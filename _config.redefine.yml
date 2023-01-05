@@ -62,8 +62,10 @@ menu: #you can customize, i18n files are in the theme's languages folder. fa-reg
   Links: 
     icon: fa-regular fa-link
     path: /links
-  #   submenus:
-  #     Link1: /link1
+  More:
+    icon: fa-regular fa-circle-chevron-down
+    submenus:
+      Love: /love
   #     Link2: /link2
   #     Link3: /link3
 

@@ -1,15 +1,14 @@
-- name: EvanNotFound
-  link: https://www.evanluo.top
-  description: hexo-theme-redefine 作者
+- name: Anonymous Land
+  link: https://ohevan.com
+  description: Evan的部落阁，用香港记者的速度更新文章
   avatar: https://evan.beee.top/avatar.png
 
 - name: Github repo
   link: https://github.com/w-copper/w-copper.github.io
   description: 本博客的github仓库
-  avatar: github
+  avatar: https://avatars.githubusercontent.com/u/35824834?v=4
 
 - name: Hexo
   link: https://hexo.io/
   description: 最受欢迎的博客系统之一
   avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
-  
