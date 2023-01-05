@@ -29,6 +29,24 @@
   </url>
   
   <url>
+    <loc>http://w-copper.github.io/2019/10/02/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2019/09/27/%E6%9B%A6%E6%9B%A6/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://w-copper.github.io/2019/10/25/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Nginx-Hexo-Django-Supervisor/</loc>
     
     <lastmod>2023-01-05</lastmod>
@@ -201,24 +219,6 @@
   
   <url>
     <loc>http://w-copper.github.io/2019/10/02/%E5%9B%BD%E5%BA%86%E5%A4%A7%E9%98%85%E5%85%B5/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/10/02/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/09/27/%E6%9B%A6%E6%9B%A6/</loc>
     
     <lastmod>2023-01-05</lastmod>
     
