@@ -1,0 +1,181 @@
+base_info:
+  title: Coooper's blog # Site title
+  author: 王铜 # Author name
+  url: https://w-copper.github.io # Site url
+
+style:
+  primary_color: rgb(0, 102, 204)
+  avatar: /images/avatar.svg
+  favicon: /images/favicon.ico
+  article_img_align: center
+  right_side_width:
+  content_max_width:
+  nav_color:
+    left: "#f78736" #left side 
+    right: "#367df7"  #right side
+    transparency: 35 #percent (10-99)
+  hover: shadow
+  first_screen:
+    enable: true
+    background_image: 
+      light: /images/light-back.png
+      dark: /images/dark-back.png
+    title_color:
+      light: rgb(0,0,0)
+      dark: rgb(200,200,200)
+    description: <p style="background-color:#9191917a">The only way to achieve the impossible is to believe it is possible
+  scroll:
+    percent: 
+      enable: true
+    progress_bar:
+      enable: true
+
+social_contact: # social contact icons in the first screen, you can add more by using fontawesome icon names
+  enable: true
+  links:
+    github:  https://github.com/w-copper # your GitHub URL
+    researchgate: https://www.researchgate.net/profile/Tong-Wang-65?ev=hdr_xprf&_sg=0EzHpvyy81TX-Sw8_RF68qisXX4aDPSgYiH1c927yP4WYXPjsytDJhWGV2XhoGtn7AO_RLFsxTy0us40W6Zc4sqc # your Instagram URL
+    # zhihu:  # your ZhiHu URL
+    # twitter:  # your twitter URL
+    email: kingcopper@whu.edu.cn # your email
+
+menu: #you can customize, i18n files are in the theme's languages folder. fa-regular recommended
+  Home: 
+    path: / 
+    icon: fa-regular fa-house # can be empty
+  Archives: 
+    path: /archives 
+    icon: fa-regular fa-archive # can be empty
+  About:
+    icon: fa-reglar fa-user
+    path: /about
+  # Status: 
+  #   path: https://status.evanluo.top/
+  #   icon: fa-regular fa-chart-bar
+  # About: 
+  #   icon: fa-regular fa-user
+  #   submenus:
+  #     Me: /about
+  #     Github: https://github.com/EvanNotFound/hexo-theme-redefine
+  #     Blog: https://www.evanluo.top
+  #     Friends: /friends
+  Links: 
+    icon: fa-regular fa-link
+    path: /links
+  #   submenus:
+  #     Link1: /link1
+  #     Link2: /link2
+  #     Link3: /link3
+
+home_article:
+  category:
+    enable: false     # show category in home page article block
+    limit: 3          # max number of categories shown in home page article block
+  tag:
+    enable: true     # show tags in home page article block
+    limit: 5          # max number of tags shown in home page article block
+
+
+post:
+  # Post word count
+  # Dependencies: hexo-wordcount (npm install hexo-wordcount)
+  # See: https://github.com/willin/hexo-wordcount
+  word_count:
+    enable: true
+    wordcount: true  # word count, one article
+    min2read: false  # time to read, one article
+
+  # Author label
+  author_label:
+    enable: true
+    auto: true  # if true, show Lv1, Lv2, Lv3... , If false, show custom label
+    # label array item can be one or more
+    custom_label_list: [ "Trainee", "Engineer", "Architect", "CTO", "BOSS" ]
+
+code_block:
+  copy: true # enable code copy button
+  style: mac # mac | simple
+
+toc:
+  enable: true
+
+  # Automatically add list number to toc.
+  number: false
+
+  # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
+  expand_all: true
+
+  # If true, open TOC every time when you enter the article page
+  init_open: true
+
+copyright_info:
+  enable: true
+
+website_count:
+  # busuanzi
+  # See: http://ibruce.info/2015/04/04/busuanzi/
+  busuanzi_count:
+    enable: true
+    site_uv: true
+    site_pv: true
+    page_pv: false
+
+local_search:
+  enable: true
+  preload: false     # Preload the search data when the page loads
+
+search:
+  path: search.json
+  field: post
+  content: true
+  format: striptags
+
+
+comment:
+  enable: false
+  use: waline # values: waline | gitalk | twikoo
+
+  # Waline
+  # See: https://waline.js.org/guide/get-started.html
+  waline:
+    serverUrl:  # Waline server url(vercel) example: https://example.example.com
+    lang: zh-CN # Waline language, default: zh-CN. See: https://waline.js.org/guide/client/i18n.html
+
+  # Gitalk
+  # See: https://github.com/gitalk/gitalk
+  gitalk:
+    github_id: # GitHub repo owner
+    repository: # Repository name to store issues
+    client_id: # GitHub Application Client ID
+    client_secret: # GitHub Application Client Secret
+
+  # Twikoo
+  # See: https://github.com/imaegoo/twikoo
+  twikoo:
+    visitor: true
+    env_id: # Vercel or Tencent Cloud Function environment ID
+    region: # environment region. If select Guangzhou, fill in "ap-guangzhou". (optional)
+
+
+rss:
+  enable: true
+
+lazyload:
+  enable: true
+
+cdn:
+  enable: false # true / false
+
+fontawesome: # select fontawesome versions you want to use
+  thin: false # use fontawesome thin version or not
+  light: false # use fontawesome light version or not
+  duotone: false # use fontawesome duotone version or not
+
+pjax:
+  enable: false  
+
+footer:
+  runtime: true # show website running time or not
+  start_time: 2022/8/17 11:45:14 # the starting time of your website, format: yyyy/mm/dd hh:mm:ss
+  customize:  # customize footer message, can be html code
+  icp: # ICP record number of your website, Can be null
