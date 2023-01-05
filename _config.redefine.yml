@@ -11,14 +11,14 @@ style:
   right_side_width:
   content_max_width:
   nav_color:
-    left: "#f78736" #left side 
-    right: "#367df7"  #right side
-    transparency: 35 #percent (10-99)
+    left: "#215f00" #left side 
+    right: "#e4e4d9"  #right side
+    transparency: 71 #percent (10-99)
   hover: shadow
   first_screen:
     enable: true
     background_image: 
-      light: /images/light-back.png
+      light: /images/light-back.jpg
       dark: /images/dark-back.png
     title_color:
       light: rgb(0,0,0)
