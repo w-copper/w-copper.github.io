@@ -29,6 +29,24 @@
   </url>
   
   <url>
+    <loc>http://w-copper.github.io/categories/index-1.html</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/categories/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://w-copper.github.io/2023/01/05/CVPR/</loc>
     
     <lastmod>2023-01-05</lastmod>
@@ -201,24 +219,6 @@
   
   <url>
     <loc>http://w-copper.github.io/about/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/categories/index-1.html</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/categories/</loc>
     
     <lastmod>2023-01-05</lastmod>
     

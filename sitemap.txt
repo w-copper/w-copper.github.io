@@ -1,6 +1,8 @@
 http://w-copper.github.io/links/
 http://w-copper.github.io/love/
 http://w-copper.github.io/tags/
+http://w-copper.github.io/categories/index-1.html
+http://w-copper.github.io/categories/
 http://w-copper.github.io/2023/01/05/CVPR/
 http://w-copper.github.io/2020/07/21/Detectron2%20on%20win10/
 http://w-copper.github.io/2019/10/08/IE%E4%B9%8B%E5%9D%91/
@@ -21,8 +23,6 @@ http://w-copper.github.io/2019/10/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B
 http://w-copper.github.io/2021/07/20/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ATSO/
 http://w-copper.github.io/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/
 http://w-copper.github.io/about/
-http://w-copper.github.io/categories/index-1.html
-http://w-copper.github.io/categories/
 http://w-copper.github.io/
 http://w-copper.github.io/tags/python/
 http://w-copper.github.io/tags/Detectron2/

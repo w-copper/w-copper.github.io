@@ -1877,7 +1877,7 @@ pre .deletion {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, rgba(247,135,54,0.208) 0%, rgba(54,125,247,0.208) 100%);
+  background: linear-gradient(120deg, rgba(33,95,0,0.443) 0%, rgba(228,228,217,0.443) 100%);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding-top: 2px;
@@ -2673,7 +2673,7 @@ pre .deletion {
 }
 @media (prefers-color-scheme: light) {
   .first-screen-container {
-    background: url("/images/light-back.png") center center/cover no-repeat !important;
+    background: url("/images/light-back.jpg") center center/cover no-repeat !important;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -2682,7 +2682,7 @@ pre .deletion {
   }
 }
 .light-mode .first-screen-container {
-  background: url("/images/light-back.png") center center/cover no-repeat !important;
+  background: url("/images/light-back.jpg") center center/cover no-repeat !important;
 }
 .dark-mode .first-screen-container {
   background: url("/images/dark-back.png") center center/cover no-repeat !important;
