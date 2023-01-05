@@ -1,6 +1,11 @@
 http://w-copper.github.io/links/
 http://w-copper.github.io/love/
 http://w-copper.github.io/tags/
+http://w-copper.github.io/2019/10/25/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Nginx-Hexo-Django-Supervisor/
+http://w-copper.github.io/2019/10/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/
+http://w-copper.github.io/2021/07/20/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ATSO/
+http://w-copper.github.io/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/
+http://w-copper.github.io/about/
 http://w-copper.github.io/categories/index-1.html
 http://w-copper.github.io/categories/
 http://w-copper.github.io/2023/01/05/CVPR/
@@ -18,11 +23,6 @@ http://w-copper.github.io/2020/03/01/%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%BB%
 http://w-copper.github.io/2019/10/02/%E5%9B%BD%E5%BA%86%E5%A4%A7%E9%98%85%E5%85%B5/
 http://w-copper.github.io/2019/10/02/%E6%95%99%E7%A8%8B%E5%90%88%E9%9B%86/
 http://w-copper.github.io/2019/09/27/%E6%9B%A6%E6%9B%A6/
-http://w-copper.github.io/2019/10/25/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Nginx-Hexo-Django-Supervisor/
-http://w-copper.github.io/2019/10/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/
-http://w-copper.github.io/2021/07/20/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ATSO/
-http://w-copper.github.io/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/
-http://w-copper.github.io/about/
 http://w-copper.github.io/
 http://w-copper.github.io/tags/python/
 http://w-copper.github.io/tags/Detectron2/

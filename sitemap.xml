@@ -29,6 +29,51 @@
   </url>
   
   <url>
+    <loc>http://w-copper.github.io/2019/10/25/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Nginx-Hexo-Django-Supervisor/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2019/10/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2021/07/20/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ATSO/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/about/</loc>
+    
+    <lastmod>2023-01-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://w-copper.github.io/categories/index-1.html</loc>
     
     <lastmod>2023-01-05</lastmod>
@@ -174,51 +219,6 @@
   
   <url>
     <loc>http://w-copper.github.io/2019/09/27/%E6%9B%A6%E6%9B%A6/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/10/25/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Nginx-Hexo-Django-Supervisor/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/10/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2021/07/20/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-ATSO/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/about/</loc>
     
     <lastmod>2023-01-05</lastmod>
     
