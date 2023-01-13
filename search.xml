@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title></title>
-    <url>/2023/01/05/CVPR/</url>
+    <url>/2023/01/13/CVPR/</url>
     <content><![CDATA[<h1 id="CVPR-发展史"><a href="#CVPR-发展史" class="headerlink" title="CVPR 发展史"></a>CVPR 发展史</h1><p>CVPR起源于1988年</p>
 <table>
 <thead>
@@ -105,6 +105,33 @@
       <tags>
         <tag>Jupyter</tag>
         <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>毫无更新动力啊</title>
+    <url>/2023/01/13/PowerForUpdate/</url>
+    <content><![CDATA[<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/image/PowerForUpdate/1673616562891.png"
+                      alt="1673616562891"
+                ></p>
+<p>回家已经 <code>Date(2022-12-16) - Date(2023-01-13) = 28</code>天了，目前完成的任务只有：</p>
+<ul>
+<li>深度学习变化检测的前端UI搭建以及流程梳理  2day</li>
+<li>部分服务器运维  1day</li>
+<li>博客系统迁移 2day</li>
+</ul>
+<p><strong>无了啊！！！</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/image/PowerForUpdate/1673616938996.png"
+                      alt="1673616938996"
+                ></p>
+]]></content>
+      <tags>
+        <tag>-随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -563,7 +590,7 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2023/01/05/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/</url>
+    <url>/2023/01/13/%E9%81%A5%E6%84%9F%E5%BD%B1%E5%83%8F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E5%85%B7/</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
