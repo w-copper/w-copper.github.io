@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://w-copper.github.io/links/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://w-copper.github.io/love/</loc>
     
     <lastmod>2023-01-13</lastmod>
@@ -29,88 +20,7 @@
   </url>
   
   <url>
-    <loc>http://w-copper.github.io/categories/index-1.html</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/categories/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2023/01/13/CVPR/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2020/07/21/Detectron2%20on%20win10/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/10/08/IE%E4%B9%8B%E5%9D%91/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/10/20/JupyterLab-Conda/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2023/01/13/PowerForUpdate/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2021/07/12/PyQt/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2019/12/04/docker-nginx-nextcloud%E9%87%87%E5%9D%91/</loc>
-    
-    <lastmod>2023-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/2021/09/01/hello-world/</loc>
+    <loc>http://w-copper.github.io/links/</loc>
     
     <lastmod>2023-01-13</lastmod>
     
@@ -228,6 +138,96 @@
   
   <url>
     <loc>http://w-copper.github.io/about/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/categories/index-1.html</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/categories/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2023/01/13/CVPR/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2020/07/21/Detectron2%20on%20win10/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2019/10/08/IE%E4%B9%8B%E5%9D%91/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2019/10/20/JupyterLab-Conda/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2023/01/13/PowerForUpdate/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2021/07/12/PyQt/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2019/12/04/docker-nginx-nextcloud%E9%87%87%E5%9D%91/</loc>
+    
+    <lastmod>2023-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://w-copper.github.io/2021/09/01/hello-world/</loc>
     
     <lastmod>2023-01-13</lastmod>
     
@@ -407,13 +407,6 @@
   
   <url>
     <loc>http://w-copper.github.io/tags/%E5%AF%92%E5%81%87%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://w-copper.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2023-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
