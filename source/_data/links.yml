@@ -12,3 +12,18 @@
   link: https://hexo.io/
   description: 最受欢迎的博客系统之一
   avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+
+- name: 湖北省流行病学调查平台
+  link: http://8.136.133.77:8081/
+  description: 自己实现的流行病学平台
+  avatar: /images/wz.svg
+
+- name: 提瓦特大地图
+  link: https://webstatic.mihoyo.com/ys/app/interactive-map/index.html
+  description: 原！
+  avatar: https://webstatic.mihoyo.com/ys/app/interactive-map/mapicon.png
+
+- name: A Dark Home
+  link: http://adarkroom.doublespeakgames.com/?lang=zh_cn
+  description: Dark home 文字游戏
+
