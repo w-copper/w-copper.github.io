@@ -1,0 +1,50 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - 堂堂一跑堂</title>
+        <link>http://localhost:4154/posts/</link>
+        <description>All Posts | 堂堂一跑堂</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor>
+            <webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 05 Jul 2025 11:05:20 &#43;0800</lastBuildDate><atom:link href="http://localhost:4154/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>教程资料</title>
+    <link>http://localhost:4154/2025/07/learn-doc/</link>
+    <pubDate>Sat, 05 Jul 2025 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2025/07/learn-doc/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Detectron2 在win10的安装经历</title>
+    <link>http://localhost:4154/2020/07/detectron2-on-win10/</link>
+    <pubDate>Tue, 21 Jul 2020 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2020/07/detectron2-on-win10/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>docker&#43;nginx&#43;nextcloud采坑</title>
+    <link>http://localhost:4154/2019/12/docker-nginx-nextcloud%E9%87%87%E5%9D%91/</link>
+    <pubDate>Wed, 04 Dec 2019 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2019/12/docker-nginx-nextcloud%E9%87%87%E5%9D%91/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>机场</title>
+    <link>http://localhost:4154/2019/12/hello-world/</link>
+    <pubDate>Wed, 04 Dec 2019 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2019/12/hello-world/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>服务器配置-Nginx&#43;Hexo&#43;Django&#43;Supervisor</title>
+    <link>http://localhost:4154/2019/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-nginx-hexo-django-supervisor/</link>
+    <pubDate>Fri, 25 Oct 2019 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2019/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-nginx-hexo-django-supervisor/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>机器学习vs深度学习</title>
+    <link>http://localhost:4154/2019/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+    <pubDate>Sat, 05 Oct 2019 11:05:20 &#43;0800</pubDate><author>
+        <name>WangTong</name>
+    </author><guid>http://localhost:4154/2019/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>

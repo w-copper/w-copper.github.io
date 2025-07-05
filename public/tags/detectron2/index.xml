@@ -1,0 +1,65 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Detectron2 - Tag - 堂堂一跑堂</title>
+        <link>https://w-copper.github.io/tags/detectron2/</link>
+        <description>Detectron2 - Tag - 堂堂一跑堂</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-hans</language><atom:link href="https://w-copper.github.io/tags/detectron2/" rel="self" type="application/rss+xml" /><item>
+    <title>Detectron2 在win10的安装经历</title>
+    <link>https://w-copper.github.io/posts/detectron2-on-win10/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>https://w-copper.github.io/posts/detectron2-on-win10/</guid>
+    <description><![CDATA[<h1 id="detectron2-在win10的安装经历" class="headerLink">
+    <a href="#detectron2-%e5%9c%a8win10%e7%9a%84%e5%ae%89%e8%a3%85%e7%bb%8f%e5%8e%86" class="header-mark"></a>Detectron2 在win10的安装经历</h1><h2 id="环境配置" class="headerLink">
+    <a href="#%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae" class="header-mark"></a>环境配置</h2><ul>
+<li>Windows 10 专业版 2004 19041.1083</li>
+<li>VS2019</li>
+<li>CUDA 10.2</li>
+<li>ninga windows v1.10.2 (from github)</li>
+<li>Anaconda 3 + python 3.7</li>
+<li>预先安装的python库有：
+<ul>
+<li>pycocotools-windows  2.0.0.2 (<code>pip install pycocotools-windows</code>)</li>
+<li>pytorch 1.71 cuda10.2 (<code>pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.2 -c pytorch</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="detectron2-安装" class="headerLink">
+    <a href="#detectron2-%e5%ae%89%e8%a3%85" class="header-mark"></a>Detectron2 安装</h2><ul>
+<li>
+<p>下载：Detectron2 版本为 0.4.1，在github中<a href="https://github.com/facebookresearch/detectron2" target="_blank" rel="noopener noreferrer">下载源码</a></p>
+</li>
+<li>
+<p>安装：</p>
+<ol>
+<li>
+<p>修改<code>CONDA_ENV_PATH/Lib/site-packages/torch/include/torch/csrc/jit/ir/ir.h</code>中第1347行：</p>
+<p><code>static constexpr Symbol Kind = ::c10::prim::profile_optional;</code></p>
+<p>将其注释</p>
+<blockquote>
+  <p>我也不知道为啥，反正注释掉后不报错了</p>
+</blockquote></li>
+<li>
+<p>安装detectron2</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">bat</p>]]></description>
+</item></channel>
+</rss>

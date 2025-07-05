@@ -1,0 +1,72 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>深度学习 - Tag - 堂堂一跑堂</title>
+        <link>https://w-copper.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+        <description>深度学习 - Tag - 堂堂一跑堂</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-hans</language><lastBuildDate>Sat, 05 Oct 2019 14:29:46 &#43;0000</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml" /><item>
+    <title>机器学习vs深度学习</title>
+    <link>https://w-copper.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+    <pubDate>Sat, 05 Oct 2019 14:29:46 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>https://w-copper.github.io/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
+    <description><![CDATA[<h2 id="起源" class="headerLink">
+    <a href="#%e8%b5%b7%e6%ba%90" class="header-mark"></a>起源</h2><p>深度学习可以认为是机器学习里的一个分支，但是随着其发展，前者越来越独立，或者说，可以被认为是一个新的领域。</p>
+<p>二者有着共同之处。概括的来说，二者都是在教计算机如何学习。二者的不同之处可以这样想：机器学习可解释，深度学习不可解释。</p>
+<p>并且，随着深度学习发展，人们又给了它一个新的名号：人工智能。</p>
+<h2 id="机器学习" class="headerLink">
+    <a href="#%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="header-mark"></a>机器学习</h2><p>机器学习更多的依赖于概率论、最优化方法，研究如何从现有的数据，利用进行模式发掘，也就是所谓的模式识别。</p>
+<p>机器学习的一些经典例子有：</p>
+<ul>
+<li>线性回归，广义的线性回归（GLM），岭回归（L2正则化）</li>
+<li>SVM，经典中的经典</li>
+<li>EM算法，高斯混合模型</li>
+<li>多层感知机，层数较小</li>
+<li>PCA变换</li>
+<li>贝叶斯的概率图模型</li>
+<li>高斯判别模型</li>
+<li>马尔科夫链，马尔科夫随机场</li>
+<li>蒙特卡洛采样</li>
+<li>聚类算法</li>
+<li>遗传算法，模拟退火等优化算法</li>
+</ul>
+<p>也可以看出，机器学习对信息论、概率论、矩阵、随机过程等有着较高的要求，因此也有人说机器学习就是统计学。</p>
+<h2 id="深度学习" class="headerLink">
+    <a href="#%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>深度学习</h2><p>与机器学习比起来，这个后来居上的深度学习似乎更加简单一些，尤其是随着一批深度学习框架的推出，例如<code>caffe, pytorch, tensorflow, mxnet</code>等等。</p>
+<p>深度学习可以根据任务要求分为以下几个方面：</p>
+<ul>
+<li>图像：
+<ul>
+<li>场景分类，即给定图像，判定场景。例如给出不同的天气图片，判断是何种天气</li>
+<li>目标识别，将图像中特定的对象识别并给出其位置</li>
+<li>人脸识别，非常火</li>
+<li>目标跟踪，给出连续的视频帧，跟踪给定目标的移动。根据目标数量多少，又可以分为单目标和多目标</li>
+<li>风格迁移，也就是GAN，生成式对抗网络</li>
+<li>语义分割，FCN流派</li>
+</ul>
+</li>
+<li>语音：
+<ul>
+<li>语音转文字</li>
+</ul>
+</li>
+<li>文字：
+<ul>
+<li>对话，比如说小爱同学</li>
+<li>翻译，Google翻译</li>
+</ul>
+</li>
+<li>运动：
+<ul>
+<li>强化学习，控制机器人移动等</li>
+</ul>
+</li>
+<li>混合：
+<ul>
+<li>看图说话</li>
+<li>根据文字生产图片</li>
+</ul>
+</li>
+</ul>
+<p>此外根据网络结构不同还可以分为CNN，RNN等等。</p>]]></description>
+</item></channel>
+</rss>

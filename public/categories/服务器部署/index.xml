@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>服务器部署 - Category - 堂堂一跑堂</title>
+        <link>https://w-copper.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
+        <description>服务器部署 - Category - 堂堂一跑堂</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-hans</language><lastBuildDate>Fri, 25 Oct 2019 22:47:14 &#43;0000</lastBuildDate><atom:link href="https://w-copper.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml" /><item>
+    <title>服务器配置-Nginx&#43;Hexo&#43;Django&#43;Supervisor</title>
+    <link>https://w-copper.github.io/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-nginx-hexo-django-supervisor/</link>
+    <pubDate>Fri, 25 Oct 2019 22:47:14 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>https://w-copper.github.io/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-nginx-hexo-django-supervisor/</guid>
+    <description><![CDATA[<h2 id="前言" class="headerLink">
+    <a href="#%e5%89%8d%e8%a8%80" class="header-mark"></a>前言</h2><p>很早之前就在腾讯云购买了一个云服务器，最近刚刚给域名备案完成，因此打算利用起来这个服务器，将域名绑定至ip地址上，顺便研究下：</p>
+<ul>
+<li>nginx配置</li>
+<li>supervisor项目管理</li>
+</ul>
+<p>整个项目的构架如下：</p>
+<ul>
+<li>
+<p>nginx</p>
+<ul>
+<li>/ &ndash;&gt; hexo静态文件</li>
+<li>/api &ndash;&gt; django restful api</li>
+<li>/githooks &ndash;&gt; flask 微服务</li>
+</ul>
+</li>
+<li>
+<p>supervisor</p>
+<ul>
+<li>api &ndash;&gt; 管理django restful api</li>
+<li>githooks &ndash;&gt; 管理flask微服务</li>
+</ul>
+</li>
+<li>
+<p>git hooks</p>
+<ul>
+<li>push事件 &ndash;&gt; github webhooks post to /githooks/push</li>
+</ul>
+</li>
+</ul>
+<h2 id="nginx" class="headerLink">
+    <a href="#nginx" class="header-mark"></a>Nginx</h2><p>nginx安装配置非常简单，在这里我只是简单的修改了<code>/etc/nginx/nginx.conf</code>的内容，进行了路径转发</p>
+<p>具体的内容如下：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description>
+</item></channel>
+</rss>

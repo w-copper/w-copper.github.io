@@ -1,0 +1,17 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>http://localhost:4154/</loc><lastmod>2025-07-05T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:4154/posts/</loc><lastmod>2025-07-05T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:4154/2025/07/learn-doc/</loc><lastmod>2025-07-05T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://localhost:4154/2020/07/detectron2-on-win10/</loc><lastmod>2020-07-21T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/categories/</loc><lastmod>2019-12-04T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/2019/12/docker-nginx-nextcloud%E9%87%87%E5%9D%91/</loc><lastmod>2019-12-04T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/categories/tools/</loc><lastmod>2019-12-04T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/2019/12/hello-world/</loc><lastmod>2019-12-04T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/2019/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-nginx-hexo-django-supervisor/</loc><lastmod>2019-10-25T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/2019/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0vs%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc><lastmod>2019-10-05T11:05:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/authors/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/series/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:4154/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
