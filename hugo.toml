@@ -422,9 +422,9 @@ theme = 'doit'
       # Gitalk 评论系统设置
       [params.page.comment.gitalk]
         # 
-        enable = false
-        owner = ""
-        repo = ""
+        enable = true
+        owner = "w-copper"
+        repo = "w-copper.github.io"
         clientId = ""
         clientSecret = ""
       # Valine 评论系统设置
