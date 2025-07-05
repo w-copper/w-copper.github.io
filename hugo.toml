@@ -414,19 +414,30 @@ theme = 'doit'
     [params.page.comment]
       enable = true
       # Disqus 评论系统设置
-      [params.page.comment.disqus]
-        # 
-        enable = false
-        # Disqus 的 shortname, 用来在文章中启用 Disqus 评论系统
-        shortname = ""
-      # Gitalk 评论系统设置
-      [params.page.comment.gitalk]
-        # 
+      [page.comment.giscus]
         enable = true
-        owner = "w-copper"
-        repo = "w-copper.github.io"
-        clientId = ""
-        clientSecret = ""
+        # owner/repo
+        dataRepo = "w-copper/w-copper.github.io"
+        dataRepoId = "R_kgDOIt9Nww"
+        dataCategory = "Announcements"
+        dataCategoryId = "DIC_kwDOIt9Nw84CsgGN"
+        dataMapping = "title"
+        dataStrict = "0"
+        dataReactionsEnabled = "1"
+        dataEmitMetadata = "0"
+        dataInputPosition = "bottom"
+        lightTheme = "light"
+        darkTheme = "dark"
+        dataLang = "zh-CN"
+        dataLoading = "lazy"
+        crossorigin="anonymous"
+      # [params.page.comment.gitalk]
+      #   # 
+      #   enable = true
+      #   owner = "w-copper"
+      #   repo = "w-copper.github.io"
+      #   clientId = ""
+      #   clientSecret = ""
       # Valine 评论系统设置
       
       

@@ -53,10 +53,10 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Inject Gitalk secrets
-        run: |
-          sed -i "s/clientId = \".*\"/clientId = \"${{ secrets.GITALK_CLIENT_ID }}\"/" hugo.toml
-          sed -i "s/clientSecret = \".*\"/clientSecret = \"${{ secrets.GITALK_CLIENT_SECRET }}\"/" hugo.toml
+      # - name: Inject Gitalk secrets
+      #   run: |
+      #     sed -i "s/clientId = \".*\"/clientId = \"${{ secrets.GITALK_CLIENT_ID }}\"/" hugo.toml
+      #     sed -i "s/clientSecret = \".*\"/clientSecret = \"${{ secrets.GITALK_CLIENT_SECRET }}\"/" hugo.toml
 
       - name: Cache Restore
         id: cache-restore
