@@ -1,6 +1,6 @@
 +++
-date = '{{ .Date }}'
-draft = true
+date = '2025-07-21T21:05:20+08:00'
+draft = false
 title = 'ubuntu使用tun2socks进行全局代理'
 +++
 
