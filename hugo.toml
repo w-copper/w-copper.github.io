@@ -9,13 +9,25 @@ theme = 'doit'
 
 [menus]
   [[menus.main]]
-    name = 'Home'
+    name = '首页'
     pageRef = '/'
     weight = 10
   [[menus.main]]
-    name = 'Categories'
-    pageRef = '/categories'
+    name = '文章'
+    pageRef = '/posts'
     weight = 20
+  [[menus.main]]
+    name = '分类'
+    pageRef = '/categories'
+    weight = 30
+  [[menus.main]]
+    name = '标签'
+    pageRef = '/tags'
+    weight = 40
+  [[menus.main]]
+    name = '关于'
+    pageRef = '/about'
+    weight = 50
 
 [params]
   #  DoIt 主题版本
