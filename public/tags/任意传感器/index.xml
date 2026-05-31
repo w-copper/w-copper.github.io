@@ -1,0 +1,45 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>任意传感器 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E4%BB%BB%E6%84%8F%E4%BC%A0%E6%84%9F%E5%99%A8/</link><description>任意传感器 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 29 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E4%BB%BB%E6%84%8F%E4%BC%A0%E6%84%9F%E5%99%A8/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿：任意传感器基础模型与开放词汇分割的突破性进展</title><link>https://w-copper.github.io/2026/05/20260529_143000_remote_sensing_foundation_models/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_143000_remote_sensing_foundation_models/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿任意传感器基础模型与开放词汇分割的突破性进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2%e7%9a%84%e7%aa%81%e7%a0%b4%e6%80%a7%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿：任意传感器基础模型与开放词汇分割的突破性进展</h1><blockquote>
+  <p><strong>作者</strong>: AI学术速递 | <strong>日期</strong>: 2026年5月29日 | <strong>关键词</strong>: 遥感基础模型, 任意传感器, 开放词汇分割, SAM 3, DINOv2</p>
+</blockquote><hr>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>本文精选了2025年遥感AI领域的两篇重要论文，分别来自CVPR 2025和arXiv最新研究。第一篇是获得CVPR 2025 EarthVision研讨会最佳论文奖的<strong>Panopticon</strong>，提出了任意传感器基础模型；第二篇是<strong>SegEarth-OV3</strong>，首次将SAM 3应用于遥感开放词汇分割任务。两篇论文均提供了开源代码，代表了遥感基础模型发展的两个重要方向。</p>
+<hr>
+<h2 id="论文一panopticon---任意传感器地球观测基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80panopticon---%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：Panopticon - 任意传感器地球观测基础模型</h2><h3 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Panopticon: Advancing Any-Sensor Foundation Models for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Leonard Waldmann, Ando Shah, Yi Wang, Nils Lehmann, Adam Stewart, Zhitong Xiong, Xiao Xiang Zhu, Stefan Bauer, John Chuang</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 EarthVision Workshop (<strong>最佳论文奖</strong>)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.10845" target="_blank" rel="noopener noreferrer">2503.10845</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">Panopticon-FM/panopticon</a> ⭐ 44 stars</td>
+      </tr>
+      <tr>
+          <td><strong>集成</strong></td>
+          <td>已集成至 TorchGeo 0.7</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h3><p>地球观测（Earth Observation, EO）数据来自多样化的传感平台，具有不同的光谱波段、空间分辨率和传感模态。现有的遥感基础模型通常针对<strong>固定传感器</strong>进行设计和训练，这带来了几个关键问题：</p>]]></description></item></channel></rss>

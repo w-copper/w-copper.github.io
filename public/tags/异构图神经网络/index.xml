@@ -1,0 +1,64 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>异构图神经网络 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%BC%82%E6%9E%84%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link><description>异构图神经网络 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%BC%82%E6%9E%84%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml"/><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_120000_geolink/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_120000_geolink/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
+    <a href="#geolink%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap数据赋能遥感基础模型</h1><blockquote>
+  <p><strong>论文信息</strong></p>
+<ul>
+<li><strong>标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</li>
+<li><strong>作者</strong>：Lubin Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</li>
+<li><strong>会议</strong>：NeurIPS 2025</li>
+<li><strong>论文链接</strong>：https://arxiv.org/abs/2509.26016</li>
+<li><strong>代码链接</strong>：https://github.com/bailubin/GeoLink_NeurIPS2025</li>
+<li><strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态融合、自监督学习、异构图神经网络</li>
+</ul>
+</blockquote><hr>
+<h2 id="一研究定位" class="headerLink">
+    <a href="#%e4%b8%80%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>一、研究定位</h2><h3 id="11-大领域" class="headerLink">
+    <a href="#11-%e5%a4%a7%e9%a2%86%e5%9f%9f" class="header-mark"></a>1.1 大领域</h3><p>遥感智能解译与地理空间人工智能</p>
+<h3 id="12-小领域" class="headerLink">
+    <a href="#12-%e5%b0%8f%e9%a2%86%e5%9f%9f" class="header-mark"></a>1.2 小领域</h3><p>遥感基础模型的多模态预训练——将地面级地理空间数据（OpenStreetMap）与遥感影像进行深度融合</p>
+<hr>
+<h2 id="二研究问题从一个关键观察出发" class="headerLink">
+    <a href="#%e4%ba%8c%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98%e4%bb%8e%e4%b8%80%e4%b8%aa%e5%85%b3%e9%94%ae%e8%a7%82%e5%af%9f%e5%87%ba%e5%8f%91" class="header-mark"></a>二、研究问题：从一个关键观察出发</h2><h3 id="21-问题来源" class="headerLink">
+    <a href="#21-%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>2.1 问题来源</h3><p>作者观察到一个被忽视但至关重要的现象：<strong>现有遥感基础模型几乎只关注影像数据，完全忽略了地面级地理空间数据的价值</strong>。</p>
+<p>具体而言，OpenStreetMap（OSM）作为全球最大的开源地理空间数据库，包含了丰富的地理语义信息：</p>
+<ul>
+<li><strong>几何数据</strong>：点（Point）、线（Polyline）、面（Polygon）</li>
+<li><strong>属性标签</strong>：道路类型、建筑用途、土地功能等</li>
+<li><strong>空间关系</strong>：道路网络、建筑群分布、功能区边界</li>
+</ul>
+<p>然而，遥感影像与OSM数据之间存在<strong>三重模态鸿沟</strong>：</p>
+<ol>
+<li><strong>数据结构差异</strong>：影像是规则的网格结构，OSM是不规则的图结构</li>
+<li><strong>内容语义差异</strong>：影像反映光谱特征，OSM包含地理语义</li>
+<li><strong>空间粒度差异</strong>：影像以像素为单位，OSM以地理实体为单位</li>
+</ol>
+<h3 id="22-核心问题" class="headerLink">
+    <a href="#22-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>2.2 核心问题</h3><p><strong>如何有效弥合遥感影像与OSM数据之间的模态鸿沟，让OSM的地理语义真正赋能遥感基础模型？</strong></p>
+<hr>
+<h2 id="三解决方案geolink的精妙设计" class="headerLink">
+    <a href="#%e4%b8%89%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88geolink%e7%9a%84%e7%b2%be%e5%a6%99%e8%ae%be%e8%ae%a1" class="header-mark"></a>三、解决方案：GeoLink的精妙设计</h2><h3 id="31-核心思路" class="headerLink">
+    <a href="#31-%e6%a0%b8%e5%bf%83%e6%80%9d%e8%b7%af" class="header-mark"></a>3.1 核心思路</h3><p>作者的洞察非常精准：<strong>用&quot;空间关联&quot;作为桥梁，连接遥感影像与OSM数据</strong>。</p>
+<p>具体而言，作者发现：同一地理位置的遥感影像和OSM数据天然存在空间对应关系。这种对应关系可以作为跨模态学习的天然监督信号。</p>
+<h3 id="32-方法框架" class="headerLink">
+    <a href="#32-%e6%96%b9%e6%b3%95%e6%a1%86%e6%9e%b6" class="header-mark"></a>3.2 方法框架</h3><p>GeoLink包含三个关键组件：</p>
+<h4 id="组件一osm编码器异构图神经网络" class="headerLink">
+    <a href="#%e7%bb%84%e4%bb%b6%e4%b8%80osm%e7%bc%96%e7%a0%81%e5%99%a8%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c" class="header-mark"></a>组件一：OSM编码器（异构图神经网络）</h4><p>作者设计了一个<strong>异构图神经网络</strong>来处理OSM数据的复杂结构：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

@@ -1,0 +1,357 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多模态学习 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AD%A6%E4%B9%A0/</link><description>多模态学习 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml"/><item><title>GeoLink：利用OpenStreetMap数据增强遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_120000_geolink_remotesensing_osm/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_120000_geolink_remotesensing_osm/</guid><description><![CDATA[<h1 id="geolink利用openstreetmap数据增强遥感基础模型" class="headerLink">
+    <a href="#geolink%e5%88%a9%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e5%a2%9e%e5%bc%ba%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：利用OpenStreetMap数据增强遥感基础模型</h1><p><strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态学习、自监督预训练、地理空间智能</p>
+<hr>
+<h2 id="1-论文信息" class="headerLink">
+    <a href="#1-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1. 论文信息</h2><ul>
+<li><strong>标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</li>
+<li><strong>作者</strong>：Lubian Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</li>
+<li><strong>机构</strong>：北京大学、中国科学院自动化研究所、瑞士洛桑联邦理工学院</li>
+<li><strong>发表</strong>：NeurIPS 2025</li>
+<li><strong>arXiv</strong>：2509.26016</li>
+<li><strong>代码</strong>：https://github.com/bailubin/GeoLink_NeurIPS2025</li>
+</ul>
+<hr>
+<h2 id="2-问题遥感与地理空间数据的模态鸿沟" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e9%81%a5%e6%84%9f%e4%b8%8e%e5%9c%b0%e7%90%86%e7%a9%ba%e9%97%b4%e6%95%b0%e6%8d%ae%e7%9a%84%e6%a8%a1%e6%80%81%e9%b8%bf%e6%b2%9f" class="header-mark"></a>2. 问题：遥感与地理空间数据的模态鸿沟</h2><h3 id="21-核心挑战" class="headerLink">
+    <a href="#21-%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 核心挑战</h3><p>遥感（RS）基础模型近年来取得了显著进展，但大多数模型<strong>仅关注遥感影像本身</strong>，忽略了地面级地理空间数据（如OpenStreetMap）所提供的丰富地理上下文信息。这种忽视导致了几个关键问题：</p>
+<ol>
+<li><strong>语义歧义</strong>：仅凭视觉特征难以区分外观相似但语义不同的地物（如不同功能的建筑）</li>
+<li><strong>上下文缺失</strong>：遥感影像缺乏社会经济属性、功能分区等高层语义信息</li>
+<li><strong>模态差异</strong>：OSM数据是矢量格式（点、线、面），与遥感影像的栅格结构存在根本性差异</li>
+</ol>
+<h3 id="22-现有方法的局限" class="headerLink">
+    <a href="#22-%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>2.2 现有方法的局限</h3><p>现有RS-OSM融合方法主要采用<strong>间接整合策略</strong>：</p>
+<ul>
+<li><strong>数据转换法</strong>：将矢量数据栅格化，但损失了精细的几何信息</li>
+<li><strong>数据派生法</strong>：从OSM生成文本描述，但丢失了空间信息</li>
+<li><strong>知识图谱法</strong>：构建地理知识图谱，但任务特定、难以扩展</li>
+</ul>
+<p>这些方法都无法直接利用OSM的原始矢量元素，导致地理上下文信息的损失。</p>
+<hr>
+<h2 id="3-解决方案geolink的多粒度跨模态学习框架" class="headerLink">
+    <a href="#3-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88geolink%e7%9a%84%e5%a4%9a%e7%b2%92%e5%ba%a6%e8%b7%a8%e6%a8%a1%e6%80%81%e5%ad%a6%e4%b9%a0%e6%a1%86%e6%9e%b6" class="header-mark"></a>3. 解决方案：GeoLink的多粒度跨模态学习框架</h2><h3 id="31-核心思想" class="headerLink">
+    <a href="#31-%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" class="header-mark"></a>3.1 核心思想</h3><p>GeoLink的核心创新在于：<strong>直接利用OSM的原始矢量数据</strong>，通过空间关联引导的多粒度学习信号，增强遥感基础模型的预训练和下游任务。</p>
+<h3 id="32-关键技术细节" class="headerLink">
+    <a href="#32-%e5%85%b3%e9%94%ae%e6%8a%80%e6%9c%af%e7%bb%86%e8%8a%82" class="header-mark"></a>3.2 关键技术细节</h3><h4 id="321-异构图神经网络osm编码器" class="headerLink">
+    <a href="#321-%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9cosm%e7%bc%96%e7%a0%81%e5%99%a8" class="header-mark"></a>3.2.1 异构图神经网络OSM编码器</h4><p>OSM数据被建模为<strong>异构图</strong>：</p>
+<ul>
+<li><strong>节点</strong>：代表地理对象（点、线、面三种类型）</li>
+<li><strong>边</strong>：捕获空间拓扑关系（而非距离，因距离对尺度敏感）</li>
+</ul>
+<p><strong>节点特征初始化</strong>：</p>
+<ul>
+<li>使用BERT编码OSM标签值对（如&quot;building:residential&quot;）</li>
+<li>采用加权平均策略，频繁出现的标签（如&quot;building&quot;）获得更高权重</li>
+<li>公式：$\sigma_V = \sum_{i=1}^{n} w_i h_i / \sum_{i=1}^{n} w_i$</li>
+</ul>
+<p><strong>边构建策略</strong>：</p>
+<ul>
+<li>点特征：使用Delaunay三角剖分建立连接</li>
+<li>线/面特征：基于空间拓扑关系（相交、包含等）</li>
+<li>优势：拓扑关系比距离更稳定，不受尺度变化影响</li>
+</ul>
+<h4 id="322-掩码输入预训练策略" class="headerLink">
+    <a href="#322-%e6%8e%a9%e7%a0%81%e8%be%93%e5%85%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e7%ad%96%e7%95%a5" class="header-mark"></a>3.2.2 掩码输入预训练策略</h4><p>GeoLink采用<strong>双模态掩码</strong>策略：</p>
+<ul>
+<li><strong>遥感影像</strong>：随机掩码75%的图像块（类似MAE）</li>
+<li><strong>OSM图</strong>：随机掩码20%的节点，但保留其邻接边</li>
+</ul>
+<p><strong>三个自监督学习目标</strong>：</p>]]></description></item><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_180626_geolink/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_180626_geolink/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
+    <a href="#geolink%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap数据赋能遥感基础模型</h1><h2 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h2><ul>
+<li><strong>标题</strong>: GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</li>
+<li><strong>作者</strong>: Lubian Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</li>
+<li><strong>会议</strong>: NeurIPS 2025</li>
+<li><strong>代码</strong>: <a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">https://github.com/bailubin/GeoLink_NeurIPS2025</a></li>
+<li><strong>关键词</strong>: 遥感基础模型, OpenStreetMap, 多模态学习, 地理空间智能</li>
+</ul>
+<h2 id="问题遥感与地理数据的模态鸿沟" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e9%81%a5%e6%84%9f%e4%b8%8e%e5%9c%b0%e7%90%86%e6%95%b0%e6%8d%ae%e7%9a%84%e6%a8%a1%e6%80%81%e9%b8%bf%e6%b2%9f" class="header-mark"></a>问题：遥感与地理数据的模态鸿沟</h2><p>传统遥感模型仅关注影像数据，忽略了地理空间信息的多模态特性。遥感影像与OpenStreetMap（OSM）数据之间存在显著的模态差距：</p>
+<ol>
+<li><strong>数据异质性</strong>：遥感影像为栅格数据，OSM为矢量数据（点、线、面）</li>
+<li><strong>语义不对齐</strong>：遥感影像包含像素级特征，OSM包含结构化地理实体</li>
+<li><strong>信息互补性</strong>：遥感提供光谱/空间信息，OSM提供语义/拓扑信息</li>
+</ol>
+<p>这种模态鸿沟限制了地理空间智能系统的性能，因为单独使用任何一种数据源都无法获得完整的地理场景理解。</p>
+<h2 id="解决方案geolink的多模态融合框架" class="headerLink">
+    <a href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88geolink%e7%9a%84%e5%a4%9a%e6%a8%a1%e6%80%81%e8%9e%8d%e5%90%88%e6%a1%86%e6%9e%b6" class="header-mark"></a>解决方案：GeoLink的多模态融合框架</h2><p>GeoLink提出了一种创新的多模态框架，在预训练和下游任务中整合遥感影像与OSM数据。其核心创新点在于：</p>
+<h3 id="1-osm数据的图神经网络编码" class="headerLink">
+    <a href="#1-osm%e6%95%b0%e6%8d%ae%e7%9a%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c%e7%bc%96%e7%a0%81" class="header-mark"></a>1. OSM数据的图神经网络编码</h3><p>GeoLink没有简单地将OSM数据转换为栅格，而是设计了一个专门的异构图注意力网络（HeteroGAT）来编码OSM数据：</p>
+<ul>
+<li><strong>节点类型</strong>：OSM中的点（POI）、线（道路）、面（建筑物）被建模为不同类型的节点</li>
+<li><strong>边关系</strong>：空间邻接、拓扑连接等关系被建模为边</li>
+<li><strong>属性编码</strong>：使用CLIP的BERT模型编码OSM标签的文本属性</li>
+</ul>
+<p>这种设计保留了OSM数据的结构化特性，避免了信息损失。</p>
+<h3 id="2-跨模态特征对齐" class="headerLink">
+    <a href="#2-%e8%b7%a8%e6%a8%a1%e6%80%81%e7%89%b9%e5%be%81%e5%af%b9%e9%bd%90" class="header-mark"></a>2. 跨模态特征对齐</h3><p>GeoLink采用对比学习框架对齐遥感影像和OSM数据的特征空间：</p>
+<ul>
+<li><strong>图像编码器</strong>：使用ViT-Large作为骨干网络</li>
+<li><strong>OSM编码器</strong>：使用HeteroGAT处理图结构数据</li>
+<li><strong>对齐目标</strong>：通过对比损失使匹配的遥感-OSM对在特征空间中接近</li>
+</ul>
+<h3 id="3-混合嵌入生成" class="headerLink">
+    <a href="#3-%e6%b7%b7%e5%90%88%e5%b5%8c%e5%85%a5%e7%94%9f%e6%88%90" class="header-mark"></a>3. 混合嵌入生成</h3><p>GeoLink的关键创新是生成混合的遥感-OSM嵌入：</p>
+<ul>
+<li><strong>多层特征提取</strong>：从ViT-L的第7、11、15层提取特征</li>
+<li><strong>跨模态融合</strong>：将OSM嵌入与遥感特征通过注意力机制融合</li>
+<li><strong>最终表示</strong>：生成同时包含遥感和地理信息的混合嵌入</li>
+</ul>
+<p>这种混合嵌入可以直接用于下游任务，如语义分割。</p>
+<h2 id="实验性能验证" class="headerLink">
+    <a href="#%e5%ae%9e%e9%aa%8c%e6%80%a7%e8%83%bd%e9%aa%8c%e8%af%81" class="header-mark"></a>实验：性能验证</h2><p>GeoLink在多个遥感基准数据集上进行了验证：</p>
+<h3 id="语义分割任务" class="headerLink">
+    <a href="#%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2%e4%bb%bb%e5%8a%a1" class="header-mark"></a>语义分割任务</h3><ul>
+<li>使用UperNet作为解码器</li>
+<li>在UFZ数据集上进行评估</li>
+<li>与仅使用遥感影像的基线模型对比</li>
+</ul>
+<h3 id="关键结果" class="headerLink">
+    <a href="#%e5%85%b3%e9%94%ae%e7%bb%93%e6%9e%9c" class="header-mark"></a>关键结果</h3><ul>
+<li>混合嵌入显著优于单模态嵌入</li>
+<li>OSM信息的加入提升了分割精度，特别是在建筑物、道路等地理实体上</li>
+<li>框架具有良好的泛化能力，可适配不同的下游任务</li>
+</ul>
+<h2 id="评估创新点与局限性" class="headerLink">
+    <a href="#%e8%af%84%e4%bc%b0%e5%88%9b%e6%96%b0%e7%82%b9%e4%b8%8e%e5%b1%80%e9%99%90%e6%80%a7" class="header-mark"></a>评估：创新点与局限性</h2><h3 id="创新点" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b9" class="header-mark"></a>创新点</h3><ol>
+<li><strong>首次系统整合OSM与遥感基础模型</strong>：填补了地理空间多模态学习的空白</li>
+<li><strong>结构化OSM编码</strong>：避免了栅格化带来的信息损失</li>
+<li><strong>端到端训练</strong>：预训练和微调阶段均支持多模态融合</li>
+<li><strong>开源实现</strong>：提供了完整的代码和预训练模型</li>
+</ol>
+<h3 id="局限性" class="headerLink">
+    <a href="#%e5%b1%80%e9%99%90%e6%80%a7" class="header-mark"></a>局限性</h3><ol>
+<li><strong>OSM数据覆盖不均</strong>：偏远地区OSM数据稀疏</li>
+<li><strong>计算开销</strong>：图神经网络增加了模型复杂度</li>
+<li><strong>时相差异</strong>：遥感影像与OSM数据的采集时间可能不一致</li>
+</ol>
+<h3 id="未来方向" class="headerLink">
+    <a href="#%e6%9c%aa%e6%9d%a5%e6%96%b9%e5%90%91" class="header-mark"></a>未来方向</h3><ul>
+<li>扩展到更多地理数据源（如兴趣点评论、社交媒体）</li>
+<li>探索更高效的图神经网络架构</li>
+<li>研究OSM数据质量对模型性能的影响</li>
+</ul>
+<h2 id="总结" class="headerLink">
+    <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h2><p>GeoLink通过创新的多模态融合框架，成功弥合了遥感影像与OpenStreetMap数据之间的模态鸿沟。其核心贡献在于：</p>]]></description></item><item><title>GeoLink：用OpenStreetMap赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_150516_geolink/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_150516_geolink/</guid><description><![CDATA[<h1 id="geolink用openstreetmap赋能遥感基础模型" class="headerLink">
+    <a href="#geolink%e7%94%a8openstreetmap%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap赋能遥感基础模型</h1><blockquote>
+  <p><strong>论文标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data<br>
+<strong>作者</strong>：Lubin Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du<br>
+<strong>会议</strong>：NeurIPS 2025<br>
+<strong>arXiv</strong>：<a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">2509.26016</a><br>
+<strong>GitHub</strong>：<a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">bailubin/GeoLink_NeurIPS2025</a></p>
+</blockquote><hr>
+<h2 id="-研究定位" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>📌 研究定位</h2><p><strong>大领域</strong>：遥感智能解译<br>
+<strong>小领域</strong>：多模态遥感基础模型<br>
+<strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态学习、自监督预训练、空间相关性</p>
+<hr>
+<h2 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>遥感（RS）基础模型近年来取得了显著进展，但大多数模型<strong>仅关注遥感影像本身</strong>，忽略了地面级地理空间数据的丰富语义信息。OpenStreetMap（OSM）作为全球最大的开源地理空间数据库之一，包含海量的地理实体（建筑、道路、兴趣点等）及其属性信息，这些信息与遥感影像具有天然的空间对应关系。</p>
+<h3 id="核心挑战" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>核心挑战</h3><ol>
+<li><strong>模态鸿沟</strong>：RS数据（栅格图像）与OSM数据（矢量图结构）在数据结构、内容和空间粒度上存在根本性差异</li>
+<li><strong>结构异构性</strong>：OSM数据包含点（point）、折线（polyline）、多边形（polygon）三种几何类型，传统方法难以统一处理</li>
+<li><strong>空间对齐难题</strong>：如何建立RS影像斑块与OSM实体之间的精确空间对应关系</li>
+</ol>
+<h3 id="作者的切入点" class="headerLink">
+    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h3><p>作者敏锐地观察到：<strong>空间相关性是连接遥感影像与OSM数据的关键桥梁</strong>。基于这一洞察，他们提出了一个核心问题：如何利用OSM数据的地理语义信息来增强遥感基础模型的预训练和下游任务性能？</p>
+<hr>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心框架" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心框架</h3><p>GeoLink是一个多模态框架，在预训练和下游任务两个阶段同时利用OSM数据增强遥感基础模型。</p>
+<h3 id="创新点1异构图神经网络osm编码器" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9cosm%e7%bc%96%e7%a0%81%e5%99%a8" class="header-mark"></a>创新点1：异构图神经网络OSM编码器</h3><p><strong>设计动机</strong>：OSM数据具有几何异构性（点/折线/多边形）、非欧式结构和动态属性标签，传统方法难以处理。</p>
+<p><strong>技术细节</strong>：</p>
+<ul>
+<li>构建异构图结构，将OSM对象表示为节点，空间关系表示为边</li>
+<li>设计基于GATConv的轻量级异构GNN，包含<strong>9个并行的GATConv层</strong></li>
+<li>每个GATConv层专门处理一种边类型（由节点类型间的空间关系定义）</li>
+<li>支持三种节点类型：点、折线、多边形</li>
+</ul>
+<p><strong>精妙之处</strong>：以点类型节点为例，编码器不仅执行类型内消息传递（点与点之间），还通过独立的GATConv层实现类型间交互（点向折线和多边形节点传播消息）。这种设计使得模型能够捕获OSM数据中复杂的拓扑关系。</p>
+<h3 id="创新点2多粒度空间相关性学习" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b92%e5%a4%9a%e7%b2%92%e5%ba%a6%e7%a9%ba%e9%97%b4%e7%9b%b8%e5%85%b3%e6%80%a7%e5%ad%a6%e4%b9%a0" class="header-mark"></a>创新点2：多粒度空间相关性学习</h3><p><strong>核心思想</strong>：使用<strong>位置</strong>作为桥梁，构建两个粒度的空间相关性：</p>
+<ol>
+<li>
+<p><strong>区域-图像级别对齐</strong>：通过对比学习实现显式空间范围匹配</p>
+<ul>
+<li>将OSM区域与对应的遥感影像进行语义对齐</li>
+<li>使用空间范围作为监督信号</li>
+</ul>
+</li>
+<li>
+<p><strong>对象-斑块级别交互</strong>：通过位置感知的交叉注意力捕获隐式空间关联</p>
+<ul>
+<li>将OSM对象与遥感影像斑块进行细粒度交互</li>
+<li>保持空间一致性以进行联合表示学习</li>
+</ul>
+</li>
+</ol>
+<p><strong>技术实现</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item><item><title>2025年遥感AI前沿：GeoPixel与Panopticon——从像素级理解到多传感器基础模型</title><link>https://w-copper.github.io/2026/05/20260530_184726_remote_sensing_foundation_model/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_184726_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿geopixel与panopticon从像素级理解到多传感器基础模型" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bfgeopixel%e4%b8%8epanopticon%e4%bb%8e%e5%83%8f%e7%b4%a0%e7%ba%a7%e7%90%86%e8%a7%a3%e5%88%b0%e5%a4%9a%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>2025年遥感AI前沿：GeoPixel与Panopticon——从像素级理解到多传感器基础模型</h1><blockquote>
+  <p><strong>撰写日期</strong>：2026年5月30日<br>
+<strong>关键词</strong>：遥感基础模型、多模态学习、像素级理解、多传感器融合、视觉语言模型</p>
+</blockquote><hr>
+<h2 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h2><h3 id="11-geopixel-像素级遥感多模态大模型" class="headerLink">
+    <a href="#11-geopixel-%e5%83%8f%e7%b4%a0%e7%ba%a7%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%a7%e6%a8%a1%e5%9e%8b" class="header-mark"></a>1.1 GeoPixel: 像素级遥感多模态大模型</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>GeoPixel: Pixel Grounding Large Multimodal Model in Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>发表会议</strong></td>
+          <td>ICML 2025 (International Conference on Machine Learning)</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Akashah Shabbir, Mohammed Zumri, Mohammed Bennamoun, Fahad Shahbaz Khan, Salman Khan</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>MBZUAI (Mohamed bin Zayed University of Artificial Intelligence)</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/mbzuai-oryx/geopixel" target="_blank" rel="noopener noreferrer">https://github.com/mbzuai-oryx/geopixel</a> ⭐ 144 stars</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2501.13925" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2501.13925</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-panopticon-任意传感器地球观测基础模型" class="headerLink">
+    <a href="#12-panopticon-%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>1.2 Panopticon: 任意传感器地球观测基础模型</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>Panopticon: Advancing Any-Sensor Foundation Models for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>发表会议</strong></td>
+          <td>CVPR 2025 EarthVision Workshop (<strong>最佳论文奖</strong> 🏆)</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Leonard Waldmann, Ando Shah, Yi Wang, Nils Lehmann, Adam Stewart, Zhitong Xiong, Xiao Xiang Zhu, Stefan Bauer, John Chuang</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>MIT, TU Munich, Stanford, UC Davis等</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">https://github.com/Panopticon-FM/panopticon</a> ⭐ 44 stars</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td>CVPR 2025 Proceedings</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="二研究问题" class="headerLink">
+    <a href="#%e4%ba%8c%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>二、研究问题</h2><h3 id="21-geopixel要解决的核心问题" class="headerLink">
+    <a href="#21-geopixel%e8%a6%81%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>2.1 GeoPixel要解决的核心问题</h3><p><strong>问题背景</strong>：遥感图像具有以下独特挑战：</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与实时检测</title><link>https://w-copper.github.io/2025/05/20250531_120000_remote_sensing_ai/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_120000_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与实时检测" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%ae%9e%e6%97%b6%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与实时检测</h1><h2 id="论文一rsrefseg---基于基础模型的引用式遥感图像分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80rsrefseg---%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：RSRefSeg - 基于基础模型的引用式遥感图像分割</h2><h3 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h3><ul>
+<li><strong>标题</strong>: RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</li>
+<li><strong>作者</strong>: Keyan Chen 等</li>
+<li><strong>发表</strong>: arXiv 2025 (arXiv:2501.06809)</li>
+<li><strong>代码</strong>: <a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></li>
+<li><strong>关键词</strong>: 遥感图像分割、基础模型、CLIP、SAM、多模态学习</li>
+</ul>
+<h3 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h3><p>引用式遥感图像分割（Referring Remote Sensing Image Segmentation）是一项通过自由格式文本描述来定位并分割遥感图像中特定区域的任务。该任务面临以下核心挑战：</p>
+<ol>
+<li><strong>细粒度语义对齐困难</strong>：现有方法难以在细粒度语义概念之间建立稳健的对齐关系，导致文本和视觉信息之间的表示不一致</li>
+<li><strong>多模态融合效率低</strong>：传统方法在处理遥感图像的复杂空间关系和多样化的文本描述时效率较低</li>
+<li><strong>泛化能力不足</strong>：针对特定任务训练的模型在面对新场景时泛化能力有限</li>
+</ol>
+<h3 id="解决方案" class="headerLink">
+    <a href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>解决方案</h3><p>RSRefSeg提出了一个创新的基础模型框架，核心创新包括：</p>
+<h4 id="1-双编码器架构" class="headerLink">
+    <a href="#1-%e5%8f%8c%e7%bc%96%e7%a0%81%e5%99%a8%e6%9e%b6%e6%9e%84" class="header-mark"></a>1. 双编码器架构</h4><ul>
+<li><strong>视觉编码器</strong>: 利用CLIP的视觉编码器提取图像特征</li>
+<li><strong>文本编码器</strong>: 利用CLIP的文本编码器处理文本描述</li>
+<li><strong>优势</strong>: 继承了CLIP强大的零样本迁移能力</li>
+</ul>
+<h4 id="2-多层次文本语义过滤" class="headerLink">
+    <a href="#2-%e5%a4%9a%e5%b1%82%e6%ac%a1%e6%96%87%e6%9c%ac%e8%af%ad%e4%b9%89%e8%bf%87%e6%bb%a4" class="header-mark"></a>2. 多层次文本语义过滤</h4><ul>
+<li><strong>全局文本语义</strong>: 捕捉整个描述的整体含义</li>
+<li><strong>局部文本语义</strong>: 关注关键名词和空间关系</li>
+<li><strong>激活特征生成</strong>: 在潜在空间中生成与引用相关的视觉激活特征</li>
+</ul>
+<h4 id="3-sam分割头集成" class="headerLink">
+    <a href="#3-sam%e5%88%86%e5%89%b2%e5%a4%b4%e9%9b%86%e6%88%90" class="header-mark"></a>3. SAM分割头集成</h4><ul>
+<li><strong>提示生成</strong>: 将激活特征转换为SAM可理解的提示</li>
+<li><strong>精细分割</strong>: 利用SAM强大的视觉泛化能力生成高质量分割掩膜</li>
+<li><strong>端到端训练</strong>: 整个流程可进行端到端优化</li>
+</ul>
+<h3 id="实验结果" class="headerLink">
+    <a href="#%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c" class="header-mark"></a>实验结果</h3><p>在RRSIS-D数据集上的实验表明：</p>
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>mIoU</th>
+          <th><a href="mailto:F1@0.5" rel="">F1@0.5</a></th>
+          <th>Precision</th>
+          <th>Recall</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>传统方法</td>
+          <td>45.2</td>
+          <td>52.3</td>
+          <td>58.1</td>
+          <td>47.6</td>
+      </tr>
+      <tr>
+          <td>RSRefSeg</td>
+          <td><strong>58.7</strong></td>
+          <td><strong>67.4</strong></td>
+          <td><strong>72.3</strong></td>
+          <td><strong>63.1</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>主要发现</strong>:</p>]]></description></item></channel></rss>

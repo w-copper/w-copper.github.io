@@ -1,0 +1,77 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>空间相关性 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3%E6%80%A7/</link><description>空间相关性 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3%E6%80%A7/" rel="self" type="application/rss+xml"/><item><title>GeoLink：用OpenStreetMap赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_150516_geolink/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_150516_geolink/</guid><description><![CDATA[<h1 id="geolink用openstreetmap赋能遥感基础模型" class="headerLink">
+    <a href="#geolink%e7%94%a8openstreetmap%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap赋能遥感基础模型</h1><blockquote>
+  <p><strong>论文标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data<br>
+<strong>作者</strong>：Lubin Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du<br>
+<strong>会议</strong>：NeurIPS 2025<br>
+<strong>arXiv</strong>：<a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">2509.26016</a><br>
+<strong>GitHub</strong>：<a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">bailubin/GeoLink_NeurIPS2025</a></p>
+</blockquote><hr>
+<h2 id="-研究定位" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>📌 研究定位</h2><p><strong>大领域</strong>：遥感智能解译<br>
+<strong>小领域</strong>：多模态遥感基础模型<br>
+<strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态学习、自监督预训练、空间相关性</p>
+<hr>
+<h2 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>遥感（RS）基础模型近年来取得了显著进展，但大多数模型<strong>仅关注遥感影像本身</strong>，忽略了地面级地理空间数据的丰富语义信息。OpenStreetMap（OSM）作为全球最大的开源地理空间数据库之一，包含海量的地理实体（建筑、道路、兴趣点等）及其属性信息，这些信息与遥感影像具有天然的空间对应关系。</p>
+<h3 id="核心挑战" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>核心挑战</h3><ol>
+<li><strong>模态鸿沟</strong>：RS数据（栅格图像）与OSM数据（矢量图结构）在数据结构、内容和空间粒度上存在根本性差异</li>
+<li><strong>结构异构性</strong>：OSM数据包含点（point）、折线（polyline）、多边形（polygon）三种几何类型，传统方法难以统一处理</li>
+<li><strong>空间对齐难题</strong>：如何建立RS影像斑块与OSM实体之间的精确空间对应关系</li>
+</ol>
+<h3 id="作者的切入点" class="headerLink">
+    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h3><p>作者敏锐地观察到：<strong>空间相关性是连接遥感影像与OSM数据的关键桥梁</strong>。基于这一洞察，他们提出了一个核心问题：如何利用OSM数据的地理语义信息来增强遥感基础模型的预训练和下游任务性能？</p>
+<hr>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心框架" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心框架</h3><p>GeoLink是一个多模态框架，在预训练和下游任务两个阶段同时利用OSM数据增强遥感基础模型。</p>
+<h3 id="创新点1异构图神经网络osm编码器" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9cosm%e7%bc%96%e7%a0%81%e5%99%a8" class="header-mark"></a>创新点1：异构图神经网络OSM编码器</h3><p><strong>设计动机</strong>：OSM数据具有几何异构性（点/折线/多边形）、非欧式结构和动态属性标签，传统方法难以处理。</p>
+<p><strong>技术细节</strong>：</p>
+<ul>
+<li>构建异构图结构，将OSM对象表示为节点，空间关系表示为边</li>
+<li>设计基于GATConv的轻量级异构GNN，包含<strong>9个并行的GATConv层</strong></li>
+<li>每个GATConv层专门处理一种边类型（由节点类型间的空间关系定义）</li>
+<li>支持三种节点类型：点、折线、多边形</li>
+</ul>
+<p><strong>精妙之处</strong>：以点类型节点为例，编码器不仅执行类型内消息传递（点与点之间），还通过独立的GATConv层实现类型间交互（点向折线和多边形节点传播消息）。这种设计使得模型能够捕获OSM数据中复杂的拓扑关系。</p>
+<h3 id="创新点2多粒度空间相关性学习" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b92%e5%a4%9a%e7%b2%92%e5%ba%a6%e7%a9%ba%e9%97%b4%e7%9b%b8%e5%85%b3%e6%80%a7%e5%ad%a6%e4%b9%a0" class="header-mark"></a>创新点2：多粒度空间相关性学习</h3><p><strong>核心思想</strong>：使用<strong>位置</strong>作为桥梁，构建两个粒度的空间相关性：</p>
+<ol>
+<li>
+<p><strong>区域-图像级别对齐</strong>：通过对比学习实现显式空间范围匹配</p>
+<ul>
+<li>将OSM区域与对应的遥感影像进行语义对齐</li>
+<li>使用空间范围作为监督信号</li>
+</ul>
+</li>
+<li>
+<p><strong>对象-斑块级别交互</strong>：通过位置感知的交叉注意力捕获隐式空间关联</p>
+<ul>
+<li>将OSM对象与遥感影像斑块进行细粒度交互</li>
+<li>保持空间一致性以进行联合表示学习</li>
+</ul>
+</li>
+</ol>
+<p><strong>技术实现</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item></channel></rss>

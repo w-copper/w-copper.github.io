@@ -1,0 +1,53 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>开放词汇 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87/</link><description>开放词汇 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87/" rel="self" type="application/rss+xml"/><item><title>开放词汇遥感语义分割：GSNet如何让AI识别任意地物类别</title><link>https://w-copper.github.io/2026/05/20260531_123557_open_vocabulary_remote_sensing_segmentation/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_123557_open_vocabulary_remote_sensing_segmentation/</guid><description><![CDATA[<h1 id="开放词汇遥感语义分割gsnet如何让ai识别任意地物类别" class="headerLink">
+    <a href="#%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e9%81%a5%e6%84%9f%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2gsnet%e5%a6%82%e4%bd%95%e8%ae%a9ai%e8%af%86%e5%88%ab%e4%bb%bb%e6%84%8f%e5%9c%b0%e7%89%a9%e7%b1%bb%e5%88%ab" class="header-mark"></a>开放词汇遥感语义分割：GSNet如何让AI识别任意地物类别</h1><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📌 论文信息</h2><ul>
+<li><strong>标题</strong>: Towards Open-Vocabulary Remote Sensing Image Semantic Segmentation</li>
+<li><strong>作者</strong>: Chengyang Ye, Yunzhi Zhuge, Pingping Zhang</li>
+<li><strong>会议</strong>: AAAI 2025 (39th Annual AAAI Conference on Artificial Intelligence)</li>
+<li><strong>论文</strong>: <a href="https://arxiv.org/abs/2412.19492" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.19492</a></li>
+<li><strong>代码</strong>: <a href="https://github.com/yecy749/gsnet" target="_blank" rel="noopener noreferrer">https://github.com/yecy749/gsnet</a></li>
+<li><strong>关键词</strong>: 开放词汇、语义分割、遥感图像、CLIP、双流编码器</li>
+</ul>
+<hr>
+<h2 id="-研究问题遥感分割的类别牢笼" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e7%9a%84%e7%b1%bb%e5%88%ab%e7%89%a2%e7%ac%bc" class="header-mark"></a>❓ 研究问题：遥感分割的&quot;类别牢笼&quot;</h2><h3 id="问题来源" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>遥感图像语义分割（RSISS）是地球观测的核心任务，但现有方法存在一个根本性限制：<strong>只能识别预定义的类别</strong>。</p>
+<h3 id="核心问题细节" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e7%bb%86%e8%8a%82" class="header-mark"></a>核心问题细节</h3><p><strong>传统方法的困境</strong>:</p>
+<ol>
+<li><strong>类别固定</strong>: 训练时定义了多少类，就只能识别多少类</li>
+<li><strong>标注成本高</strong>: 每增加一个新类别，需要大量像素级标注</li>
+<li><strong>模型重训</strong>: 适应新类别需要重新训练整个模型</li>
+<li><strong>场景受限</strong>: 不同应用场景需要不同的类别集合</li>
+</ol>
+<p><strong>实际案例</strong>:</p>
+<ul>
+<li>城市规划需要识别&quot;建筑、道路、绿地&quot;</li>
+<li>灾害评估需要识别&quot;积水、废墟、救援通道&quot;</li>
+<li>农业监测需要识别&quot;作物类型、病虫害区域&quot;</li>
+</ul>
+<p>每次任务切换都需要重新标注数据和训练模型，成本极高。</p>
+<h3 id="问题本质" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9c%ac%e8%b4%a8" class="header-mark"></a>问题本质</h3><p>现有方法将遥感分割视为&quot;闭集&quot;问题，而现实世界是&quot;开集&quot;的——你永远无法预知未来需要识别什么类别。</p>
+<hr>
+<h2 id="-解决方案gsnet的双流融合架构" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88gsnet%e7%9a%84%e5%8f%8c%e6%b5%81%e8%9e%8d%e5%90%88%e6%9e%b6%e6%9e%84" class="header-mark"></a>💡 解决方案：GSNet的双流融合架构</h2><h3 id="核心创新点" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b9" class="header-mark"></a>核心创新点</h3><p>GSNet（Generalist and Specialist Network）提出了一个精妙的解决方案：<strong>融合通用视觉语言模型的开放能力和遥感领域模型的专业知识</strong>。</p>
+<h3 id="技术细节拆解" class="headerLink">
+    <a href="#%e6%8a%80%e6%9c%af%e7%bb%86%e8%8a%82%e6%8b%86%e8%a7%a3" class="header-mark"></a>技术细节拆解</h3><h4 id="1-双流图像编码器dual-stream-image-encoder-dsie" class="headerLink">
+    <a href="#1-%e5%8f%8c%e6%b5%81%e5%9b%be%e5%83%8f%e7%bc%96%e7%a0%81%e5%99%a8dual-stream-image-encoder-dsie" class="header-mark"></a>1. 双流图像编码器（Dual-Stream Image Encoder, DSIE）</h4><p><strong>设计理念</strong>: 两条并行的特征提取流，分别捕获通用语义和领域知识。</p>
+<p><strong>通用流（Generalist Stream）</strong>:</p>
+<ul>
+<li>使用CLIP的视觉编码器</li>
+<li>通过大规模图像-文本对预训练</li>
+<li>擅长识别新目标和新语义</li>
+<li>提供开放词汇能力</li>
+</ul>
+<p><strong>专业流（Specialist Stream）</strong>:</p>
+<ul>
+<li>使用RSIB（Remote Sensing Image Backbone）</li>
+<li>通过自监督学习在遥感数据上预训练</li>
+<li>捕获遥感特有的空间和光谱特征</li>
+<li>提供领域专业知识</li>
+</ul>
+<p><strong>技术细节</strong>:</p>]]></description></item></channel></rss>

@@ -1,0 +1,163 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>零训练 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%9B%B6%E8%AE%AD%E7%BB%83/</link><description>零训练 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 29 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%9B%B6%E8%AE%AD%E7%BB%83/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI最新论文解读：CVPR 2025顶会论文精选</title><link>https://w-copper.github.io/2026/05/20260529_224400_remote_sensing/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_224400_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai最新论文解读cvpr-2025顶会论文精选" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbcvpr-2025%e9%a1%b6%e4%bc%9a%e8%ae%ba%e6%96%87%e7%b2%be%e9%80%89" class="header-mark"></a>2025年遥感AI最新论文解读：CVPR 2025顶会论文精选</h1><blockquote>
+  <p>本文精选了2025年CVPR会议上两篇具有开源代码的遥感AI前沿论文，涵盖遥感图像分割与融合两大核心任务。</p>
+</blockquote><hr>
+<h2 id="论文一segearth-ov---遥感图像开放词汇分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80segearth-ov---%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：SegEarth-OV - 遥感图像开放词汇分割</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 (Oral)</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>开放词汇分割、遥感图像、零训练、CLIP、特征上采样</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>遥感图像在农业、水资源、军事、救灾等领域发挥着不可替代的作用。像素级解释是遥感影像应用的一个关键方面，然而现有方法面临两大核心挑战：</p>
+<ol>
+<li><strong>标注成本高昂</strong>：传统语义分割方法需要大量像素级手动标注，而遥感图像的标注成本极高</li>
+<li><strong>类别封闭性</strong>：训练完成的模型只能识别训练集中的固定类别，无法泛化到新类别</li>
+</ol>
+<p>例如，当无人机掠过洪涝灾区上空，传回数千张高分辨率图像需要紧急分析时，传统方法需要预先定义类别体系并进行大量标注，这严重限制了实际应用效率。</p>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>SegEarth-OV将开放词汇语义分割（OVSS）引入遥感领域，实现了<strong>零训练分割能力</strong>：</p>
+<h4 id="核心技术创新" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%8a%80%e6%9c%af%e5%88%9b%e6%96%b0" class="header-mark"></a>核心技术创新</h4><ol>
+<li>
+<p><strong>开放词汇理解</strong></p>
+<ul>
+<li>直接接受&quot;玉米田&quot;、&ldquo;油罐区&rdquo;、&ldquo;洪水淹没区&quot;等自然语言输入</li>
+<li>无需预先定义类别体系，基于CLIP视觉语言模型实现语义理解</li>
+</ul>
+</li>
+<li>
+<p><strong>SimFeatUp特征上采样器</strong></p>
+<ul>
+<li>遥感图像对低分辨率特征敏感，预测掩码中会出现扭曲的目标形状和不拟合的边界</li>
+<li>SimFeatUp在特征空间进行分辨率恢复，避免传统上采样导致的边界模糊</li>
+<li>以无训练的方式恢复深度特征中丢失的空间信息</li>
+</ul>
+</li>
+<li>
+<p><strong>Patch Token偏差修正</strong></p>
+<ul>
+<li>基于对CLIP中局部patch token对[CLS] token异常响应的观察</li>
+<li>执行简单的减法运算来减轻patch token中的全局偏差</li>
+<li>提升局部特征与全局语义的匹配精度</li>
+</ul>
+</li>
+</ol>
+<h3 id="-实验结果" class="headerLink">
+    <a href="#-%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c" class="header-mark"></a>📊 实验结果</h3><p>在<strong>17个遥感数据集</strong>上进行了广泛的实验，涵盖4大任务：</p>
+<table>
+  <thead>
+      <tr>
+          <th>任务</th>
+          <th>性能提升</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>语义分割</td>
+          <td>平均提升 <strong>5.8%</strong></td>
+      </tr>
+      <tr>
+          <td>建筑物提取</td>
+          <td>平均提升 <strong>8.2%</strong></td>
+      </tr>
+      <tr>
+          <td>道路检测</td>
+          <td>平均提升 <strong>4.0%</strong></td>
+      </tr>
+      <tr>
+          <td>洪水检测</td>
+          <td>平均提升 <strong>15.3%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>实际测试表明，在建筑物提取任务中，该方法对未见过的新类别（如&quot;钢结构厂房&rdquo;）的识别准确率比传统方法高出15.3%。</p>
+<h3 id="-综合评估" class="headerLink">
+    <a href="#-%e7%bb%bc%e5%90%88%e8%af%84%e4%bc%b0" class="header-mark"></a>⭐ 综合评估</h3><table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>评分</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>创新性</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>首次将开放词汇分割引入遥感领域，提出零训练框架</td>
+      </tr>
+      <tr>
+          <td>实用性</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>无需标注数据，直接使用自然语言描述进行分割</td>
+      </tr>
+      <tr>
+          <td>代码质量</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>完整开源，包含演示脚本和评估工具</td>
+      </tr>
+      <tr>
+          <td>影响力</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>CVPR Oral，已在多个实际场景验证</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="论文二arconv---自适应矩形卷积用于遥感图像融合" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%ba%8carconv---%e8%87%aa%e9%80%82%e5%ba%94%e7%9f%a9%e5%bd%a2%e5%8d%b7%e7%a7%af%e7%94%a8%e4%ba%8e%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e8%9e%8d%e5%90%88" class="header-mark"></a>论文二：ARConv - 自适应矩形卷积用于遥感图像融合</h2><h3 id="-论文信息-1" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af-1" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Adaptive Rectangular Convolution for Remote Sensing Pansharpening</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/WangXueyang-uestc/ARConv" target="_blank" rel="noopener noreferrer">https://github.com/WangXueyang-uestc/ARConv</a></td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感图像融合、自适应卷积、Pansharpening、即插即用模块</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题-1" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98-1" class="header-mark"></a>🎯 研究问题</h3><p>遥感图像融合（Pansharpening）是将高分辨率全色图像与低分辨率多光谱图像融合，生成高分辨率多光谱图像的关键技术。现有方法面临的核心问题：</p>]]></description></item></channel></rss>

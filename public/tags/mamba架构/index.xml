@@ -1,0 +1,30 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mamba架构 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/mamba%E6%9E%B6%E6%9E%84/</link><description>Mamba架构 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/mamba%E6%9E%B6%E6%9E%84/" rel="self" type="application/rss+xml"/><item><title>RoMA: 基于Mamba的遥感基础模型自监督预训练框架</title><link>https://w-copper.github.io/2026/05/20260531_173833_roma_mamba/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_173833_roma_mamba/</guid><description><![CDATA[<h1 id="roma-基于mamba的遥感基础模型自监督预训练框架" class="headerLink">
+    <a href="#roma-%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>RoMA: 基于Mamba的遥感基础模型自监督预训练框架</h1><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📌 论文信息</h2><ul>
+<li><strong>标题</strong>: RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</li>
+<li><strong>作者</strong>: Fengxiang Wang, Yulin Wang, Mingshuo Chen, Haiyan Zhao, Yangang Sun, Shuo Wang, Hongzhen Wang, Di Wang, Long Lan, Wenjing Yang, Jing Zhang</li>
+<li><strong>机构</strong>: 国防科技大学、清华大学、武汉大学、北京邮电大学</li>
+<li><strong>会议</strong>: NeurIPS 2025</li>
+<li><strong>arXiv</strong>: <a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></li>
+<li><strong>关键词</strong>: 遥感基础模型、Mamba架构、自监督预训练、旋转感知、多尺度预测</li>
+</ul>
+<h2 id="-研究定位" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>🗺️ 研究定位</h2><ul>
+<li><strong>大领域</strong>: 遥感图像智能解译</li>
+<li><strong>小领域</strong>: 遥感基础模型自监督预训练</li>
+<li><strong>技术路线</strong>: 基于Mamba架构的自回归预训练</li>
+</ul>
+<h2 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>当前遥感基础模型主要基于Vision Transformer (ViT)架构，但其自注意力机制的二次计算复杂度（O(n²)）在高分辨率遥感图像处理中面临严峻的扩展性挑战。具体表现为：</p>
+<ol>
+<li><strong>计算瓶颈</strong>: 处理大尺寸遥感图像时，内存消耗和计算时间呈平方级增长</li>
+<li><strong>模型扩展受限</strong>: 现有ViT模型在参数规模和数据规模上的扩展受到硬件限制</li>
+<li><strong>Mamba应用局限</strong>: 虽然Mamba架构具有线性复杂度优势，但在遥感领域的应用仅限于小规模监督任务</li>
+</ol>
+<h3 id="核心问题" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h3><p><strong>如何实现基于Mamba架构的遥感基础模型的可扩展自监督预训练，使其在保持计算效率的同时获得与ViT模型相当甚至更优的性能？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心方法roma框架" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%96%b9%e6%b3%95roma%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心方法：RoMA框架</h3><p>RoMA（<strong>Ro</strong>tation-aware <strong>M</strong>amba <strong>A</strong>utoregressive pretraining）是一个专门针对遥感图像特性设计的Mamba模型自监督预训练框架。</p>]]></description></item></channel></rss>

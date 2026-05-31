@@ -1,0 +1,43 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>地球观测基础模型 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%9C%B0%E7%90%83%E8%A7%82%E6%B5%8B%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/</link><description>地球观测基础模型 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 30 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%9C%B0%E7%90%83%E8%A7%82%E6%B5%8B%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测</title><link>https://w-copper.github.io/2026/05/20260530_001523_remote_sensing_foundation_model/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_001523_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测</h1><blockquote>
+  <p>搜索时间：2026年5月30日<br>
+关键词：arxiv remote sensing deep learning 2025, remote sensing object detection transformer 2025, remote sensing segmentation foundation model 2025, remote sensing change detection 2025, github remote sensing paper with code 2025</p>
+</blockquote><hr>
+<h2 id="论文一copernicus-fm--统一的哥白尼地球观测基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80copernicus-fm--%e7%bb%9f%e4%b8%80%e7%9a%84%e5%93%a5%e7%99%bd%e5%b0%bc%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：Copernicus-FM — 统一的哥白尼地球观测基础模型</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Yi Wang, Zhitong Xiong, Chenying Liu, Adam J. Stewart, Thomas Dujardin, Nikolaos Ioannis Bountos, Angelos Zavras, Franziska Gerken 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年3月14日</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a> ⭐ 141 stars</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://huggingface.co/papers/2503.11849" target="_blank" rel="noopener noreferrer">https://huggingface.co/papers/2503.11849</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>地球观测基础模型、多模态遥感、动态超网络、哥白尼哨兵卫星</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>当前地球观测（Earth Observation, EO）基础模型存在三大局限性：</p>]]></description></item></channel></rss>

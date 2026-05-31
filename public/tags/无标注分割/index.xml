@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>无标注分割 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E6%97%A0%E6%A0%87%E6%B3%A8%E5%88%86%E5%89%B2/</link><description>无标注分割 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%97%A0%E6%A0%87%E6%B3%A8%E5%88%86%E5%89%B2/" rel="self" type="application/rss+xml"/><item><title>遥感基础模型新突破：SegEarth-OV与GeoLink的创新解读</title><link>https://w-copper.github.io/2026/05/20260531_140440_remote_sensing_foundation_model/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_140440_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="遥感基础模型新突破segearth-ov与geolink的创新解读" class="headerLink">
+    <a href="#%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4segearth-ov%e4%b8%8egeolink%e7%9a%84%e5%88%9b%e6%96%b0%e8%a7%a3%e8%af%bb" class="header-mark"></a>遥感基础模型新突破：SegEarth-OV与GeoLink的创新解读</h1><p><strong>关键词</strong>: 遥感基础模型, 开放词汇分割, 多模态融合, 无标注分割, OpenStreetMap, SAM3, CVPR 2025, NeurIPS 2025</p>
+<hr>
+<h2 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h2><h3 id="论文1segearth-ov3---探索sam3在遥感开放词汇语义分割中的应用" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%871segearth-ov3---%e6%8e%a2%e7%b4%a2sam3%e5%9c%a8%e9%81%a5%e6%84%9f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2%e4%b8%ad%e7%9a%84%e5%ba%94%e7%94%a8" class="header-mark"></a>论文1：SegEarth-OV3 - 探索SAM3在遥感开放词汇语义分割中的应用</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV3: Exploring SAM 3 for Open-Vocabulary Semantic Segmentation in Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kaiyu Li, Shengqi Zhang, Yupeng Deng, Zhi Wang, Deyu Meng, Xiangyong Cao</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>西安交通大学, 中国科学院</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv:2512.08730 (2025)</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/earth-insights/SegEarth-OV-3" target="_blank" rel="noopener noreferrer">https://github.com/earth-insights/SegEarth-OV-3</a> ⭐161</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.08730</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="论文2geolink---利用openstreetmap数据增强遥感基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%872geolink---%e5%88%a9%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e5%a2%9e%e5%bc%ba%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文2：GeoLink - 利用OpenStreetMap数据增强遥感基础模型</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Lubian Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>北京大学</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>NeurIPS 2025</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">https://github.com/bailubin/GeoLink_NeurIPS2025</a> ⭐56</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2509.26016</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="二问题背景与动机" class="headerLink">
+    <a href="#%e4%ba%8c%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e4%b8%8e%e5%8a%a8%e6%9c%ba" class="header-mark"></a>二、问题背景与动机</h2><h3 id="21-遥感图像理解的核心挑战" class="headerLink">
+    <a href="#21-%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e7%90%86%e8%a7%a3%e7%9a%84%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 遥感图像理解的核心挑战</h3><p>遥感图像的语义分割是地球观测的关键任务，但面临两大根本性难题：</p>]]></description></item></channel></rss>

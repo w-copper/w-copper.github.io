@@ -1,0 +1,529 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>变化检测 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B/</link><description>变化检测 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 30 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测的最新进展</title><link>https://w-copper.github.io/2026/05/20260530_044510_remote_sensing/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_044510_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测的最新进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e7%9a%84%e6%9c%80%e6%96%b0%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测的最新进展</h1><blockquote>
+  <p>摘要：本文精选了2025年遥感AI领域的两篇重要论文，分别聚焦于<strong>农业制图基础模型</strong>和<strong>变化检测实践优化</strong>，均来自顶级会议且提供了开源代码。</p>
+</blockquote><hr>
+<h2 id="一论文一agrifm---面向农业制图的多源时序遥感基础模型" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80agrifm---%e9%9d%a2%e5%90%91%e5%86%9c%e4%b8%9a%e5%88%b6%e5%9b%be%e7%9a%84%e5%a4%9a%e6%ba%90%e6%97%b6%e5%ba%8f%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>一、论文一：AgriFM - 面向农业制图的多源时序遥感基础模型</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>AgriFM: A Multi-source Temporal Remote Sensing Foundation Model for Agriculture Mapping</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Wenyuan Li, Shunlin Liang, Keyan Chen, Yongzhe Chen, Han Ma, Jianglei Xu, Yichuan Ma, Shikang Guan, Husheng Fang, Zhenwei Shi</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>香港大学、北京航空航天大学等</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年5月</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">2505.21357</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/flyakon/AgriFM" target="_blank" rel="noopener noreferrer">https://github.com/flyakon/AgriFM</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>准确的农作物制图（Crop Mapping）是精准农业和粮食安全的核心任务。然而，现有的遥感基础模型（RSFMs）在农业应用中面临两大挑战：</p>
+<ol>
+<li>
+<p><strong>多尺度时空建模不足</strong>：农作物系统具有从田间纹理到景观级上下文的多尺度空间特征，以及从短期物候变化到整个生长季动态的多尺度时间特征。现有模型要么采用固定的时空窗口忽略多尺度特性，要么完全忽略时间信息仅关注空间模式。</p>
+</li>
+<li>
+<p><strong>多源数据融合困难</strong>：农业监测需要整合多种卫星数据源（如MODIS、Landsat-8/9、Sentinel-2），但这些数据具有不同的空间分辨率、时间分辨率和光谱特性，如何有效融合是一大难题。</p>
+</li>
+</ol>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><p>AgriFM提出了一种创新的多源时序遥感基础模型架构：</p>
+<p><strong>核心创新：</strong></p>
+<ol>
+<li>
+<p><strong>改进的Video Swin Transformer架构</strong>：</p>
+<ul>
+<li>将时间下采样与空间缩放操作同步进行</li>
+<li>实现层次化的时空特征提取</li>
+<li>支持长时间序列卫星数据的高效统一处理</li>
+</ul>
+</li>
+<li>
+<p><strong>多源数据融合策略</strong>：</p>
+<ul>
+<li>整合MODIS（高时间分辨率）、Landsat-8/9（中等分辨率）和Sentinel-2（高空间分辨率）三种数据源</li>
+<li>构建全球代表性数据集，包含超过2500万个图像样本</li>
+<li>利用土地覆盖产品进行监督预训练</li>
+</ul>
+</li>
+<li>
+<p><strong>灵活的解码器架构</strong>：</p>]]></description></item><item><title>2025年遥感AI最新研究：变化检测领域的突破性进展</title><link>https://w-copper.github.io/2026/05/20260530_041324_remote_sensing_change_detection/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_041324_remote_sensing_change_detection/</guid><description><![CDATA[<h1 id="2025年遥感ai最新研究变化检测领域的突破性进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e7%a0%94%e7%a9%b6%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e9%a2%86%e5%9f%9f%e7%9a%84%e7%aa%81%e7%a0%b4%e6%80%a7%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI最新研究：变化检测领域的突破性进展</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>本文介绍了2025年遥感人工智能领域在变化检测（Change Detection）方向的两项重要研究进展。这些研究不仅提出了创新的深度学习方法，还提供了公开的代码和数据集，为遥感图像分析领域的发展做出了重要贡献。</p>
+<hr>
+<h2 id="论文一jl1-cd数据集与多教师知识蒸馏框架" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80jl1-cd%e6%95%b0%e6%8d%ae%e9%9b%86%e4%b8%8e%e5%a4%9a%e6%95%99%e5%b8%88%e7%9f%a5%e8%af%86%e8%92%b8%e9%a6%8f%e6%a1%86%e6%9e%b6" class="header-mark"></a>论文一：JL1-CD数据集与多教师知识蒸馏框架</h2><h3 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h3><ul>
+<li><strong>标题</strong>: JL1-CD: A New Benchmark for Remote Sensing Change Detection and a Robust Multi-Teacher Knowledge Distillation Framework</li>
+<li><strong>作者</strong>: Ziyuan Liu, Ruifei Zhu, Long Gao, Yuanxiu Zhou, Jingyu Ma, Yuantao Gu</li>
+<li><strong>发表时间</strong>: 2025年2月</li>
+<li><strong>论文链接</strong>: <a href="https://hf.co/papers/2502.13407" target="_blank" rel="noopener noreferrer">https://hf.co/papers/2502.13407</a></li>
+<li><strong>代码仓库</strong>: <a href="https://github.com/circleLZY/MTKD-CD" target="_blank" rel="noopener noreferrer">https://github.com/circleLZY/MTKD-CD</a></li>
+<li><strong>关键词</strong>: 变化检测、知识蒸馏、遥感图像、基准数据集</li>
+</ul>
+<h3 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h3><p>遥感图像变化检测面临两个主要挑战：</p>
+<ol>
+<li>
+<p><strong>数据集稀缺性</strong>: 现有的公开变化检测数据集大多分辨率较低，且标注不够全面。缺乏亚米级（sub-meter）的高质量开放源代码数据集，这限制了高精度变化检测模型的开发和评估。</p>
+</li>
+<li>
+<p><strong>检测一致性问题</strong>: 现有方法在不同变化区域大小的图像上难以获得一致且令人满意的检测结果。模型在处理小目标变化和大范围区域变化时表现差异显著。</p>
+</li>
+</ol>
+<h3 id="解决方案" class="headerLink">
+    <a href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>解决方案</h3><h4 id="1-jl1-cd数据集" class="headerLink">
+    <a href="#1-jl1-cd%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>1. JL1-CD数据集</h4><p>研究者提出了JL1-CD数据集，具有以下特点：</p>
+<ul>
+<li><strong>规模</strong>: 包含5,000对图像</li>
+<li><strong>分辨率</strong>: 图像尺寸为512×512像素</li>
+<li><strong>空间分辨率</strong>: 0.5至0.75米（亚米级）</li>
+<li><strong>标注质量</strong>: 像素级精确标注</li>
+</ul>
+<h4 id="2-多教师知识蒸馏框架mtkd" class="headerLink">
+    <a href="#2-%e5%a4%9a%e6%95%99%e5%b8%88%e7%9f%a5%e8%af%86%e8%92%b8%e9%a6%8f%e6%a1%86%e6%9e%b6mtkd" class="header-mark"></a>2. 多教师知识蒸馏框架（MTKD）</h4><p>MTKD框架的核心创新包括：</p>
+<p><strong>多教师架构设计</strong>:</p>
+<ul>
+<li>集成多个预训练的教师模型</li>
+<li>每个教师模型专注于不同的特征表示</li>
+<li>通过知识蒸馏将多个教师的知识传递给学生模型</li>
+</ul>
+<p><strong>知识蒸馏策略</strong>:</p>
+<ul>
+<li>特征级知识蒸馏：传递中间层特征表示</li>
+<li>输出级蒸馏：传递最终预测结果</li>
+<li>自适应权重分配：根据教师模型的置信度动态调整权重</li>
+</ul>
+<p><strong>学生模型优化</strong>:</p>
+<ul>
+<li>轻量化架构设计</li>
+<li>多尺度特征融合</li>
+<li>注意力机制增强</li>
+</ul>
+<h3 id="实验结果" class="headerLink">
+    <a href="#%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c" class="header-mark"></a>实验结果</h3><h4 id="数据集评估" class="headerLink">
+    <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86%e8%af%84%e4%bc%b0" class="header-mark"></a>数据集评估</h4><p>在JL1-CD和SYSU-CD两个数据集上进行了广泛实验：</p>]]></description></item><item><title>2025年遥感AI最新论文综述：变化检测与基础模型前沿进展</title><link>https://w-copper.github.io/2026/05/20260530_143000_remote_sensing_ai/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_143000_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai最新论文综述变化检测与基础模型前沿进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e8%ae%ba%e6%96%87%e7%bb%bc%e8%bf%b0%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e4%b8%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%89%8d%e6%b2%bf%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI最新论文综述：变化检测与基础模型前沿进展</h1><blockquote>
+  <p><strong>摘要</strong>：本文综述了2025年遥感人工智能领域的最新研究成果，重点介绍了两篇具有代表性的论文：一篇提出新的变化检测基准数据集和多教师知识蒸馏框架，另一篇构建了统一的遥感视觉语言基础模型。这些研究推动了遥感AI在变化检测和多任务学习方面的技术进步。</p>
+</blockquote><hr>
+<h2 id="一论文一jl1-cd---遥感变化检测新基准与多教师知识蒸馏框架" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80jl1-cd---%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%96%b0%e5%9f%ba%e5%87%86%e4%b8%8e%e5%a4%9a%e6%95%99%e5%b8%88%e7%9f%a5%e8%af%86%e8%92%b8%e9%a6%8f%e6%a1%86%e6%9e%b6" class="header-mark"></a>一、论文一：JL1-CD - 遥感变化检测新基准与多教师知识蒸馏框架</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>JL1-CD: A New Benchmark for Remote Sensing Change Detection and a Robust Multi-Teacher Knowledge Distillation Framework</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Ziyuan Liu, Ruifei Zhu, Long Gao, Yuanxiu Zhou, Jingyu Ma, Yuantao Gu</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年2月</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2502.13407" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.13407</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub代码</strong></td>
+          <td><a href="https://github.com/circleLZY/MTKD-CD" target="_blank" rel="noopener noreferrer">https://github.com/circleLZY/MTKD-CD</a></td>
+      </tr>
+      <tr>
+          <td><strong>研究方向</strong></td>
+          <td>遥感图像变化检测</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>遥感图像变化检测（Change Detection, CD）是监测地球表面变化的重要技术，广泛应用于城市规划、灾害评估、环境监测等领域。然而，当前该领域面临两大核心挑战：</p>
+<p><strong>挑战一：高质量基准数据集匮乏</strong></p>
+<ul>
+<li>现有公开数据集分辨率有限，多为亚米级以下</li>
+<li>数据集规模较小，难以支撑深度学习模型的充分训练</li>
+<li>标注质量参差不齐，影响模型性能评估的可靠性</li>
+</ul>
+<p><strong>挑战二：检测性能一致性差</strong></p>
+<ul>
+<li>现有模型在不同变化区域大小的图像上表现不稳定</li>
+<li>小变化区域容易被漏检，大变化区域可能出现误检</li>
+<li>模型泛化能力不足，难以适应多样化的场景</li>
+</ul>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><h4 id="131-jl1-cd数据集" class="headerLink">
+    <a href="#131-jl1-cd%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>1.3.1 JL1-CD数据集</h4><p>作者提出了JL1-CD数据集，具有以下特点：</p>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>数据规模</strong></td>
+          <td>5,000对图像</td>
+      </tr>
+      <tr>
+          <td><strong>图像尺寸</strong></td>
+          <td>512×512像素</td>
+      </tr>
+      <tr>
+          <td><strong>空间分辨率</strong></td>
+          <td>0.5-0.75米（亚米级）</td>
+      </tr>
+      <tr>
+          <td><strong>标注精度</strong></td>
+          <td>像素级标注</td>
+      </tr>
+      <tr>
+          <td><strong>场景多样性</strong></td>
+          <td>涵盖城市、郊区、农村等多种场景</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="132-多教师知识蒸馏框架mtkd" class="headerLink">
+    <a href="#132-%e5%a4%9a%e6%95%99%e5%b8%88%e7%9f%a5%e8%af%86%e8%92%b8%e9%a6%8f%e6%a1%86%e6%9e%b6mtkd" class="header-mark"></a>1.3.2 多教师知识蒸馏框架（MTKD）</h4><p>MTKD框架的核心思想是利用多个教师模型的知识来指导学生模型的训练：</p>]]></description></item><item><title>2025年遥感AI最新论文综述：变化检测与基础模型的突破</title><link>https://w-copper.github.io/2026/05/20260530_143000_remote_sensing_ai_2025/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_143000_remote_sensing_ai_2025/</guid><description><![CDATA[<h1 id="2025年遥感ai最新论文综述变化检测与基础模型的突破" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e8%ae%ba%e6%96%87%e7%bb%bc%e8%bf%b0%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e4%b8%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e7%aa%81%e7%a0%b4" class="header-mark"></a>2025年遥感AI最新论文综述：变化检测与基础模型的突破</h1><blockquote>
+  <p><strong>摘要</strong>：本文综述了2025年遥感人工智能领域的最新研究进展，重点介绍了两篇来自顶级会议且具有开源代码的代表性论文。第一篇论文提出了新的变化检测数据集和多教师知识蒸馏框架，第二篇论文构建了统一的遥感视觉语言基础模型。这些研究推动了遥感AI在数据集构建、模型架构和跨任务泛化能力方面的发展。</p>
+</blockquote><hr>
+<h2 id="一论文一jl1-cd---遥感变化检测新基准与多教师知识蒸馏框架" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80jl1-cd---%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%96%b0%e5%9f%ba%e5%87%86%e4%b8%8e%e5%a4%9a%e6%95%99%e5%b8%88%e7%9f%a5%e8%af%86%e8%92%b8%e9%a6%8f%e6%a1%86%e6%9e%b6" class="header-mark"></a>一、论文一：JL1-CD - 遥感变化检测新基准与多教师知识蒸馏框架</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>JL1-CD: A New Benchmark for Remote Sensing Change Detection and a Robust Multi-Teacher Knowledge Distillation Framework</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Ziyuan Liu, Ruifei Zhu, Long Gao, Yuanxiu Zhou, Jingyu Ma, Yuantao Gu</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年2月</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2502.13407" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.13407</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub代码</strong></td>
+          <td><a href="https://github.com/circleLZY/MTKD-CD" target="_blank" rel="noopener noreferrer">https://github.com/circleLZY/MTKD-CD</a></td>
+      </tr>
+      <tr>
+          <td><strong>研究方向</strong></td>
+          <td>遥感变化检测 (Change Detection)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>遥感图像变化检测是地球观测领域的核心任务之一，旨在识别同一区域在不同时间点之间的地表变化。然而，该领域面临两大关键挑战：</p>
+<p><strong>挑战一：高质量数据集稀缺</strong></p>
+<ul>
+<li>现有开源变化检测数据集多为中等分辨率（米级），缺乏亚米级（0.5-0.75米）的高质量数据集</li>
+<li>数据集规模有限，难以支撑大规模深度学习模型的训练需求</li>
+<li>标注质量参差不齐，影响模型性能评估的可靠性</li>
+</ul>
+<p><strong>挑战二：模型性能一致性差</strong></p>
+<ul>
+<li>现有变化检测模型在不同场景下表现不稳定</li>
+<li>面对变化区域大小差异较大的图像时，检测结果波动明显</li>
+<li>单一模型难以同时处理大尺度和小尺度变化</li>
+</ul>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><h4 id="131-jl1-cd数据集" class="headerLink">
+    <a href="#131-jl1-cd%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>1.3.1 JL1-CD数据集</h4><p>作者构建了一个大规模、高质量的亚米级变化检测数据集：</p>
+<p><strong>数据集特点</strong>：</p>
+<ul>
+<li><strong>规模</strong>：5,000对图像，每对图像尺寸为512×512像素</li>
+<li><strong>分辨率</strong>：0.5-0.75米，属于亚米级高分辨率</li>
+<li><strong>覆盖范围</strong>：涵盖城市、郊区、农村等多种场景</li>
+<li><strong>变化类型</strong>：包含建筑物、道路、植被、水体等多种地物变化</li>
+<li><strong>标注质量</strong>：专业人员精细标注，确保像素级准确性</li>
+</ul>
+<p><strong>数据集构建流程</strong>：</p>]]></description></item><item><title>2025年遥感AI前沿：两篇开源论文深度解读</title><link>https://w-copper.github.io/2026/05/20260529_054300_remote_sensing/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_054300_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿两篇开源论文深度解读" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%b8%a4%e7%af%87%e5%bc%80%e6%ba%90%e8%ae%ba%e6%96%87%e6%b7%b1%e5%ba%a6%e8%a7%a3%e8%af%bb" class="header-mark"></a>2025年遥感AI前沿：两篇开源论文深度解读</h1><blockquote>
+  <p><strong>作者</strong>: AI Research Digest<br>
+<strong>日期</strong>: 2025年5月29日<br>
+<strong>关键词</strong>: 遥感基础模型, Mamba, 自监督学习, 多模态融合, 变化检测</p>
+</blockquote><hr>
+<h2 id="一论文概览" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e6%a6%82%e8%a7%88" class="header-mark"></a>一、论文概览</h2><p>本文精选了2025年遥感AI领域两篇具有代表性的开源论文，均来自顶级研究机构并已在GitHub公开代码：</p>
+<table>
+  <thead>
+      <tr>
+          <th>论文</th>
+          <th>机构</th>
+          <th>arXiv</th>
+          <th>GitHub</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>RoMA</strong></td>
+          <td>国防科技大学、清华大学、武汉大学</td>
+          <td>2503.10392</td>
+          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">MiliLab/RoMA</a></td>
+      </tr>
+      <tr>
+          <td><strong>Copernicus-FM</strong></td>
+          <td>慕尼黑工业大学、NVIDIA、雅典国立技术大学</td>
+          <td>2503.11849</td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">zhu-xlab/Copernicus-FM</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="二论文一roma--基于mamba的遥感基础模型自监督预训练" class="headerLink">
+    <a href="#%e4%ba%8c%e8%ae%ba%e6%96%87%e4%b8%80roma--%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83" class="header-mark"></a>二、论文一：RoMA — 基于Mamba的遥感基础模型自监督预训练</h2><h3 id="21-论文信息" class="headerLink">
+    <a href="#21-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>2.1 论文信息</h3><ul>
+<li><strong>标题</strong>: RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</li>
+<li><strong>作者</strong>: Fengxiang Wang, Yulin Wang, Mingshuo Chen, Haiyan Zhao 等</li>
+<li><strong>单位</strong>: 国防科技大学、清华大学、武汉大学、北京邮电大学</li>
+<li><strong>发表</strong>: arXiv 2025 (收录于NeurIPS 2025论文集)</li>
+<li><strong>代码</strong>: <a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></li>
+</ul>
+<h3 id="22-研究问题" class="headerLink">
+    <a href="#22-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2.2 研究问题</h3><p>遥感图像处理面临三大核心挑战：</p>
+<ol>
+<li>
+<p><strong>高分辨率图像的计算瓶颈</strong>：传统Vision Transformer (ViT) 的自注意力机制具有二次复杂度，在处理高分辨率遥感图像（如DOTA数据集中4000×4000像素的图像）时计算和内存消耗巨大。</p>
+</li>
+<li>
+<p><strong>目标方向多样性</strong>：与自然图像不同，遥感图像中的目标（如飞机、船舶）可能以任意角度出现，需要旋转不变性表示。</p>
+</li>
+<li>
+<p><strong>尺度变化极端</strong>：遥感图像中的目标尺度变化范围极大，从小型车辆到大型建筑，传统方法难以有效捕捉多尺度特征。</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测</title><link>https://w-copper.github.io/2026/05/20260529_071429_remote_sensing_ai_2025/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_071429_remote_sensing_ai_2025/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测</h1><blockquote>
+  <p><strong>更新日期</strong>：2026年5月29日<br>
+<strong>关键词</strong>：遥感、深度学习、基础模型、变化检测、CVPR、NeurIPS<br>
+<strong>来源</strong>：arXiv 2025、CVPR 2025、NeurIPS 2025</p>
+</blockquote><hr>
+<h2 id="论文一copernicus-fm--统一的哥白尼基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80copernicus-fm--%e7%bb%9f%e4%b8%80%e7%9a%84%e5%93%a5%e7%99%bd%e5%b0%bc%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：Copernicus-FM — 统一的哥白尼基础模型</h2><h3 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Yi Wang, Zhitong Xiong, Chenying Liu, Adam J. Stewart, Thomas Dujardin, Nikolaos Ioannis Bountos, Angelos Zavras, Franziska Gerken 等</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>Technical University of Munich (TUM), Munich Center for Machine Learning 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年3月</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">arXiv:2503.11849</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
+      </tr>
+      <tr>
+          <td><strong>项目关键词</strong></td>
+          <td>遥感基础模型、多模态、哥白尼卫星、动态超网络</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h3><p>当前遥感基础模型存在三大局限：</p>
+<ol>
+<li><strong>光谱传感器固定</strong>：大多数基础模型仅针对特定光谱传感器设计（如Sentinel-2的多光谱），无法处理不同传感器模态的数据</li>
+<li><strong>仅关注地表</strong>：现有模型主要聚焦于地表信息，忽略了大气等其他有价值的遥感数据维度</li>
+<li><strong>忽略元数据</strong>：卫星影像附带的丰富元数据（如采集时间、光照条件、云覆盖等）在现有模型中未被充分利用</li>
+</ol>
+<p>这些问题限制了基础模型在多种下游任务中的通用性和适用性。</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测最新进展</title><link>https://w-copper.github.io/2026/05/20260529_071429_remote_sensing_ai/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_071429_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测最新进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%9c%80%e6%96%b0%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测最新进展</h1><blockquote>
+  <p><strong>撰写日期</strong>：2026年5月29日<br>
+<strong>关键词</strong>：遥感、深度学习、基础模型、变化检测、CVPR、NeurIPS</p>
+</blockquote><hr>
+<h2 id="一论文一copernicus-fm--统一的哥白尼基础模型" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80copernicus-fm--%e7%bb%9f%e4%b8%80%e7%9a%84%e5%93%a5%e7%99%bd%e5%b0%bc%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>一、论文一：Copernicus-FM — 统一的哥白尼基础模型</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Yi Wang, Zhitong Xiong, Chenying Liu, Adam J. Stewart, Thomas Dujardin, Nikolaos Ioannis Bountos, Angelos Zavras, Franziska Gerken 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年3月（arXiv: 2503.11849）</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://hf.co/papers/2503.11849" target="_blank" rel="noopener noreferrer">https://hf.co/papers/2503.11849</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>当前地球观测（Earth Observation, EO）基础模型存在三大局限性：</p>
+<ol>
+<li><strong>传感器模态受限</strong>：大多数基础模型仅针对固定光谱传感器（如Sentinel-2多光谱）设计，无法处理异构传感器数据</li>
+<li><strong>仅关注地表信息</strong>：现有模型忽略了大气层等有价值的垂直维度信息</li>
+<li><strong>元数据利用不足</strong>：地理坐标、时间戳、传感器参数等丰富元数据在模型中未被充分利用</li>
+</ol>
+<p>这些限制导致现有模型在跨传感器迁移、多任务泛化方面表现不佳，难以构建真正通用的地球观测基础模型。</p>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><p>Copernicus-FM 提出了三位一体的创新框架：</p>
+<h4 id="1copernicus-pretrain大规模多模态预训练数据集" class="headerLink">
+    <a href="#1copernicus-pretrain%e5%a4%a7%e8%a7%84%e6%a8%a1%e5%a4%9a%e6%a8%a1%e6%80%81%e9%a2%84%e8%ae%ad%e7%bb%83%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>（1）Copernicus-Pretrain：大规模多模态预训练数据集</h4><ul>
+<li>整合了来自哥白尼计划所有主要Sentinel卫星任务的 <strong>1870万对齐图像</strong></li>
+<li>覆盖范围从地球表面到大气层，跨越光学、SAR、高光谱等多种传感器</li>
+<li>数据时间跨度长，包含多时相观测信息</li>
+</ul>
+<h4 id="2copernicus-fm统一基础模型架构" class="headerLink">
+    <a href="#2copernicus-fm%e7%bb%9f%e4%b8%80%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%9e%b6%e6%9e%84" class="header-mark"></a>（2）Copernicus-FM：统一基础模型架构</h4><ul>
+<li><strong>扩展动态超网络（Extended Dynamic Hypernetworks）</strong>：根据输入传感器的波段配置动态生成适配权重，实现对任意光谱/非光谱传感器模态的统一处理</li>
+<li><strong>灵活元数据编码（Flexible Metadata Encoding）</strong>：将地理坐标、时间、传感器参数等元信息融入模型，增强时空感知能力</li>
+<li>支持多分辨率、多波段、多传感器的异构数据输入</li>
+</ul>
+<h4 id="3copernicus-bench系统性评估基准" class="headerLink">
+    <a href="#3copernicus-bench%e7%b3%bb%e7%bb%9f%e6%80%a7%e8%af%84%e4%bc%b0%e5%9f%ba%e5%87%86" class="header-mark"></a>（3）Copernicus-Bench：系统性评估基准</h4><ul>
+<li>设计了 <strong>15个层次化下游任务</strong>，覆盖从预处理到专业应用的完整流程</li>
+<li>每个Sentinel卫星任务均有专门的评估基准</li>
+<li>支持分类、分割、回归等多种任务类型</li>
+</ul>
+<h3 id="14-实验与评估" class="headerLink">
+    <a href="#14-%e5%ae%9e%e9%aa%8c%e4%b8%8e%e8%af%84%e4%bc%b0" class="header-mark"></a>1.4 实验与评估</h3><p><strong>实验设置</strong>：</p>]]></description></item><item><title>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</title><link>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</guid><description><![CDATA[<h1 id="-mamba架构在遥感领域的突破从基础模型到变化检测" class="headerLink">
+    <a href="#-mamba%e6%9e%b6%e6%9e%84%e5%9c%a8%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e7%9a%84%e7%aa%81%e7%a0%b4%e4%bb%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%88%b0%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</h1><blockquote>
+  <p><strong>关键词</strong>: Mamba, 遥感基础模型, 变化检测, 状态空间模型, 自监督预训练</p>
+</blockquote><hr>
+<h2 id="-论文一roma--遥感领域首个mamba自监督预训练框架" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%b8%80roma--%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e9%a6%96%e4%b8%aamamba%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>📌 论文一：RoMA —— 遥感领域首个Mamba自监督预训练框架</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📋 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>发表会议</strong></td>
+          <td>NeurIPS 2025 (Spotlight)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码仓库</strong></td>
+          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
+      </tr>
+      <tr>
+          <td><strong>研究机构</strong></td>
+          <td>MiliLab</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题为什么需要mamba基础模型" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81mamba%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>🎯 研究问题：为什么需要Mamba基础模型？</h3><h4 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h4><p>遥感（RS）领域近年来见证了Vision Transformer（ViT）自监督学习的突破性进展，催生了一系列遥感基础模型（RSFMs）。然而，<strong>自注意力机制的二次计算复杂度</strong>（O(n²)）成为了可扩展性的重大障碍，尤其是在处理<strong>大规模模型</strong>和<strong>高分辨率遥感影像</strong>时。</p>
+<h4 id="核心痛点" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e7%97%9b%e7%82%b9" class="header-mark"></a>核心痛点</h4><ol>
+<li><strong>计算瓶颈</strong>：ViT处理高分辨率遥感影像时，计算成本呈二次增长</li>
+<li><strong>数据规模限制</strong>：现有Mamba在遥感中的应用仅限于小规模、特定领域的监督任务</li>
+<li><strong>预训练空白</strong>：缺乏针对Mamba架构的遥感自监督预训练框架</li>
+<li><strong>尺度变化极端</strong>：遥感影像中目标尺度变化极大（从微小车辆到大型机场）</li>
+</ol>
+<h4 id="作者的切入点" class="headerLink">
+    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h4><p>作者注意到Mamba架构具有<strong>线性计算复杂度</strong>（O(n)），是Transformer的有力替代。但现有遥感Mamba研究局限于监督学习小数据集，<strong>没有充分利用大规模无标注遥感数据进行自监督预训练</strong>。这就是RoMA要解决的核心问题。</p>
+<h3 id="-解决方案旋转感知的多尺度自回归学习" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e7%9a%84%e5%a4%9a%e5%b0%ba%e5%ba%a6%e8%87%aa%e5%9b%9e%e5%bd%92%e5%ad%a6%e4%b9%a0" class="header-mark"></a>💡 解决方案：旋转感知的多尺度自回归学习</h3><h4 id="整体框架" class="headerLink">
+    <a href="#%e6%95%b4%e4%bd%93%e6%a1%86%e6%9e%b6" class="header-mark"></a>整体框架</h4><p>RoMA提出了<strong>Rotation-aware Multi-scale Autoregressive learning</strong>框架，首次实现Mamba架构在遥感领域的可扩展自监督预训练。</p>
+<h4 id="创新点一旋转感知预训练机制" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b9%e4%b8%80%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e6%9c%ba%e5%88%b6" class="header-mark"></a>创新点一：旋转感知预训练机制</h4><p><strong>问题洞察</strong>：遥感影像中的目标具有任意方向（如飞机、船舶、建筑物），传统预训练方法忽略了旋转不变性。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>自适应裁剪策略</strong>：根据目标方向自适应裁剪图像区域</li>
+<li><strong>角度嵌入（Angular Embeddings）</strong>：将旋转角度信息编码到嵌入空间</li>
+<li><strong>旋转不变表征学习</strong>：在自回归预训练过程中强化旋转不变性</li>
+</ul>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

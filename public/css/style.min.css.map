@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "D:/project/w-copper.github.io",
+	"sourceRoot": "D:/auores/w-copper.github.io",
 	"sources": [
 		"themes/doit/assets/css/style.scss",
 		"themes/doit/assets/css/_variables.scss",

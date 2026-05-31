@@ -1,0 +1,71 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>大规模多模态模型 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A8%A1%E5%9E%8B/</link><description>大规模多模态模型 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Thu, 28 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A8%A1%E5%9E%8B/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿：两篇顶级会议论文深度解析</title><link>https://w-copper.github.io/2026/05/20260528_184355_remote_sensing_ai_2025/</link><pubDate>Thu, 28 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260528_184355_remote_sensing_ai_2025/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿两篇顶级会议论文深度解析" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%b8%a4%e7%af%87%e9%a1%b6%e7%ba%a7%e4%bc%9a%e8%ae%ae%e8%ae%ba%e6%96%87%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90" class="header-mark"></a>2025年遥感AI前沿：两篇顶级会议论文深度解析</h1><blockquote>
+  <p>本文精选2025年遥感人工智能领域两篇来自顶级会议（ICML 2025、AAAI 2025）的代表性论文，均提供开源代码，涵盖像素级定位和开放词汇分割两大前沿方向。</p>
+</blockquote><hr>
+<h2 id="一geopixel像素级遥感大模型icml-2025" class="headerLink">
+    <a href="#%e4%b8%80geopixel%e5%83%8f%e7%b4%a0%e7%ba%a7%e9%81%a5%e6%84%9f%e5%a4%a7%e6%a8%a1%e5%9e%8bicml-2025" class="header-mark"></a>一、GeoPixel：像素级遥感大模型（ICML 2025）</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>GeoPixel: Pixel Grounding Large Multimodal Model in Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>发表会议</strong></td>
+          <td>ICML 2025（第42届国际机器学习会议）</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Akashah Shabbir, Ilmuz Zaman Mohammed Zumri, Mohammed Bennamoun, Fahad Khan, Salman Khan</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>MBZUAI（穆罕默德·本·扎耶德人工智能大学）</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/mbzuai-oryx/geopixel" target="_blank" rel="noopener noreferrer">https://github.com/mbzuai-oryx/geopixel</a> （⭐ 144）</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2501.13925" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2501.13925</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>大规模多模态模型、遥感、像素级定位、视觉语言模型</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>近年来，大规模多模态模型（Large Multimodal Models, LMMs）在自然图像领域取得了显著进展，尤其在细粒度视觉定位（grounding）方面表现出色。然而，这些能力在遥感（Remote Sensing, RS）领域面临严峻挑战：</p>
+<ol>
+<li><strong>视角差异</strong>：遥感图像采用俯视视角，与自然图像的平视视角存在本质区别</li>
+<li><strong>尺度变化</strong>：遥感图像中目标尺度变化剧烈，从小型车辆到大型建筑物跨度极大</li>
+<li><strong>小目标密集</strong>：高分辨率遥感图像中包含大量小目标，增加了检测和分割难度</li>
+<li><strong>数据匮乏</strong>：缺乏带有像素级标注的遥感对话数据集，限制了定位对话能力的发展</li>
+</ol>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><p>GeoPixel是<strong>首个支持像素级定位的端到端高分辨率遥感大模型</strong>，具有以下核心创新：</p>
+<h4 id="1自适应图像分区" class="headerLink">
+    <a href="#1%e8%87%aa%e9%80%82%e5%ba%94%e5%9b%be%e5%83%8f%e5%88%86%e5%8c%ba" class="header-mark"></a>（1）自适应图像分区</h4><p>GeoPixel采用创新的自适应分区策略，将输入图像动态划分为局部（local）和全局（global）区域：</p>
+<ul>
+<li><strong>局部区域</strong>：捕获细粒度细节信息</li>
+<li><strong>全局区域</strong>：保持整体场景理解</li>
+<li>支持<strong>4K超高清分辨率</strong>，适用于任意宽高比</li>
+</ul>
+<h4 id="2半自动数据生成管道" class="headerLink">
+    <a href="#2%e5%8d%8a%e8%87%aa%e5%8a%a8%e6%95%b0%e6%8d%ae%e7%94%9f%e6%88%90%e7%ae%a1%e9%81%93" class="header-mark"></a>（2）半自动数据生成管道</h4><p>为解决遥感领域像素级标注数据匮乏的问题，研究团队构建了<strong>GeoPixelD数据集</strong>：</p>
+<ul>
+<li>采用半自动化的数据生成流程</li>
+<li>利用Set-of-Marks提示和空间先验</li>
+<li>系统性控制数据生成质量</li>
+<li>生成带有交错掩码（interleaved masks）的对话数据</li>
+</ul>
+<h4 id="3统一的对话分割框架" class="headerLink">
+    <a href="#3%e7%bb%9f%e4%b8%80%e7%9a%84%e5%af%b9%e8%af%9d%e5%88%86%e5%89%b2%e6%a1%86%e6%9e%b6" class="header-mark"></a>（3）统一的对话分割框架</h4><p>GeoPixel将对话生成与像素级分割统一在一个框架中：</p>]]></description></item></channel></rss>

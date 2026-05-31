@@ -1,0 +1,712 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 - 堂堂一跑堂</title><meta name=Description content="珍惜眼前始为真"><meta property="og:url" content="https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/"><meta property="og:site_name" content="堂堂一跑堂"><meta property="og:title" content="2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破"><meta property="og:description" content="2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 摘要：本文精选2025年遥感AI领域两篇具有代表性的论文，均来自顶级会议/期刊且已开源代码。重点解读SkySense-O（CVPR 2025）和RSRefSeg（arXiv 2025），分析其在开放世界遥感解译和引用式分割任务中的创新方法与实验表现。
+论文一：SkySense-O - 面向开放世界遥感解译的视觉中心视觉语言建模 1. 论文基本信息 项目 内容 论文标题 SkySense-O: Towards Open-World Remote Sensing Interpretation with Vision-Centric Visual-Language Modeling 发表会议 CVPR 2025（计算机视觉领域顶级会议） 作者团队 Qi Zhu, Jiangwei Lao, Deyi Ji, Junwei Luo, Kang Wu 等 研究机构 武汉大学、京东AI研究院等 论文链接 CVPR 2025 Paper 开源代码 GitHub - zqcrafts/SkySense-O ⭐ 268 Stars 模型权重 Hugging Face - SkySense-O 2. 研究问题 2.1 核心痛点遥感图像解译面临以下关键挑战：
+封闭词汇限制：传统方法只能识别训练时预定义的类别，无法处理开放世界的未知地物 语义粒度不足：现有模型缺乏像素级密集语义理解能力，难以进行精细地物提取 多模态融合困难：遥感图像的视觉特征与文本语义之间存在对齐鸿沟 泛化能力弱：针对特定任务训练的模型难以迁移到其他遥感场景 2.2 现有方法局限 SAM（Segment Anything Model）：虽然具有强大的零样本分割能力，但缺乏语义理解，无法给出类别标签 GroundingDINO：目标检测能力强，但空间精度不足，难以实现像素级分割 传统遥感模型：局限于固定类别，无法适应开放世界场景 3. 解决方案 3.1 核心创新SkySense-O提出了一种以视觉为中心的视觉语言建模方法，主要创新包括："><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-05-28T12:00:00+08:00"><meta property="article:modified_time" content="2025-05-28T12:00:00+08:00"><meta property="og:image" content="https://w-copper.github.io/logo.svg"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://w-copper.github.io/logo.svg"><meta name=twitter:title content="2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破"><meta name=twitter:description content="2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 摘要：本文精选2025年遥感AI领域两篇具有代表性的论文，均来自顶级会议/期刊且已开源代码。重点解读SkySense-O（CVPR 2025）和RSRefSeg（arXiv 2025），分析其在开放世界遥感解译和引用式分割任务中的创新方法与实验表现。
+论文一：SkySense-O - 面向开放世界遥感解译的视觉中心视觉语言建模 1. 论文基本信息 项目 内容 论文标题 SkySense-O: Towards Open-World Remote Sensing Interpretation with Vision-Centric Visual-Language Modeling 发表会议 CVPR 2025（计算机视觉领域顶级会议） 作者团队 Qi Zhu, Jiangwei Lao, Deyi Ji, Junwei Luo, Kang Wu 等 研究机构 武汉大学、京东AI研究院等 论文链接 CVPR 2025 Paper 开源代码 GitHub - zqcrafts/SkySense-O ⭐ 268 Stars 模型权重 Hugging Face - SkySense-O 2. 研究问题 2.1 核心痛点遥感图像解译面临以下关键挑战：
+封闭词汇限制：传统方法只能识别训练时预定义的类别，无法处理开放世界的未知地物 语义粒度不足：现有模型缺乏像素级密集语义理解能力，难以进行精细地物提取 多模态融合困难：遥感图像的视觉特征与文本语义之间存在对齐鸿沟 泛化能力弱：针对特定任务训练的模型难以迁移到其他遥感场景 2.2 现有方法局限 SAM（Segment Anything Model）：虽然具有强大的零样本分割能力，但缺乏语义理解，无法给出类别标签 GroundingDINO：目标检测能力强，但空间精度不足，难以实现像素级分割 传统遥感模型：局限于固定类别，无法适应开放世界场景 3. 解决方案 3.1 核心创新SkySense-O提出了一种以视觉为中心的视觉语言建模方法，主要创新包括："><meta name=application-name content="堂堂一跑堂"><meta name=apple-mobile-web-app-title content="堂堂一跑堂"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/logo.svg><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/><link rel=prev href=https://w-copper.github.io/2025/05/20250528_143000_strip_rcnn_rsod/><link rel=next href=https://w-copper.github.io/2025/05/20250529_120000_remote_sensing_ai_2025/><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/css/style.min.css><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/"},"genre":"posts","wordcount":890,"url":"https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/","datePublished":"2025-05-28T12:00:00+08:00","dateModified":"2025-05-28T12:00:00+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"WangTong","url":"/"},"description":""}</script></head><body data-instant-intensity=viewport class="tw-flex tw-min-h-screen tw-flex-col"><script>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.className=e,document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),e==="light"?document.documentElement.classList.remove("tw-dark"):document.documentElement.classList.add("tw-dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"auto"==="light"||"auto"==="dark"?(setTheme("auto"),saveTheme("auto")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#161b22"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><header class="desktop print:!tw-hidden" id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=堂堂一跑堂><img class="tw-inline tw-align-text-bottom tw-mr-1" src=/logo.svg alt=关中大侠的武馆 height=32 width=32>关中大侠的武馆</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/>Home </a><a class=menu-item href=/categories/ title=Categories>Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
+<button class="search-button search-toggle" id=search-toggle-desktop title=Search>
+<svg class="icon" viewBox="0 0 512 512"><path d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</button>
+<button class="search-button search-clear" id=search-clear-desktop title=Clear>
+<svg class="icon" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3.0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3.0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3.0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3.0 17L312 256l65.6 65.1z"/></svg>
+</button>
+<span class="search-button search-loading tw-animate-spin" id=search-loading-desktop><svg class="icon" viewBox="0 0 512 512"><path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49.0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156.0c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg>
+</span></span><button class="menu-item theme-select" aria-label="Switch Theme">
+<svg class="icon" viewBox="0 0 512 512"><path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705.0 184 82.311 184 184 0 101.705-82.311 184-184 184z"/></svg>
+<select class=color-theme-select id=theme-select-desktop aria-label="Switch Theme"><option value=light>Light</option><option value=dark>Dark</option><option value=auto>Auto</option></select></button></div></div></div></header><header class="mobile print:!tw-hidden" id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=堂堂一跑堂><img class="tw-inline tw-align-text-bottom tw-mr-1" src=/logo.svg alt=关中大侠的武馆 height=32 width=32>关中大侠的武馆</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
+<button class="search-button search-toggle tw-h-10" id=search-toggle-mobile title=Search>
+<svg class="icon" viewBox="0 0 512 512"><path d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</button>
+<button class="search-button search-clear tw-h-fit" id=search-clear-mobile title=Clear>
+<svg class="icon" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3.0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3.0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3.0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3.0 17L312 256l65.6 65.1z"/></svg>
+</button>
+<span class="search-button search-loading tw-animate-spin" id=search-loading-mobile><svg class="icon" viewBox="0 0 512 512"><path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49.0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156.0c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51.0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg></span></div><button class=search-cancel id=search-cancel-mobile>
+Cancel</button></div><a class=menu-item href=/ title>Home</a><a class=menu-item href=/categories/ title=Categories>Categories</a><button class="menu-item theme-select tw-w-full" aria-label="Switch Theme">
+<svg class="icon" viewBox="0 0 512 512"><path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705.0 184 82.311 184 184 0 101.705-82.311 184-184 184z"/></svg>
+<select class=color-theme-select id=theme-select-mobile aria-label="Switch Theme"><option value=light>Light</option><option value=dark>Dark</option><option value=auto>Auto</option></select></button></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class="tw-mx-4 tw-flex-1"><dialog id=toc-dialog class="tw-max-w-full tw-w-full tw-max-h-full tw-h-full tw-ml-16"><div class="toc tw-mx-4 tw-max-w-full"><h2 class="tw-mx-0 tw-my-6 tw-uppercase tw-text-2xl">Contents</h2><div class=toc-content><nav id=TableOfContents><ul><li><a href=#论文一skysense-o---面向开放世界遥感解译的视觉中心视觉语言建模>论文一：SkySense-O - 面向开放世界遥感解译的视觉中心视觉语言建模</a><ul><li><a href=#1-论文基本信息>1. 论文基本信息</a></li><li><a href=#2-研究问题>2. 研究问题</a><ul><li><a href=#21-核心痛点>2.1 核心痛点</a></li><li><a href=#22-现有方法局限>2.2 现有方法局限</a></li></ul></li><li><a href=#3-解决方案>3. 解决方案</a><ul><li><a href=#31-核心创新>3.1 核心创新</a><ul><li><a href=#311-双模型融合架构>3.1.1 双模型融合架构</a></li><li><a href=#312-视觉中心设计>3.1.2 视觉中心设计</a></li><li><a href=#313-sky-sa数据集>3.1.3 Sky-SA数据集</a></li></ul></li><li><a href=#32-技术细节>3.2 技术细节</a><ul><li><a href=#模型训练策略>模型训练策略</a></li><li><a href=#推理流程>推理流程</a></li></ul></li></ul></li><li><a href=#4-实验评估>4. 实验评估</a><ul><li><a href=#41-评估数据集>4.1 评估数据集</a></li><li><a href=#42-核心实验结果>4.2 核心实验结果</a><ul><li><a href=#零样本分类性能>零样本分类性能</a></li><li><a href=#开放词汇分割性能>开放词汇分割性能</a></li></ul></li><li><a href=#43-可视化分析>4.3 可视化分析</a></li></ul></li><li><a href=#5-代码使用指南>5. 代码使用指南</a><ul><li><a href=#51-环境配置>5.1 环境配置</a></li><li><a href=#52-数据准备>5.2 数据准备</a></li><li><a href=#53-模型训练与评估>5.3 模型训练与评估</a></li><li><a href=#54-demo体验>5.4 Demo体验</a></li></ul></li><li><a href=#6-研究价值与展望>6. 研究价值与展望</a><ul><li><a href=#61-主要贡献>6.1 主要贡献</a></li><li><a href=#62-应用前景>6.2 应用前景</a></li><li><a href=#63-未来方向>6.3 未来方向</a></li></ul></li></ul></li><li><a href=#论文二rsrefseg---基于基础模型的引用式遥感图像分割>论文二：RSRefSeg - 基于基础模型的引用式遥感图像分割</a><ul><li><a href=#1-论文基本信息-1>1. 论文基本信息</a></li><li><a href=#2-研究问题-1>2. 研究问题</a><ul><li><a href=#21-任务定义>2.1 任务定义</a></li><li><a href=#22-核心挑战>2.2 核心挑战</a></li></ul></li><li><a href=#3-解决方案-1>3. 解决方案</a><ul><li><a href=#31-核心架构>3.1 核心架构</a></li><li><a href=#32-关键创新>3.2 关键创新</a><ul><li><a href=#321-双层语义过滤机制>3.2.1 双层语义过滤机制</a></li><li><a href=#322-clip-sam协同工作流>3.2.2 CLIP-SAM协同工作流</a></li><li><a href=#323-基于mmsegmentation的实现>3.2.3 基于MMSegmentation的实现</a></li></ul></li></ul></li><li><a href=#4-实验评估-1>4. 实验评估</a><ul><li><a href=#41-评估数据集-1>4.1 评估数据集</a></li><li><a href=#42-实验结果>4.2 实验结果</a></li><li><a href=#43-消融实验>4.3 消融实验</a></li></ul></li><li><a href=#5-代码使用指南-1>5. 代码使用指南</a><ul><li><a href=#51-环境配置-1>5.1 环境配置</a></li><li><a href=#52-数据准备-1>5.2 数据准备</a></li><li><a href=#53-模型训练>5.3 模型训练</a></li><li><a href=#54-模型测试>5.4 模型测试</a></li><li><a href=#55-图像预测>5.5 图像预测</a></li></ul></li><li><a href=#6-研究价值与展望-1>6. 研究价值与展望</a><ul><li><a href=#61-主要贡献-1>6.1 主要贡献</a></li><li><a href=#62-技术亮点>6.2 技术亮点</a></li><li><a href=#63-应用场景>6.3 应用场景</a></li></ul></li></ul></li><li><a href=#总结与对比>总结与对比</a><ul><li><a href=#两篇论文的异同>两篇论文的异同</a></li><li><a href=#共同趋势>共同趋势</a></li><li><a href=#选读建议>选读建议</a></li></ul></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></div></dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","false")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class=single-title data-pagefind-meta=date:2025-05-28 data-pagefind-body>2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破</h1><div class=post-meta><div class=post-meta-line><span class=post-author><svg class="icon" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6.0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7.0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4.0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9s28-2.7 40.9-6.9c2.3-.7 4.7-1.1 7.1-1.1 42.9.0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"/></svg><a href=/ title=Author rel=author class=author>WangTong</a>
+</span>&nbsp;<span class=post-category>included in </span>&nbsp;<span class=post-category>category <a href=/categories/%E9%81%A5%E6%84%9Fai/><svg class="icon" viewBox="0 0 512 512"><path d="M464 128H272l-54.63-54.63c-6-6-14.14-9.37-22.63-9.37H48C21.49 64 0 85.49.0 112v288c0 26.51 21.49 48 48 48h416c26.51.0 48-21.49 48-48V176c0-26.51-21.49-48-48-48zm0 272H48V112h140.12l54.63 54.63c6 6 14.14 9.37 22.63 9.37H464v224z"/></svg>遥感AI</a></span></div><div class=post-meta-line><svg class="icon" viewBox="0 0 448 512"><path d="M148 288h-40c-6.6.0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6.0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6.0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6.0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6.0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6.0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6.0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6.0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6.0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6.0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6.0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6.0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5.0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6.0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6.0 12 5.4 12 12v52h48c26.5.0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3.0 6-2.7 6-6z"/></svg>&nbsp;<time datetime=2025-05-28>2025-05-28</time>&nbsp;<svg class="icon" viewBox="0 0 576 512"><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5.0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1.0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7.0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174 402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7-43.2-43.2c-4.1-4.1-10.8-4.1-14.8.0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime=2025-05-28>2025-05-28</time>&nbsp;<svg class="icon" viewBox="0 0 512 512"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3.0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9.0l60.1 60.1c18.8 18.7 18.8 49.1.0 67.9zM284.2 99.8 21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3.0-17l-111-111c-4.8-4.7-12.4-4.7-17.1.0zM124.1 339.9c-5.5-5.5-5.5-14.3.0-19.8l154-154c5.5-5.5 14.3-5.5 19.8.0s5.5 14.3.0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8.0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;890 words&nbsp;
+<svg class="icon" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5.0-2e2-89.5-2e2-2e2S145.5 56 256 56s2e2 89.5 2e2 2e2-89.5 2e2-2e2 2e2zm61.8-104.4-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6.0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;4 minutes&nbsp;</div></div><div class="details toc print:!tw-block" id=toc-static kept=true><div class="details-summary toc-title"><span>Contents</span>
+<span class=details-icon><svg class="icon" viewBox="0 0 256 512"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9.0l-22.6-22.6c-9.4-9.4-9.4-24.6.0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6.0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9.0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#论文一skysense-o---面向开放世界遥感解译的视觉中心视觉语言建模>论文一：SkySense-O - 面向开放世界遥感解译的视觉中心视觉语言建模</a><ul><li><a href=#1-论文基本信息>1. 论文基本信息</a></li><li><a href=#2-研究问题>2. 研究问题</a><ul><li><a href=#21-核心痛点>2.1 核心痛点</a></li><li><a href=#22-现有方法局限>2.2 现有方法局限</a></li></ul></li><li><a href=#3-解决方案>3. 解决方案</a><ul><li><a href=#31-核心创新>3.1 核心创新</a><ul><li><a href=#311-双模型融合架构>3.1.1 双模型融合架构</a></li><li><a href=#312-视觉中心设计>3.1.2 视觉中心设计</a></li><li><a href=#313-sky-sa数据集>3.1.3 Sky-SA数据集</a></li></ul></li><li><a href=#32-技术细节>3.2 技术细节</a><ul><li><a href=#模型训练策略>模型训练策略</a></li><li><a href=#推理流程>推理流程</a></li></ul></li></ul></li><li><a href=#4-实验评估>4. 实验评估</a><ul><li><a href=#41-评估数据集>4.1 评估数据集</a></li><li><a href=#42-核心实验结果>4.2 核心实验结果</a><ul><li><a href=#零样本分类性能>零样本分类性能</a></li><li><a href=#开放词汇分割性能>开放词汇分割性能</a></li></ul></li><li><a href=#43-可视化分析>4.3 可视化分析</a></li></ul></li><li><a href=#5-代码使用指南>5. 代码使用指南</a><ul><li><a href=#51-环境配置>5.1 环境配置</a></li><li><a href=#52-数据准备>5.2 数据准备</a></li><li><a href=#53-模型训练与评估>5.3 模型训练与评估</a></li><li><a href=#54-demo体验>5.4 Demo体验</a></li></ul></li><li><a href=#6-研究价值与展望>6. 研究价值与展望</a><ul><li><a href=#61-主要贡献>6.1 主要贡献</a></li><li><a href=#62-应用前景>6.2 应用前景</a></li><li><a href=#63-未来方向>6.3 未来方向</a></li></ul></li></ul></li><li><a href=#论文二rsrefseg---基于基础模型的引用式遥感图像分割>论文二：RSRefSeg - 基于基础模型的引用式遥感图像分割</a><ul><li><a href=#1-论文基本信息-1>1. 论文基本信息</a></li><li><a href=#2-研究问题-1>2. 研究问题</a><ul><li><a href=#21-任务定义>2.1 任务定义</a></li><li><a href=#22-核心挑战>2.2 核心挑战</a></li></ul></li><li><a href=#3-解决方案-1>3. 解决方案</a><ul><li><a href=#31-核心架构>3.1 核心架构</a></li><li><a href=#32-关键创新>3.2 关键创新</a><ul><li><a href=#321-双层语义过滤机制>3.2.1 双层语义过滤机制</a></li><li><a href=#322-clip-sam协同工作流>3.2.2 CLIP-SAM协同工作流</a></li><li><a href=#323-基于mmsegmentation的实现>3.2.3 基于MMSegmentation的实现</a></li></ul></li></ul></li><li><a href=#4-实验评估-1>4. 实验评估</a><ul><li><a href=#41-评估数据集-1>4.1 评估数据集</a></li><li><a href=#42-实验结果>4.2 实验结果</a></li><li><a href=#43-消融实验>4.3 消融实验</a></li></ul></li><li><a href=#5-代码使用指南-1>5. 代码使用指南</a><ul><li><a href=#51-环境配置-1>5.1 环境配置</a></li><li><a href=#52-数据准备-1>5.2 数据准备</a></li><li><a href=#53-模型训练>5.3 模型训练</a></li><li><a href=#54-模型测试>5.4 模型测试</a></li><li><a href=#55-图像预测>5.5 图像预测</a></li></ul></li><li><a href=#6-研究价值与展望-1>6. 研究价值与展望</a><ul><li><a href=#61-主要贡献-1>6.1 主要贡献</a></li><li><a href=#62-技术亮点>6.2 技术亮点</a></li><li><a href=#63-应用场景>6.3 应用场景</a></li></ul></li></ul></li><li><a href=#总结与对比>总结与对比</a><ul><li><a href=#两篇论文的异同>两篇论文的异同</a></li><li><a href=#共同趋势>共同趋势</a></li><li><a href=#选读建议>选读建议</a></li></ul></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></div><div class=content id=content data-pagefind-body><h1 id=2025年遥感ai前沿论文解读基础模型在遥感图像解译中的最新突破 class=headerLink><a href=#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%9c%a8%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e8%a7%a3%e8%af%91%e4%b8%ad%e7%9a%84%e6%9c%80%e6%96%b0%e7%aa%81%e7%a0%b4 class=header-mark></a>2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破</h1><blockquote><p>摘要：本文精选2025年遥感AI领域两篇具有代表性的论文，均来自顶级会议/期刊且已开源代码。重点解读SkySense-O（CVPR 2025）和RSRefSeg（arXiv 2025），分析其在开放世界遥感解译和引用式分割任务中的创新方法与实验表现。</p></blockquote><hr><h2 id=论文一skysense-o---面向开放世界遥感解译的视觉中心视觉语言建模 class=headerLink><a href=#%e8%ae%ba%e6%96%87%e4%b8%80skysense-o---%e9%9d%a2%e5%90%91%e5%bc%80%e6%94%be%e4%b8%96%e7%95%8c%e9%81%a5%e6%84%9f%e8%a7%a3%e8%af%91%e7%9a%84%e8%a7%86%e8%a7%89%e4%b8%ad%e5%bf%83%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%bb%ba%e6%a8%a1 class=header-mark></a>论文一：SkySense-O - 面向开放世界遥感解译的视觉中心视觉语言建模</h2><h3 id=1-论文基本信息 class=headerLink><a href=#1-%e8%ae%ba%e6%96%87%e5%9f%ba%e6%9c%ac%e4%bf%a1%e6%81%af class=header-mark></a>1. 论文基本信息</h3><div class=table-wrapper><table><thead><tr><th style=text-align:>项目</th><th style=text-align:>内容</th></tr></thead><tbody><tr><td style=text-align:><strong>论文标题</strong></td><td style=text-align:>SkySense-O: Towards Open-World Remote Sensing Interpretation with Vision-Centric Visual-Language Modeling</td></tr><tr><td style=text-align:><strong>发表会议</strong></td><td style=text-align:>CVPR 2025（计算机视觉领域顶级会议）</td></tr><tr><td style=text-align:><strong>作者团队</strong></td><td style=text-align:>Qi Zhu, Jiangwei Lao, Deyi Ji, Junwei Luo, Kang Wu 等</td></tr><tr><td style=text-align:><strong>研究机构</strong></td><td style=text-align:>武汉大学、京东AI研究院等</td></tr><tr><td style=text-align:><strong>论文链接</strong></td><td style=text-align:><a href=https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_SkySense-O_Towards_Open-World_Remote_Sensing_Interpretation_with_Vision-Centric_Visual-Language_Modeling_CVPR_2025_paper.pdf target=_blank rel="noopener noreferrer">CVPR 2025 Paper</a></td></tr><tr><td style=text-align:><strong>开源代码</strong></td><td style=text-align:><a href=https://github.com/zqcrafts/SkySense-O target=_blank rel="noopener noreferrer">GitHub - zqcrafts/SkySense-O</a> ⭐ 268 Stars</td></tr><tr><td style=text-align:><strong>模型权重</strong></td><td style=text-align:><a href=https://huggingface.co/zqcraft/SkySense-O/tree/main target=_blank rel="noopener noreferrer">Hugging Face - SkySense-O</a></td></tr></tbody></table></div><h3 id=2-研究问题 class=headerLink><a href=#2-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98 class=header-mark></a>2. 研究问题</h3><h4 id=21-核心痛点 class=headerLink><a href=#21-%e6%a0%b8%e5%bf%83%e7%97%9b%e7%82%b9 class=header-mark></a>2.1 核心痛点</h4><p>遥感图像解译面临以下关键挑战：</p><ol><li><strong>封闭词汇限制</strong>：传统方法只能识别训练时预定义的类别，无法处理开放世界的未知地物</li><li><strong>语义粒度不足</strong>：现有模型缺乏像素级密集语义理解能力，难以进行精细地物提取</li><li><strong>多模态融合困难</strong>：遥感图像的视觉特征与文本语义之间存在对齐鸿沟</li><li><strong>泛化能力弱</strong>：针对特定任务训练的模型难以迁移到其他遥感场景</li></ol><h4 id=22-现有方法局限 class=headerLink><a href=#22-%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e5%b1%80%e9%99%90 class=header-mark></a>2.2 现有方法局限</h4><ul><li><strong>SAM（Segment Anything Model）</strong>：虽然具有强大的零样本分割能力，但缺乏语义理解，无法给出类别标签</li><li><strong>GroundingDINO</strong>：目标检测能力强，但空间精度不足，难以实现像素级分割</li><li><strong>传统遥感模型</strong>：局限于固定类别，无法适应开放世界场景</li></ul><h3 id=3-解决方案 class=headerLink><a href=#3-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 class=header-mark></a>3. 解决方案</h3><h4 id=31-核心创新 class=headerLink><a href=#31-%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0 class=header-mark></a>3.1 核心创新</h4><p>SkySense-O提出了一种<strong>以视觉为中心的视觉语言建模方法</strong>，主要创新包括：</p><h5 id=311-双模型融合架构 class=headerLink><a href=#311-%e5%8f%8c%e6%a8%a1%e5%9e%8b%e8%9e%8d%e5%90%88%e6%9e%b6%e6%9e%84 class=header-mark></a>3.1.1 双模型融合架构</h5><div class="code-block highlight is-closed show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">text</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-1 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl>┌─────────────────────────────────────────────────────────┐
+</span></span><span class=line><span class=cl>│                    SkySense-O 架构                       │
+</span></span><span class=line><span class=cl>├─────────────────────────────────────────────────────────┤
+</span></span><span class=line><span class=cl>│                                                         │
+</span></span><span class=line><span class=cl>│   ┌─────────────┐         ┌─────────────┐              │
+</span></span><span class=line><span class=cl>│   │    CLIP      │         │     SAM     │              │
+</span></span><span class=line><span class=cl>│   │  视觉编码器  │         │  分割解码器  │              │
+</span></span><span class=line><span class=cl>│   └──────┬──────┘         └──────┬──────┘              │
+</span></span><span class=line><span class=cl>│          │                       │                      │
+</span></span><span class=line><span class=cl>│          └───────────┬───────────┘                      │
+</span></span><span class=line><span class=cl>│                      ▼                                  │
+</span></span><span class=line><span class=cl>│          ┌───────────────────────┐                      │
+</span></span><span class=line><span class=cl>│          │   视觉语言对齐模块    │                      │
+</span></span><span class=line><span class=cl>│          └───────────┬───────────┘                      │
+</span></span><span class=line><span class=cl>│                      ▼                                  │
+</span></span><span class=line><span class=cl>│          ┌───────────────────────┐                      │
+</span></span><span class=line><span class=cl>│          │  开放词汇分割头       │                      │
+</span></span><span class=line><span class=cl>│          └───────────────────────┘                      │
+</span></span><span class=line><span class=cl>│                                                         │
+</span></span><span class=line><span class=cl>└─────────────────────────────────────────────────────────┘</span></span></code></pre></div><ul><li><strong>CLIP编码器</strong>：负责提取图像的语义特征，实现视觉-语言对齐</li><li><strong>SAM解码器</strong>：负责生成高精度像素级分割掩码</li><li><strong>融合策略</strong>：将CLIP的语义理解能力与SAM的精细分割能力有机结合</li></ul><h5 id=312-视觉中心设计 class=headerLink><a href=#312-%e8%a7%86%e8%a7%89%e4%b8%ad%e5%bf%83%e8%ae%be%e8%ae%a1 class=header-mark></a>3.1.2 视觉中心设计</h5><p>与依赖文本提示的方法不同，SkySense-O采用<strong>以视觉为中心</strong>的设计理念：</p><ul><li>优先从视觉特征中提取语义信息</li><li>文本作为辅助信号增强理解</li><li>避免过度依赖文本描述的噪声</li></ul><h5 id=313-sky-sa数据集 class=headerLink><a href=#313-sky-sa%e6%95%b0%e6%8d%ae%e9%9b%86 class=header-mark></a>3.1.3 Sky-SA数据集</h5><p>研究团队构建了<strong>首个遥感领域开放词汇分割数据集</strong>：</p><ul><li>包含像素级标注的掩码和文本描述</li><li>经过人工专家多轮标注和验证</li><li>支持开放场景下的任意地物分割</li></ul><h4 id=32-技术细节 class=headerLink><a href=#32-%e6%8a%80%e6%9c%af%e7%bb%86%e8%8a%82 class=header-mark></a>3.2 技术细节</h4><h5 id=模型训练策略 class=headerLink><a href=#%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83%e7%ad%96%e7%95%a5 class=header-mark></a>模型训练策略</h5><ul><li>基于Detectron2框架实现</li><li>支持多GPU分布式训练</li><li>提供多种配置文件适不同硬件</li></ul><h5 id=推理流程 class=headerLink><a href=#%e6%8e%a8%e7%90%86%e6%b5%81%e7%a8%8b class=header-mark></a>推理流程</h5><ol><li>输入遥感图像</li><li>CLIP提取全局语义特征</li><li>SAM生成候选分割区域</li><li>视觉语言对齐模块进行语义匹配</li><li>输出带有类别标签的分割结果</li></ol><h3 id=4-实验评估 class=headerLink><a href=#4-%e5%ae%9e%e9%aa%8c%e8%af%84%e4%bc%b0 class=header-mark></a>4. 实验评估</h3><h4 id=41-评估数据集 class=headerLink><a href=#41-%e8%af%84%e4%bc%b0%e6%95%b0%e6%8d%ae%e9%9b%86 class=header-mark></a>4.1 评估数据集</h4><p>SkySense-O在<strong>14个数据集</strong>上进行了全面评估，涵盖：</p><div class=table-wrapper><table><thead><tr><th style=text-align:>任务类型</th><th style=text-align:>数据集</th><th style=text-align:>评估指标</th></tr></thead><tbody><tr><td style=text-align:>场景分类</td><td style=text-align:>AID, NWPU-RESISC45, UC-Merced</td><td style=text-align:>Top-1 Accuracy</td></tr><tr><td style=text-align:>语义分割</td><td style=text-align:>Potsdam, Vaihingen, LoveDA</td><td style=text-align:>mIoU, F1</td></tr><tr><td style=text-align:>目标检测</td><td style=text-align:>DIOR, DOTA</td><td style=text-align:>mAP</td></tr><tr><td style=text-align:>变化检测</td><td style=text-align:>WHU-CD, LEVIR-CD</td><td style=text-align:>F1, IoU</td></tr></tbody></table></div><h4 id=42-核心实验结果 class=headerLink><a href=#42-%e6%a0%b8%e5%bf%83%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c class=header-mark></a>4.2 核心实验结果</h4><h5 id=零样本分类性能 class=headerLink><a href=#%e9%9b%b6%e6%a0%b7%e6%9c%ac%e5%88%86%e7%b1%bb%e6%80%a7%e8%83%bd class=header-mark></a>零样本分类性能</h5><div class=table-wrapper><table><thead><tr><th style=text-align:>方法</th><th style=text-align:>AID</th><th style=text-align:>NWPU</th><th style=text-align:>UC-Merced</th><th style=text-align:>平均</th></tr></thead><tbody><tr><td style=text-align:>GeoRSCLIP</td><td style=text-align:>78.2</td><td style=text-align:>82.1</td><td style=text-align:>85.3</td><td style=text-align:>81.9</td></tr><tr><td style=text-align:>VHM</td><td style=text-align:>82.5</td><td style=text-align:>85.3</td><td style=text-align:>88.1</td><td style=text-align:>85.3</td></tr><tr><td style=text-align:>SegEarth-OV</td><td style=text-align:>75.8</td><td style=text-align:>79.2</td><td style=text-align:>82.6</td><td style=text-align:>79.2</td></tr><tr><td style=text-align:><strong>SkySense-O</strong></td><td style=text-align:><strong>88.4</strong></td><td style=text-align:><strong>91.2</strong></td><td style=text-align:><strong>93.5</strong></td><td style=text-align:><strong>91.0</strong></td></tr></tbody></table></div><p><strong>关键发现</strong>：</p><ul><li>相比SegEarth-OV平均提升<strong>11.95%</strong></li><li>相比GeoRSCLIP平均提升<strong>8.04%</strong></li><li>相比VHM平均提升<strong>3.55%</strong></li></ul><h5 id=开放词汇分割性能 class=headerLink><a href=#%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2%e6%80%a7%e8%83%bd class=header-mark></a>开放词汇分割性能</h5><p>在开放世界场景下，SkySense-O展现出显著优势：</p><ul><li>能够分割训练时未见过的地物类别</li><li>分割边界更加精确</li><li>语义标签更加丰富和准确</li></ul><h4 id=43-可视化分析 class=headerLink><a href=#43-%e5%8f%af%e8%a7%86%e5%8c%96%e5%88%86%e6%9e%90 class=header-mark></a>4.3 可视化分析</h4><p>论文展示了丰富的可视化结果，对比了SkySense-O与SAM、GroundingDINO的分割效果：</p><div class=table-wrapper><table><thead><tr><th style=text-align:>方法</th><th style=text-align:>空间密度</th><th style=text-align:>语义丰富度</th><th style=text-align:>边界精度</th></tr></thead><tbody><tr><td style=text-align:>SAM</td><td style=text-align:>高</td><td style=text-align:>无（无语义标签）</td><td style=text-align:>高</td></tr><tr><td style=text-align:>GroundingDINO</td><td style=text-align:>低（框级别）</td><td style=text-align:>中</td><td style=text-align:>低</td></tr><tr><td style=text-align:><strong>SkySense-O</strong></td><td style=text-align:><strong>高</strong></td><td style=text-align:><strong>高</strong></td><td style=text-align:><strong>高</strong></td></tr></tbody></table></div><h3 id=5-代码使用指南 class=headerLink><a href=#5-%e4%bb%a3%e7%a0%81%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97 class=header-mark></a>5. 代码使用指南</h3><h4 id=51-环境配置 class=headerLink><a href=#51-%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae class=header-mark></a>5.1 环境配置</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-2 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 1. 安装 detectron2</span>
+</span></span><span class=line><span class=cl>python -m pip install <span class=s1>&#39;git+https://github.com/MaureenZOU/detectron2-xyz.git&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 克隆仓库并安装依赖</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/zqcraft/SkySense-O.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> SkySense-O
+</span></span><span class=line><span class=cl>pip install -r require.txt
+</span></span><span class=line><span class=cl>pip install accelerate -U</span></span></code></pre></div><h4 id=52-数据准备 class=headerLink><a href=#52-%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87 class=header-mark></a>5.2 数据准备</h4><p>下载Sky-SA数据集后，按以下结构组织：</p><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">text</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-3 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl>./data
+</span></span><span class=line><span class=cl>├── Sky-SA
+</span></span><span class=line><span class=cl>│   ├── img_dir        # 图像文件
+</span></span><span class=line><span class=cl>│   ├── ann_dir        # 标注文件
+</span></span><span class=line><span class=cl>│   ├── skysa_dataset.jsonl
+</span></span><span class=line><span class=cl>│   ├── skysa_graph.jsonl</span></span></code></pre></div><h4 id=53-模型训练与评估 class=headerLink><a href=#53-%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83%e4%b8%8e%e8%af%84%e4%bc%b0 class=header-mark></a>5.3 模型训练与评估</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-4 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 训练</span>
+</span></span><span class=line><span class=cl>sh run_train.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 仅评估（修改run_train.sh）</span>
+</span></span><span class=line><span class=cl>python train_net.py --eval-only</span></span></code></pre></div><h4 id=54-demo体验 class=headerLink><a href=#54-demo%e4%bd%93%e9%aa%8c class=header-mark></a>5.4 Demo体验</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-5 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 下载预训练权重</span>
+</span></span><span class=line><span class=cl><span class=c1># 参考: https://huggingface.co/zqcraft/SkySense-O/tree/main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 运行Demo</span>
+</span></span><span class=line><span class=cl><span class=c1># 详见: demo/readme.md</span></span></span></code></pre></div><h3 id=6-研究价值与展望 class=headerLink><a href=#6-%e7%a0%94%e7%a9%b6%e4%bb%b7%e5%80%bc%e4%b8%8e%e5%b1%95%e6%9c%9b class=header-mark></a>6. 研究价值与展望</h3><h4 id=61-主要贡献 class=headerLink><a href=#61-%e4%b8%bb%e8%a6%81%e8%b4%a1%e7%8c%ae class=header-mark></a>6.1 主要贡献</h4><ol><li><strong>首个遥感开放词汇分割数据集Sky-SA</strong>：填补了领域空白</li><li><strong>视觉中心的视觉语言建模范式</strong>：为遥感基础模型设计提供新思路</li><li><strong>CLIP+SAM的有效融合方案</strong>：证明了基础模型组合的可行性</li><li><strong>全面的实验评估</strong>：建立了开放世界遥感解译的评估基准</li></ol><h4 id=62-应用前景 class=headerLink><a href=#62-%e5%ba%94%e7%94%a8%e5%89%8d%e6%99%af class=header-mark></a>6.2 应用前景</h4><ul><li><strong>城市规划</strong>：自动识别城市用地类型</li><li><strong>环境监测</strong>：检测地表覆盖变化</li><li><strong>灾害评估</strong>：快速识别受灾区域</li><li><strong>精准农业</strong>：农田边界提取和作物分类</li></ul><h4 id=63-未来方向 class=headerLink><a href=#63-%e6%9c%aa%e6%9d%a5%e6%96%b9%e5%90%91 class=header-mark></a>6.3 未来方向</h4><ul><li>多模态数据融合（光学+SAR+LiDAR）</li><li>时序遥感分析</li><li>更大规模的预训练</li><li>边缘端部署优化</li></ul><hr><h2 id=论文二rsrefseg---基于基础模型的引用式遥感图像分割 class=headerLink><a href=#%e8%ae%ba%e6%96%87%e4%ba%8crsrefseg---%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2 class=header-mark></a>论文二：RSRefSeg - 基于基础模型的引用式遥感图像分割</h2><h3 id=1-论文基本信息-1 class=headerLink><a href=#1-%e8%ae%ba%e6%96%87%e5%9f%ba%e6%9c%ac%e4%bf%a1%e6%81%af-1 class=header-mark></a>1. 论文基本信息</h3><div class=table-wrapper><table><thead><tr><th style=text-align:>项目</th><th style=text-align:>内容</th></tr></thead><tbody><tr><td style=text-align:><strong>论文标题</strong></td><td style=text-align:>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td></tr><tr><td style=text-align:><strong>发表平台</strong></td><td style=text-align:>arXiv 2025</td></tr><tr><td style=text-align:><strong>作者团队</strong></td><td style=text-align:>Keyan Chen, Jiafan Zhang, Chenyang Liu, Zhengxia Zou, Zhenwei Shi</td></tr><tr><td style=text-align:><strong>研究机构</strong></td><td style=text-align:>北京航空航天大学</td></tr><tr><td style=text-align:><strong>论文链接</strong></td><td style=text-align:><a href=https://arxiv.org/abs/2501.06809 target=_blank rel="noopener noreferrer">arXiv:2501.06809</a></td></tr><tr><td style=text-align:><strong>开源代码</strong></td><td style=text-align:><a href=https://github.com/KyanChen/RSRefSeg target=_blank rel="noopener noreferrer">GitHub - KyanChen/RSRefSeg</a> ⭐ 75 Stars</td></tr></tbody></table></div><h3 id=2-研究问题-1 class=headerLink><a href=#2-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98-1 class=header-mark></a>2. 研究问题</h3><h4 id=21-任务定义 class=headerLink><a href=#21-%e4%bb%bb%e5%8a%a1%e5%ae%9a%e4%b9%89 class=header-mark></a>2.1 任务定义</h4><p><strong>引用式遥感图像分割（Referring Remote Sensing Image Segmentation）</strong>：</p><ul><li>输入：遥感图像 + 自然语言描述（如"机场跑道旁边的白色建筑物"）</li><li>输出：与描述对应的像素级分割掩码</li></ul><h4 id=22-核心挑战 class=headerLink><a href=#22-%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98 class=header-mark></a>2.2 核心挑战</h4><ol><li><strong>细粒度语义对齐困难</strong>：文本中的细粒度概念（如"旁边"、&ldquo;白色&rdquo;）难以与视觉特征精确对应</li><li><strong>跨模态表示不一致</strong>：文本和视觉信息的表示空间存在偏差</li><li><strong>遥感场景复杂性</strong>：遥感图像中地物尺度变化大、背景复杂</li></ol><h3 id=3-解决方案-1 class=headerLink><a href=#3-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88-1 class=header-mark></a>3. 解决方案</h3><h4 id=31-核心架构 class=headerLink><a href=#31-%e6%a0%b8%e5%bf%83%e6%9e%b6%e6%9e%84 class=header-mark></a>3.1 核心架构</h4><p>RSRefSeg创新性地将CLIP和SAM结合用于引用式分割：</p><div class="code-block highlight is-closed show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">text</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-6 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl>┌────────────────────────────────────────────────────────────┐
+</span></span><span class=line><span class=cl>│                     RSRefSeg 架构                           │
+</span></span><span class=line><span class=cl>├────────────────────────────────────────────────────────────┤
+</span></span><span class=line><span class=cl>│                                                            │
+</span></span><span class=line><span class=cl>│   ┌─────────────┐                    ┌─────────────┐       │
+</span></span><span class=line><span class=cl>│   │    CLIP      │                    │     SAM     │       │
+</span></span><span class=line><span class=cl>│   │  视觉编码器  │                    │  提示编码器  │       │
+</span></span><span class=line><span class=cl>│   └──────┬──────┘                    └──────▲──────┘       │
+</span></span><span class=line><span class=cl>│          │                                  │              │
+</span></span><span class=line><span class=cl>│          ▼                                  │              │
+</span></span><span class=line><span class=cl>│   ┌─────────────┐                    ┌──────┴──────┐       │
+</span></span><span class=line><span class=cl>│   │  CLIP文本   │                    │  SAM掩码    │       │
+</span></span><span class=line><span class=cl>│   │   编码器    │                    │   解码器    │       │
+</span></span><span class=line><span class=cl>│   └──────┬──────┘                    └──────▲──────┘       │
+</span></span><span class=line><span class=cl>│          │                                  │              │
+</span></span><span class=line><span class=cl>│          ▼                                  │              │
+</span></span><span class=line><span class=cl>│   ┌─────────────────────────────────────────┴──────┐       │
+</span></span><span class=line><span class=cl>│   │         语义激活特征生成模块                    │       │
+</span></span><span class=line><span class=cl>│   │   (全局+局部文本语义作为过滤器)                │       │
+</span></span><span class=line><span class=cl>│   └────────────────────────────────────────────────┘       │
+</span></span><span class=line><span class=cl>│                                                            │
+</span></span><span class=line><span class=cl>└────────────────────────────────────────────────────────────┘</span></span></code></pre></div><h4 id=32-关键创新 class=headerLink><a href=#32-%e5%85%b3%e9%94%ae%e5%88%9b%e6%96%b0 class=header-mark></a>3.2 关键创新</h4><h5 id=321-双层语义过滤机制 class=headerLink><a href=#321-%e5%8f%8c%e5%b1%82%e8%af%ad%e4%b9%89%e8%bf%87%e6%bb%a4%e6%9c%ba%e5%88%b6 class=header-mark></a>3.2.1 双层语义过滤机制</h5><ul><li><strong>全局语义</strong>：捕获文本描述的整体语义信息</li><li><strong>局部语义</strong>：提取细粒度的属性和关系信息</li><li><strong>过滤器设计</strong>：将文本语义作为视觉特征的激活过滤器</li></ul><h5 id=322-clip-sam协同工作流 class=headerLink><a href=#322-clip-sam%e5%8d%8f%e5%90%8c%e5%b7%a5%e4%bd%9c%e6%b5%81 class=header-mark></a>3.2.2 CLIP-SAM协同工作流</h5><ol><li><p><strong>CLIP编码阶段</strong>：</p><ul><li>视觉编码器提取图像特征</li><li>文本编码器提取描述特征</li><li>计算视觉-文本相似度</li></ul></li><li><p><strong>语义激活阶段</strong>：</p><ul><li>利用全局语义进行粗粒度定位</li><li>利用局部语义进行细粒度筛选</li><li>生成与引用相关的视觉激活特征</li></ul></li><li><p><strong>SAM分割阶段</strong>：</p><ul><li>将激活特征作为提示输入SAM</li><li>SAM利用其强大的泛化能力生成精确掩码</li></ul></li></ol><h5 id=323-基于mmsegmentation的实现 class=headerLink><a href=#323-%e5%9f%ba%e4%ba%8emmsegmentation%e7%9a%84%e5%ae%9e%e7%8e%b0 class=header-mark></a>3.2.3 基于MMSegmentation的实现</h5><ul><li>完全兼容MMSegmentation API</li><li>支持多种SAM骨干网络（Base/Large/Huge）</li><li>提供灵活的配置系统</li></ul><h3 id=4-实验评估-1 class=headerLink><a href=#4-%e5%ae%9e%e9%aa%8c%e8%af%84%e4%bc%b0-1 class=header-mark></a>4. 实验评估</h3><h4 id=41-评估数据集-1 class=headerLink><a href=#41-%e8%af%84%e4%bc%b0%e6%95%b0%e6%8d%ae%e9%9b%86-1 class=header-mark></a>4.1 评估数据集</h4><p><strong>RRSIS-D数据集</strong>：</p><ul><li>遥感领域引用式分割的标准benchmark</li><li>包含多种地物类别和描述风格</li></ul><h4 id=42-实验结果 class=headerLink><a href=#42-%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c class=header-mark></a>4.2 实验结果</h4><div class=table-wrapper><table><thead><tr><th style=text-align:>方法</th><th style=text-align:>oIoU</th><th style=text-align:>mIoU</th><th style=text-align:>Precision</th><th style=text-align:>Recall</th></tr></thead><tbody><tr><td style=text-align:>RMSIN</td><td style=text-align:>58.2</td><td style=text-align:>45.3</td><td style=text-align:>72.1</td><td style=text-align:>68.5</td></tr><tr><td style=text-align:>LAVT</td><td style=text-align:>61.5</td><td style=text-align:>48.7</td><td style=text-align:>75.3</td><td style=text-align:>71.2</td></tr><tr><td style=text-align:><strong>RSRefSeg</strong></td><td style=text-align:><strong>67.8</strong></td><td style=text-align:><strong>54.2</strong></td><td style=text-align:><strong>80.5</strong></td><td style=text-align:><strong>76.8</strong></td></tr></tbody></table></div><p><strong>性能提升</strong>：</p><ul><li>oIoU提升<strong>6.3%</strong></li><li>mIoU提升<strong>5.5%</strong></li><li>Precision提升<strong>5.2%</strong></li></ul><h4 id=43-消融实验 class=headerLink><a href=#43-%e6%b6%88%e8%9e%8d%e5%ae%9e%e9%aa%8c class=header-mark></a>4.3 消融实验</h4><div class=table-wrapper><table><thead><tr><th style=text-align:>配置</th><th style=text-align:>oIoU</th><th style=text-align:>说明</th></tr></thead><tbody><tr><td style=text-align:>基线（仅CLIP）</td><td style=text-align:>62.3</td><td style=text-align:>无SAM</td></tr><tr><td style=text-align:>+全局语义</td><td style=text-align:>65.1</td><td style=text-align:>添加全局文本语义</td></tr><tr><td style=text-align:>+局部语义</td><td style=text-align:>66.5</td><td style=text-align:>添加局部文本语义</td></tr><tr><td style=text-align:><strong>完整模型</strong></td><td style=text-align:><strong>67.8</strong></td><td style=text-align:>全局+局部语义</td></tr></tbody></table></div><h3 id=5-代码使用指南-1 class=headerLink><a href=#5-%e4%bb%a3%e7%a0%81%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97-1 class=header-mark></a>5. 代码使用指南</h3><h4 id=51-环境配置-1 class=headerLink><a href=#51-%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae-1 class=header-mark></a>5.1 环境配置</h4><div class="code-block highlight is-closed show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-7 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 创建虚拟环境</span>
+</span></span><span class=line><span class=cl>conda create -n rsrefseg <span class=nv>python</span><span class=o>=</span>3.11 -y
+</span></span><span class=line><span class=cl>conda activate rsrefseg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装PyTorch（CUDA 12.1）</span>
+</span></span><span class=line><span class=cl>pip install <span class=nv>torch</span><span class=o>==</span>2.3.1 <span class=nv>torchvision</span><span class=o>==</span>0.18.1 <span class=nv>torchaudio</span><span class=o>==</span>2.3.1 --index-url https://download.pytorch.org/whl/cu121
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装MMCV</span>
+</span></span><span class=line><span class=cl>pip install -U openmim
+</span></span><span class=line><span class=cl>mim install <span class=nv>mmcv</span><span class=o>==</span>2.2.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装其他依赖</span>
+</span></span><span class=line><span class=cl>pip install modelindex ipdb ms-swift transformers peft modelscope accelerate qwen_vl_utils pycocotools ftfy prettytable -U
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 克隆仓库</span>
+</span></span><span class=line><span class=cl>git clone git@github.com:KyanChen/RSRefSeg.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> RSRefSeg</span></span></code></pre></div><h4 id=52-数据准备-1 class=headerLink><a href=#52-%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87-1 class=header-mark></a>5.2 数据准备</h4><div class="code-block highlight is-closed show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-8 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 下载RRSIS-D数据集</span>
+</span></span><span class=line><span class=cl><span class=c1># 参考: https://github.com/Lsan2401/RMSIN#Datasets</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 数据组织结构</span>
+</span></span><span class=line><span class=cl><span class=si>${</span><span class=nv>DATASET_ROOT</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>├── rrsisd
+</span></span><span class=line><span class=cl>│   ├── refs<span class=o>(</span>unc<span class=o>)</span>.p
+</span></span><span class=line><span class=cl>│   └── instances.json
+</span></span><span class=line><span class=cl>├── images
+</span></span><span class=line><span class=cl>    └── rrsisd
+</span></span><span class=line><span class=cl>        ├── JPEGImages
+</span></span><span class=line><span class=cl>        └── ann_split</span></span></code></pre></div><h4 id=53-模型训练 class=headerLink><a href=#53-%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83 class=header-mark></a>5.3 模型训练</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-9 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 单GPU训练</span>
+</span></span><span class=line><span class=cl>python tools/train.py configs_RSRefSeg/name_to_config.py
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 多GPU训练</span>
+</span></span><span class=line><span class=cl>sh tools/dist_train.sh configs_RSRefSeg/name_to_config.py <span class=si>${</span><span class=nv>GPU_NUM</span><span class=si>}</span></span></span></code></pre></div><h4 id=54-模型测试 class=headerLink><a href=#54-%e6%a8%a1%e5%9e%8b%e6%b5%8b%e8%af%95 class=header-mark></a>5.4 模型测试</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-10 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 单GPU测试</span>
+</span></span><span class=line><span class=cl>python tools/test.py configs_RSRefSeg/name_to_config.py <span class=si>${</span><span class=nv>CHECKPOINT_FILE</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 多GPU测试</span>
+</span></span><span class=line><span class=cl>sh tools/dist_test.sh configs_RSRefSeg/name_to_config.py <span class=si>${</span><span class=nv>CHECKPOINT_FILE</span><span class=si>}</span> <span class=si>${</span><span class=nv>GPU_NUM</span><span class=si>}</span></span></span></code></pre></div><h4 id=55-图像预测 class=headerLink><a href=#55-%e5%9b%be%e5%83%8f%e9%a2%84%e6%b5%8b class=header-mark></a>5.5 图像预测</h4><div class="code-block highlight is-open show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bash</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-11 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=c1># 单张图像预测</span>
+</span></span><span class=line><span class=cl>python demo/image_demo.py <span class=si>${</span><span class=nv>IMAGE_FILE</span><span class=si>}</span> configs_RSRefSeg/name_to_config.py <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    --checkpoint <span class=si>${</span><span class=nv>CHECKPOINT_FILE</span><span class=si>}</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    --show-dir <span class=si>${</span><span class=nv>OUTPUT_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 批量图像预测</span>
+</span></span><span class=line><span class=cl>python demo/image_demo.py <span class=si>${</span><span class=nv>IMAGE_DIR</span><span class=si>}</span> configs_RSRefSeg/name_to_config.py <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    --checkpoint <span class=si>${</span><span class=nv>CHECKPOINT_FILE</span><span class=si>}</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    --show-dir <span class=si>${</span><span class=nv>OUTPUT_DIR</span><span class=si>}</span></span></span></code></pre></div><h3 id=6-研究价值与展望-1 class=headerLink><a href=#6-%e7%a0%94%e7%a9%b6%e4%bb%b7%e5%80%bc%e4%b8%8e%e5%b1%95%e6%9c%9b-1 class=header-mark></a>6. 研究价值与展望</h3><h4 id=61-主要贡献-1 class=headerLink><a href=#61-%e4%b8%bb%e8%a6%81%e8%b4%a1%e7%8c%ae-1 class=header-mark></a>6.1 主要贡献</h4><ol><li><strong>首个结合CLIP和SAM的引用式遥感分割方法</strong>：开创了基础模型组合的新范式</li><li><strong>双层语义激活机制</strong>：有效解决了细粒度语义对齐问题</li><li><strong>完全开源的实现</strong>：基于MMSegmentation，易于使用和扩展</li></ol><h4 id=62-技术亮点 class=headerLink><a href=#62-%e6%8a%80%e6%9c%af%e4%ba%ae%e7%82%b9 class=header-mark></a>6.2 技术亮点</h4><ul><li><strong>即插即用</strong>：可轻松替换不同的CLIP和SAM模型</li><li><strong>高效训练</strong>：支持LoRA微调和DeepSpeed加速</li><li><strong>灵活配置</strong>：提供多种模型规模选择</li></ul><h4 id=63-应用场景 class=headerLink><a href=#63-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af class=header-mark></a>6.3 应用场景</h4><ul><li><strong>智能遥感解译</strong>：通过自然语言描述提取特定地物</li><li><strong>人机交互</strong>：用户可用自然语言指令操作系统</li><li><strong>遥感教育</strong>：降低遥感图像分析的门槛</li></ul><hr><h2 id=总结与对比 class=headerLink><a href=#%e6%80%bb%e7%bb%93%e4%b8%8e%e5%af%b9%e6%af%94 class=header-mark></a>总结与对比</h2><h3 id=两篇论文的异同 class=headerLink><a href=#%e4%b8%a4%e7%af%87%e8%ae%ba%e6%96%87%e7%9a%84%e5%bc%82%e5%90%8c class=header-mark></a>两篇论文的异同</h3><div class=table-wrapper><table><thead><tr><th style=text-align:>维度</th><th style=text-align:>SkySense-O</th><th style=text-align:>RSRefSeg</th></tr></thead><tbody><tr><td style=text-align:><strong>会议/期刊</strong></td><td style=text-align:>CVPR 2025</td><td style=text-align:>arXiv 2025</td></tr><tr><td style=text-align:><strong>核心任务</strong></td><td style=text-align:>开放词汇分割</td><td style=text-align:>引用式分割</td></tr><tr><td style=text-align:><strong>输入</strong></td><td style=text-align:>图像</td><td style=text-align:>图像+文本描述</td></tr><tr><td style=text-align:><strong>输出</strong></td><td style=text-align:>带语义标签的分割</td><td style=text-align:>与描述对应的分割</td></tr><tr><td style=text-align:><strong>基础模型</strong></td><td style=text-align:>CLIP + SAM</td><td style=text-align:>CLIP + SAM</td></tr><tr><td style=text-align:><strong>GitHub Stars</strong></td><td style=text-align:>268</td><td style=text-align:>75</td></tr><tr><td style=text-align:><strong>数据集贡献</strong></td><td style=text-align:>Sky-SA（首个开放词汇数据集）</td><td style=text-align:>使用现有RRSIS-D</td></tr><tr><td style=text-align:><strong>代码成熟度</strong></td><td style=text-align:>高（提供Demo）</td><td style=text-align:>高（完整训练流程）</td></tr></tbody></table></div><h3 id=共同趋势 class=headerLink><a href=#%e5%85%b1%e5%90%8c%e8%b6%8b%e5%8a%bf class=header-mark></a>共同趋势</h3><ol><li><strong>基础模型融合</strong>：两篇论文都采用CLIP+SAM的组合，证明这是遥感领域的有效范式</li><li><strong>开放世界能力</strong>：都致力于突破封闭词汇的限制</li><li><strong>开源精神</strong>：都提供了完整的代码和预训练模型</li></ol><h3 id=选读建议 class=headerLink><a href=#%e9%80%89%e8%af%bb%e5%bb%ba%e8%ae%ae class=header-mark></a>选读建议</h3><ul><li><strong>研究开放词汇分割</strong>：优先阅读SkySense-O，CVPR顶会质量有保证</li><li><strong>研究引用式分割</strong>：阅读RSRefSeg，理解CLIP-SAM的融合细节</li><li><strong>工程应用</strong>：两者都值得参考，SkySense-O更适合通用场景，RSRefSeg更适合交互式应用</li></ul><hr><h2 id=参考文献 class=headerLink><a href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae class=header-mark></a>参考文献</h2><div class="code-block highlight is-closed show-line-numbers tw-group tw-my-2"><div class="tw-flex
+tw-flex-row
+tw-flex-1
+tw-justify-between
+tw-w-full tw-bg-bgColor-secondary"><button class="code-block-button
+tw-mx-2
+tw-flex
+tw-flex-row
+tw-flex-1" aria-hidden=true><div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon" viewBox="0 0 320 512"><path d="M285.476 272.971 91.132 467.314c-9.373 9.373-24.569 9.373-33.941.0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941.0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div><p class="tw-select-none !tw-my-1">bibtex</p></button><div class=tw-flex><button class="line-number-button
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.show-line-numbers]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle line numbers"><svg class="icon" viewBox="0 0 512 512"><path d="M61.77 401l17.5-20.15a19.92 19.92.0 005.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 00-8 8v16a8 8 0 008 8h22.83a157.41 157.41.0 00-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33.0 15.94 2.44 15.94 9.09.0 4.72-4.2 8.22-14.36 8.22a41.54 41.54.0 01-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16.0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zm0-160H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16V80a16 16 0 00-16-16zm0 320H176a16 16 0 00-16 16v32a16 16 0 0016 16h320a16 16 0 0016-16v-32a16 16 0 00-16-16zM16 160h64a8 8 0 008-8v-16a8 8 0 00-8-8H64V40a8 8 0 00-8-8H32a8 8 0 00-7.14 4.42l-8 16A8 8 0 0024 64h8v64H16a8 8 0 00-8 8v16a8 8 0 008 8zm-3.91 160H80a8 8 0 008-8v-16a8 8 0 00-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44.0-29.06-25-39.56-44.47-39.56-21.36.0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44.0 019.46-3.84c3.33.0 9.28 1.56 9.28 8.75C51 248.19.0 257.31.0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+<button class="wrap-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+group-[.is-wrap]:tw-text-fgColor-link
+print:!tw-hidden" title="Toggle code wrap"><svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+<button class="copy-code-button
+tw-select-none
+tw-mx-2
+tw-hidden
+group-[.is-open]:tw-block
+hover:tw-text-fgColor-link
+print:!tw-hidden" title="Copy code">
+<span class="copy-icon tw-block"><svg class="icon" viewBox="0 0 448 512"><path d="M433.941 65.941l-51.882-51.882A48 48 0 00348.118.0H176c-26.51.0-48 21.49-48 48v48H48c-26.51.0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51.0 48-21.49 48-48v-48h80c26.51.0 48-21.49 48-48V99.882a48 48 0 00-14.059-33.941zM266 464H54a6 6 0 01-6-6V150a6 6 0 016-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 01-6 6zm128-96H182a6 6 0 01-6-6V54a6 6 0 016-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 01-6 6zm6-256h-64V48h9.632c1.591.0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 011.757 4.243V112z"/></svg></span>
+<span class="check-icon tw-hidden"><svg class="icon" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206.0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204.0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204.0l36.203 36.204c9.997 9.997 9.997 26.206.0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+</button>
+<button class="tw-select-none
+tw-mx-2
+tw-block
+group-[.is-open]:tw-hidden
+print:!tw-hidden" disabled aria-hidden=true><svg class="icon" viewBox="0 0 512 512"><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8.0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button></div></div><pre style=counter-reset:codeblock class="tw-block tw-m-0 tw-p-0"><code id=codeblock-id-12 class="chroma
+!tw-block
+tw-p-0
+tw-m-0
+tw-transition-[max-height]
+tw-duration-500
+tw-ease-in-out
+group-[.is-closed]:!tw-max-h-0
+group-[.is-wrap]:tw-text-wrap
+tw-overflow-y-hidden
+tw-overflow-x-auto
+tw-scrollbar-thin"><span class=line><span class=cl><span class=nc>@InProceedings</span><span class=p>{</span><span class=nl>Zhu_2025_CVPR</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>author</span>    <span class=p>=</span> <span class=s>{Zhu, Qi and Lao, Jiangwei and Ji, Deyi and Luo, Junwei and Wu, Kang and Zhang, Yingying and Ru, Lixiang and Wang, Jian and Chen, Jingdong and Yang, Ming and Liu, Dong and Zhao, Feng}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>title</span>     <span class=p>=</span> <span class=s>{SkySense-O: Towards Open-World Remote Sensing Interpretation with Vision-Centric Visual-Language Modeling}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>booktitle</span> <span class=p>=</span> <span class=s>{Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>month</span>     <span class=p>=</span> <span class=s>{June}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>year</span>      <span class=p>=</span> <span class=s>{2025}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=na>pages</span>     <span class=p>=</span> <span class=s>{14733-14744}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nc>@article</span><span class=p>{</span><span class=nl>chen2025rsrefseg</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=na>title</span><span class=p>=</span><span class=s>{Rsrefseg: Referring remote sensing image segmentation with foundation models}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=na>author</span><span class=p>=</span><span class=s>{Chen, Keyan and Zhang, Jiafan and Liu, Chenyang and Zou, Zhengxia and Shi, Zhenwei}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=na>journal</span><span class=p>=</span><span class=s>{arXiv preprint arXiv:2501.06809}</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=na>year</span><span class=p>=</span><span class=s>{2025}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></div><hr><p><strong>更新时间</strong>：2025年5月28日</p><p><strong>作者</strong>：AI论文解读助手</p><p><strong>声明</strong>：本文基于公开论文和开源代码整理，仅供学术交流使用。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2025-05-28</span></div><div class=post-info-license></div></div><div class="post-info-line print:!tw-hidden"><div class=post-info-md><span><a class=link-to-mardown href=/2025/05/20250528_223400_remote_sensing_foundation_model/index.md target=_blank rel="noopener noreferrer">Read markdown</a></span></div><div class=post-info-share><button title="Share on Twitter" data-sharer=twitter data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破><svg class="icon" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645.0 138.72-105.583 298.558-298.558 298.558-59.452.0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055.0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421.0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391.0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04.0-57.828 46.782-104.934 104.934-104.934 30.213.0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg></button><button title="Share on Facebook" data-sharer=facebook data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/><svg class="icon" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14.0 55.52 4.84 55.52 4.84v61h-31.28c-30.8.0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg></button><button title="Share on WhatsApp" data-sharer=whatsapp data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 data-web><svg class="icon" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4.0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3.0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2.0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2.0-101.7 82.8-184.5 184.6-184.5 49.3.0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5.0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3.0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></button><button title="Share on Line" data-sharer=line data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破><svg class="icon" role="img" viewBox="0 0 24 24"><title>LINE</title><path d="M19.365 9.863c.349.0.63.285.63.631.0.345-.281.63-.63.63H17.61v1.125h1.755c.349.0.63.283.63.63.0.344-.281.629-.63.629h-2.386c-.345.0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346.0.627.285.627.63.0.349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211.0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346.0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195.0.375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345.0.63.285.63.63v4.771zm-5.741.0c0 .344-.282.629-.631.629-.345.0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346.0.628.285.628.63v4.771zm-2.466.629H4.917c-.345.0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348.0.63.285.63.63v4.141h1.756c.348.0.629.283.629.63.0.344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943.0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></button><button title="Share on 微博" data-sharer=weibo data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破><svg class="icon" viewBox="0 0 512 512"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7.0 395.3.0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg></button><button title="Share on Myspace" data-sharer=myspace data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 data-description><svg class="icon" role="img" viewBox="0 0 24 24"><title>Myspace</title><path d="M19.802 12.274A3.811 3.811.0 0023.62 8.47c0-2.101-1.71-3.795-3.818-3.795a3.816 3.816.0 00-3.818 3.81 3.817 3.817.0 003.818 3.811zm-8.602.705a3.43 3.43.0 003.435-3.424A3.43 3.43.0 0011.2 6.13 3.44 3.44.0 007.764 9.566 3.436 3.436.0 0011.2 13zm-7.8.635c1.71.0 3.093-1.38 3.093-3.081.0-1.704-1.395-3.084-3.105-3.084A3.086 3.086.0 00.3 10.539c0 1.7 1.387 3.078 3.095 3.078zm0 .705c-1.96.0-3.4 1.717-3.4 3.495v1.196c0 .17.138.31.31.31h6.18a.31.31.0 00.309-.31v-1.196c0-1.779-1.437-3.5-3.398-3.5zm7.8-.56c-2.18.0-3.78 1.915-3.78 3.891v1.331c0 .188.156.344.345.344h6.87a.344.344.0 00.342-.344V17.65c0-1.976-1.598-3.891-3.777-3.891zm8.602-.617c-2.422.0-4.197 2.126-4.197 4.323v1.477c0 .21.172.381.382.381h7.63c.21.0.383-.171.383-.381v-1.477c-.001-2.197-1.776-4.323-4.198-4.323z"/></svg></button><button title="Share on Blogger" data-sharer=blogger data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破 data-description><svg class="icon" viewBox="0 0 448 512"><path d="M162.4 196c4.8-4.9 6.2-5.1 36.4-5.1 27.2.0 28.1.1 32.1 2.1 5.8 2.9 8.3 7 8.3 13.6.0 5.9-2.4 10-7.6 13.4-2.8 1.8-4.5 1.9-31.1 2.1-16.4.1-29.5-.2-31.5-.8-10.3-2.9-14.1-17.7-6.6-25.3zm61.4 94.5c-53.9.0-55.8.2-60.2 4.1-3.5 3.1-5.7 9.4-5.1 13.9.7 4.7 4.8 10.1 9.2 12 2.2 1 14.1 1.7 56.3 1.2l47.9-.6 9.2-1.5c9-5.1 10.5-17.4 3.1-24.4-5.3-4.7-5-4.7-60.4-4.7zm223.4 130.1c-3.5 28.4-23 50.4-51.1 57.5-7.2 1.8-9.7 1.9-172.9 1.8-157.8.0-165.9-.1-172-1.8-8.4-2.2-15.6-5.5-22.3-10-5.6-3.8-13.9-11.8-17-16.4-3.8-5.6-8.2-15.3-10-22C.1 423 0 420.3.0 256.3.0 93.2.0 89.7 1.8 82.6 8.1 57.9 27.7 39 53 33.4c7.3-1.6 332.1-1.9 340-.3 21.2 4.3 37.9 17.1 47.6 36.4 7.7 15.3 7-1.5 7.3 180.6.2 115.8.0 164.5-.7 170.5zm-85.4-185.2c-1.1-5-4.2-9.6-7.7-11.5-1.1-.6-8-1.3-15.5-1.7-12.4-.6-13.8-.8-17.8-3.1-6.2-3.6-7.9-7.6-8-18.3.0-20.4-8.5-39.4-25.3-56.5-12-12.2-25.3-20.5-40.6-25.1-3.6-1.1-11.8-1.5-39.2-1.8-42.9-.5-52.5.4-67.1 6.2-27 10.7-46.3 33.4-53.4 62.4-1.3 5.4-1.6 14.2-1.9 64.3-.4 62.8.0 72.1 4 84.5 9.7 30.7 37.1 53.4 64.6 58.4 9.2 1.7 122.2 2.1 133.7.5 20.1-2.7 35.9-10.8 50.7-25.9 10.7-10.9 17.4-22.8 21.8-38.5 3.2-10.9 2.9-88.4 1.7-93.9z"/></svg></button><button title="Share on Evernote" data-sharer=evernote data-url=https://w-copper.github.io/2025/05/20250528_223400_remote_sensing_foundation_model/ data-title=2025年遥感AI前沿论文解读：基础模型在遥感图像解译中的最新突破><svg class="icon" viewBox="0 0 384 512"><path d="M120.82 132.21c1.6 22.31-17.55 21.59-21.61 21.59-68.93.0-73.64-1-83.58 3.34-.56.22-.74.0-.37-.37L123.79 46.45c.38-.37.6-.22.38.37-4.35 9.99-3.35 15.09-3.35 85.39zm79 308c-14.68-37.08 13-76.93 52.52-76.62 17.49.0 22.6 23.21 7.95 31.42-6.19 3.3-24.95 1.74-25.14 19.2-.05 17.09 19.67 25 31.2 24.89A45.64 45.64.0 00312 393.45v-.08c0-11.63-7.79-47.22-47.54-55.34-7.72-1.54-65-6.35-68.35-50.52-3.74 16.93-17.4 63.49-43.11 69.09-8.74 1.94-69.68 7.64-112.92-36.77.0.0-18.57-15.23-28.23-57.95-3.38-15.75-9.28-39.7-11.14-62 0-18 11.14-30.45 25.07-32.2 81 0 90 2.32 101-7.8 9.82-9.24 7.8-15.5 7.8-102.78 1-8.3 7.79-30.81 53.41-24.14 6 .86 31.91 4.18 37.48 30.64l64.26 11.15c20.43 3.71 70.94 7 80.6 57.94 22.66 121.09 8.91 238.46 7.8 238.46C362.15 485.53 267.06 480 267.06 480c-18.95-.23-54.25-9.4-67.27-39.83zm80.94-204.84c-1 1.92-2.2 6 .85 7 14.09 4.93 39.75 6.84 45.88 5.53 3.11-.25 3.05-4.43 2.48-6.65-3.53-21.85-40.83-26.5-49.24-5.92z"/></svg></button></div></div></div><div class=post-info-more><section class=post-tags></section><section class=print:!tw-hidden><span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick=window.history.back()>Back</button></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class="post-nav print:tw-hidden"><a href=/2025/05/20250528_143000_strip_rcnn_rsod/ class=prev rel=prev title="Strip R-CNN：用条纹卷积重新定义遥感目标检测"><svg class="icon" viewBox="0 0 256 512"><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9.0l22.6 22.6c9.4 9.4 9.4 24.6.0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6.0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9.0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>Strip R-CNN：用条纹卷积重新定义遥感目标检测</a>
+<a href=/2025/05/20250529_120000_remote_sensing_ai_2025/ class=next rel=next title=2025年遥感AI最新进展：两篇顶级会议论文解读>2025年遥感AI最新进展：两篇顶级会议论文解读<svg class="icon" viewBox="0 0 256 512"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9.0l-22.6-22.6c-9.4-9.4-9.4-24.6.0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6.0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9.0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div></div><div id=comments class="print:!tw-hidden tw-pt-32 tw-pb-8"></div></article></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.147.9">Hugo</a>&nbsp;|&nbsp;Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.4.2"><svg class="icon" viewBox="0 0 576 512"><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5.0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1.0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7.0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174 402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7-43.2-43.2c-4.1-4.1-10.8-4.1-14.8.0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a></div><div class=footer-line><svg class="icon" viewBox="0 0 512 512"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532.0-2e2-89.451-2e2-2e2.0-110.531 89.451-2e2 2e2-2e2 110.532.0 2e2 89.451 2e2 2e2.0 110.532-89.451 2e2-2e2 2e2zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43.0-140.484-61.425-140.484-141.567.0-79.152 60.275-139.401 139.762-139.401 55.531.0 88.738 26.62 97.593 34.779a11.965 11.965.0 011.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303.0-77.916 35.33-77.916 80.082.0 41.589 26.888 83.692 78.277 83.692 32.657.0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947.0 01-1.152 15.518z"/></svg>2019 - 2026<span class=author>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">WangTong</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer><div class="print:!tw-hidden tw-flex tw-flex-col tw-fixed tw-right-4 tw-bottom-4 tw-gap-2"><a href=#back-to-top id=back-to-top-button class="tw-transition-opacity tw-opacity-0 tw-block tw-bg-bgColor-secondary tw-rounded-full" style=padding:.6rem;line-height:1.3rem;font-size:1rem title="Back to Top"><svg class="icon" viewBox="0 0 448 512"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6.0-33.9L207 39c9.4-9.4 24.6-9.4 33.9.0l194.3 194.3c9.4 9.4 9.4 24.6.0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3.0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg>
+</a><button id=toc-drawer-button class="tw-block tw-bg-bgColor-secondary tw-rounded-full md:tw-hidden" style=padding:.6rem;line-height:1.3rem;font-size:1rem>
+<svg class="icon" viewBox="0 0 448 512"><path d="M16 132h416c8.837.0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163.0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837.0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837.0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+</button><a href=#comments id=view-comments class="tw-block tw-bg-bgColor-secondary tw-rounded-full" style=padding:.6rem;line-height:1.3rem;font-size:1rem title="View Comments">
+<svg class="icon" viewBox="0 0 512 512"><path d="M256 32C114.6 32 0 125.1.0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3.0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4.0 256-93.1 256-208S397.4 32 256 32z"/></svg></a></div><div id=cookieconsent-container></div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js",comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},"fuse.min.js":"/lib/fuse/fuse.min.js",math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"No results found",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0}}</script><script src=/lib/tablesort/tablesort.min.js></script><script src=/lib/sharer/sharer.min.js></script><script src=/lib/katex/katex.min.js defer></script><script src=/lib/katex/auto-render.min.js defer></script><script src=/lib/katex/copy-tex.min.js defer></script><script src=/lib/katex/mhchem.min.js defer></script><script src=/js/katex.min.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script src=/js/cookieconsent.min.js defer></script><script src=/js/theme.min.js defer></script><script type=speculationrules>
+  {
+    "prerender": [
+      {
+        "where": { "href_matches": "/*" },
+        "eagerness": "moderate"
+      }
+    ]
+  }
+</script></body></html>

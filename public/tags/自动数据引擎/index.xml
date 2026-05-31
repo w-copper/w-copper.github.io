@@ -1,0 +1,64 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>自动数据引擎 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%87%AA%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BC%95%E6%93%8E/</link><description>自动数据引擎 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%87%AA%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BC%95%E6%93%8E/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测新范式</title><link>https://w-copper.github.io/2026/05/20260531_142000_remote_sensing_ai/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_142000_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测新范式" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测新范式</h1><blockquote>
+  <p>撰写时间：2026-05-31 | 关键词：遥感、基础模型、变化检测、Mamba、Segment Anything</p>
+</blockquote><hr>
+<h2 id="论文一remotesam--面向地球观测的统一分割基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80remotesam--%e9%9d%a2%e5%90%91%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e7%9a%84%e7%bb%9f%e4%b8%80%e5%88%86%e5%89%b2%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：RemoteSAM — 面向地球观测的统一分割基础模型</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>RemoteSAM: Towards Segment Anything for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Liang Yao, Fan Liu, Delong Chen, Chuanyi Zhang, Yijun Wang, Ziyun Chen, Wei Xu, Shimin Di 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>ACM Multimedia 2025 (Oral Presentation)</td>
+      </tr>
+      <tr>
+          <td><strong>论文</strong></td>
+          <td><a href="https://hf.co/papers/2505.18022" target="_blank" rel="noopener noreferrer">https://hf.co/papers/2505.18022</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">https://github.com/1e12Leon/RemoteSAM</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>视觉基础模型、地球观测、指代表达分割、任务统一、自动数据引擎</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>当前遥感视觉感知系统面临三大核心挑战：</p>
+<ol>
+<li>
+<p><strong>任务碎片化</strong>：分类、检测、分割、视觉定位等任务各自为战，需要为每个任务设计专门的架构和训练流程，导致系统复杂且难以扩展。</p>
+</li>
+<li>
+<p><strong>数据标注瓶颈</strong>：遥感图像的语义类别极其丰富（建筑、车辆、农田、水体、灾害痕迹等），人工标注成本高昂，且现有数据集语义覆盖范围有限。</p>
+</li>
+<li>
+<p><strong>基础模型适配困难</strong>：虽然SAM等基础模型在自然图像上表现优异，但直接迁移到遥感场景存在域差异（domain gap），且SAM的类别无关（category-agnostic）特性无法满足遥感应用对语义类别的需求。</p>
+</li>
+</ol>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RemoteSAM从<strong>数据</strong>和<strong>建模</strong>两个维度同时突破：</p>
+<h4 id="1-自动数据引擎automatic-data-engine" class="headerLink">
+    <a href="#1-%e8%87%aa%e5%8a%a8%e6%95%b0%e6%8d%ae%e5%bc%95%e6%93%8eautomatic-data-engine" class="header-mark"></a>1. 自动数据引擎（Automatic Data Engine）</h4><ul>
+<li>设计了可扩展性远超人工标注和规则方法的自动数据引擎</li>
+<li>构建了迄今最大的遥感感知数据集：<strong>270K 图像-文本-掩码三元组</strong></li>
+<li>覆盖前所未有的语义类别范围和属性规格</li>
+<li>包含建筑、车辆、道路、农田、水体、植被等多类目标</li>
+</ul>
+<h4 id="2-任务统一范式task-unification-paradigm" class="headerLink">
+    <a href="#2-%e4%bb%bb%e5%8a%a1%e7%bb%9f%e4%b8%80%e8%8c%83%e5%bc%8ftask-unification-paradigm" class="header-mark"></a>2. 任务统一范式（Task Unification Paradigm）</h4><p>核心创新在于以**指代表达分割（Referring Expression Segmentation）**为中心统一多种视觉感知任务：</p>]]></description></item></channel></rss>

@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>传感器无关 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E4%BC%A0%E6%84%9F%E5%99%A8%E6%97%A0%E5%85%B3/</link><description>传感器无关 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E4%BC%A0%E6%84%9F%E5%99%A8%E6%97%A0%E5%85%B3/" rel="self" type="application/rss+xml"/><item><title>Panopticon: 任意传感器地球观测基础模型</title><link>https://w-copper.github.io/2026/05/20260531_133524_panopticon_any_sensor_foundation_model/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_133524_panopticon_any_sensor_foundation_model/</guid><description><![CDATA[<h1 id="panopticon-任意传感器地球观测基础模型" class="headerLink">
+    <a href="#panopticon-%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Panopticon: 任意传感器地球观测基础模型</h1><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📌 论文信息</h2><ul>
+<li><strong>标题</strong>: Panopticon: Advancing Any-Sensor Foundation Models for Earth Observation</li>
+<li><strong>作者</strong>: Leonard Waldmann, Ando Shah, Yi Wang, Nils Lehmann, Adam Stewart, Zhitong Xiong, Xiao Xiang Zhu, Stefan Bauer, John Chuang</li>
+<li><strong>会议</strong>: CVPR 2025 Workshops (EarthVision)</li>
+<li><strong>arXiv</strong>: <a href="https://arxiv.org/abs/2503.10845" target="_blank" rel="noopener noreferrer">2503.10845</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">Panopticon-FM/panopticon</a></li>
+<li><strong>关键词</strong>: 任意传感器基础模型、地球观测、DINOv2、跨注意力机制、传感器无关</li>
+</ul>
+<hr>
+<h2 id="-研究定位" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>🗺️ 研究定位</h2><p><strong>大领域</strong>: 地球观测 (Earth Observation, EO)<br>
+<strong>小领域</strong>: 传感器无关基础模型 (Any-Sensor Foundation Models)<br>
+<strong>技术路线</strong>: 基于DINOv2的自监督学习 + 跨传感器视图生成 + 跨注意力通道融合</p>
+<hr>
+<h2 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>地球观测数据具有高度异构性：不同卫星平台拥有不同的光谱波段、空间分辨率和成像模态（光学、SAR等）。现有基础模型通常针对特定传感器设计，无法处理任意传感器配置。</p>
+<h3 id="核心问题" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h3><p>如何构建一个能够处理任意传感器配置（包括未见过的传感器组合）的基础模型，而不需要针对每个传感器进行专门适配？</p>
+<h3 id="问题细节" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%bb%86%e8%8a%82" class="header-mark"></a>问题细节</h3><p>作者从三个具体技术点入手：</p>
+<ol>
+<li><strong>视图生成问题</strong>: 如何将不同传感器的图像视为同一地理位置的增强视图？</li>
+<li><strong>光谱多样性问题</strong>: 如何在训练中增加光谱输入的多样性？</li>
+<li><strong>通道可变性问题</strong>: 如何处理不同传感器具有不同数量通道的情况？</li>
+</ol>
+<hr>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心方法" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%96%b9%e6%b3%95" class="header-mark"></a>核心方法</h3><p>Panopticon基于DINOv2框架，通过三个关键修改实现传感器无关性：</p>]]></description></item></channel></rss>

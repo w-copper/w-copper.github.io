@@ -1,0 +1,520 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>开放词汇分割 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87%E5%88%86%E5%89%B2/</link><description>开放词汇分割 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87%E5%88%86%E5%89%B2/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：SegEarth-OV与RemoteSAM</title><link>https://w-copper.github.io/2026/05/20260531_065006_remote_sensing_ai/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_065006_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读segearth-ov与remotesam" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbsegearth-ov%e4%b8%8eremotesam" class="header-mark"></a>2025年遥感AI前沿论文解读：SegEarth-OV与RemoteSAM</h1><h2 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h2><h3 id="论文1segearth-ov" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%871segearth-ov" class="header-mark"></a>论文1：SegEarth-OV</h3><ul>
+<li><strong>标题</strong>: SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</li>
+<li><strong>作者</strong>: Kaiyu Li et al.</li>
+<li><strong>会议</strong>: CVPR 2025 (Oral)</li>
+<li><strong>ArXiv</strong>: 2410.01768</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a></li>
+<li><strong>关键词</strong>: 开放词汇分割、遥感图像、无训练方法、CLIP模型</li>
+</ul>
+<h3 id="论文2remotesam" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%872remotesam" class="header-mark"></a>论文2：RemoteSAM</h3><ul>
+<li><strong>标题</strong>: RemoteSAM: Towards Segment Anything for Earth Observation</li>
+<li><strong>作者</strong>: Liang Yao, Fan Liu et al.</li>
+<li><strong>会议</strong>: ACM MM 2025</li>
+<li><strong>ArXiv</strong>: 2505.18022</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">https://github.com/1e12Leon/RemoteSAM</a></li>
+<li><strong>关键词</strong>: 遥感分割、基础模型、指代表达分割、地球观测</li>
+</ul>
+<hr>
+<h2 id="二研究问题" class="headerLink">
+    <a href="#%e4%ba%8c%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>二、研究问题</h2><h3 id="21-遥感图像分割的挑战" class="headerLink">
+    <a href="#21-%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2%e7%9a%84%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 遥感图像分割的挑战</h3><p>遥感图像在农业、水资源管理、军事侦察和灾害救援等领域发挥着不可替代的作用。然而，当前遥感图像分割面临以下核心挑战：</p>
+<ol>
+<li><strong>标注成本高昂</strong>: 遥感图像的像素级标注需要专业领域知识，标注成本极高</li>
+<li><strong>类别定义受限</strong>: 传统分割方法只能识别预定义的类别，无法处理开放场景</li>
+<li><strong>领域适应性差</strong>: 自然图像的分割模型直接应用于遥感图像效果不佳</li>
+<li><strong>多尺度特征丢失</strong>: 遥感图像分辨率多样，特征提取过程中容易丢失空间信息</li>
+</ol>
+<h3 id="22-现有方法的局限性" class="headerLink">
+    <a href="#22-%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90%e6%80%a7" class="header-mark"></a>2.2 现有方法的局限性</h3><p><strong>传统分割方法</strong>:</p>
+<ul>
+<li>依赖大量标注数据进行监督学习</li>
+<li>类别体系固定，无法识别新类别</li>
+<li>模型泛化能力有限</li>
+</ul>
+<p><strong>视觉语言模型</strong>:</p>
+<ul>
+<li>虽然具备开放词汇能力，但在遥感领域表现不佳</li>
+<li>特征分辨率过低，导致预测掩膜质量差</li>
+<li>缺乏针对遥感图像的专门优化</li>
+</ul>
+<hr>
+<h2 id="三解决方案" class="headerLink">
+    <a href="#%e4%b8%89%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>三、解决方案</h2><h3 id="31-segearth-ov无训练开放词汇分割" class="headerLink">
+    <a href="#31-segearth-ov%e6%97%a0%e8%ae%ad%e7%bb%83%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>3.1 SegEarth-OV：无训练开放词汇分割</h3><h4 id="核心创新" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0" class="header-mark"></a>核心创新</h4><p>SegEarth-OV提出了一种<strong>无需训练</strong>的开放词汇语义分割方法，通过以下技术创新解决遥感图像分割问题：</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</title><link>https://w-copper.github.io/2026/05/20260531_091839_remote_sensing/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_091839_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与开放词汇分割" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</h1><blockquote>
+  <p><strong>生成时间</strong>: 2026年5月31日 09:18:39<br>
+<strong>关键词</strong>: 遥感, 深度学习, 基础模型, 开放词汇分割, 语义分割<br>
+<strong>来源</strong>: arXiv 2025, CVPR 2025, NeurIPS 2025</p>
+</blockquote><hr>
+<h2 id="论文一segearth-ov--遥感图像无标注开放词汇语义分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80segearth-ov--%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e6%97%a0%e6%a0%87%e6%b3%a8%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：SegEarth-OV — 遥感图像无标注开放词汇语义分割</h2><h3 id="1-论文基本信息" class="headerLink">
+    <a href="#1-%e8%ae%ba%e6%96%87%e5%9f%ba%e6%9c%ac%e4%bf%a1%e6%81%af" class="header-mark"></a>1. 论文基本信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kaiyu Li, Ruixun Liu, Xiangyong Cao, Xueru Bai, Feng Zhou, Deyu Meng, Zhi Wang</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>西安交通大学、西安电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td><strong>CVPR 2025 Oral</strong>（计算机视觉顶级会议，口头报告）</td>
+      </tr>
+      <tr>
+          <td><strong>论文</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.08730</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a> （⭐ 251 Stars）</td>
+      </tr>
+      <tr>
+          <td><strong>项目主页</strong></td>
+          <td><a href="https://likyoo.github.io/SegEarth-OV/" target="_blank" rel="noopener noreferrer">https://likyoo.github.io/SegEarth-OV/</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="2-研究问题" class="headerLink">
+    <a href="#2-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2. 研究问题</h3><p><strong>核心挑战</strong>：遥感图像的像素级解译是农业、水资源、军事和灾害救援等领域的关键应用，但传统方法存在两大痛点：</p>
+<ol>
+<li><strong>标注成本高昂</strong>：遥感图像的语义分割需要大量人工标注，成本极高且难以扩展到新类别</li>
+<li><strong>现有方法局限</strong>：
+<ul>
+<li>传统深度学习模型只能识别训练时见过的固定类别</li>
+<li>现有的开放词汇分割（OVSS）方法主要针对自然图像设计，直接应用于遥感场景效果不佳</li>
+<li>遥感图像对低分辨率特征敏感，导致预测掩码出现目标形状扭曲、边界不匹配等问题</li>
+</ul>
+</li>
+</ol>
+<p><strong>问题定义</strong>：如何在<strong>无需任何标注数据</strong>的情况下，实现遥感图像的开放词汇语义分割？</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</title><link>https://w-copper.github.io/2026/05/20260531_091839_remote_sensing_foundation_model/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_091839_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与开放词汇分割" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</h1><blockquote>
+  <p><strong>发布日期</strong>：2026年5月31日<br>
+<strong>关键词</strong>：遥感、深度学习、基础模型、开放词汇分割、语义分割、CVPR、NeurIPS<br>
+<strong>论文数量</strong>：2篇（均来自顶级会议，配有完整GitHub代码）</p>
+</blockquote><hr>
+<h2 id="-论文概览" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e6%a6%82%e8%a7%88" class="header-mark"></a>📋 论文概览</h2><table>
+  <thead>
+      <tr>
+          <th>论文</th>
+          <th>会议</th>
+          <th>任务</th>
+          <th>GitHub Stars</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>SegEarth-OV</strong></td>
+          <td>CVPR 2025 Oral</td>
+          <td>开放词汇语义分割</td>
+          <td>⭐ 251</td>
+      </tr>
+      <tr>
+          <td><strong>GeoLink</strong></td>
+          <td>NeurIPS 2025</td>
+          <td>遥感基础模型+OSM</td>
+          <td>⭐ 56</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-论文一segearth-ov--遥感开放词汇语义分割" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%b8%80segearth-ov--%e9%81%a5%e6%84%9f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2" class="header-mark"></a>📄 论文一：SegEarth-OV — 遥感开放词汇语义分割</h2><h3 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kaiyu Li, Ruixun Liu, Xiangyong Cao, Xueru Bai, Feng Zhou, Deyu Meng, Zhi Wang</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>西安交通大学、西安电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td><strong>CVPR 2025 Oral</strong> ⭐（计算机视觉顶级会议，口头报告）</td>
+      </tr>
+      <tr>
+          <td><strong>论文</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.08730</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a></td>
+      </tr>
+      <tr>
+          <td><strong>主页</strong></td>
+          <td><a href="https://likyoo.github.io/SegEarth-OV/" target="_blank" rel="noopener noreferrer">https://likyoo.github.io/SegEarth-OV/</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="二研究问题" class="headerLink">
+    <a href="#%e4%ba%8c%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>二、研究问题</h3><p>遥感图像在农业、水资源管理、军事和灾害救援等领域具有不可替代的作用。<strong>像素级语义分割</strong>是遥感图像应用的核心任务，但面临以下关键挑战：</p>]]></description></item><item><title>遥感基础模型新突破：SegEarth-OV与GeoLink的创新解读</title><link>https://w-copper.github.io/2026/05/20260531_140440_remote_sensing_foundation_model/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_140440_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="遥感基础模型新突破segearth-ov与geolink的创新解读" class="headerLink">
+    <a href="#%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4segearth-ov%e4%b8%8egeolink%e7%9a%84%e5%88%9b%e6%96%b0%e8%a7%a3%e8%af%bb" class="header-mark"></a>遥感基础模型新突破：SegEarth-OV与GeoLink的创新解读</h1><p><strong>关键词</strong>: 遥感基础模型, 开放词汇分割, 多模态融合, 无标注分割, OpenStreetMap, SAM3, CVPR 2025, NeurIPS 2025</p>
+<hr>
+<h2 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h2><h3 id="论文1segearth-ov3---探索sam3在遥感开放词汇语义分割中的应用" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%871segearth-ov3---%e6%8e%a2%e7%b4%a2sam3%e5%9c%a8%e9%81%a5%e6%84%9f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2%e4%b8%ad%e7%9a%84%e5%ba%94%e7%94%a8" class="header-mark"></a>论文1：SegEarth-OV3 - 探索SAM3在遥感开放词汇语义分割中的应用</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV3: Exploring SAM 3 for Open-Vocabulary Semantic Segmentation in Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kaiyu Li, Shengqi Zhang, Yupeng Deng, Zhi Wang, Deyu Meng, Xiangyong Cao</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>西安交通大学, 中国科学院</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv:2512.08730 (2025)</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/earth-insights/SegEarth-OV-3" target="_blank" rel="noopener noreferrer">https://github.com/earth-insights/SegEarth-OV-3</a> ⭐161</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.08730</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="论文2geolink---利用openstreetmap数据增强遥感基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%872geolink---%e5%88%a9%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e5%a2%9e%e5%bc%ba%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文2：GeoLink - 利用OpenStreetMap数据增强遥感基础模型</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Lubian Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>北京大学</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>NeurIPS 2025</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">https://github.com/bailubin/GeoLink_NeurIPS2025</a> ⭐56</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2509.26016</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="二问题背景与动机" class="headerLink">
+    <a href="#%e4%ba%8c%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e4%b8%8e%e5%8a%a8%e6%9c%ba" class="header-mark"></a>二、问题背景与动机</h2><h3 id="21-遥感图像理解的核心挑战" class="headerLink">
+    <a href="#21-%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e7%90%86%e8%a7%a3%e7%9a%84%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 遥感图像理解的核心挑战</h3><p>遥感图像的语义分割是地球观测的关键任务，但面临两大根本性难题：</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：SkySense-O与GeoPixel</title><link>https://w-copper.github.io/2026/05/20260530_201839_remote_sensing_ai/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_201839_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读skysense-o与geopixel" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbskysense-o%e4%b8%8egeopixel" class="header-mark"></a>2025年遥感AI前沿论文解读：SkySense-O与GeoPixel</h1><h2 id="一论文信息" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>一、论文信息</h2><h3 id="11-skysense-o-面向开放世界遥感解释的视觉中心视觉语言建模" class="headerLink">
+    <a href="#11-skysense-o-%e9%9d%a2%e5%90%91%e5%bc%80%e6%94%be%e4%b8%96%e7%95%8c%e9%81%a5%e6%84%9f%e8%a7%a3%e9%87%8a%e7%9a%84%e8%a7%86%e8%a7%89%e4%b8%ad%e5%bf%83%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%bb%ba%e6%a8%a1" class="header-mark"></a>1.1 SkySense-O: 面向开放世界遥感解释的视觉中心视觉语言建模</h3><p><strong>论文标题</strong>: SkySense-O: Towards Open-World Remote Sensing Interpretation with Vision-Centric Visual-Language Modeling</p>
+<p><strong>发表会议</strong>: CVPR 2025 (计算机视觉与模式识别顶级会议)</p>
+<p><strong>作者团队</strong>: Qi Zhu, Jiangwei Lao, Deyi Ji, Junwei Luo, Kang Wu, Yingying Zhang, Lixiang Ru, Jian Wang, Jingdong Chen, Ming Yang, Dong Liu, Feng Zhao</p>
+<p><strong>代码仓库</strong>: <a href="https://github.com/zqcrafts/SkySense-O" target="_blank" rel="noopener noreferrer">https://github.com/zqcrafts/SkySense-O</a> (268 Stars, 16 Forks)</p>
+<p><strong>论文摘要</strong>: SkySense-O是SkySense系列遥感基础模型的最新成员，专门针对开放世界遥感解释任务。该模型整合了CLIP和SAM的优势，提出了首个遥感领域的开放词汇分割数据集Sky-SA，包含183,375个高质量的局部图像-文本对，涵盖1,763个类别标签，具有更丰富的语义和更高的密度。</p>
+<h3 id="12-geopixel-遥感像素级定位大模型" class="headerLink">
+    <a href="#12-geopixel-%e9%81%a5%e6%84%9f%e5%83%8f%e7%b4%a0%e7%ba%a7%e5%ae%9a%e4%bd%8d%e5%a4%a7%e6%a8%a1%e5%9e%8b" class="header-mark"></a>1.2 GeoPixel: 遥感像素级定位大模型</h3><p><strong>论文标题</strong>: GeoPixel: Pixel Grounding Large Multimodal Model in Remote Sensing</p>
+<p><strong>发表会议</strong>: ICML 2025 (国际机器学习顶级会议)</p>
+<p><strong>作者团队</strong>: Akashah Shabbir, Mohammed Zumri, Mohammed Bennamoun, Fahad Shahbaz Khan, Salman Khan</p>]]></description></item><item><title>2025年遥感AI前沿：任意传感器基础模型与开放词汇分割的突破性进展</title><link>https://w-copper.github.io/2026/05/20260529_143000_remote_sensing_foundation_models/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_143000_remote_sensing_foundation_models/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿任意传感器基础模型与开放词汇分割的突破性进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2%e7%9a%84%e7%aa%81%e7%a0%b4%e6%80%a7%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿：任意传感器基础模型与开放词汇分割的突破性进展</h1><blockquote>
+  <p><strong>作者</strong>: AI学术速递 | <strong>日期</strong>: 2026年5月29日 | <strong>关键词</strong>: 遥感基础模型, 任意传感器, 开放词汇分割, SAM 3, DINOv2</p>
+</blockquote><hr>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>本文精选了2025年遥感AI领域的两篇重要论文，分别来自CVPR 2025和arXiv最新研究。第一篇是获得CVPR 2025 EarthVision研讨会最佳论文奖的<strong>Panopticon</strong>，提出了任意传感器基础模型；第二篇是<strong>SegEarth-OV3</strong>，首次将SAM 3应用于遥感开放词汇分割任务。两篇论文均提供了开源代码，代表了遥感基础模型发展的两个重要方向。</p>
+<hr>
+<h2 id="论文一panopticon---任意传感器地球观测基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80panopticon---%e4%bb%bb%e6%84%8f%e4%bc%a0%e6%84%9f%e5%99%a8%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：Panopticon - 任意传感器地球观测基础模型</h2><h3 id="论文信息" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Panopticon: Advancing Any-Sensor Foundation Models for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Leonard Waldmann, Ando Shah, Yi Wang, Nils Lehmann, Adam Stewart, Zhitong Xiong, Xiao Xiang Zhu, Stefan Bauer, John Chuang</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 EarthVision Workshop (<strong>最佳论文奖</strong>)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.10845" target="_blank" rel="noopener noreferrer">2503.10845</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">Panopticon-FM/panopticon</a> ⭐ 44 stars</td>
+      </tr>
+      <tr>
+          <td><strong>集成</strong></td>
+          <td>已集成至 TorchGeo 0.7</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h3><p>地球观测（Earth Observation, EO）数据来自多样化的传感平台，具有不同的光谱波段、空间分辨率和传感模态。现有的遥感基础模型通常针对<strong>固定传感器</strong>进行设计和训练，这带来了几个关键问题：</p>]]></description></item><item><title>2025年遥感AI最新论文解读：CVPR 2025顶会论文精选</title><link>https://w-copper.github.io/2026/05/20260529_224400_remote_sensing/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_224400_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai最新论文解读cvpr-2025顶会论文精选" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbcvpr-2025%e9%a1%b6%e4%bc%9a%e8%ae%ba%e6%96%87%e7%b2%be%e9%80%89" class="header-mark"></a>2025年遥感AI最新论文解读：CVPR 2025顶会论文精选</h1><blockquote>
+  <p>本文精选了2025年CVPR会议上两篇具有开源代码的遥感AI前沿论文，涵盖遥感图像分割与融合两大核心任务。</p>
+</blockquote><hr>
+<h2 id="论文一segearth-ov---遥感图像开放词汇分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80segearth-ov---%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：SegEarth-OV - 遥感图像开放词汇分割</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 (Oral)</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>开放词汇分割、遥感图像、零训练、CLIP、特征上采样</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>遥感图像在农业、水资源、军事、救灾等领域发挥着不可替代的作用。像素级解释是遥感影像应用的一个关键方面，然而现有方法面临两大核心挑战：</p>
+<ol>
+<li><strong>标注成本高昂</strong>：传统语义分割方法需要大量像素级手动标注，而遥感图像的标注成本极高</li>
+<li><strong>类别封闭性</strong>：训练完成的模型只能识别训练集中的固定类别，无法泛化到新类别</li>
+</ol>
+<p>例如，当无人机掠过洪涝灾区上空，传回数千张高分辨率图像需要紧急分析时，传统方法需要预先定义类别体系并进行大量标注，这严重限制了实际应用效率。</p>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>SegEarth-OV将开放词汇语义分割（OVSS）引入遥感领域，实现了<strong>零训练分割能力</strong>：</p>
+<h4 id="核心技术创新" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%8a%80%e6%9c%af%e5%88%9b%e6%96%b0" class="header-mark"></a>核心技术创新</h4><ol>
+<li>
+<p><strong>开放词汇理解</strong></p>
+<ul>
+<li>直接接受&quot;玉米田&quot;、&ldquo;油罐区&rdquo;、&ldquo;洪水淹没区&quot;等自然语言输入</li>
+<li>无需预先定义类别体系，基于CLIP视觉语言模型实现语义理解</li>
+</ul>
+</li>
+<li>
+<p><strong>SimFeatUp特征上采样器</strong></p>
+<ul>
+<li>遥感图像对低分辨率特征敏感，预测掩码中会出现扭曲的目标形状和不拟合的边界</li>
+<li>SimFeatUp在特征空间进行分辨率恢复，避免传统上采样导致的边界模糊</li>
+<li>以无训练的方式恢复深度特征中丢失的空间信息</li>
+</ul>
+</li>
+<li>
+<p><strong>Patch Token偏差修正</strong></p>
+<ul>
+<li>基于对CLIP中局部patch token对[CLS] token异常响应的观察</li>
+<li>执行简单的减法运算来减轻patch token中的全局偏差</li>
+<li>提升局部特征与全局语义的匹配精度</li>
+</ul>
+</li>
+</ol>
+<h3 id="-实验结果" class="headerLink">
+    <a href="#-%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c" class="header-mark"></a>📊 实验结果</h3><p>在<strong>17个遥感数据集</strong>上进行了广泛的实验，涵盖4大任务：</p>
+<table>
+  <thead>
+      <tr>
+          <th>任务</th>
+          <th>性能提升</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>语义分割</td>
+          <td>平均提升 <strong>5.8%</strong></td>
+      </tr>
+      <tr>
+          <td>建筑物提取</td>
+          <td>平均提升 <strong>8.2%</strong></td>
+      </tr>
+      <tr>
+          <td>道路检测</td>
+          <td>平均提升 <strong>4.0%</strong></td>
+      </tr>
+      <tr>
+          <td>洪水检测</td>
+          <td>平均提升 <strong>15.3%</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>实际测试表明，在建筑物提取任务中，该方法对未见过的新类别（如&quot;钢结构厂房&rdquo;）的识别准确率比传统方法高出15.3%。</p>
+<h3 id="-综合评估" class="headerLink">
+    <a href="#-%e7%bb%bc%e5%90%88%e8%af%84%e4%bc%b0" class="header-mark"></a>⭐ 综合评估</h3><table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>评分</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>创新性</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>首次将开放词汇分割引入遥感领域，提出零训练框架</td>
+      </tr>
+      <tr>
+          <td>实用性</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>无需标注数据，直接使用自然语言描述进行分割</td>
+      </tr>
+      <tr>
+          <td>代码质量</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>完整开源，包含演示脚本和评估工具</td>
+      </tr>
+      <tr>
+          <td>影响力</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>CVPR Oral，已在多个实际场景验证</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="论文二arconv---自适应矩形卷积用于遥感图像融合" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%ba%8carconv---%e8%87%aa%e9%80%82%e5%ba%94%e7%9f%a9%e5%bd%a2%e5%8d%b7%e7%a7%af%e7%94%a8%e4%ba%8e%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e8%9e%8d%e5%90%88" class="header-mark"></a>论文二：ARConv - 自适应矩形卷积用于遥感图像融合</h2><h3 id="-论文信息-1" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af-1" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Adaptive Rectangular Convolution for Remote Sensing Pansharpening</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/WangXueyang-uestc/ARConv" target="_blank" rel="noopener noreferrer">https://github.com/WangXueyang-uestc/ARConv</a></td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感图像融合、自适应卷积、Pansharpening、即插即用模块</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题-1" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98-1" class="header-mark"></a>🎯 研究问题</h3><p>遥感图像融合（Pansharpening）是将高分辨率全色图像与低分辨率多光谱图像融合，生成高分辨率多光谱图像的关键技术。现有方法面临的核心问题：</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</title><link>https://w-copper.github.io/2025/05/20250531_153000_remote_sensing/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_153000_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与开放词汇分割" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与开放词汇分割</h1><blockquote>
+  <p><strong>生成时间</strong>: 2025年5月31日<br>
+<strong>关键词</strong>: 遥感, 深度学习, 基础模型, 开放词汇分割, 语义分割<br>
+<strong>来源</strong>: arXiv 2025, CVPR 2025, NeurIPS 2025</p>
+</blockquote><hr>
+<h2 id="论文一segearth-ov---遥感图像无标注开放词汇语义分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80segearth-ov---%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e6%97%a0%e6%a0%87%e6%b3%a8%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：SegEarth-OV - 遥感图像无标注开放词汇语义分割</h2><h3 id="1-论文基本信息" class="headerLink">
+    <a href="#1-%e8%ae%ba%e6%96%87%e5%9f%ba%e6%9c%ac%e4%bf%a1%e6%81%af" class="header-mark"></a>1. 论文基本信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kaiyu Li, Ruixun Liu, Xiangyong Cao, Xueru Bai, Feng Zhou, Deyu Meng, Zhi Wang</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>西安交通大学、西安电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td><strong>CVPR 2025 Oral</strong> (计算机视觉顶级会议，口头报告)</td>
+      </tr>
+      <tr>
+          <td><strong>论文</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.08730</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">https://github.com/likyoo/SegEarth-OV</a> (⭐ 251 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>项目主页</strong></td>
+          <td><a href="https://likyoo.github.io/SegEarth-OV/" target="_blank" rel="noopener noreferrer">https://likyoo.github.io/SegEarth-OV/</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="2-研究问题" class="headerLink">
+    <a href="#2-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2. 研究问题</h3><p><strong>核心挑战</strong>: 遥感图像的像素级解译是农业、水资源、军事和灾害救援等领域的关键应用，但传统方法存在两大痛点：</p>]]></description></item></channel></rss>

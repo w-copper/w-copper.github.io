@@ -1,0 +1,135 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>视觉基础模型 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%A7%86%E8%A7%89%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/</link><description>视觉基础模型 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%A7%86%E8%A7%89%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿：基础模型与Mamba架构的突破性进展</title><link>https://w-copper.github.io/2026/05/20260531_235900_remote_sensing_ai/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_235900_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿基础模型与mamba架构的突破性进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8emamba%e6%9e%b6%e6%9e%84%e7%9a%84%e7%aa%81%e7%a0%b4%e6%80%a7%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿：基础模型与Mamba架构的突破性进展</h1><blockquote>
+  <p>生成时间：2026年5月31日
+关键词：遥感、深度学习、基础模型、变化检测、Mamba、Transformer</p>
+</blockquote><hr>
+<h2 id="论文一remotesam--面向地球观测的segment-anything模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80remotesam--%e9%9d%a2%e5%90%91%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e7%9a%84segment-anything%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：RemoteSAM — 面向地球观测的Segment Anything模型</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>RemoteSAM: Towards Segment Anything for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年5月</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Liang Yao, Fan Liu, Delong Chen, Chuanyi Zhang, Yijun Wang, Ziyun Chen, Wei Xu, Shimin Di 等</td>
+      </tr>
+      <tr>
+          <td><strong>论文链接</strong></td>
+          <td><a href="https://arxiv.org/abs/2505.18022" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2505.18022</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码仓库</strong></td>
+          <td><a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">https://github.com/1e12Leon/RemoteSAM</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>视觉基础模型、地球观测、引用表达分割、统一任务范式</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>地球观测（Earth Observation, EO）领域面临以下核心挑战：</p>
+<ol>
+<li><strong>任务碎片化</strong>：现有方法通常针对单一任务（如分类、检测、分割）设计专用架构，缺乏统一的视觉基础模型</li>
+<li><strong>数据标注瓶颈</strong>：高质量遥感图像标注成本高昂，限制了大规模监督学习的应用</li>
+<li><strong>语义覆盖不足</strong>：当前模型的训练数据语义类别有限，难以处理多样化的真实场景</li>
+<li><strong>输入输出接口不统一</strong>：不同任务需要不同的输入输出格式，增加了系统复杂性</li>
+</ol>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RemoteSAM提出了一套完整的两阶段解决方案：</p>
+<h4 id="阶段一自动化数据引擎automatic-data-engine" class="headerLink">
+    <a href="#%e9%98%b6%e6%ae%b5%e4%b8%80%e8%87%aa%e5%8a%a8%e5%8c%96%e6%95%b0%e6%8d%ae%e5%bc%95%e6%93%8eautomatic-data-engine" class="header-mark"></a>阶段一：自动化数据引擎（Automatic Data Engine）</h4><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与变化检测新范式</title><link>https://w-copper.github.io/2026/05/20260531_142000_remote_sensing_ai/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_142000_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与变化检测新范式" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与变化检测新范式</h1><blockquote>
+  <p>撰写时间：2026-05-31 | 关键词：遥感、基础模型、变化检测、Mamba、Segment Anything</p>
+</blockquote><hr>
+<h2 id="论文一remotesam--面向地球观测的统一分割基础模型" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80remotesam--%e9%9d%a2%e5%90%91%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e7%9a%84%e7%bb%9f%e4%b8%80%e5%88%86%e5%89%b2%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>论文一：RemoteSAM — 面向地球观测的统一分割基础模型</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>RemoteSAM: Towards Segment Anything for Earth Observation</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Liang Yao, Fan Liu, Delong Chen, Chuanyi Zhang, Yijun Wang, Ziyun Chen, Wei Xu, Shimin Di 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>ACM Multimedia 2025 (Oral Presentation)</td>
+      </tr>
+      <tr>
+          <td><strong>论文</strong></td>
+          <td><a href="https://hf.co/papers/2505.18022" target="_blank" rel="noopener noreferrer">https://hf.co/papers/2505.18022</a></td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">https://github.com/1e12Leon/RemoteSAM</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>视觉基础模型、地球观测、指代表达分割、任务统一、自动数据引擎</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>当前遥感视觉感知系统面临三大核心挑战：</p>
+<ol>
+<li>
+<p><strong>任务碎片化</strong>：分类、检测、分割、视觉定位等任务各自为战，需要为每个任务设计专门的架构和训练流程，导致系统复杂且难以扩展。</p>
+</li>
+<li>
+<p><strong>数据标注瓶颈</strong>：遥感图像的语义类别极其丰富（建筑、车辆、农田、水体、灾害痕迹等），人工标注成本高昂，且现有数据集语义覆盖范围有限。</p>
+</li>
+<li>
+<p><strong>基础模型适配困难</strong>：虽然SAM等基础模型在自然图像上表现优异，但直接迁移到遥感场景存在域差异（domain gap），且SAM的类别无关（category-agnostic）特性无法满足遥感应用对语义类别的需求。</p>
+</li>
+</ol>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RemoteSAM从<strong>数据</strong>和<strong>建模</strong>两个维度同时突破：</p>
+<h4 id="1-自动数据引擎automatic-data-engine" class="headerLink">
+    <a href="#1-%e8%87%aa%e5%8a%a8%e6%95%b0%e6%8d%ae%e5%bc%95%e6%93%8eautomatic-data-engine" class="header-mark"></a>1. 自动数据引擎（Automatic Data Engine）</h4><ul>
+<li>设计了可扩展性远超人工标注和规则方法的自动数据引擎</li>
+<li>构建了迄今最大的遥感感知数据集：<strong>270K 图像-文本-掩码三元组</strong></li>
+<li>覆盖前所未有的语义类别范围和属性规格</li>
+<li>包含建筑、车辆、道路、农田、水体、植被等多类目标</li>
+</ul>
+<h4 id="2-任务统一范式task-unification-paradigm" class="headerLink">
+    <a href="#2-%e4%bb%bb%e5%8a%a1%e7%bb%9f%e4%b8%80%e8%8c%83%e5%bc%8ftask-unification-paradigm" class="header-mark"></a>2. 任务统一范式（Task Unification Paradigm）</h4><p>核心创新在于以**指代表达分割（Referring Expression Segmentation）**为中心统一多种视觉感知任务：</p>]]></description></item></channel></rss>

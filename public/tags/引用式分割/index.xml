@@ -1,0 +1,221 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>引用式分割 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%BC%95%E7%94%A8%E5%BC%8F%E5%88%86%E5%89%B2/</link><description>引用式分割 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%BC%95%E7%94%A8%E5%BC%8F%E5%88%86%E5%89%B2/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：基础模型与轻量化检测</title><link>https://w-copper.github.io/2026/05/20260531_134900_remote_sensing/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_134900_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与轻量化检测" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e8%bd%bb%e9%87%8f%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与轻量化检测</h1><blockquote>
+  <p>摘要：本文精选两篇2025年遥感领域最新研究成果，分别聚焦于<strong>引用式遥感图像分割基础模型</strong>和<strong>低质量遥感图像轻量化目标检测</strong>。两篇论文均来自顶级期刊/会议，且已开源代码。</p>
+</blockquote><hr>
+<h2 id="论文一rsrefseg基于基础模型的引用式遥感图像分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80rsrefseg%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：RSRefSeg——基于基础模型的引用式遥感图像分割</h2><h3 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Keyan Chen 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv 2025 (arXiv:2501.06809)</td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感图像分割、基础模型、CLIP、SAM、引用式分割</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-研究问题" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🔍 研究问题</h3><p>引用式遥感图像分割（Referring Remote Sensing Image Segmentation, RRSIS）是一项通过自由格式文本描述来定位并分割遥感图像中特定目标的任务。该任务在城市规划、环境监测、灾害评估等领域具有重要应用价值。</p>
+<p><strong>现有方法的痛点：</strong></p>
+<ol>
+<li><strong>语义对齐困难</strong>：现有研究通常使用预训练语言模型编码文本描述，并与视觉模态对齐，但难以在细粒度语义概念之间建立稳健的对齐关系</li>
+<li><strong>表示不一致</strong>：文本和视觉信息之间的表示存在不一致，导致分割精度受限</li>
+<li><strong>泛化能力不足</strong>：针对遥感场景的特殊性（如多尺度目标、复杂背景），传统方法泛化能力较弱</li>
+</ol>
+<h3 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RSRefSeg 提出了一个创新的引用式遥感图像分割基础模型，核心思想是<strong>将 CLIP 和 SAM 两大基础模型进行协同融合</strong>：</p>
+<p><strong>架构设计：</strong></p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：基础模型与轻量化检测</title><link>https://w-copper.github.io/2026/05/20260530_184800_remote_sensing_papers/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_184800_remote_sensing_papers/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基础模型与轻量化检测" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e8%bd%bb%e9%87%8f%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基础模型与轻量化检测</h1><blockquote>
+  <p>发布日期：2026年5月30日
+关键词：遥感、深度学习、目标检测、语义分割、基础模型、Transformer</p>
+</blockquote><hr>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>本文精选了2025年发表在顶级期刊/会议上的两篇遥感AI论文，分别聚焦于<strong>引用式遥感图像分割</strong>和<strong>低质量遥感图像目标检测</strong>。这两篇论文均提供了开源代码，具有很高的实用价值和研究参考意义。</p>
+<hr>
+<h2 id="论文一rsrefseg--基于基础模型的引用式遥感图像分割" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80rsrefseg--%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：RSRefSeg — 基于基础模型的引用式遥感图像分割</h2><h3 id="1-论文信息" class="headerLink">
+    <a href="#1-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1. 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Keyan Chen 等</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv 2501.06809, 2025年1月</td>
+      </tr>
+      <tr>
+          <td><strong>代码</strong></td>
+          <td><a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>引用式分割、遥感、CLIP、SAM、基础模型</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="2-研究问题" class="headerLink">
+    <a href="#2-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2. 研究问题</h3><p>引用式图像分割（Referring Image Segmentation）是一项根据自然语言描述定位并分割图像中对应区域的任务。在遥感领域，这项技术对于实现细粒度的场景理解和目标提取具有重要意义。</p>
+<p><strong>现有方法的痛点：</strong></p>
+<ul>
+<li>难以在细粒度语义概念之间建立稳健的对齐关系</li>
+<li>文本和视觉信息之间的表示不一致</li>
+<li>遥感图像的复杂背景和多尺度目标增加了分割难度</li>
+</ul>
+<h3 id="3-解决方案" class="headerLink">
+    <a href="#3-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>3. 解决方案</h3><p>RSRefSeg 提出了一种基于基础模型的引用式遥感图像分割框架，核心创新在于：</p>
+<p><strong>（1）双编码器架构</strong></p>
+<ul>
+<li>利用 <strong>CLIP</strong> 进行视觉和文本编码，获取全局语义表示</li>
+<li>采用全局和局部文本语义作为过滤器，在潜在空间中生成与引用相关的视觉激活特征</li>
+</ul>
+<p><strong>（2）SAM驱动的分割</strong></p>
+<ul>
+<li>将激活特征作为输入提示（prompt）送入 <strong>SAM（Segment Anything Model）</strong></li>
+<li>利用SAM强大的视觉泛化能力来精化分割掩膜</li>
+</ul>
+<p><strong>（3）模型规模</strong></p>
+<ul>
+<li>整体模型参数量约 <strong>1.2B</strong>，充分利用了大规模预训练模型的能力</li>
+</ul>
+<p><strong>技术架构示意：</strong></p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>2025年遥感AI前沿：基于基础模型的遥感图像分割最新进展</title><link>https://w-copper.github.io/2025/05/20250530_120000_remote_sensing_foundation_model/</link><pubDate>Fri, 30 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250530_120000_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿基于基础模型的遥感图像分割最新进展" class="headerLink">
+    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2%e6%9c%80%e6%96%b0%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿：基于基础模型的遥感图像分割最新进展</h1><blockquote>
+  <p>发布时间：2025年5月30日
+关键词：遥感图像分割、基础模型、SAM、CLIP、开放词汇、引用式分割</p>
+</blockquote><hr>
+<h2 id="一论文一rsrefseg---基于基础模型的引用式遥感图像分割" class="headerLink">
+    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80rsrefseg---%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>一、论文一：RSRefSeg - 基于基础模型的引用式遥感图像分割</h2><h3 id="11-论文信息" class="headerLink">
+    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>论文标题</strong></td>
+          <td>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv编号</strong></td>
+          <td>2501.06809</td>
+      </tr>
+      <tr>
+          <td><strong>发表时间</strong></td>
+          <td>2025年1月</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Keyan Chen, Chengyang Liu, Wenyuan Li, Hao Chen, Zhenwei Shi</td>
+      </tr>
+      <tr>
+          <td><strong>代码仓库</strong></td>
+          <td><a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>引用式分割、遥感图像、SAM、CLIP、基础模型</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="12-研究问题" class="headerLink">
+    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>引用式遥感图像分割（Referring Remote Sensing Image Segmentation, RRSIS）是一项新兴的多模态任务，旨在根据自然语言描述从遥感图像中分割出对应的目标区域。该任务面临以下核心挑战：</p>
+<ol>
+<li><strong>语义对齐困难</strong>：遥感图像中的目标通常具有复杂的上下文关系，文本描述与视觉特征之间的细粒度语义对齐十分困难</li>
+<li><strong>域间差异显著</strong>：通用视觉基础模型（如SAM）在遥感领域的表现受限于训练数据的域间差异</li>
+<li><strong>多模态融合挑战</strong>：如何有效融合视觉和文本信息，同时保持各自特征的完整性，是一个关键问题</li>
+</ol>
+<h3 id="13-解决方案" class="headerLink">
+    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><p>RSRefSeg提出了一种创新的两阶段框架，巧妙地将CLIP和SAM两个基础模型结合：</p>
+<h4 id="核心架构" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%9e%b6%e6%9e%84" class="header-mark"></a>核心架构</h4><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>
