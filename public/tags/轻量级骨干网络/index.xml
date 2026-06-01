@@ -1,0 +1,61 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>轻量级骨干网络 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%AA%A8%E5%B9%B2%E7%BD%91%E7%BB%9C/</link><description>轻量级骨干网络 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%AA%A8%E5%B9%B2%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml"/><item><title>LSKNet：遥感场景下的大型选择性核网络，动态感受野助力小目标检测</title><link>https://w-copper.github.io/2026/06/20260601_223000_lsknet_selective_kernel/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_223000_lsknet_selective_kernel/</guid><description><![CDATA[<h1 id="lsknet遥感场景下的大型选择性核网络动态感受野助力小目标检测" class="headerLink">
+    <a href="#lsknet%e9%81%a5%e6%84%9f%e5%9c%ba%e6%99%af%e4%b8%8b%e7%9a%84%e5%a4%a7%e5%9e%8b%e9%80%89%e6%8b%a9%e6%80%a7%e6%a0%b8%e7%bd%91%e7%bb%9c%e5%8a%a8%e6%80%81%e6%84%9f%e5%8f%97%e9%87%8e%e5%8a%a9%e5%8a%9b%e5%b0%8f%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b" class="header-mark"></a>LSKNet：遥感场景下的大型选择性核网络，动态感受野助力小目标检测</h1><blockquote>
+  <p><strong>论文解读</strong> | ICCV 2023 / IJCV 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>LSKNet: A Foundation Lightweight Backbone for Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Yuxuan Li, Xiang Li, Yimian Dai, Qibin Hou, Li Liu, Yongxiang Liu, Ming-Ming Cheng, Jian Yang</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>ICCV 2023 (会议版本) / IJCV 2024 (期刊扩展版)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2303.14239" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2303.14239</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/zcablii/large-selective-kernel-network" target="_blank" rel="noopener noreferrer">https://github.com/zcablii/large-selective-kernel-network</a> (⭐678)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感目标检测、选择性核、动态感受野、轻量级骨干网络</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像具有独特的特点：目标尺度变化大、小目标密集分布、背景复杂多样。传统的卷积神经网络使用固定大小的卷积核，其感受野是固定的，这在处理遥感图像时面临两个关键挑战：</p>
+<ol>
+<li>
+<p><strong>小目标检测困难</strong>：遥感图像中的目标（如车辆、船只）往往只有几个像素大小，固定感受野可能无法捕获足够的上下文信息来准确识别这些小目标。</p>
+</li>
+<li>
+<p><strong>不同目标需要不同感受野</strong>：建筑物需要大范围上下文来理解其结构，而车辆则需要局部细节信息。固定感受野无法适应这种多样性。</p>
+</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ul>
+<li><strong>CNN方法</strong>：受限于固定感受野，难以捕获长距离依赖</li>
+<li><strong>Transformer方法</strong>：虽然具有全局建模能力，但计算复杂度高，不适合实时应用</li>
+<li><strong>多尺度方法</strong>：如FPN，通过多尺度特征融合来缓解问题，但仍然是固定感受野</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个轻量级的骨干网络，能够根据遥感图像中不同目标的特点，动态调整其空间感受野？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1大型选择性核机制-large-selective-kernel" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%a4%a7%e5%9e%8b%e9%80%89%e6%8b%a9%e6%80%a7%e6%a0%b8%e6%9c%ba%e5%88%b6-large-selective-kernel" class="header-mark"></a>核心创新点1：大型选择性核机制 (Large Selective Kernel)</h3><p><strong>设计动机</strong>：
+遥感图像中的目标具有高度多样性。例如，一条河流可能跨越数千像素，而一辆汽车可能只有几个像素。传统的固定大小卷积核无法适应这种变化。LSKNet的核心思想是：<strong>让网络能够根据输入内容，动态选择最合适的感受野大小</strong>。</p>]]></description></item></channel></rss>

@@ -1,0 +1,73 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GSD编码 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/gsd%E7%BC%96%E7%A0%81/</link><description>GSD编码 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/gsd%E7%BC%96%E7%A0%81/" rel="self" type="application/rss+xml"/><item><title>SatDINO：当DINO遇上遥感——对比学习在卫星图像预训练中的深度探索</title><link>https://w-copper.github.io/2026/06/20260601_223000_satdino_self_supervised/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_223000_satdino_self_supervised/</guid><description><![CDATA[<h1 id="satdino当dino遇上遥感对比学习在卫星图像预训练中的深度探索" class="headerLink">
+    <a href="#satdino%e5%bd%93dino%e9%81%87%e4%b8%8a%e9%81%a5%e6%84%9f%e5%af%b9%e6%af%94%e5%ad%a6%e4%b9%a0%e5%9c%a8%e5%8d%ab%e6%98%9f%e5%9b%be%e5%83%8f%e9%a2%84%e8%ae%ad%e7%bb%83%e4%b8%ad%e7%9a%84%e6%b7%b1%e5%ba%a6%e6%8e%a2%e7%b4%a2" class="header-mark"></a>SatDINO：当DINO遇上遥感——对比学习在卫星图像预训练中的深度探索</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SatDINO: A Deep Dive into Self-Supervised Pretraining for Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Jakub Straka et al.</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2508.21402" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2508.21402</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/strakaj/SatDINO" target="_blank" rel="noopener noreferrer">https://github.com/strakaj/SatDINO</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>自监督学习、DINO、对比学习、GSD编码、遥感预训练</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感领域存在一个有趣的现象：<strong>MAE（掩码自编码器）几乎垄断了自监督预训练的天下</strong>。从SatMAE到Scale-MAE，几乎所有主流的遥感基础模型都采用MAE范式——遮住图像的一部分，让模型去重建。</p>
+<p>但这里有个根本性的问题被忽视了：</p>
+<p><strong>遥感图像天生就是多尺度的。</strong></p>
+<p>同一场景在不同传感器下，GSD（地面采样距离）可以从0.3米到几十米不等。一个建筑物在高分辨率下是清晰的矩形，在低分辨率下可能只是一个模糊的像素点。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>MAE的核心思路是<strong>重建被遮挡的像素</strong>。这个任务本质上是&quot;填补缺失&quot;，而不是&quot;理解尺度&quot;。具体来说：</p>
+<ol>
+<li><strong>MAE的尺度感知是被动的</strong>：Scale-MAE虽然引入了GSD信息作为位置编码，但这只是在输入端&quot;告诉&quot;模型当前图像的尺度，模型并没有主动学习尺度的能力</li>
+<li><strong>MAE对GSD元数据有依赖</strong>：如果推理时没有GSD信息，性能会显著下降</li>
+<li><strong>MAE的多尺度利用不充分</strong>：虽然可以处理不同分辨率的图像，但训练时并没有显式地利用多尺度信息</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>能否用对比学习（DINO）替代MAE，让模型在预训练阶段就主动学习多尺度表示，而不依赖外部GSD元数据？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心洞察dino天然适合多尺度" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e6%b4%9e%e5%af%9fdino%e5%a4%a9%e7%84%b6%e9%80%82%e5%90%88%e5%a4%9a%e5%b0%ba%e5%ba%a6" class="header-mark"></a>核心洞察：DINO天然适合多尺度</h3><p>作者的核心洞察非常精妙：</p>
+<blockquote>
+  <p>DINO在训练时会生成<strong>多个不同尺度的视图</strong>（global views + local views），这些视图本身就是多尺度的。这与遥感图像的多尺度特性完美契合。</p>
+</blockquote><p>具体来说，DINO的标准训练流程是：</p>
+<ul>
+<li><strong>Global views</strong>：覆盖图像25%-100%的区域</li>
+<li><strong>Local views</strong>：覆盖图像5%-25%的区域</li>
+</ul>
+<p>这意味着模型在训练过程中，天然就会看到同一场景在不同&quot;缩放级别&quot;下的样子——这不正是遥感图像多尺度特性的完美模拟吗？</p>
+<h3 id="创新点1gsd编码ground-sample-distance-encoding" class="headerLink">
+    <a href="#%e5%88%9b%e6%96%b0%e7%82%b91gsd%e7%bc%96%e7%a0%81ground-sample-distance-encoding" class="header-mark"></a>创新点1：GSD编码（Ground Sample Distance Encoding）</h3><p><strong>设计动机</strong>：</p>
+<p>现有的GSD编码方法（如Scale-MAE）将GSD作为位置编码的一部分注入模型。但这种方法有两个致命缺陷：</p>
+<ol>
+<li>训练时必须有GSD元数据</li>
+<li>推理时如果GSD信息缺失，性能会崩溃</li>
+</ol>
+<p><strong>具体实现</strong>：</p>
+<p>SatDINO提出了一种<strong>从图像本身学习GSD</strong>的优雅方案：</p>]]></description></item></channel></rss>

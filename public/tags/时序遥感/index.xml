@@ -1,0 +1,53 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序遥感 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/</link><description>时序遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示</title><link>https://w-copper.github.io/2026/06/20260601_120000_tessera_temporal_foundation_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_tessera_temporal_foundation_model/</guid><description><![CDATA[<h1 id="tessera用barlow-twins从时序卫星影像中学习全球10米分辨率表示" class="headerLink">
+    <a href="#tessera%e7%94%a8barlow-twins%e4%bb%8e%e6%97%b6%e5%ba%8f%e5%8d%ab%e6%98%9f%e5%bd%b1%e5%83%8f%e4%b8%ad%e5%ad%a6%e4%b9%a0%e5%85%a8%e7%90%8310%e7%b1%b3%e5%88%86%e8%be%a8%e7%8e%87%e8%a1%a8%e7%a4%ba" class="header-mark"></a>TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>TESSERA: Temporal Embeddings of Surface Spectra for Earth Representation and Analysis</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Z. Feng, C. Atzberger, S. Jaffer, J. Knezevic, S. Sormunen, R. Young, M.C. Lisaius, M. Immitzer, T. Jackson, J. Ball, D.A. Coomes, A. Madhavapeddy, A. Blake, S. Keshav</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2506.20380" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2506.20380</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener noreferrer">https://github.com/ucam-eo/tessera</a> (594 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>时序遥感、自监督学习、Barlow Twins、基础模型、像素级表示</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>卫星遥感是监测地球表面变化的重要工具，广泛应用于栖息地制图、碳核算、农业监测等领域。然而，卫星时序数据面临两大挑战：</p>
+<ol>
+<li><strong>数据量巨大</strong>：全球范围的卫星时序数据达到PB级别，处理和存储成本极高</li>
+<li><strong>云遮挡严重</strong>：光学卫星影像经常被云层遮挡，导致时序数据不完整</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ul>
+<li><strong>传统方法</strong>：通常对时序数据取平均或选择无云影像，丢失了重要的时序信息</li>
+<li><strong>现有基础模型</strong>：大多基于单时相影像训练，无法捕捉时序变化模式</li>
+<li><strong>像素级方法</strong>：计算成本高，难以扩展到全球范围</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何从云遮挡严重的卫星时序数据中，高效学习保留时序物候信号的像素级表示？</strong></p>]]></description></item></channel></rss>

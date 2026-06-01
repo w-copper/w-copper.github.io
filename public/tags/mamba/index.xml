@@ -1,13 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mamba - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/mamba/</link><description>Mamba - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/mamba/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿论文解读：基于Mamba架构的遥感变化检测</title><link>https://w-copper.github.io/2026/05/20260531_143022_remote_sensing_mamba_change_detection/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_143022_remote_sensing_mamba_change_detection/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读基于mamba架构的遥感变化检测" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e4%ba%8emamba%e6%9e%b6%e6%9e%84%e7%9a%84%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>2025年遥感AI前沿论文解读：基于Mamba架构的遥感变化检测</h1><blockquote>
-  <p><strong>关键词</strong>: 遥感变化检测, Mamba, 状态空间模型, 深度学习, IEEE TGRS</p>
-<p><strong>发布时间</strong>: 2026年5月31日</p>
-<p><strong>论文来源</strong>: IEEE Transactions on Geoscience and Remote Sensing (TGRS)</p>
-</blockquote><hr>
-<h2 id="一论文概览" class="headerLink">
-    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e6%a6%82%e8%a7%88" class="header-mark"></a>一、论文概览</h2><p>本文精选两篇发表于IEEE TGRS顶刊的遥感变化检测论文，均采用最新的Mamba（状态空间模型）架构，在多个基准数据集上取得了SOTA性能，且代码完全开源。</p>
-<h3 id="论文1changemamba" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%871changemamba" class="header-mark"></a>论文1：ChangeMamba</h3><table>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mamba - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/mamba/</link><description>Mamba - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/mamba/" rel="self" type="application/rss+xml"/><item><title>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</title><link>https://w-copper.github.io/2026/06/20260601_211500_rscama_change_captioning/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_211500_rscama_change_captioning/</guid><description><![CDATA[<h1 id="rscama首次将mamba引入遥感变化描述任务实现高效时空建模" class="headerLink">
+    <a href="#rscama%e9%a6%96%e6%ac%a1%e5%b0%86mamba%e5%bc%95%e5%85%a5%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%8f%8f%e8%bf%b0%e4%bb%bb%e5%8a%a1%e5%ae%9e%e7%8e%b0%e9%ab%98%e6%95%88%e6%97%b6%e7%a9%ba%e5%bb%ba%e6%a8%a1" class="header-mark"></a>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE GRSL 2024 | ESI高被引论文</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
   <thead>
       <tr>
           <th>项目</th>
@@ -17,525 +12,53 @@
   <tbody>
       <tr>
           <td><strong>标题</strong></td>
-          <td>ChangeMamba: Remote Sensing Change Detection With Spatiotemporal State Space Model</td>
+          <td>RSCaMa: Remote Sensing Image Change Captioning with State Space Model</td>
       </tr>
       <tr>
           <td><strong>作者</strong></td>
-          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+          <td>Chen-Yang Liu et al.</td>
       </tr>
       <tr>
-          <td><strong>机构</strong></td>
-          <td>东京大学、RIKEN AIP、武汉大学</td>
-      </tr>
-      <tr>
-          <td><strong>发表</strong></td>
-          <td>IEEE TGRS 2024（ESI热点论文，连续12个月高被引论文）</td>
+          <td><strong>会议</strong></td>
+          <td>IEEE Geoscience and Remote Sensing Letters (GRSL) 2024</td>
       </tr>
       <tr>
           <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2404.03425" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425</a></td>
+          <td><a href="https://arxiv.org/abs/2405.13366" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2405.13366</a></td>
       </tr>
       <tr>
           <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="论文2cdmamba" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%872cdmamba" class="header-mark"></a>论文2：CDMamba</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>CDMamba: Incorporating Local Clues into Mamba for Remote Sensing Image Binary Change Detection</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Haotian Zhang, Keyan Chen, Chenyang Liu, Hao Chen, Zhengxia Zou, Zhenwei Shi</td>
-      </tr>
-      <tr>
-          <td><strong>机构</strong></td>
-          <td>北京航空航天大学</td>
-      </tr>
-      <tr>
-          <td><strong>发表</strong></td>
-          <td>IEEE TGRS 2025, Vol. 63, Art no. 4405016</td>
-      </tr>
-      <tr>
-          <td><strong>DOI</strong></td>
-          <td>10.1109/TGRS.2025.3545012</td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/zmoka-zht/CDMamba" target="_blank" rel="noopener noreferrer">https://github.com/zmoka-zht/CDMamba</a></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="二研究问题" class="headerLink">
-    <a href="#%e4%ba%8c%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>二、研究问题</h2><h3 id="21-遥感变化检测的核心挑战" class="headerLink">
-    <a href="#21-%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e7%9a%84%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 遥感变化检测的核心挑战</h3><p>遥感变化检测（Change Detection, CD）旨在从同一区域不同时相的遥感影像中自动识别地表变化，广泛应用于城市规划、环境监测、灾害评估等领域。现有方法面临以下核心挑战：</p>]]></description></item><item><title>2025年遥感AI前沿：RoMA与HyperFree——Mamba架构与高光谱基础模型的突破性进展</title><link>https://w-copper.github.io/2026/05/20260530_201900_remote_sensing_foundation_model/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_201900_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿roma与hyperfreemamba架构与高光谱基础模型的突破性进展" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bfroma%e4%b8%8ehyperfreemamba%e6%9e%b6%e6%9e%84%e4%b8%8e%e9%ab%98%e5%85%89%e8%b0%b1%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e7%aa%81%e7%a0%b4%e6%80%a7%e8%bf%9b%e5%b1%95" class="header-mark"></a>2025年遥感AI前沿：RoMA与HyperFree——Mamba架构与高光谱基础模型的突破性进展</h1><blockquote>
-  <p><strong>摘要</strong>：本文精选两篇2025年遥感AI领域的顶级会议论文——NeurIPS 2025的RoMA和CVPR 2025的HyperFree，分别代表了Mamba架构在遥感基础模型中的规模化应用和高光谱遥感免微调基础模型的创新突破。两篇论文均开源代码，具有重要的研究和应用价值。</p>
-</blockquote><hr>
-<h2 id="一论文一roma基于mamba的遥感基础模型规模化自监督预训练" class="headerLink">
-    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e4%b8%80roma%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%a7%84%e6%a8%a1%e5%8c%96%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83" class="header-mark"></a>一、论文一：RoMA——基于Mamba的遥感基础模型规模化自监督预训练</h2><h3 id="11-论文信息" class="headerLink">
-    <a href="#11-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1.1 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
-      </tr>
-      <tr>
-          <td><strong>发表会议</strong></td>
-          <td>NeurIPS 2025</td>
-      </tr>
-      <tr>
-          <td><strong>作者团队</strong></td>
-          <td>Fengxiang Wang, Hongzhen Wang, Yulin Wang, Di Wang, Mingshuo Chen, Haiyan Zhao, Yangang Sun, Shuo Wang等</td>
-      </tr>
-      <tr>
-          <td><strong>研究机构</strong></td>
-          <td>国防科技大学、清华大学、武汉大学、北京邮电大学</td>
-      </tr>
-      <tr>
-          <td><strong>论文链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
-      </tr>
-      <tr>
-          <td><strong>代码仓库</strong></td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
+          <td><a href="https://github.com/Chen-Yang-Liu/RSCaMa" target="_blank" rel="noopener noreferrer">https://github.com/Chen-Yang-Liu/RSCaMa</a></td>
       </tr>
       <tr>
           <td><strong>关键词</strong></td>
-          <td>Mamba、自监督学习、遥感基础模型、Scaling Laws、自回归预训练</td>
+          <td>遥感变化描述、状态空间模型、Mamba、时序建模、多时相遥感</td>
       </tr>
   </tbody>
 </table>
-<h3 id="12-研究问题" class="headerLink">
-    <a href="#12-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1.2 研究问题</h3><p>遥感（Remote Sensing, RS）图像处理在生态系统监测、自然灾害管理、城市规划等领域发挥着关键作用。然而，当前遥感深度学习模型面临以下核心挑战：</p>
-<ol>
-<li>
-<p><strong>计算复杂度瓶颈</strong>：主流的Vision Transformer（ViT）架构基于自注意力机制，其二次复杂度（O(n²)）在处理高分辨率遥感图像时导致巨大的计算和内存开销，限制了模型的规模化扩展。</p>
-</li>
-<li>
-<p><strong>数据标注成本高昂</strong>：遥感图像的标注需要专业知识，大规模标注数据的获取成本极高，限制了监督学习方法的应用范围。</p>
-</li>
-<li>
-<p><strong>现有Mamba应用局限</strong>：虽然Mamba架构以其线性复杂度（O(n)）提供了有前景的替代方案，但现有的遥感Mamba应用仅限于小型、特定领域的监督任务，未能充分发挥其潜力。</p>
-</li>
-<li>
-<p><strong>缺乏Scaling验证</strong>：尚未有研究系统性地验证Mamba模型在遥感领域的数据和参数扩展规律（Scaling Laws）。</p>
-</li>
-</ol>
-<h3 id="13-解决方案" class="headerLink">
-    <a href="#13-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>1.3 解决方案</h3><p>RoMA框架提出了三项关键创新来解决上述问题：</p>
-<h4 id="131-旋转感知预训练机制rotation-aware-pretraining" class="headerLink">
-    <a href="#131-%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e6%9c%ba%e5%88%b6rotation-aware-pretraining" class="header-mark"></a>1.3.1 旋转感知预训练机制（Rotation-Aware Pretraining）</h4><p>遥感图像中的目标通常呈任意方向分布，传统预训练方法难以有效处理这一特性。RoMA设计了：</p>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像变化描述（Remote Sensing Image Change Captioning, RSICC）是一项新兴的多模态任务，旨在<strong>用自然语言描述多时相遥感图像之间的地表变化</strong>。与传统的二元变化检测（仅判断&quot;变/不变&quot;）不同，RSICC需要输出更丰富的语义信息：</p>
 <ul>
-<li><strong>自适应裁剪策略</strong>：基于传统特征（如LBP）识别高信息区域，进行智能裁剪</li>
-<li><strong>角度嵌入（Angular Embeddings）</strong>：将旋转角度信息编码到模型中，提升对任意方向目标的鲁棒性</li>
-<li><strong>旋转增强</strong>：在预训练阶段引入多样化的旋转增强，使模型学习方向不变性特征</li>
+<li><strong>变化对象</strong>：建筑物、道路、植被等</li>
+<li><strong>变化位置</strong>：在哪里发生了变化</li>
+<li><strong>变化动态</strong>：是新增还是消失</li>
 </ul>
-<h4 id="132-多尺度令牌预测目标multi-scale-token-prediction" class="headerLink">
-    <a href="#132-%e5%a4%9a%e5%b0%ba%e5%ba%a6%e4%bb%a4%e7%89%8c%e9%a2%84%e6%b5%8b%e7%9b%ae%e6%a0%87multi-scale-token-prediction" class="header-mark"></a>1.3.2 多尺度令牌预测目标（Multi-scale Token Prediction）</h4><p>遥感图像中目标尺度差异极大（从车辆到城市区域），RoMA设计了多尺度预测机制：</p>]]></description></item><item><title>2025年遥感AI最新论文解读：基础模型引领遥感智能解译新时代</title><link>https://w-copper.github.io/2026/05/20260530_234947_remote_sensing_ai_2025/</link><pubDate>Sat, 30 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260530_234947_remote_sensing_ai_2025/</guid><description><![CDATA[<h1 id="2025年遥感ai最新论文解读基础模型引领遥感智能解译新时代" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e6%9c%80%e6%96%b0%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%bc%95%e9%a2%86%e9%81%a5%e6%84%9f%e6%99%ba%e8%83%bd%e8%a7%a3%e8%af%91%e6%96%b0%e6%97%b6%e4%bb%a3" class="header-mark"></a>2025年遥感AI最新论文解读：基础模型引领遥感智能解译新时代</h1><blockquote>
-  <p><strong>摘要</strong>：本文精选2025年遥感人工智能领域两篇重要论文，均来自顶级会议且开源代码。论文分别聚焦遥感图像分割基础模型和Mamba架构遥感基础模型，代表了当前遥感AI的最新研究方向。</p>
-</blockquote><hr>
-<h2 id="论文一rsrefseg---基于基础模型的指代遥感图像分割" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80rsrefseg---%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e6%8c%87%e4%bb%a3%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>论文一：RSRefSeg - 基于基础模型的指代遥感图像分割</h2><h3 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Keyan Chen, Jiafan Zhang, Chenyang Liu, Zhengxia Zou, Zhenwei Shi</td>
-      </tr>
-      <tr>
-          <td><strong>发表平台</strong></td>
-          <td>arXiv 2025 (arXiv:2501.06809)</td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></td>
-      </tr>
-      <tr>
-          <td><strong>模型规模</strong></td>
-          <td>1.2B参数</td>
-      </tr>
-      <tr>
-          <td><strong>提交时间</strong></td>
-          <td>2025年1月12日</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="-研究问题" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>指代遥感图像分割（Referring Remote Sensing Image Segmentation, RRSIS）是遥感领域的重要任务，旨在通过自由格式的文本描述来定位和分割遥感图像中的特定目标。该任务面临以下挑战：</p>
-<ol>
-<li><strong>细粒度语义对齐困难</strong>：现有方法难以在细粒度语义概念之间建立稳健的对齐，导致文本和视觉信息之间的表示不一致</li>
-<li><strong>多模态融合不充分</strong>：预训练语言模型编码的文本描述与视觉模态的对齐效果有限</li>
-<li><strong>分割精度不足</strong>：传统方法在复杂遥感场景中的分割精度有待提高</li>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>CNN-based方法</strong>：感受野有限，难以捕获长距离时空依赖关系</li>
+<li><strong>Transformer-based方法</strong>：自注意力机制的二次复杂度导致计算成本高昂，特别是在处理高分辨率遥感图像时</li>
+<li><strong>时序建模不足</strong>：现有方法多采用简单的双分支结构，缺乏对时序信息的深度交互</li>
 </ol>
-<h3 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RSRefSeg创新性地结合了<strong>CLIP</strong>和<strong>SAM</strong>两个基础模型：</p>
-<h4 id="核心架构" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e6%9e%b6%e6%9e%84" class="header-mark"></a>核心架构</h4><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    
-    tw-flex 
-    tw-flex-row
-    tw-flex-1 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        code-block-button
-        tw-mx-2 
-        tw-flex
-        tw-flex-row
-        tw-flex-1"
-      aria-hidden="true">
-          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>2025年遥感AI前沿：两篇开源论文深度解读</title><link>https://w-copper.github.io/2026/05/20260529_054300_remote_sensing/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_054300_remote_sensing/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿两篇开源论文深度解读" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%b8%a4%e7%af%87%e5%bc%80%e6%ba%90%e8%ae%ba%e6%96%87%e6%b7%b1%e5%ba%a6%e8%a7%a3%e8%af%bb" class="header-mark"></a>2025年遥感AI前沿：两篇开源论文深度解读</h1><blockquote>
-  <p><strong>作者</strong>: AI Research Digest<br>
-<strong>日期</strong>: 2025年5月29日<br>
-<strong>关键词</strong>: 遥感基础模型, Mamba, 自监督学习, 多模态融合, 变化检测</p>
-</blockquote><hr>
-<h2 id="一论文概览" class="headerLink">
-    <a href="#%e4%b8%80%e8%ae%ba%e6%96%87%e6%a6%82%e8%a7%88" class="header-mark"></a>一、论文概览</h2><p>本文精选了2025年遥感AI领域两篇具有代表性的开源论文，均来自顶级研究机构并已在GitHub公开代码：</p>
-<table>
-  <thead>
-      <tr>
-          <th>论文</th>
-          <th>机构</th>
-          <th>arXiv</th>
-          <th>GitHub</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>RoMA</strong></td>
-          <td>国防科技大学、清华大学、武汉大学</td>
-          <td>2503.10392</td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">MiliLab/RoMA</a></td>
-      </tr>
-      <tr>
-          <td><strong>Copernicus-FM</strong></td>
-          <td>慕尼黑工业大学、NVIDIA、雅典国立技术大学</td>
-          <td>2503.11849</td>
-          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">zhu-xlab/Copernicus-FM</a></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="二论文一roma--基于mamba的遥感基础模型自监督预训练" class="headerLink">
-    <a href="#%e4%ba%8c%e8%ae%ba%e6%96%87%e4%b8%80roma--%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83" class="header-mark"></a>二、论文一：RoMA — 基于Mamba的遥感基础模型自监督预训练</h2><h3 id="21-论文信息" class="headerLink">
-    <a href="#21-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>2.1 论文信息</h3><ul>
-<li><strong>标题</strong>: RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</li>
-<li><strong>作者</strong>: Fengxiang Wang, Yulin Wang, Mingshuo Chen, Haiyan Zhao 等</li>
-<li><strong>单位</strong>: 国防科技大学、清华大学、武汉大学、北京邮电大学</li>
-<li><strong>发表</strong>: arXiv 2025 (收录于NeurIPS 2025论文集)</li>
-<li><strong>代码</strong>: <a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></li>
-</ul>
-<h3 id="22-研究问题" class="headerLink">
-    <a href="#22-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2.2 研究问题</h3><p>遥感图像处理面临三大核心挑战：</p>
-<ol>
-<li>
-<p><strong>高分辨率图像的计算瓶颈</strong>：传统Vision Transformer (ViT) 的自注意力机制具有二次复杂度，在处理高分辨率遥感图像（如DOTA数据集中4000×4000像素的图像）时计算和内存消耗巨大。</p>
-</li>
-<li>
-<p><strong>目标方向多样性</strong>：与自然图像不同，遥感图像中的目标（如飞机、船舶）可能以任意角度出现，需要旋转不变性表示。</p>
-</li>
-<li>
-<p><strong>尺度变化极端</strong>：遥感图像中的目标尺度变化范围极大，从小型车辆到大型建筑，传统方法难以有效捕捉多尺度特征。</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：Mamba基础模型与引用式分割</title><link>https://w-copper.github.io/2026/05/20260529_194300_remote_sensing_ai/</link><pubDate>Fri, 29 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260529_194300_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读mamba基础模型与引用式分割" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbmamba%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%8e%e5%bc%95%e7%94%a8%e5%bc%8f%e5%88%86%e5%89%b2" class="header-mark"></a>2025年遥感AI前沿论文解读：Mamba基础模型与引用式分割</h1><blockquote>
-  <p><strong>搜索日期</strong>：2026年5月29日<br>
-<strong>关键词</strong>：arxiv remote sensing deep learning 2025, remote sensing foundation model, Mamba, change detection, segmentation<br>
-<strong>筛选标准</strong>：2025年发表、来自顶级会议/期刊、已开源代码</p>
-</blockquote><hr>
-<h2 id="论文一roma---基于mamba的遥感基础模型扩展框架" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80roma---%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%89%a9%e5%b1%95%e6%a1%86%e6%9e%b6" class="header-mark"></a>论文一：RoMA - 基于Mamba的遥感基础模型扩展框架</h2><h3 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
-      </tr>
-      <tr>
-          <td><strong>发表会议</strong></td>
-          <td><strong>NeurIPS 2025</strong>（顶级机器学习会议）</td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
-      </tr>
-      <tr>
-          <td><strong>研究单位</strong></td>
-          <td>国防科技大学、清华大学、武汉大学、北京邮电大学</td>
-      </tr>
-      <tr>
-          <td><strong>发表时间</strong></td>
-          <td>2025年</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="-研究问题" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🔍 研究问题</h3><p>遥感图像具有<strong>超高分辨率</strong>（通常为数千到数万像素）的特点，这给现有深度学习模型带来了巨大挑战：</p>
-<ol>
-<li><strong>计算复杂度瓶颈</strong>：当前主流的Vision Transformer（ViT）基于自注意力机制，其计算复杂度为<strong>O(n²)</strong>，当处理高分辨率遥感图像时，计算和内存开销急剧增长</li>
-<li><strong>可扩展性受限</strong>：由于二次复杂度的限制，现有遥感基础模型难以扩展到更大规模，限制了模型性能的进一步提升</li>
-<li><strong>长距离依赖建模不足</strong>：遥感场景中地物的空间分布范围广、尺度变化大，需要模型具备强大的全局上下文建模能力</li>
-</ol>
-<h3 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>RoMA提出了<strong>首个用于遥感的Mamba自监督预训练框架</strong>，核心创新包括：</p>
-<h4 id="1-线性复杂度的mamba架构" class="headerLink">
-    <a href="#1-%e7%ba%bf%e6%80%a7%e5%a4%8d%e6%9d%82%e5%ba%a6%e7%9a%84mamba%e6%9e%b6%e6%9e%84" class="header-mark"></a>1. 线性复杂度的Mamba架构</h4><ul>
-<li>采用**状态空间模型（SSM）**替代传统自注意力机制</li>
-<li>将计算复杂度从O(n²)降至<strong>O(n)</strong>，实现线性扩展</li>
-<li>保持甚至超越Transformer的全局建模能力</li>
-</ul>
-<h4 id="2-自回归预训练策略" class="headerLink">
-    <a href="#2-%e8%87%aa%e5%9b%9e%e5%bd%92%e9%a2%84%e8%ae%ad%e7%bb%83%e7%ad%96%e7%95%a5" class="header-mark"></a>2. 自回归预训练策略</h4><ul>
-<li>首次将**自回归预训练（Autoregressive Pretraining）**引入Mamba架构用于遥感</li>
-<li>设计了适合遥感图像特性的掩码预测任务</li>
-<li>在大规模未标注遥感数据上进行自监督学习</li>
-</ul>
-<h4 id="3-多尺度特征融合" class="headerLink">
-    <a href="#3-%e5%a4%9a%e5%b0%ba%e5%ba%a6%e7%89%b9%e5%be%81%e8%9e%8d%e5%90%88" class="header-mark"></a>3. 多尺度特征融合</h4><ul>
-<li>设计了层次化的特征提取结构</li>
-<li>融合不同尺度的语义信息，适应遥感场景中多尺度地物的检测需求</li>
-</ul>
-<h3 id="-实验与评估" class="headerLink">
-    <a href="#-%e5%ae%9e%e9%aa%8c%e4%b8%8e%e8%af%84%e4%bc%b0" class="header-mark"></a>📊 实验与评估</h3><h4 id="实验设置" class="headerLink">
-    <a href="#%e5%ae%9e%e9%aa%8c%e8%ae%be%e7%bd%ae" class="header-mark"></a>实验设置</h4><ul>
-<li><strong>预训练数据</strong>：大规模遥感影像数据集</li>
-<li><strong>下游任务</strong>：场景分类、语义分割、目标检测、变化检测</li>
-<li><strong>对比基线</strong>：MAE、SatMAE、Scale-MAE等现有遥感预训练方法</li>
-</ul>
-<h4 id="主要结果" class="headerLink">
-    <a href="#%e4%b8%bb%e8%a6%81%e7%bb%93%e6%9e%9c" class="header-mark"></a>主要结果</h4><table>
-  <thead>
-      <tr>
-          <th>任务</th>
-          <th>性能提升</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>场景分类</td>
-          <td>+2-3%</td>
-          <td>在多个基准数据集上超越ViT基线</td>
-      </tr>
-      <tr>
-          <td>语义分割</td>
-          <td>+1.5-2.5% mIoU</td>
-          <td>在高分辨率分割任务上优势明显</td>
-      </tr>
-      <tr>
-          <td>目标检测</td>
-          <td>+1-2% mAP</td>
-          <td>小目标检测提升显著</td>
-      </tr>
-      <tr>
-          <td>训练效率</td>
-          <td>3-5x加速</td>
-          <td>相同硬件下训练速度大幅提升</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="关键发现" class="headerLink">
-    <a href="#%e5%85%b3%e9%94%ae%e5%8f%91%e7%8e%b0" class="header-mark"></a>关键发现</h4><ul>
-<li><strong>首次验证Mamba在遥感领域的Scaling能力</strong>：随着模型规模增大，性能持续提升</li>
-<li><strong>内存效率显著</strong>：处理相同分辨率图像时，内存占用仅为ViT的1/3-1/4</li>
-<li><strong>长距离建模优势</strong>：在大范围地物（如河流、道路网络）的检测上表现突出</li>
-</ul>
-<h3 id="-论文价值" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bb%b7%e5%80%bc" class="header-mark"></a>🏆 论文价值</h3><ol>
-<li><strong>开创性工作</strong>：首个将Mamba架构引入遥感基础模型的大规模研究</li>
-<li><strong>实用性强</strong>：代码和预训练模型已完全开源</li>
-<li><strong>影响力大</strong>：被NeurIPS 2025接收，代表该领域的最新前沿</li>
-</ol>
-<hr>
-<h2 id="论文二rsrefseg---基于基础模型的引用式遥感图像分割" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%87%e4%ba%8crsrefseg---%e5%9f%ba%e4%ba%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%bc%95%e7%94%a8%e5%bc%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e5%88%86%e5%89%b2" class="header-mark"></a>论文二：RSRefSeg - 基于基础模型的引用式遥感图像分割</h2><h3 id="-论文信息-1" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af-1" class="header-mark"></a>📄 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RSRefSeg: Referring Remote Sensing Image Segmentation with Foundation Models</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2501.06809" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2501.06809</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/KyanChen/RSRefSeg" target="_blank" rel="noopener noreferrer">https://github.com/KyanChen/RSRefSeg</a></td>
-      </tr>
-      <tr>
-          <td><strong>模型规模</strong></td>
-          <td>1.2B参数</td>
-      </tr>
-      <tr>
-          <td><strong>发表时间</strong></td>
-          <td>2025年1月</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="-研究问题-1" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98-1" class="header-mark"></a>🔍 研究问题</h3><p><strong>引用式遥感图像分割（Referring Remote Sensing Image Segmentation）<strong>是一个新兴任务，目标是根据</strong>自然语言描述</strong>在遥感图像中分割指定的地物目标。</p>]]></description></item><item><title>2025年遥感AI前沿论文解读：Mamba与多模态基础模型的突破</title><link>https://w-copper.github.io/2025/05/20250531_011800_remote_sensing_foundation_model/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_011800_remote_sensing_foundation_model/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿论文解读mamba与多模态基础模型的突破" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bbmamba%e4%b8%8e%e5%a4%9a%e6%a8%a1%e6%80%81%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e7%aa%81%e7%a0%b4" class="header-mark"></a>2025年遥感AI前沿论文解读：Mamba与多模态基础模型的突破</h1><blockquote>
-  <p><strong>撰写日期</strong>：2025年5月31日<br>
-<strong>关键词</strong>：遥感、基础模型、Mamba、自监督学习、多模态融合、NeurIPS 2025、ICCV 2025</p>
-</blockquote><hr>
-<h2 id="一引言" class="headerLink">
-    <a href="#%e4%b8%80%e5%bc%95%e8%a8%80" class="header-mark"></a>一、引言</h2><p>2025年，遥感领域的深度学习研究迎来了重要的范式转变。一方面，基于状态空间模型（State Space Model, SSM）的Mamba架构开始挑战Vision Transformer（ViT）在遥感基础模型中的主导地位；另一方面，多模态、多传感器的统一基础模型正在成为新的研究热点。本文精选了两篇来自顶级会议、且已开源代码的代表性论文，深入解读其研究动机、技术方案、实验结果与学术贡献。</p>
-<hr>
-<h2 id="二论文一roma--基于mamba的遥感基础模型规模化预训练框架" class="headerLink">
-    <a href="#%e4%ba%8c%e8%ae%ba%e6%96%87%e4%b8%80roma--%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%a7%84%e6%a8%a1%e5%8c%96%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>二、论文一：RoMA — 基于Mamba的遥感基础模型规模化预训练框架</h2><h3 id="21-论文信息" class="headerLink">
-    <a href="#21-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>2.1 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
-      </tr>
-      <tr>
-          <td><strong>发表会议</strong></td>
-          <td><strong>NeurIPS 2025</strong></td>
-      </tr>
-      <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub仓库</strong></td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Fengxiang Wang, Yulin Wang, Mingshuo Chen, Haiyan Zhao, Yangang Sun, Shuo Wang, Hongzhen Wang, Di Wang, Long Lan, Wenjing Yang, Jing Zhang</td>
-      </tr>
-      <tr>
-          <td><strong>研究机构</strong></td>
-          <td>国防科技大学、清华大学、武汉大学、北京邮电大学</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="22-研究问题" class="headerLink">
-    <a href="#22-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>2.2 研究问题</h3><p>遥感基础模型的自监督预训练近年来取得了显著进展，Vision Transformer（ViT）凭借其强大的表征能力成为主流选择。然而，ViT的核心组件——自注意力机制（Self-Attention）具有<strong>二次计算复杂度</strong>（O(n²)），这在处理高分辨率遥感图像时带来了严重的可扩展性瓶颈：</p>
-<ol>
-<li><strong>计算开销巨大</strong>：遥感图像通常具有数千甚至数万像素的分辨率，直接应用ViT会导致显存溢出和训练时间过长。</li>
-<li><strong>遥感数据的特殊性</strong>：遥感目标具有任意方向、稀疏分布、尺度变化剧烈等特点，传统ViT预训练策略难以有效应对。</li>
-<li><strong>Mamba的潜力未被充分挖掘</strong>：虽然Mamba架构具有线性复杂度（O(n)），但在遥感领域的应用仍局限于小规模监督任务，缺乏大规模自监督预训练的系统性研究。</li>
-</ol>
-<h3 id="23-解决方案" class="headerLink">
-    <a href="#23-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>2.3 解决方案</h3><p>RoMA提出了一个完整的Mamba遥感基础模型自监督预训练框架，包含两个核心创新：</p>
-<h4 id="创新一旋转感知预训练机制rotation-aware-pretraining" class="headerLink">
-    <a href="#%e5%88%9b%e6%96%b0%e4%b8%80%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e6%9c%ba%e5%88%b6rotation-aware-pretraining" class="header-mark"></a>创新一：旋转感知预训练机制（Rotation-Aware Pretraining）</h4><p>遥感目标（如飞机、船舶、建筑物）往往以任意角度分布，传统的随机裁剪策略无法有效捕捉这些旋转目标。RoMA提出了：</p>]]></description></item><item><title>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</title><link>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</guid><description><![CDATA[<h1 id="-mamba架构在遥感领域的突破从基础模型到变化检测" class="headerLink">
-    <a href="#-mamba%e6%9e%b6%e6%9e%84%e5%9c%a8%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e7%9a%84%e7%aa%81%e7%a0%b4%e4%bb%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%88%b0%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</h1><blockquote>
-  <p><strong>关键词</strong>: Mamba, 遥感基础模型, 变化检测, 状态空间模型, 自监督预训练</p>
-</blockquote><hr>
-<h2 id="-论文一roma--遥感领域首个mamba自监督预训练框架" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%b8%80roma--%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e9%a6%96%e4%b8%aamamba%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>📌 论文一：RoMA —— 遥感领域首个Mamba自监督预训练框架</h2><h3 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📋 论文信息</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
-      </tr>
-      <tr>
-          <td><strong>发表会议</strong></td>
-          <td>NeurIPS 2025 (Spotlight)</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
-      </tr>
-      <tr>
-          <td><strong>代码仓库</strong></td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
-      </tr>
-      <tr>
-          <td><strong>研究机构</strong></td>
-          <td>MiliLab</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="-研究问题为什么需要mamba基础模型" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81mamba%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>🎯 研究问题：为什么需要Mamba基础模型？</h3><h4 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h4><p>遥感（RS）领域近年来见证了Vision Transformer（ViT）自监督学习的突破性进展，催生了一系列遥感基础模型（RSFMs）。然而，<strong>自注意力机制的二次计算复杂度</strong>（O(n²)）成为了可扩展性的重大障碍，尤其是在处理<strong>大规模模型</strong>和<strong>高分辨率遥感影像</strong>时。</p>
-<h4 id="核心痛点" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e7%97%9b%e7%82%b9" class="header-mark"></a>核心痛点</h4><ol>
-<li><strong>计算瓶颈</strong>：ViT处理高分辨率遥感影像时，计算成本呈二次增长</li>
-<li><strong>数据规模限制</strong>：现有Mamba在遥感中的应用仅限于小规模、特定领域的监督任务</li>
-<li><strong>预训练空白</strong>：缺乏针对Mamba架构的遥感自监督预训练框架</li>
-<li><strong>尺度变化极端</strong>：遥感影像中目标尺度变化极大（从微小车辆到大型机场）</li>
-</ol>
-<h4 id="作者的切入点" class="headerLink">
-    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h4><p>作者注意到Mamba架构具有<strong>线性计算复杂度</strong>（O(n)），是Transformer的有力替代。但现有遥感Mamba研究局限于监督学习小数据集，<strong>没有充分利用大规模无标注遥感数据进行自监督预训练</strong>。这就是RoMA要解决的核心问题。</p>
-<h3 id="-解决方案旋转感知的多尺度自回归学习" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e7%9a%84%e5%a4%9a%e5%b0%ba%e5%ba%a6%e8%87%aa%e5%9b%9e%e5%bd%92%e5%ad%a6%e4%b9%a0" class="header-mark"></a>💡 解决方案：旋转感知的多尺度自回归学习</h3><h4 id="整体框架" class="headerLink">
-    <a href="#%e6%95%b4%e4%bd%93%e6%a1%86%e6%9e%b6" class="header-mark"></a>整体框架</h4><p>RoMA提出了<strong>Rotation-aware Multi-scale Autoregressive learning</strong>框架，首次实现Mamba架构在遥感领域的可扩展自监督预训练。</p>
-<h4 id="创新点一旋转感知预训练机制" class="headerLink">
-    <a href="#%e5%88%9b%e6%96%b0%e7%82%b9%e4%b8%80%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e6%9c%ba%e5%88%b6" class="header-mark"></a>创新点一：旋转感知预训练机制</h4><p><strong>问题洞察</strong>：遥感影像中的目标具有任意方向（如飞机、船舶、建筑物），传统预训练方法忽略了旋转不变性。</p>
-<p><strong>解决方案</strong>：</p>
-<ul>
-<li><strong>自适应裁剪策略</strong>：根据目标方向自适应裁剪图像区域</li>
-<li><strong>角度嵌入（Angular Embeddings）</strong>：将旋转角度信息编码到嵌入空间</li>
-<li><strong>旋转不变表征学习</strong>：在自回归预训练过程中强化旋转不变性</li>
-</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何在保持线性计算复杂度的同时，实现双时相遥感图像之间的深度时空交互，从而生成更准确的变化描述？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1temporal-traversing-ssm-tt-ssm" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91temporal-traversing-ssm-tt-ssm" class="header-mark"></a>核心创新点1：Temporal-Traversing SSM (TT-SSM)</h3><p><strong>设计动机</strong>：
+Mamba架构的时间扫描特性与RSICC任务的时序需求存在天然契合。传统SSM采用单向扫描，无法充分利用双时相图像之间的交互信息。</p>
+<p><strong>具体实现</strong>：
+TT-SSM采用<strong>时间交叉扫描策略</strong>，让两个时相的特征在网络中&quot;交错前行&quot;：</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -555,4 +78,67 @@
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>ChangeMamba：用状态空间模型革新遥感变化检测</title><link>https://w-copper.github.io/2026/05/20260531_215800_changemamba/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_215800_changemamba/</guid><description><![CDATA[<h1 id="changemamba用状态空间模型革新遥感变化检测" class="headerLink">
+    <a href="#changemamba%e7%94%a8%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e9%9d%a9%e6%96%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>ChangeMamba：用状态空间模型革新遥感变化检测</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Transactions on Geoscience and Remote Sensing (TGRS) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2404.03425" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、Mamba、状态空间模型、时空建模</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感影像变化检测（Change Detection, CD）是地球观测领域的核心任务之一。想象一下：当你需要快速评估台风过后的建筑损毁情况，或是监测亚马逊雨林的砍伐进度时，传统人工判读方式不仅效率低下，而且容易受主观因素影响。这正是AI模型大显身手的场景——它能自动分析不同时相的卫星或航拍影像，精准定位地表变化。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li>
+<p><strong>CNN的&quot;近视眼&quot;问题</strong>：卷积神经网络受限于有限的感受野，难以捕捉大尺寸遥感影像中的长距离依赖关系。当变化区域跨越较大范围时，CNN容易漏检。</p>
+</li>
+<li>
+<p><strong>Transformer的&quot;暴饮暴食&quot;问题</strong>：虽然Transformer能够建模全局上下文，但其自注意力机制的计算复杂度随图像尺寸呈平方级增长。处理8000×8000像素的卫星影像时，显存消耗惊人。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何设计一种既能高效处理大尺寸遥感影像，又能准确捕捉时空变化信息的网络架构？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1引入mamba架构到遥感变化检测" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%95%e5%85%a5mamba%e6%9e%b6%e6%9e%84%e5%88%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>核心创新点1：引入Mamba架构到遥感变化检测</h3><p><strong>设计动机</strong>：Mamba架构基于状态空间模型（State Space Model, SSM），通过选择性记忆机制，只保留关键信息，实现线性复杂度的全局感知。这就像给变化检测装上了兼具望远镜和显微镜功能的智能眼镜。</p>
+<p><strong>具体实现</strong>：</p>
+<p>ChangeMamba将Mamba架构应用于遥感变化检测，提出了三种网络框架：</p>
+<ol>
+<li><strong>MambaBCD</strong>：二元变化检测（Binary Change Detection）</li>
+<li><strong>MambaSCD</strong>：语义变化检测（Semantic Change Detection）</li>
+<li><strong>MambaBDA</strong>：建筑损坏评估（Building Damage Assessment）</li>
+</ol>
+<p><strong>关键细节</strong>：</p>]]></description></item></channel></rss>

@@ -1,4 +1,537 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/</link><description>遥感基础模型 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/" rel="self" type="application/rss+xml"/><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/</link><description>遥感基础模型 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B/" rel="self" type="application/rss+xml"/><item><title>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</title><link>https://w-copper.github.io/2026/06/20260601_220000_anysat_multi_resolution/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_220000_anysat_multi_resolution/</guid><description><![CDATA[<h1 id="anysat一个模型搞定所有分辨率尺度和模态的遥感数据" class="headerLink">
+    <a href="#anysat%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e6%89%80%e6%9c%89%e5%88%86%e8%be%a8%e7%8e%87%e5%b0%ba%e5%ba%a6%e5%92%8c%e6%a8%a1%e6%80%81%e7%9a%84%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae" class="header-mark"></a>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2025 Highlight | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>AnySat: One Earth Observation Model for Many Resolutions, Scales, and Modalities</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Guillaume Astruc, Nicolas Gonthier, Clement Mallet, Loic Landrieu</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 (Highlight)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2412.14123" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.14123</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/gastruc/AnySat" target="_blank" rel="noopener noreferrer">https://github.com/gastruc/AnySat</a> (190 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态、多分辨率、JEPA架构、自监督学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据天然具有<strong>多源异构</strong>的特点：</p>
+<ul>
+<li><strong>分辨率差异</strong>：从0.3米的无人机影像到30米的Sentinel-2，跨越100倍</li>
+<li><strong>通道数量不同</strong>：RGB（3通道）、多光谱（4-13通道）、SAR（2通道）</li>
+<li><strong>覆盖范围多样</strong>：小区域精细观测 vs 大范围宏观监测</li>
+<li><strong>传感器类型繁多</strong>：光学、SAR、高光谱等11种以上传感器</li>
+</ul>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>单模型单数据</strong>：每个数据集需要单独训练模型，无法共享知识</li>
+<li><strong>分辨率不兼容</strong>：不同分辨率的数据需要不同的网络架构</li>
+<li><strong>模态隔离</strong>：光学和SAR数据通常分开处理</li>
+<li><strong>扩展性差</strong>：新增传感器需要重新设计模型</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何用一个统一的模型处理任意分辨率、任意尺度、任意模态组合的遥感数据？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1scale-adaptive-jepa架构" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91scale-adaptive-jepa%e6%9e%b6%e6%9e%84" class="header-mark"></a>核心创新点1：Scale-Adaptive JEPA架构</h3><p><strong>设计动机</strong>：传统MAE需要固定输入尺寸，无法处理不同分辨率的图像。</p>
+<p><strong>具体实现</strong>：</p>
+<ul>
+<li>采用<strong>Joint Embedding Predictive Architecture (JEPA)</strong>，不依赖像素级重建</li>
+<li>引入<strong>尺度自适应</strong>机制，根据输入数据的GSD自动调整</li>
+<li>使用<strong>分块嵌入</strong>策略，将不同分辨率的图像映射到统一的特征空间</li>
+</ul>
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>Falcon：首个支持14个任务的遥感视觉语言基础模型</title><link>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</guid><description><![CDATA[<h1 id="falcon首个支持14个任务的遥感视觉语言基础模型" class="headerLink">
+    <a href="#falcon%e9%a6%96%e4%b8%aa%e6%94%af%e6%8c%8114%e4%b8%aa%e4%bb%bb%e5%8a%a1%e7%9a%84%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Falcon：首个支持14个任务的遥感视觉语言基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Falcon: A Remote Sensing Vision-Language Foundation Model (Technical Report)</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kelu Yao, Nuo Xu, Rong Yang, Yingying Xu, Zhuoyan Gao, Titinunt Kitrungrotsakul, Yi Ren, Pu Zhang, Jin Wang, Ning Wei, Chao Li</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>ZhejiangLab（之江实验室）</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.11070" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11070</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/TianHuiLab/Falcon" target="_blank" rel="noopener noreferrer">https://github.com/TianHuiLab/Falcon</a> (⭐372)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、视觉语言模型、多任务学习、指令调优、统一表示</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像解译是地球观测的核心任务，涵盖场景分类、目标检测、语义分割、变化检测等多个领域。近年来，大型视觉语言模型（LVLMs）在自然图像领域取得了巨大成功，但在遥感领域却面临严峻挑战：</p>
+<ol>
+<li><strong>领域鸿沟</strong>：自然图像与遥感图像之间存在显著的领域差异，包括视角、尺度、语义等方面</li>
+<li><strong>任务碎片化</strong>：现有遥感VLMs通常只擅长特定任务，缺乏统一的多任务处理能力</li>
+<li><strong>数据集不足</strong>：缺乏大规模、高质量、多任务的遥感指令调优数据集</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>参数量</th>
+          <th>支持任务数</th>
+          <th>主要局限</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GeoChat</td>
+          <td>7B</td>
+          <td>7</td>
+          <td>不支持像素级任务（分割、变化检测）</td>
+      </tr>
+      <tr>
+          <td>LHRS-Bot</td>
+          <td>7B</td>
+          <td>6</td>
+          <td>缺乏区域级和像素级理解能力</td>
+      </tr>
+      <tr>
+          <td>EarthGPT</td>
+          <td>7B</td>
+          <td>9</td>
+          <td>参数量大，推理效率低</td>
+      </tr>
+      <tr>
+          <td>RSGPT</td>
+          <td>7B</td>
+          <td>5</td>
+          <td>任务覆盖范围有限</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个轻量级、统一的遥感视觉语言模型，同时支持图像级、区域级和像素级的14个任务？</strong></p>]]></description></item><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
+    <a href="#galileo%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e5%b0%ba%e5%ba%a6icml-2025-%e9%80%9a%e7%94%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4" class="header-mark"></a>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</h1><blockquote>
+  <p><strong>论文解读</strong> | ICML 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Galileo: Learning Global &amp; Local Features of Many Remote Sensing Modalities</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Gabriel Tseng, Anthony Fuller, Marlena Reil, Henry Herzog, Patrick Beukema, Favyen Bastani, James R. Green, Evan Shelhamer, Hannah Kerner, David Rolnick</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>ICML 2025 (Proceedings of the 42nd International Conference on Machine Learning)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.09356</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">https://github.com/nasaharvest/galileo</a> (⭐ 177)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型, 多模态融合, 自监督学习, 多尺度特征, 掩码建模, 通用模型</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item><item><title>Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型</title><link>https://w-copper.github.io/2026/06/20260601_130000_prithvi_eo_2_multitemporal/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_130000_prithvi_eo_2_multitemporal/</guid><description><![CDATA[<h1 id="prithvi-eo-20nasa和ibm联手打造的600m参数地球观测基础模型" class="headerLink">
+    <a href="#prithvi-eo-20nasa%e5%92%8cibm%e8%81%94%e6%89%8b%e6%89%93%e9%80%a0%e7%9a%84600m%e5%8f%82%e6%95%b0%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Sujit Roy, Paolo Fraccaro, Þorsteinn Elí Gíslason, Benedikt Blumenstiel, Rinki Ghosal 等</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>IBM Research、NASA Marshall Space Flight Center、Jülich Supercomputing Centre</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv 2024 (Technical Report)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.02732</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">https://github.com/NASA-IMPACT/Prithvi-EO-2.0</a></td>
+      </tr>
+      <tr>
+          <td><strong>HuggingFace</strong></td>
+          <td><a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-600M-TL" target="_blank" rel="noopener noreferrer">https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-600M-TL</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多时相、MAE预训练、时空注意力、全球覆盖</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景地球观测的数据丰富标签稀缺困境" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e7%9a%84%e6%95%b0%e6%8d%ae%e4%b8%b0%e5%af%8c%e6%a0%87%e7%ad%be%e7%a8%80%e7%bc%ba%e5%9b%b0%e5%a2%83" class="header-mark"></a>问题背景：地球观测的&quot;数据丰富、标签稀缺&quot;困境</h3><p>地球观测数据正在爆炸式增长：</p>
+<ul>
+<li>Landsat系列：40年历史，持续更新</li>
+<li>Sentinel-2：5天重访周期，13个波段</li>
+<li>全球每天产生TB级遥感影像</li>
+</ul>
+<p>但问题是：<strong>标注数据极其稀缺</strong>。训练一个准确的作物分类模型可能需要数月的专家标注工作。</p>
+<h3 id="现有基础模型的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有基础模型的局限</h3><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>问题</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>ImageNet预训练</strong></td>
+          <td>自然图像与遥感图像差异大</td>
+      </tr>
+      <tr>
+          <td><strong>单时相模型</strong></td>
+          <td>无法捕捉季节变化、物候信息</td>
+      </tr>
+      <tr>
+          <td><strong>小规模预训练</strong></td>
+          <td>数据量不足，泛化能力有限</td>
+      </tr>
+      <tr>
+          <td><strong>无元数据</strong></td>
+          <td>忽略地理位置、时间信息</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个大规模、多时相、融合元数据的地球观测基础模型，实现跨任务、跨分辨率的泛化？</strong></p>]]></description></item><item><title>SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱</title><link>https://w-copper.github.io/2026/06/20260601_220000_skysense_v2_multimodal/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_220000_skysense_v2_multimodal/</guid><description><![CDATA[<h1 id="skysense-v2统一多模态遥感基础模型一个backbone搞定rgbsar多光谱" class="headerLink">
+    <a href="#skysense-v2%e7%bb%9f%e4%b8%80%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e4%b8%80%e4%b8%aabackbone%e6%90%9e%e5%ae%9argbsar%e5%a4%9a%e5%85%89%e8%b0%b1" class="header-mark"></a>SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱</h1><blockquote>
+  <p><strong>论文解读</strong> | ICCV 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>蚂蚁集团、武汉大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>ICCV 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td>待确认</td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/kang-wu/SkySensePlusPlus" target="_blank" rel="noopener noreferrer">https://github.com/kang-wu/SkySensePlusPlus</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态统一、Transformer、自监督学习、专家混合</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>在遥感领域，我们经常需要处理多种模态的数据：光学图像（RGB）、多光谱图像（MS）、合成孔径雷达（SAR）等。这些不同模态的数据各有优势——光学图像色彩丰富，SAR能穿透云雾，多光谱能捕捉植被健康状况。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>目前的多模态遥感基础模型存在一个尴尬的问题：</p>
+<ol>
+<li><strong>参数冗余</strong>：为每种模态训练单独的backbone，导致模型参数量爆炸</li>
+<li><strong>效率低下</strong>：不同模态的模型无法共享特征，计算资源浪费严重</li>
+<li><strong>语义不一致</strong>：不同模态提取的特征难以对齐，影响下游任务性能</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何用一个统一的backbone高效处理多种遥感模态，同时保持各模态的独特特性？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1统一transformer骨干网络" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e7%bb%9f%e4%b8%80transformer%e9%aa%a8%e5%b9%b2%e7%bd%91%e7%bb%9c" class="header-mark"></a>核心创新点1：统一Transformer骨干网络</h3><p><strong>设计动机</strong>：既然不同模态的图像都是2D数据，为什么不共享一个backbone？</p>
+<p><strong>具体实现</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</title><link>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</guid><description><![CDATA[<h1 id="skysense20亿参数多模态遥感基础模型统一理解地球观测" class="headerLink">
+    <a href="#skysense20%e4%ba%bf%e5%8f%82%e6%95%b0%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%bb%9f%e4%b8%80%e7%90%86%e8%a7%a3%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b" class="header-mark"></a>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xin Guo, Jiangwei Lao, Bo Dang, Yingying Zhang, Lei Yu, Lixiang Ru, Liheng Zhong, Ziyuan Huang, Kang Wu, Dingxiang Hu, Huimei He, Jian Wang, Jingdong Chen, Ming Yang, Yongjun Zhang, Yansheng Li</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.10115</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">https://github.com/Jack-bo1220/SkySense</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态融合、时序建模、地球观测、通用解译</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感技术已经渗透到我们生活的方方面面——从城市规划、农业生产到灾害监测、环境保护。然而，传统的遥感影像理解技术存在一个根本性缺陷：<strong>每个任务都需要单独训练一个模型</strong>。比如，要检测建筑物变化，需要一个专门的模型；要识别农作物类型，又需要另一个模型；要监测森林覆盖变化，还需要第三个模型。</p>]]></description></item><item><title>从模型权重中学习：GeoSANE开创遥感基础模型新范式</title><link>https://w-copper.github.io/2026/06/20260601_120000_geosane_weight_space_learning/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_geosane_weight_space_learning/</guid><description><![CDATA[<h1 id="从模型权重中学习geosane开创遥感基础模型新范式" class="headerLink">
+    <a href="#%e4%bb%8e%e6%a8%a1%e5%9e%8b%e6%9d%83%e9%87%8d%e4%b8%ad%e5%ad%a6%e4%b9%a0geosane%e5%bc%80%e5%88%9b%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>从模型权重中学习：GeoSANE开创遥感基础模型新范式</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoSANE: Learning Geospatial Representations from Models, Not Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Joelle Hanna, Damian Falk, Stella X. Yu, Damian Borth</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>HSG-AIML (University of St. Gallen)</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2603.23408" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2603.23408</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/HSG-AIML/GeoSANE" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GeoSANE</a> (11 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>模型权重空间、遥感基础模型、元学习、模型生成、权重空间学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感领域近年来涌现了大量基础模型（Foundation Models），包括SatMAE、CROMA、SpectralGPT、DOFA、SkySense、Prithvi等。这些模型通过在大规模遥感数据上进行自监督预训练，学习到了强大的特征表示能力。</p>
+<p>然而，一个根本性的问题始终存在：<strong>我们能否不依赖训练数据，直接从这些已有的模型中学习？</strong></p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>数据依赖性强</strong>：传统基础模型需要大量遥感数据进行预训练，数据收集和处理成本高昂</li>
+<li><strong>计算资源消耗大</strong>：训练一个大规模基础模型需要大量GPU资源和时间</li>
+<li><strong>模型孤立性</strong>：现有模型各自独立训练，缺乏模型间的知识共享机制</li>
+<li><strong>组合困难</strong>：如何将多个模型的优势整合到一个新模型中是一个开放问题</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>能否直接在模型权重空间中学习一个通用表示，从而生成针对特定任务优化的新模型？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1模型权重空间学习weight-space-learning" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e6%a8%a1%e5%9e%8b%e6%9d%83%e9%87%8d%e7%a9%ba%e9%97%b4%e5%ad%a6%e4%b9%a0weight-space-learning" class="header-mark"></a>核心创新点1：模型权重空间学习（Weight Space Learning）</h3><p><strong>设计动机</strong>：</p>
+<p>传统方法从数据中学习表示，而GeoSANE提出了一个全新的范式：<strong>从模型权重中学习表示</strong>。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li><strong>模型集合构建</strong>：收集103个预训练的遥感基础模型，总计约380亿参数</li>
+<li><strong>权重空间编码</strong>：使用Sequential Autoencoder学习这些模型权重的共享潜在表示</li>
+<li><strong>模型生成</strong>：从学习到的潜在空间中采样，生成新的模型候选</li>
+</ol>
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>支持任意波段、任意分辨率！AOM：通用遥感基础模型</title><link>https://w-copper.github.io/2026/06/20260601_052213_any_optical_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_052213_any_optical_model/</guid><description><![CDATA[<h1 id="支持任意波段任意分辨率aom通用遥感基础模型" class="headerLink">
+    <a href="#%e6%94%af%e6%8c%81%e4%bb%bb%e6%84%8f%e6%b3%a2%e6%ae%b5%e4%bb%bb%e6%84%8f%e5%88%86%e8%be%a8%e7%8e%87aom%e9%80%9a%e7%94%a8%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>支持任意波段、任意分辨率！AOM：通用遥感基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | AAAI 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Any-Optical-Model: A Universal Foundation Model for Optical Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xuyang Li, Chenyu Li, Danfeng Hong</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>AAAI 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.17224" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.17224</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td>暂未开源</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、任意波段、任意分辨率、多尺度自适应、通道独立tokenizer</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像与自然图像有本质区别：遥感图像通常包含多个光谱通道（如Sentinel-2有13个波段，Landsat-8有11个波段），且空间分辨率差异巨大（从0.1米到100米）。现有的遥感基础模型（RSFMs）通常在固定的波段配置和空间分辨率上预训练，这导致它们在实际应用中面临严重局限。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>波段固定问题</strong>：现有模型（如SatMAE、SpectralGPT）将多光谱数据作为整体输入处理，当遇到波段缺失或新增波段时，性能严重下降。</li>
+<li><strong>跨传感器迁移困难</strong>：不同传感器（如Sentinel-2与Landsat）的波段配置不同，导致模型难以直接迁移。</li>
+<li><strong>尺度适应性差</strong>：现有模型采用单一尺度的patch embedding，无法同时捕获高分辨率的纹理细节和低分辨率的全局上下文。</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p>如何构建一个能够适应<strong>任意波段组合</strong>、<strong>任意传感器类型</strong>、<strong>任意空间分辨率</strong>的通用遥感基础模型？</p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1spectrum-independent-tokenizer-sitok" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91spectrum-independent-tokenizer-sitok" class="header-mark"></a>核心创新点1：Spectrum-independent Tokenizer (SiTok)</h3><p><strong>设计动机</strong>：传统方法将多光谱图像作为3D张量处理，波段维度与空间维度耦合，导致波段变化时需要重新训练。</p>
+<p><strong>具体实现</strong>：</p>
+<ul>
+<li>对每个光谱通道独立进行tokenization</li>
+<li>为每个token添加channel index编码</li>
+<li>支持任意波段组合和缺失波段场景</li>
+</ul>
+<p><strong>关键细节</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
     <a href="#geolink%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap数据赋能遥感基础模型</h1><blockquote>
   <p>📅 发表时间：2025年
 🏛️ 会议：NeurIPS 2025

@@ -1,0 +1,129 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时空建模 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E6%97%B6%E7%A9%BA%E5%BB%BA%E6%A8%A1/</link><description>时空建模 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%97%B6%E7%A9%BA%E5%BB%BA%E6%A8%A1/" rel="self" type="application/rss+xml"/><item><title>ChangeMamba：用状态空间模型革新遥感变化检测</title><link>https://w-copper.github.io/2026/05/20260531_215800_changemamba/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_215800_changemamba/</guid><description><![CDATA[<h1 id="changemamba用状态空间模型革新遥感变化检测" class="headerLink">
+    <a href="#changemamba%e7%94%a8%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e9%9d%a9%e6%96%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>ChangeMamba：用状态空间模型革新遥感变化检测</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Transactions on Geoscience and Remote Sensing (TGRS) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2404.03425" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、Mamba、状态空间模型、时空建模</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感影像变化检测（Change Detection, CD）是地球观测领域的核心任务之一。想象一下：当你需要快速评估台风过后的建筑损毁情况，或是监测亚马逊雨林的砍伐进度时，传统人工判读方式不仅效率低下，而且容易受主观因素影响。这正是AI模型大显身手的场景——它能自动分析不同时相的卫星或航拍影像，精准定位地表变化。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li>
+<p><strong>CNN的&quot;近视眼&quot;问题</strong>：卷积神经网络受限于有限的感受野，难以捕捉大尺寸遥感影像中的长距离依赖关系。当变化区域跨越较大范围时，CNN容易漏检。</p>
+</li>
+<li>
+<p><strong>Transformer的&quot;暴饮暴食&quot;问题</strong>：虽然Transformer能够建模全局上下文，但其自注意力机制的计算复杂度随图像尺寸呈平方级增长。处理8000×8000像素的卫星影像时，显存消耗惊人。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何设计一种既能高效处理大尺寸遥感影像，又能准确捕捉时空变化信息的网络架构？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1引入mamba架构到遥感变化检测" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%95%e5%85%a5mamba%e6%9e%b6%e6%9e%84%e5%88%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>核心创新点1：引入Mamba架构到遥感变化检测</h3><p><strong>设计动机</strong>：Mamba架构基于状态空间模型（State Space Model, SSM），通过选择性记忆机制，只保留关键信息，实现线性复杂度的全局感知。这就像给变化检测装上了兼具望远镜和显微镜功能的智能眼镜。</p>
+<p><strong>具体实现</strong>：</p>
+<p>ChangeMamba将Mamba架构应用于遥感变化检测，提出了三种网络框架：</p>
+<ol>
+<li><strong>MambaBCD</strong>：二元变化检测（Binary Change Detection）</li>
+<li><strong>MambaSCD</strong>：语义变化检测（Semantic Change Detection）</li>
+<li><strong>MambaBDA</strong>：建筑损坏评估（Building Damage Assessment）</li>
+</ol>
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</title><link>https://w-copper.github.io/2026/05/20260531_211017_changemamba_ssm/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_211017_changemamba_ssm/</guid><description><![CDATA[<h1 id="changemamba首个基于状态空间模型的遥感变化检测框架" class="headerLink">
+    <a href="#changemamba%e9%a6%96%e4%b8%aa%e5%9f%ba%e4%ba%8e%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e7%9a%84%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%a1%86%e6%9e%b6" class="header-mark"></a>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Transactions on Geoscience and Remote Sensing (TGRS) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2404.03425v4" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425v4</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、状态空间模型、Mamba架构、时空建模、二元变化检测、语义变化检测</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感变化检测（Change Detection, CD）是地理信息科学的核心任务之一，旨在识别同一地理区域在不同时间段拍摄的影像之间的变化。这项技术在灾害评估、城市扩张监测、生态环境保护等领域具有重要应用价值。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li>
+<p><strong>CNN的&quot;近视眼&quot;问题</strong>：卷积神经网络受限于有限的感受野，难以捕捉大范围的空间上下文信息。在处理高分辨率遥感影像时，这一缺陷尤为明显。</p>
+</li>
+<li>
+<p><strong>Transformer的&quot;暴饮暴食&quot;问题</strong>：虽然Transformer具有全局建模能力，但其自注意力机制的计算复杂度与序列长度呈平方关系（O(L²)），在处理大尺寸遥感影像时计算成本极高。</p>
+</li>
+<li>
+<p><strong>实际应用挑战</strong>：在实际场景中，如台风灾后评估或森林砍伐监测，需要快速、准确地处理大量高分辨率影像，传统方法难以满足实时性要求。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p>如何设计一个既能捕捉全局空间上下文信息，又具有线性计算复杂度的遥感变化检测架构？</p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1首次引入mamba架构到遥感变化检测" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e9%a6%96%e6%ac%a1%e5%bc%95%e5%85%a5mamba%e6%9e%b6%e6%9e%84%e5%88%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>核心创新点1：首次引入Mamba架构到遥感变化检测</h3><p><strong>设计动机</strong>：
+Mamba是基于状态空间模型（State Space Model, SSM）的新兴架构，在自然语言处理领域展现出卓越性能。其核心优势在于：</p>
+<ul>
+<li>线性计算复杂度（O(L)），远低于Transformer的O(L²)</li>
+<li>通过选择性记忆机制实现全局感知</li>
+<li>更适合处理长序列数据</li>
+</ul>
+<p><strong>具体实现</strong>：
+ChangeMamba采用Visual Mamba架构作为编码器，将遥感影像转换为序列数据，通过状态空间模型进行特征提取。关键设计包括：</p>]]></description></item></channel></rss>

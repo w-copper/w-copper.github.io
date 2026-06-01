@@ -1,0 +1,79 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>任意波段 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E4%BB%BB%E6%84%8F%E6%B3%A2%E6%AE%B5/</link><description>任意波段 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E4%BB%BB%E6%84%8F%E6%B3%A2%E6%AE%B5/" rel="self" type="application/rss+xml"/><item><title>支持任意波段、任意分辨率！AOM：通用遥感基础模型</title><link>https://w-copper.github.io/2026/06/20260601_052213_any_optical_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_052213_any_optical_model/</guid><description><![CDATA[<h1 id="支持任意波段任意分辨率aom通用遥感基础模型" class="headerLink">
+    <a href="#%e6%94%af%e6%8c%81%e4%bb%bb%e6%84%8f%e6%b3%a2%e6%ae%b5%e4%bb%bb%e6%84%8f%e5%88%86%e8%be%a8%e7%8e%87aom%e9%80%9a%e7%94%a8%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>支持任意波段、任意分辨率！AOM：通用遥感基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | AAAI 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Any-Optical-Model: A Universal Foundation Model for Optical Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xuyang Li, Chenyu Li, Danfeng Hong</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>AAAI 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2512.17224" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2512.17224</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td>暂未开源</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、任意波段、任意分辨率、多尺度自适应、通道独立tokenizer</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像与自然图像有本质区别：遥感图像通常包含多个光谱通道（如Sentinel-2有13个波段，Landsat-8有11个波段），且空间分辨率差异巨大（从0.1米到100米）。现有的遥感基础模型（RSFMs）通常在固定的波段配置和空间分辨率上预训练，这导致它们在实际应用中面临严重局限。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>波段固定问题</strong>：现有模型（如SatMAE、SpectralGPT）将多光谱数据作为整体输入处理，当遇到波段缺失或新增波段时，性能严重下降。</li>
+<li><strong>跨传感器迁移困难</strong>：不同传感器（如Sentinel-2与Landsat）的波段配置不同，导致模型难以直接迁移。</li>
+<li><strong>尺度适应性差</strong>：现有模型采用单一尺度的patch embedding，无法同时捕获高分辨率的纹理细节和低分辨率的全局上下文。</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p>如何构建一个能够适应<strong>任意波段组合</strong>、<strong>任意传感器类型</strong>、<strong>任意空间分辨率</strong>的通用遥感基础模型？</p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1spectrum-independent-tokenizer-sitok" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91spectrum-independent-tokenizer-sitok" class="header-mark"></a>核心创新点1：Spectrum-independent Tokenizer (SiTok)</h3><p><strong>设计动机</strong>：传统方法将多光谱图像作为3D张量处理，波段维度与空间维度耦合，导致波段变化时需要重新训练。</p>
+<p><strong>具体实现</strong>：</p>
+<ul>
+<li>对每个光谱通道独立进行tokenization</li>
+<li>为每个token添加channel index编码</li>
+<li>支持任意波段组合和缺失波段场景</li>
+</ul>
+<p><strong>关键细节</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

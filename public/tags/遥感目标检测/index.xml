@@ -1,10 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感目标检测 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</link><description>遥感目标检测 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 31 May 2025 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>2025年遥感AI前沿：两篇顶级会议论文深度解析</title><link>https://w-copper.github.io/2025/05/20250531_143000_remote_sensing_ai/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_143000_remote_sensing_ai/</guid><description><![CDATA[<h1 id="2025年遥感ai前沿两篇顶级会议论文深度解析" class="headerLink">
-    <a href="#2025%e5%b9%b4%e9%81%a5%e6%84%9fai%e5%89%8d%e6%b2%bf%e4%b8%a4%e7%af%87%e9%a1%b6%e7%ba%a7%e4%bc%9a%e8%ae%ae%e8%ae%ba%e6%96%87%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90" class="header-mark"></a>2025年遥感AI前沿：两篇顶级会议论文深度解析</h1><blockquote>
-  <p>本文精选2025年遥感人工智能领域两篇具有GitHub开源代码的顶级会议论文，涵盖目标检测与语义分割两大核心任务。</p>
-</blockquote><hr>
-<h2 id="论文一legnet---面向低质量遥感图像的轻量级边缘-高斯网络" class="headerLink">
-    <a href="#%e8%ae%ba%e6%96%87%e4%b8%80legnet---%e9%9d%a2%e5%90%91%e4%bd%8e%e8%b4%a8%e9%87%8f%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e7%9a%84%e8%bd%bb%e9%87%8f%e7%ba%a7%e8%be%b9%e7%bc%98-%e9%ab%98%e6%96%af%e7%bd%91%e7%bb%9c" class="header-mark"></a>论文一：LEGNet - 面向低质量遥感图像的轻量级边缘-高斯网络</h2><h3 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📋 论文信息</h3><table>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感目标检测 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</link><description>遥感目标检测 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%81%A5%E6%84%9F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>LSKNet：遥感场景下的大型选择性核网络，动态感受野助力小目标检测</title><link>https://w-copper.github.io/2026/06/20260601_223000_lsknet_selective_kernel/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_223000_lsknet_selective_kernel/</guid><description><![CDATA[<h1 id="lsknet遥感场景下的大型选择性核网络动态感受野助力小目标检测" class="headerLink">
+    <a href="#lsknet%e9%81%a5%e6%84%9f%e5%9c%ba%e6%99%af%e4%b8%8b%e7%9a%84%e5%a4%a7%e5%9e%8b%e9%80%89%e6%8b%a9%e6%80%a7%e6%a0%b8%e7%bd%91%e7%bb%9c%e5%8a%a8%e6%80%81%e6%84%9f%e5%8f%97%e9%87%8e%e5%8a%a9%e5%8a%9b%e5%b0%8f%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b" class="header-mark"></a>LSKNet：遥感场景下的大型选择性核网络，动态感受野助力小目标检测</h1><blockquote>
+  <p><strong>论文解读</strong> | ICCV 2023 / IJCV 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
   <thead>
       <tr>
           <th>项目</th>
@@ -13,69 +11,110 @@
   </thead>
   <tbody>
       <tr>
-          <td><strong>论文标题</strong></td>
-          <td>LEGNet: A Lightweight Edge-Gaussian Network for Low-Quality Remote Sensing Image Object Detection</td>
+          <td><strong>标题</strong></td>
+          <td>LSKNet: A Foundation Lightweight Backbone for Remote Sensing</td>
       </tr>
       <tr>
           <td><strong>作者</strong></td>
-          <td>Wei Lu, Si-Bao Chen, Hui-Dong Li, Qing-Ling Shu, Chris H. Q. Ding, Jin Tang, Bin Luo</td>
+          <td>Yuxuan Li, Xiang Li, Yimian Dai, Qibin Hou, Li Liu, Yongxiang Liu, Ming-Ming Cheng, Jian Yang</td>
       </tr>
       <tr>
-          <td><strong>单位</strong></td>
-          <td>安徽大学、香港中文大学（深圳）</td>
+          <td><strong>会议</strong></td>
+          <td>ICCV 2023 (会议版本) / IJCV 2024 (期刊扩展版)</td>
       </tr>
       <tr>
-          <td><strong>发表会议</strong></td>
-          <td>TCSVT 2025（IEEE顶级期刊）/ ICCV 2025 Workshop</td>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2303.14239" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2303.14239</a></td>
       </tr>
       <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.14012" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.14012</a></td>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/zcablii/large-selective-kernel-network" target="_blank" rel="noopener noreferrer">https://github.com/zcablii/large-selective-kernel-network</a> (⭐678)</td>
       </tr>
       <tr>
-          <td><strong>GitHub代码</strong></td>
-          <td><a href="https://github.com/lwCVer/LEGNet" target="_blank" rel="noopener noreferrer">https://github.com/lwCVer/LEGNet</a></td>
-      </tr>
-      <tr>
-          <td><strong>发表时间</strong></td>
-          <td>2025年3月18日</td>
+          <td><strong>关键词</strong></td>
+          <td>遥感目标检测、选择性核、动态感受野、轻量级骨干网络</td>
       </tr>
   </tbody>
 </table>
-<h3 id="-研究问题" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 研究问题</h3><p>遥感目标检测（RSOD）在复杂视觉环境中面临严峻挑战。航空和卫星图像固有地存在以下降质问题：</p>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像具有独特的特点：目标尺度变化大、小目标密集分布、背景复杂多样。传统的卷积神经网络使用固定大小的卷积核，其感受野是固定的，这在处理遥感图像时面临两个关键挑战：</p>
 <ol>
-<li><strong>空间分辨率低</strong>：传感器硬件限制导致图像细节丢失</li>
-<li><strong>传感器噪声</strong>：成像过程中的电子噪声干扰</li>
-<li><strong>运动模糊</strong>：平台振动或快速移动造成的模糊</li>
-<li><strong>光照条件差</strong>：低光照、阴影遮挡等不利条件</li>
+<li>
+<p><strong>小目标检测困难</strong>：遥感图像中的目标（如车辆、船只）往往只有几个像素大小，固定感受野可能无法捕获足够的上下文信息来准确识别这些小目标。</p>
+</li>
+<li>
+<p><strong>不同目标需要不同感受野</strong>：建筑物需要大范围上下文来理解其结构，而车辆则需要局部细节信息。固定感受野无法适应这种多样性。</p>
+</li>
 </ol>
-<p>这些降质因素导致三个关键问题：</p>
-<ul>
-<li><strong>对比度降低</strong>：阻碍前景-背景分离</li>
-<li><strong>边缘结构不连续</strong>：目标边界模糊</li>
-<li><strong>特征响应模糊</strong>：光照变化引起的不确定性</li>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ul>
+<li><strong>CNN方法</strong>：受限于固定感受野，难以捕获长距离依赖</li>
+<li><strong>Transformer方法</strong>：虽然具有全局建模能力，但计算复杂度高，不适合实时应用</li>
+<li><strong>多尺度方法</strong>：如FPN，通过多尺度特征融合来缓解问题，但仍然是固定感受野</li>
 </ul>
-<h3 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h3><p>LEGNet提出了一种轻量级骨干网络，核心是创新的<strong>边缘-高斯聚合（EGA）模块</strong>：</p>
-<h4 id="1-边缘先验提取scharr算子" class="headerLink">
-    <a href="#1-%e8%be%b9%e7%bc%98%e5%85%88%e9%aa%8c%e6%8f%90%e5%8f%96scharr%e7%ae%97%e5%ad%90" class="header-mark"></a>1. 边缘先验提取（Scharr算子）</h4><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    
-    tw-flex 
-    tw-flex-row
-    tw-flex-1 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        code-block-button
-        tw-mx-2 
-        tw-flex
-        tw-flex-row
-        tw-flex-1"
-      aria-hidden="true">
-          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个轻量级的骨干网络，能够根据遥感图像中不同目标的特点，动态调整其空间感受野？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1大型选择性核机制-large-selective-kernel" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%a4%a7%e5%9e%8b%e9%80%89%e6%8b%a9%e6%80%a7%e6%a0%b8%e6%9c%ba%e5%88%b6-large-selective-kernel" class="header-mark"></a>核心创新点1：大型选择性核机制 (Large Selective Kernel)</h3><p><strong>设计动机</strong>：
+遥感图像中的目标具有高度多样性。例如，一条河流可能跨越数千像素，而一辆汽车可能只有几个像素。传统的固定大小卷积核无法适应这种变化。LSKNet的核心思想是：<strong>让网络能够根据输入内容，动态选择最合适的感受野大小</strong>。</p>]]></description></item><item><title>多核Inception网络：遥感目标检测的尺度感知新范式</title><link>https://w-copper.github.io/2026/05/20260531_231500_pkinet_remote_sensing_detection/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_231500_pkinet_remote_sensing_detection/</guid><description><![CDATA[<h1 id="多核inception网络遥感目标检测的尺度感知新范式" class="headerLink">
+    <a href="#%e5%a4%9a%e6%a0%b8inception%e7%bd%91%e7%bb%9c%e9%81%a5%e6%84%9f%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b%e7%9a%84%e5%b0%ba%e5%ba%a6%e6%84%9f%e7%9f%a5%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>多核Inception网络：遥感目标检测的尺度感知新范式</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Poly Kernel Inception Network for Remote Sensing Detection</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xinhao Cai, Qiuxia Lai, Yuwei Wang, Wenguan Wang, Zeren Sun, Yazhou Yao</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2403.06258" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2403.06258</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/NUST-Machine-Intelligence-Laboratory/PKINet" target="_blank" rel="noopener noreferrer">https://github.com/NUST-Machine-Intelligence-Laboratory/PKINet</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感目标检测、多尺度特征提取、Inception网络、上下文锚注意力、无膨胀卷积</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像（Remote Sensing Images, RSIs）中的目标检测是计算机视觉领域的重要研究方向。与自然图像不同，遥感图像具有独特的挑战性：</p>
+<ol>
+<li><strong>目标尺度变化巨大</strong>：同一场景中可能包含从几像素到几百像素的不同大小目标（如车辆vs机场）</li>
+<li><strong>背景复杂多样</strong>：遥感图像包含丰富的上下文信息，但也带来大量干扰</li>
+<li><strong>目标方向任意</strong>：遥感目标通常以任意角度出现，需要旋转不变性</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>为了解决上述问题，现有方法主要通过扩展主干网络的空间感受野来增强特征提取能力：</p>
+<p><strong>方法一：大核卷积（Large-kernel Convolution）</strong></p>
+<ul>
+<li>使用大尺寸卷积核（如7×7、11×11）来扩大感受野</li>
+<li><strong>问题</strong>：引入大量背景噪声，降低检测精度</li>
+</ul>
+<p><strong>方法二：膨胀卷积（Dilated Convolution）</strong></p>
+<ul>
+<li>通过设置膨胀率来扩大感受野，同时保持参数量</li>
+<li><strong>问题</strong>：生成过于稀疏的特征表示，丢失细节信息</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何在不引入背景噪声和不损失特征密度的前提下，有效捕获遥感图像中多尺度目标的特征和上下文信息？</strong></p>]]></description></item></channel></rss>

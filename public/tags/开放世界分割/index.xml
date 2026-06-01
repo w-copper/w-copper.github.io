@@ -1,0 +1,90 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>开放世界分割 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E4%B8%96%E7%95%8C%E5%88%86%E5%89%B2/</link><description>开放世界分割 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%BC%80%E6%94%BE%E4%B8%96%E7%95%8C%E5%88%86%E5%89%B2/" rel="self" type="application/rss+xml"/><item><title>UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架</title><link>https://w-copper.github.io/2026/06/20260601_120000_unigeoseg_open_world_segmentation/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_unigeoseg_open_world_segmentation/</guid><description><![CDATA[<h1 id="unigeoseg百万级数据集驱动的统一开放世界遥感分割框架" class="headerLink">
+    <a href="#unigeoseg%e7%99%be%e4%b8%87%e7%ba%a7%e6%95%b0%e6%8d%ae%e9%9b%86%e9%a9%b1%e5%8a%a8%e7%9a%84%e7%bb%9f%e4%b8%80%e5%bc%80%e6%94%be%e4%b8%96%e7%95%8c%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e6%a1%86%e6%9e%b6" class="header-mark"></a>UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>UniGeoSeg: Towards Unified Open-World Segmentation for Geospatial Scenes</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Shuo Ni, Di Wang, He Chen, Haonan Guo, Ning Zhang, Jing Zhang</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>北京理工大学、武汉大学、中关村学院、香港理工大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2511.23332" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2511.23332</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/MiliLab/UniGeoSeg" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/UniGeoSeg</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>指令驱动分割、开放世界分割、GeoSeg-1M数据集、统一框架、多任务学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>在遥感图像分析中，<strong>指令驱动分割</strong>（Instruction-Driven Segmentation）是一种新兴的范式，用户可以通过自然语言指令来指定需要分割的目标区域。这种交互方式极大地提升了遥感图像分析的<strong>可访问性</strong>和<strong>通用性</strong>，在城市规划、环境监测、灾害评估等领域具有广泛的应用前景。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>然而，当前的指令驱动分割方法面临三个核心挑战：</p>
+<ol>
+<li>
+<p><strong>任务碎片化</strong>：现有方法通常只针对单一任务（如引用分割或交互分割）进行设计，缺乏统一的框架来处理多种指令类型。这导致模型难以利用不同任务之间的互补性，限制了跨任务的迁移能力。</p>
+</li>
+<li>
+<p><strong>数据规模不足</strong>：当前的遥感指令分割数据集规模有限，且在视觉和文本领域的多样性不足。例如，RefSegRS仅有285张图像和4.4K样本，RRSIS-D也只有17K样本。这种数据稀缺性严重制约了模型的泛化能力。</p>
+</li>
+<li>
+<p><strong>推理能力薄弱</strong>：现有方法在处理需要复杂上下文理解和推理的指令时表现不佳。例如，当指令涉及空间关系、属性约束或因果推理时，模型往往无法准确理解用户意图。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个统一的、具备强大推理能力的指令驱动分割框架，以应对遥感图像中多样化的分割需求？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1geoseg-1m百万级数据集" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91geoseg-1m%e7%99%be%e4%b8%87%e7%ba%a7%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>核心创新点1：GeoSeg-1M百万级数据集</h3><p><strong>设计动机</strong>：现有数据集规模小、任务单一，无法支撑统一框架的训练。需要构建一个大规模、多任务、高质量的指令分割数据集。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li>
+<p><strong>数据来源整合</strong>：整合了18个公开的遥感分割数据集，包括SkyScapes、DIOR、DOTA、LoveDA、Potsdam等，涵盖0.05m到153m的空间分辨率。</p>
+</li>
+<li>
+<p><strong>自动化构建流水线</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

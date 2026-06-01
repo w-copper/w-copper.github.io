@@ -1,0 +1,88 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>类别不平衡 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E7%B1%BB%E5%88%AB%E4%B8%8D%E5%B9%B3%E8%A1%A1/</link><description>类别不平衡 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E7%B1%BB%E5%88%AB%E4%B8%8D%E5%B9%B3%E8%A1%A1/" rel="self" type="application/rss+xml"/><item><title>Mamba-FCS：融合空间-频率特征与变化引导注意力的遥感语义变化检测</title><link>https://w-copper.github.io/2026/06/20260601_213000_mamba_fcs_change_detection/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_213000_mamba_fcs_change_detection/</guid><description><![CDATA[<h1 id="mamba-fcs融合空间-频率特征与变化引导注意力的遥感语义变化检测" class="headerLink">
+    <a href="#mamba-fcs%e8%9e%8d%e5%90%88%e7%a9%ba%e9%97%b4-%e9%a2%91%e7%8e%87%e7%89%b9%e5%be%81%e4%b8%8e%e5%8f%98%e5%8c%96%e5%bc%95%e5%af%bc%e6%b3%a8%e6%84%8f%e5%8a%9b%e7%9a%84%e9%81%a5%e6%84%9f%e8%af%ad%e4%b9%89%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>Mamba-FCS：融合空间-频率特征与变化引导注意力的遥感语义变化检测</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Mamba-FCS: Joint Spatio-Frequency Feature Fusion, Change-Guided Attention, and SeK Inspired Loss for Enhanced Semantic Change Detection in Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Buddhi19 et al.</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2508.08232" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2508.08232</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Buddhi19/Mamba-FCS" target="_blank" rel="noopener noreferrer">https://github.com/Buddhi19/Mamba-FCS</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>语义变化检测、Mamba架构、频率域融合、变化引导注意力、类别不平衡</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>**语义变化检测（SCD）**是遥感领域的一项重要任务：给定两个时相的遥感图像，模型不仅要检测&quot;哪里发生了变化&quot;，还要识别&quot;从什么类别变成了什么类别&quot;。例如，检测&quot;农田变成了建筑用地&quot;或&quot;森林变成了水体&quot;。</p>
+<p>这项任务对于城市规划、环境监测、灾害评估等应用具有重要意义。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>CNN方法</strong>：受限于感受野大小，难以捕捉长程依赖关系</li>
+<li><strong>Transformer方法</strong>：自注意力机制的二次复杂度导致计算开销大</li>
+<li><strong>现有Mamba方法</strong>：主要关注空间特征，忽略了频率域信息和类别不平衡问题</li>
+</ol>
+<p><strong>核心挑战</strong>：</p>
+<ul>
+<li>如何有效融合空间和频率域特征？</li>
+<li>如何处理二元变化检测（BCD）和语义变化检测（SCD）任务的关联？</li>
+<li>如何解决类别不平衡问题（变化区域通常远小于未变化区域）？</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个高效的Mamba-based框架，同时解决空间-频率特征融合、双任务关联建模和类别不平衡三大挑战？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1联合空间-频率融合模块joint-spatio-frequency-fusion" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e8%81%94%e5%90%88%e7%a9%ba%e9%97%b4-%e9%a2%91%e7%8e%87%e8%9e%8d%e5%90%88%e6%a8%a1%e5%9d%97joint-spatio-frequency-fusion" class="header-mark"></a>核心创新点1：联合空间-频率融合模块（Joint Spatio-Frequency Fusion）</h3><p><strong>设计动机</strong>：
+空间域特征擅长捕捉纹理和结构信息，而频率域特征擅长捕捉边缘和高频细节。通过融合两个域的特征，可以增强模型对变化边界的敏感性。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li>对输入特征进行快速傅里叶变换（FFT）</li>
+<li>提取对数幅度谱特征</li>
+<li>将频率域特征与空间域特征融合</li>
+<li>通过逆FFT回到空间域</li>
+</ol>
+<p><strong>关键细节</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item></channel></rss>

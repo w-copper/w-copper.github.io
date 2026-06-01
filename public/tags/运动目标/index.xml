@@ -1,0 +1,79 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>运动目标 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%BF%90%E5%8A%A8%E7%9B%AE%E6%A0%87/</link><description>运动目标 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%BF%90%E5%8A%A8%E7%9B%AE%E6%A0%87/" rel="self" type="application/rss+xml"/><item><title>ROS-SAM：遥感视频中运动目标的高质量交互式分割</title><link>https://w-copper.github.io/2026/06/20260601_153000_ros_sam_interactive_segmentation/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_153000_ros_sam_interactive_segmentation/</guid><description><![CDATA[<h1 id="ros-sam遥感视频中运动目标的高质量交互式分割" class="headerLink">
+    <a href="#ros-sam%e9%81%a5%e6%84%9f%e8%a7%86%e9%a2%91%e4%b8%ad%e8%bf%90%e5%8a%a8%e7%9b%ae%e6%a0%87%e7%9a%84%e9%ab%98%e8%b4%a8%e9%87%8f%e4%ba%a4%e4%ba%92%e5%bc%8f%e5%88%86%e5%89%b2" class="header-mark"></a>ROS-SAM：遥感视频中运动目标的高质量交互式分割</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Zhe Shan, Yang Liu, Lei Zhou, Cheng Yan, Heng Wang, Xia Xie</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Shan_ROS-SAM_High-Quality_Interactive_Segmentation_for_Remote_Sensing_Moving_Object_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/CVPR2025/html/Shan_ROS-SAM_High-Quality_Interactive_Segmentation_for_Remote_Sensing_Moving_Object_CVPR_2025_paper.html</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ShanZard/ROS-SAM" target="_blank" rel="noopener noreferrer">https://github.com/ShanZard/ROS-SAM</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感视频分割、交互式分割、SAM、LoRA微调、运动目标</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感视频数据的普及为动态目标监测带来了新的机遇与挑战。与静态遥感图像不同，视频数据包含时间维度信息，能够捕捉运动目标的动态变化。然而，现有方法在处理遥感视频分割时面临三大难题：</p>
+<ol>
+<li><strong>目标尺寸小</strong>：遥感图像中的运动目标通常占据很小的像素比例，难以准确识别</li>
+<li><strong>特征模糊</strong>：小目标的语义特征不明显，容易与其他地物混淆</li>
+<li><strong>泛化能力不足</strong>：针对特定场景训练的模型难以迁移到其他遥感数据</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p><strong>SAM（Segment Anything Model）</strong> 虽然在通用图像分割领域表现出色，但直接应用于遥感视频时存在以下问题：</p>
+<ul>
+<li><strong>领域差异</strong>：SAM在自然图像上预训练，对遥感图像的特殊性（俯视视角、多尺度目标）适应不足</li>
+<li><strong>时序信息缺失</strong>：SAM是单帧分割模型，无法充分利用视频的时序连续性</li>
+<li><strong>细节丢失</strong>：SAM的编码器对深层特征的处理不够精细，导致分割边界模糊</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何在保持SAM强大泛化能力的同时，实现遥感视频中运动目标的高质量交互式分割？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1lora微调策略" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91lora%e5%be%ae%e8%b0%83%e7%ad%96%e7%95%a5" class="header-mark"></a>核心创新点1：LoRA微调策略</h3><p><strong>设计动机</strong>：直接全参数微调SAM会破坏其在大规模数据上学到的通用表示能力，导致过拟合到遥感领域。</p>
+<p><strong>具体实现</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item></channel></rss>

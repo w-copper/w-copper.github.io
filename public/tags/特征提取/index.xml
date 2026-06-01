@@ -1,0 +1,76 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>特征提取 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/</link><description>特征提取 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/" rel="self" type="application/rss+xml"/><item><title>扩散模型赋能遥感变化检测：DDPM-CD的创新之路</title><link>https://w-copper.github.io/2026/06/20260601_210000_ddpm_cd_change_detection/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_ddpm_cd_change_detection/</guid><description><![CDATA[<h1 id="扩散模型赋能遥感变化检测ddpm-cd的创新之路" class="headerLink">
+    <a href="#%e6%89%a9%e6%95%a3%e6%a8%a1%e5%9e%8b%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8bddpm-cd%e7%9a%84%e5%88%9b%e6%96%b0%e4%b9%8b%e8%b7%af" class="header-mark"></a>扩散模型赋能遥感变化检测：DDPM-CD的创新之路</h1><blockquote>
+  <p><strong>论文解读</strong> | WACV 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Denoising Diffusion Probabilistic Models as Feature Extractors for Change Detection</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Wele Gedara Chaminda Bandara, Nithin Gopalakrishnan Nair, Vishal M. Patel</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2405.17641" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2405.17641</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/wgcban/ddpm-cd" target="_blank" rel="noopener noreferrer">https://github.com/wgcban/ddpm-cd</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、扩散模型、自监督预训练、特征提取、DDPM</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感变化检测（Change Detection, CD）是地球观测的核心任务之一，旨在从不同时相的遥感图像中识别地表变化。这项任务在城市规划、环境监测、灾害评估等领域有着广泛应用。</p>
+<p>然而，现有的变化检测方法面临一个关键瓶颈：<strong>高质量标注数据的稀缺性</strong>。标注遥感图像的变化区域需要专业知识和大量时间，这限制了深度学习模型的性能提升。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>监督学习方法的困境</strong>：传统的CNN和Transformer方法依赖大量标注数据，但在遥感领域获取标注成本极高</li>
+<li><strong>特征提取的局限性</strong>：现有方法通常从头训练模型，无法充分利用海量无标注遥感数据中蕴含的语义信息</li>
+<li><strong>泛化能力不足</strong>：在小数据集上训练的模型容易过拟合，泛化到新场景的能力有限</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何利用海量无标注遥感图像提升变化检测模型的特征表示能力？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1扩散模型作为特征提取器" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e6%89%a9%e6%95%a3%e6%a8%a1%e5%9e%8b%e4%bd%9c%e4%b8%ba%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8" class="header-mark"></a>核心创新点1：扩散模型作为特征提取器</h3><p><strong>设计动机</strong>：
+扩散模型（DDPM）在图像生成任务中展现出强大的语义理解能力。作者观察到，预训练的扩散模型在去噪过程中学习到了丰富的图像语义特征，这些特征可以迁移到变化检测任务中。</p>
+<p><strong>具体实现</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item></channel></rss>

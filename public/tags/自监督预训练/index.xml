@@ -1,173 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>自监督预训练 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83/</link><description>自监督预训练 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83/" rel="self" type="application/rss+xml"/><item><title>GeoLink：利用OpenStreetMap数据增强遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_120000_geolink_remotesensing_osm/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_120000_geolink_remotesensing_osm/</guid><description><![CDATA[<h1 id="geolink利用openstreetmap数据增强遥感基础模型" class="headerLink">
-    <a href="#geolink%e5%88%a9%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e5%a2%9e%e5%bc%ba%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：利用OpenStreetMap数据增强遥感基础模型</h1><p><strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态学习、自监督预训练、地理空间智能</p>
-<hr>
-<h2 id="1-论文信息" class="headerLink">
-    <a href="#1-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>1. 论文信息</h2><ul>
-<li><strong>标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</li>
-<li><strong>作者</strong>：Lubian Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du</li>
-<li><strong>机构</strong>：北京大学、中国科学院自动化研究所、瑞士洛桑联邦理工学院</li>
-<li><strong>发表</strong>：NeurIPS 2025</li>
-<li><strong>arXiv</strong>：2509.26016</li>
-<li><strong>代码</strong>：https://github.com/bailubin/GeoLink_NeurIPS2025</li>
-</ul>
-<hr>
-<h2 id="2-问题遥感与地理空间数据的模态鸿沟" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e9%81%a5%e6%84%9f%e4%b8%8e%e5%9c%b0%e7%90%86%e7%a9%ba%e9%97%b4%e6%95%b0%e6%8d%ae%e7%9a%84%e6%a8%a1%e6%80%81%e9%b8%bf%e6%b2%9f" class="header-mark"></a>2. 问题：遥感与地理空间数据的模态鸿沟</h2><h3 id="21-核心挑战" class="headerLink">
-    <a href="#21-%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>2.1 核心挑战</h3><p>遥感（RS）基础模型近年来取得了显著进展，但大多数模型<strong>仅关注遥感影像本身</strong>，忽略了地面级地理空间数据（如OpenStreetMap）所提供的丰富地理上下文信息。这种忽视导致了几个关键问题：</p>
-<ol>
-<li><strong>语义歧义</strong>：仅凭视觉特征难以区分外观相似但语义不同的地物（如不同功能的建筑）</li>
-<li><strong>上下文缺失</strong>：遥感影像缺乏社会经济属性、功能分区等高层语义信息</li>
-<li><strong>模态差异</strong>：OSM数据是矢量格式（点、线、面），与遥感影像的栅格结构存在根本性差异</li>
-</ol>
-<h3 id="22-现有方法的局限" class="headerLink">
-    <a href="#22-%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>2.2 现有方法的局限</h3><p>现有RS-OSM融合方法主要采用<strong>间接整合策略</strong>：</p>
-<ul>
-<li><strong>数据转换法</strong>：将矢量数据栅格化，但损失了精细的几何信息</li>
-<li><strong>数据派生法</strong>：从OSM生成文本描述，但丢失了空间信息</li>
-<li><strong>知识图谱法</strong>：构建地理知识图谱，但任务特定、难以扩展</li>
-</ul>
-<p>这些方法都无法直接利用OSM的原始矢量元素，导致地理上下文信息的损失。</p>
-<hr>
-<h2 id="3-解决方案geolink的多粒度跨模态学习框架" class="headerLink">
-    <a href="#3-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88geolink%e7%9a%84%e5%a4%9a%e7%b2%92%e5%ba%a6%e8%b7%a8%e6%a8%a1%e6%80%81%e5%ad%a6%e4%b9%a0%e6%a1%86%e6%9e%b6" class="header-mark"></a>3. 解决方案：GeoLink的多粒度跨模态学习框架</h2><h3 id="31-核心思想" class="headerLink">
-    <a href="#31-%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" class="header-mark"></a>3.1 核心思想</h3><p>GeoLink的核心创新在于：<strong>直接利用OSM的原始矢量数据</strong>，通过空间关联引导的多粒度学习信号，增强遥感基础模型的预训练和下游任务。</p>
-<h3 id="32-关键技术细节" class="headerLink">
-    <a href="#32-%e5%85%b3%e9%94%ae%e6%8a%80%e6%9c%af%e7%bb%86%e8%8a%82" class="header-mark"></a>3.2 关键技术细节</h3><h4 id="321-异构图神经网络osm编码器" class="headerLink">
-    <a href="#321-%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9cosm%e7%bc%96%e7%a0%81%e5%99%a8" class="header-mark"></a>3.2.1 异构图神经网络OSM编码器</h4><p>OSM数据被建模为<strong>异构图</strong>：</p>
-<ul>
-<li><strong>节点</strong>：代表地理对象（点、线、面三种类型）</li>
-<li><strong>边</strong>：捕获空间拓扑关系（而非距离，因距离对尺度敏感）</li>
-</ul>
-<p><strong>节点特征初始化</strong>：</p>
-<ul>
-<li>使用BERT编码OSM标签值对（如&quot;building:residential&quot;）</li>
-<li>采用加权平均策略，频繁出现的标签（如&quot;building&quot;）获得更高权重</li>
-<li>公式：$\sigma_V = \sum_{i=1}^{n} w_i h_i / \sum_{i=1}^{n} w_i$</li>
-</ul>
-<p><strong>边构建策略</strong>：</p>
-<ul>
-<li>点特征：使用Delaunay三角剖分建立连接</li>
-<li>线/面特征：基于空间拓扑关系（相交、包含等）</li>
-<li>优势：拓扑关系比距离更稳定，不受尺度变化影响</li>
-</ul>
-<h4 id="322-掩码输入预训练策略" class="headerLink">
-    <a href="#322-%e6%8e%a9%e7%a0%81%e8%be%93%e5%85%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e7%ad%96%e7%95%a5" class="header-mark"></a>3.2.2 掩码输入预训练策略</h4><p>GeoLink采用<strong>双模态掩码</strong>策略：</p>
-<ul>
-<li><strong>遥感影像</strong>：随机掩码75%的图像块（类似MAE）</li>
-<li><strong>OSM图</strong>：随机掩码20%的节点，但保留其邻接边</li>
-</ul>
-<p><strong>三个自监督学习目标</strong>：</p>]]></description></item><item><title>GeoLink：用OpenStreetMap赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_150516_geolink/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_150516_geolink/</guid><description><![CDATA[<h1 id="geolink用openstreetmap赋能遥感基础模型" class="headerLink">
-    <a href="#geolink%e7%94%a8openstreetmap%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap赋能遥感基础模型</h1><blockquote>
-  <p><strong>论文标题</strong>：GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data<br>
-<strong>作者</strong>：Lubin Bai, Xiuyuan Zhang, Siqi Zhang, Zepeng Zhang, Haoyu Wang, Wei Qin, Shihong Du<br>
-<strong>会议</strong>：NeurIPS 2025<br>
-<strong>arXiv</strong>：<a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">2509.26016</a><br>
-<strong>GitHub</strong>：<a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">bailubin/GeoLink_NeurIPS2025</a></p>
-</blockquote><hr>
-<h2 id="-研究定位" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>📌 研究定位</h2><p><strong>大领域</strong>：遥感智能解译<br>
-<strong>小领域</strong>：多模态遥感基础模型<br>
-<strong>关键词</strong>：遥感基础模型、OpenStreetMap、多模态学习、自监督预训练、空间相关性</p>
-<hr>
-<h2 id="-研究问题" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>遥感（RS）基础模型近年来取得了显著进展，但大多数模型<strong>仅关注遥感影像本身</strong>，忽略了地面级地理空间数据的丰富语义信息。OpenStreetMap（OSM）作为全球最大的开源地理空间数据库之一，包含海量的地理实体（建筑、道路、兴趣点等）及其属性信息，这些信息与遥感影像具有天然的空间对应关系。</p>
-<h3 id="核心挑战" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e6%8c%91%e6%88%98" class="header-mark"></a>核心挑战</h3><ol>
-<li><strong>模态鸿沟</strong>：RS数据（栅格图像）与OSM数据（矢量图结构）在数据结构、内容和空间粒度上存在根本性差异</li>
-<li><strong>结构异构性</strong>：OSM数据包含点（point）、折线（polyline）、多边形（polygon）三种几何类型，传统方法难以统一处理</li>
-<li><strong>空间对齐难题</strong>：如何建立RS影像斑块与OSM实体之间的精确空间对应关系</li>
-</ol>
-<h3 id="作者的切入点" class="headerLink">
-    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h3><p>作者敏锐地观察到：<strong>空间相关性是连接遥感影像与OSM数据的关键桥梁</strong>。基于这一洞察，他们提出了一个核心问题：如何利用OSM数据的地理语义信息来增强遥感基础模型的预训练和下游任务性能？</p>
-<hr>
-<h2 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心框架" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心框架</h3><p>GeoLink是一个多模态框架，在预训练和下游任务两个阶段同时利用OSM数据增强遥感基础模型。</p>
-<h3 id="创新点1异构图神经网络osm编码器" class="headerLink">
-    <a href="#%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%82%e6%9e%84%e5%9b%be%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9cosm%e7%bc%96%e7%a0%81%e5%99%a8" class="header-mark"></a>创新点1：异构图神经网络OSM编码器</h3><p><strong>设计动机</strong>：OSM数据具有几何异构性（点/折线/多边形）、非欧式结构和动态属性标签，传统方法难以处理。</p>
-<p><strong>技术细节</strong>：</p>
-<ul>
-<li>构建异构图结构，将OSM对象表示为节点，空间关系表示为边</li>
-<li>设计基于GATConv的轻量级异构GNN，包含<strong>9个并行的GATConv层</strong></li>
-<li>每个GATConv层专门处理一种边类型（由节点类型间的空间关系定义）</li>
-<li>支持三种节点类型：点、折线、多边形</li>
-</ul>
-<p><strong>精妙之处</strong>：以点类型节点为例，编码器不仅执行类型内消息传递（点与点之间），还通过独立的GATConv层实现类型间交互（点向折线和多边形节点传播消息）。这种设计使得模型能够捕获OSM数据中复杂的拓扑关系。</p>
-<h3 id="创新点2多粒度空间相关性学习" class="headerLink">
-    <a href="#%e5%88%9b%e6%96%b0%e7%82%b92%e5%a4%9a%e7%b2%92%e5%ba%a6%e7%a9%ba%e9%97%b4%e7%9b%b8%e5%85%b3%e6%80%a7%e5%ad%a6%e4%b9%a0" class="header-mark"></a>创新点2：多粒度空间相关性学习</h3><p><strong>核心思想</strong>：使用<strong>位置</strong>作为桥梁，构建两个粒度的空间相关性：</p>
-<ol>
-<li>
-<p><strong>区域-图像级别对齐</strong>：通过对比学习实现显式空间范围匹配</p>
-<ul>
-<li>将OSM区域与对应的遥感影像进行语义对齐</li>
-<li>使用空间范围作为监督信号</li>
-</ul>
-</li>
-<li>
-<p><strong>对象-斑块级别交互</strong>：通过位置感知的交叉注意力捕获隐式空间关联</p>
-<ul>
-<li>将OSM对象与遥感影像斑块进行细粒度交互</li>
-<li>保持空间一致性以进行联合表示学习</li>
-</ul>
-</li>
-</ol>
-<p><strong>技术实现</strong>：</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    
-    tw-flex 
-    tw-flex-row
-    tw-flex-1 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        code-block-button
-        tw-mx-2 
-        tw-flex
-        tw-flex-row
-        tw-flex-1"
-      aria-hidden="true">
-          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">python</p>]]></description></item><item><title>RoMA: 基于Mamba的遥感基础模型自监督预训练框架</title><link>https://w-copper.github.io/2026/05/20260531_173833_roma_mamba/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_173833_roma_mamba/</guid><description><![CDATA[<h1 id="roma-基于mamba的遥感基础模型自监督预训练框架" class="headerLink">
-    <a href="#roma-%e5%9f%ba%e4%ba%8emamba%e7%9a%84%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>RoMA: 基于Mamba的遥感基础模型自监督预训练框架</h1><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📌 论文信息</h2><ul>
-<li><strong>标题</strong>: RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</li>
-<li><strong>作者</strong>: Fengxiang Wang, Yulin Wang, Mingshuo Chen, Haiyan Zhao, Yangang Sun, Shuo Wang, Hongzhen Wang, Di Wang, Long Lan, Wenjing Yang, Jing Zhang</li>
-<li><strong>机构</strong>: 国防科技大学、清华大学、武汉大学、北京邮电大学</li>
-<li><strong>会议</strong>: NeurIPS 2025</li>
-<li><strong>arXiv</strong>: <a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></li>
-<li><strong>GitHub</strong>: <a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></li>
-<li><strong>关键词</strong>: 遥感基础模型、Mamba架构、自监督预训练、旋转感知、多尺度预测</li>
-</ul>
-<h2 id="-研究定位" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>🗺️ 研究定位</h2><ul>
-<li><strong>大领域</strong>: 遥感图像智能解译</li>
-<li><strong>小领域</strong>: 遥感基础模型自监督预训练</li>
-<li><strong>技术路线</strong>: 基于Mamba架构的自回归预训练</li>
-</ul>
-<h2 id="-研究问题" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>❓ 研究问题</h2><h3 id="问题来源" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e6%9d%a5%e6%ba%90" class="header-mark"></a>问题来源</h3><p>当前遥感基础模型主要基于Vision Transformer (ViT)架构，但其自注意力机制的二次计算复杂度（O(n²)）在高分辨率遥感图像处理中面临严峻的扩展性挑战。具体表现为：</p>
-<ol>
-<li><strong>计算瓶颈</strong>: 处理大尺寸遥感图像时，内存消耗和计算时间呈平方级增长</li>
-<li><strong>模型扩展受限</strong>: 现有ViT模型在参数规模和数据规模上的扩展受到硬件限制</li>
-<li><strong>Mamba应用局限</strong>: 虽然Mamba架构具有线性复杂度优势，但在遥感领域的应用仅限于小规模监督任务</li>
-</ol>
-<h3 id="核心问题" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h3><p><strong>如何实现基于Mamba架构的遥感基础模型的可扩展自监督预训练，使其在保持计算效率的同时获得与ViT模型相当甚至更优的性能？</strong></p>
-<h2 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心方法roma框架" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e6%96%b9%e6%b3%95roma%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心方法：RoMA框架</h3><p>RoMA（<strong>Ro</strong>tation-aware <strong>M</strong>amba <strong>A</strong>utoregressive pretraining）是一个专门针对遥感图像特性设计的Mamba模型自监督预训练框架。</p>]]></description></item><item><title>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</title><link>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</link><pubDate>Sat, 31 May 2025 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2025/05/20250531_214500_mamba_remote_sensing/</guid><description><![CDATA[<h1 id="-mamba架构在遥感领域的突破从基础模型到变化检测" class="headerLink">
-    <a href="#-mamba%e6%9e%b6%e6%9e%84%e5%9c%a8%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e7%9a%84%e7%aa%81%e7%a0%b4%e4%bb%8e%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e5%88%b0%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>🛰️ Mamba架构在遥感领域的突破：从基础模型到变化检测</h1><blockquote>
-  <p><strong>关键词</strong>: Mamba, 遥感基础模型, 变化检测, 状态空间模型, 自监督预训练</p>
-</blockquote><hr>
-<h2 id="-论文一roma--遥感领域首个mamba自监督预训练框架" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%b8%80roma--%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9f%e9%a6%96%e4%b8%aamamba%e8%87%aa%e7%9b%91%e7%9d%a3%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>📌 论文一：RoMA —— 遥感领域首个Mamba自监督预训练框架</h2><h3 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📋 论文信息</h3><table>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>自监督预训练 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83/</link><description>自监督预训练 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83/" rel="self" type="application/rss+xml"/><item><title>MA3E：让遥感预训练\"看见\"角度——基于掩码角度感知自编码器的旋转不变表示学习</title><link>https://w-copper.github.io/2026/06/20260601_223000_ma3e_angle_aware/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_223000_ma3e_angle_aware/</guid><description><![CDATA[<h1 id="ma3e让遥感预训练看见角度基于掩码角度感知自编码器的旋转不变表示学习" class="headerLink">
+    <a href="#ma3e%e8%ae%a9%e9%81%a5%e6%84%9f%e9%a2%84%e8%ae%ad%e7%bb%83%e7%9c%8b%e8%a7%81%e8%a7%92%e5%ba%a6%e5%9f%ba%e4%ba%8e%e6%8e%a9%e7%a0%81%e8%a7%92%e5%ba%a6%e6%84%9f%e7%9f%a5%e8%87%aa%e7%bc%96%e7%a0%81%e5%99%a8%e7%9a%84%e6%97%8b%e8%bd%ac%e4%b8%8d%e5%8f%98%e8%a1%a8%e7%a4%ba%e5%ad%a6%e4%b9%a0" class="header-mark"></a>MA3E：让遥感预训练&quot;看见&quot;角度——基于掩码角度感知自编码器的旋转不变表示学习</h1><blockquote>
+  <p><strong>论文解读</strong> | ECCV 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
   <thead>
       <tr>
           <th>项目</th>
@@ -176,51 +11,49 @@
   </thead>
   <tbody>
       <tr>
-          <td><strong>论文标题</strong></td>
-          <td>RoMA: Scaling up Mamba-based Foundation Models for Remote Sensing</td>
+          <td><strong>标题</strong></td>
+          <td>Masked Angle-Aware Autoencoder for Remote Sensing Images</td>
       </tr>
       <tr>
-          <td><strong>发表会议</strong></td>
-          <td>NeurIPS 2025 (Spotlight)</td>
+          <td><strong>作者</strong></td>
+          <td>Benesaki Takam, et al.</td>
       </tr>
       <tr>
-          <td><strong>arXiv链接</strong></td>
-          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.10392</a></td>
+          <td><strong>会议</strong></td>
+          <td>ECCV 2024</td>
       </tr>
       <tr>
-          <td><strong>代码仓库</strong></td>
-          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/RoMA</a></td>
+          <td><strong>arXiv</strong></td>
+          <td>-</td>
       </tr>
       <tr>
-          <td><strong>研究机构</strong></td>
-          <td>MiliLab</td>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/benesakitam/MA3E" target="_blank" rel="noopener noreferrer">https://github.com/benesakitam/MA3E</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>自监督预训练、掩码自编码器、角度感知、旋转不变性、遥感图像</td>
       </tr>
   </tbody>
 </table>
-<h3 id="-研究问题为什么需要mamba基础模型" class="headerLink">
-    <a href="#-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81mamba%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>🎯 研究问题：为什么需要Mamba基础模型？</h3><h4 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h4><p>遥感（RS）领域近年来见证了Vision Transformer（ViT）自监督学习的突破性进展，催生了一系列遥感基础模型（RSFMs）。然而，<strong>自注意力机制的二次计算复杂度</strong>（O(n²)）成为了可扩展性的重大障碍，尤其是在处理<strong>大规模模型</strong>和<strong>高分辨率遥感影像</strong>时。</p>
-<h4 id="核心痛点" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e7%97%9b%e7%82%b9" class="header-mark"></a>核心痛点</h4><ol>
-<li><strong>计算瓶颈</strong>：ViT处理高分辨率遥感影像时，计算成本呈二次增长</li>
-<li><strong>数据规模限制</strong>：现有Mamba在遥感中的应用仅限于小规模、特定领域的监督任务</li>
-<li><strong>预训练空白</strong>：缺乏针对Mamba架构的遥感自监督预训练框架</li>
-<li><strong>尺度变化极端</strong>：遥感影像中目标尺度变化极大（从微小车辆到大型机场）</li>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像与自然图像存在本质差异：<strong>同一地物在不同拍摄角度下会呈现完全不同的视觉外观</strong>。例如，一栋建筑物从东南方向和西北方向拍摄，其外观可能截然不同。这种<strong>旋转变化</strong>是遥感图像的固有特性。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>现有的自监督预训练方法（如MAE、SatMAE等）主要借鉴自然图像的预训练策略，<strong>忽略了遥感图像中普遍存在的角度变化问题</strong>：</p>
+<ol>
+<li><strong>MAE系列</strong>：直接重建被掩码的图像块，未考虑旋转带来的外观变化</li>
+<li><strong>对比学习方法</strong>：依赖数据增强，但未显式建模角度信息</li>
+<li><strong>现有遥感预训练</strong>：大多直接迁移自然图像方法，未针对遥感特性设计</li>
 </ol>
-<h4 id="作者的切入点" class="headerLink">
-    <a href="#%e4%bd%9c%e8%80%85%e7%9a%84%e5%88%87%e5%85%a5%e7%82%b9" class="header-mark"></a>作者的切入点</h4><p>作者注意到Mamba架构具有<strong>线性计算复杂度</strong>（O(n)），是Transformer的有力替代。但现有遥感Mamba研究局限于监督学习小数据集，<strong>没有充分利用大规模无标注遥感数据进行自监督预训练</strong>。这就是RoMA要解决的核心问题。</p>
-<h3 id="-解决方案旋转感知的多尺度自回归学习" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e7%9a%84%e5%a4%9a%e5%b0%ba%e5%ba%a6%e8%87%aa%e5%9b%9e%e5%bd%92%e5%ad%a6%e4%b9%a0" class="header-mark"></a>💡 解决方案：旋转感知的多尺度自回归学习</h3><h4 id="整体框架" class="headerLink">
-    <a href="#%e6%95%b4%e4%bd%93%e6%a1%86%e6%9e%b6" class="header-mark"></a>整体框架</h4><p>RoMA提出了<strong>Rotation-aware Multi-scale Autoregressive learning</strong>框架，首次实现Mamba架构在遥感领域的可扩展自监督预训练。</p>
-<h4 id="创新点一旋转感知预训练机制" class="headerLink">
-    <a href="#%e5%88%9b%e6%96%b0%e7%82%b9%e4%b8%80%e6%97%8b%e8%bd%ac%e6%84%9f%e7%9f%a5%e9%a2%84%e8%ae%ad%e7%bb%83%e6%9c%ba%e5%88%b6" class="header-mark"></a>创新点一：旋转感知预训练机制</h4><p><strong>问题洞察</strong>：遥感影像中的目标具有任意方向（如飞机、船舶、建筑物），传统预训练方法忽略了旋转不变性。</p>
-<p><strong>解决方案</strong>：</p>
-<ul>
-<li><strong>自适应裁剪策略</strong>：根据目标方向自适应裁剪图像区域</li>
-<li><strong>角度嵌入（Angular Embeddings）</strong>：将旋转角度信息编码到嵌入空间</li>
-<li><strong>旋转不变表征学习</strong>：在自回归预训练过程中强化旋转不变性</li>
-</ul>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何在自监督预训练中显式地感知和学习遥感图像中的角度信息，从而获得旋转不变的特征表示？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1scaling-center-crop缩放中心裁剪" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91scaling-center-crop%e7%bc%a9%e6%94%be%e4%b8%ad%e5%bf%83%e8%a3%81%e5%89%aa" class="header-mark"></a>核心创新点1：Scaling Center Crop（缩放中心裁剪）</h3><p><strong>设计动机</strong>：遥感图像中的地物可能以任意角度出现，需要模型能够感知并适应这种角度变化。</p>
+<p><strong>具体实现</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
     tw-flex 
@@ -239,4 +72,79 @@
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>扩散模型赋能遥感变化检测：DDPM-CD的创新之路</title><link>https://w-copper.github.io/2026/06/20260601_210000_ddpm_cd_change_detection/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_ddpm_cd_change_detection/</guid><description><![CDATA[<h1 id="扩散模型赋能遥感变化检测ddpm-cd的创新之路" class="headerLink">
+    <a href="#%e6%89%a9%e6%95%a3%e6%a8%a1%e5%9e%8b%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8bddpm-cd%e7%9a%84%e5%88%9b%e6%96%b0%e4%b9%8b%e8%b7%af" class="header-mark"></a>扩散模型赋能遥感变化检测：DDPM-CD的创新之路</h1><blockquote>
+  <p><strong>论文解读</strong> | WACV 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Denoising Diffusion Probabilistic Models as Feature Extractors for Change Detection</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Wele Gedara Chaminda Bandara, Nithin Gopalakrishnan Nair, Vishal M. Patel</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2405.17641" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2405.17641</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/wgcban/ddpm-cd" target="_blank" rel="noopener noreferrer">https://github.com/wgcban/ddpm-cd</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、扩散模型、自监督预训练、特征提取、DDPM</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感变化检测（Change Detection, CD）是地球观测的核心任务之一，旨在从不同时相的遥感图像中识别地表变化。这项任务在城市规划、环境监测、灾害评估等领域有着广泛应用。</p>
+<p>然而，现有的变化检测方法面临一个关键瓶颈：<strong>高质量标注数据的稀缺性</strong>。标注遥感图像的变化区域需要专业知识和大量时间，这限制了深度学习模型的性能提升。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>监督学习方法的困境</strong>：传统的CNN和Transformer方法依赖大量标注数据，但在遥感领域获取标注成本极高</li>
+<li><strong>特征提取的局限性</strong>：现有方法通常从头训练模型，无法充分利用海量无标注遥感数据中蕴含的语义信息</li>
+<li><strong>泛化能力不足</strong>：在小数据集上训练的模型容易过拟合，泛化到新场景的能力有限</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何利用海量无标注遥感图像提升变化检测模型的特征表示能力？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1扩散模型作为特征提取器" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e6%89%a9%e6%95%a3%e6%a8%a1%e5%9e%8b%e4%bd%9c%e4%b8%ba%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8" class="header-mark"></a>核心创新点1：扩散模型作为特征提取器</h3><p><strong>设计动机</strong>：
+扩散模型（DDPM）在图像生成任务中展现出强大的语义理解能力。作者观察到，预训练的扩散模型在去噪过程中学习到了丰富的图像语义特征，这些特征可以迁移到变化检测任务中。</p>
+<p><strong>具体实现</strong>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item></channel></rss>

@@ -1,0 +1,259 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多任务学习 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/</link><description>多任务学习 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml"/><item><title>Falcon：首个支持14个任务的遥感视觉语言基础模型</title><link>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</guid><description><![CDATA[<h1 id="falcon首个支持14个任务的遥感视觉语言基础模型" class="headerLink">
+    <a href="#falcon%e9%a6%96%e4%b8%aa%e6%94%af%e6%8c%8114%e4%b8%aa%e4%bb%bb%e5%8a%a1%e7%9a%84%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Falcon：首个支持14个任务的遥感视觉语言基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Falcon: A Remote Sensing Vision-Language Foundation Model (Technical Report)</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kelu Yao, Nuo Xu, Rong Yang, Yingying Xu, Zhuoyan Gao, Titinunt Kitrungrotsakul, Yi Ren, Pu Zhang, Jin Wang, Ning Wei, Chao Li</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>ZhejiangLab（之江实验室）</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.11070" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11070</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/TianHuiLab/Falcon" target="_blank" rel="noopener noreferrer">https://github.com/TianHuiLab/Falcon</a> (⭐372)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、视觉语言模型、多任务学习、指令调优、统一表示</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像解译是地球观测的核心任务，涵盖场景分类、目标检测、语义分割、变化检测等多个领域。近年来，大型视觉语言模型（LVLMs）在自然图像领域取得了巨大成功，但在遥感领域却面临严峻挑战：</p>
+<ol>
+<li><strong>领域鸿沟</strong>：自然图像与遥感图像之间存在显著的领域差异，包括视角、尺度、语义等方面</li>
+<li><strong>任务碎片化</strong>：现有遥感VLMs通常只擅长特定任务，缺乏统一的多任务处理能力</li>
+<li><strong>数据集不足</strong>：缺乏大规模、高质量、多任务的遥感指令调优数据集</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>参数量</th>
+          <th>支持任务数</th>
+          <th>主要局限</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GeoChat</td>
+          <td>7B</td>
+          <td>7</td>
+          <td>不支持像素级任务（分割、变化检测）</td>
+      </tr>
+      <tr>
+          <td>LHRS-Bot</td>
+          <td>7B</td>
+          <td>6</td>
+          <td>缺乏区域级和像素级理解能力</td>
+      </tr>
+      <tr>
+          <td>EarthGPT</td>
+          <td>7B</td>
+          <td>9</td>
+          <td>参数量大，推理效率低</td>
+      </tr>
+      <tr>
+          <td>RSGPT</td>
+          <td>7B</td>
+          <td>5</td>
+          <td>任务覆盖范围有限</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个轻量级、统一的遥感视觉语言模型，同时支持图像级、区域级和像素级的14个任务？</strong></p>]]></description></item><item><title>GeoChat：首个遥感领域Grounded视觉语言大模型，让卫星图像对话更智能</title><link>https://w-copper.github.io/2026/06/20260601_120000_geochat_vlm/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_geochat_vlm/</guid><description><![CDATA[<h1 id="geochat首个遥感领域grounded视觉语言大模型让卫星图像对话更智能" class="headerLink">
+    <a href="#geochat%e9%a6%96%e4%b8%aa%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9fgrounded%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%a4%a7%e6%a8%a1%e5%9e%8b%e8%ae%a9%e5%8d%ab%e6%98%9f%e5%9b%be%e5%83%8f%e5%af%b9%e8%af%9d%e6%9b%b4%e6%99%ba%e8%83%bd" class="header-mark"></a>GeoChat：首个遥感领域Grounded视觉语言大模型，让卫星图像对话更智能</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kartik Kuckreja, Muhammad Sohail Danish, Muzammal Naseer, Abduljabbar Al-Khateri, Shoaib Jameel, Lars Petersson, Salman Khan, Fahad Shahbaz Khan</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2311.15826" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2311.15826</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">https://github.com/mbzuai-oryx/GeoChat</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感、视觉语言模型、Grounding、多任务学习、区域级推理</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像分析是地球观测的核心任务，传统方法通常针对单一任务（如分类、检测、分割）设计专用模型。随着大型视觉语言模型（VLM）在通用领域的成功，研究者开始探索将其应用于遥感领域。</p>
+<p>然而，现有方法面临三个关键挑战：</p>
+<ol>
+<li><strong>领域适配问题</strong>：通用VLM（如GPT-4V）在遥感场景下表现不佳，容易产生不准确或虚构的信息</li>
+<li><strong>缺乏区域级推理</strong>：现有遥感VLM主要支持图像级任务，无法对特定区域进行细粒度分析</li>
+<li><strong>多任务统一困难</strong>：不同遥感任务（分类、检测、描述等）通常需要独立模型，缺乏统一框架</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>局限性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>通用VLM（GPT-4V等）</td>
+          <td>缺乏遥感领域知识，对卫星图像理解能力有限</td>
+      </tr>
+      <tr>
+          <td>遥感专用模型</td>
+          <td>仅支持单一任务，无法进行多轮对话</td>
+      </tr>
+      <tr>
+          <td>现有遥感VLM</td>
+          <td>仅支持图像级推理，缺乏区域级grounding能力</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个既能理解遥感图像全局语义，又能对特定区域进行细粒度推理的统一视觉语言模型？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1多模态遥感指令数据集构建" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e6%8c%87%e4%bb%a4%e6%95%b0%e6%8d%ae%e9%9b%86%e6%9e%84%e5%bb%ba" class="header-mark"></a>核心创新点1：多模态遥感指令数据集构建</h3><p><strong>设计动机</strong>：遥感领域缺乏大规模多模态指令调优数据集，直接使用通用数据集会导致领域偏移。</p>
+<p><strong>具体实现</strong>：</p>
+<ul>
+<li>整合多个现有遥感数据集（LRBEN、NWPU-RESISC-45、SAMRS等）</li>
+<li>利用Vicuna-v1.5和自动化管道生成318k指令数据</li>
+<li>设计统一的图像-文本对格式，支持多种任务类型</li>
+</ul>
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架</title><link>https://w-copper.github.io/2026/06/20260601_120000_unigeoseg_open_world_segmentation/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_unigeoseg_open_world_segmentation/</guid><description><![CDATA[<h1 id="unigeoseg百万级数据集驱动的统一开放世界遥感分割框架" class="headerLink">
+    <a href="#unigeoseg%e7%99%be%e4%b8%87%e7%ba%a7%e6%95%b0%e6%8d%ae%e9%9b%86%e9%a9%b1%e5%8a%a8%e7%9a%84%e7%bb%9f%e4%b8%80%e5%bc%80%e6%94%be%e4%b8%96%e7%95%8c%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e6%a1%86%e6%9e%b6" class="header-mark"></a>UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>UniGeoSeg: Towards Unified Open-World Segmentation for Geospatial Scenes</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Shuo Ni, Di Wang, He Chen, Haonan Guo, Ning Zhang, Jing Zhang</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>北京理工大学、武汉大学、中关村学院、香港理工大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2511.23332" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2511.23332</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/MiliLab/UniGeoSeg" target="_blank" rel="noopener noreferrer">https://github.com/MiliLab/UniGeoSeg</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>指令驱动分割、开放世界分割、GeoSeg-1M数据集、统一框架、多任务学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>在遥感图像分析中，<strong>指令驱动分割</strong>（Instruction-Driven Segmentation）是一种新兴的范式，用户可以通过自然语言指令来指定需要分割的目标区域。这种交互方式极大地提升了遥感图像分析的<strong>可访问性</strong>和<strong>通用性</strong>，在城市规划、环境监测、灾害评估等领域具有广泛的应用前景。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>然而，当前的指令驱动分割方法面临三个核心挑战：</p>
+<ol>
+<li>
+<p><strong>任务碎片化</strong>：现有方法通常只针对单一任务（如引用分割或交互分割）进行设计，缺乏统一的框架来处理多种指令类型。这导致模型难以利用不同任务之间的互补性，限制了跨任务的迁移能力。</p>
+</li>
+<li>
+<p><strong>数据规模不足</strong>：当前的遥感指令分割数据集规模有限，且在视觉和文本领域的多样性不足。例如，RefSegRS仅有285张图像和4.4K样本，RRSIS-D也只有17K样本。这种数据稀缺性严重制约了模型的泛化能力。</p>
+</li>
+<li>
+<p><strong>推理能力薄弱</strong>：现有方法在处理需要复杂上下文理解和推理的指令时表现不佳。例如，当指令涉及空间关系、属性约束或因果推理时，模型往往无法准确理解用户意图。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个统一的、具备强大推理能力的指令驱动分割框架，以应对遥感图像中多样化的分割需求？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1geoseg-1m百万级数据集" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91geoseg-1m%e7%99%be%e4%b8%87%e7%ba%a7%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>核心创新点1：GeoSeg-1M百万级数据集</h3><p><strong>设计动机</strong>：现有数据集规模小、任务单一，无法支撑统一框架的训练。需要构建一个大规模、多任务、高质量的指令分割数据集。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li>
+<p><strong>数据来源整合</strong>：整合了18个公开的遥感分割数据集，包括SkyScapes、DIOR、DOTA、LoveDA、Potsdam等，涵盖0.05m到153m的空间分辨率。</p>
+</li>
+<li>
+<p><strong>自动化构建流水线</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

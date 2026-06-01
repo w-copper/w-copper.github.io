@@ -1,4 +1,159 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多模态融合 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E8%9E%8D%E5%90%88/</link><description>多模态融合 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E8%9E%8D%E5%90%88/" rel="self" type="application/rss+xml"/><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多模态融合 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E8%9E%8D%E5%90%88/</link><description>多模态融合 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E6%A8%A1%E6%80%81%E8%9E%8D%E5%90%88/" rel="self" type="application/rss+xml"/><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
+    <a href="#galileo%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e5%b0%ba%e5%ba%a6icml-2025-%e9%80%9a%e7%94%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4" class="header-mark"></a>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</h1><blockquote>
+  <p><strong>论文解读</strong> | ICML 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Galileo: Learning Global &amp; Local Features of Many Remote Sensing Modalities</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Gabriel Tseng, Anthony Fuller, Marlena Reil, Henry Herzog, Patrick Beukema, Favyen Bastani, James R. Green, Evan Shelhamer, Hannah Kerner, David Rolnick</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>ICML 2025 (Proceedings of the 42nd International Conference on Machine Learning)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.09356</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">https://github.com/nasaharvest/galileo</a> (⭐ 177)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型, 多模态融合, 自监督学习, 多尺度特征, 掩码建模, 通用模型</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item><item><title>MAESTRO：多模态多时相多光谱遥感自监督学习的\"指挥家\"</title><link>https://w-copper.github.io/2026/06/20260601_100230_maestro_self_supervised/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_100230_maestro_self_supervised/</guid><description><![CDATA[<h1 id="maestro多模态多时相多光谱遥感自监督学习的指挥家" class="headerLink">
+    <a href="#maestro%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e6%97%b6%e7%9b%b8%e5%a4%9a%e5%85%89%e8%b0%b1%e9%81%a5%e6%84%9f%e8%87%aa%e7%9b%91%e7%9d%a3%e5%ad%a6%e4%b9%a0%e7%9a%84%e6%8c%87%e6%8c%a5%e5%ae%b6" class="header-mark"></a>MAESTRO：多模态多时相多光谱遥感自监督学习的&quot;指挥家&quot;</h1><blockquote>
+  <p><strong>论文解读</strong> | WACV 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>MAESTRO: Masked AutoEncoders for Multimodal, Multitemporal, and Multispectral Earth Observation Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Antoine Labatie, Michael Vaccaro, Nina Lardiere, Anatol Garioud, Nicolas Gonthier</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>WACV 2026 (IEEE/CVF Winter Conference on Applications of Computer Vision)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2508.10894" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2508.10894</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ignf/maestro" target="_blank" rel="noopener noreferrer">https://github.com/ignf/maestro</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>自监督学习, 掩码自编码器, 多模态融合, 多时相分析, 多光谱遥感, 地球观测</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景遥感数据的三多挑战" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae%e7%9a%84%e4%b8%89%e5%a4%9a%e6%8c%91%e6%88%98" class="header-mark"></a>问题背景：遥感数据的&quot;三多&quot;挑战</h3><p>地球观测（Earth Observation, EO）数据具有独特的&quot;三多&quot;特性：</p>
+<ol>
+<li><strong>多模态</strong>：光学（Sentinel-2）、SAR（Sentinel-1）、高光谱、DEM等不同传感器</li>
+<li><strong>多时相</strong>：同一区域在不同时间点的观测，蕴含丰富的时序变化信息</li>
+<li><strong>多光谱</strong>：单个传感器就有多个光谱波段（如Sentinel-2有13个波段）</li>
+</ol>
+<p>这些特性使得直接将自然图像领域的自监督学习方法（如MAE）迁移到遥感领域存在根本性挑战。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>方法类型</th>
+          <th>局限性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>单模态MAE</strong></td>
+          <td>忽略多模态互补信息，无法充分利用SAR、DEM等数据</td>
+      </tr>
+      <tr>
+          <td><strong>简单拼接融合</strong></td>
+          <td>将所有模态/时相强行拼接，导致异质数据相互干扰</td>
+      </tr>
+      <tr>
+          <td><strong>晚期融合</strong></td>
+          <td>各模态独立编码后融合，丢失跨模态交互信息</td>
+      </tr>
+      <tr>
+          <td><strong>统一tokenizer</strong></td>
+          <td>用同一套tokenizer处理所有模态，忽略传感器特性差异</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个统一的自监督学习框架，能够高效地融合多模态、多时相、多光谱的遥感数据，同时保持计算效率？</strong></p>]]></description></item><item><title>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</title><link>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</guid><description><![CDATA[<h1 id="skysense20亿参数多模态遥感基础模型统一理解地球观测" class="headerLink">
+    <a href="#skysense20%e4%ba%bf%e5%8f%82%e6%95%b0%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%bb%9f%e4%b8%80%e7%90%86%e8%a7%a3%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b" class="header-mark"></a>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xin Guo, Jiangwei Lao, Bo Dang, Yingying Zhang, Lei Yu, Lixiang Ru, Liheng Zhong, Ziyuan Huang, Kang Wu, Dingxiang Hu, Huimei He, Jian Wang, Jingdong Chen, Ming Yang, Yongjun Zhang, Yansheng Li</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.10115</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">https://github.com/Jack-bo1220/SkySense</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态融合、时序建模、地球观测、通用解译</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感技术已经渗透到我们生活的方方面面——从城市规划、农业生产到灾害监测、环境保护。然而，传统的遥感影像理解技术存在一个根本性缺陷：<strong>每个任务都需要单独训练一个模型</strong>。比如，要检测建筑物变化，需要一个专门的模型；要识别农作物类型，又需要另一个模型；要监测森林覆盖变化，还需要第三个模型。</p>]]></description></item><item><title>GeoLink：用OpenStreetMap数据赋能遥感基础模型</title><link>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_153612_geolink_multimodal/</guid><description><![CDATA[<h1 id="geolink用openstreetmap数据赋能遥感基础模型" class="headerLink">
     <a href="#geolink%e7%94%a8openstreetmap%e6%95%b0%e6%8d%ae%e8%b5%8b%e8%83%bd%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoLink：用OpenStreetMap数据赋能遥感基础模型</h1><blockquote>
   <p>📅 发表时间：2025年
 🏛️ 会议：NeurIPS 2025

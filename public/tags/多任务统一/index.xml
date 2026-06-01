@@ -1,0 +1,82 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多任务统一 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BB%9F%E4%B8%80/</link><description>多任务统一 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%BB%9F%E4%B8%80/" rel="self" type="application/rss+xml"/><item><title>GeoGround：统一遥感视觉Grounding的大型视觉语言模型</title><link>https://w-copper.github.io/2026/06/20260601_210000_geoground_unified_grounding/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_geoground_unified_grounding/</guid><description><![CDATA[<h1 id="geoground统一遥感视觉grounding的大型视觉语言模型" class="headerLink">
+    <a href="#geoground%e7%bb%9f%e4%b8%80%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89grounding%e7%9a%84%e5%a4%a7%e5%9e%8b%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>GeoGround：统一遥感视觉Grounding的大型视觉语言模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoGround: A Unified Large Vision-Language Model for Remote Sensing Visual Grounding</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Yue Zhou et al.</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2024 (v3: May 2025)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2411.11904" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2411.11904</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/nicehuster/GeoGround" target="_blank" rel="noopener noreferrer">https://github.com/nicehuster/GeoGround</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>视觉Grounding、遥感大模型、多任务统一、Text-Mask技术、像素级定位</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>在遥感图像解译中，<strong>视觉Grounding</strong>（视觉定位）是一项关键任务：给定一句自然语言描述，模型需要在遥感图像中找到对应的目标物体。这项任务对于人机交互式遥感解译系统至关重要。</p>
+<p>然而，遥感领域的视觉Grounding面临一个尴尬的现状：<strong>不同类型的目标需要不同的定位输出形式</strong>。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>水平边界框（HBB）</strong>：只能定位物体的位置，无法描述其朝向和形状</li>
+<li><strong>旋转边界框（OBB）</strong>：能描述物体的朝向，但无法刻画精确轮廓</li>
+<li><strong>分割掩码（Mask）</strong>：能精确描述物体形状，但计算复杂度高</li>
+</ol>
+<p><strong>现有方法的困境</strong>：</p>
+<ul>
+<li><strong>专用方法</strong>：针对单一任务设计，无法泛化到其他Grounding类型</li>
+<li><strong>大型视觉语言模型（VLM）</strong>：具有强大的多任务学习能力，但难以处理像素级密集预测任务（如分割）</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何在一个统一的框架中同时支持HBB、OBB和Mask三种遥感视觉Grounding任务，并允许用户灵活选择输出类型？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1统一的多任务grounding框架" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e7%bb%9f%e4%b8%80%e7%9a%84%e5%a4%9a%e4%bb%bb%e5%8a%a1grounding%e6%a1%86%e6%9e%b6" class="header-mark"></a>核心创新点1：统一的多任务Grounding框架</h3><p><strong>设计动机</strong>：
+传统方法为每种Grounding类型设计专门的模型，这不仅增加了系统复杂度，也限制了模型的泛化能力。GeoGround的目标是用一个模型支持所有Grounding类型。</p>
+<p><strong>具体实现</strong>：
+GeoGround采用标准的VLM架构（视觉编码器 + 语言解码器），但不修改VLM的核心架构。关键创新在于引入<strong>Text-Mask技术</strong>，使VLM能够优雅地支持像素级Grounding输出。</p>
+<p><strong>关键细节</strong>：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

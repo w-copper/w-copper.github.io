@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>元学习 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%85%83%E5%AD%A6%E4%B9%A0/</link><description>元学习 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%85%83%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml"/><item><title>从模型权重中学习：GeoSANE开创遥感基础模型新范式</title><link>https://w-copper.github.io/2026/06/20260601_120000_geosane_weight_space_learning/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_geosane_weight_space_learning/</guid><description><![CDATA[<h1 id="从模型权重中学习geosane开创遥感基础模型新范式" class="headerLink">
+    <a href="#%e4%bb%8e%e6%a8%a1%e5%9e%8b%e6%9d%83%e9%87%8d%e4%b8%ad%e5%ad%a6%e4%b9%a0geosane%e5%bc%80%e5%88%9b%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>从模型权重中学习：GeoSANE开创遥感基础模型新范式</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>GeoSANE: Learning Geospatial Representations from Models, Not Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Joelle Hanna, Damian Falk, Stella X. Yu, Damian Borth</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>HSG-AIML (University of St. Gallen)</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2026</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2603.23408" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2603.23408</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/HSG-AIML/GeoSANE" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GeoSANE</a> (11 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>模型权重空间、遥感基础模型、元学习、模型生成、权重空间学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感领域近年来涌现了大量基础模型（Foundation Models），包括SatMAE、CROMA、SpectralGPT、DOFA、SkySense、Prithvi等。这些模型通过在大规模遥感数据上进行自监督预训练，学习到了强大的特征表示能力。</p>
+<p>然而，一个根本性的问题始终存在：<strong>我们能否不依赖训练数据，直接从这些已有的模型中学习？</strong></p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>数据依赖性强</strong>：传统基础模型需要大量遥感数据进行预训练，数据收集和处理成本高昂</li>
+<li><strong>计算资源消耗大</strong>：训练一个大规模基础模型需要大量GPU资源和时间</li>
+<li><strong>模型孤立性</strong>：现有模型各自独立训练，缺乏模型间的知识共享机制</li>
+<li><strong>组合困难</strong>：如何将多个模型的优势整合到一个新模型中是一个开放问题</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>能否直接在模型权重空间中学习一个通用表示，从而生成针对特定任务优化的新模型？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1模型权重空间学习weight-space-learning" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e6%a8%a1%e5%9e%8b%e6%9d%83%e9%87%8d%e7%a9%ba%e9%97%b4%e5%ad%a6%e4%b9%a0weight-space-learning" class="header-mark"></a>核心创新点1：模型权重空间学习（Weight Space Learning）</h3><p><strong>设计动机</strong>：</p>
+<p>传统方法从数据中学习表示，而GeoSANE提出了一个全新的范式：<strong>从模型权重中学习表示</strong>。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li><strong>模型集合构建</strong>：收集103个预训练的遥感基础模型，总计约380亿参数</li>
+<li><strong>权重空间编码</strong>：使用Sequential Autoencoder学习这些模型权重的共享潜在表示</li>
+<li><strong>模型生成</strong>：从学习到的潜在空间中采样，生成新的模型候选</li>
+</ol>
+<p><strong>关键细节</strong>：</p>]]></description></item></channel></rss>

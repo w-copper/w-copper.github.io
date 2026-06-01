@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>JEPA架构 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/jepa%E6%9E%B6%E6%9E%84/</link><description>JEPA架构 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/jepa%E6%9E%B6%E6%9E%84/" rel="self" type="application/rss+xml"/><item><title>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</title><link>https://w-copper.github.io/2026/06/20260601_220000_anysat_multi_resolution/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_220000_anysat_multi_resolution/</guid><description><![CDATA[<h1 id="anysat一个模型搞定所有分辨率尺度和模态的遥感数据" class="headerLink">
+    <a href="#anysat%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e6%89%80%e6%9c%89%e5%88%86%e8%be%a8%e7%8e%87%e5%b0%ba%e5%ba%a6%e5%92%8c%e6%a8%a1%e6%80%81%e7%9a%84%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae" class="header-mark"></a>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2025 Highlight | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>AnySat: One Earth Observation Model for Many Resolutions, Scales, and Modalities</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Guillaume Astruc, Nicolas Gonthier, Clement Mallet, Loic Landrieu</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025 (Highlight)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2412.14123" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.14123</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/gastruc/AnySat" target="_blank" rel="noopener noreferrer">https://github.com/gastruc/AnySat</a> (190 stars)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态、多分辨率、JEPA架构、自监督学习</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据天然具有<strong>多源异构</strong>的特点：</p>
+<ul>
+<li><strong>分辨率差异</strong>：从0.3米的无人机影像到30米的Sentinel-2，跨越100倍</li>
+<li><strong>通道数量不同</strong>：RGB（3通道）、多光谱（4-13通道）、SAR（2通道）</li>
+<li><strong>覆盖范围多样</strong>：小区域精细观测 vs 大范围宏观监测</li>
+<li><strong>传感器类型繁多</strong>：光学、SAR、高光谱等11种以上传感器</li>
+</ul>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>单模型单数据</strong>：每个数据集需要单独训练模型，无法共享知识</li>
+<li><strong>分辨率不兼容</strong>：不同分辨率的数据需要不同的网络架构</li>
+<li><strong>模态隔离</strong>：光学和SAR数据通常分开处理</li>
+<li><strong>扩展性差</strong>：新增传感器需要重新设计模型</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何用一个统一的模型处理任意分辨率、任意尺度、任意模态组合的遥感数据？</strong></p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1scale-adaptive-jepa架构" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91scale-adaptive-jepa%e6%9e%b6%e6%9e%84" class="header-mark"></a>核心创新点1：Scale-Adaptive JEPA架构</h3><p><strong>设计动机</strong>：传统MAE需要固定输入尺寸，无法处理不同分辨率的图像。</p>
+<p><strong>具体实现</strong>：</p>
+<ul>
+<li>采用<strong>Joint Embedding Predictive Architecture (JEPA)</strong>，不依赖像素级重建</li>
+<li>引入<strong>尺度自适应</strong>机制，根据输入数据的GSD自动调整</li>
+<li>使用<strong>分块嵌入</strong>策略，将不同分辨率的图像映射到统一的特征空间</li>
+</ul>
+<p><strong>关键细节</strong>：</p>]]></description></item></channel></rss>

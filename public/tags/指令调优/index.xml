@@ -1,0 +1,89 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>指令调优 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E6%8C%87%E4%BB%A4%E8%B0%83%E4%BC%98/</link><description>指令调优 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%8C%87%E4%BB%A4%E8%B0%83%E4%BC%98/" rel="self" type="application/rss+xml"/><item><title>Falcon：首个支持14个任务的遥感视觉语言基础模型</title><link>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_210000_falcon_vlm/</guid><description><![CDATA[<h1 id="falcon首个支持14个任务的遥感视觉语言基础模型" class="headerLink">
+    <a href="#falcon%e9%a6%96%e4%b8%aa%e6%94%af%e6%8c%8114%e4%b8%aa%e4%bb%bb%e5%8a%a1%e7%9a%84%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Falcon：首个支持14个任务的遥感视觉语言基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Falcon: A Remote Sensing Vision-Language Foundation Model (Technical Report)</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Kelu Yao, Nuo Xu, Rong Yang, Yingying Xu, Zhuoyan Gao, Titinunt Kitrungrotsakul, Yi Ren, Pu Zhang, Jin Wang, Ning Wei, Chao Li</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>ZhejiangLab（之江实验室）</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>arXiv 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2503.11070" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11070</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/TianHuiLab/Falcon" target="_blank" rel="noopener noreferrer">https://github.com/TianHuiLab/Falcon</a> (⭐372)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、视觉语言模型、多任务学习、指令调优、统一表示</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像解译是地球观测的核心任务，涵盖场景分类、目标检测、语义分割、变化检测等多个领域。近年来，大型视觉语言模型（LVLMs）在自然图像领域取得了巨大成功，但在遥感领域却面临严峻挑战：</p>
+<ol>
+<li><strong>领域鸿沟</strong>：自然图像与遥感图像之间存在显著的领域差异，包括视角、尺度、语义等方面</li>
+<li><strong>任务碎片化</strong>：现有遥感VLMs通常只擅长特定任务，缺乏统一的多任务处理能力</li>
+<li><strong>数据集不足</strong>：缺乏大规模、高质量、多任务的遥感指令调优数据集</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>参数量</th>
+          <th>支持任务数</th>
+          <th>主要局限</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GeoChat</td>
+          <td>7B</td>
+          <td>7</td>
+          <td>不支持像素级任务（分割、变化检测）</td>
+      </tr>
+      <tr>
+          <td>LHRS-Bot</td>
+          <td>7B</td>
+          <td>6</td>
+          <td>缺乏区域级和像素级理解能力</td>
+      </tr>
+      <tr>
+          <td>EarthGPT</td>
+          <td>7B</td>
+          <td>9</td>
+          <td>参数量大，推理效率低</td>
+      </tr>
+      <tr>
+          <td>RSGPT</td>
+          <td>7B</td>
+          <td>5</td>
+          <td>任务覆盖范围有限</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个轻量级、统一的遥感视觉语言模型，同时支持图像级、区域级和像素级的14个任务？</strong></p>]]></description></item></channel></rss>

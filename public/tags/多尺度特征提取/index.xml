@@ -1,0 +1,60 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多尺度特征提取 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/</link><description>多尺度特征提取 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 31 May 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/" rel="self" type="application/rss+xml"/><item><title>多核Inception网络：遥感目标检测的尺度感知新范式</title><link>https://w-copper.github.io/2026/05/20260531_231500_pkinet_remote_sensing_detection/</link><pubDate>Sun, 31 May 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/05/20260531_231500_pkinet_remote_sensing_detection/</guid><description><![CDATA[<h1 id="多核inception网络遥感目标检测的尺度感知新范式" class="headerLink">
+    <a href="#%e5%a4%9a%e6%a0%b8inception%e7%bd%91%e7%bb%9c%e9%81%a5%e6%84%9f%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b%e7%9a%84%e5%b0%ba%e5%ba%a6%e6%84%9f%e7%9f%a5%e6%96%b0%e8%8c%83%e5%bc%8f" class="header-mark"></a>多核Inception网络：遥感目标检测的尺度感知新范式</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Poly Kernel Inception Network for Remote Sensing Detection</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xinhao Cai, Qiuxia Lai, Yuwei Wang, Wenguan Wang, Zeren Sun, Yazhou Yao</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2403.06258" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2403.06258</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/NUST-Machine-Intelligence-Laboratory/PKINet" target="_blank" rel="noopener noreferrer">https://github.com/NUST-Machine-Intelligence-Laboratory/PKINet</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感目标检测、多尺度特征提取、Inception网络、上下文锚注意力、无膨胀卷积</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像（Remote Sensing Images, RSIs）中的目标检测是计算机视觉领域的重要研究方向。与自然图像不同，遥感图像具有独特的挑战性：</p>
+<ol>
+<li><strong>目标尺度变化巨大</strong>：同一场景中可能包含从几像素到几百像素的不同大小目标（如车辆vs机场）</li>
+<li><strong>背景复杂多样</strong>：遥感图像包含丰富的上下文信息，但也带来大量干扰</li>
+<li><strong>目标方向任意</strong>：遥感目标通常以任意角度出现，需要旋转不变性</li>
+</ol>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>为了解决上述问题，现有方法主要通过扩展主干网络的空间感受野来增强特征提取能力：</p>
+<p><strong>方法一：大核卷积（Large-kernel Convolution）</strong></p>
+<ul>
+<li>使用大尺寸卷积核（如7×7、11×11）来扩大感受野</li>
+<li><strong>问题</strong>：引入大量背景噪声，降低检测精度</li>
+</ul>
+<p><strong>方法二：膨胀卷积（Dilated Convolution）</strong></p>
+<ul>
+<li>通过设置膨胀率来扩大感受野，同时保持参数量</li>
+<li><strong>问题</strong>：生成过于稀疏的特征表示，丢失细节信息</li>
+</ul>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何在不引入背景噪声和不损失特征密度的前提下，有效捕获遥感图像中多尺度目标的特征和上下文信息？</strong></p>]]></description></item></channel></rss>

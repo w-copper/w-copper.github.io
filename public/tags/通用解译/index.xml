@@ -1,0 +1,41 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>通用解译 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E9%80%9A%E7%94%A8%E8%A7%A3%E8%AF%91/</link><description>通用解译 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E9%80%9A%E7%94%A8%E8%A7%A3%E8%AF%91/" rel="self" type="application/rss+xml"/><item><title>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</title><link>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_skysense_multimodal_foundation_model/</guid><description><![CDATA[<h1 id="skysense20亿参数多模态遥感基础模型统一理解地球观测" class="headerLink">
+    <a href="#skysense20%e4%ba%bf%e5%8f%82%e6%95%b0%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%bb%9f%e4%b8%80%e7%90%86%e8%a7%a3%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b" class="header-mark"></a>SkySense：20亿参数多模态遥感基础模型，统一理解地球观测</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xin Guo, Jiangwei Lao, Bo Dang, Yingying Zhang, Lei Yu, Lixiang Ru, Liheng Zhong, Ziyuan Huang, Kang Wu, Dingxiang Hu, Huimei He, Jian Wang, Jingdong Chen, Ming Yang, Yongjun Zhang, Yansheng Li</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.10115</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">https://github.com/Jack-bo1220/SkySense</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多模态融合、时序建模、地球观测、通用解译</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感技术已经渗透到我们生活的方方面面——从城市规划、农业生产到灾害监测、环境保护。然而，传统的遥感影像理解技术存在一个根本性缺陷：<strong>每个任务都需要单独训练一个模型</strong>。比如，要检测建筑物变化，需要一个专门的模型；要识别农作物类型，又需要另一个模型；要监测森林覆盖变化，还需要第三个模型。</p>]]></description></item></channel></rss>

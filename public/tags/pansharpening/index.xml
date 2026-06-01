@@ -1,0 +1,71 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Pansharpening - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/pansharpening/</link><description>Pansharpening - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/pansharpening/" rel="self" type="application/rss+xml"/><item><title>突破方形卷积限制：自适应矩形卷积革新遥感图像融合</title><link>https://w-copper.github.io/2026/06/20260601_001500_arconv_pansharpening/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_001500_arconv_pansharpening/</guid><description><![CDATA[<h1 id="突破方形卷积限制自适应矩形卷积革新遥感图像融合" class="headerLink">
+    <a href="#%e7%aa%81%e7%a0%b4%e6%96%b9%e5%bd%a2%e5%8d%b7%e7%a7%af%e9%99%90%e5%88%b6%e8%87%aa%e9%80%82%e5%ba%94%e7%9f%a9%e5%bd%a2%e5%8d%b7%e7%a7%af%e9%9d%a9%e6%96%b0%e9%81%a5%e6%84%9f%e5%9b%be%e5%83%8f%e8%9e%8d%e5%90%88" class="header-mark"></a>突破方形卷积限制：自适应矩形卷积革新遥感图像融合</h1><blockquote>
+  <p><strong>论文解读</strong> | CVPR 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Adaptive Rectangular Convolution for Remote Sensing Pansharpening</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Xueyang Wang 等</td>
+      </tr>
+      <tr>
+          <td><strong>单位</strong></td>
+          <td>电子科技大学</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>CVPR 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/pdf/2503.00467" target="_blank" rel="noopener noreferrer">https://arxiv.org/pdf/2503.00467</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/WangXueyang-uestc/ARConv" target="_blank" rel="noopener noreferrer">https://github.com/WangXueyang-uestc/ARConv</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感图像融合、Pansharpening、自适应卷积、即插即用模块</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像融合(Pansharpening)是将高分辨率全色图像(PAN)与低分辨率多光谱图像(LRMS)融合，生成高分辨率多光谱图像(HRMS)的技术。这项技术在遥感领域至关重要，因为它能同时获得空间细节和光谱信息。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><p>传统CNN-based方法在Pansharpening中存在两个关键缺陷：</p>
+<ol>
+<li><strong>固定方形卷积核</strong>：传统卷积操作局限于固定的正方形窗口(如3×3、5×5)，无法适应遥感图像中不同大小的目标</li>
+<li><strong>固定采样点数量</strong>：卷积核的采样点数量预先设定且保持不变，缺乏灵活性</li>
+</ol>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item></channel></rss>

@@ -1,0 +1,85 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>MAE预训练 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/mae%E9%A2%84%E8%AE%AD%E7%BB%83/</link><description>MAE预训练 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/mae%E9%A2%84%E8%AE%AD%E7%BB%83/" rel="self" type="application/rss+xml"/><item><title>Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型</title><link>https://w-copper.github.io/2026/06/20260601_130000_prithvi_eo_2_multitemporal/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_130000_prithvi_eo_2_multitemporal/</guid><description><![CDATA[<h1 id="prithvi-eo-20nasa和ibm联手打造的600m参数地球观测基础模型" class="headerLink">
+    <a href="#prithvi-eo-20nasa%e5%92%8cibm%e8%81%94%e6%89%8b%e6%89%93%e9%80%a0%e7%9a%84600m%e5%8f%82%e6%95%b0%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型</h1><blockquote>
+  <p><strong>论文解读</strong> | arXiv 2024 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Sujit Roy, Paolo Fraccaro, Þorsteinn Elí Gíslason, Benedikt Blumenstiel, Rinki Ghosal 等</td>
+      </tr>
+      <tr>
+          <td><strong>机构</strong></td>
+          <td>IBM Research、NASA Marshall Space Flight Center、Jülich Supercomputing Centre</td>
+      </tr>
+      <tr>
+          <td><strong>发表</strong></td>
+          <td>arXiv 2024 (Technical Report)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.02732</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">https://github.com/NASA-IMPACT/Prithvi-EO-2.0</a></td>
+      </tr>
+      <tr>
+          <td><strong>HuggingFace</strong></td>
+          <td><a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-600M-TL" target="_blank" rel="noopener noreferrer">https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-600M-TL</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型、多时相、MAE预训练、时空注意力、全球覆盖</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景地球观测的数据丰富标签稀缺困境" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e5%9c%b0%e7%90%83%e8%a7%82%e6%b5%8b%e7%9a%84%e6%95%b0%e6%8d%ae%e4%b8%b0%e5%af%8c%e6%a0%87%e7%ad%be%e7%a8%80%e7%bc%ba%e5%9b%b0%e5%a2%83" class="header-mark"></a>问题背景：地球观测的&quot;数据丰富、标签稀缺&quot;困境</h3><p>地球观测数据正在爆炸式增长：</p>
+<ul>
+<li>Landsat系列：40年历史，持续更新</li>
+<li>Sentinel-2：5天重访周期，13个波段</li>
+<li>全球每天产生TB级遥感影像</li>
+</ul>
+<p>但问题是：<strong>标注数据极其稀缺</strong>。训练一个准确的作物分类模型可能需要数月的专家标注工作。</p>
+<h3 id="现有基础模型的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有基础模型的局限</h3><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>问题</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>ImageNet预训练</strong></td>
+          <td>自然图像与遥感图像差异大</td>
+      </tr>
+      <tr>
+          <td><strong>单时相模型</strong></td>
+          <td>无法捕捉季节变化、物候信息</td>
+      </tr>
+      <tr>
+          <td><strong>小规模预训练</strong></td>
+          <td>数据量不足，泛化能力有限</td>
+      </tr>
+      <tr>
+          <td><strong>无元数据</strong></td>
+          <td>忽略地理位置、时间信息</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个大规模、多时相、融合元数据的地球观测基础模型，实现跨任务、跨分辨率的泛化？</strong></p>]]></description></item></channel></rss>

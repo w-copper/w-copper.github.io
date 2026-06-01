@@ -1,0 +1,41 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>掩码建模 - Tag - 堂堂一跑堂</title><link>https://w-copper.github.io/tags/%E6%8E%A9%E7%A0%81%E5%BB%BA%E6%A8%A1/</link><description>掩码建模 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://w-copper.github.io/tags/%E6%8E%A9%E7%A0%81%E5%BB%BA%E6%A8%A1/" rel="self" type="application/rss+xml"/><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://w-copper.github.io/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
+    <a href="#galileo%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e5%b0%ba%e5%ba%a6icml-2025-%e9%80%9a%e7%94%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4" class="header-mark"></a>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</h1><blockquote>
+  <p><strong>论文解读</strong> | ICML 2025 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>Galileo: Learning Global &amp; Local Features of Many Remote Sensing Modalities</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Gabriel Tseng, Anthony Fuller, Marlena Reil, Henry Herzog, Patrick Beukema, Favyen Bastani, James R. Green, Evan Shelhamer, Hannah Kerner, David Rolnick</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>ICML 2025 (Proceedings of the 42nd International Conference on Machine Learning)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.09356</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">https://github.com/nasaharvest/galileo</a> (⭐ 177)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感基础模型, 多模态融合, 自监督学习, 多尺度特征, 掩码建模, 通用模型</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item></channel></rss>
