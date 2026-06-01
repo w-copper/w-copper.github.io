@@ -1,0 +1,211 @@
+{{- define "title" }}
+    {{- $paginatorPager := .Scratch.Get "paginatorPager" -}}
+    {{- if and $paginatorPager (gt $paginatorPager.PageNumber 1) -}}
+        {{- T "prefixPageNumber" }} {{ $paginatorPager.PageNumber }} {{ T "suffixPageNumber" }} - {{ $.Site.Title -}}
+    {{ else }}
+        {{- $.Site.Title -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    <div class="page home"{{ if ne $posts.enable false | or .Content }} posts{{ end }}>
+        {{- /* Profile */ -}}
+        {{- if ne $profile.enable false -}}
+            {{- partial "home/profile.html" . -}}
+        {{- end -}}
+
+        {{- /* Content */ -}}
+        {{- if .Content -}}
+            <div class="single">
+                <div class="content" id="content">
+                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            </div>
+        {{- end -}}
+
+        {{- /* Recent Posts Section */ -}}
+        <div class="recent-posts-section">
+            <h2 class="section-title">📝 最近文章</h2>
+            <div class="recent-posts-grid">
+                {{- $recentPosts := first 6 (where .Site.RegularPages "Section" "posts") -}}
+                {{- range $recentPosts -}}
+                <div class="recent-post-card">
+                    <div class="post-meta">
+                        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+                        {{- if .Params.categories -}}
+                        <span class="post-category">{{ index .Params.categories 0 }}</span>
+                        {{- end -}}
+                    </div>
+                    <h3 class="post-title">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{- if .Params.tags -}}
+                    <div class="post-tags">
+                        {{- range first 3 .Params.tags -}}
+                        <span class="tag">{{ . }}</span>
+                        {{- end -}}
+                    </div>
+                    {{- end -}}
+                </div>
+                {{- end -}}
+            </div>
+            <div class="view-all">
+                <a href="/posts" class="view-all-link">查看所有文章 →</a>
+            </div>
+        </div>
+
+        {{- /* Word Cloud Section */ -}}
+        <div class="wordcloud-section">
+            <h2 class="section-title">🏷️ 标签词云</h2>
+            <div id="wordcloud-container" class="wordcloud-container"></div>
+        </div>
+
+        {{- /* Game Section */ -}}
+        <div class="game-section">
+            <h2 class="section-title">🎮 小游戏</h2>
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>🎯 猜数字游戏</h3>
+                    <p>猜一个1-100之间的数字，看看你能几次猜中！</p>
+                </div>
+                <div class="game-controls">
+                    <input type="number" id="guess-input" min="1" max="100" placeholder="输入你的猜测">
+                    <button id="guess-btn" onclick="makeGuess()">猜测</button>
+                    <button id="reset-btn" onclick="resetGame()" style="display:none;">重新开始</button>
+                </div>
+                <div id="game-result" class="game-result"></div>
+                <div id="game-history" class="game-history"></div>
+            </div>
+        </div>
+    </div>
+
+    {{- /* Word Cloud Script */ -}}
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script>
+        // Collect all tags from the site
+        const tags = [
+            {{- range $name, $taxonomy := .Site.Taxonomies.tags -}}
+            { name: "{{ $name }}", value: {{ $taxonomy.Count }} },
+            {{- end -}}
+        ];
+
+        // Initialize word cloud
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartDom = document.getElementById('wordcloud-container');
+            if (chartDom && tags.length > 0) {
+                const myChart = echarts.init(chartDom);
+                
+                const option = {
+                    series: [{
+                        type: 'wordCloud',
+                        shape: 'circle',
+                        left: 'center',
+                        top: 'center',
+                        width: '90%',
+                        height: '90%',
+                        right: null,
+                        bottom: null,
+                        sizeRange: [12, 60],
+                        rotationRange: [-90, 90],
+                        rotationStep: 45,
+                        gridSize: 8,
+                        drawOutOfBound: false,
+                        layoutAnimation: true,
+                        textStyle: {
+                            fontFamily: 'sans-serif',
+                            fontWeight: 'bold',
+                            color: function () {
+                                return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')';
+                            }
+                        },
+                        emphasis: {
+                            focus: 'self',
+                            textStyle: {
+                                textShadowBlur: 10,
+                                textShadowColor: '#333'
+                            }
+                        },
+                        data: tags
+                    }]
+                };
+                
+                myChart.setOption(option);
+                
+                // Responsive
+                window.addEventListener('resize', function() {
+                    myChart.resize();
+                });
+            }
+        });
+    </script>
+
+    {{- /* Game Script */ -}}
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        let gameOver = false;
+
+        function makeGuess() {
+            if (gameOver) return;
+            
+            const input = document.getElementById('guess-input');
+            const resultDiv = document.getElementById('game-result');
+            const historyDiv = document.getElementById('game-history');
+            const guess = parseInt(input.value);
+            
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                resultDiv.innerHTML = '<p class="error">请输入1-100之间的数字！</p>';
+                return;
+            }
+            
+            attempts++;
+            
+            if (guess === secretNumber) {
+                resultDiv.innerHTML = `<p class="success">🎉 恭喜你猜对了！答案就是 ${secretNumber}！</p>
+                                       <p>你总共猜了 ${attempts} 次</p>`;
+                gameOver = true;
+                document.getElementById('reset-btn').style.display = 'inline-block';
+                document.getElementById('guess-btn').style.display = 'none';
+            } else if (guess < secretNumber) {
+                resultDiv.innerHTML = '<p class="hint">📈 太小了，再大一点！</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="hint">📉 太大了，再小一点！</p>';
+            }
+            
+            // Add to history
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            historyItem.textContent = `第${attempts}次: ${guess} ${guess < secretNumber ? '(小)' : guess > secretNumber ? '(大)' : '(对)'}`;
+            historyDiv.appendChild(historyItem);
+            
+            input.value = '';
+            input.focus();
+        }
+
+        function resetGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameOver = false;
+            document.getElementById('game-result').innerHTML = '';
+            document.getElementById('game-history').innerHTML = '';
+            document.getElementById('guess-input').value = '';
+            document.getElementById('reset-btn').style.display = 'none';
+            document.getElementById('guess-btn').style.display = 'inline-block';
+        }
+
+        // Enter key support
+        document.getElementById('guess-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+    </script>
+{{- end -}}
