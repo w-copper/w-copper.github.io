@@ -22,10 +22,28 @@
         {{- if .Content -}}
             <div class="single">
                 <div class="content" id="content">
-                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction | partial "function/content.html" | safeHTML -}}
                 </div>
             </div>
         {{- end -}}
+
+        {{- /* Hitokoto Section */ -}}
+        <div class="hitokoto-section">
+            <div class="hitokoto-card">
+                <div class="hitokoto-icon">💬</div>
+                <div class="hitokoto-content">
+                    <p id="hitokoto-text" class="hitokoto-text">加载中...</p>
+                    <p id="hitokoto-from" class="hitokoto-from"></p>
+                </div>
+                <button id="hitokoto-refresh" class="hitokoto-refresh" onclick="fetchHitokoto()" title="换一句">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
 
         {{- /* Recent Posts Section */ -}}
         <div class="recent-posts-section">
@@ -85,6 +103,7 @@
 
     {{- /* Word Cloud Script */ -}}
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
     <script>
         // Collect all tags from the site
         const tags = [
@@ -207,5 +226,160 @@
                 makeGuess();
             }
         });
+    </script>
+
+    {{- /* Hitokoto Styles */ -}}
+    <style>
+        .hitokoto-section {
+            margin: 2rem 0;
+        }
+        .hitokoto-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .hitokoto-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+        .hitokoto-icon {
+            font-size: 2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .hitokoto-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .hitokoto-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #1e293b;
+            margin: 0 0 0.5rem 0;
+            font-style: italic;
+        }
+        .hitokoto-text::before {
+            content: '"';
+            font-size: 1.5rem;
+            color: rgba(99, 102, 241, 0.5);
+            font-weight: bold;
+            margin-right: 0.25rem;
+        }
+        .hitokoto-text::after {
+            content: '"';
+            font-size: 1.5rem;
+            color: rgba(99, 102, 241, 0.5);
+            font-weight: bold;
+            margin-left: 0.25rem;
+        }
+        .hitokoto-from {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin: 0;
+            text-align: right;
+        }
+        .hitokoto-from::before {
+            content: '—— ';
+        }
+        .hitokoto-refresh {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6366f1;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .hitokoto-refresh:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: rotate(180deg);
+        }
+        .hitokoto-refresh:active {
+            transform: rotate(360deg);
+        }
+        /* Dark mode */
+        [data-theme="dark"] .hitokoto-card {
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.08), rgba(192, 132, 252, 0.08));
+            border-color: rgba(129, 140, 248, 0.2);
+        }
+        [data-theme="dark"] .hitokoto-card:hover {
+            border-color: rgba(129, 140, 248, 0.4);
+            box-shadow: 0 4px 12px rgba(129, 140, 248, 0.15);
+        }
+        [data-theme="dark"] .hitokoto-text {
+            color: #e2e8f0;
+        }
+        [data-theme="dark"] .hitokoto-text::before,
+        [data-theme="dark"] .hitokoto-text::after {
+            color: rgba(129, 140, 248, 0.5);
+        }
+        [data-theme="dark"] .hitokoto-from {
+            color: #94a3b8;
+        }
+        [data-theme="dark"] .hitokoto-refresh {
+            background: rgba(129, 140, 248, 0.15);
+            color: #a5b4fc;
+        }
+        [data-theme="dark"] .hitokoto-refresh:hover {
+            background: rgba(129, 140, 248, 0.25);
+        }
+        /* Loading animation */
+        @keyframes hitokotoLoading {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .hitokoto-loading .hitokoto-text {
+            animation: hitokotoLoading 1.5s ease-in-out infinite;
+        }
+    </style>
+
+    {{- /* Hitokoto Script */ -}}
+    <script>
+        async function fetchHitokoto() {
+            const textEl = document.getElementById('hitokoto-text');
+            const fromEl = document.getElementById('hitokoto-from');
+            const card = document.querySelector('.hitokoto-card');
+            
+            // Add loading state
+            card.classList.add('hitokoto-loading');
+            textEl.textContent = '加载中...';
+            fromEl.textContent = '';
+            
+            try {
+                const response = await fetch('https://v1.hitokoto.cn');
+                const data = await response.json();
+                
+                if (data.hitokoto) {
+                    textEl.textContent = data.hitokoto;
+                    fromEl.textContent = data.from || '佚名';
+                } else {
+                    textEl.textContent = '生活不止眼前的苟且，还有诗和远方。';
+                    fromEl.textContent = '高晓松';
+                }
+            } catch (error) {
+                console.error('Hitokoto fetch error:', error);
+                textEl.textContent = '生活不止眼前的苟且，还有诗和远方。';
+                fromEl.textContent = '高晓松';
+            } finally {
+                card.classList.remove('hitokoto-loading');
+            }
+        }
+        
+        // Load on page ready
+        document.addEventListener('DOMContentLoaded', fetchHitokoto);
     </script>
 {{- end -}}

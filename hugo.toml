@@ -1,4 +1,4 @@
-baseURL = 'https://w-copper.github.io/'
+baseURL = 'https://spacetop.win/'
 languageCode = 'zh-CN'
 title = '堂堂一跑堂'
 theme = 'doit'
@@ -28,6 +28,30 @@ theme = 'doit'
     name = '关于'
     pageRef = '/about'
     weight = 50
+  [[menus.main]]
+    name = '小游戏'
+    pageRef = '/games'
+    weight = 60
+  [[menus.main]]
+    name = '简历'
+    pageRef = '/resume'
+    weight = 70
+  [[menus.main]]
+    name = '小说'
+    pageRef = '/novel'
+    weight = 75
+  [[menus.main]]
+    name = '读书笔记'
+    pageRef = '/reading'
+    weight = 77
+  [[menus.main]]
+    name = '时间线'
+    pageRef = '/timeline'
+    weight = 80
+  [[menus.main]]
+    name = '工具箱'
+    pageRef = '/tools'
+    weight = 85
 
 [params]
   #  DoIt 主题版本
@@ -218,7 +242,7 @@ theme = 'doit'
 
   # 作者的社交信息设置
   [params.social]
-    GitHub = "https://github.com/w-copper"
+    GitHub = "w-copper"
     Linkedin = ""
     Medium = ""
     Gitlab = ""
@@ -267,7 +291,7 @@ theme = 'doit'
     Dribbble = ""
     Wordpress = ""
     Vine = ""
-    Googlescholar = "https://scholar.google.com/citations?user=OrdigYgAAAAJ&hl=zh-CN"
+    Googlescholar = "OrdigYgAAAAJ"
     Researchgate = ""
     Mastodon = ""
     Thingiverse = ""

@@ -1,0 +1,1750 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{- end -}}
+
+{{- define "content" -}}
+<div class="novel-page">
+    <h1 class="novel-title">📚 小说阅读器</h1>
+    <p class="novel-description">在线小说阅读器，支持书架管理、章节阅读、阅读进度保存</p>
+
+    <div id="bookshelf-view">
+        <div class="bookshelf-toolbar">
+            <div class="toolbar-left">
+                <button class="btn btn-primary" onclick="showAddNovelModal()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    添加小说
+                </button>
+                <button class="btn btn-outline" onclick="showImportModal()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-3-7H9v2h6v2l3-3-3-3v2z"/>
+                    </svg>
+                    导入TXT
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <div class="category-filter">
+                    <select id="category-filter" onchange="filterByCategory(this.value)">
+                        <option value="all">全部分类</option>
+                        <option value="玄幻">玄幻</option>
+                        <option value="都市">都市</option>
+                        <option value="历史">历史</option>
+                        <option value="科幻">科幻</option>
+                        <option value="武侠">武侠</option>
+                        <option value="言情">言情</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="搜索小说..." oninput="searchNovels(this.value)">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="bookshelf-grid" class="bookshelf-grid"></div>
+
+        <div id="empty-bookshelf" class="empty-bookshelf" style="display:none;">
+            <div class="empty-icon">📚</div>
+            <h3>书架空空如也</h3>
+            <p>点击"添加小说"或"导入TXT"开始你的阅读之旅</p>
+        </div>
+    </div>
+
+    <div id="reading-view" style="display:none;">
+        <div class="reading-header">
+            <button class="btn btn-back" onclick="backToBookshelf()">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                返回书架
+            </button>
+            <div class="reading-info">
+                <h2 id="reading-title"></h2>
+                <span id="reading-chapter-name"></span>
+            </div>
+            <div class="reading-controls">
+                <button class="btn btn-icon" onclick="toggleChapterList()" title="章节目录">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                    </svg>
+                </button>
+                <button class="btn btn-icon" onclick="adjustFontSize(1)" title="放大字体">A+</button>
+                <button class="btn btn-icon" onclick="adjustFontSize(-1)" title="缩小字体">A-</button>
+            </div>
+        </div>
+
+        <div class="reading-body">
+            <div id="chapter-sidebar" class="chapter-sidebar">
+                <div class="chapter-sidebar-header">
+                    <h3>章节目录</h3>
+                    <button class="btn btn-icon" onclick="toggleChapterList()">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="chapter-list" class="chapter-list"></div>
+            </div>
+
+            <div id="reading-content" class="reading-content">
+                <div id="chapter-content" class="chapter-content"></div>
+                <div class="chapter-navigation">
+                    <button id="prev-chapter-btn" class="btn btn-nav" onclick="navigateChapter(-1)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                        上一章
+                    </button>
+                    <span id="chapter-progress" class="chapter-progress"></span>
+                    <button id="next-chapter-btn" class="btn btn-nav" onclick="navigateChapter(1)">
+                        下一章
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-novel-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加小说</h3>
+                <button class="btn btn-icon" onclick="closeModal('add-novel-modal')">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>小说名称 *</label>
+                    <input type="text" id="novel-name" placeholder="请输入小说名称">
+                </div>
+                <div class="form-group">
+                    <label>作者</label>
+                    <input type="text" id="novel-author" placeholder="请输入作者名称">
+                </div>
+                <div class="form-group">
+                    <label>分类</label>
+                    <select id="novel-category">
+                        <option value="玄幻">玄幻</option>
+                        <option value="都市">都市</option>
+                        <option value="历史">历史</option>
+                        <option value="科幻">科幻</option>
+                        <option value="武侠">武侠</option>
+                        <option value="言情">言情</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>简介</label>
+                    <textarea id="novel-description" placeholder="请输入小说简介" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('add-novel-modal')">取消</button>
+                <button class="btn btn-primary" onclick="addNovel()">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="import-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>导入TXT文件</h3>
+                <button class="btn btn-icon" onclick="closeModal('import-modal')">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>小说名称 *</label>
+                    <input type="text" id="import-name" placeholder="请输入小说名称">
+                </div>
+                <div class="form-group">
+                    <label>作者</label>
+                    <input type="text" id="import-author" placeholder="请输入作者名称">
+                </div>
+                <div class="form-group">
+                    <label>分类</label>
+                    <select id="import-category">
+                        <option value="玄幻">玄幻</option>
+                        <option value="都市">都市</option>
+                        <option value="历史">历史</option>
+                        <option value="科幻">科幻</option>
+                        <option value="武侠">武侠</option>
+                        <option value="言情">言情</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>TXT文件</label>
+                    <div class="file-upload" id="file-upload-area">
+                        <input type="file" id="txt-file" accept=".txt" onchange="handleFileUpload(this)">
+                        <div class="file-upload-content">
+                            <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+                                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-3-7H9v2h6v2l3-3-3-3v2z"/>
+                            </svg>
+                            <p>点击或拖拽TXT文件到此处</p>
+                            <span>支持.txt格式</span>
+                        </div>
+                    </div>
+                    <div id="file-info" class="file-info" style="display:none;">
+                        <span id="file-name"></span>
+                        <button class="btn btn-icon" onclick="clearFile()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>章节识别模式</label>
+                    <select id="chapter-pattern">
+                        <option value="auto">自动识别</option>
+                        <option value="regex">正则表达式</option>
+                        <option value="fixed">固定字数分割</option>
+                    </select>
+                </div>
+                <div class="form-group" id="regex-pattern-group" style="display:none;">
+                    <label>章节正则表达式</label>
+                    <input type="text" id="chapter-regex" placeholder="例如：^第.+章" value="^第.+章">
+                </div>
+                <div class="form-group" id="fixed-length-group" style="display:none;">
+                    <label>每章字数</label>
+                    <input type="number" id="chapter-length" placeholder="例如：3000" value="3000">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('import-modal')">取消</button>
+                <button class="btn btn-primary" onclick="importNovel()">导入</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal" style="display:none;">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="btn btn-icon" onclick="closeModal('confirm-modal')">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">确定要删除这本小说吗？此操作不可恢复。</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('confirm-modal')">取消</button>
+                <button class="btn btn-danger" id="confirm-btn" onclick="confirmDelete()">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.novel-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.novel-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.novel-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #667eea;
+    border: 1.5px solid #667eea;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-back {
+    background: white;
+    color: #2c3e50;
+    border: 1px solid #e0e0e0;
+}
+
+.btn-back:hover {
+    background: #f8f9fa;
+}
+
+.btn-icon {
+    background: transparent;
+    color: #666;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.btn-icon:hover {
+    background: #f8f9fa;
+    color: #667eea;
+}
+
+.btn-nav {
+    background: white;
+    color: #2c3e50;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem 1.5rem;
+}
+
+.btn-nav:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.bookshelf-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.toolbar-left {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.toolbar-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.category-filter select {
+    padding: 0.6rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #667eea;
+    width: 260px;
+}
+
+.search-box svg {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.bookshelf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
+}
+
+.book-card-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.book-cover {
+    width: 80px;
+    height: 110px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.book-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.book-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-author {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.book-category {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
+
+.book-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-progress {
+    flex: 1;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.book-actions {
+    display: flex;
+    gap: 0.3rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.book-card:hover .book-actions {
+    opacity: 1;
+}
+
+.empty-bookshelf {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-bookshelf h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.reading-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.reading-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.reading-info h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.2rem;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reading-info span {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.reading-controls {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.reading-body {
+    display: flex;
+    gap: 1.5rem;
+    min-height: 70vh;
+}
+
+.chapter-sidebar {
+    width: 280px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.chapter-sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.chapter-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.chapter-sidebar-header h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.chapter-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.chapter-item {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+.chapter-item:hover {
+    background: #f8f9fa;
+}
+
+.chapter-item.active {
+    background: #667eea;
+    color: white;
+}
+
+.reading-content {
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.chapter-content {
+    flex: 1;
+    padding: 2rem 3rem;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #2c3e50;
+    overflow-y: auto;
+}
+
+.chapter-content p {
+    text-indent: 2em;
+    margin-bottom: 1em;
+}
+
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.chapter-progress {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-small {
+    max-width: 400px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.file-upload {
+    position: relative;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-content {
+    color: #666;
+}
+
+.file-upload-content svg {
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+.file-upload-content p {
+    margin: 0.5rem 0 0.2rem;
+    font-size: 0.95rem;
+}
+
+.file-upload-content span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+}
+
+.file-info span {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+[data-theme="dark"] .novel-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .novel-description {
+    color: #aaa;
+}
+
+[data-theme="dark"] .btn-back {
+    background: #1e1e1e;
+    color: #ecf0f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .btn-back:hover {
+    background: #2a2a2a;
+}
+
+[data-theme="dark"] .btn-icon {
+    color: #aaa;
+}
+
+[data-theme="dark"] .btn-icon:hover {
+    background: #2a2a2a;
+    color: #667eea;
+}
+
+[data-theme="dark"] .btn-nav {
+    background: #1e1e1e;
+    color: #ecf0f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .category-filter select {
+    background: #1e1e1e;
+    color: #ecf0f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .search-box input {
+    background: #1e1e1e;
+    color: #ecf0f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .search-box svg {
+    color: #aaa;
+}
+
+[data-theme="dark"] .book-card {
+    background: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .book-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .book-author {
+    color: #aaa;
+}
+
+[data-theme="dark"] .book-description {
+    color: #aaa;
+}
+
+[data-theme="dark"] .progress-bar {
+    background: #333;
+}
+
+[data-theme="dark"] .progress-text {
+    color: #777;
+}
+
+[data-theme="dark"] .empty-bookshelf {
+    color: #aaa;
+}
+
+[data-theme="dark"] .empty-bookshelf h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .reading-header {
+    background: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .reading-info h2 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .reading-info span {
+    color: #aaa;
+}
+
+[data-theme="dark"] .chapter-sidebar {
+    background: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .chapter-sidebar-header {
+    border-color: #333;
+}
+
+[data-theme="dark"] .chapter-sidebar-header h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .chapter-item {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .chapter-item:hover {
+    background: #2a2a2a;
+}
+
+[data-theme="dark"] .reading-content {
+    background: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .chapter-content {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .chapter-navigation {
+    border-color: #333;
+}
+
+[data-theme="dark"] .chapter-progress {
+    color: #777;
+}
+
+[data-theme="dark"] .modal-content {
+    background: #1e1e1e;
+}
+
+[data-theme="dark"] .modal-header {
+    border-color: #333;
+}
+
+[data-theme="dark"] .modal-header h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .modal-footer {
+    border-color: #333;
+}
+
+[data-theme="dark"] .form-group label {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea {
+    background: #0d1117;
+    color: #ecf0f1;
+    border-color: #333;
+}
+
+[data-theme="dark"] .file-upload {
+    border-color: #333;
+}
+
+[data-theme="dark"] .file-upload-content {
+    color: #aaa;
+}
+
+[data-theme="dark"] .file-info {
+    background: #0d1117;
+}
+
+[data-theme="dark"] .file-info span {
+    color: #ecf0f1;
+}
+
+@media (max-width: 1024px) {
+    .chapter-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .chapter-sidebar.visible {
+        transform: translateX(0);
+    }
+
+    .reading-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .novel-page {
+        padding: 1rem;
+    }
+
+    .novel-title {
+        font-size: 2rem;
+    }
+
+    .bookshelf-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+        justify-content: center;
+    }
+
+    .search-box input {
+        width: 160px;
+    }
+
+    .search-box input:focus {
+        width: 200px;
+    }
+
+    .bookshelf-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .reading-header {
+        flex-wrap: wrap;
+    }
+
+    .reading-info {
+        order: 1;
+        width: 100%;
+    }
+
+    .reading-controls {
+        order: 2;
+    }
+
+    .chapter-content {
+        padding: 1.5rem;
+    }
+
+    .chapter-navigation {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .bookshelf-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar-right {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .search-box input:focus {
+        width: 100%;
+    }
+
+    .category-filter {
+        width: 100%;
+    }
+
+    .category-filter select {
+        width: 100%;
+    }
+}
+
+.chapter-list::-webkit-scrollbar,
+.chapter-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chapter-list::-webkit-scrollbar-track,
+.chapter-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chapter-list::-webkit-scrollbar-thumb,
+.chapter-content::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+}
+
+[data-theme="dark"] .chapter-list::-webkit-scrollbar-thumb,
+[data-theme="dark"] .chapter-content::-webkit-scrollbar-thumb {
+    background: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.book-card {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.book-card:nth-child(1) { animation-delay: 0.05s; }
+.book-card:nth-child(2) { animation-delay: 0.1s; }
+.book-card:nth-child(3) { animation-delay: 0.15s; }
+.book-card:nth-child(4) { animation-delay: 0.2s; }
+.book-card:nth-child(5) { animation-delay: 0.25s; }
+.book-card:nth-child(6) { animation-delay: 0.3s; }
+</style>
+
+<script>
+const STORAGE_KEYS = {
+    NOVELS: 'novel_reader_novels',
+    PROGRESS: 'novel_reader_progress'
+};
+
+const SAMPLE_NOVELS = [
+    {
+        id: 'sample_1',
+        name: '西游记',
+        author: '吴承恩',
+        category: '玄幻',
+        description: '中国古典四大名著之一，讲述了唐僧师徒四人西天取经的故事。',
+        cover: '🐒',
+        chapters: [
+            {
+                title: '第一回 灵根育孕源流出 心性修持大道生',
+                content: '混沌未分天地乱，茫茫渺渺无人见。自从盘古破鸿蒙，开辟从兹清浊辨。覆载群生仰至仁，发明万物皆成善。\n\n盖闻天地之数，有十二万九千六百岁为一元。将一元分为十二会，乃子、丑、寅、卯、辰、巳、午、未、申、酉、戌、亥之十二支也。每会该一万八百岁。\n\n感盘古开辟，三皇治世，五帝定伦，世界之间，遂分为四大部洲：曰东胜神洲，曰西牛贺洲，曰南赡部洲，曰北俱芦洲。这部书单表东胜神洲。海外有一国土，名曰傲来国。国近大海，海中有一座山，唤为花果山。此山乃十洲之祖脉，三岛之来龙。'
+            },
+            {
+                title: '第二回 悟彻菩提真妙理 断魔归本合元神',
+                content: '话表美猴王得了姓名，怡然踊跃，对菩提前作礼启谢。那祖师即命大众引悟空出二门外，教他洒扫应对、进退周旋之节。众仙奉行而出。\n\n次早，与众师兄学言语礼貌，讲经论道，习字焚香，每日如此。闲时即扫地锄园，养花修树，寻柴燃火，挑水运浆。在洞中不觉倏六七年。\n\n一日，祖师登坛高坐，唤集诸仙，开讲大道。孙悟空在旁闻听，喜得他抓耳挠腮，眉花眼笑。忍不住手之舞之，足之蹈之。'
+            }
+        ]
+    },
+    {
+        id: 'sample_2',
+        name: '三体',
+        author: '刘慈欣',
+        category: '科幻',
+        description: '地球文明向宇宙发出的第一声啼鸣，引来了三体文明的注意。',
+        cover: '🌌',
+        chapters: [
+            {
+                title: '第一章 科学边界',
+                content: '汪淼觉得，过去的四十多年中，自己从未像现在这样对世界充满好奇心。作为一名纳米材料研究者，他的世界一直是由分子、原子和纳米管构成的微观天地。\n\n但此刻，站在北京郊外的这个天文台前，他第一次感受到了宇宙的浩瀚与神秘。\n\n台长引着他走向主楼，说道：最近我们有一些非常有趣的发现，相信您一定会感兴趣的。'
+            },
+            {
+                title: '第二章 射手假说',
+                content: '杨冬直截了当地说：我听说您最近在关注一些天文学方面的数据。能告诉我是什么引起了您的兴趣吗？\n\n汪淼犹豫了一下，然后把他在天文台看到的情况简要地告诉了她。杨冬听完后，沉默了很长时间。\n\n汪教授，她终于开口，您听说过射手假说吗？这是一个哲学思想实验。想象有一个神枪手，在一个靶子上每隔十厘米打一个洞。'
+            }
+        ]
+    },
+    {
+        id: 'sample_3',
+        name: '活着',
+        author: '余华',
+        category: '其他',
+        description: '讲述了农村人福贵悲惨的人生遭遇，以第一人称的叙述方式展开。',
+        cover: '📖',
+        chapters: [
+            {
+                title: '第一章',
+                content: '我比现在年轻十岁的时候，获得了一个游手好闲的职业，去乡间收集民间歌谣。那一年的整个夏天，我如同一只乱飞的麻雀，在知了和阳光充斥的村庄之间穿来穿去。\n\n那年夏天，我遇到了一个老人。他叫福贵，是一个地主的儿子。他年轻的时候是一个纨绔子弟，吃喝嫖赌，把家产败光了。\n\n我是在一个下午遇到福贵的。他正在田里耕地，那头老牛走得很慢，他也走得很慢。'
+            },
+            {
+                title: '第二章',
+                content: '我和福贵坐在田埂上，他开始给我讲他的故事。我年轻的时候，是这方圆几十里最阔的少爷。福贵说，眼睛看着远处的山，我爹有两百多亩地，家里有几十个长工。\n\n我那时候最喜欢的事情就是赌博。我经常去城里赌博，一赌就是几天几夜。我输了好多钱，但我爹总是帮我把债还上。'
+            }
+        ]
+    }
+];
+
+let novels = [];
+let progress = {};
+let currentNovel = null;
+let currentChapterIndex = 0;
+let deleteTargetId = null;
+let uploadedFileContent = null;
+let fontSize = parseInt(localStorage.getItem('novel_font_size') || '16');
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+    renderBookshelf();
+    updateFontSize();
+});
+
+function loadData() {
+    const savedNovels = localStorage.getItem(STORAGE_KEYS.NOVELS);
+    if (savedNovels) {
+        novels = JSON.parse(savedNovels);
+    } else {
+        novels = JSON.parse(JSON.stringify(SAMPLE_NOVELS));
+        saveNovels();
+    }
+
+    const savedProgress = localStorage.getItem(STORAGE_KEYS.PROGRESS);
+    if (savedProgress) {
+        progress = JSON.parse(savedProgress);
+    }
+}
+
+function saveNovels() {
+    localStorage.setItem(STORAGE_KEYS.NOVELS, JSON.stringify(novels));
+}
+
+function saveProgress() {
+    localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(progress));
+}
+
+function getNovelProgress(novelId) {
+    if (!progress[novelId]) {
+        return { chapter: 0, scroll: 0, percentage: 0 };
+    }
+    return progress[novelId];
+}
+
+function updateNovelProgress(novelId, chapterIndex, scrollPercentage) {
+    const novel = novels.find(function(n) { return n.id === novelId; });
+    if (!novel) return;
+
+    const totalChapters = novel.chapters.length;
+    const overallPercentage = Math.round(((chapterIndex + 1) / totalChapters) * 100);
+
+    progress[novelId] = {
+        chapter: chapterIndex,
+        scroll: scrollPercentage || 0,
+        percentage: overallPercentage,
+        lastRead: new Date().toISOString()
+    };
+
+    saveProgress();
+}
+
+function renderBookshelf(filter, search) {
+    filter = filter || 'all';
+    search = search || '';
+
+    const grid = document.getElementById('bookshelf-grid');
+    const empty = document.getElementById('empty-bookshelf');
+
+    let filteredNovels = novels;
+
+    if (filter !== 'all') {
+        filteredNovels = filteredNovels.filter(function(n) { return n.category === filter; });
+    }
+
+    if (search) {
+        var searchLower = search.toLowerCase();
+        filteredNovels = filteredNovels.filter(function(n) {
+            return n.name.toLowerCase().indexOf(searchLower) !== -1 ||
+                   n.author.toLowerCase().indexOf(searchLower) !== -1;
+        });
+    }
+
+    if (filteredNovels.length === 0) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    empty.style.display = 'none';
+
+    var html = '';
+    for (var i = 0; i < filteredNovels.length; i++) {
+        var novel = filteredNovels[i];
+        var prog = getNovelProgress(novel.id);
+        html += '<div class="book-card" onclick="openNovel(\'' + novel.id + '\')">';
+        html += '<div class="book-card-header">';
+        html += '<div class="book-cover">' + (novel.cover || '📕') + '</div>';
+        html += '<div class="book-info">';
+        html += '<div class="book-title" title="' + novel.name + '">' + novel.name + '</div>';
+        html += '<div class="book-author">' + (novel.author || '未知作者') + '</div>';
+        html += '<span class="book-category">' + novel.category + '</span>';
+        html += '</div></div>';
+        html += '<div class="book-description">' + (novel.description || '暂无简介') + '</div>';
+        html += '<div class="book-footer"><div class="book-progress">';
+        html += '<div class="progress-bar"><div class="progress-fill" style="width: ' + prog.percentage + '%"></div></div>';
+        html += '<div class="progress-text">';
+        html += prog.percentage > 0 ? '已读 ' + prog.percentage + '%' : '未开始阅读';
+        if (prog.lastRead) html += ' · ' + formatDate(prog.lastRead);
+        html += '</div></div>';
+        html += '<div class="book-actions">';
+        html += '<button class="btn btn-icon" onclick="event.stopPropagation(); confirmDeleteNovel(\'' + novel.id + '\')" title="删除">';
+        html += '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>';
+        html += '</button></div></div></div>';
+    }
+    grid.innerHTML = html;
+}
+
+function showAddNovelModal() {
+    document.getElementById('novel-name').value = '';
+    document.getElementById('novel-author').value = '';
+    document.getElementById('novel-category').value = '玄幻';
+    document.getElementById('novel-description').value = '';
+    openModal('add-novel-modal');
+}
+
+function addNovel() {
+    var name = document.getElementById('novel-name').value.trim();
+    var author = document.getElementById('novel-author').value.trim();
+    var category = document.getElementById('novel-category').value;
+    var description = document.getElementById('novel-description').value.trim();
+
+    if (!name) {
+        alert('请输入小说名称');
+        return;
+    }
+
+    var covers = ['📕', '📗', '📘', '📙', '📓', '📔', '📒', '📚'];
+    var randomCover = covers[Math.floor(Math.random() * covers.length)];
+
+    var novel = {
+        id: 'novel_' + Date.now(),
+        name: name,
+        author: author || '未知作者',
+        category: category,
+        description: description || '暂无简介',
+        cover: randomCover,
+        chapters: [{ title: '第一章', content: '请编辑章节内容...' }]
+    };
+
+    novels.push(novel);
+    saveNovels();
+    renderBookshelf();
+    closeModal('add-novel-modal');
+}
+
+function confirmDeleteNovel(novelId) {
+    deleteTargetId = novelId;
+    var novel = novels.find(function(n) { return n.id === novelId; });
+    if (novel) {
+        document.getElementById('confirm-message').textContent =
+            '确定要删除《' + novel.name + '》吗？此操作不可恢复。';
+    }
+    openModal('confirm-modal');
+}
+
+function confirmDelete() {
+    if (!deleteTargetId) return;
+
+    novels = novels.filter(function(n) { return n.id !== deleteTargetId; });
+    delete progress[deleteTargetId];
+    saveNovels();
+    saveProgress();
+    renderBookshelf();
+    closeModal('confirm-modal');
+    deleteTargetId = null;
+}
+
+function showImportModal() {
+    document.getElementById('import-name').value = '';
+    document.getElementById('import-author').value = '';
+    document.getElementById('import-category').value = '其他';
+    document.getElementById('txt-file').value = '';
+    document.getElementById('file-info').style.display = 'none';
+    document.getElementById('file-upload-area').style.display = 'block';
+    uploadedFileContent = null;
+    openModal('import-modal');
+}
+
+function handleFileUpload(input) {
+    var file = input.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.txt')) {
+        alert('请选择.txt格式的文件');
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        uploadedFileContent = e.target.result;
+        document.getElementById('file-name').textContent = file.name;
+        document.getElementById('file-info').style.display = 'flex';
+        document.getElementById('file-upload-area').style.display = 'none';
+
+        if (!document.getElementById('import-name').value) {
+            document.getElementById('import-name').value = file.name.replace('.txt', '');
+        }
+    };
+    reader.readAsText(file);
+}
+
+function clearFile() {
+    uploadedFileContent = null;
+    document.getElementById('txt-file').value = '';
+    document.getElementById('file-info').style.display = 'none';
+    document.getElementById('file-upload-area').style.display = 'block';
+}
+
+function importNovel() {
+    var name = document.getElementById('import-name').value.trim();
+    var author = document.getElementById('import-author').value.trim();
+    var category = document.getElementById('import-category').value;
+    var patternType = document.getElementById('chapter-pattern').value;
+
+    if (!name) {
+        alert('请输入小说名称');
+        return;
+    }
+
+    if (!uploadedFileContent) {
+        alert('请选择要导入的TXT文件');
+        return;
+    }
+
+    var chapters = [];
+    if (patternType === 'auto') {
+        chapters = autoDetectChapters(uploadedFileContent);
+    } else if (patternType === 'regex') {
+        var regex = document.getElementById('chapter-regex').value;
+        chapters = splitByRegex(uploadedFileContent, regex);
+    } else {
+        var length = parseInt(document.getElementById('chapter-length').value) || 3000;
+        chapters = splitByLength(uploadedFileContent, length);
+    }
+
+    if (chapters.length === 0) {
+        alert('未能识别出任何章节，请检查文件格式或调整分割方式');
+        return;
+    }
+
+    var covers = ['📕', '📗', '📘', '📙', '📓', '📔', '📒', '📚'];
+    var randomCover = covers[Math.floor(Math.random() * covers.length)];
+
+    var novel = {
+        id: 'novel_' + Date.now(),
+        name: name,
+        author: author || '未知作者',
+        category: category,
+        description: '共' + chapters.length + '章',
+        cover: randomCover,
+        chapters: chapters
+    };
+
+    novels.push(novel);
+    saveNovels();
+    renderBookshelf();
+    closeModal('import-modal');
+    alert('成功导入《' + name + '》，共' + chapters.length + '章');
+}
+
+function autoDetectChapters(text) {
+    var patterns = [
+        /^第[一二三四五六七八九十百千万零〇\d]+[章节回卷集部篇]/m,
+        /^Chapter\s+\d+/mi,
+        /^\d+\.\s+/m
+    ];
+
+    for (var i = 0; i < patterns.length; i++) {
+        if (patterns[i].test(text)) {
+            return splitByRegex(text, patterns[i].source);
+        }
+    }
+
+    return splitByLength(text, 3000);
+}
+
+function splitByRegex(text, regexStr) {
+    var regex = new RegExp(regexStr, 'gm');
+    var matches = [];
+    var match;
+    while ((match = regex.exec(text)) !== null) {
+        matches.push({ index: match.index, text: match[0] });
+    }
+
+    if (matches.length === 0) {
+        return splitByLength(text, 3000);
+    }
+
+    var chapters = [];
+    for (var i = 0; i < matches.length; i++) {
+        var start = matches[i].index;
+        var end = i + 1 < matches.length ? matches[i + 1].index : text.length;
+        var content = text.substring(start, end).trim();
+
+        var lines = content.split('\n');
+        var title = lines[0].trim();
+        var body = lines.slice(1).join('\n').trim();
+
+        chapters.push({
+            title: title,
+            content: body || content
+        });
+    }
+
+    return chapters;
+}
+
+function splitByLength(text, length) {
+    var chapters = [];
+    var remaining = text;
+    var index = 1;
+
+    while (remaining.length > 0) {
+        var end = Math.min(length, remaining.length);
+
+        if (end < remaining.length) {
+            var breakPoints = ['。', '！', '？', '\n\n'];
+            for (var i = 0; i < breakPoints.length; i++) {
+                var lastBreak = remaining.lastIndexOf(breakPoints[i], end);
+                if (lastBreak > end * 0.5) {
+                    end = lastBreak + 1;
+                    break;
+                }
+            }
+        }
+
+        chapters.push({
+            title: '第' + index + '章',
+            content: remaining.substring(0, end).trim()
+        });
+
+        remaining = remaining.substring(end).trim();
+        index++;
+    }
+
+    return chapters;
+}
+
+document.getElementById('chapter-pattern').addEventListener('change', function() {
+    document.getElementById('regex-pattern-group').style.display =
+        this.value === 'regex' ? 'block' : 'none';
+    document.getElementById('fixed-length-group').style.display =
+        this.value === 'fixed' ? 'block' : 'none';
+});
+
+function openNovel(novelId) {
+    var novel = novels.find(function(n) { return n.id === novelId; });
+    if (!novel) return;
+
+    currentNovel = novel;
+    var prog = getNovelProgress(novelId);
+    currentChapterIndex = prog.chapter || 0;
+
+    document.getElementById('bookshelf-view').style.display = 'none';
+    document.getElementById('reading-view').style.display = 'block';
+
+    document.getElementById('reading-title').textContent = novel.name;
+
+    renderChapterList();
+    loadChapter(currentChapterIndex);
+
+    setTimeout(function() {
+        var content = document.getElementById('chapter-content');
+        if (prog.scroll) {
+            content.scrollTop = content.scrollHeight * prog.scroll;
+        }
+    }, 100);
+}
+
+function backToBookshelf() {
+    if (currentNovel) {
+        var content = document.getElementById('chapter-content');
+        var scrollPercentage = content.scrollTop / content.scrollHeight;
+        updateNovelProgress(currentNovel.id, currentChapterIndex, scrollPercentage);
+    }
+
+    document.getElementById('bookshelf-view').style.display = 'block';
+    document.getElementById('reading-view').style.display = 'none';
+
+    currentNovel = null;
+    renderBookshelf();
+}
+
+function renderChapterList() {
+    if (!currentNovel) return;
+
+    var list = document.getElementById('chapter-list');
+    var html = '';
+    for (var i = 0; i < currentNovel.chapters.length; i++) {
+        var chapter = currentNovel.chapters[i];
+        var activeClass = i === currentChapterIndex ? ' active' : '';
+        html += '<div class="chapter-item' + activeClass + '" onclick="loadChapter(' + i + ')">';
+        html += chapter.title;
+        html += '</div>';
+    }
+    list.innerHTML = html;
+}
+
+function loadChapter(index) {
+    if (!currentNovel || index < 0 || index >= currentNovel.chapters.length) return;
+
+    currentChapterIndex = index;
+    var chapter = currentNovel.chapters[index];
+
+    var contentEl = document.getElementById('chapter-content');
+    var paragraphs = chapter.content.split('\n').filter(function(p) { return p.trim(); });
+    var html = '';
+    for (var i = 0; i < paragraphs.length; i++) {
+        html += '<p>' + paragraphs[i] + '</p>';
+    }
+    contentEl.innerHTML = html;
+    contentEl.scrollTop = 0;
+
+    document.getElementById('reading-chapter-name').textContent = chapter.title;
+    document.getElementById('chapter-progress').textContent =
+        '第 ' + (index + 1) + ' / ' + currentNovel.chapters.length + ' 章';
+
+    document.getElementById('prev-chapter-btn').disabled = index === 0;
+    document.getElementById('next-chapter-btn').disabled = index === currentNovel.chapters.length - 1;
+
+    var items = document.querySelectorAll('.chapter-item');
+    for (var i = 0; i < items.length; i++) {
+        if (i === index) {
+            items[i].classList.add('active');
+        } else {
+            items[i].classList.remove('active');
+        }
+    }
+
+    updateNovelProgress(currentNovel.id, index, 0);
+}
+
+function navigateChapter(direction) {
+    var newIndex = currentChapterIndex + direction;
+    if (newIndex >= 0 && newIndex < currentNovel.chapters.length) {
+        loadChapter(newIndex);
+    }
+}
+
+function toggleChapterList() {
+    var sidebar = document.getElementById('chapter-sidebar');
+    sidebar.classList.toggle('collapsed');
+    sidebar.classList.toggle('visible');
+}
+
+function adjustFontSize(delta) {
+    fontSize = Math.max(12, Math.min(24, fontSize + delta));
+    localStorage.setItem('novel_font_size', fontSize.toString());
+    updateFontSize();
+}
+
+function updateFontSize() {
+    var contentEl = document.getElementById('chapter-content');
+    if (contentEl) {
+        contentEl.style.fontSize = fontSize + 'px';
+    }
+}
+
+function filterByCategory(category) {
+    var search = document.getElementById('search-input').value;
+    renderBookshelf(category, search);
+}
+
+function searchNovels(search) {
+    var category = document.getElementById('category-filter').value;
+    renderBookshelf(category, search);
+}
+
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'flex';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    var date = new Date(dateStr);
+    var now = new Date();
+    var diff = now - date;
+
+    if (diff < 60000) return '刚刚';
+    if (diff < 3600000) return Math.floor(diff / 60000) + '分钟前';
+    if (diff < 86400000) return Math.floor(diff / 3600000) + '小时前';
+    if (diff < 604800000) return Math.floor(diff / 86400000) + '天前';
+
+    return (date.getMonth() + 1) + '月' + date.getDate() + '日';
+}
+
+document.getElementById('chapter-content').addEventListener('scroll', function() {
+    if (currentNovel) {
+        var self = this;
+        var scrollPercentage = self.scrollTop / self.scrollHeight;
+        clearTimeout(self._saveTimeout);
+        self._saveTimeout = setTimeout(function() {
+            updateNovelProgress(currentNovel.id, currentChapterIndex, scrollPercentage);
+        }, 500);
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (!currentNovel) return;
+
+    if (e.key === 'ArrowLeft') {
+        navigateChapter(-1);
+    } else if (e.key === 'ArrowRight') {
+        navigateChapter(1);
+    } else if (e.key === 'Escape') {
+        backToBookshelf();
+    }
+});
+</script>
+{{- end -}}

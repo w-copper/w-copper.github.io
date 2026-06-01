@@ -1,0 +1,997 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{- end -}}
+
+{{- define "content" -}}
+<div class="tools-page">
+    <h1 class="tools-title">🛠️ 开发工具箱</h1>
+    <p class="tools-description">开发者常用工具集合，所有数据仅在本地浏览器处理，不会上传到服务器。</p>
+
+    <!-- 工具导航 -->
+    <nav class="tools-nav">
+        <button class="tool-nav-btn active" onclick="switchTool('json')">JSON 格式化</button>
+        <button class="tool-nav-btn" onclick="switchTool('base64')">Base64 编解码</button>
+        <button class="tool-nav-btn" onclick="switchTool('timestamp')">时间戳转换</button>
+        <button class="tool-nav-btn" onclick="switchTool('color')">颜色转换</button>
+    </nav>
+
+    <!-- JSON 格式化工具 -->
+    <div id="tool-json" class="tool-panel active">
+        <div class="tool-header">
+            <h2>📋 JSON 格式化 / 压缩</h2>
+            <p>格式化、压缩、验证 JSON 数据</p>
+        </div>
+        <div class="tool-body">
+            <div class="tool-input-group">
+                <label>输入 JSON</label>
+                <textarea id="json-input" placeholder='请输入 JSON 数据，例如：{"name":"张三","age":25}'></textarea>
+            </div>
+            <div class="tool-actions">
+                <button class="btn-primary" onclick="formatJSON()">格式化</button>
+                <button class="btn-secondary" onclick="compressJSON()">压缩</button>
+                <button class="btn-secondary" onclick="validateJSON()">验证</button>
+                <button class="btn-outline" onclick="clearJSON()">清空</button>
+            </div>
+            <div class="tool-input-group">
+                <label>输出结果</label>
+                <textarea id="json-output" readonly placeholder="格式化后的 JSON 将显示在这里"></textarea>
+            </div>
+            <div id="json-status" class="tool-status"></div>
+        </div>
+    </div>
+
+    <!-- Base64 编解码工具 -->
+    <div id="tool-base64" class="tool-panel">
+        <div class="tool-header">
+            <h2>🔐 Base64 编解码</h2>
+            <p>Base64 编码和解码文本数据</p>
+        </div>
+        <div class="tool-body">
+            <div class="tool-input-group">
+                <label>输入文本</label>
+                <textarea id="base64-input" placeholder="请输入需要编码或解码的文本"></textarea>
+            </div>
+            <div class="tool-actions">
+                <button class="btn-primary" onclick="encodeBase64()">编码</button>
+                <button class="btn-primary" onclick="decodeBase64()">解码</button>
+                <button class="btn-outline" onclick="clearBase64()">清空</button>
+            </div>
+            <div class="tool-input-group">
+                <label>输出结果</label>
+                <textarea id="base64-output" readonly placeholder="编码或解码结果将显示在这里"></textarea>
+            </div>
+            <div class="tool-actions">
+                <button class="btn-secondary" onclick="copyBase64Output()">复制结果</button>
+            </div>
+            <div id="base64-status" class="tool-status"></div>
+        </div>
+    </div>
+
+    <!-- 时间戳转换工具 -->
+    <div id="tool-timestamp" class="tool-panel">
+        <div class="tool-header">
+            <h2>⏰ 时间戳转换</h2>
+            <p>Unix 时间戳与日期时间相互转换</p>
+        </div>
+        <div class="tool-body">
+            <div class="timestamp-current">
+                <span class="timestamp-label">当前时间戳：</span>
+                <span id="current-timestamp" class="timestamp-value">--</span>
+                <button class="btn-small" onclick="refreshTimestamp()">刷新</button>
+            </div>
+            <div class="tool-columns">
+                <div class="tool-column">
+                    <h3>时间戳 → 日期</h3>
+                    <div class="tool-input-group">
+                        <label>输入时间戳</label>
+                        <input type="text" id="timestamp-input" placeholder="例如：1717200000">
+                    </div>
+                    <div class="tool-input-group">
+                        <label>单位</label>
+                        <select id="timestamp-unit">
+                            <option value="s">秒 (s)</option>
+                            <option value="ms">毫秒 (ms)</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="timestampToDate()">转换</button>
+                    <div id="timestamp-to-date-result" class="tool-result"></div>
+                </div>
+                <div class="tool-column">
+                    <h3>日期 → 时间戳</h3>
+                    <div class="tool-input-group">
+                        <label>选择日期时间</label>
+                        <input type="datetime-local" id="date-input">
+                    </div>
+                    <button class="btn-primary" onclick="dateToTimestamp()">转换</button>
+                    <div id="date-to-timestamp-result" class="tool-result"></div>
+                </div>
+            </div>
+            <div id="timestamp-status" class="tool-status"></div>
+        </div>
+    </div>
+
+    <!-- 颜色转换工具 -->
+    <div id="tool-color" class="tool-panel">
+        <div class="tool-header">
+            <h2>🎨 颜色转换</h2>
+            <p>HEX、RGB、HSL 颜色格式相互转换</p>
+        </div>
+        <div class="tool-body">
+            <div class="color-preview-wrapper">
+                <div id="color-preview" class="color-preview"></div>
+                <div class="color-inputs">
+                    <div class="tool-input-group">
+                        <label>HEX</label>
+                        <input type="text" id="color-hex" placeholder="#667eea" oninput="onHexInput()">
+                    </div>
+                    <div class="tool-input-group">
+                        <label>RGB</label>
+                        <div class="color-rgb-inputs">
+                            <input type="number" id="color-r" min="0" max="255" placeholder="R" oninput="onRgbInput()">
+                            <input type="number" id="color-g" min="0" max="255" placeholder="G" oninput="onRgbInput()">
+                            <input type="number" id="color-b" min="0" max="255" placeholder="B" oninput="onRgbInput()">
+                        </div>
+                    </div>
+                    <div class="tool-input-group">
+                        <label>HSL</label>
+                        <div class="color-hsl-inputs">
+                            <input type="number" id="color-h" min="0" max="360" placeholder="H" oninput="onHslInput()">
+                            <input type="number" id="color-s" min="0" max="100" placeholder="S%" oninput="onHslInput()">
+                            <input type="number" id="color-l" min="0" max="100" placeholder="L%" oninput="onHslInput()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-actions">
+                <button class="btn-secondary" onclick="copyColor('hex')">复制 HEX</button>
+                <button class="btn-secondary" onclick="copyColor('rgb')">复制 RGB</button>
+                <button class="btn-secondary" onclick="copyColor('hsl')">复制 HSL</button>
+                <button class="btn-outline" onclick="randomColor()">随机颜色</button>
+            </div>
+            <div class="color-palette">
+                <h3>常用颜色</h3>
+                <div class="palette-grid" id="palette-grid"></div>
+            </div>
+            <div id="color-status" class="tool-status"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ========== 工具箱页面基础 ========== */
+.tools-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.tools-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.tools-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* ========== 工具导航 ========== */
+.tools-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tool-nav-btn {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #667eea;
+    background: transparent;
+    color: #667eea;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tool-nav-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.tool-nav-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* ========== 工具面板 ========== */
+.tool-panel {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+    overflow: hidden;
+}
+
+.tool-panel.active {
+    display: block;
+}
+
+.tool-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.tool-header h2 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+}
+
+.tool-header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.tool-body {
+    padding: 2rem;
+}
+
+/* ========== 输入输出区域 ========== */
+.tool-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.tool-input-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.tool-input-group textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.tool-input-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.tool-input-group input[type="text"],
+.tool-input-group input[type="number"],
+.tool-input-group input[type="datetime-local"],
+.tool-input-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.tool-input-group input:focus,
+.tool-input-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* ========== 按钮样式 ========== */
+.tool-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+}
+
+.btn-outline {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-small:hover {
+    background: #5a6fd6;
+}
+
+/* ========== 状态提示 ========== */
+.tool-status {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: none;
+}
+
+.tool-status.success {
+    display: block;
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.tool-status.error {
+    display: block;
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.tool-status.info {
+    display: block;
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+/* ========== 时间戳工具特殊样式 ========== */
+.timestamp-current {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.timestamp-label {
+    font-weight: 500;
+}
+
+.timestamp-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.tool-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.tool-column {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.tool-column h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin: 0 0 1rem;
+}
+
+.tool-result {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    min-height: 60px;
+}
+
+/* ========== 颜色工具特殊样式 ========== */
+.color-preview-wrapper {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.color-preview {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    background: #667eea;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    flex-shrink: 0;
+}
+
+.color-inputs {
+    flex: 1;
+}
+
+.color-rgb-inputs,
+.color-hsl-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.color-rgb-inputs input,
+.color-hsl-inputs input {
+    flex: 1;
+    min-width: 0;
+}
+
+.color-palette {
+    margin-top: 2rem;
+}
+
+.color-palette h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 0.8rem;
+}
+
+.palette-color {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.palette-color:hover {
+    transform: scale(1.1);
+}
+
+.palette-color::after {
+    content: attr(data-hex);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #666;
+    white-space: nowrap;
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 768px) {
+    .tools-page {
+        padding: 1rem;
+    }
+
+    .tools-title {
+        font-size: 1.8rem;
+    }
+
+    .tool-nav-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .tool-header {
+        padding: 1.5rem;
+    }
+
+    .tool-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .tool-body {
+        padding: 1.5rem;
+    }
+
+    .tool-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .color-preview-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .color-preview {
+        width: 150px;
+        height: 150px;
+    }
+
+    .tool-actions {
+        flex-direction: column;
+    }
+
+    .tool-actions button {
+        width: 100%;
+    }
+}
+
+/* ========== 暗色模式 ========== */
+[data-theme="dark"] .tools-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .tools-description {
+    color: #aaa;
+}
+
+[data-theme="dark"] .tool-panel {
+    background: #1e1e1e;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .tool-input-group label {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .tool-input-group textarea,
+[data-theme="dark"] .tool-input-group input[type="text"],
+[data-theme="dark"] .tool-input-group input[type="number"],
+[data-theme="dark"] .tool-input-group input[type="datetime-local"],
+[data-theme="dark"] .tool-input-group select {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .tool-input-group textarea:focus,
+[data-theme="dark"] .tool-input-group input:focus,
+[data-theme="dark"] .tool-input-group select:focus {
+    border-color: #667eea;
+}
+
+[data-theme="dark"] .tool-column {
+    background: #2d2d2d;
+}
+
+[data-theme="dark"] .tool-column h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .tool-result {
+    background: #333;
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .tool-nav-btn {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+[data-theme="dark"] .btn-outline {
+    color: #667eea;
+    border-color: #667eea;
+}
+
+[data-theme="dark"] .color-palette h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .palette-color::after {
+    color: #aaa;
+}
+</style>
+
+<script>
+// ========== 工具切换 ==========
+function switchTool(tool) {
+    // 隐藏所有面板
+    document.querySelectorAll('.tool-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+    // 取消所有导航按钮激活状态
+    document.querySelectorAll('.tool-nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    // 显示目标面板
+    document.getElementById('tool-' + tool).classList.add('active');
+    // 激活对应导航按钮
+    event.target.classList.add('active');
+}
+
+// ========== 状态提示 ==========
+function showStatus(elementId, message, type) {
+    const status = document.getElementById(elementId);
+    status.textContent = message;
+    status.className = 'tool-status ' + type;
+}
+
+// ========== JSON 格式化工具 ==========
+function formatJSON() {
+    const input = document.getElementById('json-input').value.trim();
+    if (!input) {
+        showStatus('json-status', '请输入 JSON 数据', 'error');
+        return;
+    }
+    try {
+        const parsed = JSON.parse(input);
+        const formatted = JSON.stringify(parsed, null, 2);
+        document.getElementById('json-output').value = formatted;
+        showStatus('json-status', 'JSON 格式化成功！', 'success');
+    } catch (e) {
+        showStatus('json-status', 'JSON 解析错误：' + e.message, 'error');
+    }
+}
+
+function compressJSON() {
+    const input = document.getElementById('json-input').value.trim();
+    if (!input) {
+        showStatus('json-status', '请输入 JSON 数据', 'error');
+        return;
+    }
+    try {
+        const parsed = JSON.parse(input);
+        const compressed = JSON.stringify(parsed);
+        document.getElementById('json-output').value = compressed;
+        showStatus('json-status', 'JSON 压缩成功！', 'success');
+    } catch (e) {
+        showStatus('json-status', 'JSON 解析错误：' + e.message, 'error');
+    }
+}
+
+function validateJSON() {
+    const input = document.getElementById('json-input').value.trim();
+    if (!input) {
+        showStatus('json-status', '请输入 JSON 数据', 'error');
+        return;
+    }
+    try {
+        JSON.parse(input);
+        showStatus('json-status', 'JSON 格式有效！', 'success');
+    } catch (e) {
+        showStatus('json-status', 'JSON 格式无效：' + e.message, 'error');
+    }
+}
+
+function clearJSON() {
+    document.getElementById('json-input').value = '';
+    document.getElementById('json-output').value = '';
+    document.getElementById('json-status').className = 'tool-status';
+}
+
+// ========== Base64 编解码工具 ==========
+function encodeBase64() {
+    const input = document.getElementById('base64-input').value;
+    if (!input) {
+        showStatus('base64-status', '请输入需要编码的文本', 'error');
+        return;
+    }
+    try {
+        const encoded = btoa(unescape(encodeURIComponent(input)));
+        document.getElementById('base64-output').value = encoded;
+        showStatus('base64-status', 'Base64 编码成功！', 'success');
+    } catch (e) {
+        showStatus('base64-status', '编码失败：' + e.message, 'error');
+    }
+}
+
+function decodeBase64() {
+    const input = document.getElementById('base64-input').value.trim();
+    if (!input) {
+        showStatus('base64-status', '请输入需要解码的 Base64 文本', 'error');
+        return;
+    }
+    try {
+        const decoded = decodeURIComponent(escape(atob(input)));
+        document.getElementById('base64-output').value = decoded;
+        showStatus('base64-status', 'Base64 解码成功！', 'success');
+    } catch (e) {
+        showStatus('base64-status', '解码失败：输入不是有效的 Base64 编码', 'error');
+    }
+}
+
+function clearBase64() {
+    document.getElementById('base64-input').value = '';
+    document.getElementById('base64-output').value = '';
+    document.getElementById('base64-status').className = 'tool-status';
+}
+
+function copyBase64Output() {
+    const output = document.getElementById('base64-output');
+    if (!output.value) {
+        showStatus('base64-status', '没有可复制的内容', 'error');
+        return;
+    }
+    navigator.clipboard.writeText(output.value).then(() => {
+        showStatus('base64-status', '已复制到剪贴板！', 'success');
+    }).catch(() => {
+        output.select();
+        document.execCommand('copy');
+        showStatus('base64-status', '已复制到剪贴板！', 'success');
+    });
+}
+
+// ========== 时间戳转换工具 ==========
+function refreshTimestamp() {
+    document.getElementById('current-timestamp').textContent = Math.floor(Date.now() / 1000);
+}
+
+// 页面加载时刷新时间戳
+document.addEventListener('DOMContentLoaded', refreshTimestamp);
+
+function timestampToDate() {
+    const input = document.getElementById('timestamp-input').value.trim();
+    if (!input) {
+        showStatus('timestamp-status', '请输入时间戳', 'error');
+        return;
+    }
+    const unit = document.getElementById('timestamp-unit').value;
+    let timestamp = parseInt(input);
+    if (isNaN(timestamp)) {
+        showStatus('timestamp-status', '请输入有效的时间戳数字', 'error');
+        return;
+    }
+    if (unit === 's') {
+        timestamp = timestamp * 1000;
+    }
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) {
+        showStatus('timestamp-status', '无效的时间戳', 'error');
+        return;
+    }
+    const result = `
+        <p><strong>本地时间：</strong>${date.toLocaleString('zh-CN')}</p>
+        <p><strong>UTC 时间：</strong>${date.toUTCString()}</p>
+        <p><strong>ISO 格式：</strong>${date.toISOString()}</p>
+    `;
+    document.getElementById('timestamp-to-date-result').innerHTML = result;
+    showStatus('timestamp-status', '转换成功！', 'success');
+}
+
+function dateToTimestamp() {
+    const input = document.getElementById('date-input').value;
+    if (!input) {
+        showStatus('timestamp-status', '请选择日期时间', 'error');
+        return;
+    }
+    const date = new Date(input);
+    const timestampSec = Math.floor(date.getTime() / 1000);
+    const timestampMs = date.getTime();
+    const result = `
+        <p><strong>秒级时间戳：</strong>${timestampSec}</p>
+        <p><strong>毫秒级时间戳：</strong>${timestampMs}</p>
+    `;
+    document.getElementById('date-to-timestamp-result').innerHTML = result;
+    showStatus('timestamp-status', '转换成功！', 'success');
+}
+
+// ========== 颜色转换工具 ==========
+function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    const num = parseInt(hex, 16);
+    return {
+        r: (num >> 16) & 255,
+        g: (num >> 8) & 255,
+        b: num & 255
+    };
+}
+
+function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+}
+
+function rgbToHsl(r, g, b) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) {
+        h = s = 0;
+    } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+            case g: h = ((b - r) / d + 2) / 6; break;
+            case b: h = ((r - g) / d + 4) / 6; break;
+        }
+    }
+    return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+    };
+}
+
+function hslToRgb(h, s, l) {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    let r, g, b;
+    if (s === 0) {
+        r = g = b = l;
+    } else {
+        const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1/6) return p + (q - p) * 6 * t;
+            if (t < 1/2) return q;
+            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+    return {
+        r: Math.round(r * 255),
+        g: Math.round(g * 255),
+        b: Math.round(b * 255)
+    };
+}
+
+function updateColorPreview(hex) {
+    document.getElementById('color-preview').style.background = hex;
+}
+
+function onHexInput() {
+    const hex = document.getElementById('color-hex').value.trim();
+    if (!/^#?[0-9a-fA-F]{3,6}$/.test(hex)) return;
+    const fullHex = hex.startsWith('#') ? hex : '#' + hex;
+    const rgb = hexToRgb(fullHex);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    document.getElementById('color-r').value = rgb.r;
+    document.getElementById('color-g').value = rgb.g;
+    document.getElementById('color-b').value = rgb.b;
+    document.getElementById('color-h').value = hsl.h;
+    document.getElementById('color-s').value = hsl.s;
+    document.getElementById('color-l').value = hsl.l;
+    updateColorPreview(fullHex);
+}
+
+function onRgbInput() {
+    const r = parseInt(document.getElementById('color-r').value) || 0;
+    const g = parseInt(document.getElementById('color-g').value) || 0;
+    const b = parseInt(document.getElementById('color-b').value) || 0;
+    const hex = rgbToHex(r, g, b);
+    const hsl = rgbToHsl(r, g, b);
+    document.getElementById('color-hex').value = hex;
+    document.getElementById('color-h').value = hsl.h;
+    document.getElementById('color-s').value = hsl.s;
+    document.getElementById('color-l').value = hsl.l;
+    updateColorPreview(hex);
+}
+
+function onHslInput() {
+    const h = parseInt(document.getElementById('color-h').value) || 0;
+    const s = parseInt(document.getElementById('color-s').value) || 0;
+    const l = parseInt(document.getElementById('color-l').value) || 0;
+    const rgb = hslToRgb(h, s, l);
+    const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+    document.getElementById('color-hex').value = hex;
+    document.getElementById('color-r').value = rgb.r;
+    document.getElementById('color-g').value = rgb.g;
+    document.getElementById('color-b').value = rgb.b;
+    updateColorPreview(hex);
+}
+
+function copyColor(format) {
+    let text = '';
+    switch (format) {
+        case 'hex':
+            text = document.getElementById('color-hex').value;
+            break;
+        case 'rgb':
+            const r = document.getElementById('color-r').value || 0;
+            const g = document.getElementById('color-g').value || 0;
+            const b = document.getElementById('color-b').value || 0;
+            text = `rgb(${r}, ${g}, ${b})`;
+            break;
+        case 'hsl':
+            const h = document.getElementById('color-h').value || 0;
+            const s = document.getElementById('color-s').value || 0;
+            const l = document.getElementById('color-l').value || 0;
+            text = `hsl(${h}, ${s}%, ${l}%)`;
+            break;
+    }
+    if (!text) {
+        showStatus('color-status', '没有可复制的颜色值', 'error');
+        return;
+    }
+    navigator.clipboard.writeText(text).then(() => {
+        showStatus('color-status', `已复制：${text}`, 'success');
+    }).catch(() => {
+        showStatus('color-status', '复制失败', 'error');
+    });
+}
+
+function randomColor() {
+    const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+    document.getElementById('color-hex').value = hex;
+    onHexInput();
+}
+
+// 初始化调色板
+function initPalette() {
+    const colors = [
+        '#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#1abc9c',
+        '#3498db', '#9b59b6', '#34495e', '#ecf0f1', '#95a5a6',
+        '#c0392b', '#d35400', '#f39c12', '#27ae60', '#16a085',
+        '#2980b9', '#8e44ad', '#2c3e50', '#bdc3c7', '#7f8c8d',
+        '#667eea', '#764ba2', '#11998e', '#38ef7d', '#f093fb',
+        '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'
+    ];
+    const grid = document.getElementById('palette-grid');
+    grid.innerHTML = colors.map(color => 
+        `<div class="palette-color" style="background:${color}" data-hex="${color}" onclick="selectPaletteColor('${color}')"></div>`
+    ).join('');
+}
+
+function selectPaletteColor(hex) {
+    document.getElementById('color-hex').value = hex;
+    onHexInput();
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', initPalette);
+</script>
+{{- end -}}

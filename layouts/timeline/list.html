@@ -1,0 +1,844 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{- end -}}
+
+{{- define "content" -}}
+<div class="timeline-page">
+    <div class="timeline-header">
+        <h1 class="timeline-title">⏳ 学术时间线</h1>
+        <p class="timeline-description">教育经历 · 科研项目 · 论文发表</p>
+    </div>
+
+    <div class="timeline-filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterTimeline('all')">全部</button>
+        <button class="filter-btn" data-filter="education" onclick="filterTimeline('education')">
+            <span class="filter-dot education-dot"></span>教育经历
+        </button>
+        <button class="filter-btn" data-filter="project" onclick="filterTimeline('project')">
+            <span class="filter-dot project-dot"></span>科研项目
+        </button>
+        <button class="filter-btn" data-filter="paper" onclick="filterTimeline('paper')">
+            <span class="filter-dot paper-dot"></span>论文发表
+        </button>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <!-- 教育经历 -->
+        <div class="timeline-item" data-category="education" data-year="2022">
+            <div class="timeline-marker education-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2022.09 - 2026.06</span>
+                    <span class="timeline-badge education-badge">博士</span>
+                </div>
+                <h3 class="timeline-card-title">武汉大学 · 摄影测量与遥感</h3>
+                <p class="timeline-card-subtitle">测绘遥感信息全国重点实验室</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>学位</strong>: 全日制学术博士（硕博连读 2+3）</li>
+                        <li><strong>研究方向</strong>: 计算机视觉、多模态图像语义分割</li>
+                        <li><strong>荣誉</strong>: 2020年实验室新生奖学金</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="education" data-year="2016">
+            <div class="timeline-marker education-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2016.09 - 2020.06</span>
+                    <span class="timeline-badge education-badge">本科</span>
+                </div>
+                <h3 class="timeline-card-title">武汉大学 · 遥感科学与技术</h3>
+                <p class="timeline-card-subtitle">遥感信息工程学院</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>学位</strong>: 工学学士</li>
+                        <li><strong>荣誉</strong>: 国家励志奖学金</li>
+                        <li><strong>竞赛</strong>: 美赛M奖和S奖</li>
+                        <li><strong>竞赛</strong>: 2019届MathorCup三等奖</li>
+                        <li><strong>竞赛</strong>: 第七届GIS应用大赛一等奖</li>
+                        <li><strong>竞赛</strong>: PRCV-航天宏图天气信息提取比赛第三名（赛道二第一名）</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- 科研项目 -->
+        <div class="timeline-item" data-category="project" data-year="2024">
+            <div class="timeline-marker project-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2024.07 - 2026.06</span>
+                    <span class="timeline-badge project-badge">核心技术人员</span>
+                </div>
+                <h3 class="timeline-card-title">国家重点研发项目</h3>
+                <p class="timeline-card-subtitle">2024QY0702 · 271万经费</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>研发方向</strong>: 多模态数据融合与三维场景理解、大视觉语言模型（VLM）应用</li>
+                        <li>负责项目整体技术路线规划与任务书撰写，推动项目顺利立项</li>
+                        <li>主导多源数据融合与三维城市场景关键要素的智能解析算法研发</li>
+                        <li>引入并微调前沿的大型视觉语言模型（VLM）</li>
+                        <li>设计半自动数据标注，突破特定目标数据集快速构建的技术瓶颈</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="project" data-year="2022">
+            <div class="timeline-marker project-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">在研期间</span>
+                    <span class="timeline-badge project-badge">核心技术人员</span>
+                </div>
+                <h3 class="timeline-card-title">上海市科委项目 · 沉浸式分析系统设计</h3>
+                <p class="timeline-card-subtitle">纵向课题</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>研发方向</strong>: 3D视觉、目标检测算法、视频流实时处理系统</li>
+                        <li>主导三维模型自动化处理算法</li>
+                        <li>设计基于规则与基于YOLO的3D模型自动化缺陷检测算法</li>
+                        <li>基于OSG与Qt引擎实现三维模型的半自动修复系统</li>
+                        <li>研发三维场景与视频流目标检测框架</li>
+                        <li>基于OpenCV与FFmpeg搭建高效的视频拉流与推流处理管道</li>
+                        <li><strong>产出</strong>: 获授权发明专利2项（排名第二），登记软件著作权1项</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="project" data-year="2020">
+            <div class="timeline-marker project-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">本科 - 硕士期间</span>
+                    <span class="timeline-badge project-badge">核心人员</span>
+                </div>
+                <h3 class="timeline-card-title">国家自然科学基金 · 深度迁移学习遥感影像分类</h3>
+                <p class="timeline-card-subtitle">基于深度迁移学习的遥感影像地表覆盖分类方法</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li>基于GID数据集，实现基于软标签引导的弱监督语义分割算法研究（PyTorch + Lightning实现）</li>
+                        <li>完成一篇论文发表（EI会议）</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- 论文发表 -->
+        <div class="timeline-item" data-category="paper" data-year="2025">
+            <div class="timeline-marker paper-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2025</span>
+                    <span class="timeline-badge paper-badge">SCI 1区TOP · IF 15.5</span>
+                </div>
+                <h3 class="timeline-card-title">MSSDF: Modality-Shared Self-Supervised Distillation</h3>
+                <p class="timeline-card-subtitle">Information Fusion, 129: 104006</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>作者</strong>: Wang T, Chen G, Zhang X, et al.</li>
+                        <li><strong>期刊</strong>: Information Fusion（计算机科学SCI 1区TOP）</li>
+                        <li><strong>影响因子</strong>: 15.5</li>
+                        <li><strong>主题</strong>: 高分辨率多模态遥感图像的模态共享自监督蒸馏学习</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="paper" data-year="2025">
+            <div class="timeline-marker paper-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2025</span>
+                    <span class="timeline-badge paper-badge">SCI 1区TOP · IF 7.5 · ESI高被引</span>
+                </div>
+                <h3 class="timeline-card-title">LMFNet: Lightweight Multimodal Fusion Network</h3>
+                <p class="timeline-card-subtitle">Pattern Recognition, 164: 111579</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>作者</strong>: Wang T, Chen G, Zhang X, et al.</li>
+                        <li><strong>期刊</strong>: Pattern Recognition（计算机科学SCI 1区TOP）</li>
+                        <li><strong>影响因子</strong>: 7.5</li>
+                        <li><strong>荣誉</strong>: ESI高被引论文</li>
+                        <li><strong>主题</strong>: 高分辨率遥感图像分割的轻量级多模态融合网络</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="paper" data-year="2025">
+            <div class="timeline-marker paper-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2025</span>
+                    <span class="timeline-badge paper-badge">SCI 1区TOP · IF 9.9</span>
+                </div>
+                <h3 class="timeline-card-title">BFA-YOLO: Balanced Multiscale Object Detection</h3>
+                <p class="timeline-card-subtitle">Advanced Engineering Informatics, in press</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>作者</strong>: Y. Chen, <strong>Wang T</strong>, Chen G.</li>
+                        <li><strong>期刊</strong>: Advanced Engineering Informatics（SCI 1区TOP）</li>
+                        <li><strong>影响因子</strong>: 9.9</li>
+                        <li><strong>排名</strong>: 共同第一作者（共一第二）</li>
+                        <li><strong>主题</strong>: 建筑立面元素检测的平衡多尺度目标检测网络</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="paper" data-year="2023">
+            <div class="timeline-marker paper-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2023</span>
+                    <span class="timeline-badge paper-badge">EI会议</span>
+                </div>
+                <h3 class="timeline-card-title">Smilies: Soft-Multi-Label-Guided Weakly Supervised Segmentation</h3>
+                <p class="timeline-card-subtitle">Geoinformatics 2023, London, UK</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>作者</strong>: Wang T, Zhang X, Chen G, et al.</li>
+                        <li><strong>会议</strong>: 2023 30th International Conference on Geoinformatics</li>
+                        <li><strong>类型</strong>: EI会议论文</li>
+                        <li><strong>主题</strong>: 遥感图像的软多标签引导弱监督语义分割框架</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-category="paper" data-year="2020">
+            <div class="timeline-marker paper-marker">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="timeline-card" onclick="toggleCard(this)">
+                <div class="timeline-card-header">
+                    <span class="timeline-date">2020</span>
+                    <span class="timeline-badge paper-badge">SCI 2区</span>
+                </div>
+                <h3 class="timeline-card-title">Convective Clouds Extraction From Himawari-8</h3>
+                <p class="timeline-card-subtitle">IEEE GRSL, 17(4): 553-557</p>
+                <div class="timeline-card-details">
+                    <ul>
+                        <li><strong>作者</strong>: Zhang X., <strong>Wang T</strong>, Chen G., et al.</li>
+                        <li><strong>期刊</strong>: IEEE Geoscience and Remote Sensing Letters（SCI 2区）</li>
+                        <li><strong>排名</strong>: 导师一作，本人二作</li>
+                        <li><strong>主题</strong>: 基于双流全卷积网络的 Himawari-8 卫星积云提取</li>
+                    </ul>
+                </div>
+                <div class="timeline-card-expand">
+                    <span>点击查看详情</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ========== Timeline Page Base ========== */
+.timeline-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.timeline-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.timeline-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-description {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* ========== Filter Buttons ========== */
+.timeline-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 30px;
+    background: white;
+    color: #666;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.filter-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.education-dot { background: #667eea; }
+.project-dot { background: #11998e; }
+.paper-dot { background: #f093fb; }
+
+/* ========== Timeline Container ========== */
+.timeline-container {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #11998e 100%);
+    border-radius: 2px;
+}
+
+/* ========== Timeline Items ========== */
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 2rem;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.4s ease;
+}
+
+.timeline-item.hidden {
+    opacity: 0;
+    transform: translateX(-20px);
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.timeline-item.fade-in {
+    animation: fadeInRight 0.5s ease forwards;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== Timeline Marker ========== */
+.timeline-marker {
+    position: absolute;
+    left: 12px;
+    top: 1.2rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.education-marker {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.project-marker {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.paper-marker {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* ========== Timeline Card ========== */
+.timeline-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.timeline-card.expanded {
+    border-color: #667eea;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.25);
+}
+
+.timeline-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    color: #666;
+    background: #f8f9fa;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.timeline-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.education-badge {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.project-badge {
+    background: rgba(17, 153, 142, 0.1);
+    color: #11998e;
+}
+
+.paper-badge {
+    background: rgba(240, 147, 251, 0.1);
+    color: #d63384;
+}
+
+.timeline-card-title {
+    font-size: 1.15rem;
+    color: #2c3e50;
+    margin: 0 0 0.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.timeline-card-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0;
+}
+
+.timeline-card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.timeline-card.expanded .timeline-card-details {
+    max-height: 500px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.timeline-card-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-card-details li {
+    padding: 0.4rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.timeline-card-details li::before {
+    content: "▸";
+    color: #667eea;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.timeline-card-details li strong {
+    color: #2c3e50;
+}
+
+.timeline-card-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.timeline-card.expanded .timeline-card-expand {
+    color: #667eea;
+}
+
+.timeline-card.expanded .timeline-card-expand svg {
+    transform: rotate(180deg);
+}
+
+.timeline-card-expand svg {
+    transition: transform 0.3s ease;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+    .timeline-page {
+        padding: 1rem;
+    }
+
+    .timeline-title {
+        font-size: 2rem;
+    }
+
+    .timeline-filters {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .timeline-line {
+        left: 18px;
+    }
+
+    .timeline-item {
+        padding-left: 48px;
+    }
+
+    .timeline-marker {
+        left: 6px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .timeline-marker svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .timeline-card {
+        padding: 1.2rem;
+    }
+
+    .timeline-card-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-line {
+        left: 14px;
+    }
+
+    .timeline-item {
+        padding-left: 40px;
+    }
+
+    .timeline-marker {
+        left: 3px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .timeline-marker svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .timeline-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .timeline-badge {
+        font-size: 0.7rem;
+    }
+}
+
+/* ========== Dark Mode ========== */
+[data-theme="dark"] .timeline-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .timeline-description {
+    color: #aaa;
+}
+
+[data-theme="dark"] .filter-btn {
+    background: #1e1e1e;
+    border-color: #333;
+    color: #aaa;
+}
+
+[data-theme="dark"] .filter-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+[data-theme="dark"] .filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+[data-theme="dark"] .timeline-card {
+    background: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .timeline-card:hover {
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+[data-theme="dark"] .timeline-card.expanded {
+    border-color: #667eea;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+}
+
+[data-theme="dark"] .timeline-date {
+    background: #2a2a2a;
+    color: #aaa;
+}
+
+[data-theme="dark"] .timeline-card-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .timeline-card-subtitle {
+    color: #888;
+}
+
+[data-theme="dark"] .timeline-card-details {
+    border-color: #333;
+}
+
+[data-theme="dark"] .timeline-card-details li {
+    color: #bbb;
+}
+
+[data-theme="dark"] .timeline-card-details li strong {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .timeline-card-expand {
+    color: #777;
+}
+
+[data-theme="dark"] .timeline-card.expanded .timeline-card-expand {
+    color: #667eea;
+}
+
+/* ========== Scrollbar ========== */
+.timeline-card-details::-webkit-scrollbar {
+    width: 4px;
+}
+
+.timeline-card-details::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.timeline-card-details::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 2px;
+}
+
+[data-theme="dark"] .timeline-card-details::-webkit-scrollbar-thumb {
+    background: #444;
+}
+</style>
+
+<script>
+function filterTimeline(category) {
+    // Update active filter button
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    document.querySelector('[data-filter="' + category + '"]').classList.add('active');
+
+    // Filter timeline items
+    var items = document.querySelectorAll('.timeline-item');
+    var delay = 0;
+
+    items.forEach(function(item) {
+        var itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+            item.classList.remove('hidden');
+            item.style.animationDelay = delay + 'ms';
+            item.classList.add('fade-in');
+            delay += 100;
+            setTimeout(function() {
+                item.classList.remove('fade-in');
+            }, 500);
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+}
+
+function toggleCard(card) {
+    var wasExpanded = card.classList.contains('expanded');
+
+    // Close all other cards
+    document.querySelectorAll('.timeline-card.expanded').forEach(function(c) {
+        c.classList.remove('expanded');
+    });
+
+    // Toggle current card
+    if (!wasExpanded) {
+        card.classList.add('expanded');
+    }
+}
+
+// Initialize: expand first card
+document.addEventListener('DOMContentLoaded', function() {
+    var firstCard = document.querySelector('.timeline-card');
+    if (firstCard) {
+        firstCard.classList.add('expanded');
+    }
+});
+</script>
+{{- end -}}
