@@ -1,0 +1,54 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vision Transformer - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/vision-transformer/</link><description>Vision Transformer - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/vision-transformer/" rel="self" type="application/rss+xml"/><item><title>全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？</title><link>https://spacetop.win/2026/06/20260601_210000_hypersigma_hyperspectral/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_210000_hypersigma_hyperspectral/</guid><description><![CDATA[<h1 id="全球首个十亿级高光谱基础模型hypersigma如何统一高层与底层视觉任务" class="headerLink">
+    <a href="#%e5%85%a8%e7%90%83%e9%a6%96%e4%b8%aa%e5%8d%81%e4%ba%bf%e7%ba%a7%e9%ab%98%e5%85%89%e8%b0%b1%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8bhypersigma%e5%a6%82%e4%bd%95%e7%bb%9f%e4%b8%80%e9%ab%98%e5%b1%82%e4%b8%8e%e5%ba%95%e5%b1%82%e8%a7%86%e8%a7%89%e4%bb%bb%e5%8a%a1" class="header-mark"></a>全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TPAMI 2025 (IF=20.8) | ESI高被引论文</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>HyperSIGMA: Hyperspectral Intelligence Comprehension Foundation Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Di Wang*, Meiqi Hu*, Yao Jin*, Yuchun Miao*, Jiaqi Yang*, Yichu Xu* 等（武汉大学、重庆大学、东京大学、南洋理工大学）</td>
+      </tr>
+      <tr>
+          <td><strong>会议/期刊</strong></td>
+          <td>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2406.11519" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2406.11519</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/WHU-Sigma/HyperSIGMA" target="_blank" rel="noopener noreferrer">https://github.com/WHU-Sigma/HyperSIGMA</a> (⭐366)</td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>高光谱图像、基础模型、Vision Transformer、稀疏采样注意力、自监督预训练</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-论文定位" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e5%ae%9a%e4%bd%8d" class="header-mark"></a>📊 论文定位</h2><ul>
+<li><strong>论文类型</strong>：理论突破型</li>
+<li><strong>创新性评分</strong>：⭐⭐⭐⭐ (4分)</li>
+<li><strong>判断依据</strong>：
+<ol>
+<li><strong>首创性</strong>：全球首个专门为高光谱图像设计的十亿级基础模型，填补了该领域的空白</li>
+<li><strong>技术贡献</strong>：提出稀疏采样注意力（SSA）机制，针对性解决高光谱数据的冗余问题</li>
+<li><strong>数据贡献</strong>：构建全球最大高光谱预训练数据集HyperGlobal-450K（2000万+图像）</li>
+<li><strong>荣誉认可</strong>：入选ESI Hot Paper和Highly Cited Paper，证明学术影响力</li>
+</ol>
+</li>
+</ul>
+<h2 id="-解决的核心问题第一层表象层" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e7%ac%ac%e4%b8%80%e5%b1%82%e8%a1%a8%e8%b1%a1%e5%b1%82" class="header-mark"></a>🎯 解决的核心问题（第一层：表象层）</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>高光谱图像（Hyperspectral Image, HSI）是遥感领域的重要数据类型，能够捕获数百个连续光谱波段的信息，在矿物勘探、农业监测、环境评估等领域有广泛应用。然而，与普通RGB图像相比，高光谱图像面临独特的挑战：</p>]]></description></item></channel></rss>
