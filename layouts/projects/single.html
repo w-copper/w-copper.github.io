@@ -1,0 +1,578 @@
+{{- define "title" }}{{ .Title }} - 项目详情 - {{ .Site.Title }}{{- end -}}
+
+{{- define "content" -}}
+<div class="project-detail-page">
+    <div id="project-detail">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>加载项目详情...</p>
+        </div>
+    </div>
+    
+    <div class="comments-section" id="comments-section" style="display: none;">
+        <h2>💬 评论</h2>
+        <form id="comment-form" class="comment-form">
+            <input type="hidden" id="project-slug" value="">
+            <div class="form-group">
+                <label for="comment-email">邮箱 *</label>
+                <input type="email" id="comment-email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="comment-content">评论内容 *</label>
+                <textarea id="comment-content" placeholder="写下你的评论..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">提交评论</button>
+        </form>
+        
+        <div id="comments-list" class="comments-list"></div>
+    </div>
+</div>
+
+<script>
+const API_BASE = 'https://api.spacetop.win/api';
+const slug = window.location.pathname.split('/').filter(Boolean).pop();
+
+async function loadProjectDetail() {
+    try {
+        const response = await fetch(`${API_BASE}/projects/${slug}`);
+        const data = await response.json();
+        
+        if (data.error) {
+            document.getElementById('project-detail').innerHTML = `
+                <div class="error-message">
+                    <h2>项目未找到</h2>
+                    <p>${data.error}</p>
+                    <a href="/projects" class="back-btn">返回项目列表</a>
+                </div>
+            `;
+            return;
+        }
+        
+        renderProjectDetail(data.project, data.images, data.comments);
+        document.getElementById('project-slug').value = slug;
+        document.getElementById('comments-section').style.display = 'block';
+        renderComments(data.comments);
+        
+    } catch (error) {
+        console.error('Failed to load project:', error);
+        document.getElementById('project-detail').innerHTML = `
+            <div class="error-message">
+                <h2>加载失败</h2>
+                <p>请刷新页面重试</p>
+                <a href="/projects" class="back-btn">返回项目列表</a>
+            </div>
+        `;
+    }
+}
+
+function renderProjectDetail(project, images, comments) {
+    const tags = JSON.parse(project.tags || '[]');
+    const techStack = JSON.parse(project.tech_stack || '[]');
+    
+    const categoryNames = {
+        'remote-sensing': '🛰️ 遥感',
+        'ai-deep-learning': '🤖 AI/深度学习',
+        'tools-platforms': '🛠️ 工具/平台',
+        'data-processing': '📊 数据处理',
+        'other': '📁 其他'
+    };
+    
+    document.getElementById('project-detail').innerHTML = `
+        <div class="project-header">
+            <a href="/projects" class="back-link">← 返回项目列表</a>
+            <h1 class="project-title">${project.title}</h1>
+            <div class="project-meta">
+                <span class="meta-category">${categoryNames[project.category] || project.category}</span>
+                <span class="meta-style">${project.style === 'tech' ? '⚡ 现代科技风' : '📚 学术风'}</span>
+            </div>
+        </div>
+        
+        <div class="project-content">
+            <div class="project-main">
+                ${project.image_url ? `<img src="${project.image_url}" alt="${project.title}" class="project-image">` : ''}
+                ${project.video_url ? `<video src="${project.video_url}" controls class="project-video"></video>` : ''}
+                
+                <div class="project-description">
+                    <h2>项目描述</h2>
+                    <p>${project.long_description || project.description || '暂无详细描述'}</p>
+                </div>
+            </div>
+            
+            <div class="project-sidebar">
+                <div class="sidebar-section">
+                    <h3>🔗 链接</h3>
+                    <div class="project-links">
+                        ${project.github_url ? `<a href="${project.github_url}" target="_blank" class="link-btn github">GitHub</a>` : ''}
+                        ${project.paper_url ? `<a href="${project.paper_url}" target="_blank" class="link-btn paper">📄 论文</a>` : ''}
+                        ${project.demo_url ? `<a href="${project.demo_url}" target="_blank" class="link-btn demo">🚀 Demo</a>` : ''}
+                    </div>
+                </div>
+                
+                ${techStack.length > 0 ? `
+                <div class="sidebar-section">
+                    <h3>💻 技术栈</h3>
+                    <div class="tech-stack">
+                        ${techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${tags.length > 0 ? `
+                <div class="sidebar-section">
+                    <h3>🏷️ 标签</h3>
+                    <div class="tags-list">
+                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function renderComments(comments) {
+    const commentsList = document.getElementById('comments-list');
+    
+    if (!comments || comments.length === 0) {
+        commentsList.innerHTML = '<p class="no-comments">暂无评论，快来发表第一条评论吧！</p>';
+        return;
+    }
+    
+    commentsList.innerHTML = comments.map(comment => `
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="comment-avatar">👤</span>
+                <span class="comment-email">${comment.email}</span>
+                <span class="comment-date">${new Date(comment.created_at).toLocaleDateString('zh-CN')}</span>
+            </div>
+            <div class="comment-content">${comment.content}</div>
+        </div>
+    `).join('');
+}
+
+document.getElementById('comment-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('comment-email').value;
+    const content = document.getElementById('comment-content').value;
+    const projectSlug = document.getElementById('project-slug').value;
+    
+    if (!email || !content) {
+        alert('请填写邮箱和评论内容');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                project_slug: projectSlug,
+                email: email,
+                content: content,
+            }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('comment-content').value = '';
+            loadProjectDetail();
+            alert('评论提交成功！');
+        } else {
+            alert('评论提交失败：' + (data.error || '未知错误'));
+        }
+    } catch (error) {
+        console.error('Failed to submit comment:', error);
+        alert('评论提交失败，请重试');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadProjectDetail);
+</script>
+
+<style>
+.project-detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.project-header {
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: inline-block;
+    color: #667eea;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.project-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.project-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.meta-category,
+.meta-style {
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+.project-main {
+    min-width: 0;
+}
+
+.project-image {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.project-video {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.project-description h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.project-description p {
+    line-height: 1.8;
+    color: #555;
+    font-size: 1.05rem;
+}
+
+.project-sidebar {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+}
+
+.sidebar-section {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.sidebar-section h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+.project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.link-btn {
+    display: block;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.link-btn.github {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
+}
+
+.link-btn.paper {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+}
+
+.link-btn.demo {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    padding: 0.4rem 0.8rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.4rem 0.8rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+.comments-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+}
+
+.comments-section h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+.comment-form {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.submit-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment-item {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.comment-avatar {
+    font-size: 1.5rem;
+}
+
+.comment-email {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.comment-date {
+    color: #999;
+    font-size: 0.85rem;
+    margin-left: auto;
+}
+
+.comment-content {
+    color: #555;
+    line-height: 1.6;
+}
+
+.no-comments {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem;
+}
+
+.error-message h2 {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 3rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+[data-theme="dark"] .project-title {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .project-description h2 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .project-description p {
+    color: #aaa;
+}
+
+[data-theme="dark"] .sidebar-section {
+    background: #1e1e1e;
+}
+
+[data-theme="dark"] .sidebar-section h3 {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .comment-form {
+    background: #1e1e1e;
+}
+
+[data-theme="dark"] .form-group label {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .comment-item {
+    background: #1e1e1e;
+}
+
+[data-theme="dark"] .comment-email {
+    color: #ecf0f1;
+}
+
+[data-theme="dark"] .comment-content {
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .project-detail-page {
+        padding: 1rem;
+    }
+    
+    .project-title {
+        font-size: 1.8rem;
+    }
+    
+    .project-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-sidebar {
+        position: static;
+    }
+}
+</style>
+{{- end -}}

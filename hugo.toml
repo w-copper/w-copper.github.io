@@ -52,6 +52,10 @@ theme = 'doit'
     name = '工具箱'
     pageRef = '/tools'
     weight = 85
+  [[menus.main]]
+    name = '项目'
+    pageRef = '/projects'
+    weight = 88
 
 [params]
   #  DoIt 主题版本
