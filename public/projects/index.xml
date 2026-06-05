@@ -1,0 +1,572 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>🚀 项目展示 - - 堂堂一跑堂</title><link>https://spacetop.win/projects/</link><description>🚀 项目展示 - - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><atom:link href="https://spacetop.win/projects/" rel="self" type="application/rss+xml"/><item><title>🔥 火点监测平台</title><link>https://spacetop.win/projects/fire-report/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/fire-report/</guid><description><![CDATA[<h1 id="-火点监测平台" class="headerLink">
+    <a href="#-%e7%81%ab%e7%82%b9%e7%9b%91%e6%b5%8b%e5%b9%b3%e5%8f%b0" class="header-mark"></a>🔥 火点监测平台</h1><p>基于 React + Cesium + FastAPI 的火点监测平台，支持 NASA FIRMS 数据、AI 报表生成、多省份登录管理。</p>
+<h2 id="-核心功能" class="headerLink">
+    <a href="#-%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd" class="header-mark"></a>✨ 核心功能</h2><h3 id="普通用户功能" class="headerLink">
+    <a href="#%e6%99%ae%e9%80%9a%e7%94%a8%e6%88%b7%e5%8a%9f%e8%83%bd" class="header-mark"></a>普通用户功能</h3><ul>
+<li>🗺️ <strong>3D 地图展示</strong>：基于 Cesium 的三维地球，实时展示火点信息</li>
+<li>📊 <strong>多数据源支持</strong>：NASA FIRMS 火点数据 + 自定义火点数据</li>
+<li>⏱️ <strong>时间筛选</strong>：快捷选择最近 10 分钟、24 小时、7 天的火点</li>
+<li>📈 <strong>时间轴</strong>：拖动时间轴查看历史火点变化</li>
+<li>🤖 <strong>AI 报表</strong>：基于 LLM 的智能火点分析报表</li>
+<li>💬 <strong>AI 对话</strong>：与 AI 交互，问答式生成报表</li>
+<li>📥 <strong>数据下载</strong>：导出火点数据和 AI 报表</li>
+</ul>
+<h3 id="管理员功能" class="headerLink">
+    <a href="#%e7%ae%a1%e7%90%86%e5%91%98%e5%8a%9f%e8%83%bd" class="header-mark"></a>管理员功能</h3><ul>
+<li>👥 <strong>多省份管理</strong>：分省登录，数据隔离</li>
+<li>⚙️ <strong>数据源配置</strong>：管理 WFS 数据源（URL、Map Key、时间范围）</li>
+<li>🤖 <strong>AI Provider 配置</strong>：支持 OpenAI 及兼容接口</li>
+<li>📝 <strong>操作日志</strong>：完整的用户操作记录</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>层级</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>前端</strong></td>
+          <td>React + Cesium + Tailwind CSS + Vite</td>
+      </tr>
+      <tr>
+          <td><strong>后端</strong></td>
+          <td>FastAPI + SQLAlchemy</td>
+      </tr>
+      <tr>
+          <td><strong>数据库</strong></td>
+          <td>PostgreSQL + PostGIS</td>
+      </tr>
+      <tr>
+          <td><strong>缓存</strong></td>
+          <td>Redis</td>
+      </tr>
+      <tr>
+          <td><strong>任务队列</strong></td>
+          <td>Celery</td>
+      </tr>
+      <tr>
+          <td><strong>部署</strong></td>
+          <td>Docker Compose</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-系统架构" class="headerLink">
+    <a href="#-%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84" class="header-mark"></a>📦 系统架构</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>🛣️ SAM Road - 道路网络图提取</title><link>https://spacetop.win/projects/sam_road/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/sam_road/</guid><description><![CDATA[<h1 id="-sam-road---道路网络图提取" class="headerLink">
+    <a href="#-sam-road---%e9%81%93%e8%b7%af%e7%bd%91%e7%bb%9c%e5%9b%be%e6%8f%90%e5%8f%96" class="header-mark"></a>🛣️ SAM Road - 道路网络图提取</h1><p><strong>CVPRW 2024 最佳论文</strong> - 基于 Segment Anything Model (SAM) 的道路网络图自动提取</p>
+<blockquote>
+  <p>📄 <a href="https://openaccess.thecvf.com/content/CVPR2024W/SG2RL/papers/Hetang_Segment_Anything_Model_for_Road_Network_Graph_Extraction_CVPRW_2024_paper.pdf" target="_blank" rel="noopener noreferrer">论文链接</a> | 🏆 <a href="https://sites.google.com/corp/view/sg2rl/" target="_blank" rel="noopener noreferrer">最佳论文奖</a></p>
+</blockquote><h2 id="-研究目标" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e7%9b%ae%e6%a0%87" class="header-mark"></a>🎯 研究目标</h2><p>从卫星影像中自动提取道路网络的<strong>拓扑图结构</strong>（节点 + 边），而非传统的像素级分割。</p>
+<h2 id="-核心创新" class="headerLink">
+    <a href="#-%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0" class="header-mark"></a>✨ 核心创新</h2><ol>
+<li><strong>SAM 集成</strong>：利用 SAM 的强大分割能力提取道路掩码</li>
+<li><strong>图拓扑提取</strong>：从掩码中推导道路交叉点和路段</li>
+<li><strong>端到端流程</strong>：从原始影像到图结构的完整 pipeline</li>
+</ol>
+<h2 id="-实验结果" class="headerLink">
+    <a href="#-%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c" class="header-mark"></a>📊 实验结果</h2><h3 id="数据集" class="headerLink">
+    <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>数据集</h3><ul>
+<li><strong>CityScale</strong>：20 个城市，2km × 2km 区域</li>
+<li><strong>SpaceNet</strong>：大规模卫星影像数据集</li>
+</ul>
+<h3 id="评估指标" class="headerLink">
+    <a href="#%e8%af%84%e4%bc%b0%e6%8c%87%e6%a0%87" class="header-mark"></a>评估指标</h3><ul>
+<li><strong>APLS</strong>：Average Path Length Similarity</li>
+<li><strong>TOPO</strong>：拓扑准确性指标</li>
+</ul>
+<h3 id="性能" class="headerLink">
+    <a href="#%e6%80%a7%e8%83%bd" class="header-mark"></a>性能</h3><ul>
+<li>在 CityScale 数据集上达到 SOTA 性能</li>
+<li>在复杂城市场景中表现优异</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型</strong></td>
+          <td>PyTorch + PyTorch Lightning</td>
+      </tr>
+      <tr>
+          <td><strong>骨干网络</strong></td>
+          <td>SAM ViT-B</td>
+      </tr>
+      <tr>
+          <td><strong>训练</strong></td>
+          <td>WandB 日志</td>
+      </tr>
+      <tr>
+          <td><strong>推理</strong></td>
+          <td>ONNX 导出支持</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-预训练模型" class="headerLink">
+    <a href="#-%e9%a2%84%e8%ae%ad%e7%bb%83%e6%a8%a1%e5%9e%8b" class="header-mark"></a>📦 预训练模型</h2><table>
+  <thead>
+      <tr>
+          <th>数据集</th>
+          <th>模型</th>
+          <th>链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CityScale</td>
+          <td>ViT-B 512</td>
+          <td><a href="https://huggingface.co/congrui/sam_road" target="_blank" rel="noopener noreferrer">HuggingFace</a></td>
+      </tr>
+      <tr>
+          <td>SpaceNet</td>
+          <td>ViT-B 256</td>
+          <td><a href="https://huggingface.co/congrui/sam_road" target="_blank" rel="noopener noreferrer">HuggingFace</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-快速开始" class="headerLink">
+    <a href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" class="header-mark"></a>🚀 快速开始</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">bash</p>]]></description></item><item><title>🌍 SegEarth-OV3 - 遥感开放词汇分割</title><link>https://spacetop.win/projects/segearth-ov-3-main/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/segearth-ov-3-main/</guid><description><![CDATA[<h1 id="-segearth-ov3---遥感开放词汇分割" class="headerLink">
+    <a href="#-segearth-ov3---%e9%81%a5%e6%84%9f%e5%bc%80%e6%94%be%e8%af%8d%e6%b1%87%e5%88%86%e5%89%b2" class="header-mark"></a>🌍 SegEarth-OV3 - 遥感开放词汇分割</h1><p><strong>基于 SAM 3 的遥感图像开放词汇语义分割，无需训练</strong></p>
+<blockquote>
+  <p>📄 <a href="https://arxiv.org/abs/2512.08730" target="_blank" rel="noopener noreferrer">arXiv</a> | 💻 <a href="https://github.com/earth-insights/SegEarth-OV-3" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+</blockquote><h2 id="-研究目标" class="headerLink">
+    <a href="#-%e7%a0%94%e7%a9%b6%e7%9b%ae%e6%a0%87" class="header-mark"></a>🎯 研究目标</h2><p>实现<strong>零训练</strong>的遥感图像开放词汇语义分割，用户只需提供文本提示（如 &ldquo;building&rdquo;, &ldquo;road&rdquo;, &ldquo;water&rdquo;），模型即可分割对应地物。</p>
+<h2 id="-核心创新" class="headerLink">
+    <a href="#-%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0" class="header-mark"></a>✨ 核心创新</h2><ol>
+<li><strong>SAM 3 适配</strong>：将 SAM 3 应用于遥感场景</li>
+<li><strong>双头掩码融合</strong>：结合语义头和实例头的优势</li>
+<li><strong>存在性引导过滤</strong>：利用存在分数抑制误检</li>
+<li><strong>超大图支持</strong>：支持 10k × 10k 以上分辨率</li>
+</ol>
+<h2 id="-支持的数据集" class="headerLink">
+    <a href="#-%e6%94%af%e6%8c%81%e7%9a%84%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>📊 支持的数据集</h2><h3 id="语义分割" class="headerLink">
+    <a href="#%e8%af%ad%e4%b9%89%e5%88%86%e5%89%b2" class="header-mark"></a>语义分割</h3><ul>
+<li>OpenEarthMap, LoveDA, iSAID, Potsdam, Vaihingen</li>
+<li>UAVid, UDD5, VDD</li>
+</ul>
+<h3 id="建筑提取" class="headerLink">
+    <a href="#%e5%bb%ba%e7%ad%91%e6%8f%90%e5%8f%96" class="header-mark"></a>建筑提取</h3><ul>
+<li>WHU Aerial, WHU Sat.Ⅱ, Inria, xBD</li>
+</ul>
+<h3 id="道路提取" class="headerLink">
+    <a href="#%e9%81%93%e8%b7%af%e6%8f%90%e5%8f%96" class="header-mark"></a>道路提取</h3><ul>
+<li>CHN6-CUG, DeepGlobe, Massachusetts, SpaceNet</li>
+</ul>
+<h3 id="水体提取" class="headerLink">
+    <a href="#%e6%b0%b4%e4%bd%93%e6%8f%90%e5%8f%96" class="header-mark"></a>水体提取</h3><ul>
+<li>WBS-SI</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型</strong></td>
+          <td>SAM 3 (Segment Anything Model 3)</td>
+      </tr>
+      <tr>
+          <td><strong>框架</strong></td>
+          <td>mmcv + mmsegmentation</td>
+      </tr>
+      <tr>
+          <td><strong>推理</strong></td>
+          <td>Python + PyTorch</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-快速开始" class="headerLink">
+    <a href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" class="header-mark"></a>🚀 快速开始</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">bash</p>]]></description></item><item><title>🏗️ SAMPolyBuild - 建筑多边形提取</title><link>https://spacetop.win/projects/sampolybuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/sampolybuild/</guid><description><![CDATA[<h1 id="-sampolybuild---建筑多边形提取" class="headerLink">
+    <a href="#-sampolybuild---%e5%bb%ba%e7%ad%91%e5%a4%9a%e8%be%b9%e5%bd%a2%e6%8f%90%e5%8f%96" class="header-mark"></a>🏗️ SAMPolyBuild - 建筑多边形提取</h1><p>基于 Segment Anything Model (SAM) 的建筑多边形自动提取工具</p>
+<h2 id="-功能特点" class="headerLink">
+    <a href="#-%e5%8a%9f%e8%83%bd%e7%89%b9%e7%82%b9" class="header-mark"></a>🎯 功能特点</h2><ul>
+<li>🏠 <strong>建筑轮廓提取</strong>：从卫星影像中自动提取建筑多边形</li>
+<li>📐 <strong>精确边界</strong>：生成矢量化的建筑轮廓</li>
+<li>🖼️ <strong>大图支持</strong>：支持大尺寸 TIFF 影像推理</li>
+<li>⚡ <strong>ONNX 加速</strong>：支持 ONNX 模型推理</li>
+<li>🎮 <strong>交互模式</strong>：支持点击/框选交互式提示</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型</strong></td>
+          <td>SAM + MMDetection</td>
+      </tr>
+      <tr>
+          <td><strong>训练</strong></td>
+          <td>PyTorch Lightning</td>
+      </tr>
+      <tr>
+          <td><strong>推理</strong></td>
+          <td>ONNX Runtime</td>
+      </tr>
+      <tr>
+          <td><strong>部署</strong></td>
+          <td>Docker</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-模型文件" class="headerLink">
+    <a href="#-%e6%a8%a1%e5%9e%8b%e6%96%87%e4%bb%b6" class="header-mark"></a>📦 模型文件</h2><ul>
+<li><code>sam_encoder.onnx</code> - SAM 编码器</li>
+<li><code>sam_vitl.onnx</code> - SAM ViT-L 模型</li>
+<li><code>auto_whumix.pth</code> - WHU 数据集训练权重</li>
+</ul>
+<h2 id="-快速开始" class="headerLink">
+    <a href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" class="header-mark"></a>🚀 快速开始</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">bash</p>]]></description></item><item><title>🧠 DINOv3 - Meta 视觉基础模型</title><link>https://spacetop.win/projects/dinov3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/dinov3/</guid><description><![CDATA[<h1 id="-dinov3---meta-视觉基础模型" class="headerLink">
+    <a href="#-dinov3---meta-%e8%a7%86%e8%a7%89%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b" class="header-mark"></a>🧠 DINOv3 - Meta 视觉基础模型</h1><p><strong>Meta FAIR 最新视觉基础模型家族</strong>，DINOv2 的后继者</p>
+<blockquote>
+  <p>💻 <a href="https://github.com/facebookresearch/dinov3" target="_blank" rel="noopener noreferrer">GitHub</a> | 🤗 <a href="https://huggingface.co/facebook" target="_blank" rel="noopener noreferrer">HuggingFace</a></p>
+</blockquote><h2 id="-模型特点" class="headerLink">
+    <a href="#-%e6%a8%a1%e5%9e%8b%e7%89%b9%e7%82%b9" class="header-mark"></a>🎯 模型特点</h2><ul>
+<li>🌍 <strong>通用视觉特征</strong>：强大的图像理解能力</li>
+<li>🛰️ <strong>卫星图像支持</strong>：SAT-493M 预训练模型</li>
+<li>🔍 <strong>密集特征</strong>：像素级特征提取</li>
+<li>📐 <strong>深度估计</strong>：单目深度预测</li>
+<li>🎯 <strong>目标检测</strong>：零样本目标定位</li>
+<li>🗣️ <strong>文本对齐</strong>：dino.txt 文本-图像对齐</li>
+</ul>
+<h2 id="-模型变体" class="headerLink">
+    <a href="#-%e6%a8%a1%e5%9e%8b%e5%8f%98%e4%bd%93" class="header-mark"></a>📦 模型变体</h2><table>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>参数量</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ViT-S</td>
+          <td>22M</td>
+          <td>轻量级</td>
+      </tr>
+      <tr>
+          <td>ViT-B</td>
+          <td>86M</td>
+          <td>平衡</td>
+      </tr>
+      <tr>
+          <td>ViT-L</td>
+          <td>304M</td>
+          <td>高精度</td>
+      </tr>
+      <tr>
+          <td>ViT-H</td>
+          <td>632M</td>
+          <td>大规模</td>
+      </tr>
+      <tr>
+          <td>ViT-7B</td>
+          <td>6.7B</td>
+          <td>超大规模</td>
+      </tr>
+      <tr>
+          <td>ConvNeXt</td>
+          <td>-</td>
+          <td>CNN 变体</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>框架</strong></td>
+          <td>PyTorch</td>
+      </tr>
+      <tr>
+          <td><strong>集成</strong></td>
+          <td>HuggingFace Transformers</td>
+      </tr>
+      <tr>
+          <td><strong>训练</strong></td>
+          <td>分布式训练</td>
+      </tr>
+      <tr>
+          <td><strong>评估</strong></td>
+          <td>多任务评估</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-快速开始" class="headerLink">
+    <a href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" class="header-mark"></a>🚀 快速开始</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">python</p>]]></description></item><item><title>📋 OA 公文管理系统</title><link>https://spacetop.win/projects/oa-platform/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/oa-platform/</guid><description><![CDATA[<h1 id="-oa-公文管理系统" class="headerLink">
+    <a href="#-oa-%e5%85%ac%e6%96%87%e7%ae%a1%e7%90%86%e7%b3%bb%e7%bb%9f" class="header-mark"></a>📋 OA 公文管理系统</h1><p>支持钉钉单点登录、OnlyOffice 在线编辑的公文管理系统</p>
+<h2 id="-核心功能" class="headerLink">
+    <a href="#-%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd" class="header-mark"></a>✨ 核心功能</h2><h3 id="用户功能" class="headerLink">
+    <a href="#%e7%94%a8%e6%88%b7%e5%8a%9f%e8%83%bd" class="header-mark"></a>用户功能</h3><ul>
+<li>📄 <strong>公文管理</strong>：创建、编辑、审批公文</li>
+<li>📝 <strong>在线编辑</strong>：集成 OnlyOffice 在线文档编辑</li>
+<li>🔐 <strong>钉钉登录</strong>：钉钉 SSO 单点登录</li>
+<li>📊 <strong>审批流程</strong>：多级审批流程管理</li>
+<li>📥 <strong>文件下载</strong>：导出公文和审批单</li>
+</ul>
+<h3 id="管理功能" class="headerLink">
+    <a href="#%e7%ae%a1%e7%90%86%e5%8a%9f%e8%83%bd" class="header-mark"></a>管理功能</h3><ul>
+<li>👥 <strong>用户管理</strong>：用户增删改查</li>
+<li>📋 <strong>角色权限</strong>：多角色权限控制</li>
+<li>📝 <strong>操作日志</strong>：完整的操作记录</li>
+<li>💾 <strong>数据备份</strong>：一键备份和恢复</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>层级</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>前端</strong></td>
+          <td>Vue 2 + Element UI</td>
+      </tr>
+      <tr>
+          <td><strong>后端 1</strong></td>
+          <td>Django (主服务)</td>
+      </tr>
+      <tr>
+          <td><strong>后端 2</strong></td>
+          <td>Spring Boot (文档生成)</td>
+      </tr>
+      <tr>
+          <td><strong>数据库</strong></td>
+          <td>MySQL</td>
+      </tr>
+      <tr>
+          <td><strong>文档编辑</strong></td>
+          <td>OnlyOffice</td>
+      </tr>
+      <tr>
+          <td><strong>反向代理</strong></td>
+          <td>Nginx</td>
+      </tr>
+      <tr>
+          <td><strong>部署</strong></td>
+          <td>Docker Compose</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-系统架构" class="headerLink">
+    <a href="#-%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84" class="header-mark"></a>📦 系统架构</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>🤖 Qwen2-VL 微调框架</title><link>https://spacetop.win/projects/qwen2-vl-finetune/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/projects/qwen2-vl-finetune/</guid><description><![CDATA[<h1 id="-qwen2-vl-微调框架" class="headerLink">
+    <a href="#-qwen2-vl-%e5%be%ae%e8%b0%83%e6%a1%86%e6%9e%b6" class="header-mark"></a>🤖 Qwen2-VL 微调框架</h1><p><strong>Qwen2-VL/Qwen2.5-VL 视觉语言模型微调框架</strong>，支持多种训练方式</p>
+<blockquote>
+  <p>💻 <a href="https://github.com/2U1/Qwen2-VL-Finetune" target="_blank" rel="noopener noreferrer">GitHub</a> | 🐳 <a href="https://hub.docker.com/repository/docker/john119/vlm" target="_blank" rel="noopener noreferrer">Docker</a></p>
+</blockquote><h2 id="-核心功能" class="headerLink">
+    <a href="#-%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd" class="header-mark"></a>✨ 核心功能</h2><h3 id="训练方式" class="headerLink">
+    <a href="#%e8%ae%ad%e7%bb%83%e6%96%b9%e5%bc%8f" class="header-mark"></a>训练方式</h3><ul>
+<li>🎯 <strong>SFT</strong>：监督微调</li>
+<li>🔧 <strong>LoRA/QLoRA</strong>：低秩适配</li>
+<li>📊 <strong>DPO</strong>：直接偏好优化</li>
+<li>🎲 <strong>GRPO</strong>：组相对策略优化</li>
+<li>🏷️ <strong>Classification</strong>：分类任务微调</li>
+</ul>
+<h3 id="数据支持" class="headerLink">
+    <a href="#%e6%95%b0%e6%8d%ae%e6%94%af%e6%8c%81" class="header-mark"></a>数据支持</h3><ul>
+<li>🖼️ <strong>单图数据</strong>：单张图片对话</li>
+<li>🖼️🖼️ <strong>多图数据</strong>：多张图片对话</li>
+<li>🎬 <strong>视频数据</strong>：视频理解训练</li>
+<li>🔀 <strong>混合模态</strong>：图文混合数据</li>
+</ul>
+<h3 id="优化特性" class="headerLink">
+    <a href="#%e4%bc%98%e5%8c%96%e7%89%b9%e6%80%a7" class="header-mark"></a>优化特性</h3><ul>
+<li>⚡ <strong>DeepSpeed</strong>：分布式训练加速</li>
+<li>🧠 <strong>Liger Kernel</strong>：内存优化内核</li>
+<li>💾 <strong>8-bit 训练</strong>：显存优化</li>
+<li>🔄 <strong>Flash Attention 2</strong>：注意力加速</li>
+</ul>
+<h2 id="-技术栈" class="headerLink">
+    <a href="#-%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>🛠️ 技术栈</h2><table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型</strong></td>
+          <td>Qwen2-VL / Qwen2.5-VL</td>
+      </tr>
+      <tr>
+          <td><strong>框架</strong></td>
+          <td>PyTorch + Transformers</td>
+      </tr>
+      <tr>
+          <td><strong>训练</strong></td>
+          <td>DeepSpeed + TRL</td>
+      </tr>
+      <tr>
+          <td><strong>优化</strong></td>
+          <td>Liger Kernel</td>
+      </tr>
+      <tr>
+          <td><strong>推理</strong></td>
+          <td>Gradio WebUI</td>
+      </tr>
+      <tr>
+          <td><strong>部署</strong></td>
+          <td>Docker</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-快速开始" class="headerLink">
+    <a href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" class="header-mark"></a>🚀 快速开始</h2><h3 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h3><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">bash</p>]]></description></item></channel></rss>
