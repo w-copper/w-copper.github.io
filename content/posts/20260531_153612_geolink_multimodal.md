@@ -1,6 +1,6 @@
 ---
 title: "GeoLink：用OpenStreetMap数据赋能遥感基础模型"
-date: 2026-05-31
+date: 2026-05-31T15:36:12+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

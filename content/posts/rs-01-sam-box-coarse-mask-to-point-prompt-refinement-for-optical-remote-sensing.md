@@ -1,6 +1,6 @@
 ---
 title: "RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing"
-date: 2026-06-07
+date: 2026-06-07T09:00:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感基础模型", "GeoFM", "2024-2026"]
 categories: ["可提示分割、开放词表与密集预测"]

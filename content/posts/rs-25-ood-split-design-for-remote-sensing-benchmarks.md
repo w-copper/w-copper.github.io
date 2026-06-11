@@ -1,6 +1,6 @@
 ---
 title: "RS-25 OOD Split Design for Remote Sensing Benchmarks"
-date: 2026-06-07
+date: 2026-06-07T09:24:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["泛化", "OOD", "不确定性"]
 categories: ["时序变化、跨域泛化与可信评测"]

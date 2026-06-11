@@ -1,0 +1,19 @@
+{{- $comment := .Scratch.Get "comment" | default dict -}}
+{{- if $comment.enable -}}
+<section id="comments" class="simple-comments print:!tw-hidden">
+  <h2>评论</h2>
+  <div id="simple-comments-list" class="simple-comments-list" data-path="{{ .RelPermalink }}"></div>
+  <form id="simple-comments-form" class="simple-comments-form">
+    <div class="simple-comments-row">
+      <input id="simple-comments-name" name="name" type="text" maxlength="40" placeholder="昵称" autocomplete="name" required>
+      <input id="simple-comments-email" name="email" type="email" maxlength="120" placeholder="邮箱，不公开" autocomplete="email">
+    </div>
+    <textarea id="simple-comments-content" name="content" rows="4" maxlength="1000" placeholder="写下你的评论" required></textarea>
+    <div class="simple-comments-actions">
+      <span id="simple-comments-status" aria-live="polite"></span>
+      <button type="submit">提交评论</button>
+    </div>
+  </form>
+</section>
+<script src="/js/simple-comments.js" defer></script>
+{{- end -}}

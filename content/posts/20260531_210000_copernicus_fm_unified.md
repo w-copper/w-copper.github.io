@@ -1,6 +1,6 @@
 ---
 title: "一个模型吃透所有卫星传感器：Copernicus-FM如何统一地球观测基础模型"
-date: 2026-05-31
+date: 2026-05-31T21:00:00+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

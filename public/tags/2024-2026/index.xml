@@ -1,202 +1,72 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>2024-2026 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/2024-2026/</link><description>2024-2026 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/2024-2026/" rel="self" type="application/rss+xml"/><item><title>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</title><link>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</guid><description><![CDATA[<h1 id="sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
-    <a href="#sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><h2 id="研究问题" class="headerLink">
-    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出更稳定的边界。</p>
-<p>这个问题不等同于“遥感语义分割”或“把 SAM 用到遥感”。它只关注一个环节：给定 <code>box</code>、<code>rotated box</code>、<code>coarse mask</code> 或检测器输出，如何选择 prompt 点的位置、数量、正负标签和迭代策略。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>2024-2026 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/2024-2026/</link><description>2024-2026 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:04:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/2024-2026/" rel="self" type="application/rss+xml"/><item><title>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</title><link>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</link><pubDate>Sun, 07 Jun 2026 09:04:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</guid><description><![CDATA[<h1 id="rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="headerLink">
+    <a href="#rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="header-mark"></a>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向最值得做的不是“再证明 foundation model 有用”，而是做一个严格、可复现、成本可控的比较：同样的小区域标签预算下，公开 embedding、冻结编码器、轻量 adapter/LoRA、decoder-only 和 full fine-tuning 到底谁更稳，尤其在跨区域、跨年份、跨生物群区、跨城市形态时谁掉得少。</p>
+<p>关键边界：</p>
+<ul>
+<li>AlphaEarth Foundations 当前主要以 Google Satellite Embedding 数据集形式开放：10 m、年度、64 维、2017-2024 的全球 embedding layers，适合做 frozen embedding + classifier/head，不适合直接对模型本体做 LoRA。</li>
+<li>Prithvi-EO-2.0、Clay、SatlasPretrain 是更适合做参数高效微调的 open model/backbone 路线。Prithvi-EO-2.0 官方 GitHub 已提供 TerraTorch 下游任务配置，TerraTorch 也明确支持 Prithvi、TerraMind、SatMAE、Satlas、DOFA、Clay 等 backbone。</li>
+<li>小区域制图的核心问题是“局部标签少 + 空间自相关强 + 区域外泛化难”。随机划分会虚高；必须做 spatial block、leave-region、leave-year、leave-biome 或 leave-city 测试。</li>
+</ul>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>SAM 的交互分割在自然图像中很强，但遥感图像有几个结构性差异：</p>
-<ul>
-<li>目标小：飞机、车、船、屋顶构件在 tile 中只占少量像素，box 内背景比例很高。</li>
-<li>目标旋转：水平框会包进大量背景，尤其是飞机、船、跑道、细长建筑。</li>
-<li>目标密集：停车场车辆、建筑群、集装箱等相邻实例容易被一个正点或一个 box 合并。</li>
-<li>大幅面切片：超大影像被切成 patch 后，目标可能跨 tile，且局部上下文不足。</li>
-<li>语义与边界分离：CLIP/VLM/检测器知道类别，SAM 主要负责边界；两者之间的误差会传给 prompt。</li>
-</ul>
-<p>因此，box prompt 常能定位但边界粗，point prompt 可纠偏但点位选择困难。可投稿的小空间在于：把检测/粗分割的不确定性、边界几何和遥感先验转化成一组正负 prompt 点。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感制图依赖人工特征、光谱指数、随机森林或任务专用深度网络。它们在本地标签足够、同分布测试时表现不错，但迁移到新的城市、农田制度、火烧迹地、气候带或传感器组合时往往需要重新标注。GeoFM 的承诺是：用大规模未标注 EO 数据预训练出通用表示，再用很少的本地标签快速制图。</p>
+<p>2024-2026 出现了两条明显路线：</p>
+<ol>
+<li><strong>Embedding-as-data</strong>：AlphaEarth 把多源 EO 信息压成年度 embedding field。用户在 Earth Engine 或 GCS 中读取 64 维 embedding，再训练线性模型、树模型、MLP 或轻量空间头。</li>
+<li><strong>Open-backbone fine-tuning</strong>：Prithvi、Clay、SatlasPretrain 等提供模型权重和代码，用户可以做 frozen linear probe、decoder-only、adapter、LoRA 或 full fine-tuning。</li>
+</ol>
+<p>这两条路线目前缺一个公平实验：在同样标签预算、同样 spatial split、同样任务指标下比较“公开 embedding + 轻量 head”和“可微调 backbone + LoRA/adapter”。</p>]]></description></item><item><title>RS-04 Geo-Temporal Embedding for Foundation Models</title><link>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</link><pubDate>Sun, 07 Jun 2026 09:03:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</guid><description><![CDATA[<h1 id="rs-04-geo-temporal-embedding-for-foundation-models" class="headerLink">
+    <a href="#rs-04-geo-temporal-embedding-for-foundation-models" class="header-mark"></a>RS-04 Geo-Temporal Embedding for Foundation Models</h1><h2 id="1-执行摘要" class="headerLink">
+    <a href="#1-%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>1. 执行摘要</h2><p>2024-2026 的 GeoFM 正在从“只看像素”转向“像素 + 传感器 + 时间 + 地理位置 + 生态/气候上下文”的条件化表示。这个方向的关键不只是把经纬度和日期塞给模型，而是要回答：模型是否学到了可迁移的地理时间规律，还是只是记住某个地方常见什么地物。</p>
+<p>目前可以把方法分成五类：</p>
+<table>
   <thead>
       <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>官方代码/项目</th>
-          <th>与本问题的关系</th>
+          <th>类别</th>
+          <th>做法</th>
+          <th>代表</th>
+          <th>优点</th>
+          <th>风险</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Segment Anything, From Space?</td>
-          <td style="text-align: right">2024 WACV</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html</a></td>
-          <td>未见官方 GitHub</td>
-          <td>系统评估 SAM 在 overhead imagery 的失败模式，是遥感 prompt 设计的起点。</td>
+          <td>显式连续元数据 embedding</td>
+          <td>对 lat/lon、week/hour、GSD、wavelength 做数值归一化后编码</td>
+          <td>Clay, Prithvi-EO-2.0</td>
+          <td>工程直接、适合下游 adapter</td>
+          <td>容易让模型记地理偏置</td>
       </tr>
       <tr>
-          <td>SAM-Assisted Remote Sensing Imagery Semantic Segmentation With Object and Boundary Constraints</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://arxiv.org/abs/2312.02464" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.02464</a></td>
-          <td>未见官方 GitHub</td>
-          <td>用 SAM object/boundary 约束改善遥感语义分割，提示边界约束可与点 prompt 联合。</td>
-      </tr>
-      <tr>
-          <td>DiffuPrompter</td>
-          <td style="text-align: right">2024 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/16/11/2004" target="_blank" rel="noopener noreferrer">https://www.mdpi.com/2072-4292/16/11/2004</a></td>
-          <td>未确认官方代码</td>
-          <td>训练自由地利用 diffusion attention 产生 box/point prompt，可作为自动 prompt 生成基线。</td>
-      </tr>
-      <tr>
-          <td>SAM-RSIS</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085" target="_blank" rel="noopener noreferrer">https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085</a></td>
-          <td>未见官方 GitHub</td>
-          <td>渐进式 box prompting 与 SAM 微调，适合比较“只有 box”和“box+点 refinement”。</td>
-      </tr>
-      <tr>
-          <td>SAMPolyBuild</td>
-          <td style="text-align: right">2024 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271624003563</a></td>
-          <td><a href="https://github.com/wchh-2000/SAMPolyBuild" target="_blank" rel="noopener noreferrer">https://github.com/wchh-2000/SAMPolyBuild</a></td>
-          <td>建筑多边形提取；支持 bbox 与 prompt points，说明点 prompt 可服务于规则边界/多边形化。</td>
-      </tr>
-      <tr>
-          <td>PointSAM</td>
-          <td style="text-align: right">2024 arXiv / 2025 TGRS方向</td>
-          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2409.13401</a></td>
-          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">https://github.com/Lans1ng/PointSAM</a></td>
-          <td>点监督 SAM，提出负提示校准、伪标签自训练和 point-to-box converter，是最相关方法。</td>
-      </tr>
-      <tr>
-          <td>CrossCut</td>
-          <td style="text-align: right">2026 AAAI</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37637" target="_blank" rel="noopener noreferrer">https://ojs.aaai.org/index.php/AAAI/article/view/37637</a></td>
-          <td><a href="https://github.com/nanzhou02/CrossCut" target="_blank" rel="noopener noreferrer">https://github.com/nanzhou02/CrossCut</a></td>
-          <td>交互式正/负点击跨 patch 传播，解决大图 patch 信息隔离。</td>
-      </tr>
-      <tr>
-          <td>RS2-SAM2</td>
-          <td style="text-align: right">2026 AAAI / 2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.07266" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.07266</a></td>
-          <td>未确认官方 GitHub</td>
-          <td>用 pseudo-mask dense prompt 适配 SAM2 到遥感 referring segmentation，说明粗 mask prompt 是强信号。</td>
-      </tr>
-      <tr>
-          <td>Remote SAMsing</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.00256" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.00256</a></td>
-          <td>未确认官方代码</td>
-          <td>分析 SAM2 遥感大图 mask quality/coverage trade-off 与 tiling 问题，可作为后续评测参考。</td>
-      </tr>
-      <tr>
-          <td>SAM2 official</td>
-          <td style="text-align: right">2024 Meta</td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td>基础模型与 image/video prompt API；可用于实现 box+points+mask 输入组合。</td>
-      </tr>
-      <tr>
-          <td>segment-geospatial / SamGeo</td>
-          <td style="text-align: right">持续维护</td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td>工具型基线，方便在真实 GeoTIFF/QGIS 工作流中验证自动 prompt。</td>
-      </tr>
-  </tbody>
-</table>
-<p>说明：上表中的“未确认官方 GitHub”表示截至本次检索没有找到清晰的作者官方代码仓库；可用论文实现或第三方复现替代，但复现实验中应标注。</p>]]></description></item><item><title>RS-02 GeoFM Benchmark Leakage Audit</title><link>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</guid><description><![CDATA[<h1 id="rs-02-geofm-benchmark-leakage-audit" class="headerLink">
-    <a href="#rs-02-geofm-benchmark-leakage-audit" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><p>研究问题：geospatial foundation model 评测中的训练-测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GeoFM 的预训练数据通常来自全球尺度 Sentinel-2、Landsat、NAIP、航空影像、气象/地理辅助数据和公开下游数据集合并。模型越大，越容易出现一个尴尬问题：下游 benchmark 的测试图像、相邻瓦片、同一 Sentinel/Landsat scene、同一年同一区域影像，可能已经在预训练中出现过。</p>
-<p>这会让 SOTA 被高估，尤其在以下场景中：</p>
-<ul>
-<li>地理区域重叠：训练或预训练见过同一城市、同一农田地块、同一灾区附近区域，测试看似独立但空间自相关很强。</li>
-<li>时间重叠：测试年份、季节或灾害前后影像被预训练覆盖，模型可能记住局部地物状态，而不是真正泛化。</li>
-<li>同源瓦片泄漏：大幅影像被切成 patch 后随机划分，训练/测试 patch 共享同一 parent scene 或 mosaic。</li>
-<li>下游数据覆盖：模型预训练直接使用了下游 benchmark 的影像、标签衍生产品、caption/QA 或同源公开数据。</li>
-</ul>
-<p>2024-2026 的趋势是：PANGAEA、PhilEO Bench、Copernicus-Bench、GEOBench-VLM 等开始统一评测；EarthShift 和 REOBench 开始强调真实分布偏移；<code>No One Knows the State of the Art in Geospatial Foundation Models</code> 则把问题进一步推到“GeoFM SOTA 是否可被清晰比较”的层面。我的判断是：未来两年，GeoFM 论文如果没有清楚的数据血缘和泄漏审计，很难让评测结论真正站稳。</p>
-<h2 id="2-重点来源" class="headerLink">
-    <a href="#2-%e9%87%8d%e7%82%b9%e6%9d%a5%e6%ba%90" class="header-mark"></a>2. 重点来源</h2><table>
-  <thead>
-      <tr>
-          <th>来源</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>与泄漏审计的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>跨任务、跨区域、跨模态统一评测，是审计协议的主目标之一。</td>
-      </tr>
-      <tr>
-          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>明确把真实世界 shift 放进 benchmark，可用于“去泄漏后性能下降”对照。</td>
-      </tr>
-      <tr>
-          <td>No One Knows the State of the Art in Geospatial Foundation Models</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.12678" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>直接指出 GeoFM SOTA 比较不稳定、评测协议和透明度不足。</td>
-      </tr>
-      <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>HLS 多时相预训练，适合审计同 MGRS tile、同日期、同区域覆盖。</td>
-      </tr>
-      <tr>
-          <td>Clay Foundation Model</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://clay-foundation.github.io/model/" target="_blank" rel="noopener noreferrer">docs</a>, <a href="https://github.com/Clay-foundation/model" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/made-with-clay" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>多传感器、多时相工程化开源模型，模型卡/数据卡透明度适合做 audit case。</td>
-      </tr>
-      <tr>
-          <td>SkySense</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>大规模多模态遥感 FM，代表高性能但数据源复杂的评测场景。</td>
-      </tr>
-      <tr>
-          <td>Galileo</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>全球/局部多模态 EO 表征，适合审计跨区域与下游任务覆盖。</td>
-      </tr>
-      <tr>
+          <td>离散 token 化</td>
+          <td>将经纬度/时间/模态等转成离散 token，与图像 token 一起预训练</td>
           <td>TerraMind</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>任意模态到任意模态 EO 生成/表征，适合审计“预训练是否见过下游目标模态或标签产品”。</td>
+          <td>适合任意模态生成和 token-level 推理</td>
+          <td>token 粒度影响很大，坐标离散会损失连续空间关系</td>
       </tr>
       <tr>
-          <td>PhilEO Bench</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://phileo-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2401.04464" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/PhilEO-community/PhilEO-Bench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>few-shot/n-shot GeoFM benchmark，可用来验证去泄漏 split 后的样本效率变化。</td>
+          <td>时空统一检索空间</td>
+          <td>把图像、位置、时间映射到同一 embedding space</td>
+          <td>TIGeR, GT-Loc</td>
+          <td>可做 geolocation、time prediction、geo-time retrieval</td>
+          <td>主要来自自然图像/街景，迁移到卫星需处理俯视和传感器差异</td>
       </tr>
       <tr>
-          <td>Copernicus-FM / Copernicus-Bench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/wangyi111/Copernicus-FM" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>Copernicus 数据预训练和层级任务评测，适合做同源 Copernicus 数据覆盖审计。</td>
+          <td>年度/时序 embedding field</td>
+          <td>生成每年每个像元的地表 embedding</td>
+          <td>AlphaEarth Foundations, Tessera</td>
+          <td>适合全球制图和时间序列监测</td>
+          <td>模型内部不可控，可能隐藏空间不公平性</td>
       </tr>
       <tr>
-          <td>REOBench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/xiang709/REOBench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>光学遥感扰动鲁棒性 benchmark，可作为泄漏之外的 robustness 对照。</td>
+          <td>采样/benchmark 层面的地理时间控制</td>
+          <td>用 spatial/temporal split、生态区覆盖、跨年评测控制偏差</td>
+          <td>EarthShift, PANGAEA, SSL4EO-S12 v1.1</td>
+          <td>可验证泛化</td>
+          <td>不是模型结构，不能单独提升能力</td>
       </tr>
   </tbody>
 </table>
-<h2 id="3-方法脉络从随机划分到数据血缘审计" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e5%88%b0%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e5%ae%a1%e8%ae%a1" class="header-mark"></a>3. 方法脉络：从随机划分到数据血缘审计</h2><h3 id="31-传统随机划分的问题" class="headerLink">
-    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item><item><title>RS-03 GSD-Aware GeoFM Adapter</title><link>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</guid><description><![CDATA[<h1 id="rs-03-gsd-aware-geofm-adapter" class="headerLink">
+<p>核心研究机会：提出一个 <strong>Geo-Time Conditional Adapter (GTCA)</strong>，在冻结 GeoFM backbone 的前提下，只用轻量模块注入经纬度、年内时间、年份、气候区和 GSD，并通过反偏置训练约束避免“坐标捷径”。</p>]]></description></item><item><title>RS-03 GSD-Aware GeoFM Adapter</title><link>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</link><pubDate>Sun, 07 Jun 2026 09:02:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</guid><description><![CDATA[<h1 id="rs-03-gsd-aware-geofm-adapter" class="headerLink">
     <a href="#rs-03-gsd-aware-geofm-adapter" class="header-mark"></a>RS-03 GSD-Aware GeoFM Adapter</h1><p>目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、Prithvi-EO-2.0、AlphaEarth、GeoFM/AnySat/Clay/Galileo 中的尺度处理方式；设计一个只引入轻量 adapter/LoRA 的 GSD-aware 下游适配方法，并给出分类、分割、检测三个任务的实验矩阵。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GSD, ground sample distance，决定一个像素对应地面的真实长度。遥感模型如果只看 resize 后的 patch，很容易把“像素尺度”误当成“真实尺度”：同样 224 x 224 的输入，在 0.3 m 航空影像中可能覆盖一个街区，在 10 m Sentinel-2 中可能覆盖数平方公里。自然图像 VFM 常把尺度变化当成数据增强问题，但遥感中尺度本身包含任务语义：</p>
@@ -304,72 +174,202 @@
 </table>
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-隐式尺度学习" class="headerLink">
-    <a href="#31-%e9%9a%90%e5%bc%8f%e5%b0%ba%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 隐式尺度学习</h3><p>SkySense、Prithvi、Clay、Galileo 等主要依赖大规模多源预训练，让模型从数据中隐式吸收尺度差异。这类方法优点是简单，缺点是模型可能把传感器、地域、类别和 GSD 纠缠起来。例如 10 m Sentinel-2 中“城市纹理”与 0.3 m NAIP 中“建筑轮廓”不是同一层级语义，统一 resize 后模型容易学到 dataset shortcut。</p>]]></description></item><item><title>RS-04 Geo-Temporal Embedding for Foundation Models</title><link>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</guid><description><![CDATA[<h1 id="rs-04-geo-temporal-embedding-for-foundation-models" class="headerLink">
-    <a href="#rs-04-geo-temporal-embedding-for-foundation-models" class="header-mark"></a>RS-04 Geo-Temporal Embedding for Foundation Models</h1><h2 id="1-执行摘要" class="headerLink">
-    <a href="#1-%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>1. 执行摘要</h2><p>2024-2026 的 GeoFM 正在从“只看像素”转向“像素 + 传感器 + 时间 + 地理位置 + 生态/气候上下文”的条件化表示。这个方向的关键不只是把经纬度和日期塞给模型，而是要回答：模型是否学到了可迁移的地理时间规律，还是只是记住某个地方常见什么地物。</p>
-<p>目前可以把方法分成五类：</p>
-<table>
+    <a href="#31-%e9%9a%90%e5%bc%8f%e5%b0%ba%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 隐式尺度学习</h3><p>SkySense、Prithvi、Clay、Galileo 等主要依赖大规模多源预训练，让模型从数据中隐式吸收尺度差异。这类方法优点是简单，缺点是模型可能把传感器、地域、类别和 GSD 纠缠起来。例如 10 m Sentinel-2 中“城市纹理”与 0.3 m NAIP 中“建筑轮廓”不是同一层级语义，统一 resize 后模型容易学到 dataset shortcut。</p>]]></description></item><item><title>RS-02 GeoFM Benchmark Leakage Audit</title><link>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</link><pubDate>Sun, 07 Jun 2026 09:01:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</guid><description><![CDATA[<h1 id="rs-02-geofm-benchmark-leakage-audit" class="headerLink">
+    <a href="#rs-02-geofm-benchmark-leakage-audit" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><p>研究问题：geospatial foundation model 评测中的训练-测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GeoFM 的预训练数据通常来自全球尺度 Sentinel-2、Landsat、NAIP、航空影像、气象/地理辅助数据和公开下游数据集合并。模型越大，越容易出现一个尴尬问题：下游 benchmark 的测试图像、相邻瓦片、同一 Sentinel/Landsat scene、同一年同一区域影像，可能已经在预训练中出现过。</p>
+<p>这会让 SOTA 被高估，尤其在以下场景中：</p>
+<ul>
+<li>地理区域重叠：训练或预训练见过同一城市、同一农田地块、同一灾区附近区域，测试看似独立但空间自相关很强。</li>
+<li>时间重叠：测试年份、季节或灾害前后影像被预训练覆盖，模型可能记住局部地物状态，而不是真正泛化。</li>
+<li>同源瓦片泄漏：大幅影像被切成 patch 后随机划分，训练/测试 patch 共享同一 parent scene 或 mosaic。</li>
+<li>下游数据覆盖：模型预训练直接使用了下游 benchmark 的影像、标签衍生产品、caption/QA 或同源公开数据。</li>
+</ul>
+<p>2024-2026 的趋势是：PANGAEA、PhilEO Bench、Copernicus-Bench、GEOBench-VLM 等开始统一评测；EarthShift 和 REOBench 开始强调真实分布偏移；<code>No One Knows the State of the Art in Geospatial Foundation Models</code> 则把问题进一步推到“GeoFM SOTA 是否可被清晰比较”的层面。我的判断是：未来两年，GeoFM 论文如果没有清楚的数据血缘和泄漏审计，很难让评测结论真正站稳。</p>
+<h2 id="2-重点来源" class="headerLink">
+    <a href="#2-%e9%87%8d%e7%82%b9%e6%9d%a5%e6%ba%90" class="header-mark"></a>2. 重点来源</h2><table>
   <thead>
       <tr>
-          <th>类别</th>
-          <th>做法</th>
-          <th>代表</th>
-          <th>优点</th>
-          <th>风险</th>
+          <th>来源</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>与泄漏审计的关系</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>显式连续元数据 embedding</td>
-          <td>对 lat/lon、week/hour、GSD、wavelength 做数值归一化后编码</td>
-          <td>Clay, Prithvi-EO-2.0</td>
-          <td>工程直接、适合下游 adapter</td>
-          <td>容易让模型记地理偏置</td>
+          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
+          <td style="text-align: right">2024/2025</td>
+          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>跨任务、跨区域、跨模态统一评测，是审计协议的主目标之一。</td>
       </tr>
       <tr>
-          <td>离散 token 化</td>
-          <td>将经纬度/时间/模态等转成离散 token，与图像 token 一起预训练</td>
+          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>明确把真实世界 shift 放进 benchmark，可用于“去泄漏后性能下降”对照。</td>
+      </tr>
+      <tr>
+          <td>No One Knows the State of the Art in Geospatial Foundation Models</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.12678" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>直接指出 GeoFM SOTA 比较不稳定、评测协议和透明度不足。</td>
+      </tr>
+      <tr>
+          <td>Prithvi-EO-2.0</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>HLS 多时相预训练，适合审计同 MGRS tile、同日期、同区域覆盖。</td>
+      </tr>
+      <tr>
+          <td>Clay Foundation Model</td>
+          <td style="text-align: right">2024/2025</td>
+          <td><a href="https://clay-foundation.github.io/model/" target="_blank" rel="noopener noreferrer">docs</a>, <a href="https://github.com/Clay-foundation/model" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/made-with-clay" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>多传感器、多时相工程化开源模型，模型卡/数据卡透明度适合做 audit case。</td>
+      </tr>
+      <tr>
+          <td>SkySense</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>大规模多模态遥感 FM，代表高性能但数据源复杂的评测场景。</td>
+      </tr>
+      <tr>
+          <td>Galileo</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>全球/局部多模态 EO 表征，适合审计跨区域与下游任务覆盖。</td>
+      </tr>
+      <tr>
           <td>TerraMind</td>
-          <td>适合任意模态生成和 token-level 推理</td>
-          <td>token 粒度影响很大，坐标离散会损失连续空间关系</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>任意模态到任意模态 EO 生成/表征，适合审计“预训练是否见过下游目标模态或标签产品”。</td>
       </tr>
       <tr>
-          <td>时空统一检索空间</td>
-          <td>把图像、位置、时间映射到同一 embedding space</td>
-          <td>TIGeR, GT-Loc</td>
-          <td>可做 geolocation、time prediction、geo-time retrieval</td>
-          <td>主要来自自然图像/街景，迁移到卫星需处理俯视和传感器差异</td>
+          <td>PhilEO Bench</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://phileo-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2401.04464" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/PhilEO-community/PhilEO-Bench" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>few-shot/n-shot GeoFM benchmark，可用来验证去泄漏 split 后的样本效率变化。</td>
       </tr>
       <tr>
-          <td>年度/时序 embedding field</td>
-          <td>生成每年每个像元的地表 embedding</td>
-          <td>AlphaEarth Foundations, Tessera</td>
-          <td>适合全球制图和时间序列监测</td>
-          <td>模型内部不可控，可能隐藏空间不公平性</td>
+          <td>Copernicus-FM / Copernicus-Bench</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/wangyi111/Copernicus-FM" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>Copernicus 数据预训练和层级任务评测，适合做同源 Copernicus 数据覆盖审计。</td>
       </tr>
       <tr>
-          <td>采样/benchmark 层面的地理时间控制</td>
-          <td>用 spatial/temporal split、生态区覆盖、跨年评测控制偏差</td>
-          <td>EarthShift, PANGAEA, SSL4EO-S12 v1.1</td>
-          <td>可验证泛化</td>
-          <td>不是模型结构，不能单独提升能力</td>
+          <td>REOBench</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/xiang709/REOBench" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>光学遥感扰动鲁棒性 benchmark，可作为泄漏之外的 robustness 对照。</td>
       </tr>
   </tbody>
 </table>
-<p>核心研究机会：提出一个 <strong>Geo-Time Conditional Adapter (GTCA)</strong>，在冻结 GeoFM backbone 的前提下，只用轻量模块注入经纬度、年内时间、年份、气候区和 GSD，并通过反偏置训练约束避免“坐标捷径”。</p>]]></description></item><item><title>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</title><link>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</guid><description><![CDATA[<h1 id="rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="headerLink">
-    <a href="#rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="header-mark"></a>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</h1><h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向最值得做的不是“再证明 foundation model 有用”，而是做一个严格、可复现、成本可控的比较：同样的小区域标签预算下，公开 embedding、冻结编码器、轻量 adapter/LoRA、decoder-only 和 full fine-tuning 到底谁更稳，尤其在跨区域、跨年份、跨生物群区、跨城市形态时谁掉得少。</p>
-<p>关键边界：</p>
-<ul>
-<li>AlphaEarth Foundations 当前主要以 Google Satellite Embedding 数据集形式开放：10 m、年度、64 维、2017-2024 的全球 embedding layers，适合做 frozen embedding + classifier/head，不适合直接对模型本体做 LoRA。</li>
-<li>Prithvi-EO-2.0、Clay、SatlasPretrain 是更适合做参数高效微调的 open model/backbone 路线。Prithvi-EO-2.0 官方 GitHub 已提供 TerraTorch 下游任务配置，TerraTorch 也明确支持 Prithvi、TerraMind、SatMAE、Satlas、DOFA、Clay 等 backbone。</li>
-<li>小区域制图的核心问题是“局部标签少 + 空间自相关强 + 区域外泛化难”。随机划分会虚高；必须做 spatial block、leave-region、leave-year、leave-biome 或 leave-city 测试。</li>
-</ul>
+<h2 id="3-方法脉络从随机划分到数据血缘审计" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e5%88%b0%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e5%ae%a1%e8%ae%a1" class="header-mark"></a>3. 方法脉络：从随机划分到数据血缘审计</h2><h3 id="31-传统随机划分的问题" class="headerLink">
+    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item><item><title>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</title><link>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</guid><description><![CDATA[<h1 id="sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
+    <a href="#sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><h2 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出更稳定的边界。</p>
+<p>这个问题不等同于“遥感语义分割”或“把 SAM 用到遥感”。它只关注一个环节：给定 <code>box</code>、<code>rotated box</code>、<code>coarse mask</code> 或检测器输出，如何选择 prompt 点的位置、数量、正负标签和迭代策略。</p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感制图依赖人工特征、光谱指数、随机森林或任务专用深度网络。它们在本地标签足够、同分布测试时表现不错，但迁移到新的城市、农田制度、火烧迹地、气候带或传感器组合时往往需要重新标注。GeoFM 的承诺是：用大规模未标注 EO 数据预训练出通用表示，再用很少的本地标签快速制图。</p>
-<p>2024-2026 出现了两条明显路线：</p>
-<ol>
-<li><strong>Embedding-as-data</strong>：AlphaEarth 把多源 EO 信息压成年度 embedding field。用户在 Earth Engine 或 GCS 中读取 64 维 embedding，再训练线性模型、树模型、MLP 或轻量空间头。</li>
-<li><strong>Open-backbone fine-tuning</strong>：Prithvi、Clay、SatlasPretrain 等提供模型权重和代码，用户可以做 frozen linear probe、decoder-only、adapter、LoRA 或 full fine-tuning。</li>
-</ol>
-<p>这两条路线目前缺一个公平实验：在同样标签预算、同样 spatial split、同样任务指标下比较“公开 embedding + 轻量 head”和“可微调 backbone + LoRA/adapter”。</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>SAM 的交互分割在自然图像中很强，但遥感图像有几个结构性差异：</p>
+<ul>
+<li>目标小：飞机、车、船、屋顶构件在 tile 中只占少量像素，box 内背景比例很高。</li>
+<li>目标旋转：水平框会包进大量背景，尤其是飞机、船、跑道、细长建筑。</li>
+<li>目标密集：停车场车辆、建筑群、集装箱等相邻实例容易被一个正点或一个 box 合并。</li>
+<li>大幅面切片：超大影像被切成 patch 后，目标可能跨 tile，且局部上下文不足。</li>
+<li>语义与边界分离：CLIP/VLM/检测器知道类别，SAM 主要负责边界；两者之间的误差会传给 prompt。</li>
+</ul>
+<p>因此，box prompt 常能定位但边界粗，point prompt 可纠偏但点位选择困难。可投稿的小空间在于：把检测/粗分割的不确定性、边界几何和遥感先验转化成一组正负 prompt 点。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>官方代码/项目</th>
+          <th>与本问题的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Segment Anything, From Space?</td>
+          <td style="text-align: right">2024 WACV</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html</a></td>
+          <td>未见官方 GitHub</td>
+          <td>系统评估 SAM 在 overhead imagery 的失败模式，是遥感 prompt 设计的起点。</td>
+      </tr>
+      <tr>
+          <td>SAM-Assisted Remote Sensing Imagery Semantic Segmentation With Object and Boundary Constraints</td>
+          <td style="text-align: right">2024 IEEE TGRS</td>
+          <td><a href="https://arxiv.org/abs/2312.02464" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.02464</a></td>
+          <td>未见官方 GitHub</td>
+          <td>用 SAM object/boundary 约束改善遥感语义分割，提示边界约束可与点 prompt 联合。</td>
+      </tr>
+      <tr>
+          <td>DiffuPrompter</td>
+          <td style="text-align: right">2024 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/16/11/2004" target="_blank" rel="noopener noreferrer">https://www.mdpi.com/2072-4292/16/11/2004</a></td>
+          <td>未确认官方代码</td>
+          <td>训练自由地利用 diffusion attention 产生 box/point prompt，可作为自动 prompt 生成基线。</td>
+      </tr>
+      <tr>
+          <td>SAM-RSIS</td>
+          <td style="text-align: right">2024 IEEE TGRS</td>
+          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085" target="_blank" rel="noopener noreferrer">https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085</a></td>
+          <td>未见官方 GitHub</td>
+          <td>渐进式 box prompting 与 SAM 微调，适合比较“只有 box”和“box+点 refinement”。</td>
+      </tr>
+      <tr>
+          <td>SAMPolyBuild</td>
+          <td style="text-align: right">2024 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271624003563</a></td>
+          <td><a href="https://github.com/wchh-2000/SAMPolyBuild" target="_blank" rel="noopener noreferrer">https://github.com/wchh-2000/SAMPolyBuild</a></td>
+          <td>建筑多边形提取；支持 bbox 与 prompt points，说明点 prompt 可服务于规则边界/多边形化。</td>
+      </tr>
+      <tr>
+          <td>PointSAM</td>
+          <td style="text-align: right">2024 arXiv / 2025 TGRS方向</td>
+          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2409.13401</a></td>
+          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">https://github.com/Lans1ng/PointSAM</a></td>
+          <td>点监督 SAM，提出负提示校准、伪标签自训练和 point-to-box converter，是最相关方法。</td>
+      </tr>
+      <tr>
+          <td>CrossCut</td>
+          <td style="text-align: right">2026 AAAI</td>
+          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37637" target="_blank" rel="noopener noreferrer">https://ojs.aaai.org/index.php/AAAI/article/view/37637</a></td>
+          <td><a href="https://github.com/nanzhou02/CrossCut" target="_blank" rel="noopener noreferrer">https://github.com/nanzhou02/CrossCut</a></td>
+          <td>交互式正/负点击跨 patch 传播，解决大图 patch 信息隔离。</td>
+      </tr>
+      <tr>
+          <td>RS2-SAM2</td>
+          <td style="text-align: right">2026 AAAI / 2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.07266" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.07266</a></td>
+          <td>未确认官方 GitHub</td>
+          <td>用 pseudo-mask dense prompt 适配 SAM2 到遥感 referring segmentation，说明粗 mask prompt 是强信号。</td>
+      </tr>
+      <tr>
+          <td>Remote SAMsing</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.00256" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.00256</a></td>
+          <td>未确认官方代码</td>
+          <td>分析 SAM2 遥感大图 mask quality/coverage trade-off 与 tiling 问题，可作为后续评测参考。</td>
+      </tr>
+      <tr>
+          <td>SAM2 official</td>
+          <td style="text-align: right">2024 Meta</td>
+          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
+          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
+          <td>基础模型与 image/video prompt API；可用于实现 box+points+mask 输入组合。</td>
+      </tr>
+      <tr>
+          <td>segment-geospatial / SamGeo</td>
+          <td style="text-align: right">持续维护</td>
+          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
+          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
+          <td>工具型基线，方便在真实 GeoTIFF/QGIS 工作流中验证自动 prompt。</td>
+      </tr>
+  </tbody>
+</table>
+<p>说明：上表中的“未确认官方 GitHub”表示截至本次检索没有找到清晰的作者官方代码仓库；可用论文实现或第三方复现替代，但复现实验中应标注。</p>]]></description></item></channel></rss>

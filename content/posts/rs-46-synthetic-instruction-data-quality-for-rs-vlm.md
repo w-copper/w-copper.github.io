@@ -1,6 +1,6 @@
 ---
 title: "RS-46 Synthetic Instruction Data Quality for RS-VLM"
-date: 2026-06-07
+date: 2026-06-07T09:45:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
 categories: ["遥感基础模型与多模态理解"]

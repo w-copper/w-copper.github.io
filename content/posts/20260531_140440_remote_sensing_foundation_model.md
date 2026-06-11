@@ -1,6 +1,6 @@
 ---
 title: "遥感基础模型新突破：SegEarth-OV与GeoLink的创新解读"
-date: 2026-05-31
+date: 2026-05-31T14:04:40+08:00
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
 ---

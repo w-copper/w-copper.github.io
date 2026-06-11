@@ -1,6 +1,6 @@
 ---
 title: "SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱"
-date: 2026-06-01
+date: 2026-06-01T22:00:00+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

@@ -1,217 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>泛化 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%B3%9B%E5%8C%96/</link><description>泛化 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%B3%9B%E5%8C%96/" rel="self" type="application/rss+xml"/><item><title>RS-21 EarthShift-Style Robustness Suite</title><link>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</guid><description><![CDATA[<h1 id="rs-21-earthshift-style-robustness-suite" class="headerLink">
-    <a href="#rs-21-earthshift-style-robustness-suite" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><p>细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。<br>
-范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。</p>
-<h2 id="1-结论先行" class="headerLink">
-    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>EarthShift 把 2024-2026 GeoFM 评测里最关键的问题挑明了：当前大量遥感 benchmark 主要测的是 in-distribution performance，但真实部署经常遇到新的时间窗口、地理区域、空间尺度和传感器。EarthShift 官方页说明其覆盖 5 类 shift、11 个任务和 8 个 geospatial foundation models；论文摘要报告 GFMs 在 OOD 上平均约 15-20% 性能下降，并且这种下降不因模型结构、尺寸、预训练或微调策略而自然消失。</p>
-<p>因此，一个可投稿的小方向不是“再做一个平均精度更高的 GeoFM”，而是做一个更可解释、更可诊断、更贴近部署的 robustness suite：明确每类 shift 的因果来源，区分模型能力、数据泄漏、传感器差异和标签体系变化，并把结果报告成性能、鲁棒性、校准、效率和失败类型的组合。</p>
-<h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感数据的分布偏移比自然图像更“结构化”：</p>
-<ul>
-<li>地理偏移：同一类建筑、道路、农田、水体在不同城市、国家、气候带中的纹理和上下文不同。</li>
-<li>时间偏移：季节、作物物候、施工进度、灾害前后、传感器重访周期都会改变表观。</li>
-<li>尺度偏移：GSD 改变后，同一对象的像素大小和局部纹理完全不同。</li>
-<li>传感器偏移：Sentinel-2、Landsat、Planet、NAIP、航空 RGB、无人机影像的谱段、响应函数、噪声和分辨率不同。</li>
-<li>标注/任务偏移：land cover、land use、object、parcel-level label、行政产品标签之间语义不完全一致。</li>
-</ul>
-<p>传统随机划分会高估模型泛化能力，因为相邻瓦片、同一城市、同一季节、同一传感器的数据往往同时进入训练和测试。GeoFM 的大规模预训练进一步放大了这个问题：模型可能在预训练阶段已经看过测试区域或同源影像，但 benchmark 报告并不总是给出地理/时间去重信息。</p>
-<h2 id="3-代表论文与项目" class="headerLink">
-    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>项目/论文</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>对 RS-21 的价值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.29330</a></td>
-          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">https://earthshift.github.io/</a></td>
-          <td>核心锚点；官方页称覆盖 realistic distribution shifts，论文摘要给出 8 个 GFM、11 任务、5 shift types 和 OOD 平均约 15-20% 下降。</td>
-      </tr>
-      <tr>
-          <td>REOBench: Benchmarking Robustness of Earth Observation Foundation Models</td>
-          <td style="text-align: right">2025 NeurIPS D&amp;B / arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2505.16793</a></td>
-          <td><a href="https://github.com/lx709/REOBench" target="_blank" rel="noopener noreferrer">https://github.com/lx709/REOBench</a></td>
-          <td>关注高分辨率光学遥感下 6 类任务、12 类图像扰动；适合补 EarthShift 的 corruption/perturbation 维度。</td>
-      </tr>
-      <tr>
-          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
-          <td style="text-align: right">2024/2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.04204</a></td>
-          <td><a href="https://github.com/VMarsocci/pangaea-bench" target="_blank" rel="noopener noreferrer">https://github.com/VMarsocci/pangaea-bench</a></td>
-          <td>指出 GFM 评测 narrow、地理偏向欧美、任务和分辨率覆盖不足；可作为 suite 的多任务基础框架。</td>
-      </tr>
-      <tr>
-          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
-          <td style="text-align: right">2025 ICCV oral</td>
-          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11849</a></td>
-          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
-          <td>Copernicus-Bench 覆盖 Sentinel 多任务、多层级应用；适合做 cross-sensor / Sentinel-family shift 的对照。</td>
-      </tr>
-      <tr>
-          <td>Parameter Efficient Self-Supervised Geospatial Domain Adaptation</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html</a></td>
-          <td><a href="https://github.com/HSG-AIML/GDA" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GDA</a></td>
-          <td>代表 PEFT/adapter 路线；官方 repo 描述了 SLR adapter、目标域自监督 MIM、再监督微调的三阶段适配。</td>
-      </tr>
-      <tr>
-          <td>LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation</td>
-          <td style="text-align: right">2021 NeurIPS D&amp;B</td>
-          <td><a href="https://arxiv.org/abs/2110.08733" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2110.08733</a></td>
-          <td><a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">https://github.com/Junjue-Wang/LoveDA</a></td>
-          <td>虽早于 2024，但仍是 cross-domain urban/rural segmentation 的常用基准，可作为 cross-city/cross-context split 的基础。</td>
-      </tr>
-      <tr>
-          <td>Benchmarking Object Detectors under Real-World Distribution Shifts in Satellite Imagery</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.19202" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.19202</a></td>
-          <td><a href="https://github.com/RWGAI/RWDS" target="_blank" rel="noopener noreferrer">https://github.com/RWGAI/RWDS</a></td>
-          <td>专门研究卫星目标检测中的真实空间 domain shift，补足 segmentation 之外的 detection 任务。</td>
-      </tr>
-      <tr>
-          <td>WILDS: A Benchmark of in-the-Wild Distribution Shifts</td>
-          <td style="text-align: right">2021 ICML</td>
-          <td><a href="https://proceedings.mlr.press/v139/koh21a.html" target="_blank" rel="noopener noreferrer">https://proceedings.mlr.press/v139/koh21a.html</a></td>
-          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">https://wilds.stanford.edu/</a></td>
-          <td>非 2024-2026，但其 shift reporting、leaderboard 和 fMoW satellite setting 是 robustness benchmark 设计的重要参照。</td>
-      </tr>
-      <tr>
-          <td>Decomposition-based UDA for Remote Sensing Semantic Segmentation</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2404.04531" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.04531</a></td>
-          <td><a href="https://github.com/sstary/SSRS" target="_blank" rel="noopener noreferrer">https://github.com/sstary/SSRS</a></td>
-          <td>代表 2024 segmentation UDA baseline，可纳入 TTA/UDA 对照组。</td>
-      </tr>
-      <tr>
-          <td>SegDesicNet: Lightweight Semantic Segmentation with Geo-Coordinate Embeddings for Domain Adaptation</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.08290" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.08290</a></td>
-          <td>待核验</td>
-          <td>将 geo-coordinate embeddings 用于 UDA，适合作为“坐标是帮助泛化还是造成记忆”的对照。</td>
-      </tr>
-      <tr>
-          <td>Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning</td>
-          <td style="text-align: right">2025 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625003569" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271625003569</a></td>
-          <td><a href="https://github.com/mmmll23/GeoSA-BaSA" target="_blank" rel="noopener noreferrer">https://github.com/mmmll23/GeoSA-BaSA</a></td>
-          <td>代表 VFM fine-tuning + domain generalization；注意代码是否已发布需二次核验。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="4-shift-taxonomy建议的-6-类真实偏移" class="headerLink">
-    <a href="#4-shift-taxonomy%e5%bb%ba%e8%ae%ae%e7%9a%84-6-%e7%b1%bb%e7%9c%9f%e5%ae%9e%e5%81%8f%e7%a7%bb" class="header-mark"></a>4. Shift taxonomy：建议的 6 类真实偏移</h2><h3 id="s1-跨城市--跨区域" class="headerLink">
-    <a href="#s1-%e8%b7%a8%e5%9f%8e%e5%b8%82--%e8%b7%a8%e5%8c%ba%e5%9f%9f" class="header-mark"></a>S1 跨城市 / 跨区域</h3><p>定义：训练城市和测试城市不同，或训练区域与测试区域在城市形态、建筑密度、道路结构、植被覆盖上不同。<br>
-候选数据：LoveDA urban/rural、Vaihingen/Potsdam、SpaceNet cities、DeepGlobe/LoveDA transfer。<br>
-核心风险：模型学到城市纹理和标注风格，而不是类别本身。<br>
-报告指标：ID mIoU、OOD mIoU、relative drop、per-class drop、spatial calibration。</p>]]></description></item><item><title>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="headerLink">
-    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><h2 id="1-结论先行" class="headerLink">
-    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。</p>
-<p>最有价值的小课题是：<strong>Uncertainty-Constrained Test-Time Adaptation for Cross-City Remote Sensing Semantic Segmentation</strong>。核心假设是：只在可靠像素、可靠 tile 和可靠类别原型上更新少量参数，并用空间一致性、类别先验和回滚机制约束更新，可以减少跨城市 TTA 的 model collapse 和 rare-class forgetting。</p>
-<h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感语义分割常在一个城市、一个传感器或一个采样策略上训练，然后部署到另一个城市。城市之间的差异不是简单色彩变化，而是多因素叠加：</p>
-<ul>
-<li>地理景观差异：武汉、南京、长春、Potsdam、Vaihingen 的建筑密度、道路宽度、植被形态不同。</li>
-<li>类别先验差异：LoveDA rural 中 agriculture/forest 占比高，urban 中 building/road 占比高；熵最小化容易把主导类越推越强。</li>
-<li>空间自相关：一个 1024 tile 中相邻像素高度相关，batch size 看似大，独立样本数其实很低。</li>
-<li>边界和小目标：道路、水体边界、建筑阴影、车辆等区域的高不确定性往往正是最重要的区域。</li>
-<li>测试流非平稳：真实大范围制图是从城区到郊区、从平原到山地、从晴天到阴影的连续流，单一 target distribution 假设不成立。</li>
-</ul>
-<p>LoveDA 本身就是为了 land-cover segmentation 和 UDA 设计的遥感域适配数据集，其 GitHub 说明中也保留了 Semantic Segmentation Challenge 和 UDA Challenge；OpenReview 摘要强调城市级/国家级制图泛化不足。LoveDA 早于本时间窗，但仍是 RS-22 的核心实验场。<br>
-链接：<a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">LoveDA GitHub</a>，<a href="https://openreview.net/forum?id=_-O9SefMb99" target="_blank" rel="noopener noreferrer">LoveDA OpenReview</a>。</p>]]></description></item><item><title>RS-23 Uncertainty-Calibrated Large-Scale Mapping</title><link>https://spacetop.win/2026/06/rs-23-uncertainty-calibrated-large-scale-mapping/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-23-uncertainty-calibrated-large-scale-mapping/</guid><description><![CDATA[<h1 id="rs-23-uncertainty-calibrated-large-scale-mapping" class="headerLink">
-    <a href="#rs-23-uncertainty-calibrated-large-scale-mapping" class="header-mark"></a>RS-23 Uncertainty-Calibrated Large-Scale Mapping</h1><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>大范围遥感制图的核心问题不是只把 mIoU、F1 或 RMSE 做高，而是让地图产品知道“哪里可靠、哪里不可靠、为什么不可靠”。2024-2026 的相关工作正在把 conformal prediction、spatial calibration、Bayesian/ensemble uncertainty、neural processes 和 geospatial foundation model embeddings 放到一起。最值得做的小课题是：在 land cover、森林属性、生物量或灾害制图中，构造一个空间感知的不确定性校准协议，让模型在跨区域、跨生态区和跨传感器时仍能给出可信的 prediction set 或 prediction interval。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感制图天然具有空间自相关。普通深度模型往往把每个像素或 patch 当成独立样本，输出 softmax probability 后直接解释为置信度；但在真实部署里，误差会沿地形、城市形态、生态区、季节和传感器成片出现。一个模型在测试集总体精度很高，并不意味着它在某个山区、云影边缘或少数土地覆盖类型上可靠。</p>
-<p>不确定性校准要回答三个具体问题：</p>
-<ol>
-<li>预测概率是否能对应真实正确率。</li>
-<li>模型能否给出覆盖率可控的类别集合或连续区间。</li>
-<li>这种覆盖率在空间分组、生态区、GSD、传感器和长尾类别上是否仍成立。</li>
-</ol>
-<h2 id="代表论文与资源" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>价值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Assessing Predictive Uncertainties in Remote Sensing Image Classification via Conformal Prediction</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://elib.dlr.de/208182/" target="_blank" rel="noopener noreferrer">DLR entry</a></td>
-          <td>将 conformal prediction 引入遥感分类不确定性，适合作为分类基线。</td>
-      </tr>
-      <tr>
-          <td>Uncertainty quantification for forest attribute maps with conformal prediction and k-nearest neighbor method</td>
-          <td style="text-align: right">2025 RSE</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725001622" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>面向森林属性图的不确定性区间，说明传统遥感制图也需要覆盖率保证。</td>
-      </tr>
-      <tr>
-          <td>Interpolation of GEDI Biomass Estimates with Calibrated Uncertainty Quantification</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://researchtrend.ai/papers/2601.16834" target="_blank" rel="noopener noreferrer">arXiv summary</a></td>
-          <td>用 local observation sets 和 GeoFM embeddings 改善生物量估计的校准。</td>
-      </tr>
-      <tr>
-          <td>Calibrated spatial uncertainty for Earth observation</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://eartharxiv.org/repository/object/13059/download/23139/?embed=True" target="_blank" rel="noopener noreferrer">EarthArXiv PDF</a></td>
-          <td>强调空间依赖、Matérn covariance 和 foundation model 特征下的空间不确定性。</td>
-      </tr>
-      <tr>
-          <td>EarthShift</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>提供真实 distribution shift 场景，可作为校准 OOD benchmark。</td>
-      </tr>
-      <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>可作为 frozen GeoFM backbone，测试不确定性头。</td>
-      </tr>
-      <tr>
-          <td>AlphaEarth Foundations</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://research.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">Google Research</a></td>
-          <td>年度 embedding field 适合做大范围制图和空间公平性误差分析。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="softmaxensemble-calibration" class="headerLink">
-    <a href="#softmaxensemble-calibration" class="header-mark"></a>Softmax/ensemble calibration</h3><p>最小基线是 temperature scaling、deep ensemble、MC dropout 和 test-time augmentation。它们容易实现，但常把模型方差误当成数据噪声，在跨区域部署时会过度自信。</p>]]></description></item><item><title>RS-24 Cross-Sensor Missing-Band Adaptation</title><link>https://spacetop.win/2026/06/rs-24-cross-sensor-missing-band-adaptation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-24-cross-sensor-missing-band-adaptation/</guid><description><![CDATA[<h1 id="rs-24-cross-sensor-missing-band-adaptation" class="headerLink">
-    <a href="#rs-24-cross-sensor-missing-band-adaptation" class="header-mark"></a>RS-24 Cross-Sensor Missing-Band Adaptation</h1><h2 id="1-核心判断" class="headerLink">
-    <a href="#1-%e6%a0%b8%e5%bf%83%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 核心判断</h2><p>跨传感器 missing-band adaptation 正在从“把不同传感器重采样到同一组固定 band”转向“让模型显式理解每个 band 的物理含义”。2024-2026 的代表路线包括：</p>
-<ul>
-<li><strong>波长/传感器条件化</strong>：DOFA、Any-Optical-Model、HyperFree、SpecAware、Panopticon 用 wavelength/band embedding、动态 embedding、hypernetwork 或 channel-adaptive prompt 处理可变 band。</li>
-<li><strong>缺失 band 鲁棒预训练</strong>：LESSViT、AnyBand-Diff、AOM 通过 channel-agnostic patch embedding、hierarchical channel sampling、masked conditional diffusion 或 channel-wise reconstruction 直接模拟 band 缺失。</li>
-<li><strong>跨传感器共址学习</strong>：SpectralEarth-FM、msGFM 类工作用同一区域的 HSI/MSI/Landsat/Sentinel 等共址数据做 JEPA/contrastive/masked pretraining，让不同传感器对齐到共享语义空间。</li>
-<li><strong>物理先验约束</strong>：PhySwin 和 AnyBand-Diff 提醒我们，遥感不是普通多通道图片；反射率范围、光谱连续性、指数保持、辐射一致性都可以成为训练约束。</li>
-</ul>
-<p>最值得做的小课题不是再堆一个大模型，而是：<strong>把完整 SRF 曲线、band dropout 和跨传感器共址蒸馏结合起来，做一个可复现的 missing-band / cross-sensor adapter protocol</strong>。</p>
-<h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>自然图像模型默认 RGB 三通道且语义稳定；遥感光学传感器则不同：</p>
-<ul>
-<li><strong>Band layout 不同</strong>：Sentinel-2 有 13 个 band，Landsat/HLS band 设置不同，Planet/NAIP 更偏 RGB/NIR，高光谱 EnMAP/EMIT/DESIS 可有上百个窄 band。</li>
-<li><strong>SRF 不同</strong>：即使两个传感器都叫 red/NIR，中心波长、带宽、响应曲线也不同。用 band name 对齐会丢掉物理差异。</li>
-<li><strong>缺失 band 是常态</strong>：业务中常遇到传感器缺 band、云污染、坏线、只下载部分 band、历史数据 band 不全、模型训练时的 band 配置与部署时不同。</li>
-<li><strong>空间分辨率耦合</strong>：Sentinel-2 的 10/20/60m band 不能简单当作同分辨率通道；跨传感器时还会同时变化 GSD。</li>
-<li><strong>标注稀缺与区域偏差</strong>：高光谱/多光谱下游标签少，模型容易只在某个传感器和区域内有效。</li>
-</ul>
-<p>因此，跨传感器适配的本质不是“补几个通道”，而是学习一个函数：在输入传感器、SRF、可用 band、空间分辨率和地理场景变化时，模型仍能保留稳定地物语义与光谱物理一致性。</p>]]></description></item><item><title>RS-25 OOD Split Design for Remote Sensing Benchmarks</title><link>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</guid><description><![CDATA[<h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>泛化 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%B3%9B%E5%8C%96/</link><description>泛化 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:24:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%B3%9B%E5%8C%96/" rel="self" type="application/rss+xml"/><item><title>RS-25 OOD Split Design for Remote Sensing Benchmarks</title><link>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</link><pubDate>Sun, 07 Jun 2026 09:24:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</guid><description><![CDATA[<h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks" class="headerLink">
     <a href="#rs-25-ood-split-design-for-remote-sensing-benchmarks" class="header-mark"></a>RS-25 OOD Split Design for Remote Sensing Benchmarks</h1><p>默认范围：光学/多光谱/高分辨率遥感为主；不把 SAR-only 作为主线。</p>
 <h2 id="摘要" class="headerLink">
     <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>遥感 benchmark 的最大风险是“随机划分高分，真实部署掉分”。影像瓦片具有强空间自相关，同一区域相邻 patch、同一城市不同裁片、同一季节同一传感器采样出来的数据，常常让训练集和测试集在纹理、建筑形态、植被物候、成像条件上高度相似。OOD split 的研究价值在于把这种相似性有意打散，分别测试模型面对新地理区域、新时间窗口、新传感器、新空间分辨率和新数据源时是否仍可靠。</p>
@@ -358,4 +145,217 @@
 </table>
 <h2 id="推荐复现实验协议" class="headerLink">
     <a href="#%e6%8e%a8%e8%8d%90%e5%a4%8d%e7%8e%b0%e5%ae%9e%e9%aa%8c%e5%8d%8f%e8%ae%ae" class="header-mark"></a>推荐复现实验协议</h2><h3 id="1-数据元信息要求" class="headerLink">
-    <a href="#1-%e6%95%b0%e6%8d%ae%e5%85%83%e4%bf%a1%e6%81%af%e8%a6%81%e6%b1%82" class="header-mark"></a>1. 数据元信息要求</h3><p>每个样本至少需要保存：</p>]]></description></item></channel></rss>
+    <a href="#1-%e6%95%b0%e6%8d%ae%e5%85%83%e4%bf%a1%e6%81%af%e8%a6%81%e6%b1%82" class="header-mark"></a>1. 数据元信息要求</h3><p>每个样本至少需要保存：</p>]]></description></item><item><title>RS-24 Cross-Sensor Missing-Band Adaptation</title><link>https://spacetop.win/2026/06/rs-24-cross-sensor-missing-band-adaptation/</link><pubDate>Sun, 07 Jun 2026 09:23:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-24-cross-sensor-missing-band-adaptation/</guid><description><![CDATA[<h1 id="rs-24-cross-sensor-missing-band-adaptation" class="headerLink">
+    <a href="#rs-24-cross-sensor-missing-band-adaptation" class="header-mark"></a>RS-24 Cross-Sensor Missing-Band Adaptation</h1><h2 id="1-核心判断" class="headerLink">
+    <a href="#1-%e6%a0%b8%e5%bf%83%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 核心判断</h2><p>跨传感器 missing-band adaptation 正在从“把不同传感器重采样到同一组固定 band”转向“让模型显式理解每个 band 的物理含义”。2024-2026 的代表路线包括：</p>
+<ul>
+<li><strong>波长/传感器条件化</strong>：DOFA、Any-Optical-Model、HyperFree、SpecAware、Panopticon 用 wavelength/band embedding、动态 embedding、hypernetwork 或 channel-adaptive prompt 处理可变 band。</li>
+<li><strong>缺失 band 鲁棒预训练</strong>：LESSViT、AnyBand-Diff、AOM 通过 channel-agnostic patch embedding、hierarchical channel sampling、masked conditional diffusion 或 channel-wise reconstruction 直接模拟 band 缺失。</li>
+<li><strong>跨传感器共址学习</strong>：SpectralEarth-FM、msGFM 类工作用同一区域的 HSI/MSI/Landsat/Sentinel 等共址数据做 JEPA/contrastive/masked pretraining，让不同传感器对齐到共享语义空间。</li>
+<li><strong>物理先验约束</strong>：PhySwin 和 AnyBand-Diff 提醒我们，遥感不是普通多通道图片；反射率范围、光谱连续性、指数保持、辐射一致性都可以成为训练约束。</li>
+</ul>
+<p>最值得做的小课题不是再堆一个大模型，而是：<strong>把完整 SRF 曲线、band dropout 和跨传感器共址蒸馏结合起来，做一个可复现的 missing-band / cross-sensor adapter protocol</strong>。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>自然图像模型默认 RGB 三通道且语义稳定；遥感光学传感器则不同：</p>
+<ul>
+<li><strong>Band layout 不同</strong>：Sentinel-2 有 13 个 band，Landsat/HLS band 设置不同，Planet/NAIP 更偏 RGB/NIR，高光谱 EnMAP/EMIT/DESIS 可有上百个窄 band。</li>
+<li><strong>SRF 不同</strong>：即使两个传感器都叫 red/NIR，中心波长、带宽、响应曲线也不同。用 band name 对齐会丢掉物理差异。</li>
+<li><strong>缺失 band 是常态</strong>：业务中常遇到传感器缺 band、云污染、坏线、只下载部分 band、历史数据 band 不全、模型训练时的 band 配置与部署时不同。</li>
+<li><strong>空间分辨率耦合</strong>：Sentinel-2 的 10/20/60m band 不能简单当作同分辨率通道；跨传感器时还会同时变化 GSD。</li>
+<li><strong>标注稀缺与区域偏差</strong>：高光谱/多光谱下游标签少，模型容易只在某个传感器和区域内有效。</li>
+</ul>
+<p>因此，跨传感器适配的本质不是“补几个通道”，而是学习一个函数：在输入传感器、SRF、可用 band、空间分辨率和地理场景变化时，模型仍能保留稳定地物语义与光谱物理一致性。</p>]]></description></item><item><title>RS-23 Uncertainty-Calibrated Large-Scale Mapping</title><link>https://spacetop.win/2026/06/rs-23-uncertainty-calibrated-large-scale-mapping/</link><pubDate>Sun, 07 Jun 2026 09:22:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-23-uncertainty-calibrated-large-scale-mapping/</guid><description><![CDATA[<h1 id="rs-23-uncertainty-calibrated-large-scale-mapping" class="headerLink">
+    <a href="#rs-23-uncertainty-calibrated-large-scale-mapping" class="header-mark"></a>RS-23 Uncertainty-Calibrated Large-Scale Mapping</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>大范围遥感制图的核心问题不是只把 mIoU、F1 或 RMSE 做高，而是让地图产品知道“哪里可靠、哪里不可靠、为什么不可靠”。2024-2026 的相关工作正在把 conformal prediction、spatial calibration、Bayesian/ensemble uncertainty、neural processes 和 geospatial foundation model embeddings 放到一起。最值得做的小课题是：在 land cover、森林属性、生物量或灾害制图中，构造一个空间感知的不确定性校准协议，让模型在跨区域、跨生态区和跨传感器时仍能给出可信的 prediction set 或 prediction interval。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感制图天然具有空间自相关。普通深度模型往往把每个像素或 patch 当成独立样本，输出 softmax probability 后直接解释为置信度；但在真实部署里，误差会沿地形、城市形态、生态区、季节和传感器成片出现。一个模型在测试集总体精度很高，并不意味着它在某个山区、云影边缘或少数土地覆盖类型上可靠。</p>
+<p>不确定性校准要回答三个具体问题：</p>
+<ol>
+<li>预测概率是否能对应真实正确率。</li>
+<li>模型能否给出覆盖率可控的类别集合或连续区间。</li>
+<li>这种覆盖率在空间分组、生态区、GSD、传感器和长尾类别上是否仍成立。</li>
+</ol>
+<h2 id="代表论文与资源" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Assessing Predictive Uncertainties in Remote Sensing Image Classification via Conformal Prediction</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://elib.dlr.de/208182/" target="_blank" rel="noopener noreferrer">DLR entry</a></td>
+          <td>将 conformal prediction 引入遥感分类不确定性，适合作为分类基线。</td>
+      </tr>
+      <tr>
+          <td>Uncertainty quantification for forest attribute maps with conformal prediction and k-nearest neighbor method</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725001622" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>面向森林属性图的不确定性区间，说明传统遥感制图也需要覆盖率保证。</td>
+      </tr>
+      <tr>
+          <td>Interpolation of GEDI Biomass Estimates with Calibrated Uncertainty Quantification</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://researchtrend.ai/papers/2601.16834" target="_blank" rel="noopener noreferrer">arXiv summary</a></td>
+          <td>用 local observation sets 和 GeoFM embeddings 改善生物量估计的校准。</td>
+      </tr>
+      <tr>
+          <td>Calibrated spatial uncertainty for Earth observation</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://eartharxiv.org/repository/object/13059/download/23139/?embed=True" target="_blank" rel="noopener noreferrer">EarthArXiv PDF</a></td>
+          <td>强调空间依赖、Matérn covariance 和 foundation model 特征下的空间不确定性。</td>
+      </tr>
+      <tr>
+          <td>EarthShift</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>提供真实 distribution shift 场景，可作为校准 OOD benchmark。</td>
+      </tr>
+      <tr>
+          <td>Prithvi-EO-2.0</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>可作为 frozen GeoFM backbone，测试不确定性头。</td>
+      </tr>
+      <tr>
+          <td>AlphaEarth Foundations</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://research.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">Google Research</a></td>
+          <td>年度 embedding field 适合做大范围制图和空间公平性误差分析。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="softmaxensemble-calibration" class="headerLink">
+    <a href="#softmaxensemble-calibration" class="header-mark"></a>Softmax/ensemble calibration</h3><p>最小基线是 temperature scaling、deep ensemble、MC dropout 和 test-time augmentation。它们容易实现，但常把模型方差误当成数据噪声，在跨区域部署时会过度自信。</p>]]></description></item><item><title>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 09:21:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="headerLink">
+    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。</p>
+<p>最有价值的小课题是：<strong>Uncertainty-Constrained Test-Time Adaptation for Cross-City Remote Sensing Semantic Segmentation</strong>。核心假设是：只在可靠像素、可靠 tile 和可靠类别原型上更新少量参数，并用空间一致性、类别先验和回滚机制约束更新，可以减少跨城市 TTA 的 model collapse 和 rare-class forgetting。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感语义分割常在一个城市、一个传感器或一个采样策略上训练，然后部署到另一个城市。城市之间的差异不是简单色彩变化，而是多因素叠加：</p>
+<ul>
+<li>地理景观差异：武汉、南京、长春、Potsdam、Vaihingen 的建筑密度、道路宽度、植被形态不同。</li>
+<li>类别先验差异：LoveDA rural 中 agriculture/forest 占比高，urban 中 building/road 占比高；熵最小化容易把主导类越推越强。</li>
+<li>空间自相关：一个 1024 tile 中相邻像素高度相关，batch size 看似大，独立样本数其实很低。</li>
+<li>边界和小目标：道路、水体边界、建筑阴影、车辆等区域的高不确定性往往正是最重要的区域。</li>
+<li>测试流非平稳：真实大范围制图是从城区到郊区、从平原到山地、从晴天到阴影的连续流，单一 target distribution 假设不成立。</li>
+</ul>
+<p>LoveDA 本身就是为了 land-cover segmentation 和 UDA 设计的遥感域适配数据集，其 GitHub 说明中也保留了 Semantic Segmentation Challenge 和 UDA Challenge；OpenReview 摘要强调城市级/国家级制图泛化不足。LoveDA 早于本时间窗，但仍是 RS-22 的核心实验场。<br>
+链接：<a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">LoveDA GitHub</a>，<a href="https://openreview.net/forum?id=_-O9SefMb99" target="_blank" rel="noopener noreferrer">LoveDA OpenReview</a>。</p>]]></description></item><item><title>RS-21 EarthShift-Style Robustness Suite</title><link>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</link><pubDate>Sun, 07 Jun 2026 09:20:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</guid><description><![CDATA[<h1 id="rs-21-earthshift-style-robustness-suite" class="headerLink">
+    <a href="#rs-21-earthshift-style-robustness-suite" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><p>细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。<br>
+范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。</p>
+<h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>EarthShift 把 2024-2026 GeoFM 评测里最关键的问题挑明了：当前大量遥感 benchmark 主要测的是 in-distribution performance，但真实部署经常遇到新的时间窗口、地理区域、空间尺度和传感器。EarthShift 官方页说明其覆盖 5 类 shift、11 个任务和 8 个 geospatial foundation models；论文摘要报告 GFMs 在 OOD 上平均约 15-20% 性能下降，并且这种下降不因模型结构、尺寸、预训练或微调策略而自然消失。</p>
+<p>因此，一个可投稿的小方向不是“再做一个平均精度更高的 GeoFM”，而是做一个更可解释、更可诊断、更贴近部署的 robustness suite：明确每类 shift 的因果来源，区分模型能力、数据泄漏、传感器差异和标签体系变化，并把结果报告成性能、鲁棒性、校准、效率和失败类型的组合。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感数据的分布偏移比自然图像更“结构化”：</p>
+<ul>
+<li>地理偏移：同一类建筑、道路、农田、水体在不同城市、国家、气候带中的纹理和上下文不同。</li>
+<li>时间偏移：季节、作物物候、施工进度、灾害前后、传感器重访周期都会改变表观。</li>
+<li>尺度偏移：GSD 改变后，同一对象的像素大小和局部纹理完全不同。</li>
+<li>传感器偏移：Sentinel-2、Landsat、Planet、NAIP、航空 RGB、无人机影像的谱段、响应函数、噪声和分辨率不同。</li>
+<li>标注/任务偏移：land cover、land use、object、parcel-level label、行政产品标签之间语义不完全一致。</li>
+</ul>
+<p>传统随机划分会高估模型泛化能力，因为相邻瓦片、同一城市、同一季节、同一传感器的数据往往同时进入训练和测试。GeoFM 的大规模预训练进一步放大了这个问题：模型可能在预训练阶段已经看过测试区域或同源影像，但 benchmark 报告并不总是给出地理/时间去重信息。</p>
+<h2 id="3-代表论文与项目" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>项目/论文</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>对 RS-21 的价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.29330</a></td>
+          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">https://earthshift.github.io/</a></td>
+          <td>核心锚点；官方页称覆盖 realistic distribution shifts，论文摘要给出 8 个 GFM、11 任务、5 shift types 和 OOD 平均约 15-20% 下降。</td>
+      </tr>
+      <tr>
+          <td>REOBench: Benchmarking Robustness of Earth Observation Foundation Models</td>
+          <td style="text-align: right">2025 NeurIPS D&amp;B / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2505.16793</a></td>
+          <td><a href="https://github.com/lx709/REOBench" target="_blank" rel="noopener noreferrer">https://github.com/lx709/REOBench</a></td>
+          <td>关注高分辨率光学遥感下 6 类任务、12 类图像扰动；适合补 EarthShift 的 corruption/perturbation 维度。</td>
+      </tr>
+      <tr>
+          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
+          <td style="text-align: right">2024/2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.04204</a></td>
+          <td><a href="https://github.com/VMarsocci/pangaea-bench" target="_blank" rel="noopener noreferrer">https://github.com/VMarsocci/pangaea-bench</a></td>
+          <td>指出 GFM 评测 narrow、地理偏向欧美、任务和分辨率覆盖不足；可作为 suite 的多任务基础框架。</td>
+      </tr>
+      <tr>
+          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
+          <td style="text-align: right">2025 ICCV oral</td>
+          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11849</a></td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
+          <td>Copernicus-Bench 覆盖 Sentinel 多任务、多层级应用；适合做 cross-sensor / Sentinel-family shift 的对照。</td>
+      </tr>
+      <tr>
+          <td>Parameter Efficient Self-Supervised Geospatial Domain Adaptation</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html</a></td>
+          <td><a href="https://github.com/HSG-AIML/GDA" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GDA</a></td>
+          <td>代表 PEFT/adapter 路线；官方 repo 描述了 SLR adapter、目标域自监督 MIM、再监督微调的三阶段适配。</td>
+      </tr>
+      <tr>
+          <td>LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation</td>
+          <td style="text-align: right">2021 NeurIPS D&amp;B</td>
+          <td><a href="https://arxiv.org/abs/2110.08733" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2110.08733</a></td>
+          <td><a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">https://github.com/Junjue-Wang/LoveDA</a></td>
+          <td>虽早于 2024，但仍是 cross-domain urban/rural segmentation 的常用基准，可作为 cross-city/cross-context split 的基础。</td>
+      </tr>
+      <tr>
+          <td>Benchmarking Object Detectors under Real-World Distribution Shifts in Satellite Imagery</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.19202" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.19202</a></td>
+          <td><a href="https://github.com/RWGAI/RWDS" target="_blank" rel="noopener noreferrer">https://github.com/RWGAI/RWDS</a></td>
+          <td>专门研究卫星目标检测中的真实空间 domain shift，补足 segmentation 之外的 detection 任务。</td>
+      </tr>
+      <tr>
+          <td>WILDS: A Benchmark of in-the-Wild Distribution Shifts</td>
+          <td style="text-align: right">2021 ICML</td>
+          <td><a href="https://proceedings.mlr.press/v139/koh21a.html" target="_blank" rel="noopener noreferrer">https://proceedings.mlr.press/v139/koh21a.html</a></td>
+          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">https://wilds.stanford.edu/</a></td>
+          <td>非 2024-2026，但其 shift reporting、leaderboard 和 fMoW satellite setting 是 robustness benchmark 设计的重要参照。</td>
+      </tr>
+      <tr>
+          <td>Decomposition-based UDA for Remote Sensing Semantic Segmentation</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2404.04531" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.04531</a></td>
+          <td><a href="https://github.com/sstary/SSRS" target="_blank" rel="noopener noreferrer">https://github.com/sstary/SSRS</a></td>
+          <td>代表 2024 segmentation UDA baseline，可纳入 TTA/UDA 对照组。</td>
+      </tr>
+      <tr>
+          <td>SegDesicNet: Lightweight Semantic Segmentation with Geo-Coordinate Embeddings for Domain Adaptation</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.08290" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.08290</a></td>
+          <td>待核验</td>
+          <td>将 geo-coordinate embeddings 用于 UDA，适合作为“坐标是帮助泛化还是造成记忆”的对照。</td>
+      </tr>
+      <tr>
+          <td>Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625003569" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271625003569</a></td>
+          <td><a href="https://github.com/mmmll23/GeoSA-BaSA" target="_blank" rel="noopener noreferrer">https://github.com/mmmll23/GeoSA-BaSA</a></td>
+          <td>代表 VFM fine-tuning + domain generalization；注意代码是否已发布需二次核验。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-shift-taxonomy建议的-6-类真实偏移" class="headerLink">
+    <a href="#4-shift-taxonomy%e5%bb%ba%e8%ae%ae%e7%9a%84-6-%e7%b1%bb%e7%9c%9f%e5%ae%9e%e5%81%8f%e7%a7%bb" class="header-mark"></a>4. Shift taxonomy：建议的 6 类真实偏移</h2><h3 id="s1-跨城市--跨区域" class="headerLink">
+    <a href="#s1-%e8%b7%a8%e5%9f%8e%e5%b8%82--%e8%b7%a8%e5%8c%ba%e5%9f%9f" class="header-mark"></a>S1 跨城市 / 跨区域</h3><p>定义：训练城市和测试城市不同，或训练区域与测试区域在城市形态、建筑密度、道路结构、植被覆盖上不同。<br>
+候选数据：LoveDA urban/rural、Vaihingen/Potsdam、SpaceNet cities、DeepGlobe/LoveDA transfer。<br>
+核心风险：模型学到城市纹理和标注风格，而不是类别本身。<br>
+报告指标：ID mIoU、OOD mIoU、relative drop、per-class drop、spatial calibration。</p>]]></description></item></channel></rss>

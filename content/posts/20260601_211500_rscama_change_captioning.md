@@ -1,6 +1,6 @@
 ---
 title: "RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模"
-date: 2026-06-01
+date: 2026-06-01T21:15:00+08:00
 categories: ["时序变化、跨域泛化与可信评测"]
 draft: false
 ---

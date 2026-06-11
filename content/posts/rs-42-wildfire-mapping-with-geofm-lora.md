@@ -1,6 +1,6 @@
 ---
 title: "RS-42 Wildfire Mapping with GeoFM LoRA"
-date: 2026-06-07
+date: 2026-06-07T09:41:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感应用", "农业生态灾害", "方法化"]
 categories: ["遥感基础模型与多模态理解"]

@@ -1,6 +1,6 @@
 ---
 title: "TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示"
-date: 2026-06-01
+date: 2026-06-01T12:00:00+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

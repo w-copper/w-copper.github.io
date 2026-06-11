@@ -1,6 +1,6 @@
 ---
 title: "RS-20 Temporal Foundation Model for Cloud/Season Robustness"
-date: 2026-06-07
+date: 2026-06-07T09:19:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["多时相", "变化检测", "时序遥感"]
 categories: ["时序变化、跨域泛化与可信评测"]

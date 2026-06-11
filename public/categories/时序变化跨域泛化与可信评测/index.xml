@@ -1,262 +1,73 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/</link><description>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
-    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
-<h2 id="1-方向概述" class="headerLink">
-    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云、云影、雪、薄雾、传感器缺测、不同重访周期、物候周期和真实地物变化混在一起。传统做法常用云掩膜、最佳像元合成、插值、时序平滑或单任务云去除，但 foundation model 时代的机会是：把“缺测、遮挡、季节变化”变成预训练任务本身，让模型学会在不完整、多季节、多区域、多传感器序列中形成稳定表示。</p>
-<p>本方向可被压成一个很具体的论文问题：</p>
-<blockquote>
-  <p>在 Sentinel-2 / HLS 多时相序列中，用真实或模拟云缺测做 masked temporal reconstruction 预训练，是否能同时提升云遮挡条件下的 crop mapping 和真实变化检测，并减少把季节变化误判为变化的错误？</p>
-</blockquote><h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感时序和普通视频不同。视频帧通常时间间隔密集、同一相机、视角连续；卫星时序是稀疏、不规则、多传感器、多大气条件，而且同一像元的语义可能因物候周期而显著变化。对于 crop mapping，模型必须理解不同作物的物候曲线，而不是只看单期纹理。对于 change detection，模型必须区分真实建设/灾害/砍伐变化与季节性植被变化、云影、观测角和配准误差。</p>
-<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>
-<h2 id="3-代表论文与项目" class="headerLink">
-    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/</link><description>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:33:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>RS-34 Missing-Band Reconstruction vs Robust Adaptation</title><link>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</link><pubDate>Sun, 07 Jun 2026 09:33:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</guid><description><![CDATA[<h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation" class="headerLink">
+    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>真实遥感输入经常不完整：传感器原生 band 不同、云和质量控制屏蔽部分波段、不同产品处理级别不一致、商业卫星只提供少数通道。直接补零或丢弃样本会造成信息浪费；但盲目重建 band 也可能生成光谱上好看、下游却有害的伪信号。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
   <thead>
       <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
           <th>链接</th>
-          <th>代码/模型/数据</th>
-          <th>与本问题的关系</th>
+          <th>相关性</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications</td>
-          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ntrs.nasa.gov/api/citations/20240015391/downloads/RSE%20Prithvi%20Global.pdf" target="_blank" rel="noopener noreferrer">NASA NTRS PDF</a></td>
-          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF 300M</a></td>
-          <td>HLS 多时相 MAE，使用 3D spatiotemporal patch embedding、time/geolocation encoding；是本课题最直接基线。</td>
+          <td>SatMAE++</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2403.05419" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/techmn/satmae_pp" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>masked pretraining 的固定/多光谱基线。</td>
       </tr>
       <tr>
-          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>使用大规模时序遥感数据和 factorized spatiotemporal encoder；说明 temporal sequence 已是 RSFM 核心能力。</td>
+          <td>DOFA</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2403.15356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/DOFA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>动态适配不同观测通道。</td>
       </tr>
       <tr>
-          <td>SkySense++: A semantic-enhanced multi-modal RSFM for EO</td>
-          <td style="text-align: right">2025 Nature Machine Intelligence</td>
-          <td><a href="https://www.nature.com/articles/s42256-025-01078-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
-          <td><a href="https://github.com/kang-wu/SkySensePlusPlus" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>加入语义增强多模态建模，可作为“时序表示 + 语义任务”参照。</td>
+          <td>SpectralEarth</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2408.08447" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/AABNassim/spectral_earth" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>大规模 EnMAP 高光谱预训练数据和基准。</td>
       </tr>
       <tr>
-          <td>Galileo: Learning Global and Local Features in Pretrained Remote Sensing Models</td>
-          <td style="text-align: right">2025 arXiv / OpenReview</td>
-          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openreview.net/pdf?id=gqZO3eSZRy" target="_blank" rel="noopener noreferrer">OpenReview PDF</a></td>
-          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>设计为灵活处理不同空间和时间形状的多模态 RS 输入；适合做可变长度/不规则时序基线。</td>
+          <td>HyperFree</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td>channel-adaptive/tuning-free，适合作为直接鲁棒适配基线。</td>
       </tr>
       <tr>
-          <td>TerraMind: Large-Scale Generative Multimodality for Earth Observation</td>
-          <td style="text-align: right">2025 ICCV/arXiv</td>
-          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Jakubik_TerraMind_Large-Scale_Generative_Multimodality_for_Earth_Observation_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td><a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-esa-geospatial/TerraMind-1.0-base" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>任意模态生成和 Thinking-in-Modalities 可转化为“缺测时生成辅助模态/时间片”的鲁棒方案。</td>
+          <td>Multispectral to Hyperspectral using Pretrained FM</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2502.19451" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>MSI 到 HSI 重建路线代表。</td>
       </tr>
       <tr>
-          <td>ChronoEarth-492K</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.15666" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>待确认官方代码/数据</td>
-          <td>长时间跨度 hyperspectral 时序 benchmark，强调 temporal calibration，可启发长期时序评测。</td>
+          <td>AnyBand-Diff</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.14341" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>spectral-prior-guided diffusion band repair。</td>
       </tr>
       <tr>
-          <td>UniTS: Unified Time Series Generative Model for Remote Sensing</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2512.04461" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>待确认官方代码</td>
-          <td>统一时序重建、云去除、语义变化检测、预测；与本课题的生成式预训练目标很接近。</td>
+          <td>Any-Optical-Model</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/37583/41545" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
+          <td>直接评估 missing bands、cross-sensor、cross-resolution 鲁棒性。</td>
       </tr>
       <tr>
-          <td>SatSwinMAE: Efficient Autoencoding for Multiscale Time-series Satellite Imagery</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2405.02512" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>待确认官方代码</td>
-          <td>3D masked autoencoder + Video Swin，直接支持多尺度时序影像自编码。</td>
-      </tr>
-      <tr>
-          <td>SatMAE</td>
-          <td style="text-align: right">2022 NeurIPS, 仍是时间/多光谱 MAE 基线</td>
-          <td><a href="https://sustainlab-group.github.io/SatMAE/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://papers.neurips.cc/paper_files/paper/2022/file/01c561df365429f33fcd7a7faa44c985-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">PDF</a></td>
-          <td>项目页</td>
-          <td>虽早于目标窗口，但 temporal/multispectral MAE 设计仍是所有 2024-2026 方法的重要参照。</td>
-      </tr>
-      <tr>
-          <td>Reconstruction of seamless HLS time series via self-supervised learning</td>
-          <td style="text-align: right">2024 RSE</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425724002098" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>论文页</td>
-          <td>HLS 时序无缝重建与 gap filling 是 masked temporal reconstruction 的应用前身。</td>
-      </tr>
-      <tr>
-          <td>AnytimeFormer</td>
-          <td style="text-align: right">2025 RSE</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725005243" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>论文页</td>
-          <td>目标是任意时间 reflectance reconstruction；含 SAR-optical 融合，本文只借鉴异步时序重建思想，不把 SAR 作为主线。</td>
-      </tr>
-      <tr>
-          <td>RESTORE-DiT</td>
-          <td style="text-align: right">2025 RSE</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725002767" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>论文页</td>
-          <td>时序重建/云去除的 diffusion transformer 代表；同样含 SAR-optical，作为生成式重建参照。</td>
-      </tr>
-      <tr>
-          <td>AgriFM: A Multi-source Temporal RSFM for Crop Mapping</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2505.21357" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td><a href="https://github.com/flyakon/AgriFM" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
-          <td>面向 crop mapping 的多源长时序 foundation model，适合作为下游农业任务对比。</td>
-      </tr>
-      <tr>
-          <td>Spatiotemporal masked pre-training for crop mapping with limited labels</td>
-          <td style="text-align: right">2025 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843225000731" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>论文页</td>
-          <td>明确验证 spatiotemporal masking 对低标签 crop mapping 的价值。</td>
-      </tr>
-      <tr>
-          <td>SITS-MoCo: Self-supervised pre-training for large-scale crop mapping</td>
-          <td style="text-align: right">2024/2023 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td><a href="https://github.com/YXu556/SITS-MoCo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>对 temporal shift、spectral noise、irregular length 做鲁棒表示学习，是 contrastive baseline。</td>
+          <td>SpectralEarth-FM</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>多模态 EO 预训练中接入 HSI。</td>
       </tr>
   </tbody>
 </table>
-<h2 id="4-方法脉络" class="headerLink">
-    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-多时相-mae-路线" class="headerLink">
-    <a href="#41-%e5%a4%9a%e6%97%b6%e7%9b%b8-mae-%e8%b7%af%e7%ba%bf" class="header-mark"></a>4.1 多时相 MAE 路线</h3><p>代表：Prithvi-EO-2.0、SatSwinMAE、SatMAE。<br>
-核心思想是 mask 掉空间、谱段或时间 patch，让模型重建缺失观测。优点是简单、可扩展，能自然模拟云遮挡和缺测。问题是像素重建质量不一定等价于下游语义鲁棒性，尤其容易学到“平滑插值”而不是物候语义。</p>]]></description></item><item><title>RS-21 EarthShift-Style Robustness Suite</title><link>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</guid><description><![CDATA[<h1 id="rs-21-earthshift-style-robustness-suite" class="headerLink">
-    <a href="#rs-21-earthshift-style-robustness-suite" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><p>细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。<br>
-范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。</p>
-<h2 id="1-结论先行" class="headerLink">
-    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>EarthShift 把 2024-2026 GeoFM 评测里最关键的问题挑明了：当前大量遥感 benchmark 主要测的是 in-distribution performance，但真实部署经常遇到新的时间窗口、地理区域、空间尺度和传感器。EarthShift 官方页说明其覆盖 5 类 shift、11 个任务和 8 个 geospatial foundation models；论文摘要报告 GFMs 在 OOD 上平均约 15-20% 性能下降，并且这种下降不因模型结构、尺寸、预训练或微调策略而自然消失。</p>
-<p>因此，一个可投稿的小方向不是“再做一个平均精度更高的 GeoFM”，而是做一个更可解释、更可诊断、更贴近部署的 robustness suite：明确每类 shift 的因果来源，区分模型能力、数据泄漏、传感器差异和标签体系变化，并把结果报告成性能、鲁棒性、校准、效率和失败类型的组合。</p>
-<h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感数据的分布偏移比自然图像更“结构化”：</p>
-<ul>
-<li>地理偏移：同一类建筑、道路、农田、水体在不同城市、国家、气候带中的纹理和上下文不同。</li>
-<li>时间偏移：季节、作物物候、施工进度、灾害前后、传感器重访周期都会改变表观。</li>
-<li>尺度偏移：GSD 改变后，同一对象的像素大小和局部纹理完全不同。</li>
-<li>传感器偏移：Sentinel-2、Landsat、Planet、NAIP、航空 RGB、无人机影像的谱段、响应函数、噪声和分辨率不同。</li>
-<li>标注/任务偏移：land cover、land use、object、parcel-level label、行政产品标签之间语义不完全一致。</li>
-</ul>
-<p>传统随机划分会高估模型泛化能力，因为相邻瓦片、同一城市、同一季节、同一传感器的数据往往同时进入训练和测试。GeoFM 的大规模预训练进一步放大了这个问题：模型可能在预训练阶段已经看过测试区域或同源影像，但 benchmark 报告并不总是给出地理/时间去重信息。</p>
-<h2 id="3-代表论文与项目" class="headerLink">
-    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>项目/论文</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>对 RS-21 的价值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.29330</a></td>
-          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">https://earthshift.github.io/</a></td>
-          <td>核心锚点；官方页称覆盖 realistic distribution shifts，论文摘要给出 8 个 GFM、11 任务、5 shift types 和 OOD 平均约 15-20% 下降。</td>
-      </tr>
-      <tr>
-          <td>REOBench: Benchmarking Robustness of Earth Observation Foundation Models</td>
-          <td style="text-align: right">2025 NeurIPS D&amp;B / arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2505.16793</a></td>
-          <td><a href="https://github.com/lx709/REOBench" target="_blank" rel="noopener noreferrer">https://github.com/lx709/REOBench</a></td>
-          <td>关注高分辨率光学遥感下 6 类任务、12 类图像扰动；适合补 EarthShift 的 corruption/perturbation 维度。</td>
-      </tr>
-      <tr>
-          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
-          <td style="text-align: right">2024/2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.04204</a></td>
-          <td><a href="https://github.com/VMarsocci/pangaea-bench" target="_blank" rel="noopener noreferrer">https://github.com/VMarsocci/pangaea-bench</a></td>
-          <td>指出 GFM 评测 narrow、地理偏向欧美、任务和分辨率覆盖不足；可作为 suite 的多任务基础框架。</td>
-      </tr>
-      <tr>
-          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
-          <td style="text-align: right">2025 ICCV oral</td>
-          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11849</a></td>
-          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
-          <td>Copernicus-Bench 覆盖 Sentinel 多任务、多层级应用；适合做 cross-sensor / Sentinel-family shift 的对照。</td>
-      </tr>
-      <tr>
-          <td>Parameter Efficient Self-Supervised Geospatial Domain Adaptation</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html</a></td>
-          <td><a href="https://github.com/HSG-AIML/GDA" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GDA</a></td>
-          <td>代表 PEFT/adapter 路线；官方 repo 描述了 SLR adapter、目标域自监督 MIM、再监督微调的三阶段适配。</td>
-      </tr>
-      <tr>
-          <td>LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation</td>
-          <td style="text-align: right">2021 NeurIPS D&amp;B</td>
-          <td><a href="https://arxiv.org/abs/2110.08733" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2110.08733</a></td>
-          <td><a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">https://github.com/Junjue-Wang/LoveDA</a></td>
-          <td>虽早于 2024，但仍是 cross-domain urban/rural segmentation 的常用基准，可作为 cross-city/cross-context split 的基础。</td>
-      </tr>
-      <tr>
-          <td>Benchmarking Object Detectors under Real-World Distribution Shifts in Satellite Imagery</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.19202" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.19202</a></td>
-          <td><a href="https://github.com/RWGAI/RWDS" target="_blank" rel="noopener noreferrer">https://github.com/RWGAI/RWDS</a></td>
-          <td>专门研究卫星目标检测中的真实空间 domain shift，补足 segmentation 之外的 detection 任务。</td>
-      </tr>
-      <tr>
-          <td>WILDS: A Benchmark of in-the-Wild Distribution Shifts</td>
-          <td style="text-align: right">2021 ICML</td>
-          <td><a href="https://proceedings.mlr.press/v139/koh21a.html" target="_blank" rel="noopener noreferrer">https://proceedings.mlr.press/v139/koh21a.html</a></td>
-          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">https://wilds.stanford.edu/</a></td>
-          <td>非 2024-2026，但其 shift reporting、leaderboard 和 fMoW satellite setting 是 robustness benchmark 设计的重要参照。</td>
-      </tr>
-      <tr>
-          <td>Decomposition-based UDA for Remote Sensing Semantic Segmentation</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2404.04531" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.04531</a></td>
-          <td><a href="https://github.com/sstary/SSRS" target="_blank" rel="noopener noreferrer">https://github.com/sstary/SSRS</a></td>
-          <td>代表 2024 segmentation UDA baseline，可纳入 TTA/UDA 对照组。</td>
-      </tr>
-      <tr>
-          <td>SegDesicNet: Lightweight Semantic Segmentation with Geo-Coordinate Embeddings for Domain Adaptation</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.08290" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.08290</a></td>
-          <td>待核验</td>
-          <td>将 geo-coordinate embeddings 用于 UDA，适合作为“坐标是帮助泛化还是造成记忆”的对照。</td>
-      </tr>
-      <tr>
-          <td>Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning</td>
-          <td style="text-align: right">2025 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625003569" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271625003569</a></td>
-          <td><a href="https://github.com/mmmll23/GeoSA-BaSA" target="_blank" rel="noopener noreferrer">https://github.com/mmmll23/GeoSA-BaSA</a></td>
-          <td>代表 VFM fine-tuning + domain generalization；注意代码是否已发布需二次核验。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="4-shift-taxonomy建议的-6-类真实偏移" class="headerLink">
-    <a href="#4-shift-taxonomy%e5%bb%ba%e8%ae%ae%e7%9a%84-6-%e7%b1%bb%e7%9c%9f%e5%ae%9e%e5%81%8f%e7%a7%bb" class="header-mark"></a>4. Shift taxonomy：建议的 6 类真实偏移</h2><h3 id="s1-跨城市--跨区域" class="headerLink">
-    <a href="#s1-%e8%b7%a8%e5%9f%8e%e5%b8%82--%e8%b7%a8%e5%8c%ba%e5%9f%9f" class="header-mark"></a>S1 跨城市 / 跨区域</h3><p>定义：训练城市和测试城市不同，或训练区域与测试区域在城市形态、建筑密度、道路结构、植被覆盖上不同。<br>
-候选数据：LoveDA urban/rural、Vaihingen/Potsdam、SpaceNet cities、DeepGlobe/LoveDA transfer。<br>
-核心风险：模型学到城市纹理和标注风格，而不是类别本身。<br>
-报告指标：ID mIoU、OOD mIoU、relative drop、per-class drop、spatial calibration。</p>]]></description></item><item><title>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="headerLink">
-    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><h2 id="1-结论先行" class="headerLink">
-    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。</p>
-<p>最有价值的小课题是：<strong>Uncertainty-Constrained Test-Time Adaptation for Cross-City Remote Sensing Semantic Segmentation</strong>。核心假设是：只在可靠像素、可靠 tile 和可靠类别原型上更新少量参数，并用空间一致性、类别先验和回滚机制约束更新，可以减少跨城市 TTA 的 model collapse 和 rare-class forgetting。</p>
-<h2 id="2-问题由来" class="headerLink">
-    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感语义分割常在一个城市、一个传感器或一个采样策略上训练，然后部署到另一个城市。城市之间的差异不是简单色彩变化，而是多因素叠加：</p>
-<ul>
-<li>地理景观差异：武汉、南京、长春、Potsdam、Vaihingen 的建筑密度、道路宽度、植被形态不同。</li>
-<li>类别先验差异：LoveDA rural 中 agriculture/forest 占比高，urban 中 building/road 占比高；熵最小化容易把主导类越推越强。</li>
-<li>空间自相关：一个 1024 tile 中相邻像素高度相关，batch size 看似大，独立样本数其实很低。</li>
-<li>边界和小目标：道路、水体边界、建筑阴影、车辆等区域的高不确定性往往正是最重要的区域。</li>
-<li>测试流非平稳：真实大范围制图是从城区到郊区、从平原到山地、从晴天到阴影的连续流，单一 target distribution 假设不成立。</li>
-</ul>
-<p>LoveDA 本身就是为了 land-cover segmentation 和 UDA 设计的遥感域适配数据集，其 GitHub 说明中也保留了 Semantic Segmentation Challenge 和 UDA Challenge；OpenReview 摘要强调城市级/国家级制图泛化不足。LoveDA 早于本时间窗，但仍是 RS-22 的核心实验场。<br>
-链接：<a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">LoveDA GitHub</a>，<a href="https://openreview.net/forum?id=_-O9SefMb99" target="_blank" rel="noopener noreferrer">LoveDA OpenReview</a>。</p>]]></description></item><item><title>RS-25 OOD Split Design for Remote Sensing Benchmarks</title><link>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</guid><description><![CDATA[<h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks" class="headerLink">
+<h2 id="两条路线" class="headerLink">
+    <a href="#%e4%b8%a4%e6%9d%a1%e8%b7%af%e7%ba%bf" class="header-mark"></a>两条路线</h2><h3 id="先重建再推理" class="headerLink">
+    <a href="#%e5%85%88%e9%87%8d%e5%bb%ba%e5%86%8d%e6%8e%a8%e7%90%86" class="header-mark"></a>先重建再推理</h3><p>优点：输出完整光谱，适合光谱指数、物理反演、材料识别和可解释分析。<br>
+缺点：重建误差会传播到下游；生成模型可能产生看似合理但物理不真实的 band。</p>]]></description></item><item><title>RS-25 OOD Split Design for Remote Sensing Benchmarks</title><link>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</link><pubDate>Sun, 07 Jun 2026 09:24:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</guid><description><![CDATA[<h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks" class="headerLink">
     <a href="#rs-25-ood-split-design-for-remote-sensing-benchmarks" class="header-mark"></a>RS-25 OOD Split Design for Remote Sensing Benchmarks</h1><p>默认范围：光学/多光谱/高分辨率遥感为主；不把 SAR-only 作为主线。</p>
 <h2 id="摘要" class="headerLink">
     <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>遥感 benchmark 的最大风险是“随机划分高分，真实部署掉分”。影像瓦片具有强空间自相关，同一区域相邻 patch、同一城市不同裁片、同一季节同一传感器采样出来的数据，常常让训练集和测试集在纹理、建筑形态、植被物候、成像条件上高度相似。OOD split 的研究价值在于把这种相似性有意打散，分别测试模型面对新地理区域、新时间窗口、新传感器、新空间分辨率和新数据源时是否仍可靠。</p>
@@ -403,76 +214,265 @@
 </table>
 <h2 id="推荐复现实验协议" class="headerLink">
     <a href="#%e6%8e%a8%e8%8d%90%e5%a4%8d%e7%8e%b0%e5%ae%9e%e9%aa%8c%e5%8d%8f%e8%ae%ae" class="header-mark"></a>推荐复现实验协议</h2><h3 id="1-数据元信息要求" class="headerLink">
-    <a href="#1-%e6%95%b0%e6%8d%ae%e5%85%83%e4%bf%a1%e6%81%af%e8%a6%81%e6%b1%82" class="header-mark"></a>1. 数据元信息要求</h3><p>每个样本至少需要保存：</p>]]></description></item><item><title>RS-34 Missing-Band Reconstruction vs Robust Adaptation</title><link>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</guid><description><![CDATA[<h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation" class="headerLink">
-    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>真实遥感输入经常不完整：传感器原生 band 不同、云和质量控制屏蔽部分波段、不同产品处理级别不一致、商业卫星只提供少数通道。直接补零或丢弃样本会造成信息浪费；但盲目重建 band 也可能生成光谱上好看、下游却有害的伪信号。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+    <a href="#1-%e6%95%b0%e6%8d%ae%e5%85%83%e4%bf%a1%e6%81%af%e8%a6%81%e6%b1%82" class="header-mark"></a>1. 数据元信息要求</h3><p>每个样本至少需要保存：</p>]]></description></item><item><title>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 09:21:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="headerLink">
+    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。</p>
+<p>最有价值的小课题是：<strong>Uncertainty-Constrained Test-Time Adaptation for Cross-City Remote Sensing Semantic Segmentation</strong>。核心假设是：只在可靠像素、可靠 tile 和可靠类别原型上更新少量参数，并用空间一致性、类别先验和回滚机制约束更新，可以减少跨城市 TTA 的 model collapse 和 rare-class forgetting。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感语义分割常在一个城市、一个传感器或一个采样策略上训练，然后部署到另一个城市。城市之间的差异不是简单色彩变化，而是多因素叠加：</p>
+<ul>
+<li>地理景观差异：武汉、南京、长春、Potsdam、Vaihingen 的建筑密度、道路宽度、植被形态不同。</li>
+<li>类别先验差异：LoveDA rural 中 agriculture/forest 占比高，urban 中 building/road 占比高；熵最小化容易把主导类越推越强。</li>
+<li>空间自相关：一个 1024 tile 中相邻像素高度相关，batch size 看似大，独立样本数其实很低。</li>
+<li>边界和小目标：道路、水体边界、建筑阴影、车辆等区域的高不确定性往往正是最重要的区域。</li>
+<li>测试流非平稳：真实大范围制图是从城区到郊区、从平原到山地、从晴天到阴影的连续流，单一 target distribution 假设不成立。</li>
+</ul>
+<p>LoveDA 本身就是为了 land-cover segmentation 和 UDA 设计的遥感域适配数据集，其 GitHub 说明中也保留了 Semantic Segmentation Challenge 和 UDA Challenge；OpenReview 摘要强调城市级/国家级制图泛化不足。LoveDA 早于本时间窗，但仍是 RS-22 的核心实验场。<br>
+链接：<a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">LoveDA GitHub</a>，<a href="https://openreview.net/forum?id=_-O9SefMb99" target="_blank" rel="noopener noreferrer">LoveDA OpenReview</a>。</p>]]></description></item><item><title>RS-21 EarthShift-Style Robustness Suite</title><link>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</link><pubDate>Sun, 07 Jun 2026 09:20:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</guid><description><![CDATA[<h1 id="rs-21-earthshift-style-robustness-suite" class="headerLink">
+    <a href="#rs-21-earthshift-style-robustness-suite" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><p>细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。<br>
+范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。</p>
+<h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>EarthShift 把 2024-2026 GeoFM 评测里最关键的问题挑明了：当前大量遥感 benchmark 主要测的是 in-distribution performance，但真实部署经常遇到新的时间窗口、地理区域、空间尺度和传感器。EarthShift 官方页说明其覆盖 5 类 shift、11 个任务和 8 个 geospatial foundation models；论文摘要报告 GFMs 在 OOD 上平均约 15-20% 性能下降，并且这种下降不因模型结构、尺寸、预训练或微调策略而自然消失。</p>
+<p>因此，一个可投稿的小方向不是“再做一个平均精度更高的 GeoFM”，而是做一个更可解释、更可诊断、更贴近部署的 robustness suite：明确每类 shift 的因果来源，区分模型能力、数据泄漏、传感器差异和标签体系变化，并把结果报告成性能、鲁棒性、校准、效率和失败类型的组合。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感数据的分布偏移比自然图像更“结构化”：</p>
+<ul>
+<li>地理偏移：同一类建筑、道路、农田、水体在不同城市、国家、气候带中的纹理和上下文不同。</li>
+<li>时间偏移：季节、作物物候、施工进度、灾害前后、传感器重访周期都会改变表观。</li>
+<li>尺度偏移：GSD 改变后，同一对象的像素大小和局部纹理完全不同。</li>
+<li>传感器偏移：Sentinel-2、Landsat、Planet、NAIP、航空 RGB、无人机影像的谱段、响应函数、噪声和分辨率不同。</li>
+<li>标注/任务偏移：land cover、land use、object、parcel-level label、行政产品标签之间语义不完全一致。</li>
+</ul>
+<p>传统随机划分会高估模型泛化能力，因为相邻瓦片、同一城市、同一季节、同一传感器的数据往往同时进入训练和测试。GeoFM 的大规模预训练进一步放大了这个问题：模型可能在预训练阶段已经看过测试区域或同源影像，但 benchmark 报告并不总是给出地理/时间去重信息。</p>
+<h2 id="3-代表论文与项目" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
   <thead>
       <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份</th>
+          <th>项目/论文</th>
+          <th style="text-align: right">年份/venue</th>
           <th>链接</th>
-          <th>相关性</th>
+          <th>代码/数据</th>
+          <th>对 RS-21 的价值</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>SatMAE++</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2403.05419" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/techmn/satmae_pp" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>masked pretraining 的固定/多光谱基线。</td>
+          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.29330</a></td>
+          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">https://earthshift.github.io/</a></td>
+          <td>核心锚点；官方页称覆盖 realistic distribution shifts，论文摘要给出 8 个 GFM、11 任务、5 shift types 和 OOD 平均约 15-20% 下降。</td>
       </tr>
       <tr>
-          <td>DOFA</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2403.15356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/DOFA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>动态适配不同观测通道。</td>
+          <td>REOBench: Benchmarking Robustness of Earth Observation Foundation Models</td>
+          <td style="text-align: right">2025 NeurIPS D&amp;B / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2505.16793</a></td>
+          <td><a href="https://github.com/lx709/REOBench" target="_blank" rel="noopener noreferrer">https://github.com/lx709/REOBench</a></td>
+          <td>关注高分辨率光学遥感下 6 类任务、12 类图像扰动；适合补 EarthShift 的 corruption/perturbation 维度。</td>
       </tr>
       <tr>
-          <td>SpectralEarth</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2408.08447" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/AABNassim/spectral_earth" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>大规模 EnMAP 高光谱预训练数据和基准。</td>
+          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
+          <td style="text-align: right">2024/2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.04204</a></td>
+          <td><a href="https://github.com/VMarsocci/pangaea-bench" target="_blank" rel="noopener noreferrer">https://github.com/VMarsocci/pangaea-bench</a></td>
+          <td>指出 GFM 评测 narrow、地理偏向欧美、任务和分辨率覆盖不足；可作为 suite 的多任务基础框架。</td>
       </tr>
       <tr>
-          <td>HyperFree</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
-          <td>channel-adaptive/tuning-free，适合作为直接鲁棒适配基线。</td>
+          <td>Towards a Unified Copernicus Foundation Model for Earth Vision</td>
+          <td style="text-align: right">2025 ICCV oral</td>
+          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.11849</a></td>
+          <td><a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">https://github.com/zhu-xlab/Copernicus-FM</a></td>
+          <td>Copernicus-Bench 覆盖 Sentinel 多任务、多层级应用；适合做 cross-sensor / Sentinel-family shift 的对照。</td>
       </tr>
       <tr>
-          <td>Multispectral to Hyperspectral using Pretrained FM</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2502.19451" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>MSI 到 HSI 重建路线代表。</td>
+          <td>Parameter Efficient Self-Supervised Geospatial Domain Adaptation</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/CVPR2024/html/Scheibenreif_Parameter_Efficient_Self-Supervised_Geospatial_Domain_Adaptation_CVPR_2024_paper.html</a></td>
+          <td><a href="https://github.com/HSG-AIML/GDA" target="_blank" rel="noopener noreferrer">https://github.com/HSG-AIML/GDA</a></td>
+          <td>代表 PEFT/adapter 路线；官方 repo 描述了 SLR adapter、目标域自监督 MIM、再监督微调的三阶段适配。</td>
       </tr>
       <tr>
-          <td>AnyBand-Diff</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.14341" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>spectral-prior-guided diffusion band repair。</td>
+          <td>LoveDA: A Remote Sensing Land-Cover Dataset for Domain Adaptive Semantic Segmentation</td>
+          <td style="text-align: right">2021 NeurIPS D&amp;B</td>
+          <td><a href="https://arxiv.org/abs/2110.08733" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2110.08733</a></td>
+          <td><a href="https://github.com/Junjue-Wang/LoveDA" target="_blank" rel="noopener noreferrer">https://github.com/Junjue-Wang/LoveDA</a></td>
+          <td>虽早于 2024，但仍是 cross-domain urban/rural segmentation 的常用基准，可作为 cross-city/cross-context split 的基础。</td>
       </tr>
       <tr>
-          <td>Any-Optical-Model</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/37583/41545" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
-          <td>直接评估 missing bands、cross-sensor、cross-resolution 鲁棒性。</td>
+          <td>Benchmarking Object Detectors under Real-World Distribution Shifts in Satellite Imagery</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.19202" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.19202</a></td>
+          <td><a href="https://github.com/RWGAI/RWDS" target="_blank" rel="noopener noreferrer">https://github.com/RWGAI/RWDS</a></td>
+          <td>专门研究卫星目标检测中的真实空间 domain shift，补足 segmentation 之外的 detection 任务。</td>
       </tr>
       <tr>
-          <td>SpectralEarth-FM</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>多模态 EO 预训练中接入 HSI。</td>
+          <td>WILDS: A Benchmark of in-the-Wild Distribution Shifts</td>
+          <td style="text-align: right">2021 ICML</td>
+          <td><a href="https://proceedings.mlr.press/v139/koh21a.html" target="_blank" rel="noopener noreferrer">https://proceedings.mlr.press/v139/koh21a.html</a></td>
+          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">https://wilds.stanford.edu/</a></td>
+          <td>非 2024-2026，但其 shift reporting、leaderboard 和 fMoW satellite setting 是 robustness benchmark 设计的重要参照。</td>
+      </tr>
+      <tr>
+          <td>Decomposition-based UDA for Remote Sensing Semantic Segmentation</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2404.04531" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.04531</a></td>
+          <td><a href="https://github.com/sstary/SSRS" target="_blank" rel="noopener noreferrer">https://github.com/sstary/SSRS</a></td>
+          <td>代表 2024 segmentation UDA baseline，可纳入 TTA/UDA 对照组。</td>
+      </tr>
+      <tr>
+          <td>SegDesicNet: Lightweight Semantic Segmentation with Geo-Coordinate Embeddings for Domain Adaptation</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.08290" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.08290</a></td>
+          <td>待核验</td>
+          <td>将 geo-coordinate embeddings 用于 UDA，适合作为“坐标是帮助泛化还是造成记忆”的对照。</td>
+      </tr>
+      <tr>
+          <td>Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625003569" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271625003569</a></td>
+          <td><a href="https://github.com/mmmll23/GeoSA-BaSA" target="_blank" rel="noopener noreferrer">https://github.com/mmmll23/GeoSA-BaSA</a></td>
+          <td>代表 VFM fine-tuning + domain generalization；注意代码是否已发布需二次核验。</td>
       </tr>
   </tbody>
 </table>
-<h2 id="两条路线" class="headerLink">
-    <a href="#%e4%b8%a4%e6%9d%a1%e8%b7%af%e7%ba%bf" class="header-mark"></a>两条路线</h2><h3 id="先重建再推理" class="headerLink">
-    <a href="#%e5%85%88%e9%87%8d%e5%bb%ba%e5%86%8d%e6%8e%a8%e7%90%86" class="header-mark"></a>先重建再推理</h3><p>优点：输出完整光谱，适合光谱指数、物理反演、材料识别和可解释分析。<br>
-缺点：重建误差会传播到下游；生成模型可能产生看似合理但物理不真实的 band。</p>]]></description></item><item><title>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</title><link>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</link><pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</guid><description><![CDATA[<h1 id="rscama首次将mamba引入遥感变化描述任务实现高效时空建模" class="headerLink">
+<h2 id="4-shift-taxonomy建议的-6-类真实偏移" class="headerLink">
+    <a href="#4-shift-taxonomy%e5%bb%ba%e8%ae%ae%e7%9a%84-6-%e7%b1%bb%e7%9c%9f%e5%ae%9e%e5%81%8f%e7%a7%bb" class="header-mark"></a>4. Shift taxonomy：建议的 6 类真实偏移</h2><h3 id="s1-跨城市--跨区域" class="headerLink">
+    <a href="#s1-%e8%b7%a8%e5%9f%8e%e5%b8%82--%e8%b7%a8%e5%8c%ba%e5%9f%9f" class="header-mark"></a>S1 跨城市 / 跨区域</h3><p>定义：训练城市和测试城市不同，或训练区域与测试区域在城市形态、建筑密度、道路结构、植被覆盖上不同。<br>
+候选数据：LoveDA urban/rural、Vaihingen/Potsdam、SpaceNet cities、DeepGlobe/LoveDA transfer。<br>
+核心风险：模型学到城市纹理和标注风格，而不是类别本身。<br>
+报告指标：ID mIoU、OOD mIoU、relative drop、per-class drop、spatial calibration。</p>]]></description></item><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 09:19:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云、云影、雪、薄雾、传感器缺测、不同重访周期、物候周期和真实地物变化混在一起。传统做法常用云掩膜、最佳像元合成、插值、时序平滑或单任务云去除，但 foundation model 时代的机会是：把“缺测、遮挡、季节变化”变成预训练任务本身，让模型学会在不完整、多季节、多区域、多传感器序列中形成稳定表示。</p>
+<p>本方向可被压成一个很具体的论文问题：</p>
+<blockquote>
+  <p>在 Sentinel-2 / HLS 多时相序列中，用真实或模拟云缺测做 masked temporal reconstruction 预训练，是否能同时提升云遮挡条件下的 crop mapping 和真实变化检测，并减少把季节变化误判为变化的错误？</p>
+</blockquote><h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感时序和普通视频不同。视频帧通常时间间隔密集、同一相机、视角连续；卫星时序是稀疏、不规则、多传感器、多大气条件，而且同一像元的语义可能因物候周期而显著变化。对于 crop mapping，模型必须理解不同作物的物候曲线，而不是只看单期纹理。对于 change detection，模型必须区分真实建设/灾害/砍伐变化与季节性植被变化、云影、观测角和配准误差。</p>
+<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>
+<h2 id="3-代表论文与项目" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/模型/数据</th>
+          <th>与本问题的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications</td>
+          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ntrs.nasa.gov/api/citations/20240015391/downloads/RSE%20Prithvi%20Global.pdf" target="_blank" rel="noopener noreferrer">NASA NTRS PDF</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF 300M</a></td>
+          <td>HLS 多时相 MAE，使用 3D spatiotemporal patch embedding、time/geolocation encoding；是本课题最直接基线。</td>
+      </tr>
+      <tr>
+          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>使用大规模时序遥感数据和 factorized spatiotemporal encoder；说明 temporal sequence 已是 RSFM 核心能力。</td>
+      </tr>
+      <tr>
+          <td>SkySense++: A semantic-enhanced multi-modal RSFM for EO</td>
+          <td style="text-align: right">2025 Nature Machine Intelligence</td>
+          <td><a href="https://www.nature.com/articles/s42256-025-01078-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
+          <td><a href="https://github.com/kang-wu/SkySensePlusPlus" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>加入语义增强多模态建模，可作为“时序表示 + 语义任务”参照。</td>
+      </tr>
+      <tr>
+          <td>Galileo: Learning Global and Local Features in Pretrained Remote Sensing Models</td>
+          <td style="text-align: right">2025 arXiv / OpenReview</td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openreview.net/pdf?id=gqZO3eSZRy" target="_blank" rel="noopener noreferrer">OpenReview PDF</a></td>
+          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>设计为灵活处理不同空间和时间形状的多模态 RS 输入；适合做可变长度/不规则时序基线。</td>
+      </tr>
+      <tr>
+          <td>TerraMind: Large-Scale Generative Multimodality for Earth Observation</td>
+          <td style="text-align: right">2025 ICCV/arXiv</td>
+          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Jakubik_TerraMind_Large-Scale_Generative_Multimodality_for_Earth_Observation_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td><a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-esa-geospatial/TerraMind-1.0-base" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>任意模态生成和 Thinking-in-Modalities 可转化为“缺测时生成辅助模态/时间片”的鲁棒方案。</td>
+      </tr>
+      <tr>
+          <td>ChronoEarth-492K</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.15666" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码/数据</td>
+          <td>长时间跨度 hyperspectral 时序 benchmark，强调 temporal calibration，可启发长期时序评测。</td>
+      </tr>
+      <tr>
+          <td>UniTS: Unified Time Series Generative Model for Remote Sensing</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2512.04461" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码</td>
+          <td>统一时序重建、云去除、语义变化检测、预测；与本课题的生成式预训练目标很接近。</td>
+      </tr>
+      <tr>
+          <td>SatSwinMAE: Efficient Autoencoding for Multiscale Time-series Satellite Imagery</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2405.02512" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码</td>
+          <td>3D masked autoencoder + Video Swin，直接支持多尺度时序影像自编码。</td>
+      </tr>
+      <tr>
+          <td>SatMAE</td>
+          <td style="text-align: right">2022 NeurIPS, 仍是时间/多光谱 MAE 基线</td>
+          <td><a href="https://sustainlab-group.github.io/SatMAE/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://papers.neurips.cc/paper_files/paper/2022/file/01c561df365429f33fcd7a7faa44c985-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">PDF</a></td>
+          <td>项目页</td>
+          <td>虽早于目标窗口，但 temporal/multispectral MAE 设计仍是所有 2024-2026 方法的重要参照。</td>
+      </tr>
+      <tr>
+          <td>Reconstruction of seamless HLS time series via self-supervised learning</td>
+          <td style="text-align: right">2024 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425724002098" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>HLS 时序无缝重建与 gap filling 是 masked temporal reconstruction 的应用前身。</td>
+      </tr>
+      <tr>
+          <td>AnytimeFormer</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725005243" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>目标是任意时间 reflectance reconstruction；含 SAR-optical 融合，本文只借鉴异步时序重建思想，不把 SAR 作为主线。</td>
+      </tr>
+      <tr>
+          <td>RESTORE-DiT</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725002767" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>时序重建/云去除的 diffusion transformer 代表；同样含 SAR-optical，作为生成式重建参照。</td>
+      </tr>
+      <tr>
+          <td>AgriFM: A Multi-source Temporal RSFM for Crop Mapping</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2505.21357" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td><a href="https://github.com/flyakon/AgriFM" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>面向 crop mapping 的多源长时序 foundation model，适合作为下游农业任务对比。</td>
+      </tr>
+      <tr>
+          <td>Spatiotemporal masked pre-training for crop mapping with limited labels</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843225000731" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>明确验证 spatiotemporal masking 对低标签 crop mapping 的价值。</td>
+      </tr>
+      <tr>
+          <td>SITS-MoCo: Self-supervised pre-training for large-scale crop mapping</td>
+          <td style="text-align: right">2024/2023 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/YXu556/SITS-MoCo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>对 temporal shift、spectral noise、irregular length 做鲁棒表示学习，是 contrastive baseline。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-方法脉络" class="headerLink">
+    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-多时相-mae-路线" class="headerLink">
+    <a href="#41-%e5%a4%9a%e6%97%b6%e7%9b%b8-mae-%e8%b7%af%e7%ba%bf" class="header-mark"></a>4.1 多时相 MAE 路线</h3><p>代表：Prithvi-EO-2.0、SatSwinMAE、SatMAE。<br>
+核心思想是 mask 掉空间、谱段或时间 patch，让模型重建缺失观测。优点是简单、可扩展，能自然模拟云遮挡和缺测。问题是像素重建质量不一定等价于下游语义鲁棒性，尤其容易学到“平滑插值”而不是物候语义。</p>]]></description></item><item><title>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</title><link>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</link><pubDate>Mon, 01 Jun 2026 21:15:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</guid><description><![CDATA[<h1 id="rscama首次将mamba引入遥感变化描述任务实现高效时空建模" class="headerLink">
     <a href="#rscama%e9%a6%96%e6%ac%a1%e5%b0%86mamba%e5%bc%95%e5%85%a5%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%8f%8f%e8%bf%b0%e4%bb%bb%e5%8a%a1%e5%ae%9e%e7%8e%b0%e9%ab%98%e6%95%88%e6%97%b6%e7%a9%ba%e5%bb%ba%e6%a8%a1" class="header-mark"></a>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</h1><blockquote>
   <p><strong>论文解读</strong> | IEEE GRSL 2024 | ESI高被引论文</p>
 </blockquote><h2 id="-论文信息" class="headerLink">
@@ -552,7 +552,7 @@ TT-SSM采用<strong>时间交叉扫描策略</strong>，让两个时相的特征
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>ChangeMamba：用状态空间模型革新遥感变化检测</title><link>https://spacetop.win/2026/05/20260531_215800_changemamba/</link><pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_215800_changemamba/</guid><description><![CDATA[<h1 id="changemamba用状态空间模型革新遥感变化检测" class="headerLink">
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>ChangeMamba：用状态空间模型革新遥感变化检测</title><link>https://spacetop.win/2026/05/20260531_215800_changemamba/</link><pubDate>Sun, 31 May 2026 21:58:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_215800_changemamba/</guid><description><![CDATA[<h1 id="changemamba用状态空间模型革新遥感变化检测" class="headerLink">
     <a href="#changemamba%e7%94%a8%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e9%9d%a9%e6%96%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>ChangeMamba：用状态空间模型革新遥感变化检测</h1><blockquote>
   <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
 </blockquote><h2 id="-论文信息" class="headerLink">
@@ -615,7 +615,7 @@ TT-SSM采用<strong>时间交叉扫描策略</strong>，让两个时相的特征
 <li><strong>MambaSCD</strong>：语义变化检测（Semantic Change Detection）</li>
 <li><strong>MambaBDA</strong>：建筑损坏评估（Building Damage Assessment）</li>
 </ol>
-<p><strong>关键细节</strong>：</p>]]></description></item><item><title>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</title><link>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</link><pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</guid><description><![CDATA[<h1 id="changemamba首个基于状态空间模型的遥感变化检测框架" class="headerLink">
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</title><link>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</link><pubDate>Sun, 31 May 2026 21:10:17 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</guid><description><![CDATA[<h1 id="changemamba首个基于状态空间模型的遥感变化检测框架" class="headerLink">
     <a href="#changemamba%e9%a6%96%e4%b8%aa%e5%9f%ba%e4%ba%8e%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e7%9a%84%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%a1%86%e6%9e%b6" class="header-mark"></a>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</h1><blockquote>
   <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
 </blockquote><h2 id="-论文信息" class="headerLink">

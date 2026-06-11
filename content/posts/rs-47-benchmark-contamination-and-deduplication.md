@@ -1,6 +1,6 @@
 ---
 title: "RS-47 Benchmark Contamination and Deduplication"
-date: 2026-06-07
+date: 2026-06-07T09:46:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
 categories: ["遥感基础模型与多模态理解"]

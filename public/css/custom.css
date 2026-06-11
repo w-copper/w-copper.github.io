@@ -339,3 +339,130 @@
     background: #333;
     color: #aaa;
 }
+
+.simple-comments {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(120, 120, 120, 0.25);
+}
+
+.simple-comments h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1.35rem;
+}
+
+.simple-comments-list {
+    display: grid;
+    gap: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.simple-comment {
+    padding: 1rem;
+    border: 1px solid rgba(120, 120, 120, 0.22);
+    border-radius: 8px;
+    background: rgba(250, 250, 250, 0.75);
+}
+
+.simple-comment header {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.simple-comment time,
+.simple-comments-empty,
+#simple-comments-status {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.simple-comment p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.simple-comments-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.simple-comments-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.75rem;
+}
+
+.simple-comments-form input,
+.simple-comments-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgba(120, 120, 120, 0.3);
+    border-radius: 8px;
+    background: #fff;
+    color: #222;
+    font: inherit;
+}
+
+.simple-comments-form textarea {
+    resize: vertical;
+}
+
+.simple-comments-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.simple-comments-actions button {
+    padding: 0.65rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.simple-comments-actions button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+#simple-comments-status.is-error {
+    color: #b42318;
+}
+
+[data-theme="dark"] .simple-comment {
+    background: rgba(30, 30, 30, 0.72);
+    border-color: rgba(220, 220, 220, 0.18);
+}
+
+[data-theme="dark"] .simple-comments-form input,
+[data-theme="dark"] .simple-comments-form textarea {
+    background: #222;
+    border-color: #555;
+    color: #eee;
+}
+
+[data-theme="dark"] .simple-comment time,
+[data-theme="dark"] .simple-comments-empty,
+[data-theme="dark"] #simple-comments-status {
+    color: #aaa;
+}
+
+@media (max-width: 640px) {
+    .simple-comments-row {
+        grid-template-columns: 1fr;
+    }
+
+    .simple-comment header,
+    .simple-comments-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

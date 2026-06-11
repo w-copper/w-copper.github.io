@@ -1,6 +1,6 @@
 ---
 title: "RS-36 Raster-Vector Joint Encoder"
-date: 2026-06-07
+date: 2026-06-07T09:35:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
 categories: ["多源数据融合、效率部署与应用落地"]

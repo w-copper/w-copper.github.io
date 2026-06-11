@@ -53,7 +53,7 @@
                 {{- range $recentPosts -}}
                 <div class="recent-post-card">
                     <div class="post-meta">
-                        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+                        <span class="post-date">{{ .Date.Format "2006-01-02 15:04" }}</span>
                         {{- if .Params.categories -}}
                         <span class="post-category">{{ index .Params.categories 0 }}</span>
                         {{- end -}}

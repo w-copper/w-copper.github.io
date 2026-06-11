@@ -1,6 +1,6 @@
 ---
 title: "RS-35 Spectral-Text Alignment"
-date: 2026-06-07
+date: 2026-06-07T09:34:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高光谱", "多光谱", "谱段适配"]
 categories: ["遥感基础模型与多模态理解"]

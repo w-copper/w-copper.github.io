@@ -1,6 +1,6 @@
 ---
 title: "RS-18 Temporal Hard Negatives for Change Models"
-date: 2026-06-07
+date: 2026-06-07T09:17:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["多时相", "变化检测", "时序遥感"]
 categories: ["多源数据融合、效率部署与应用落地"]

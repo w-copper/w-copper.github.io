@@ -1,0 +1,7 @@
+name = "spacetop-blog"
+pages_build_output_dir = "public"
+compatibility_date = "2026-06-11"
+
+[[kv_namespaces]]
+binding = "COMMENTS_KV"
+id = "1bfb622c68a84d02aa37ef2926355ea9"

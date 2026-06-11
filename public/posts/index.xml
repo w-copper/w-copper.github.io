@@ -1,693 +1,994 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - 堂堂一跑堂</title><link>https://spacetop.win/posts/</link><description>All Posts | 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/posts/" rel="self" type="application/rss+xml"/><item><title>2024-2026 遥感 AI 研究系列总览</title><link>https://spacetop.win/2026/06/00-series-overview/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-series-overview/</guid><description><![CDATA[<h1 id="2024-2026-遥感-ai-研究系列总览" class="headerLink">
-    <a href="#2024-2026-%e9%81%a5%e6%84%9f-ai-%e7%a0%94%e7%a9%b6%e7%b3%bb%e5%88%97%e6%80%bb%e8%a7%88" class="header-mark"></a>2024-2026 遥感 AI 研究系列总览</h1><p>这个系列把遥感顶刊和计算机视觉顶会中的新方向拆成 50 个小问题。核心判断是：遥感 AI 的前沿已经从单一任务模型，转向基础模型、视觉语言、开放词表、跨域鲁棒性、高效大图推理、谱段适配、GIS 融合和可信数据基准。</p>
-<p>建议阅读顺序：先看 GeoFM 和 VLM，再看 SAM/开放词表，随后进入时序变化检测、泛化与高效部署，最后读高光谱、GIS 融合、应用方法化和数据工程。</p>]]></description></item><item><title>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</title><link>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</guid><description><![CDATA[<h1 id="sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
-    <a href="#sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><h2 id="研究问题" class="headerLink">
-    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出更稳定的边界。</p>
-<p>这个问题不等同于“遥感语义分割”或“把 SAM 用到遥感”。它只关注一个环节：给定 <code>box</code>、<code>rotated box</code>、<code>coarse mask</code> 或检测器输出，如何选择 prompt 点的位置、数量、正负标签和迭代策略。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - 堂堂一跑堂</title><link>https://spacetop.win/posts/</link><description>All Posts | 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:49:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/posts/" rel="self" type="application/rss+xml"/><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:49:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
+    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
+<p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>SAM 的交互分割在自然图像中很强，但遥感图像有几个结构性差异：</p>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>RS-49 Weak Labels from OSM/Map Products</title><link>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</link><pubDate>Sun, 07 Jun 2026 09:48:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</guid><description><![CDATA[<h1 id="rs-49-weak-labels-from-osmmap-products" class="headerLink">
+    <a href="#rs-49-weak-labels-from-osmmap-products" class="header-mark"></a>RS-49 Weak Labels from OSM/Map Products</h1><h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注最贵的部分通常不是图像本身，而是“地理一致、时相一致、类别一致”的像素级或对象级标签。OSM、Microsoft/Google building footprints、ESA WorldCover、Dynamic World、FROM-GLC、GlobeLand30、HydroLAKES/Global Surface Water、各国地籍和道路数据看起来像天然标签源，但它们本质上是异构、异时相、异精度的地图产品。直接把它们当 ground truth 会把地图误差转成模型偏差。</p>
+<p>这个方向在 2024-2026 变得更重要，原因有三点：</p>
+<ol>
+<li>Foundation model 需要海量弱监督。OSM tag、道路/建筑矢量和土地覆盖产品可以提供全球尺度的预训练或伪标签信号。</li>
+<li>SAM、GroundingDINO、VLM 可以半自动生成 mask/box/caption，但它们仍需要地图产品做类别约束、空间先验或质量校验。</li>
+<li>真实部署更看重跨地区泛化。OSM 在欧美城市覆盖好，在农村、发展中地区、灾后区域常缺失或滞后；这会直接造成空间公平性问题。</li>
+</ol>
+<p>核心研究问题不是“能不能用 OSM 做弱标签”，而是：如何估计每个弱标签的可靠性、如何处理时相和空间错位、如何在训练时避免模型学习地图产品的系统性偏差。</p>
+<h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>与弱标签的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>OSM 自监督</td>
+          <td>Rose: Register Assisted General Time Series Embedding for Multimodal and Sensor Agnostic Satellite Data</td>
+          <td style="text-align: right">2024, Remote Sensing of Environment</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425724005996" target="_blank" rel="noopener noreferrer">ScienceDirect</a>, <a href="https://github.com/antofuller/rose" target="_blank" rel="noopener noreferrer">code</a></td>
+          <td>使用 OSM register / 地图语义辅助多模态、多传感器时序表示学习，是“地图作为预训练信号”的代表。</td>
+      </tr>
+      <tr>
+          <td>地图弱标签分割</td>
+          <td>SAModified: A Foundation Model for Image Segmentation of Remote Sensing Data</td>
+          <td style="text-align: right">2025, arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.08101" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>明确从已有地图产品/基础地理数据构造 prompt 和伪标签，用 SAM 系列能力做遥感分割。</td>
+      </tr>
+      <tr>
+          <td>地图产品纠偏</td>
+          <td>MapSR: Mapping with Super-Resolution</td>
+          <td style="text-align: right">2024, arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.00891" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>研究用低分辨率/粗糙地图产品作为 supervision，恢复更高分辨率的空间边界，是“地图产品到高分制图”的典型问题。</td>
+      </tr>
+      <tr>
+          <td>大规模土地覆盖</td>
+          <td>LandSegmenter: Large-scale land cover mapping by segmentation models</td>
+          <td style="text-align: right">2025, arXiv</td>
+          <td><a href="https://arxiv.org/abs/2504.03451" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>使用全球土地覆盖产品和大规模影像训练分割模型，体现 map product label noise 与类别体系问题。</td>
+      </tr>
+      <tr>
+          <td>OSM + RS 表示</td>
+          <td>Spatial Representation Learning Beyond Pixels</td>
+          <td style="text-align: right">2026, arXiv</td>
+          <td><a href="https://arxiv.org/abs/2606.02374" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>将 raster data 与 vector semantics 统一，说明 OSM/矢量语义正从下游弱标签变成 foundation model 表示的一部分。</td>
+      </tr>
+      <tr>
+          <td>benchmark / 数据质量</td>
+          <td>PANGAEA benchmark</td>
+          <td style="text-align: right">2024/2025</td>
+          <td><a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>虽不是专门弱标签论文，但其跨任务/跨区域协议可作为地图弱标签方法的泛化评测框架。</td>
+      </tr>
+      <tr>
+          <td>真实偏移评测</td>
+          <td>EarthShift</td>
+          <td style="text-align: right">2026, arXiv</td>
+          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>提供真实世界分布偏移评测思路，可检测地图弱标签模型是否只适配局部数据质量。</td>
+      </tr>
+      <tr>
+          <td>鲁棒性评测</td>
+          <td>REOBench</td>
+          <td style="text-align: right">2025, arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>可用于评估弱标签训练模型在扰动、退化和 OOD 下的可靠性。</td>
+      </tr>
+      <tr>
+          <td>弱标签来源</td>
+          <td>Microsoft Global ML Building Footprints</td>
+          <td style="text-align: right">持续更新</td>
+          <td><a href="https://github.com/microsoft/GlobalMLBuildingFootprints" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>全球建筑 footprint，可作为建筑分割/检测弱标签；存在地区覆盖、时间戳和几何误差问题。</td>
+      </tr>
+      <tr>
+          <td>弱标签来源</td>
+          <td>Google Open Buildings</td>
+          <td style="text-align: right">持续更新</td>
+          <td><a href="https://sites.research.google/open-buildings/" target="_blank" rel="noopener noreferrer">dataset</a></td>
+          <td>非洲、南亚、东南亚等区域建筑 footprint，适合研究区域覆盖差异和弱标签置信度。</td>
+      </tr>
+      <tr>
+          <td>弱标签来源</td>
+          <td>Dynamic World</td>
+          <td style="text-align: right">持续更新</td>
+          <td><a href="https://dynamicworld.app/" target="_blank" rel="noopener noreferrer">Google</a>, <a href="https://www.nature.com/articles/s41597-022-01307-4" target="_blank" rel="noopener noreferrer">Nature paper</a></td>
+          <td>10m near-real-time land cover 概率产品，适合做时序弱标签和置信度加权。</td>
+      </tr>
+      <tr>
+          <td>弱标签来源</td>
+          <td>ESA WorldCover</td>
+          <td style="text-align: right">2020/2021 product, 仍常用</td>
+          <td><a href="https://esa-worldcover.org/" target="_blank" rel="noopener noreferrer">ESA</a></td>
+          <td>10m 全球土地覆盖标签源，适合弱监督 land-cover pretraining，但类别粗、时相固定。</td>
+      </tr>
+      <tr>
+          <td>弱标签来源</td>
+          <td>Field boundaries / FTW</td>
+          <td style="text-align: right">2025 左右活跃</td>
+          <td><a href="https://github.com/fieldsoftheworld/ftw-baselines" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://fieldsoftheworld.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>地块边界弱标签和农业制图常用资源，可研究 parcel/field boundary 与作物标签错位。</td>
+      </tr>
+      <tr>
+          <td>质量规范</td>
+          <td>OpenStreetMap Import Guidelines</td>
+          <td style="text-align: right">官方文档</td>
+          <td><a href="https://wiki.openstreetmap.org/wiki/Import/Guidelines" target="_blank" rel="noopener noreferrer">OSM Wiki</a></td>
+          <td>不是论文，但说明 OSM 数据导入、许可证、质量审查和社区验证流程，是使用 OSM 标签时必须考虑的约束。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-弱标签噪声类型" class="headerLink">
+    <a href="#3-%e5%bc%b1%e6%a0%87%e7%ad%be%e5%99%aa%e5%a3%b0%e7%b1%bb%e5%9e%8b" class="header-mark"></a>3. 弱标签噪声类型</h2><h3 id="31-时效误差" class="headerLink">
+    <a href="#31-%e6%97%b6%e6%95%88%e8%af%af%e5%b7%ae" class="header-mark"></a>3.1 时效误差</h3><p>地图产品和遥感影像常不在同一天甚至同一年。建筑新增/拆除、道路施工、洪水季节性水体、农田轮作、城市扩张都会让标签与影像真实状态不一致。</p>]]></description></item><item><title>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</title><link>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</link><pubDate>Sun, 07 Jun 2026 09:47:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</guid><description><![CDATA[<h1 id="rs-48-active-learning-with-samvlm-human-in-the-loop" class="headerLink">
+    <a href="#rs-48-active-learning-with-samvlm-human-in-the-loop" class="header-mark"></a>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</h1><h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注贵，贵在三个地方：大幅面影像要切片和定位，小目标/旋转目标/密集实例边界难修，类别语义还经常依赖地理上下文。传统主动学习只问“哪张图最不确定”，但 foundation model 时代的问题变了：SAM 能给 mask 但不懂类别，GroundingDINO/VLM 能给语义但受 prompt 和语言先验影响，人类标注者的主要成本也从“从零画 mask”变成“检查、修正、合并、改类别”。</p>
+<p>因此，这个方向的核心研究问题不是再做一个主动学习打分函数，而是：</p>
 <ul>
-<li>目标小：飞机、车、船、屋顶构件在 tile 中只占少量像素，box 内背景比例很高。</li>
-<li>目标旋转：水平框会包进大量背景，尤其是飞机、船、跑道、细长建筑。</li>
-<li>目标密集：停车场车辆、建筑群、集装箱等相邻实例容易被一个正点或一个 box 合并。</li>
-<li>大幅面切片：超大影像被切成 patch 后，目标可能跨 tile，且局部上下文不足。</li>
-<li>语义与边界分离：CLIP/VLM/检测器知道类别，SAM 主要负责边界；两者之间的误差会传给 prompt。</li>
+<li>如何估计一张候选图像的“自动标注可修正性”：SAM/VLM 生成的伪标签是否值得交给人类改？</li>
+<li>如何把选样目标从 uncertainty 扩展到地理覆盖、季节覆盖、长尾类别、小目标覆盖和纠错成本？</li>
+<li>如何让人类纠错反过来更新 prompt、prototype、类别词表或轻量 adapter，而不是只把修正标签放进训练集？</li>
+<li>如何用“单位人工分钟带来的 mIoU/AP 提升”评估方法，而不是只比较标注比例？</li>
 </ul>
-<p>因此，box prompt 常能定位但边界粗，point prompt 可纠偏但点位选择困难。可投稿的小空间在于：把检测/粗分割的不确定性、边界几何和遥感先验转化成一组正负 prompt 点。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+<h2 id="2-2024-2026-代表论文项目" class="headerLink">
+    <a href="#2-2024-2026-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 2024-2026 代表论文/项目</h2><table>
   <thead>
       <tr>
           <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
+          <th style="text-align: right">年份/来源</th>
           <th>链接</th>
-          <th>官方代码/项目</th>
-          <th>与本问题的关系</th>
+          <th>官方代码/数据</th>
+          <th>与本方向的关系</th>
       </tr>
   </thead>
   <tbody>
       <tr>
+          <td>Active Learning Meets Foundation Models: Fast Remote Sensing Data Annotation</td>
+          <td style="text-align: right">ICCV 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Burges_Active_Learning_Meets_Foundation_Models_Fast_Remote_Sensing_Data_Annotation_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td><a href="https://github.com/mburges-cvl/ICCV_AL4FM" target="_blank" rel="noopener noreferrer">GitHub: ICCV_AL4FM</a></td>
+          <td>最直接锚点：把主动学习和 SAM 半自动遥感目标检测标注结合，强调标注时间和冷启动。</td>
+      </tr>
+      <tr>
+          <td>FMARS: Annotating Remote Sensing Images for Disaster Monitoring with Foundation Models</td>
+          <td style="text-align: right">2024 IGARSS / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2405.20109" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://huggingface.co/datasets/links-ads/fmars-dataset" target="_blank" rel="noopener noreferrer">HF dataset</a>, <a href="https://paperswithcode.com/paper/fmars-annotating-remote-sensing-images-for" target="_blank" rel="noopener noreferrer">Papers with Code</a></td>
+          <td>使用 GroundingDINO + SAM 自动标注灾害相关 VHR 遥感图像，适合作为自动伪标签管线基线。</td>
+      </tr>
+      <tr>
+          <td>RemoteSAM / RemoteSAM-270K</td>
+          <td style="text-align: right">2025 ACM MM oral / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.18022" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/1e12Leon/RemoteSAM270k" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+          <td>构建 image-text-mask 三元组数据引擎，可作为 SAM/VLM 自动标注和 referring segmentation 基座。</td>
+      </tr>
+      <tr>
           <td>Segment Anything, From Space?</td>
-          <td style="text-align: right">2024 WACV</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html</a></td>
-          <td>未见官方 GitHub</td>
-          <td>系统评估 SAM 在 overhead imagery 的失败模式，是遥感 prompt 设计的起点。</td>
-      </tr>
-      <tr>
-          <td>SAM-Assisted Remote Sensing Imagery Semantic Segmentation With Object and Boundary Constraints</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://arxiv.org/abs/2312.02464" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.02464</a></td>
-          <td>未见官方 GitHub</td>
-          <td>用 SAM object/boundary 约束改善遥感语义分割，提示边界约束可与点 prompt 联合。</td>
-      </tr>
-      <tr>
-          <td>DiffuPrompter</td>
-          <td style="text-align: right">2024 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/16/11/2004" target="_blank" rel="noopener noreferrer">https://www.mdpi.com/2072-4292/16/11/2004</a></td>
-          <td>未确认官方代码</td>
-          <td>训练自由地利用 diffusion attention 产生 box/point prompt，可作为自动 prompt 生成基线。</td>
-      </tr>
-      <tr>
-          <td>SAM-RSIS</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085" target="_blank" rel="noopener noreferrer">https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085</a></td>
-          <td>未见官方 GitHub</td>
-          <td>渐进式 box prompting 与 SAM 微调，适合比较“只有 box”和“box+点 refinement”。</td>
-      </tr>
-      <tr>
-          <td>SAMPolyBuild</td>
-          <td style="text-align: right">2024 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271624003563</a></td>
-          <td><a href="https://github.com/wchh-2000/SAMPolyBuild" target="_blank" rel="noopener noreferrer">https://github.com/wchh-2000/SAMPolyBuild</a></td>
-          <td>建筑多边形提取；支持 bbox 与 prompt points，说明点 prompt 可服务于规则边界/多边形化。</td>
+          <td style="text-align: right">WACV 2024</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2024/papers/Ren_Segment_Anything_From_Space_WACV_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>论文评测多遥感数据</td>
+          <td>系统暴露 SAM 在 overhead imagery 上的失败模式，是设计人类纠错和 prompt refinement 的依据。</td>
       </tr>
       <tr>
           <td>PointSAM</td>
-          <td style="text-align: right">2024 arXiv / 2025 TGRS方向</td>
-          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2409.13401</a></td>
-          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">https://github.com/Lans1ng/PointSAM</a></td>
-          <td>点监督 SAM，提出负提示校准、伪标签自训练和 point-to-box converter，是最相关方法。</td>
+          <td style="text-align: right">2024/2025 arXiv / TGRS 方向</td>
+          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>点监督、负提示校准、伪标签自训练；可用于“少量点击 -&gt; 更好 mask”的 HITL 单元。</td>
       </tr>
       <tr>
-          <td>CrossCut</td>
-          <td style="text-align: right">2026 AAAI</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37637" target="_blank" rel="noopener noreferrer">https://ojs.aaai.org/index.php/AAAI/article/view/37637</a></td>
-          <td><a href="https://github.com/nanzhou02/CrossCut" target="_blank" rel="noopener noreferrer">https://github.com/nanzhou02/CrossCut</a></td>
-          <td>交互式正/负点击跨 patch 传播，解决大图 patch 信息隔离。</td>
+          <td>OpenRSD: Towards Open-prompts for Object Detection in Remote Sensing Images</td>
+          <td style="text-align: right">ICCV 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Huang_OpenRSD_Towards_Open-prompts_for_Object_Detection_in_Remote_Sensing_Images_ICCV_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2503.06146" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>论文页为主</td>
+          <td>开放提示遥感检测，适合作为 VLM/文本 prompt 生成候选框的比较对象。</td>
       </tr>
       <tr>
-          <td>RS2-SAM2</td>
-          <td style="text-align: right">2026 AAAI / 2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.07266" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.07266</a></td>
-          <td>未确认官方 GitHub</td>
-          <td>用 pseudo-mask dense prompt 适配 SAM2 到遥感 referring segmentation，说明粗 mask prompt 是强信号。</td>
+          <td>VRSBench</td>
+          <td style="text-align: right">NeurIPS 2024 Datasets &amp; Benchmarks</td>
+          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/05b7f821234f66b78f99e7803fffa78a-Paper-Datasets_and_Benchmarks_Track.pdf" target="_blank" rel="noopener noreferrer">NeurIPS PDF</a></td>
+          <td><a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>高质量遥感视觉语言 benchmark，可借鉴人工验证、object reference 和 VQA 标注质量控制。</td>
       </tr>
       <tr>
-          <td>Remote SAMsing</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.00256" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.00256</a></td>
-          <td>未确认官方代码</td>
-          <td>分析 SAM2 遥感大图 mask quality/coverage trade-off 与 tiling 问题，可作为后续评测参考。</td>
+          <td>Grounded-SAM-2</td>
+          <td style="text-align: right">2024-2025 official-style project</td>
+          <td><a href="https://github.com/IDEA-Research/Grounded-SAM-2" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>通用 GroundingDINO/SAM2 管线，可迁移为“文本/框 -&gt; mask -&gt; 人类修正”的工程基线。</td>
       </tr>
       <tr>
-          <td>SAM2 official</td>
+          <td>SAM 2</td>
           <td style="text-align: right">2024 Meta</td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td>基础模型与 image/video prompt API；可用于实现 box+points+mask 输入组合。</td>
+          <td><a href="https://ai.meta.com/sam2/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub/model weights</td>
+          <td>对多帧 memory 和交互式修正友好，可用于多时相遥感标注闭环。</td>
       </tr>
       <tr>
-          <td>segment-geospatial / SamGeo</td>
-          <td style="text-align: right">持续维护</td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td>工具型基线，方便在真实 GeoTIFF/QGIS 工作流中验证自动 prompt。</td>
-      </tr>
-  </tbody>
-</table>
-<p>说明：上表中的“未确认官方 GitHub”表示截至本次检索没有找到清晰的作者官方代码仓库；可用论文实现或第三方复现替代，但复现实验中应标注。</p>]]></description></item><item><title>RS-02 GeoFM Benchmark Leakage Audit</title><link>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</guid><description><![CDATA[<h1 id="rs-02-geofm-benchmark-leakage-audit" class="headerLink">
-    <a href="#rs-02-geofm-benchmark-leakage-audit" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><p>研究问题：geospatial foundation model 评测中的训练-测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GeoFM 的预训练数据通常来自全球尺度 Sentinel-2、Landsat、NAIP、航空影像、气象/地理辅助数据和公开下游数据集合并。模型越大，越容易出现一个尴尬问题：下游 benchmark 的测试图像、相邻瓦片、同一 Sentinel/Landsat scene、同一年同一区域影像，可能已经在预训练中出现过。</p>
-<p>这会让 SOTA 被高估，尤其在以下场景中：</p>
-<ul>
-<li>地理区域重叠：训练或预训练见过同一城市、同一农田地块、同一灾区附近区域，测试看似独立但空间自相关很强。</li>
-<li>时间重叠：测试年份、季节或灾害前后影像被预训练覆盖，模型可能记住局部地物状态，而不是真正泛化。</li>
-<li>同源瓦片泄漏：大幅影像被切成 patch 后随机划分，训练/测试 patch 共享同一 parent scene 或 mosaic。</li>
-<li>下游数据覆盖：模型预训练直接使用了下游 benchmark 的影像、标签衍生产品、caption/QA 或同源公开数据。</li>
-</ul>
-<p>2024-2026 的趋势是：PANGAEA、PhilEO Bench、Copernicus-Bench、GEOBench-VLM 等开始统一评测；EarthShift 和 REOBench 开始强调真实分布偏移；<code>No One Knows the State of the Art in Geospatial Foundation Models</code> 则把问题进一步推到“GeoFM SOTA 是否可被清晰比较”的层面。我的判断是：未来两年，GeoFM 论文如果没有清楚的数据血缘和泄漏审计，很难让评测结论真正站稳。</p>
-<h2 id="2-重点来源" class="headerLink">
-    <a href="#2-%e9%87%8d%e7%82%b9%e6%9d%a5%e6%ba%90" class="header-mark"></a>2. 重点来源</h2><table>
-  <thead>
-      <tr>
-          <th>来源</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>与泄漏审计的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>跨任务、跨区域、跨模态统一评测，是审计协议的主目标之一。</td>
-      </tr>
-      <tr>
-          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>明确把真实世界 shift 放进 benchmark，可用于“去泄漏后性能下降”对照。</td>
-      </tr>
-      <tr>
-          <td>No One Knows the State of the Art in Geospatial Foundation Models</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.12678" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>直接指出 GeoFM SOTA 比较不稳定、评测协议和透明度不足。</td>
-      </tr>
-      <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>HLS 多时相预训练，适合审计同 MGRS tile、同日期、同区域覆盖。</td>
-      </tr>
-      <tr>
-          <td>Clay Foundation Model</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://clay-foundation.github.io/model/" target="_blank" rel="noopener noreferrer">docs</a>, <a href="https://github.com/Clay-foundation/model" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/made-with-clay" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>多传感器、多时相工程化开源模型，模型卡/数据卡透明度适合做 audit case。</td>
-      </tr>
-      <tr>
-          <td>SkySense</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>大规模多模态遥感 FM，代表高性能但数据源复杂的评测场景。</td>
-      </tr>
-      <tr>
-          <td>Galileo</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>全球/局部多模态 EO 表征，适合审计跨区域与下游任务覆盖。</td>
-      </tr>
-      <tr>
-          <td>TerraMind</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>任意模态到任意模态 EO 生成/表征，适合审计“预训练是否见过下游目标模态或标签产品”。</td>
-      </tr>
-      <tr>
-          <td>PhilEO Bench</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://phileo-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2401.04464" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/PhilEO-community/PhilEO-Bench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>few-shot/n-shot GeoFM benchmark，可用来验证去泄漏 split 后的样本效率变化。</td>
-      </tr>
-      <tr>
-          <td>Copernicus-FM / Copernicus-Bench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/wangyi111/Copernicus-FM" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>Copernicus 数据预训练和层级任务评测，适合做同源 Copernicus 数据覆盖审计。</td>
-      </tr>
-      <tr>
-          <td>REOBench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/xiang709/REOBench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>光学遥感扰动鲁棒性 benchmark，可作为泄漏之外的 robustness 对照。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法脉络从随机划分到数据血缘审计" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e5%88%b0%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e5%ae%a1%e8%ae%a1" class="header-mark"></a>3. 方法脉络：从随机划分到数据血缘审计</h2><h3 id="31-传统随机划分的问题" class="headerLink">
-    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item><item><title>RS-03 GSD-Aware GeoFM Adapter</title><link>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</guid><description><![CDATA[<h1 id="rs-03-gsd-aware-geofm-adapter" class="headerLink">
-    <a href="#rs-03-gsd-aware-geofm-adapter" class="header-mark"></a>RS-03 GSD-Aware GeoFM Adapter</h1><p>目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、Prithvi-EO-2.0、AlphaEarth、GeoFM/AnySat/Clay/Galileo 中的尺度处理方式；设计一个只引入轻量 adapter/LoRA 的 GSD-aware 下游适配方法，并给出分类、分割、检测三个任务的实验矩阵。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GSD, ground sample distance，决定一个像素对应地面的真实长度。遥感模型如果只看 resize 后的 patch，很容易把“像素尺度”误当成“真实尺度”：同样 224 x 224 的输入，在 0.3 m 航空影像中可能覆盖一个街区，在 10 m Sentinel-2 中可能覆盖数平方公里。自然图像 VFM 常把尺度变化当成数据增强问题，但遥感中尺度本身包含任务语义：</p>
-<ul>
-<li>建筑、车辆、飞机、船舶等目标的真实尺寸范围相对稳定，GSD 决定它们在图像中的像素大小。</li>
-<li>land cover / crop / ecological mapping 中，GSD 影响 mixed pixel、边界模糊、纹理可见性和类别层级。</li>
-<li>多源训练常把 Sentinel-2、Landsat、NAIP、VHR aerial、Planet、commercial imagery 放在一起，如果模型不知道 GSD，跨传感器泛化会出现隐性偏差。</li>
-<li>下游 benchmark 常把图像统一 resize 到固定输入大小，这会抹掉真实地理尺度，导致模型在跨分辨率测试时不稳。</li>
-</ul>
-<p>因此，GSD-aware adapter 的核心不是“把分辨率写进 prompt”，而是让模型在特征变换、attention、adapter/LoRA 参数或 decoder 中连续地感知地面尺度。</p>
-<h2 id="2-代表工作与尺度处理方式" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e5%b7%a5%e4%bd%9c%e4%b8%8e%e5%b0%ba%e5%ba%a6%e5%a4%84%e7%90%86%e6%96%b9%e5%bc%8f" class="header-mark"></a>2. 代表工作与尺度处理方式</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>官方代码/模型</th>
-          <th>尺度/GSD 处理</th>
-          <th>对 RS-03 的启发</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ScaleEarth</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.07562" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>公开检索未确认官方代码</td>
-          <td>将 GSD 作为连续尺度条件，用 Hyper-LoRA 动态生成/调节 VLM 参数，并构建 GeoScale-VQA 来测尺度理解</td>
-          <td>直接证明“连续 GSD 条件 + LoRA”是可行题眼；可从 VLM 扩到分类/分割/检测</td>
-      </tr>
-      <tr>
-          <td>SkySense</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
-          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>多模态、多时相、大规模预训练，覆盖不同遥感源；主要通过数据规模和任务头吸收尺度差异</td>
-          <td>强基线，但尺度是隐式学习；适合做 frozen backbone + GSD adapter 对照</td>
-      </tr>
-      <tr>
-          <td>SkySense V2</td>
-          <td style="text-align: right">2025 ICCV/arXiv</td>
-          <td><a href="https://arxiv.org/abs/2412.10115" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub org</a></td>
-          <td>多模态统一模型；面向多任务、多传感器，多分辨率问题更多通过统一表征处理</td>
-          <td>可作为多源 GeoFM 基线，检查显式 GSD 条件是否还能带来收益</td>
-      </tr>
-      <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024 arXiv / IBM-NASA</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial" target="_blank" rel="noopener noreferrer">Hugging Face</a></td>
-          <td>基于 HLS/Sentinel-Landsat 系列，多时相 30 m 级数据；包含时间/位置相关设计，但训练尺度相对集中</td>
-          <td>适合作为 30 m 多时相基座，测试 adapter 是否能迁移到 10 m/1 m/VHR</td>
-      </tr>
-      <tr>
-          <td>AlphaEarth Foundations</td>
-          <td style="text-align: right">2025 Google/DeepMind</td>
-          <td><a href="https://research.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">Google Research</a>, <a href="https://www.nature.com/articles/s41586-025-09260-x" target="_blank" rel="noopener noreferrer">Nature</a></td>
-          <td><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL" target="_blank" rel="noopener noreferrer">Earth Engine dataset</a></td>
-          <td>生成年度 10 m 卫星 embedding field；尺度固定在产品网格，但融合多源信息</td>
-          <td>不是常规可微调开源 backbone；更适合作为 10 m embedding baseline 或 teacher</td>
-      </tr>
-      <tr>
-          <td>AnySat</td>
-          <td style="text-align: right">2025 CVPR Highlight</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Astruc_AnySat_One_Earth_Observation_Model_for_Many_Resolutions_Scales_and_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
-          <td><a href="https://github.com/gastruc/AnySat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>明确面向 many resolutions, scales, modalities；使用 scale-adaptive encoder/JEPA 类训练</td>
-          <td>很适合对照“结构内建多尺度”与“外接轻量 GSD adapter”</td>
-      </tr>
-      <tr>
-          <td>Clay v1.5</td>
-          <td style="text-align: right">2024-2025 open model</td>
-          <td><a href="https://clay-foundation.github.io/model/release-notes/specification.html" target="_blank" rel="noopener noreferrer">docs</a></td>
-          <td><a href="https://github.com/Clay-foundation/model" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>支持多传感器、任意尺寸和多波段输入，工程接口通常保留 metadata</td>
-          <td>适合作为工程可复现实验基线，测试 metadata-driven adapter</td>
-      </tr>
-      <tr>
-          <td>Galileo</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>多模态 EO 表征，关注不同遥感模态和局部/全局特征</td>
-          <td>可以作为多任务、多源基线；尺度条件需要查具体输入 metadata</td>
-      </tr>
-      <tr>
-          <td>PANGAEA</td>
-          <td style="text-align: right">2024-2025 benchmark</td>
-          <td><a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td><a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>覆盖多任务、多区域、多分辨率/模态，是比较 GeoFM 的好平台</td>
-          <td>适合作为统一 benchmark 框架，避免只在单一 GSD 数据集上过拟合</td>
-      </tr>
-      <tr>
-          <td>EarthShift</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">Project</a></td>
-          <td>项目页</td>
-          <td>真实世界 distribution shift benchmark，包含空间/时间/尺度/传感器偏移</td>
-          <td>可作为跨 GSD/跨传感器 robustness 验证的补充</td>
+          <td>GEOBench-VLM</td>
+          <td style="text-align: right">ICCV 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td><a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>可作为 VLM 语义质量和定位能力评估参考，避免把语言答案当作可靠标签。</td>
       </tr>
   </tbody>
 </table>
 <h2 id="3-方法脉络" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-隐式尺度学习" class="headerLink">
-    <a href="#31-%e9%9a%90%e5%bc%8f%e5%b0%ba%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 隐式尺度学习</h3><p>SkySense、Prithvi、Clay、Galileo 等主要依赖大规模多源预训练，让模型从数据中隐式吸收尺度差异。这类方法优点是简单，缺点是模型可能把传感器、地域、类别和 GSD 纠缠起来。例如 10 m Sentinel-2 中“城市纹理”与 0.3 m NAIP 中“建筑轮廓”不是同一层级语义，统一 resize 后模型容易学到 dataset shortcut。</p>]]></description></item><item><title>RS-04 Geo-Temporal Embedding for Foundation Models</title><link>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</guid><description><![CDATA[<h1 id="rs-04-geo-temporal-embedding-for-foundation-models" class="headerLink">
-    <a href="#rs-04-geo-temporal-embedding-for-foundation-models" class="header-mark"></a>RS-04 Geo-Temporal Embedding for Foundation Models</h1><h2 id="1-执行摘要" class="headerLink">
-    <a href="#1-%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>1. 执行摘要</h2><p>2024-2026 的 GeoFM 正在从“只看像素”转向“像素 + 传感器 + 时间 + 地理位置 + 生态/气候上下文”的条件化表示。这个方向的关键不只是把经纬度和日期塞给模型，而是要回答：模型是否学到了可迁移的地理时间规律，还是只是记住某个地方常见什么地物。</p>
-<p>目前可以把方法分成五类：</p>
-<table>
-  <thead>
-      <tr>
-          <th>类别</th>
-          <th>做法</th>
-          <th>代表</th>
-          <th>优点</th>
-          <th>风险</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>显式连续元数据 embedding</td>
-          <td>对 lat/lon、week/hour、GSD、wavelength 做数值归一化后编码</td>
-          <td>Clay, Prithvi-EO-2.0</td>
-          <td>工程直接、适合下游 adapter</td>
-          <td>容易让模型记地理偏置</td>
-      </tr>
-      <tr>
-          <td>离散 token 化</td>
-          <td>将经纬度/时间/模态等转成离散 token，与图像 token 一起预训练</td>
-          <td>TerraMind</td>
-          <td>适合任意模态生成和 token-level 推理</td>
-          <td>token 粒度影响很大，坐标离散会损失连续空间关系</td>
-      </tr>
-      <tr>
-          <td>时空统一检索空间</td>
-          <td>把图像、位置、时间映射到同一 embedding space</td>
-          <td>TIGeR, GT-Loc</td>
-          <td>可做 geolocation、time prediction、geo-time retrieval</td>
-          <td>主要来自自然图像/街景，迁移到卫星需处理俯视和传感器差异</td>
-      </tr>
-      <tr>
-          <td>年度/时序 embedding field</td>
-          <td>生成每年每个像元的地表 embedding</td>
-          <td>AlphaEarth Foundations, Tessera</td>
-          <td>适合全球制图和时间序列监测</td>
-          <td>模型内部不可控，可能隐藏空间不公平性</td>
-      </tr>
-      <tr>
-          <td>采样/benchmark 层面的地理时间控制</td>
-          <td>用 spatial/temporal split、生态区覆盖、跨年评测控制偏差</td>
-          <td>EarthShift, PANGAEA, SSL4EO-S12 v1.1</td>
-          <td>可验证泛化</td>
-          <td>不是模型结构，不能单独提升能力</td>
-      </tr>
-  </tbody>
-</table>
-<p>核心研究机会：提出一个 <strong>Geo-Time Conditional Adapter (GTCA)</strong>，在冻结 GeoFM backbone 的前提下，只用轻量模块注入经纬度、年内时间、年份、气候区和 GSD，并通过反偏置训练约束避免“坐标捷径”。</p>]]></description></item><item><title>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</title><link>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</guid><description><![CDATA[<h1 id="rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="headerLink">
-    <a href="#rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="header-mark"></a>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</h1><h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向最值得做的不是“再证明 foundation model 有用”，而是做一个严格、可复现、成本可控的比较：同样的小区域标签预算下，公开 embedding、冻结编码器、轻量 adapter/LoRA、decoder-only 和 full fine-tuning 到底谁更稳，尤其在跨区域、跨年份、跨生物群区、跨城市形态时谁掉得少。</p>
-<p>关键边界：</p>
-<ul>
-<li>AlphaEarth Foundations 当前主要以 Google Satellite Embedding 数据集形式开放：10 m、年度、64 维、2017-2024 的全球 embedding layers，适合做 frozen embedding + classifier/head，不适合直接对模型本体做 LoRA。</li>
-<li>Prithvi-EO-2.0、Clay、SatlasPretrain 是更适合做参数高效微调的 open model/backbone 路线。Prithvi-EO-2.0 官方 GitHub 已提供 TerraTorch 下游任务配置，TerraTorch 也明确支持 Prithvi、TerraMind、SatMAE、Satlas、DOFA、Clay 等 backbone。</li>
-<li>小区域制图的核心问题是“局部标签少 + 空间自相关强 + 区域外泛化难”。随机划分会虚高；必须做 spatial block、leave-region、leave-year、leave-biome 或 leave-city 测试。</li>
-</ul>
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-传统主动学习" class="headerLink">
+    <a href="#31-%e4%bc%a0%e7%bb%9f%e4%b8%bb%e5%8a%a8%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 传统主动学习</h3><p>典型做法是用 uncertainty、entropy、margin、BALD、core-set/diversity 或 query-by-committee 选择未标注样本。遥感中它的问题是：随机切片高度冗余，空间相邻样本相关性强，模型最不确定的样本可能只是云、阴影、配准错或异常纹理，并不一定值得人类标注。</p>]]></description></item><item><title>RS-47 Benchmark Contamination and Deduplication</title><link>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</link><pubDate>Sun, 07 Jun 2026 09:46:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</guid><description><![CDATA[<h1 id="rs-47-benchmark-contamination-and-deduplication" class="headerLink">
+    <a href="#rs-47-benchmark-contamination-and-deduplication" class="header-mark"></a>RS-47 Benchmark Contamination and Deduplication</h1><p>细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、near-duplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。<br>
+范围：光学/多光谱/高分辨率遥感优先；SAR-only 不作为主线。本文与 <a href="./RS-02_geofm_benchmark_leakage_audit.md" rel="">RS-02 GeoFM Benchmark Leakage Audit</a> 和 <a href="./rs25_ood_split_design.md" rel="">RS-25 OOD Split Design</a> 互补：RS-02 偏 GeoFM 评测泄漏审计，RS-25 偏 OOD split；本文件专门落在数据污染检测、近重复去重和可执行工具链。</p>
+<h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>遥感 benchmark contamination 不是一个抽象风险，而是已经被实证发现的硬问题。最直接的证据是 CVPR 2026 oral 论文 <strong>Data Leakage Detection and De-duplication in Large Scale Geospatial Image Datasets</strong>：作者审计 INRIA、SpaceNet 2 和 AICrowd Mapping Challenge 等建筑 footprint 数据集，发现 AICrowd 训练集中约 25 万张、接近 90% 图像是完全或增强重复；验证集中大量样本也出现在训练集中，并给出官方代码 <a href="https://github.com/yeshwanth95/Hash_and_search" target="_blank" rel="noopener noreferrer">Hash_and_search</a>。</p>
+<p>对 2024-2026 的 GeoFM/VLM 时代来说，问题更复杂：模型预训练数据往往来自全球 Sentinel-2、Landsat、NAIP、航空影像、Web caption、OSM/WorldCover/building footprint 等衍生产品；下游 benchmark 又可能使用相同区域、相同年份、相同 parent scene、相同标签产品或同源 caption/QA。只做 image-level random split 已经不够，必须做 <strong>provenance-aware dedup</strong>：同时用坐标、时间、传感器、parent scene、精确/感知哈希、embedding 近邻和标签来源审计。</p>]]></description></item><item><title>RS-46 Synthetic Instruction Data Quality for RS-VLM</title><link>https://spacetop.win/2026/06/rs-46-synthetic-instruction-data-quality-for-rs-vlm/</link><pubDate>Sun, 07 Jun 2026 09:45:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-46-synthetic-instruction-data-quality-for-rs-vlm/</guid><description><![CDATA[<h1 id="rs-46-synthetic-instruction-data-quality-for-rs-vlm" class="headerLink">
+    <a href="#rs-46-synthetic-instruction-data-quality-for-rs-vlm" class="header-mark"></a>RS-46 Synthetic Instruction Data Quality for RS-VLM</h1><p>细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>2024-2026 年遥感 VLM 的核心数据路线可以概括为三类：把已有 caption/VQA/检测/分割数据转成 instruction；用 GPT-4V/通用 VLM/LLM 生成多轮问答、细粒度 caption 或 scene graph；再用人工验证、负样本或 benchmark 协议约束模型幻觉。问题是，遥感图像有小目标、俯视视角、尺度/GSD、地理上下文和类别层级，通用 VLM 生成的数据很容易出现“看不见却说有”“模板句式过强”“类别先验替代图像证据”“地理常识编造”等伪细节。</p>
+<p>本方向最值得做的小课题不是再堆一个更大的 instruction 数据集，而是提出一个可复现的 <code>Synthetic RS-VLM Data Quality Protocol</code>：对每条 image-instruction-answer 做来源追踪、视觉证据检查、地理/尺度一致性检查、负样本压力测试、人工分层抽检和训练收益验证。</p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感制图依赖人工特征、光谱指数、随机森林或任务专用深度网络。它们在本地标签足够、同分布测试时表现不错，但迁移到新的城市、农田制度、火烧迹地、气候带或传感器组合时往往需要重新标注。GeoFM 的承诺是：用大规模未标注 EO 数据预训练出通用表示，再用很少的本地标签快速制图。</p>
-<p>2024-2026 出现了两条明显路线：</p>
-<ol>
-<li><strong>Embedding-as-data</strong>：AlphaEarth 把多源 EO 信息压成年度 embedding field。用户在 Earth Engine 或 GCS 中读取 64 维 embedding，再训练线性模型、树模型、MLP 或轻量空间头。</li>
-<li><strong>Open-backbone fine-tuning</strong>：Prithvi、Clay、SatlasPretrain 等提供模型权重和代码，用户可以做 frozen linear probe、decoder-only、adapter、LoRA 或 full fine-tuning。</li>
-</ol>
-<p>这两条路线目前缺一个公平实验：在同样标签预算、同样 spatial split、同样任务指标下比较“公开 embedding + 轻量 head”和“可微调 backbone + LoRA/adapter”。</p>]]></description></item><item><title>RS-06 Evidence-Grounded RS-VQA</title><link>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa/</guid><description><![CDATA[<h1 id="rs-06-evidence-grounded-rs-vqa" class="headerLink">
-    <a href="#rs-06-evidence-grounded-rs-vqa" class="header-mark"></a>RS-06 Evidence-Grounded RS-VQA</h1><h2 id="核心问题" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h2><p>遥感 VQA 里最危险的失败不是“答错”，而是“答案看起来对，但证据区域错”。例如模型回答“有 3 架飞机”，但它看的 attention/box 落在建筑屋顶；或者回答“这是洪水区域”，但证据 mask 覆盖的是云影。自然图像 VQA 中这种问题已经存在，遥感里会更严重，因为遥感图像常有：</p>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感 VLM 训练数据的难点来自两个冲突：</p>
 <ul>
-<li>超大图和 tile 切片，问题相关区域可能只占极少像素。</li>
-<li>小目标密集，车、飞机、船、球场等容易被背景纹理混淆。</li>
-<li>俯视视角和 GSD 差异，同一个地物在 0.3m、1m、10m 影像中视觉证据完全不同。</li>
-<li>语义依赖地理上下文，模型可能用“机场附近应该有飞机”这类先验猜答案。</li>
-<li>公开数据中 caption/QA/grounding 多由检测框、模板或 VLM 合成，证据链不一定被人工核验。</li>
+<li>大规模 instruction 数据必须自动化生成，否则成本不可承受。</li>
+<li>遥感场景又极其依赖证据，自动生成的一句 caption 或 QA 只要错一个小目标、方向、类别层级，就会把模型训练成“会说但不看图”。</li>
 </ul>
-<p>因此 RS-06 的目标不是再做一个普通 RS-VQA 数据集，而是设计一个强制输出 <code>answer + bbox/mask + confidence</code> 的 evidence-grounded RS-VQA benchmark。它要能诊断三类错误：答案错、答案对但证据错、答案和证据都对但置信度不可信。</p>
+<p>2024 年的 RS-LLaVA、SkyEyeGPT、GeoChat、RS-GPT4V、SkySenseGPT、VHM 都在扩充 instruction 数据；2025-2026 年的 GEOBench-VLM、OmniEarth、RSHBench/RADAR 则开始反过来诊断这些数据和模型是否真的可靠。这个演化说明：数据质量本身已经成为遥感 VLM 的研究问题。</p>
 <h2 id="代表论文与资源" class="headerLink">
     <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
   <thead>
       <tr>
           <th>工作</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>证据/grounding 设计</th>
-          <th>对 RS-06 的启发</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
-          <td style="text-align: right">CVPR 2024</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>支持 image/region caption、VQA、grounded conversations、referring object detection；项目页说明已开源代码、模型、数据和评测脚本。</td>
-          <td>说明 RS-VLM 可以把自然语言回答和目标位置交织输出，但还需要独立评估“回答和框是否一致”。</td>
-      </tr>
-      <tr>
-          <td>VHM: Versatile and Honest VLM for Remote Sensing Image Analysis</td>
-          <td style="text-align: right">arXiv 2024 / AAAI 2025 方向</td>
-          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>强调 honest QA，用不存在目标/欺骗性问题减轻幻觉。</td>
-          <td>RS-06 可借鉴 false-premise QA，但要进一步要求证据框/mask 和拒答置信度。</td>
-      </tr>
-      <tr>
-          <td>VRSBench: A Versatile Vision-Language Benchmark Dataset for Remote Sensing Image Understanding</td>
-          <td style="text-align: right">NeurIPS 2024 Datasets &amp; Benchmarks</td>
-          <td><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/05b7f821234f66b78f99e7803fffa78a-Abstract-Datasets_and_Benchmarks_Track.html" target="_blank" rel="noopener noreferrer">NeurIPS</a>, <a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>包含 29,614 图、人工核验 caption、52,472 object references、123,221 QA，覆盖 caption、visual grounding、VQA。</td>
-          <td>可作为 answer-grounding 联合样本来源；但需要把 VQA 与 reference/object evidence 强绑定。</td>
-      </tr>
-      <tr>
-          <td>GEOBench-VLM</td>
-          <td style="text-align: right">ICCV 2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>覆盖 8 大类、31 个细粒度 geospatial VLM 任务，包括计数、定位、分割、caption、event、temporal 等；采用 MCQ 以降低开放回答评测偏差。</td>
-          <td>提供任务谱系和客观评测思路，但 RS-06 应从 MCQ 扩展到开放答案 + 证据区域。</td>
-      </tr>
-      <tr>
-          <td>OmniEarth</td>
-          <td style="text-align: right">arXiv 2026</td>
-          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>28 个细粒度任务，支持 MCQ 与 open-ended VQA；开放形式含文本、bbox、mask；采用 blind test 和 quintuple semantic consistency 降低语言偏差。</td>
-          <td>最接近 RS-06 的 benchmark 形态，可直接借鉴“任务维度 + box/mask 输出 + 语义一致性”。</td>
-      </tr>
-      <tr>
-          <td>RSHBench / RADAR: Seeing Clearly without Training</td>
-          <td style="text-align: right">arXiv 2026</td>
-          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub 计划</a></td>
-          <td>RSHBench 诊断 RS-VQA 中 factual/logical hallucination；RADAR 是 training-free 推理方法，用模型内在 attention 做渐进定位和局部推理。</td>
-          <td>证明幻觉主要来自 grounding failure 和小目标误读；RS-06 应把局部化过程显式纳入指标。</td>
-      </tr>
-      <tr>
-          <td>ScaleEarth: Continuous Scale Conditioning for RS-VLMs</td>
-          <td style="text-align: right">arXiv 2026</td>
-          <td><a href="https://arxiv.org/abs/2605.07562" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>把 GSD 当连续条件变量，用 CS-HLoRA 动态调制 LoRA 子空间；构造 GeoScale-VQA，问题生成与物理尺度条件绑定。</td>
-          <td>RS-06 必须记录 GSD，并将“证据区域是否足以支持答案”按尺度分层评估。</td>
-      </tr>
-      <tr>
-          <td>SATGround</td>
-          <td style="text-align: right">arXiv 2025/2026</td>
-          <td><a href="https://arxiv.org/abs/2512.08881" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>面向遥感 visual grounding 的空间感知方法，强化语言与空间定位联合推理。</td>
-          <td>可作为 evidence box 生成/校准 baseline。</td>
-      </tr>
-      <tr>
-          <td>RSHallu / RSHalluEval</td>
-          <td style="text-align: right">arXiv 2026 方向</td>
-          <td><a href="https://researchtrend.ai/papers/2602.10799" target="_blank" rel="noopener noreferrer">paper page</a></td>
-          <td>提出遥感 MLLM 幻觉 taxonomy，区分 object-centric 与 image-level inconsistencies，并做双模式检查。</td>
-          <td>可补足 RS-06 的幻觉类别定义，特别是 modality、resolution、scene-level 语义错误。</td>
-      </tr>
-      <tr>
-          <td>RSHR-Bench</td>
-          <td style="text-align: right">2025/2026 方向</td>
-          <td><a href="https://huggingface.co/datasets/RL-MIND/RSHR-Bench" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
-          <td>面向超高分辨率遥感 MLLM，含 VQA/caption 等任务。</td>
-          <td>可用于大图场景的 evidence localization 和 token/tiling 失败诊断。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-从回答问题到回答并定位" class="headerLink">
-    <a href="#1-%e4%bb%8e%e5%9b%9e%e7%ad%94%e9%97%ae%e9%a2%98%e5%88%b0%e5%9b%9e%e7%ad%94%e5%b9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>1. 从“回答问题”到“回答并定位”</h3><p>早期 RS-VQA 主要优化 answer accuracy：分类式答案、文本匹配或 LLM judge。GeoChat 之后，模型开始可以把回答和位置一起输出，例如 grounded description、referring expression、region caption。问题是多数评测仍把 VQA、grounding、caption 分开算；模型只要答案对，就可能掩盖证据区域错误。</p>]]></description></item><item><title>RS-07 Remote Sensing VLM Hallucination Diagnostics</title><link>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</guid><description><![CDATA[<h1 id="rs-07-remote-sensing-vlm-hallucination-diagnostics" class="headerLink">
-    <a href="#rs-07-remote-sensing-vlm-hallucination-diagnostics" class="header-mark"></a>RS-07 Remote Sensing VLM Hallucination Diagnostics</h1><p>研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hard-negative QA 与自动评测指标。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感 VLM 的幻觉比自然图像 VLM 更尖锐，原因不是模型“不会说话”，而是视觉证据更难被可靠读取：</p>
-<ul>
-<li>俯视视角导致自然图像中常见的物体外观先验失效，例如车辆、飞机、船、储罐都可能变成很小的纹理块。</li>
-<li>大幅面遥感影像常被切成 patch，VLM 看到的是局部切片或低分辨率缩略图，容易把上下文补全成语言常识。</li>
-<li>许多地物是相似纹理和尺度组合，例如 parking lot、impervious surface、road、runway、roof、container yard，语言类别边界不清。</li>
-<li>遥感问题经常要求空间关系、数量、尺度和存在性判断，例如“机场旁是否有大型停机坪”“河道北侧是否出现采矿裸地”。这些问题只答文本不够，必须有证据区域。</li>
-<li>2024 年后大量 RS-VLM 数据由 GPT-4V、模板、检测标签、caption 扩展得到；如果没有 hard negative 和事实核验，训练集会鼓励模型给出“看起来合理”的肯定回答。</li>
-</ul>
-<p>因此，本方向的核心不只是降低 hallucination rate，而是把幻觉拆成可诊断、可复现、可定位的错误类型。</p>
-<h2 id="2-代表论文与资源" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>2. 代表论文与资源</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
           <th style="text-align: right">年份/venue</th>
-          <th>资源链接</th>
-          <th>与幻觉诊断的关系</th>
+          <th>数据构造方式</th>
+          <th>与数据质量相关的贡献</th>
+          <th>主要风险/可借鉴点</th>
+          <th>链接</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>VHM: Versatile and Honest Vision Language Model for Remote Sensing Image Analysis</td>
-          <td style="text-align: right">2024 arXiv / 2025 AAAI</td>
-          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ojs.aaai.org/index.php/AAAI/article/download/32683/34838" target="_blank" rel="noopener noreferrer">AAAI PDF</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>引入 VersaD 详细 caption 和 HnstD honest instruction，包含 factual 与 deceptive questions，用“不存在目标”训练模型避免无脑肯定。</td>
+          <td>RS-LLaVA</td>
+          <td style="text-align: right">2024 Remote Sensing</td>
+          <td>将 caption 和 VQA 数据混合成 RS-instructions</td>
+          <td>早期 LLaVA-style RS caption+VQA 指令数据</td>
+          <td>多来自既有数据集，任务覆盖窄，容易继承原数据集偏差</td>
+          <td><a href="https://www.mdpi.com/2072-4292/16/9/1477" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/BigData-KSU/RS-LLaVA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
       </tr>
       <tr>
-          <td>DDFAV / RSPOPE: Remote Sensing LVLM Dataset and Evaluation Benchmark</td>
-          <td style="text-align: right">2024 arXiv / 2025 Remote Sensing</td>
-          <td><a href="https://arxiv.org/abs/2411.02733" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://www.mdpi.com/2072-4292/17/4/719" target="_blank" rel="noopener noreferrer">MDPI</a>, <a href="https://github.com/HaodongLi2024/rspope" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/isaaccorley/DDFAV" target="_blank" rel="noopener noreferrer">HF mirror</a></td>
-          <td>面向遥感 LVLM 的 hallucination evaluation，借鉴 POPE 式二元存在性问答，适合做 object-existence hallucination 基线。</td>
-      </tr>
-      <tr>
-          <td>Seeing Clearly without Training / RSHBench / RADAR</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub placeholder/承诺</a></td>
-          <td>将 RS-VQA 幻觉细分为 factual 与 logical hallucinations；RADAR 用 attention 驱动 progressive localization 和 local reasoning，训练自由。需注意：截至本次检索，官方代码/数据可能仍未完整释放。</td>
-      </tr>
-      <tr>
-          <td>OmniEarth: A Benchmark for Evaluating VLMs in Geospatial Tasks</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/datasets/sjeeudd/OmniEarth" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
-          <td>支持 multiple-choice 和 open-ended VQA；采用 blind test 与 semantic consistency 来降低语言偏置，适合作为综合评测框架。</td>
-      </tr>
-      <tr>
-          <td>GEOBench-VLM</td>
-          <td style="text-align: right">2025 ICCV</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://arxiv.org/abs/2411.19325" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>覆盖计数、定位、细粒度分类、分割、时序等 geospatial tasks，可用于把“幻觉”扩展到空间定位、数量和几何错误。</td>
-      </tr>
-      <tr>
-          <td>RS-GPT4V</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2406.12479" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2406.12479" target="_blank" rel="noopener noreferrer">HF paper page</a>, <a href="https://github.com/GeoX-Lab/RS-GPT4V" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GPT-4V 构造多模态 instruction-following 数据，适合分析合成数据中的伪细节、语言模板和肯定偏置。</td>
-      </tr>
-      <tr>
-          <td>SkySenseGPT / FIT-RS</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2406.10100" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2406.10100" target="_blank" rel="noopener noreferrer">HF paper page</a>, <a href="https://github.com/Luo-Z13/SkySenseGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>强调 fine-grained relation comprehension 和 scene graph，可用于空间关系幻觉诊断；也要检查复杂关系样本是否由模板和裁剪策略带来偏差。</td>
+          <td>SkyEyeGPT</td>
+          <td style="text-align: right">2024 arXiv / 2025 ISPRS JPRS</td>
+          <td>构造 SkyEye-968k，单任务和多任务 instruction</td>
+          <td>统一多种 RS vision-language 任务</td>
+          <td>模板化和任务格式转换质量需要审计</td>
+          <td><a href="https://arxiv.org/abs/2401.09712" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/ZhanYang-nwpu/SkyEyeGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
       </tr>
       <tr>
           <td>GeoChat</td>
           <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://mbzuai-oryx.github.io/GeoChat/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>遥感 grounded dialogue 代表；可作为 evidence-grounded answer 的模型基线。</td>
+          <td>构造 grounded RS instruction，包含 region dialogue / grounding</td>
+          <td>强调遥感 grounded conversation，开源代码、模型、数据和评测</td>
+          <td>grounding 数据能缓解纯语言幻觉，但 bbox/region 与答案一致性仍需检查</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
       </tr>
       <tr>
-          <td>HallusionBench</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Guan_HallusionBench_An_Advanced_Diagnostic_Suite_for_Entangled_Language_Hallucination_and_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/tianyi-lab/HallusionBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>通用 VLM 幻觉诊断，可迁移其“视觉错觉 + 语言幻觉纠缠”的题型设计到遥感相似地物和尺度误判。</td>
+          <td>VHM</td>
+          <td style="text-align: right">2024 arXiv / 2025 AAAI</td>
+          <td>VersaD rich captions + HnstD honest/deceptive questions</td>
+          <td>引入详细 caption 和不存在目标的欺骗性问题，直接针对“诚实性”</td>
+          <td>很适合作为 RS-VLM 数据负样本构造模板</td>
+          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
       </tr>
       <tr>
-          <td>M-HalDetect</td>
-          <td style="text-align: right">2024 AAAI</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/29771" target="_blank" rel="noopener noreferrer">AAAI</a>, <a href="https://github.com/hendryx-scale/mhal-detect" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>通用 LVLM hallucination detection/prevention 数据，可借鉴 reward model 或 detector 作为自动评测器。</td>
+          <td>RS-GPT4V</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>用 GPT-4V 构造统一多模态 instruction-following 数据</td>
+          <td>代表 GPT-4V 生成遥感指令数据路线</td>
+          <td>需要系统验证 GPT-4V 生成细节是否有图像证据</td>
+          <td><a href="https://arxiv.org/abs/2406.12479" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/GeoX-Lab/RS-GPT4V" target="_blank" rel="noopener noreferrer">GitHub</a></td>
       </tr>
       <tr>
-          <td>GROUNDHOG</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://groundhog-mllm.github.io/index.html" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://cvpr.thecvf.com/virtual/2024/poster/30796" target="_blank" rel="noopener noreferrer">CVPR poster</a></td>
-          <td>将 grounding 变成 segmentation entity selection；可迁移到“回答必须绑定 mask/entity”的遥感 VQA。</td>
+          <td>SkySenseGPT / FIT-RS</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>FIT-RS，约 1.8M instruction，含关系推理、scene graph</td>
+          <td>关注复杂语义关系和细粒度理解</td>
+          <td>大规模合成/转换数据必须检查关系三元组是否可见</td>
+          <td><a href="https://arxiv.org/abs/2406.10100" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/Luo-Z13/SkySenseGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>VRSBench</td>
+          <td style="text-align: right">2024 NeurIPS Datasets &amp; Benchmarks</td>
+          <td>高质量 RS vision-language benchmark，caption/object reference/VQA</td>
+          <td>将 benchmark 从简单问答扩展到多任务</td>
+          <td>可作为抽检协议和人工验证标准参考</td>
+          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>RSUniVLM</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>图像级、区域级、像素级、多图输入统一</td>
+          <td>粒度 MoE 让 instruction 覆盖多粒度任务</td>
+          <td>需要检查不同粒度标签互相是否一致</td>
+          <td><a href="https://arxiv.org/abs/2412.05679" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://rsunivlm.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
+      </tr>
+      <tr>
+          <td>GeoGround</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>用 HBB/OBB/mask 支持遥感视觉 grounding</td>
+          <td>提供更细的视觉证据约束</td>
+          <td>可用于过滤“有答案但无定位证据”的样本</td>
+          <td><a href="https://arxiv.org/abs/2411.11904" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zytx121/GeoGround" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>GEOBench-VLM</td>
+          <td style="text-align: right">2025 ICCV</td>
+          <td>多任务 geospatial VLM benchmark，包含自动与人工验证标注</td>
+          <td>用 MCQ 降低 open-ended 评估偏差，覆盖计数、定位、时序、关系等</td>
+          <td>可借鉴其任务 taxonomy 和人工核验方式</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>OmniEarth</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>44,210 manually verified instructions，含 MCQ/open-ended、bbox/mask</td>
+          <td>blind test + semantic consistency，用于检验是否依赖视觉证据</td>
+          <td>很适合作为“数据质量目标函数”的 benchmark</td>
+          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/datasets/sjeeudd/OmniEarth" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+      </tr>
+      <tr>
+          <td>RSHBench/RADAR</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>细粒度诊断 RS-VQA 事实/逻辑幻觉</td>
+          <td>把幻觉归因到 grounding failure 和小目标误读</td>
+          <td>可直接用于合成数据负样本和失败模式分类</td>
+          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>Cambrian-1</td>
+          <td style="text-align: right">2024 NeurIPS</td>
+          <td>通用 MLLM 数据策展和分布平衡</td>
+          <td>强调高质量视觉指令数据、数据源平衡、视觉中心 benchmark</td>
+          <td>可迁移为 RS-VLM 数据混合比例和质量审计原则</td>
+          <td><a href="https://papers.nips.cc/paper_files/paper/2024/hash/9ee3a664ccfeabc0da16ac6f1f1cfe59-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">NeurIPS</a>, <a href="https://github.com/cambrian-mllm/cambrian" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>What matters when building VLMs?</td>
+          <td style="text-align: right">2024 NeurIPS</td>
+          <td>通用 VLM 构建消融</td>
+          <td>讨论训练混合、数据重复、合成 caption 对 VLM 的影响</td>
+          <td>可作为 RS 合成 caption 是否真正增益的消融模板</td>
+          <td><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/a03037317560b8c5f2fb4b6466d4c439-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">paper</a></td>
       </tr>
   </tbody>
 </table>
-<h2 id="3-方法脉络" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-从存在性二元问答开始" class="headerLink">
-    <a href="#31-%e4%bb%8e%e5%ad%98%e5%9c%a8%e6%80%a7%e4%ba%8c%e5%85%83%e9%97%ae%e7%ad%94%e5%bc%80%e5%a7%8b" class="header-mark"></a>3.1 从“存在性二元问答”开始</h3><p>VHM/HnstD 与 DDFAV/RSPOPE 都抓住了一个很小但很关键的问题：当问题问“图中是否有 X”时，如果 X 并不存在，RS-VLM 是否会因为遥感场景常识或训练集肯定偏置回答“有”。这类题容易自动评测，适合建立第一版 hallucination rate：</p>]]></description></item><item><title>RS-08 Text-to-Region Retrieval in Large EO Mosaics</title><link>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</guid><description><![CDATA[<h1 id="rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="headerLink">
-    <a href="#rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="header-mark"></a>RS-08 Text-to-Region Retrieval in Large EO Mosaics</h1><h2 id="研究问题" class="headerLink">
-    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>把遥感图文检索从“给一句文本，检索一张固定裁剪图”推进到“给一句自然语言，在大范围地理空间影像镶嵌图中检索一个或多个候选区域”。例如：</p>
-<ul>
-<li>“找到沿河分布、旁边有密集建筑的太阳能板区域。”</li>
-<li>“找出疑似新建物流园区：大屋顶、规则停车区、靠近高速出入口。”</li>
-<li>“在这个城市范围内找可能的采石场或裸土扩张区域。”</li>
-</ul>
-<p>这不是普通 RS image-text retrieval 的简单放大版。普通检索默认候选是预切好的 image chips；text-to-region retrieval 的候选空间是连续地理空间，需要解决尺度、tile 粒度、候选区域生成、坐标索引、跨 tile 上下文、语义歧义和证据定位。</p>
-<h2 id="为什么这个问题出现了" class="headerLink">
-    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%bf%99%e4%b8%aa%e9%97%ae%e9%a2%98%e5%87%ba%e7%8e%b0%e4%ba%86" class="header-mark"></a>为什么这个问题出现了</h2><p>2024-2026 的几个趋势把这个问题推到了台前：</p>
-<ol>
-<li>遥感 CLIP/RS-VLM 已经能做图文检索和语义定位。RemoteCLIP、GeoRSCLIP/RS5M、PriorCLIP 等把 CLIP 式 image-text alignment 迁移到遥感。</li>
-<li>大范围检索需求来自真实应用。用户通常不是要找“最像这张图的图片”，而是在一个城市、省域或全球瓦片中找符合自然语言描述的区域。</li>
-<li>GeoFM embedding 变成可索引资产。AlphaEarth Foundations 把年度多源 EO 信息压缩成 Google Earth Engine 中的 64 维 10m embedding，说明“先建全球 embedding，再按任务检索/制图”已经可操作。</li>
-<li>VLM2GeoVec 开始把图像、文本、bbox 和地理坐标放入统一向量空间，并引入 semantic geospatial retrieval 评测，说明“文本 + 坐标 + 区域语义”的检索正在从想法变成任务。</li>
-<li>LRS-VQA 证明超大遥感图像不能直接整体送入 VLM，需要 coarse-to-fine tile selection 和 text-guided token pruning。这套思想可直接迁移到 text-to-region retrieval。</li>
-</ol>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+<h2 id="数据构造路线对比" class="headerLink">
+    <a href="#%e6%95%b0%e6%8d%ae%e6%9e%84%e9%80%a0%e8%b7%af%e7%ba%bf%e5%af%b9%e6%af%94" class="header-mark"></a>数据构造路线对比</h2><table>
   <thead>
       <tr>
-          <th>方向</th>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/模型/数据</th>
-          <th>对 text-to-region 的价值</th>
+          <th>路线</th>
+          <th>典型做法</th>
+          <th>优点</th>
+          <th>质量风险</th>
+          <th>建议检查</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>遥感 VLM 基座</td>
-          <td>RemoteCLIP: A Vision Language Foundation Model for Remote Sensing</td>
-          <td style="text-align: right">2024 TGRS</td>
-          <td><a href="https://github.com/ChenDelong1999/RemoteCLIP" target="_blank" rel="noopener noreferrer">GitHub repo</a></td>
-          <td><a href="https://github.com/ChenDelong1999/RemoteCLIP" target="_blank" rel="noopener noreferrer">RemoteCLIP GitHub</a></td>
-          <td>提供 RSITR 常用基座和 RSITMD/RSICD/UCM 检索脚本，可作 text-to-chip baseline。</td>
+          <td>既有数据集转 instruction</td>
+          <td>将 caption/VQA/detection/segmentation 标签包装为自然语言 QA</td>
+          <td>成本低、可复现</td>
+          <td>模板化强，问题答案分布单一，继承旧数据标签噪声</td>
+          <td>模板多样性、答案分布、同图多问一致性</td>
       </tr>
       <tr>
-          <td>大规模图文数据</td>
-          <td>RS5M and GeoRSCLIP</td>
-          <td style="text-align: right">2024 TGRS</td>
-          <td><a href="https://arxiv.org/abs/2306.11300" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/om-ai-lab/RS5M" target="_blank" rel="noopener noreferrer">RS5M GitHub</a>, <a href="https://huggingface.co/Zilun/GeoRSCLIP" target="_blank" rel="noopener noreferrer">GeoRSCLIP HF</a></td>
-          <td>5M 遥感图文对和 GeoRSCLIP，支持 cross-modal retrieval 与 semantic localization，是检索模型强基线。</td>
+          <td>GPT-4V/通用 VLM 生成</td>
+          <td>给图像生成 caption、多轮 QA、关系描述</td>
+          <td>规模大，语言自然</td>
+          <td>小目标、尺度、类别和空间关系幻觉</td>
+          <td>视觉证据核验、负样本、人工抽检</td>
       </tr>
       <tr>
-          <td>噪声与先验</td>
-          <td>PriorCLIP / PIR-CLIP</td>
+          <td>LLM 基于标签生成</td>
+          <td>用已有 bbox/mask/class 让 LLM 生成问答</td>
+          <td>语义可控，便于批量生成</td>
+          <td>答案可能只来自标签而不是图像；语言先验强</td>
+          <td>bbox/mask-answer 一致性、图像可见性</td>
+      </tr>
+      <tr>
+          <td>detector/SAM/VLM 联合自动标注</td>
+          <td>GroundingDINO/SAM/CLIP/VLM 产生区域和描述</td>
+          <td>有区域证据，适合 grounding</td>
+          <td>detector 漏检、SAM 类别无关、CLIP 类别混淆</td>
+          <td>多模型一致性、mask stability、类别置信度</td>
+      </tr>
+      <tr>
+          <td>人工验证 benchmark</td>
+          <td>人工校验 instruction、答案和证据</td>
+          <td>可信度高，适合评测</td>
+          <td>成本高，覆盖有限</td>
+          <td>分层抽样、双人标注、一致性统计</td>
+      </tr>
+      <tr>
+          <td>hard negative / deceptive QA</td>
+          <td>问不存在对象、相似类别、空间关系陷阱</td>
+          <td>直接抑制幻觉</td>
+          <td>构造不自然会让模型学到模板捷径</td>
+          <td>负样本自然度、与正样本配对、难度分层</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="质量问题分类" class="headerLink">
+    <a href="#%e8%b4%a8%e9%87%8f%e9%97%ae%e9%a2%98%e5%88%86%e7%b1%bb" class="header-mark"></a>质量问题分类</h2><ol>
+<li>伪细节幻觉：caption 里出现图像中没有的飞机、船、道路、建筑损毁等。</li>
+<li>小目标误读：把 tiny vehicle、storage tank、greenhouse、ship 等当成纹理或相似类别。</li>
+<li>空间关系错误：left/right、near、inside、parallel、surrounded by 在俯视图中容易错。</li>
+<li>尺度/GSD 错误：把球场、停车场、房屋屋顶等按自然图像尺度理解。</li>
+<li>类别层级混乱：land cover 与 object label 混用，例如 impervious surface/road/runway/building。</li>
+<li>模板偏置：模型靠问题句式猜答案，而不是看图。</li>
+<li>答案分布偏置：yes/no、选项位置、常见类别过度集中。</li>
+<li>地理常识编造：根据地区名、典型场景或语言先验推断不可见信息。</li>
+<li>多粒度不一致：同一图像的 image-level caption、region QA、mask label 互相矛盾。</li>
+<li>训练-测试污染：合成数据来自公开 benchmark 或同一区域瓦片，导致评测虚高。</li>
+</ol>
+<h2 id="可执行的数据过滤协议" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%9a%84%e6%95%b0%e6%8d%ae%e8%bf%87%e6%bb%a4%e5%8d%8f%e8%ae%ae" class="header-mark"></a>可执行的数据过滤协议</h2><h3 id="stage-0-数据血缘记录" class="headerLink">
+    <a href="#stage-0-%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e8%ae%b0%e5%bd%95" class="header-mark"></a>Stage 0: 数据血缘记录</h3><p>每条样本保存：</p>]]></description></item><item><title>RS-45 Few-Shot Disaster Building Damage Mapping</title><link>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</link><pubDate>Sun, 07 Jun 2026 09:44:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</guid><description><![CDATA[<h1 id="rs-45-few-shot-disaster-building-damage-mapping" class="headerLink">
+    <a href="#rs-45-few-shot-disaster-building-damage-mapping" class="header-mark"></a>RS-45 Few-Shot Disaster Building Damage Mapping</h1><p>范围：灾后建筑损毁低样本制图；优先 VHR 光学 pre/post 遥感影像，兼顾 UAV/FloodNet 与 VLM 报告任务；SAR 或地面多视角工作只作为补充参考。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>灾后建筑损毁制图的核心约束是“黄金 72 小时”：需要快速定位受损建筑、判断损毁等级，并把结果交给救援、保险和城市管理流程。但 xBD/xView2 这类主流数据虽然大，仍存在三个长期矛盾：</p>
+<ol>
+<li><strong>低样本与跨灾种泛化</strong>：新灾害发生时通常没有本地标注，模型从飓风迁移到地震、火灾、海啸时会因为建筑形态、成像角度、灾害痕迹和背景地貌变化而失效。</li>
+<li><strong>建筑实例与损毁证据错位</strong>：像素级变化不一定等于建筑损毁，阴影、季节、火烟、水体、配准误差都会产生伪变化；反过来，屋顶破损、局部坍塌又可能很细微。</li>
+<li><strong>可审计输出不足</strong>：应急场景不只要分类标签，还要建筑轮廓、pre/post 证据、损毁理由、置信度和报告文本。VLM 能生成报告，但容易脱离图像证据。</li>
+</ol>
+<p>2024-2026 的新变化是，研究开始把 vision foundation model、SAM、VLM、LoRA/adapter、in-context learning 和跨域迁移引入灾害损毁评估，而不是只训练一个 xBD 专用 Siamese CNN。</p>
+<h2 id="2-代表论文数据与代码" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%95%b0%e6%8d%ae%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>2. 代表论文、数据与代码</h2><table>
+  <thead>
+      <tr>
+          <th>方向</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>关键贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>强基线与泛化诊断</td>
+          <td>A simple, strong baseline for building damage detection on the xBD dataset</td>
           <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2405.10160" target="_blank" rel="noopener noreferrer">HF paper page</a></td>
-          <td>论文页含 GitHub 入口</td>
-          <td>关注遥感图文检索中的语义噪声和 open-domain retrieval，可用于处理自然语言查询歧义。</td>
+          <td><a href="https://arxiv.org/abs/2401.17271" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/PaulBorneP/Xview2_Strong_Baseline" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>从 xView2 复杂冠军方案中剥离出简单强基线，并重新划分 unseen-location 测试，指出模型和数据分布都会导致跨地点泛化失败。</td>
       </tr>
       <tr>
-          <td>多光谱检索</td>
-          <td>Multi-Spectral Remote Sensing Image Retrieval Using Geospatial Foundation Models</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2403.02059" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/IBM/remote-sensing-image-retrieval" target="_blank" rel="noopener noreferrer">IBM GitHub</a></td>
-          <td>用 Prithvi 等 GeoFM 做多光谱 image retrieval，提示 text-to-region 不应只依赖 RGB chip。</td>
+          <td>Foundation model 变化检测</td>
+          <td>Generalizable Disaster Damage Assessment via Change Detection with Vision Foundation Model / DAVI</td>
+          <td style="text-align: right">2024 arXiv, 2025 revision</td>
+          <td><a href="https://arxiv.org/abs/2406.08020" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>未确认官方代码</td>
+          <td>结合源域任务模型和 segmentation foundation model，在目标区域无 GT 标签时生成损毁伪标签，并做 pixel/image 两阶段 refinement。</td>
       </tr>
       <tr>
-          <td>组合检索</td>
-          <td>Composed Image Retrieval for Remote Sensing</td>
-          <td style="text-align: right">2024 IGARSS</td>
-          <td><a href="https://arxiv.org/abs/2405.15587" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/billpsomas/rscir" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>将 image query + text modification 用于遥感检索，可扩展为“初始区域 + 文本约束”的交互式区域检索。</td>
+          <td>SAM 视觉提示</td>
+          <td>Visual Prompt Learning of Foundation Models for Post-Disaster Damage Evaluation / ViPDE</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/10/1664" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>未见官方代码</td>
+          <td>用 SAM 嵌入知识和 pre/post 图像对做 contrastive visual prompt learning，面向建筑损毁评价。</td>
       </tr>
       <tr>
-          <td>位置与区域统一 embedding</td>
-          <td>VLM2GeoVec</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2512.11490" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>论文称 acceptance 后开源</td>
-          <td>单编码器把 image/text/bbox/coordinates 放进统一 embedding，并提出 RSMEB，包含 semantic geospatial retrieval。</td>
+          <td>VLM 灾害数据</td>
+          <td>DisasterM3: A Remote Sensing Vision-Language Dataset for Disaster Damage Assessment and Response</td>
+          <td style="text-align: right">2025 NeurIPS</td>
+          <td><a href="https://arxiv.org/abs/2505.21089" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/Junjue-Wang/DisasterM3" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>26,988 bi-temporal images、123k instruction pairs、36 个灾害事件、9 类任务；包含多传感器，SAR 内容需在光学主线中标记为 mixed-modality。</td>
       </tr>
       <tr>
-          <td>超大图 VLM</td>
-          <td>When Large Vision-Language Model Meets Large Remote Sensing Imagery</td>
-          <td style="text-align: right">2025 ICCV</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Luo_When_Large_Vision-Language_Model_Meets_Large_Remote_Sensing_Imagery_Coarse-to-Fine_ICCV_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2503.07588" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/VisionXLab/LRS-VQA" target="_blank" rel="noopener noreferrer">LRS-VQA GitHub</a></td>
-          <td>Dynamic Image Pyramid + text-guided token pruning，可迁移为 coarse-to-fine region retrieval。</td>
-      </tr>
-      <tr>
-          <td>全球 embedding</td>
-          <td>AlphaEarth Foundations / Satellite Embedding V1</td>
-          <td style="text-align: right">2025 Google DeepMind / Earth Engine</td>
-          <td><a href="https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">DeepMind blog</a>, <a href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/alphaearth-foundations.pdf" target="_blank" rel="noopener noreferrer">paper PDF</a></td>
-          <td><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL" target="_blank" rel="noopener noreferrer">Earth Engine catalog</a>, <a href="https://developers.google.com/earth-engine/guides/aef_on_gcs_readme" target="_blank" rel="noopener noreferrer">GCS guide</a></td>
-          <td>提供年度 10m 全球 embedding，可作为大范围候选索引或 reranking 特征。</td>
-      </tr>
-      <tr>
-          <td>组合检索评测</td>
-          <td>Benchmarking Composed Image Retrieval for Applied Earth Observation</td>
+          <td>多模态基准</td>
+          <td>DisasterInsight: A Multimodal Benchmark for Function-Aware and Grounded Disaster Assessment</td>
           <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.24442" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未核到官方 GitHub</td>
-          <td>将 composed retrieval 推向应用 EO 和变化中心数据集，可借鉴任务构造和指标。</td>
+          <td><a href="https://arxiv.org/abs/2601.18493" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>待确认</td>
+          <td>将 xBD 重构为约 112K building-centered instances，支持功能分类、损毁等级、灾害类型、计数和结构化报告；DI-Chat 用 LoRA 做灾害指令适配。</td>
       </tr>
       <tr>
-          <td>地理先验 CLIP</td>
-          <td>GeoPriorCLIP</td>
-          <td style="text-align: right">2026 TGRS/ORNL page</td>
-          <td><a href="https://impact.ornl.gov/en/publications/geopriorclip-a-foundational-remote-sensing-vision-language-model-/" target="_blank" rel="noopener noreferrer">ORNL page</a></td>
-          <td>未核到官方代码</td>
-          <td>通过级联地理信息先验增强 RSVLM；适合检索时加入地理、边界和空间关系。</td>
+          <td>智能迁移</td>
+          <td>Smart Transfer: Leveraging Vision Foundation Model for Rapid Building Damage Mapping with Post-Earthquake VHR Imagery</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.02627" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/ai4city-hkust/SmartTransfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>面向震后 VHR 单灾害快速迁移，提出 Pixel-wise Clustering 和 Distance-Penalized Triplet，做 LODO/SSDC 跨区域实验。</td>
+      </tr>
+      <tr>
+          <td>VLM 推理</td>
+          <td>Instruct-ICL: Instruction-Guided In-Context Learning for Post-Disaster Damage Assessment</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.11439" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>FloodNet 依赖 <a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用一个 MLLM 生成任务指令/CoT 指导另一个 MLLM，在 FloodNet post-disaster VQA 上研究 prompt/ICL 稳定性。</td>
+      </tr>
+      <tr>
+          <td>SAM + temporal VLM</td>
+          <td>Integrating segmentation and vision-language model for automated and interpretable building damage assessment from satellite imagery / BDAChat</td>
+          <td style="text-align: right">2026 Automation in Construction</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1474034626000121" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/WangYong921/BDAChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>三阶段框架：改进 SAM 分割、时空配对、BDAChat temporal VLM 做对象级损毁推理和解释。</td>
+      </tr>
+      <tr>
+          <td>工程基线</td>
+          <td>Microsoft building damage assessment toolkit</td>
+          <td style="text-align: right">持续维护</td>
+          <td><a href="https://github.com/microsoft/building-damage-assessment" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://github.com/microsoft/building-damage-assessment-cnn-siamese" target="_blank" rel="noopener noreferrer">CNN Siamese</a></td>
+          <td>GitHub</td>
+          <td>提供 xBD 类别、推理/可视化 workflow，可作为工程 baseline 与部署参考。</td>
+      </tr>
+      <tr>
+          <td>经典对象级变化</td>
+          <td>ChangeOS</td>
+          <td style="text-align: right">2021 RSE, 仍是重要基线</td>
+          <td><a href="https://github.com/Z-Zheng/ChangeOS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>深度对象级语义变化检测框架，适合作为非 foundation model 的强对照。</td>
+      </tr>
+      <tr>
+          <td>数据</td>
+          <td>xBD / xView2</td>
+          <td style="text-align: right">2019-</td>
+          <td><a href="https://arxiv.org/abs/1911.09296" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://fmi-data-index.github.io/xbd.html" target="_blank" rel="noopener noreferrer">dataset index</a>, <a href="https://www.eotdl.com/datasets/xView2" target="_blank" rel="noopener noreferrer">EOTDL</a></td>
+          <td><a href="https://github.com/diux-xview/xview2-baseline" target="_blank" rel="noopener noreferrer">baseline</a></td>
+          <td>主流建筑损毁数据，四级损毁标签：no damage、minor、major、destroyed；仍是少样本和跨灾种实验的核心数据。</td>
+      </tr>
+      <tr>
+          <td>UAV/VQA 补充</td>
+          <td>FloodNet Challenge</td>
+          <td style="text-align: right">2021-</td>
+          <td><a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>高分辨率 UAV 洪灾图像，含分类、半监督分割和 VQA，适合验证 Instruct-ICL/VLM 的灾害问答路线。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-xbd-专用模型到跨地点强基线" class="headerLink">
+    <a href="#31-xbd-%e4%b8%93%e7%94%a8%e6%a8%a1%e5%9e%8b%e5%88%b0%e8%b7%a8%e5%9c%b0%e7%82%b9%e5%bc%ba%e5%9f%ba%e7%ba%bf" class="header-mark"></a>3.1 xBD 专用模型到跨地点强基线</h3><p>2024 的 xBD simple strong baseline 很重要，因为它不只是给一个模型，而是指出原 competition split 可能高估泛化能力。它把测试位置设置为训练未见区域后，复杂模型和简化模型都明显暴露跨地点弱点。这说明 RS-45 不能只做随机 split 上的 F1，而必须做 leave-event-out、leave-region-out、leave-disaster-type-out。</p>]]></description></item><item><title>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</title><link>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</link><pubDate>Sun, 07 Jun 2026 09:43:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</guid><description><![CDATA[<h1 id="rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="headerLink">
+    <a href="#rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="header-mark"></a>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向的关键不在于“GeoFM embedding 能不能预测财富/人口/基础设施”，而在于：这些预测误差是否会系统性落在农村、低收入、非洲/拉美、非核心城市、非正式住区、低人口密度地区，以及这些误差是否会改变政策资源排序。</p>
+<p>2024-2026 的新变化是，社会经济遥感从手工夜光/道路/建筑 covariates 和 CNN poverty mapping，进入了 embedding-as-data 阶段：AlphaEarth Foundations 提供全球年度 10 m、64 维 embedding；PDFM/Population Dynamics Foundation Model 提供面向人口动态、健康、社会经济和环境任务的地理 embedding；Tempov 把双时相 Landsat 自监督预训练用于财富监测；Prithvi、Clay 等 Earth embeddings 也被用于城市指标预测。</p>
+<p>但公平性风险没有自动消失。已有 poverty-map 公平性研究已经证明，卫星贫困图存在城市/农村代表性差异、系统性误差和下游资源分配影响。新一代 GeoFM embedding 反而让风险更值得研究：同一个 embedding 会被复用于很多下游任务，一旦它对某类地区编码不足，误差会被复制到人口、财富、健康、基础设施等多条政策链路。</p>
+<p>最值得做的小课题：<strong>GeoFM 社会经济制图的 fairness-aware evaluation benchmark</strong>。它不训练一个更大模型，而是在 AlphaEarth/PDFM/Tempov/Prithvi/Clay/传统 geospatial covariates 上统一报告平均精度、分组误差、最差组误差、空间尺度错配、排序公平性和政策敏感性。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统 poverty/population mapping 使用 DHS/LSMS/census 等少量地面标签，结合夜间灯光、道路、建筑、土地覆盖、地形、POI、气候或移动网络数据，把区域财富、人口或基础设施指标推断到未调查区域。这个路线有三个老问题：</p>
+<ul>
+<li>标签分布不均：调查点常按人口和行政区抽样，低密度农村、非正式住区、边境地区、小岛、冲突地区更少。</li>
+<li>图像-社会经济关系非平稳：同样的屋顶、道路、农田或夜光，在不同国家/城乡/气候带代表的财富含义不同。</li>
+<li>平均指标掩盖政策风险：一个模型整体 R² 高，但如果系统性低估农村贫困或非正式住区人口，就会影响资源分配。</li>
+</ul>
+<p>GeoFM embedding 带来了更强的表征，但也引入新问题：</p>
+<ul>
+<li>embedding 可能更像“建成环境相似度”，对收入、政策、社会网络、非正式经济等不可见因素弱。</li>
+<li>预计算 embedding 有固定空间尺度，人口/财富标签常是 cluster、admin、grid、parcel、neighborhood 等多尺度混合。</li>
+<li>多源 foundation model 可能包含搜索、移动、地图、POI 等数字行为数据，这些数据本身代表性不均。</li>
+<li>downstream 用户容易直接训练 shallow model 并发布地图，却没有检查城市/农村、国家、收入组和空间尺度上的误差差异。</li>
+</ul>
+<h2 id="代表论文与资源" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>和公平性问题的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>AlphaEarth Foundations: An embedding field model for accurate and efficient global mapping from sparse label data</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2507.22291" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">Google DeepMind blog</a></td>
+          <td><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL" target="_blank" rel="noopener noreferrer">Earth Engine Satellite Embedding V1</a></td>
+          <td>全球年度 10 m、64 维 embedding，适合 sparse-label mapping；公平性要检查不同地区和社会经济组的 embedding utility。</td>
+      </tr>
+      <tr>
+          <td>General Geospatial Inference with a Population Dynamics Foundation Model</td>
+          <td style="text-align: right">2024/2026 revision</td>
+          <td><a href="https://arxiv.org/abs/2411.07207" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/google-research/population-dynamics" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>PDFM 用 maps、busyness、search trends、weather、air quality 等构建地理 embedding，预测健康、社会经济和环境任务；需要检查数字行为数据代表性偏差。</td>
+      </tr>
+      <tr>
+          <td>Geospatial foundation-model embeddings improve population estimation unevenly across space and scale</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.01650" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见独立代码</td>
+          <td>直接指出 PDFM embedding 对 Brazil/Nigeria/US 人口估计的收益在空间和尺度上不均，GeoFM 不能简单替代传统 covariates。</td>
+      </tr>
+      <tr>
+          <td>A satellite foundation model for improved wealth monitoring</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2604.23166" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>arXiv 页称 open-source approach；当前需进一步核验官方 repo</td>
+          <td>Tempov 用 300 万双时相 Landsat 对自监督预训练，并用参数高效微调做财富监测；应检查 nowcast/hindcast 在国家、城乡和收入组上的误差。</td>
+      </tr>
+      <tr>
+          <td>Earth Embeddings Reveal Diverse Urban Signals from Space</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2604.03456" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2604.03456" target="_blank" rel="noopener noreferrer">HF paper page</a></td>
+          <td>未见官方代码</td>
+          <td>比较 AlphaEarth、Prithvi、Clay 预测 6 个美国都市区的 14 个 neighborhood indicators；发现跨城市表现差异明显，适合作为城市内部公平性评估参考。</td>
+      </tr>
+      <tr>
+          <td>Slum Detection and Density Mapping with AlphaEarth Foundations</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.10029" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>用 AlphaEarth 做 12 城市 slum classification/density；发现跨城转移和密度梯度建模仍难，说明非正式住区是公平性压力测试场景。</td>
+      </tr>
+      <tr>
+          <td>Fairness and representation in satellite-based poverty maps</td>
+          <td style="text-align: right">2023</td>
+          <td><a href="https://arxiv.org/abs/2305.01783" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>需进一步核验</td>
+          <td>虽早于 2024，但它定义了本方向的核心问题：城市/农村代表性、系统性误差和下游政策排序影响。</td>
+      </tr>
+      <tr>
+          <td>Mitigating Urban-Rural Disparities in Contrastive Representation Learning with Satellite Imagery / FairDCL</td>
+          <td style="text-align: right">2024 AIES</td>
+          <td><a href="https://par.nsf.gov/biblio/10592949-mitigating-urban-rural-disparities-contrastive-representation-learning-satellite-imagery" target="_blank" rel="noopener noreferrer">NSF record</a>, <a href="https://arxiv.org/abs/2211.08672" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见主 repo</td>
+          <td>用 fair dense contrastive learning 减少城市/农村表示差异；可迁移到 GeoFM embedding 的公平预训练或后处理。</td>
+      </tr>
+      <tr>
+          <td>SustainBench / Poverty prediction over space and time</td>
+          <td style="text-align: right">2021 benchmark, still active</td>
+          <td><a href="https://github.com/sustainlab-group/sustainbench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://sustainlab-group.github.io/sustainbench/leaderboard/" target="_blank" rel="noopener noreferrer">Leaderboard</a>, <a href="https://arxiv.org/abs/2111.04724" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>公开 benchmark/code</td>
+          <td>不是 2024 新论文，但仍是 poverty mapping 和 SDG 任务的核心复现实验框架。</td>
+      </tr>
+      <tr>
+          <td>PovertyMap-WILDS</td>
+          <td style="text-align: right">2021 benchmark, still useful</td>
+          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">WILDS paper/data context</a></td>
+          <td>WILDS package</td>
+          <td>按国家和 urban/rural 定义 domain；适合最差组性能和跨国泛化评估。</td>
+      </tr>
+      <tr>
+          <td>WorldPop</td>
+          <td style="text-align: right">持续更新</td>
+          <td><a href="https://www.worldpop.org/" target="_blank" rel="noopener noreferrer">official</a></td>
+          <td>开放人口数据</td>
+          <td>传统 population mapping 强基线和辅助标签来源；其 constrained/unconstrained 选择本身影响公平性。</td>
+      </tr>
+      <tr>
+          <td>Global Human Settlement Layer / GHS-POP</td>
+          <td style="text-align: right">2023/2024 atlas and updates</td>
+          <td><a href="https://data.jrc.ec.europa.eu/collection/ghsl" target="_blank" rel="noopener noreferrer">JRC GHSL</a>, <a href="https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php" target="_blank" rel="noopener noreferrer">GHS-POP R2023A</a></td>
+          <td>官方数据</td>
+          <td>人口和 built-up baseline；城市/农村定义、built-up mask 和 coarse grid 会影响下游公平性。</td>
+      </tr>
+      <tr>
+          <td>High-resolution urban and rural settlement map of Africa</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://www.nature.com/articles/s41598-025-34295-7" target="_blank" rel="noopener noreferrer">Scientific Reports</a></td>
+          <td>论文数据需核验</td>
+          <td>10 m urban/rural settlement map，可作为非洲城乡分组和 settlement-type fairness label。</td>
       </tr>
   </tbody>
 </table>
 <h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-text-to-chip-retrieval" class="headerLink">
-    <a href="#1-text-to-chip-retrieval" class="header-mark"></a>1. Text-to-chip retrieval</h3><p>输入文本，候选库是固定大小 image chips。RemoteCLIP、GeoRSCLIP、PriorCLIP、PR-CLIP、CMPAGL 等都属于这条线。优点是易复现、指标成熟；缺点是候选 chip 的边界由数据集预先定义，不解决“在大图中找区域”的问题。</p>]]></description></item><item><title>RS-09 HBB/OBB/Mask Unified Visual Grounding</title><link>https://spacetop.win/2026/06/rs-09-hbb-obb-mask-unified-visual-grounding/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-09-hbb-obb-mask-unified-visual-grounding/</guid><description><![CDATA[<h1 id="rs-09-hbbobbmask-unified-visual-grounding" class="headerLink">
-    <a href="#rs-09-hbbobbmask-unified-visual-grounding" class="header-mark"></a>RS-09 HBB/OBB/Mask Unified Visual Grounding</h1><h2 id="任务-prompt" class="headerLink">
-    <a href="#%e4%bb%bb%e5%8a%a1-prompt" class="header-mark"></a>任务 Prompt</h2><h2 id="执行摘要" class="headerLink">
-    <a href="#%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>执行摘要</h2><ul>
-<li>遥感 visual grounding 的输出正在从单一 HBB 走向 HBB/OBB/mask 统一：HBB 适合粗定位，OBB 适合飞机、船、车辆、跑道等旋转目标，mask 适合建筑、道路、水体、农田等形状复杂目标。</li>
-<li>GeoChat 先把遥感 VLM 带到 grounded dialogue，但主要输出框；GeoGround 进一步把 HBB、OBB、mask 统一成同一套 RS visual grounding 框架，并用 Text-Mask 与 hybrid supervision 对齐三种几何信号。</li>
-<li>RSUniVLM 侧重多粒度任务统一，把 object localization、VQA、semantic segmentation 等都归入 text-only generation；OmniEarth 则把 bbox 和 mask 输出纳入 RSVLM benchmark，强调模型是否真正依赖视觉证据。</li>
-<li>RS2-SAM2 从 referring remote sensing image segmentation 切入：用文本-视觉联合编码生成 dense mask prompt 给 SAM2，代表“语言 grounding -&gt; SAM2 精修 mask”的路线。</li>
-<li>一个值得做的小课题是：把 VLM/grounding 模型的 HBB/OBB 粗定位，与 SAM2/RS2-SAM2 的 mask prompt 生成、旋转几何约束和密集小目标去粘连机制串起来，构造统一的 <code>text -&gt; HBB/OBB -&gt; mask</code> pipeline。</li>
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-传统-covariates--survey-labels" class="headerLink">
+    <a href="#1-%e4%bc%a0%e7%bb%9f-covariates--survey-labels" class="header-mark"></a>1. 传统 covariates + survey labels</h3><p>输入包括 night lights、built-up、roads、land cover、elevation、climate、population products、POI 和 admin features；标签来自 DHS/LSMS/census/ACS 等。模型通常是 RF、GBDT、Bayesian small-area estimation、CNN 或 CNN feature + regression。</p>]]></description></item><item><title>RS-43 Illegal Mining Evidence Grounding</title><link>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</link><pubDate>Sun, 07 Jun 2026 09:42:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</guid><description><![CDATA[<h1 id="rs-43-illegal-mining-evidence-grounding" class="headerLink">
+    <a href="#rs-43-illegal-mining-evidence-grounding" class="header-mark"></a>RS-43 Illegal Mining Evidence Grounding</h1><h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>非法采矿，尤其是亚马逊和加纳等地区的 artisanal and small-scale gold mining，具有几个典型遥感难点：目标尺度小、形态变化快、常沿河流和道路扩散、裸土/采坑/尾矿池/临时道路/简易机场之间存在强上下文关系，同时又经常受云、阴影、季节水位和成像分辨率影响。传统做法多是二分类或语义分割：给出“这里是矿区”。但执法、新闻调查、生态评估和社区沟通需要的不只是一个 mask，而是可审计证据：模型为什么认为这里是非法采矿，变化发生在何处，相关证据是否来自裸土扩张、河道浑浊、植被损失、道路/机场/机械痕迹，答案有没有定位支撑。</p>
+<p>因此这个细方向可以定义为：面向非法采矿/森林破坏的 evidence-grounded remote sensing interpretation。输出不只是 detection / segmentation / change mask，还包括：</p>
+<ul>
+<li>证据区域：bbox、mask、polygon 或 georeferenced tile。</li>
+<li>证据类型：裸土采坑、尾矿池、浑浊水体、临时道路、营地、机场、森林清除边界等。</li>
+<li>时间证据：pre/post 或多时相变化描述。</li>
+<li>置信度与不确定性：是否可能是合法矿区、自然裸地、农业开垦、河道季节变化。</li>
+<li>可复核产物：地图图层、caption、QA、变化报告和失败案例。</li>
 </ul>
+<h2 id="2-代表论文数据与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%95%b0%e6%8d%ae%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文、数据与项目</h2><table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>对 RS-43 的价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ELDOR: A Dataset and Benchmark for Illegal Gold Mining in the Amazon Rainforest</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.15397" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>论文提到 interactive explorer，官方代码需继续跟踪</td>
+          <td>目前最贴近本题的 benchmark：UAV orthomosaic、像素级 mining/ecological labels、语义分割、recognition、VLM class-presence 任务。</td>
+      </tr>
+      <tr>
+          <td>Amazon Mining Watch</td>
+          <td style="text-align: right">2026 数据平台/产品</td>
+          <td><a href="https://amazonminingwatch.org/es" target="_blank" rel="noopener noreferrer">platform</a>, <a href="https://source.coop/earthgenome/amazon-mining-watch" target="_blank" rel="noopener noreferrer">Source Cooperative data</a></td>
+          <td><a href="https://github.com/earthrise-media/mining-detector" target="_blank" rel="noopener noreferrer">GitHub: mining-detector</a></td>
+          <td>Sentinel-2 泛亚马逊矿区检测产品；GitHub 说明使用 SSL4EO DINO ViT 特征 + 小型 ensemble classifier；适合做真实部署基线和地理范围评测。</td>
+      </tr>
+      <tr>
+          <td>SmallMinesDS: A Multimodal Dataset for Mapping Artisanal and Small-Scale Gold Mines</td>
+          <td style="text-align: right">2025 IEEE GRSL</td>
+          <td><a href="https://portal.fis.tum.de/en/publications/smallminesds-a-multimodal-dataset-for-mapping-artisanal-and-small/" target="_blank" rel="noopener noreferrer">TUM page</a></td>
+          <td><a href="https://huggingface.co/datasets/ellaampy/SmallMinesDS" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+          <td>Ghana 小规模金矿，多时相/多传感器；适合测试跨区域、跨传感器和小目标矿区分割。</td>
+      </tr>
+      <tr>
+          <td>EuroMineNet: A Multitemporal Sentinel-2 Benchmark for Spatiotemporal Mining Footprint Analysis</td>
+          <td style="text-align: right">2026 ISPRS JPRS / 2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2510.14661" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://www.sciencedirect.com/science/article/pii/S092427162600225X" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/EricYu97/EuroMineNet" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>虽非“非法”主线，但提供 2015-2024 年度 mining footprint，多时相变化和 footprint tracking protocol 可迁移。</td>
+      </tr>
+      <tr>
+          <td>Remote Sensing Capabilities of Detecting Spatio-Temporal Dynamics in Unregulated Gold Mining Hotspots in Ecuador</td>
+          <td style="text-align: right">2026 EGUsphere preprint</td>
+          <td><a href="https://egusphere.copernicus.org/preprints/2026/egusphere-2026-1854/" target="_blank" rel="noopener noreferrer">EGUsphere</a></td>
+          <td>使用公开数据，含 Amazon Mining Watch 引用</td>
+          <td>对“unregulated mining”真实场景评估 Sentinel / Planet / embedding 数据能力，适合做案例与验证区域。</td>
+      </tr>
+      <tr>
+          <td>MineCam: Segmentation and Change Detection of Mining Areas</td>
+          <td style="text-align: right">2024 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/16/6/955" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>未见官方代码</td>
+          <td>传统 segmentation + change detection baseline，可作为 VLM 证据化方案的对照。</td>
+      </tr>
+      <tr>
+          <td>Global High-Resolution Mining Footprints</td>
+          <td style="text-align: right">数据产品</td>
+          <td><a href="https://gee-community-catalog.org/projects/global-mining/" target="_blank" rel="noopener noreferrer">GEE Community Catalog</a></td>
+          <td>GEE 数据</td>
+          <td>全球矿区 footprint 先验，可作为弱标签、负样本过滤或合法/历史矿区背景层。</td>
+      </tr>
+      <tr>
+          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td><a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>遥感 grounded dialogue 基线，可迁移到“指出证据区域并解释为什么像矿区”。</td>
+      </tr>
+      <tr>
+          <td>LHRS-Bot</td>
+          <td style="text-align: right">2024 ECCV</td>
+          <td><a href="https://pumpkin-co.github.io/publication/2024-01" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>项目页含 GitHub</td>
+          <td>VGI-enhanced 遥感 MLLM，适合探索 OSM/POI/地名/道路先验辅助但需防止文本幻觉。</td>
+      </tr>
+      <tr>
+          <td>Change-Agent</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://huggingface.co/papers/2403.19646" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td><a href="https://github.com/Chen-Yang-Liu/Change-Agent" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>交互式变化解释：change detection、caption、counting、cause analysis；适合迁移到矿区扩张解释。</td>
+      </tr>
+      <tr>
+          <td>CDChat</td>
+          <td style="text-align: right">2024/2025 IGARSS</td>
+          <td><a href="https://github.com/techmn/cdchat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>遥感变化描述 MLLM；可作为 change caption baseline。</td>
+      </tr>
+      <tr>
+          <td>SECOND-CC / MModalCC</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://huggingface.co/papers/2501.10075" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td><a href="https://github.com/ChangeCapsInRS/SecondCC" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>change captioning 数据与模型，适合借鉴多模态 change caption 数据构造。</td>
+      </tr>
+      <tr>
+          <td>DeltaVLM</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://huggingface.co/papers/2507.22346" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>需继续核验</td>
+          <td>instruction-guided difference perception，把双时相变化分析做成可交互 VLM。</td>
+      </tr>
+      <tr>
+          <td>HiSem</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.15024" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/Man-Wang-star/HiSem" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>层级语义解耦 change caption，可迁移到“森林损失 -&gt; 采坑/道路/水体污染”等分层描述。</td>
+      </tr>
+      <tr>
+          <td>Vision-Language Agents for Interactive Forest Change Analysis</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://huggingface.co/papers/2601.04497" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>需继续核验</td>
+          <td>直接面向 forest change 的交互式 VLM agent；适合迁移到 deforestation + mining 证据问答。</td>
+      </tr>
+      <tr>
+          <td>LISAT: Language-Instructed Segmentation Assistant for Satellite Imagery</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://huggingface.co/papers/2505.02829" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>HF page links project/GitHub</td>
+          <td>reasoning segmentation 能力可迁移到“segment mining scars / tailing ponds / disturbed riverbank”。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-问题由来为什么需要-evidence-grounding" class="headerLink">
+    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81-evidence-grounding" class="header-mark"></a>3. 问题由来：为什么需要 evidence grounding</h2><h3 id="31-从检测矿区到证明矿区" class="headerLink">
+    <a href="#31-%e4%bb%8e%e6%a3%80%e6%b5%8b%e7%9f%bf%e5%8c%ba%e5%88%b0%e8%af%81%e6%98%8e%e7%9f%bf%e5%8c%ba" class="header-mark"></a>3.1 从“检测矿区”到“证明矿区”</h3><p>Amazon Mining Watch 这类系统已经能做大范围筛查，但现实使用者往往需要回答更细的问题：</p>]]></description></item><item><title>RS-42 Wildfire Mapping with GeoFM LoRA</title><link>https://spacetop.win/2026/06/rs-42-wildfire-mapping-with-geofm-lora/</link><pubDate>Sun, 07 Jun 2026 09:41:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-42-wildfire-mapping-with-geofm-lora/</guid><description><![CDATA[<h1 id="rs-42-wildfire-mapping-with-geofm-lora" class="headerLink">
+    <a href="#rs-42-wildfire-mapping-with-geofm-lora" class="header-mark"></a>RS-42 Wildfire Mapping with GeoFM LoRA</h1><p>细问题：面向 wildfire / burn scar / burn severity mapping，如何用低样本、参数高效的 GeoFM adapter/LoRA 适配 Prithvi、TerraMind、DINOv3、AlphaEarth 等遥感基础模型，并处理 pre/post-fire 光学影像、云烟干扰、不确定性和跨地区泛化。</p>
+<h2 id="1-方向判断" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 方向判断</h2><p>Wildfire mapping 的经典路线是 NBR/dNBR、BAIS2、阈值、随机森林、U-Net/Siamese U-Net、ChangeFormer 一类变化检测模型。2024-2026 的新变化是：基础模型开始进入真正可复现的 wildfire 任务，而不只是“拿 Prithvi 做一个示例”。其中最直接的锚点是 2026 IGARSS 论文 <a href="https://arxiv.org/abs/2605.04989" target="_blank" rel="noopener noreferrer">Low-Rank Adaptation of Geospatial Foundation Models for Wildfire Mapping Using Sentinel-2 Data</a>，其官方代码为 <a href="https://github.com/alishibli97/wildfire-lora-gfm" target="_blank" rel="noopener noreferrer">alishibli97/wildfire-lora-gfm</a>。</p>
+<p>这个方向的研究价值不在于“再做一个烧毁区分割模型”，而在于回答一个更窄的问题：在地理、时间、生态区和传感器条件都变化的情况下，LoRA/adapter 是否比 full fine-tuning 或 decoder-only fine-tuning 更稳，尤其是在小样本事件、云烟遮挡、火后恢复阶段、跨国家/跨生态区泛化时。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><ol>
+<li>火烧迹地是典型的 bi-temporal change problem。单张 post-fire 影像容易把裸土、采伐地、阴影、火山/矿区等误判为 burned area；pre-fire/post-fire 差分能增强变化信号，但也会引入季节、物候、云影、观测角和配准误差。</li>
+<li>标签天然有噪声。USGS BARC 数据说明 burn severity 产品通常基于 pre/post-fire 的 dNBR，并且阈值需要 BAER 团队结合现场观察调整；这意味着 severity label 在生态区边界和低/中 severity 类别上并不是绝对真值。</li>
+<li>跨地区泛化比随机切分难得多。2026 LoRA-GFM 论文使用美国和加拿大 2017-2023 的 3,820 个 wildfire events，并做 spatial/temporal generalization tests；这是该方向从“局部案例”走向“域泛化问题”的关键。</li>
+<li>GeoFM 的预训练知识有用，但灾害任务需要强适配。Prithvi-EO-2.0 预训练于 HLS 全球时间序列，并引入 temporal/location embeddings；这对 wildfire 这种多时相任务很友好，但仍需解决任务头、差分建模和不确定性。</li>
+</ol>
+<h2 id="3-代表论文模型数据与代码" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%a8%a1%e5%9e%8b%e6%95%b0%e6%8d%ae%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>3. 代表论文、模型、数据与代码</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>与本方向的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Low-Rank Adaptation of Geospatial Foundation Models for Wildfire Mapping Using Sentinel-2 Data</td>
+          <td style="text-align: right">2026 IGARSS / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.04989" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/alishibli97/wildfire-lora-gfm" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>直接比较 TerraMind、DINOv3、Prithvi-v2 的 full fine-tuning、decoder-only fine-tuning、LoRA；官方 README 显示包含 FPN adapter、UPerNet decoder、spatio-temporal splits、sliding-window full-fire inference、IoU/F1 和 fire-size summaries。</td>
+      </tr>
+      <tr>
+          <td>Prithvi-EO-2.0</td>
+          <td style="text-align: right">2024 arXiv, 2026 revised</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>多时相 HLS GeoFM。论文摘要称其使用 4.2M 全球 HLS time-series samples，并提供 Hugging Face、TerraTorch 与 GitHub 资源；适合作为 wildfire LoRA 主干。</td>
+      </tr>
+      <tr>
+          <td>Prithvi EO 2.0 Burn Scar Severity Detection</td>
+          <td style="text-align: right">2024/2025 HF model card</td>
+          <td><a href="https://huggingface.co/Tushar365/prithvi-burn-scar-model" target="_blank" rel="noopener noreferrer">model</a>, <a href="https://huggingface.co/datasets/Tushar365/prithvi-burn-scar-dataset" target="_blank" rel="noopener noreferrer">dataset</a></td>
+          <td>一个可直接运行的 Prithvi burn scar severity demo。输入为 pre-fire、post-fire、delta 三帧，6 个 Sentinel-2 band，输出 5 类 severity。模型卡自报 macro F1 从 0.116 提升到 0.622，但其限制也明确：单一北加州 wildfire 事件、云烟未评估、20m 分辨率可能漏细节。</td>
+      </tr>
+      <tr>
+          <td>HLS Burn Scars Dataset</td>
+          <td style="text-align: right">HF dataset</td>
+          <td><a href="https://huggingface.co/datasets/harshinde/hls-burn-scars" target="_blank" rel="noopener noreferrer">dataset</a></td>
+          <td>HLS 2018-2021 CONUS burn scar segmentation，804 个 512x512 scenes，6 个 band，540 train / 264 validation；适合最小复现实验和 adapter sanity check。</td>
+      </tr>
+      <tr>
+          <td>AlphaEarth Foundations</td>
+          <td style="text-align: right">2025 arXiv / Google DeepMind</td>
+          <td><a href="https://arxiv.org/abs/2507.22291" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">blog</a></td>
+          <td>64 维年度 embedding field，面向 sparse labels 的 global mapping。更适合做 linear probe / shallow adapter / sparse-label baseline，而不是端到端 LoRA。可用于 wildfire 小样本或跨区迁移对照。</td>
+      </tr>
+      <tr>
+          <td>Burned Area Reflectance Classification (BARC) Thematic Burn Severity Mosaic</td>
+          <td style="text-align: right">2025 USGS data release</td>
+          <td><a href="https://data.usgs.gov/datacatalog/data/USGS%3A62e3e9b4d34e394b65365bef" target="_blank" rel="noopener noreferrer">USGS catalog</a></td>
+          <td>权威 severity label 来源之一。基于 Landsat/Sentinel pre/post-fire dNBR，但官方说明 severity 与 canopy/understory/soil effects 相关，且阈值需与现场观测调整，因此很适合讨论标签不确定性。</td>
+      </tr>
+      <tr>
+          <td>SAFE: Segmentation of Any Fire Event</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/1/54" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>训练自由路线：结合 SAM、MODIS/VIIRS hotspot、Sentinel-2 指数两步定位 burned area，并可生成高分辨率数据再训练区域模型。适合作为伪标签或半自动标注对照。</td>
+      </tr>
+      <tr>
+          <td>California Wildfire GeoImaging Dataset (CWGID)</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2409.16380" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>构建 10 万+ before/after Sentinel-2 image pairs，用于 wildfire detection；偏分类/检测而非高精度 burn mask，但可用于预训练或事件级检索。</td>
+      </tr>
+      <tr>
+          <td>Faster, better, and more accurate mapping of burned areas using Sentinel-2 multispectral images</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725005413" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>MSR-BACD 路线：全球大规模正负样本、pre/post Sentinel-2、candidate-based inference。可作为强监督专用模型 baseline。</td>
+      </tr>
+      <tr>
+          <td>TransFireNet</td>
+          <td style="text-align: right">2025 Remote Sensing Letters</td>
+          <td><a href="https://www.tandfonline.com/doi/abs/10.1080/2150704X.2025.2544356" target="_blank" rel="noopener noreferrer">publisher</a></td>
+          <td>bi-temporal Sentinel-2 burn severity estimation，45 个 European wildfire events；适合作为非 GeoFM 的 burn severity baseline。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-方法脉络比较" class="headerLink">
+    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e6%af%94%e8%be%83" class="header-mark"></a>4. 方法脉络比较</h2><h3 id="41-指数与阈值" class="headerLink">
+    <a href="#41-%e6%8c%87%e6%95%b0%e4%b8%8e%e9%98%88%e5%80%bc" class="header-mark"></a>4.1 指数与阈值</h3><p>NBR/dNBR、BAIS2、NDVI/NDWI 等指数可解释、低成本、部署简单，但跨生态区阈值不稳，对云影、裸土、采伐、湿地和季节变化敏感。BARC 的说明很适合用来支撑一个观点：severity label 不是纯影像数学事实，而是遥感指数、生态效应和现场知识的折中。</p>]]></description></item><item><title>RS-41 Phenology-Aware Crop Foundation Models</title><link>https://spacetop.win/2026/06/rs-41-phenology-aware-crop-foundation-models/</link><pubDate>Sun, 07 Jun 2026 09:40:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-41-phenology-aware-crop-foundation-models/</guid><description><![CDATA[<h1 id="rs-41-phenology-aware-crop-foundation-models" class="headerLink">
+    <a href="#rs-41-phenology-aware-crop-foundation-models" class="header-mark"></a>RS-41 Phenology-Aware Crop Foundation Models</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>作物识别的关键不是某一天的影像，而是作物在一个生长季中的物候轨迹。2024-2026 的作物遥感研究从传统 Sentinel-2 time series 分类，走向 multi-source temporal foundation model、region-adaptive phenology、WorldCereal 实际部署和 AgriFM。最有价值的小问题是：如何让 foundation model 学到“可迁移的物候阶段”，而不是记住某地区某年的日历日期。</p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感图像和自然图像的 grounding 差异很硬：</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>同一种作物在不同纬度、海拔、管理制度和气候年份下，播种、返青、抽穗、成熟和收获时间都会偏移。模型若用固定 day-of-year 作为强特征，很容易跨年份或跨区域失效。物候感知模型需要处理不规则时间采样、云导致的缺测、多源传感器和作物生长阶段对齐。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Self-supervised pre-training for large-scale crop mapping using Sentinel-2 time series</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>大规模 S2 时序自监督作物制图。</td>
+      </tr>
+      <tr>
+          <td>Temporally transferable crop mapping with temporal encoding and augmentations</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843224002218" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>使用 temporal encoding 和 day shifting 提升跨年份迁移。</td>
+      </tr>
+      <tr>
+          <td>AgriFM</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>多源时序 crop mapping foundation model，强调多尺度时空模式。</td>
+      </tr>
+      <tr>
+          <td>Deploying GFMs in the Real World: WorldCereal</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2508.00858" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>用 Presto 等模型讨论真实作物制图部署难点。</td>
+      </tr>
+      <tr>
+          <td>Region-Adaptive Phenology-Aware Network</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/24/4011" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>区域自适应物候网络，强调跨区域泛化。</td>
+      </tr>
+      <tr>
+          <td>Benchmarking FMs for hyperspectral crop type mapping</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2510.11576" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>将 foundation model 用于 cereal crop type mapping。</td>
+      </tr>
+      <tr>
+          <td>FLORO</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://doi.org/10.48550/arXiv.2605.28174" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>生态遥感 across sensors/scales，可迁移到农业生态任务。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
+<li>时间编码：day-of-year、month、season embedding。</li>
+<li>物候增强：random day shifting、temporal cropping、cloud gap simulation。</li>
+<li>阶段对齐：用 NDVI/EVI 曲线估计生长阶段，再让模型按阶段而非日期聚合。</li>
+<li>多源时序：Sentinel-2、Landsat/HLS、SAR 可选、气象和地块先验共同建模；本系列默认光学/多光谱优先。</li>
+<li>foundation model 适配：Presto、Prithvi、AgriFM、Galileo 等作为时序基座。</li>
+</ol>
+<h2 id="当前问题" class="headerLink">
+    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
+<li>日历日期和物候阶段混淆。</li>
+<li>云缺测导致关键阶段观测不足。</li>
+<li>作物标签跨区域定义不一致。</li>
+<li>多年、多地、多传感器 benchmark 不统一。</li>
+<li>foundation model 在真实部署中仍需要区域微调。</li>
+</ul>
+<h2 id="可执行研究方案" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Phenology-Phase Adapter for Crop Foundation Models</p>]]></description></item></channel></rss>

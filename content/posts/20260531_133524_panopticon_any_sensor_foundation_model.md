@@ -1,6 +1,6 @@
 ---
 title: "Panopticon: 任意传感器地球观测基础模型"
-date: 2026-05-31
+date: 2026-05-31T13:35:24+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

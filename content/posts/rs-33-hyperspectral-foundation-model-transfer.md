@@ -1,6 +1,6 @@
 ---
 title: "RS-33 Hyperspectral Foundation Model Transfer"
-date: 2026-06-07
+date: 2026-06-07T09:32:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高光谱", "多光谱", "谱段适配"]
 categories: ["可提示分割、开放词表与密集预测"]

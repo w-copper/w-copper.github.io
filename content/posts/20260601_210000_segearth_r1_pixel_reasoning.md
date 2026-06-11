@@ -1,6 +1,6 @@
 ---
 title: "当遥感图像学会\"思考\"：SegEarth-R1用LLM实现地理空间像素推理"
-date: 2026-06-01
+date: 2026-06-01T21:00:00+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

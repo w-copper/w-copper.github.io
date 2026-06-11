@@ -1,6 +1,6 @@
 ---
 title: "RS-30 Tiny Model Task Routing for EO"
-date: 2026-06-07
+date: 2026-06-07T09:29:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高效推理", "大幅面遥感", "星上部署"]
 categories: ["多源数据融合、效率部署与应用落地"]

@@ -1,6 +1,6 @@
 ---
 title: "Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型"
-date: 2026-06-01
+date: 2026-06-01T13:00:00+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

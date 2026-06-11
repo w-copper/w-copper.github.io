@@ -1,6 +1,6 @@
 ---
 title: "RS-39 POI-Assisted Remote Sensing VLM Reasoning"
-date: 2026-06-07
+date: 2026-06-07T09:38:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
 categories: ["遥感基础模型与多模态理解"]

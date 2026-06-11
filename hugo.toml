@@ -74,7 +74,7 @@ theme = 'doit'
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   #  日期格式
-  dateFormat = "2006-01-02"
+  dateFormat = "2006-01-02 15:04:05"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.svg"]
   #  开启 PWA 支持
@@ -191,7 +191,7 @@ theme = 'doit'
     # section 页面每页显示文章数量
     paginate = 20
     # 日期格式 (月和日)
-    dateFormat = "01-02"
+    dateFormat = "01-02 15:04"
     # RSS 文章数目
     rss = 10
     #  最近更新文章设置
@@ -206,7 +206,7 @@ theme = 'doit'
     # list 页面每页显示文章数量
     paginate = 20
     # 日期格式 (月和日)
-    dateFormat = "01-02"
+    dateFormat = "01-02 15:04"
     # RSS 文章数目
     rss = 10
 
@@ -455,7 +455,7 @@ theme = 'doit'
       enable = true
       # Disqus 评论系统设置
       [page.comment.giscus]
-        enable = true
+        enable = false
         # owner/repo
         dataRepo = "w-copper/w-copper.github.io"
         dataRepoId = "R_kgDOIt9Nww"

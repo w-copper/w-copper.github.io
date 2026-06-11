@@ -1,6 +1,6 @@
 ---
 title: "RS-19 Change Caption Evidence Grounding"
-date: 2026-06-07
+date: 2026-06-07T09:18:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["多时相", "变化检测", "时序遥感"]
 categories: ["遥感基础模型与多模态理解"]

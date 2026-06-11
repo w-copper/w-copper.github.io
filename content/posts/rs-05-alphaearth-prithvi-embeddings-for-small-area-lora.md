@@ -1,6 +1,6 @@
 ---
 title: "RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA"
-date: 2026-06-07
+date: 2026-06-07T09:04:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感基础模型", "GeoFM", "2024-2026"]
 categories: ["遥感基础模型与多模态理解"]

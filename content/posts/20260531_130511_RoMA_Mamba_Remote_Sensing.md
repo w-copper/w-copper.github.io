@@ -1,6 +1,6 @@
 ---
 title: "RoMA: 首个基于Mamba架构的遥感自监督预训练框架"
-date: 2026-05-31
+date: 2026-05-31T13:05:11+08:00
 categories: ["遥感基础模型与多模态理解"]
 draft: false
 ---

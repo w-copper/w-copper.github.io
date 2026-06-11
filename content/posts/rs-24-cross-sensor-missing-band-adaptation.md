@@ -1,6 +1,6 @@
 ---
 title: "RS-24 Cross-Sensor Missing-Band Adaptation"
-date: 2026-06-07
+date: 2026-06-07T09:23:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["泛化", "OOD", "不确定性"]
 categories: ["遥感基础模型与多模态理解"]

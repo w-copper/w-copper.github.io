@@ -1,6 +1,6 @@
 ---
 title: "RS-50 Hierarchical Taxonomy Metrics for Remote Sensing"
-date: 2026-06-07
+date: 2026-06-07T09:49:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
 categories: ["多源数据融合、效率部署与应用落地"]

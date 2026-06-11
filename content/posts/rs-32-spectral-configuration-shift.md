@@ -1,6 +1,6 @@
 ---
 title: "RS-32 Spectral Configuration Shift"
-date: 2026-06-07
+date: 2026-06-07T09:31:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高光谱", "多光谱", "谱段适配"]
 categories: ["多源数据融合、效率部署与应用落地"]

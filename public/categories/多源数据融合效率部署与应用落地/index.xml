@@ -1,4 +1,493 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:49:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:49:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
+    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
+<p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>RS-38 Parcel-Aware Crop Mapping</title><link>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</link><pubDate>Sun, 07 Jun 2026 09:37:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</guid><description><![CDATA[<h1 id="rs-38-parcel-aware-crop-mapping" class="headerLink">
+    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>像素级 crop classification 会在地块边界、混合像元、云影、裸土期和不同作物物候接近时出错。若将地块作为结构先验，可以把时序信号在地块内聚合，并减少椒盐噪声。但地块边界本身并不总是可用，OSM/LPIS 等矢量数据也可能过期、错位或不完整。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Self-supervised pre-training for large-scale crop mapping using Sentinel-2 time series</td>
+          <td style="text-align: right">2024 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>时序自监督作物制图基线。</td>
+      </tr>
+      <tr>
+          <td>Delineate Anything</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://huggingface.co/papers/2504.02534" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>resolution-agnostic field boundary delineation，强调 zero-shot generalization。</td>
+      </tr>
+      <tr>
+          <td>AgriFM</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>多源时序作物制图 foundation model，显式强调物候。</td>
+      </tr>
+      <tr>
+          <td>WorldCereal / Presto real-world deployment</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2508.00858" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>真实作物制图部署经验，强调 benchmark 到 operational gap。</td>
+      </tr>
+      <tr>
+          <td>Fields of The World</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://github.com/fieldsoftheworld/" target="_blank" rel="noopener noreferrer">GitHub org</a></td>
+          <td>多洲、多国家 field boundary benchmark 生态。</td>
+      </tr>
+      <tr>
+          <td>PRUE</td>
+          <td style="text-align: right">2026 CVPR</td>
+          <td><a href="https://arxiv.org/abs/2603.27101" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>field boundary segmentation at scale，适合地块边界主基线。</td>
+      </tr>
+      <tr>
+          <td>Region-Adaptive Phenology-Aware Network</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/24/4011" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>区域自适应物候网络，说明跨区域作物物候偏移的重要性。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
+<li>pixel-first：直接对 Sentinel-2 time series 做像素分类。</li>
+<li>parcel-first：已有地块矢量，聚合每个 parcel 的时序特征。</li>
+<li>boundary-first：先从影像预测 field boundary，再生成 parcel。</li>
+<li>joint：同时学习 boundary、parcel embedding 和 crop label。</li>
+</ol>
+<h2 id="当前问题" class="headerLink">
+    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
+<li>公开地块边界跨国家不均衡。</li>
+<li>parcel 边界错位会污染时序聚合。</li>
+<li>小地块、梯田和复种区域难分。</li>
+<li>作物物候跨年份、气候带和管理制度变化很大。</li>
+<li>单纯 parcel majority voting 会掩盖地块内混作或变化。</li>
+</ul>
+<h2 id="可执行研究方案" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Uncertainty-Aware Parcel Aggregation for Crop Mapping</p>]]></description></item><item><title>RS-37 Topology-Aware Road and Building Segmentation</title><link>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</link><pubDate>Sun, 07 Jun 2026 09:36:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</guid><description><![CDATA[<h1 id="rs-37-topology-aware-road-and-building-segmentation" class="headerLink">
+    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感基础模型擅长提供强特征或候选 mask，但 GIS 产品需要道路网络和建筑轮廓。像素级分割错误一旦进入路网或建筑 footprint，会造成导航断裂、地块统计错误和灾损估计偏差。因此拓扑指标与 vectorization 是从研究分割走向实际地图生产的关键。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SAM-Road</td>
+          <td style="text-align: right">2024 CVPRW</td>
+          <td><a href="https://github.com/htcr/sam_road" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 SAM/图结构做大规模向量化道路网络提取。</td>
+      </tr>
+      <tr>
+          <td>P2PFormer</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://researchtrend.ai/papers/2406.02930" target="_blank" rel="noopener noreferrer">arXiv summary</a></td>
+          <td>primitive-to-polygon，先预测点线角等几何 primitive，再生成建筑轮廓。</td>
+      </tr>
+      <tr>
+          <td>Adaptive Structure-Aware Connectivity-Preserving Loss</td>
+          <td style="text-align: right">2025 WACVW</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2025W/CV4EO/papers/Shojaei_Adaptive_Structure-Aware_Connectivity-Preserving_Loss_for_Improved_Road_Segmentation_in_Remote_WACVW_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>针对道路连通性的结构感知损失。</td>
+      </tr>
+      <tr>
+          <td>Pix2Poly</td>
+          <td style="text-align: right">2025 WACV</td>
+          <td><a href="https://github.com/yeshwanth95/Pix2Poly" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>端到端 polygonal building footprint extraction。</td>
+      </tr>
+      <tr>
+          <td>MT-RoadNet/MTNet</td>
+          <td style="text-align: right">2025 IJAEOG</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843225007277" target="_blank" rel="noopener noreferrer">ScienceDirect</a>, <a href="https://github.com/508hz1207/MTNet" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>道路 surface/centerline 联合提取，关注 topology-aware representation。</td>
+      </tr>
+      <tr>
+          <td>TopoRF-Net</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12736503/" target="_blank" rel="noopener noreferrer">PMC</a></td>
+          <td>多分辨率遥感道路提取中的 connectivity-preserving framework。</td>
+      </tr>
+      <tr>
+          <td>SAMPolyBuild</td>
+          <td style="text-align: right">2024 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>将 SAM 适配到建筑 polygon extraction。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
+<li>后处理路线：先 segmentation，再 skeletonization、graph repair、polygon simplification。</li>
+<li>拓扑损失路线：训练时约束连通性、中心线、边界和孔洞。</li>
+<li>图/矢量路线：直接预测道路 graph 或建筑 polygon。</li>
+<li>SAM-assisted 路线：用 SAM 产生候选 mask，再通过几何规则或 graph decoder 修正。</li>
+</ol>
+<h2 id="当前问题" class="headerLink">
+    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
+<li>mIoU 与路网连通性不一致。</li>
+<li>建筑 footprint 的角点、直角和平行边很难用普通 Dice/CE 损失约束。</li>
+<li>道路被树冠、阴影、车辆遮挡时容易断裂。</li>
+<li>直接 polygon 输出训练不稳定，标注格式也不统一。</li>
+<li>拓扑损失常计算昂贵，不易扩展到大图。</li>
+</ul>
+<h2 id="可执行研究方案" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Topology-Aware SAM Adapter for Map-Ready Road and Building Extraction</p>]]></description></item><item><title>RS-36 Raster-Vector Joint Encoder</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</link><pubDate>Sun, 07 Jun 2026 09:35:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder" class="headerLink">
+    <a href="#rs-36-raster-vector-joint-encoder" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder</h1><p>范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
+<h2 id="1-问题定义" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89" class="header-mark"></a>1. 问题定义</h2><p><strong>细问题</strong>：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不把矢量数据粗暴栅格化的情况下，共同学习可迁移的地理空间表示？</p>
+<p>这个问题的价值在于：纯 raster foundation model 很擅长捕捉连续的光谱、纹理和空间形态，但它天然缺少显式对象、拓扑、地块边界、道路连通性、POI 功能语义和行政单元属性。矢量数据正好补这些信息，却又和影像 patch 的数据结构完全不同：点、线、面、标签表、拓扑关系、空间范围和时效性都不一致。</p>
+<p>因此，2024-2026 的关键趋势是从“把 OSM/道路/建筑 rasterize 成额外通道”转向“把 raster patch 与 vector geoentity 直接对齐、交互和联合预训练”。</p>
+<h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/资源</th>
+          <th>相关性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Spatial Representation Learning Beyond Pixels</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2606.02374" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>暂未见代码</td>
+          <td>观点/路线图论文，明确提出 raster perception 与 vector reasoning 需要进入统一 embedding space。</td>
+      </tr>
+      <tr>
+          <td>GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</td>
+          <td style="text-align: right">2025 arXiv / NeurIPS 2025 repo 标注</td>
+          <td><a href="https://ar5iv.labs.arxiv.org/html/2509.26016" target="_blank" rel="noopener noreferrer">arXiv HTML</a>, <a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>目前最直接的 RS patch + OSM geoentity 融合范式：OSM 异构图编码器、image-OSM contrastive learning、object-patch cross-attention。</td>
+      </tr>
+      <tr>
+          <td>NARA: Anchor-Conditioned Relation-Aware Contextualization of Heterogeneous Geoentities</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.12276" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>暂未见官方代码</td>
+          <td>专注 vector geoentities，统一点、线、面，并建模语义、几何、距离和拓扑关系；可作为 raster-vector 系统中的 vector encoder。</td>
+      </tr>
+      <tr>
+          <td>GeoViSTA: Geospatial Vision-Tabular Transformer</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.14406" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>暂未见官方代码</td>
+          <td>将 co-registered imagery 与 tabular/census tract token 用 bilateral cross-attention 融合，适合扩展到行政区/社会经济属性。</td>
+      </tr>
+      <tr>
+          <td>Geo2Vec: Shape- and Distance-Aware Neural Representation of Geospatial Entities</td>
+          <td style="text-align: right">2025 arXiv / AAAI 2026 页面线索</td>
+          <td><a href="https://arxiv.org/abs/2508.19305" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/chuchen2017/GeoNeuralRepresentation" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 signed distance field 思路统一点、线、面几何表示，强调形状、位置、距离和拓扑关系。</td>
+      </tr>
+      <tr>
+          <td>Poly2Vec: Polymorphic Fourier-Based Encoding of Geospatial Objects</td>
+          <td style="text-align: right">2025 ICML</td>
+          <td><a href="https://arxiv.org/abs/2408.14806" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/USC-InfoLab/poly2vec" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>矢量对象统一编码框架，支持 OSM points/polylines/polygons，适合做 geometry encoder baseline。</td>
+      </tr>
+      <tr>
+          <td>UrbanFusion: Stochastic Multimodal Fusion for Robust Spatial Representations</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2510.13774" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/DominikM198/UrbanFusion" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>融合 remote sensing、street view、cartographic maps、POI 等城市多模态数据；适合作为多源融合训练目标参考。</td>
+      </tr>
+      <tr>
+          <td>AETHER / Beyond AlphaEarth via POI-Guided Contrastive Learning</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2510.09894" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>需进一步确认官方代码</td>
+          <td>用 POI 语义对齐 AlphaEarth/EO embedding，使物理影像表示获得城市功能语义。</td>
+      </tr>
+      <tr>
+          <td>GeoSynth</td>
+          <td style="text-align: right">2024 CVPR EarthVision</td>
+          <td><a href="https://vishu26.github.io/geosynth/index.html" target="_blank" rel="noopener noreferrer">Project</a></td>
+          <td>项目页含 arXiv/GitHub/模型入口</td>
+          <td>用 OSM layout 控制卫星图像生成，说明 vector layout 可作为生成式先验；更偏数据生成，但可迁移到对齐预训练。</td>
+      </tr>
+      <tr>
+          <td>MapTracker</td>
+          <td style="text-align: right">2024 ECCV Oral</td>
+          <td><a href="https://map-tracker.github.io/" target="_blank" rel="noopener noreferrer">Project</a></td>
+          <td>项目页含 paper/code</td>
+          <td>自动驾驶 HD map 方向，使用 raster BEV latent 与 vector road-element latent；不是遥感，但 raster-vector latent tracking 很可迁移。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-旧路线矢量转栅格或转标签" class="headerLink">
+    <a href="#31-%e6%97%a7%e8%b7%af%e7%ba%bf%e7%9f%a2%e9%87%8f%e8%bd%ac%e6%a0%85%e6%a0%bc%e6%88%96%e8%bd%ac%e6%a0%87%e7%ad%be" class="header-mark"></a>3.1 旧路线：矢量转栅格或转标签</h3><p>常见做法是把 OSM 道路、建筑、土地利用 polygon rasterize 成额外通道，或者直接作为弱标签训练 segmentation。优点是工程简单，能沿用 CNN/ViT；缺点是会损失拓扑关系、对象边界、标签表语义和多尺度结构。GeoLink 的论文把这类路线归纳为 data conversion / data derivation / knowledge graph 等间接融合方式，并指出它们往往任务特定、区域小、空间信息损失较大。</p>]]></description></item><item><title>RS-32 Spectral Configuration Shift</title><link>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</link><pubDate>Sun, 07 Jun 2026 09:31:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</guid><description><![CDATA[<h1 id="rs-32-spectral-configuration-shift" class="headerLink">
+    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>RGB 模型默认通道固定；遥感中 Sentinel-2、Landsat/HLS、Planet、NAIP、EnMAP、PACE、AVIRIS 等传感器的谱段配置差异很大。高光谱数据还会遇到坏 band、噪声 band、不同大气校正链和空间分辨率差异。若模型只记住通道序号，到了未见传感器或缺 band 输入时就会退化。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>核心机制</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SpectralGPT</td>
+          <td style="text-align: right">2024 TPAMI</td>
+          <td><a href="https://arxiv.org/abs/2311.07113" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/danfenghong/IEEE_TPAMI_SpectralGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>3D token 与多目标重建，强调空间-光谱耦合。</td>
+      </tr>
+      <tr>
+          <td>S2MAE</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Li_S2MAE_A_Spatial-Spectral_Pretraining_Foundation_Model_for_Spectral_Remote_Sensing_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>spatial-spectral masked pretraining。</td>
+      </tr>
+      <tr>
+          <td>DOFA</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2403.15356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/DOFA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>通过 wavelength-conditioned hypernetwork 处理多传感器输入。</td>
+      </tr>
+      <tr>
+          <td>HyperSIGMA</td>
+          <td style="text-align: right">2025 TPAMI</td>
+          <td><a href="https://whu-sigma.github.io/HyperSIGMA/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://github.com/WHU-Sigma/HyperSIGMA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>大规模高光谱 foundation model，覆盖多任务。</td>
+      </tr>
+      <tr>
+          <td>HyperFree</td>
+          <td style="text-align: right">2025 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://rsidea.whu.edu.cn/hyperfree.htm" target="_blank" rel="noopener noreferrer">Project</a></td>
+          <td>channel-adaptive、tuning-free，高光谱变波段输入。</td>
+      </tr>
+      <tr>
+          <td>Panopticon</td>
+          <td style="text-align: right">2025 CVPRW</td>
+          <td><a href="https://arxiv.org/abs/2503.10845" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>wavelength encoding、channel subsampling、channel cross-attention。</td>
+      </tr>
+      <tr>
+          <td>SpecAware</td>
+          <td style="text-align: right">2025/2026 ISPRS JPRS</td>
+          <td><a href="https://arxiv.org/abs/2510.27219" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>sensor meta-attributes + image content 条件化。</td>
+      </tr>
+      <tr>
+          <td>LESSViT</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.18541" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>明确针对 spectral configuration shift 的鲁棒 HSI 表征。</td>
+      </tr>
+      <tr>
+          <td>Any-Optical-Model</td>
+          <td style="text-align: right">2026 AAAI</td>
+          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/37583/41545" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
+          <td>spectrum-independent tokenizer，测试 missing/cross-sensor/cross-resolution。</td>
+      </tr>
+      <tr>
+          <td>SpectralEarth-FM</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>将高光谱带入多模态 EO 预训练。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法比较" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83" class="header-mark"></a>方法比较</h2><ol>
+<li>固定通道模型：训练稳定，但无法自然处理未见传感器。</li>
+<li>band id / wavelength embedding：简单，但中心波长不足以表示完整 SRF。</li>
+<li>hypernetwork tokenizer：由 wavelength 或 sensor metadata 生成输入投影，跨传感器更灵活。</li>
+<li>channel cross-attention：将 band 作为 token，让模型学习谱段间关系。</li>
+<li>spectral grouping：先按物理连续性或传感器响应分组，降低 HSI token 爆炸。</li>
+</ol>
+<h2 id="当前问题" class="headerLink">
+    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
+<li>很多 benchmark 的 missing band 是人工 mask，不等价于真实传感器缺测。</li>
+<li>cross-sensor 测试常同时混入地理区域、季节和空间分辨率差异，因果不干净。</li>
+<li>中心波长被过度使用，完整 SRF、带宽和辐射定标很少进入模型。</li>
+<li>HSI 数据集小而碎，预训练数据与下游标签分布差异很大。</li>
+<li>缺少统一 leave-sensor-out protocol。</li>
+</ul>
+<h2 id="可执行研究方案" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：SRF-Aware Evaluation for Spectral Configuration Shift</p>]]></description></item><item><title>RS-30 Tiny Model Task Routing for EO</title><link>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</link><pubDate>Sun, 07 Jun 2026 09:29:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</guid><description><![CDATA[<h1 id="rs-30-tiny-model-task-routing-for-eo" class="headerLink">
+    <a href="#rs-30-tiny-model-task-routing-for-eo" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><p>范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬件”。但 2024-2026 的趋势正在变成“级联式任务路由”：轻量模型先做快速筛选，大模型或下传链路只处理高价值、高风险或不确定样本。这样的问题比单纯模型压缩更像一个决策系统：</p>
+<ul>
+<li><strong>输入端</strong>：低分辨率 quick-look、压缩预览、云量估计、saliency map、tiny detector、元数据、任务优先级。</li>
+<li><strong>路由端</strong>：决定丢弃、压缩下传、调用中等模型、调用大模型、或触发灾害/异常回退。</li>
+<li><strong>输出端</strong>：省电、省带宽、低延迟，同时保证云、洪水、火点、船只、道路损毁等关键事件不被漏掉。</li>
+</ul>
+<p>这个方向的研究价值在于：真实星上/边缘约束不是一个静态 FLOPs 约束，而是动态的电量、热、存储、下传窗口、任务优先级和风险预算。一个可投稿的小题可以围绕“风险感知 tiny-to-large cascade for EO”展开。</p>
+<h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>标题/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/模型</th>
+          <th>与 RS-30 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NASA&rsquo;s Prithvi Becomes First AI Geospatial Foundation Model In Orbit</td>
+          <td style="text-align: right">2026 NASA</td>
+          <td><a href="https://science.nasa.gov/science-research/ai-foundation-model-in-orbit/" target="_blank" rel="noopener noreferrer">NASA Science</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">Prithvi-EO-2.0 GitHub</a></td>
+          <td>压缩版 Prithvi 已在 Kanyini 与 ISS IMAGIN-e 上测试云/洪水检测，说明“压缩 FM 上轨 + 任务触发”已进入实证阶段。</td>
+      </tr>
+      <tr>
+          <td>Prithvi-EO-2.0</td>
+          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>可作为大模型分支或 teacher；300M/600M 版本适合研究压缩、LoRA、蒸馏。</td>
+      </tr>
+      <tr>
+          <td>Φsat-2</td>
+          <td style="text-align: right">2024 ESA mission</td>
+          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2" target="_blank" rel="noopener noreferrer">ESA mission</a>, <a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Introducing_Phsat-2" target="_blank" rel="noopener noreferrer">Introducing Φsat-2</a></td>
+          <td><a href="https://github.com/PhiSat-2" target="_blank" rel="noopener noreferrer">PhiSat-2 GitHub org</a></td>
+          <td>6U CubeSat，星上运行 cloud detection、vessel detection、wildfire、marine anomaly、compression 等应用，是任务路由系统的现实原型。</td>
+      </tr>
+      <tr>
+          <td>Φsat-2 gets two new AI apps</td>
+          <td style="text-align: right">2024 ESA</td>
+          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Phsat-2_gets_two_new_AI_apps" target="_blank" rel="noopener noreferrer">ESA</a></td>
+          <td>mission apps</td>
+          <td>明确提出云去除、应急街图、船只检测、海洋污染、野火检测等多 app 场景，适合抽象成 onboard scheduler。</td>
+      </tr>
+      <tr>
+          <td>Optimizing Deep Learning Models for On-Orbit Deployment Through Neural Architecture Search</td>
+          <td style="text-align: right">2025 Scientific Reports</td>
+          <td><a href="https://www.nature.com/articles/s41598-025-21467-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
+          <td>未见官方代码</td>
+          <td>硬件/任务约束下的 NAS，给级联系统里的 tiny/mid 模型选型提供方法基础。</td>
+      </tr>
+      <tr>
+          <td>Efficient FPGA-accelerated CNNs for Cloud Detection on CubeSats</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2504.03891" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>云检测是最自然的第一级路由器；论文报告在 Zynq UltraScale+ MPSoC 上用 FPGA/DPU 实现实时云检测。</td>
+      </tr>
+      <tr>
+          <td>TinyRS-R1: Compact Multimodal Language Model for Remote Sensing</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.12099" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未确认官方代码</td>
+          <td>2B 遥感多模态小模型，可作为边缘端“轻量语义解释/任务确认”分支，而不是直接调用 7B/13B VLM。</td>
+      </tr>
+      <tr>
+          <td>Lightweight Remote Sensing Scene Classification on Edge Devices via Knowledge Distillation and Early-exit</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2507.20623" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>early-exit 和蒸馏适合做“简单样本早停，困难样本路由到大模型”。</td>
+      </tr>
+      <tr>
+          <td>SatReg: Regression-based NAS for Lightweight Satellite Image Segmentation</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.10306" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>GitHub 未核验</td>
+          <td>在 Jetson Orin Nano 上拟合 mIoU、latency、power surrogate，适合作为级联系统硬件 cost model。</td>
+      </tr>
+      <tr>
+          <td>TA-YOLO</td>
+          <td style="text-align: right">2024 Complex &amp; Intelligent Systems</td>
+          <td><a href="https://link.springer.com/article/10.1007/s40747-024-01448-6" target="_blank" rel="noopener noreferrer">Springer</a></td>
+          <td>未见官方代码</td>
+          <td>轻量小目标检测，可作为第一级 tiny detector 候选。</td>
+      </tr>
+      <tr>
+          <td>LEGNet</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.14012" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>针对低质量遥感图像的轻量目标检测，适合评估噪声/低分辨率 quick-look 下的路由鲁棒性。</td>
+      </tr>
+      <tr>
+          <td>MEANet</td>
+          <td style="text-align: right">2024 Expert Systems with Applications</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0957417423022807" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见官方代码</td>
+          <td>轻量光学遥感 saliency detection，可用于“是否值得下传/是否调用大模型”的 saliency gate。</td>
+      </tr>
+      <tr>
+          <td>Lightweight Semantic- and Graph-Guided Network for ORSI-SOD</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/5/861" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>未见官方代码</td>
+          <td>低计算成本 saliency，强调边缘和语义引导，可作为异常/目标候选区域路由器。</td>
+      </tr>
+      <tr>
+          <td>IEAM for Remote Sensing Salient Object Detection</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/12/2053" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>未见官方代码</td>
+          <td>兼顾边界、注意力和效率，适合与 tiny detector/cloud mask 组合。</td>
+      </tr>
+      <tr>
+          <td>LightEMNet</td>
+          <td style="text-align: right">2025 TGRS</td>
+          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2025.3587287" target="_blank" rel="noopener noreferrer">CoLab/IEEE record</a></td>
+          <td>未见官方代码</td>
+          <td>弱监督轻量 Mamba-fusion SOD，论文记录显示仅 4.81M 参数，适合 onboard saliency gate。</td>
+      </tr>
+      <tr>
+          <td>E4: Energy-Efficient DNN Inference via Early-Exit and DVFS</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.04865" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未核验</td>
+          <td>通用边缘视频分析方法，可迁移到星上 EO：根据模型置信度和芯片频率动态控制能耗。</td>
+      </tr>
+      <tr>
+          <td>SCTNet-NAS for Cloud-Edge Collaborative Perception</td>
+          <td style="text-align: right">2025 Complex &amp; Intelligent Systems</td>
+          <td><a href="https://link.springer.com/article/10.1007/s40747-025-01996-5" target="_blank" rel="noopener noreferrer">Springer</a></td>
+          <td>未见官方代码</td>
+          <td>通用 cloud-edge 协同分割框架，可迁移为“星上初筛 + 地面/大模型精处理”。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-问题由来" class="headerLink">
+    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>3. 问题由来</h2><h3 id="31-星上边缘不是单模型问题" class="headerLink">
+    <a href="#31-%e6%98%9f%e4%b8%8a%e8%be%b9%e7%bc%98%e4%b8%8d%e6%98%af%e5%8d%95%e6%a8%a1%e5%9e%8b%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 星上/边缘不是单模型问题</h3><p>单个轻量模型可以降低延迟，但真实 EO 系统还要决定：</p>]]></description></item><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 09:17:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
     <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>传统二时相 change detection 通常把输入简化为 <code>(image_t1, image_t2) -&gt; change mask</code>，但真实遥感里的“不变”并不等于像素相同。很多变化检测模型在 LEVIR-CD、WHU-CD、CDD 这类标准集上分数很高，部署到跨季节、跨年份、跨传感器或轻微错位场景时会把无害差异误报成变化。</p>
@@ -161,499 +650,60 @@
 <h2 id="4-方法脉络" class="headerLink">
     <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-传统-cd-backbone" class="headerLink">
     <a href="#41-%e4%bc%a0%e7%bb%9f-cd-backbone" class="header-mark"></a>4.1 传统 CD backbone</h3><p>代表：Siamese UNet/Transformer、BIT、ChangeFormer、STANet、ChangeMamba、CD-Lamba。<br>
-优点是可复现、适合作为 baseline；缺点是大多把 hard negative 当作普通背景像素，没有显式建模“无害但视觉差异大”的样本。</p>]]></description></item><item><title>RS-30 Tiny Model Task Routing for EO</title><link>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</guid><description><![CDATA[<h1 id="rs-30-tiny-model-task-routing-for-eo" class="headerLink">
-    <a href="#rs-30-tiny-model-task-routing-for-eo" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><p>范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。</p>
-<h2 id="1-方向概述" class="headerLink">
-    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬件”。但 2024-2026 的趋势正在变成“级联式任务路由”：轻量模型先做快速筛选，大模型或下传链路只处理高价值、高风险或不确定样本。这样的问题比单纯模型压缩更像一个决策系统：</p>
-<ul>
-<li><strong>输入端</strong>：低分辨率 quick-look、压缩预览、云量估计、saliency map、tiny detector、元数据、任务优先级。</li>
-<li><strong>路由端</strong>：决定丢弃、压缩下传、调用中等模型、调用大模型、或触发灾害/异常回退。</li>
-<li><strong>输出端</strong>：省电、省带宽、低延迟，同时保证云、洪水、火点、船只、道路损毁等关键事件不被漏掉。</li>
-</ul>
-<p>这个方向的研究价值在于：真实星上/边缘约束不是一个静态 FLOPs 约束，而是动态的电量、热、存储、下传窗口、任务优先级和风险预算。一个可投稿的小题可以围绕“风险感知 tiny-to-large cascade for EO”展开。</p>
-<h2 id="2-代表论文与项目" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+优点是可复现、适合作为 baseline；缺点是大多把 hard negative 当作普通背景像素，没有显式建模“无害但视觉差异大”的样本。</p>]]></description></item><item><title>全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？</title><link>https://spacetop.win/2026/06/20260601_210000_hypersigma_hyperspectral/</link><pubDate>Mon, 01 Jun 2026 21:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_210000_hypersigma_hyperspectral/</guid><description><![CDATA[<h1 id="全球首个十亿级高光谱基础模型hypersigma如何统一高层与底层视觉任务" class="headerLink">
+    <a href="#%e5%85%a8%e7%90%83%e9%a6%96%e4%b8%aa%e5%8d%81%e4%ba%bf%e7%ba%a7%e9%ab%98%e5%85%89%e8%b0%b1%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8bhypersigma%e5%a6%82%e4%bd%95%e7%bb%9f%e4%b8%80%e9%ab%98%e5%b1%82%e4%b8%8e%e5%ba%95%e5%b1%82%e8%a7%86%e8%a7%89%e4%bb%bb%e5%8a%a1" class="header-mark"></a>全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TPAMI 2025 (IF=20.8) | ESI高被引论文</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
   <thead>
       <tr>
-          <th>标题/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/模型</th>
-          <th>与 RS-30 的关系</th>
+          <th>项目</th>
+          <th>内容</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>NASA&rsquo;s Prithvi Becomes First AI Geospatial Foundation Model In Orbit</td>
-          <td style="text-align: right">2026 NASA</td>
-          <td><a href="https://science.nasa.gov/science-research/ai-foundation-model-in-orbit/" target="_blank" rel="noopener noreferrer">NASA Science</a></td>
-          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">Prithvi-EO-2.0 GitHub</a></td>
-          <td>压缩版 Prithvi 已在 Kanyini 与 ISS IMAGIN-e 上测试云/洪水检测，说明“压缩 FM 上轨 + 任务触发”已进入实证阶段。</td>
+          <td><strong>标题</strong></td>
+          <td>HyperSIGMA: Hyperspectral Intelligence Comprehension Foundation Model</td>
       </tr>
       <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>可作为大模型分支或 teacher；300M/600M 版本适合研究压缩、LoRA、蒸馏。</td>
+          <td><strong>作者</strong></td>
+          <td>Di Wang*, Meiqi Hu*, Yao Jin*, Yuchun Miao*, Jiaqi Yang*, Yichu Xu* 等（武汉大学、重庆大学、东京大学、南洋理工大学）</td>
       </tr>
       <tr>
-          <td>Φsat-2</td>
-          <td style="text-align: right">2024 ESA mission</td>
-          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2" target="_blank" rel="noopener noreferrer">ESA mission</a>, <a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Introducing_Phsat-2" target="_blank" rel="noopener noreferrer">Introducing Φsat-2</a></td>
-          <td><a href="https://github.com/PhiSat-2" target="_blank" rel="noopener noreferrer">PhiSat-2 GitHub org</a></td>
-          <td>6U CubeSat，星上运行 cloud detection、vessel detection、wildfire、marine anomaly、compression 等应用，是任务路由系统的现实原型。</td>
+          <td><strong>会议/期刊</strong></td>
+          <td>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025</td>
       </tr>
       <tr>
-          <td>Φsat-2 gets two new AI apps</td>
-          <td style="text-align: right">2024 ESA</td>
-          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Phsat-2_gets_two_new_AI_apps" target="_blank" rel="noopener noreferrer">ESA</a></td>
-          <td>mission apps</td>
-          <td>明确提出云去除、应急街图、船只检测、海洋污染、野火检测等多 app 场景，适合抽象成 onboard scheduler。</td>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2406.11519" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2406.11519</a></td>
       </tr>
       <tr>
-          <td>Optimizing Deep Learning Models for On-Orbit Deployment Through Neural Architecture Search</td>
-          <td style="text-align: right">2025 Scientific Reports</td>
-          <td><a href="https://www.nature.com/articles/s41598-025-21467-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
-          <td>未见官方代码</td>
-          <td>硬件/任务约束下的 NAS，给级联系统里的 tiny/mid 模型选型提供方法基础。</td>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/WHU-Sigma/HyperSIGMA" target="_blank" rel="noopener noreferrer">https://github.com/WHU-Sigma/HyperSIGMA</a> (⭐366)</td>
       </tr>
       <tr>
-          <td>Efficient FPGA-accelerated CNNs for Cloud Detection on CubeSats</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2504.03891" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见官方代码</td>
-          <td>云检测是最自然的第一级路由器；论文报告在 Zynq UltraScale+ MPSoC 上用 FPGA/DPU 实现实时云检测。</td>
-      </tr>
-      <tr>
-          <td>TinyRS-R1: Compact Multimodal Language Model for Remote Sensing</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.12099" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未确认官方代码</td>
-          <td>2B 遥感多模态小模型，可作为边缘端“轻量语义解释/任务确认”分支，而不是直接调用 7B/13B VLM。</td>
-      </tr>
-      <tr>
-          <td>Lightweight Remote Sensing Scene Classification on Edge Devices via Knowledge Distillation and Early-exit</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2507.20623" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见官方代码</td>
-          <td>early-exit 和蒸馏适合做“简单样本早停，困难样本路由到大模型”。</td>
-      </tr>
-      <tr>
-          <td>SatReg: Regression-based NAS for Lightweight Satellite Image Segmentation</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2604.10306" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>GitHub 未核验</td>
-          <td>在 Jetson Orin Nano 上拟合 mIoU、latency、power surrogate，适合作为级联系统硬件 cost model。</td>
-      </tr>
-      <tr>
-          <td>TA-YOLO</td>
-          <td style="text-align: right">2024 Complex &amp; Intelligent Systems</td>
-          <td><a href="https://link.springer.com/article/10.1007/s40747-024-01448-6" target="_blank" rel="noopener noreferrer">Springer</a></td>
-          <td>未见官方代码</td>
-          <td>轻量小目标检测，可作为第一级 tiny detector 候选。</td>
-      </tr>
-      <tr>
-          <td>LEGNet</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.14012" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见官方代码</td>
-          <td>针对低质量遥感图像的轻量目标检测，适合评估噪声/低分辨率 quick-look 下的路由鲁棒性。</td>
-      </tr>
-      <tr>
-          <td>MEANet</td>
-          <td style="text-align: right">2024 Expert Systems with Applications</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0957417423022807" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>未见官方代码</td>
-          <td>轻量光学遥感 saliency detection，可用于“是否值得下传/是否调用大模型”的 saliency gate。</td>
-      </tr>
-      <tr>
-          <td>Lightweight Semantic- and Graph-Guided Network for ORSI-SOD</td>
-          <td style="text-align: right">2025 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/17/5/861" target="_blank" rel="noopener noreferrer">MDPI</a></td>
-          <td>未见官方代码</td>
-          <td>低计算成本 saliency，强调边缘和语义引导，可作为异常/目标候选区域路由器。</td>
-      </tr>
-      <tr>
-          <td>IEAM for Remote Sensing Salient Object Detection</td>
-          <td style="text-align: right">2025 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/17/12/2053" target="_blank" rel="noopener noreferrer">MDPI</a></td>
-          <td>未见官方代码</td>
-          <td>兼顾边界、注意力和效率，适合与 tiny detector/cloud mask 组合。</td>
-      </tr>
-      <tr>
-          <td>LightEMNet</td>
-          <td style="text-align: right">2025 TGRS</td>
-          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2025.3587287" target="_blank" rel="noopener noreferrer">CoLab/IEEE record</a></td>
-          <td>未见官方代码</td>
-          <td>弱监督轻量 Mamba-fusion SOD，论文记录显示仅 4.81M 参数，适合 onboard saliency gate。</td>
-      </tr>
-      <tr>
-          <td>E4: Energy-Efficient DNN Inference via Early-Exit and DVFS</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.04865" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未核验</td>
-          <td>通用边缘视频分析方法，可迁移到星上 EO：根据模型置信度和芯片频率动态控制能耗。</td>
-      </tr>
-      <tr>
-          <td>SCTNet-NAS for Cloud-Edge Collaborative Perception</td>
-          <td style="text-align: right">2025 Complex &amp; Intelligent Systems</td>
-          <td><a href="https://link.springer.com/article/10.1007/s40747-025-01996-5" target="_blank" rel="noopener noreferrer">Springer</a></td>
-          <td>未见官方代码</td>
-          <td>通用 cloud-edge 协同分割框架，可迁移为“星上初筛 + 地面/大模型精处理”。</td>
+          <td><strong>关键词</strong></td>
+          <td>高光谱图像、基础模型、Vision Transformer、稀疏采样注意力、自监督预训练</td>
       </tr>
   </tbody>
 </table>
-<h2 id="3-问题由来" class="headerLink">
-    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>3. 问题由来</h2><h3 id="31-星上边缘不是单模型问题" class="headerLink">
-    <a href="#31-%e6%98%9f%e4%b8%8a%e8%be%b9%e7%bc%98%e4%b8%8d%e6%98%af%e5%8d%95%e6%a8%a1%e5%9e%8b%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 星上/边缘不是单模型问题</h3><p>单个轻量模型可以降低延迟，但真实 EO 系统还要决定：</p>]]></description></item><item><title>RS-32 Spectral Configuration Shift</title><link>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</guid><description><![CDATA[<h1 id="rs-32-spectral-configuration-shift" class="headerLink">
-    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>RGB 模型默认通道固定；遥感中 Sentinel-2、Landsat/HLS、Planet、NAIP、EnMAP、PACE、AVIRIS 等传感器的谱段配置差异很大。高光谱数据还会遇到坏 band、噪声 band、不同大气校正链和空间分辨率差异。若模型只记住通道序号，到了未见传感器或缺 band 输入时就会退化。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>核心机制</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SpectralGPT</td>
-          <td style="text-align: right">2024 TPAMI</td>
-          <td><a href="https://arxiv.org/abs/2311.07113" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/danfenghong/IEEE_TPAMI_SpectralGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>3D token 与多目标重建，强调空间-光谱耦合。</td>
-      </tr>
-      <tr>
-          <td>S2MAE</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Li_S2MAE_A_Spatial-Spectral_Pretraining_Foundation_Model_for_Spectral_Remote_Sensing_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>spatial-spectral masked pretraining。</td>
-      </tr>
-      <tr>
-          <td>DOFA</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2403.15356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/DOFA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>通过 wavelength-conditioned hypernetwork 处理多传感器输入。</td>
-      </tr>
-      <tr>
-          <td>HyperSIGMA</td>
-          <td style="text-align: right">2025 TPAMI</td>
-          <td><a href="https://whu-sigma.github.io/HyperSIGMA/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://github.com/WHU-Sigma/HyperSIGMA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>大规模高光谱 foundation model，覆盖多任务。</td>
-      </tr>
-      <tr>
-          <td>HyperFree</td>
-          <td style="text-align: right">2025 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://rsidea.whu.edu.cn/hyperfree.htm" target="_blank" rel="noopener noreferrer">Project</a></td>
-          <td>channel-adaptive、tuning-free，高光谱变波段输入。</td>
-      </tr>
-      <tr>
-          <td>Panopticon</td>
-          <td style="text-align: right">2025 CVPRW</td>
-          <td><a href="https://arxiv.org/abs/2503.10845" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/Panopticon-FM/panopticon" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>wavelength encoding、channel subsampling、channel cross-attention。</td>
-      </tr>
-      <tr>
-          <td>SpecAware</td>
-          <td style="text-align: right">2025/2026 ISPRS JPRS</td>
-          <td><a href="https://arxiv.org/abs/2510.27219" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>sensor meta-attributes + image content 条件化。</td>
-      </tr>
-      <tr>
-          <td>LESSViT</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.18541" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>明确针对 spectral configuration shift 的鲁棒 HSI 表征。</td>
-      </tr>
-      <tr>
-          <td>Any-Optical-Model</td>
-          <td style="text-align: right">2026 AAAI</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/37583/41545" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
-          <td>spectrum-independent tokenizer，测试 missing/cross-sensor/cross-resolution。</td>
-      </tr>
-      <tr>
-          <td>SpectralEarth-FM</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>将高光谱带入多模态 EO 预训练。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法比较" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83" class="header-mark"></a>方法比较</h2><ol>
-<li>固定通道模型：训练稳定，但无法自然处理未见传感器。</li>
-<li>band id / wavelength embedding：简单，但中心波长不足以表示完整 SRF。</li>
-<li>hypernetwork tokenizer：由 wavelength 或 sensor metadata 生成输入投影，跨传感器更灵活。</li>
-<li>channel cross-attention：将 band 作为 token，让模型学习谱段间关系。</li>
-<li>spectral grouping：先按物理连续性或传感器响应分组，降低 HSI token 爆炸。</li>
+<h2 id="-论文定位" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e5%ae%9a%e4%bd%8d" class="header-mark"></a>📊 论文定位</h2><ul>
+<li><strong>论文类型</strong>：理论突破型</li>
+<li><strong>创新性评分</strong>：⭐⭐⭐⭐ (4分)</li>
+<li><strong>判断依据</strong>：
+<ol>
+<li><strong>首创性</strong>：全球首个专门为高光谱图像设计的十亿级基础模型，填补了该领域的空白</li>
+<li><strong>技术贡献</strong>：提出稀疏采样注意力（SSA）机制，针对性解决高光谱数据的冗余问题</li>
+<li><strong>数据贡献</strong>：构建全球最大高光谱预训练数据集HyperGlobal-450K（2000万+图像）</li>
+<li><strong>荣誉认可</strong>：入选ESI Hot Paper和Highly Cited Paper，证明学术影响力</li>
 </ol>
-<h2 id="当前问题" class="headerLink">
-    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
-<li>很多 benchmark 的 missing band 是人工 mask，不等价于真实传感器缺测。</li>
-<li>cross-sensor 测试常同时混入地理区域、季节和空间分辨率差异，因果不干净。</li>
-<li>中心波长被过度使用，完整 SRF、带宽和辐射定标很少进入模型。</li>
-<li>HSI 数据集小而碎，预训练数据与下游标签分布差异很大。</li>
-<li>缺少统一 leave-sensor-out protocol。</li>
+</li>
 </ul>
-<h2 id="可执行研究方案" class="headerLink">
-    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：SRF-Aware Evaluation for Spectral Configuration Shift</p>]]></description></item><item><title>RS-36 Raster-Vector Joint Encoder</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder" class="headerLink">
-    <a href="#rs-36-raster-vector-joint-encoder" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder</h1><p>范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
-<h2 id="1-问题定义" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89" class="header-mark"></a>1. 问题定义</h2><p><strong>细问题</strong>：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不把矢量数据粗暴栅格化的情况下，共同学习可迁移的地理空间表示？</p>
-<p>这个问题的价值在于：纯 raster foundation model 很擅长捕捉连续的光谱、纹理和空间形态，但它天然缺少显式对象、拓扑、地块边界、道路连通性、POI 功能语义和行政单元属性。矢量数据正好补这些信息，却又和影像 patch 的数据结构完全不同：点、线、面、标签表、拓扑关系、空间范围和时效性都不一致。</p>
-<p>因此，2024-2026 的关键趋势是从“把 OSM/道路/建筑 rasterize 成额外通道”转向“把 raster patch 与 vector geoentity 直接对齐、交互和联合预训练”。</p>
-<h2 id="2-代表论文与项目" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>代码/资源</th>
-          <th>相关性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Spatial Representation Learning Beyond Pixels</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2606.02374" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>暂未见代码</td>
-          <td>观点/路线图论文，明确提出 raster perception 与 vector reasoning 需要进入统一 embedding space。</td>
-      </tr>
-      <tr>
-          <td>GeoLink: Empowering Remote Sensing Foundation Model with OpenStreetMap Data</td>
-          <td style="text-align: right">2025 arXiv / NeurIPS 2025 repo 标注</td>
-          <td><a href="https://ar5iv.labs.arxiv.org/html/2509.26016" target="_blank" rel="noopener noreferrer">arXiv HTML</a>, <a href="https://arxiv.org/abs/2509.26016" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/bailubin/GeoLink_NeurIPS2025" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>目前最直接的 RS patch + OSM geoentity 融合范式：OSM 异构图编码器、image-OSM contrastive learning、object-patch cross-attention。</td>
-      </tr>
-      <tr>
-          <td>NARA: Anchor-Conditioned Relation-Aware Contextualization of Heterogeneous Geoentities</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.12276" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>暂未见官方代码</td>
-          <td>专注 vector geoentities，统一点、线、面，并建模语义、几何、距离和拓扑关系；可作为 raster-vector 系统中的 vector encoder。</td>
-      </tr>
-      <tr>
-          <td>GeoViSTA: Geospatial Vision-Tabular Transformer</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.14406" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>暂未见官方代码</td>
-          <td>将 co-registered imagery 与 tabular/census tract token 用 bilateral cross-attention 融合，适合扩展到行政区/社会经济属性。</td>
-      </tr>
-      <tr>
-          <td>Geo2Vec: Shape- and Distance-Aware Neural Representation of Geospatial Entities</td>
-          <td style="text-align: right">2025 arXiv / AAAI 2026 页面线索</td>
-          <td><a href="https://arxiv.org/abs/2508.19305" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/chuchen2017/GeoNeuralRepresentation" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>用 signed distance field 思路统一点、线、面几何表示，强调形状、位置、距离和拓扑关系。</td>
-      </tr>
-      <tr>
-          <td>Poly2Vec: Polymorphic Fourier-Based Encoding of Geospatial Objects</td>
-          <td style="text-align: right">2025 ICML</td>
-          <td><a href="https://arxiv.org/abs/2408.14806" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/USC-InfoLab/poly2vec" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>矢量对象统一编码框架，支持 OSM points/polylines/polygons，适合做 geometry encoder baseline。</td>
-      </tr>
-      <tr>
-          <td>UrbanFusion: Stochastic Multimodal Fusion for Robust Spatial Representations</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2510.13774" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/DominikM198/UrbanFusion" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>融合 remote sensing、street view、cartographic maps、POI 等城市多模态数据；适合作为多源融合训练目标参考。</td>
-      </tr>
-      <tr>
-          <td>AETHER / Beyond AlphaEarth via POI-Guided Contrastive Learning</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2510.09894" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>需进一步确认官方代码</td>
-          <td>用 POI 语义对齐 AlphaEarth/EO embedding，使物理影像表示获得城市功能语义。</td>
-      </tr>
-      <tr>
-          <td>GeoSynth</td>
-          <td style="text-align: right">2024 CVPR EarthVision</td>
-          <td><a href="https://vishu26.github.io/geosynth/index.html" target="_blank" rel="noopener noreferrer">Project</a></td>
-          <td>项目页含 arXiv/GitHub/模型入口</td>
-          <td>用 OSM layout 控制卫星图像生成，说明 vector layout 可作为生成式先验；更偏数据生成，但可迁移到对齐预训练。</td>
-      </tr>
-      <tr>
-          <td>MapTracker</td>
-          <td style="text-align: right">2024 ECCV Oral</td>
-          <td><a href="https://map-tracker.github.io/" target="_blank" rel="noopener noreferrer">Project</a></td>
-          <td>项目页含 paper/code</td>
-          <td>自动驾驶 HD map 方向，使用 raster BEV latent 与 vector road-element latent；不是遥感，但 raster-vector latent tracking 很可迁移。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法脉络" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-旧路线矢量转栅格或转标签" class="headerLink">
-    <a href="#31-%e6%97%a7%e8%b7%af%e7%ba%bf%e7%9f%a2%e9%87%8f%e8%bd%ac%e6%a0%85%e6%a0%bc%e6%88%96%e8%bd%ac%e6%a0%87%e7%ad%be" class="header-mark"></a>3.1 旧路线：矢量转栅格或转标签</h3><p>常见做法是把 OSM 道路、建筑、土地利用 polygon rasterize 成额外通道，或者直接作为弱标签训练 segmentation。优点是工程简单，能沿用 CNN/ViT；缺点是会损失拓扑关系、对象边界、标签表语义和多尺度结构。GeoLink 的论文把这类路线归纳为 data conversion / data derivation / knowledge graph 等间接融合方式，并指出它们往往任务特定、区域小、空间信息损失较大。</p>]]></description></item><item><title>RS-37 Topology-Aware Road and Building Segmentation</title><link>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</guid><description><![CDATA[<h1 id="rs-37-topology-aware-road-and-building-segmentation" class="headerLink">
-    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感基础模型擅长提供强特征或候选 mask，但 GIS 产品需要道路网络和建筑轮廓。像素级分割错误一旦进入路网或建筑 footprint，会造成导航断裂、地块统计错误和灾损估计偏差。因此拓扑指标与 vectorization 是从研究分割走向实际地图生产的关键。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>贡献</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SAM-Road</td>
-          <td style="text-align: right">2024 CVPRW</td>
-          <td><a href="https://github.com/htcr/sam_road" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>用 SAM/图结构做大规模向量化道路网络提取。</td>
-      </tr>
-      <tr>
-          <td>P2PFormer</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://researchtrend.ai/papers/2406.02930" target="_blank" rel="noopener noreferrer">arXiv summary</a></td>
-          <td>primitive-to-polygon，先预测点线角等几何 primitive，再生成建筑轮廓。</td>
-      </tr>
-      <tr>
-          <td>Adaptive Structure-Aware Connectivity-Preserving Loss</td>
-          <td style="text-align: right">2025 WACVW</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2025W/CV4EO/papers/Shojaei_Adaptive_Structure-Aware_Connectivity-Preserving_Loss_for_Improved_Road_Segmentation_in_Remote_WACVW_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>针对道路连通性的结构感知损失。</td>
-      </tr>
-      <tr>
-          <td>Pix2Poly</td>
-          <td style="text-align: right">2025 WACV</td>
-          <td><a href="https://github.com/yeshwanth95/Pix2Poly" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>端到端 polygonal building footprint extraction。</td>
-      </tr>
-      <tr>
-          <td>MT-RoadNet/MTNet</td>
-          <td style="text-align: right">2025 IJAEOG</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843225007277" target="_blank" rel="noopener noreferrer">ScienceDirect</a>, <a href="https://github.com/508hz1207/MTNet" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>道路 surface/centerline 联合提取，关注 topology-aware representation。</td>
-      </tr>
-      <tr>
-          <td>TopoRF-Net</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12736503/" target="_blank" rel="noopener noreferrer">PMC</a></td>
-          <td>多分辨率遥感道路提取中的 connectivity-preserving framework。</td>
-      </tr>
-      <tr>
-          <td>SAMPolyBuild</td>
-          <td style="text-align: right">2024 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>将 SAM 适配到建筑 polygon extraction。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
-<li>后处理路线：先 segmentation，再 skeletonization、graph repair、polygon simplification。</li>
-<li>拓扑损失路线：训练时约束连通性、中心线、边界和孔洞。</li>
-<li>图/矢量路线：直接预测道路 graph 或建筑 polygon。</li>
-<li>SAM-assisted 路线：用 SAM 产生候选 mask，再通过几何规则或 graph decoder 修正。</li>
-</ol>
-<h2 id="当前问题" class="headerLink">
-    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
-<li>mIoU 与路网连通性不一致。</li>
-<li>建筑 footprint 的角点、直角和平行边很难用普通 Dice/CE 损失约束。</li>
-<li>道路被树冠、阴影、车辆遮挡时容易断裂。</li>
-<li>直接 polygon 输出训练不稳定，标注格式也不统一。</li>
-<li>拓扑损失常计算昂贵，不易扩展到大图。</li>
-</ul>
-<h2 id="可执行研究方案" class="headerLink">
-    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Topology-Aware SAM Adapter for Map-Ready Road and Building Extraction</p>]]></description></item><item><title>RS-38 Parcel-Aware Crop Mapping</title><link>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</guid><description><![CDATA[<h1 id="rs-38-parcel-aware-crop-mapping" class="headerLink">
-    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>像素级 crop classification 会在地块边界、混合像元、云影、裸土期和不同作物物候接近时出错。若将地块作为结构先验，可以把时序信号在地块内聚合，并减少椒盐噪声。但地块边界本身并不总是可用，OSM/LPIS 等矢量数据也可能过期、错位或不完整。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>工作</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>价值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Self-supervised pre-training for large-scale crop mapping using Sentinel-2 time series</td>
-          <td style="text-align: right">2024 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>时序自监督作物制图基线。</td>
-      </tr>
-      <tr>
-          <td>Delineate Anything</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://huggingface.co/papers/2504.02534" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td>resolution-agnostic field boundary delineation，强调 zero-shot generalization。</td>
-      </tr>
-      <tr>
-          <td>AgriFM</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>多源时序作物制图 foundation model，显式强调物候。</td>
-      </tr>
-      <tr>
-          <td>WorldCereal / Presto real-world deployment</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2508.00858" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>真实作物制图部署经验，强调 benchmark 到 operational gap。</td>
-      </tr>
-      <tr>
-          <td>Fields of The World</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://github.com/fieldsoftheworld/" target="_blank" rel="noopener noreferrer">GitHub org</a></td>
-          <td>多洲、多国家 field boundary benchmark 生态。</td>
-      </tr>
-      <tr>
-          <td>PRUE</td>
-          <td style="text-align: right">2026 CVPR</td>
-          <td><a href="https://arxiv.org/abs/2603.27101" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>field boundary segmentation at scale，适合地块边界主基线。</td>
-      </tr>
-      <tr>
-          <td>Region-Adaptive Phenology-Aware Network</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://www.mdpi.com/2072-4292/17/24/4011" target="_blank" rel="noopener noreferrer">MDPI</a></td>
-          <td>区域自适应物候网络，说明跨区域作物物候偏移的重要性。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
-<li>pixel-first：直接对 Sentinel-2 time series 做像素分类。</li>
-<li>parcel-first：已有地块矢量，聚合每个 parcel 的时序特征。</li>
-<li>boundary-first：先从影像预测 field boundary，再生成 parcel。</li>
-<li>joint：同时学习 boundary、parcel embedding 和 crop label。</li>
-</ol>
-<h2 id="当前问题" class="headerLink">
-    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
-<li>公开地块边界跨国家不均衡。</li>
-<li>parcel 边界错位会污染时序聚合。</li>
-<li>小地块、梯田和复种区域难分。</li>
-<li>作物物候跨年份、气候带和管理制度变化很大。</li>
-<li>单纯 parcel majority voting 会掩盖地块内混作或变化。</li>
-</ul>
-<h2 id="可执行研究方案" class="headerLink">
-    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Uncertainty-Aware Parcel Aggregation for Crop Mapping</p>]]></description></item><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
-    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
-<p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>如何阅读这 50 篇遥感 AI 研究笔记</title><link>https://spacetop.win/2026/06/00-reading-roadmap/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-reading-roadmap/</guid><description><![CDATA[<h1 id="如何阅读这-50-篇遥感-ai-研究笔记" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e9%98%85%e8%af%bb%e8%bf%99-50-%e7%af%87%e9%81%a5%e6%84%9f-ai-%e7%a0%94%e7%a9%b6%e7%ac%94%e8%ae%b0" class="header-mark"></a>如何阅读这 50 篇遥感 AI 研究笔记</h1><p>如果目标是快速找论文题目，优先读 RS-01、RS-06、RS-23、RS-26、RS-31、RS-36、RS-47。它们分别对应 promptable segmentation、证据约束 VQA、可信制图、大图剪枝、谱段适配、raster-vector 融合和 benchmark 去重。</p>
-<p>如果目标是写综述，按十个大方向分组阅读。每组 5 篇，刚好形成一个相关工作小节。</p>]]></description></item><item><title>最值得优先尝试的 12 个遥感 AI 小论文题眼</title><link>https://spacetop.win/2026/06/00-paper-idea-shortlist/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-paper-idea-shortlist/</guid><description><![CDATA[<h1 id="最值得优先尝试的-12-个遥感-ai-小论文题眼" class="headerLink">
-    <a href="#%e6%9c%80%e5%80%bc%e5%be%97%e4%bc%98%e5%85%88%e5%b0%9d%e8%af%95%e7%9a%84-12-%e4%b8%aa%e9%81%a5%e6%84%9f-ai-%e5%b0%8f%e8%ae%ba%e6%96%87%e9%a2%98%e7%9c%bc" class="header-mark"></a>最值得优先尝试的 12 个遥感 AI 小论文题眼</h1><p>优先级最高的选题包括：box-to-point SAM prompt refinement、evidence-grounded RS-VQA、GeoFM benchmark leakage audit、risk-aware token pruning、GSD-aware adapter、SAM2 geographic memory、SRF-aware tokenizer、raster-vector joint encoder、EarthShift-style robustness、text-to-region retrieval、SAM/VLM active learning、hierarchical taxonomy metrics。</p>]]></description></item><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
+<h2 id="-解决的核心问题第一层表象层" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e7%ac%ac%e4%b8%80%e5%b1%82%e8%a1%a8%e8%b1%a1%e5%b1%82" class="header-mark"></a>🎯 解决的核心问题（第一层：表象层）</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>高光谱图像（Hyperspectral Image, HSI）是遥感领域的重要数据类型，能够捕获数百个连续光谱波段的信息，在矿物勘探、农业监测、环境评估等领域有广泛应用。然而，与普通RGB图像相比，高光谱图像面临独特的挑战：</p>]]></description></item><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
     <a href="#galileo%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e5%b0%ba%e5%ba%a6icml-2025-%e9%80%9a%e7%94%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4" class="header-mark"></a>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</h1><blockquote>
   <p><strong>论文解读</strong> | ICML 2025 | 2026-06-01</p>
 </blockquote><h2 id="-论文信息" class="headerLink">
@@ -693,4 +743,79 @@
 </table>
 <h2 id="-解决的核心问题" class="headerLink">
     <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item><item><title>MAESTRO：多模态多时相多光谱遥感自监督学习的"指挥家"</title><link>https://spacetop.win/2026/06/20260601_100230_maestro_self_supervised/</link><pubDate>Mon, 01 Jun 2026 10:02:30 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_100230_maestro_self_supervised/</guid><description><![CDATA[<h1 id="maestro多模态多时相多光谱遥感自监督学习的指挥家" class="headerLink">
+    <a href="#maestro%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e6%97%b6%e7%9b%b8%e5%a4%9a%e5%85%89%e8%b0%b1%e9%81%a5%e6%84%9f%e8%87%aa%e7%9b%91%e7%9d%a3%e5%ad%a6%e4%b9%a0%e7%9a%84%e6%8c%87%e6%8c%a5%e5%ae%b6" class="header-mark"></a>MAESTRO：多模态多时相多光谱遥感自监督学习的&quot;指挥家&quot;</h1><blockquote>
+  <p><strong>论文解读</strong> | WACV 2026 | 2026-06-01</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>MAESTRO: Masked AutoEncoders for Multimodal, Multitemporal, and Multispectral Earth Observation Data</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Antoine Labatie, Michael Vaccaro, Nina Lardiere, Anatol Garioud, Nicolas Gonthier</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>WACV 2026 (IEEE/CVF Winter Conference on Applications of Computer Vision)</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2508.10894" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2508.10894</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ignf/maestro" target="_blank" rel="noopener noreferrer">https://github.com/ignf/maestro</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>自监督学习, 掩码自编码器, 多模态融合, 多时相分析, 多光谱遥感, 地球观测</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景遥感数据的三多挑战" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae%e7%9a%84%e4%b8%89%e5%a4%9a%e6%8c%91%e6%88%98" class="header-mark"></a>问题背景：遥感数据的&quot;三多&quot;挑战</h3><p>地球观测（Earth Observation, EO）数据具有独特的&quot;三多&quot;特性：</p>
+<ol>
+<li><strong>多模态</strong>：光学（Sentinel-2）、SAR（Sentinel-1）、高光谱、DEM等不同传感器</li>
+<li><strong>多时相</strong>：同一区域在不同时间点的观测，蕴含丰富的时序变化信息</li>
+<li><strong>多光谱</strong>：单个传感器就有多个光谱波段（如Sentinel-2有13个波段）</li>
+</ol>
+<p>这些特性使得直接将自然图像领域的自监督学习方法（如MAE）迁移到遥感领域存在根本性挑战。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
+  <thead>
+      <tr>
+          <th>方法类型</th>
+          <th>局限性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>单模态MAE</strong></td>
+          <td>忽略多模态互补信息，无法充分利用SAR、DEM等数据</td>
+      </tr>
+      <tr>
+          <td><strong>简单拼接融合</strong></td>
+          <td>将所有模态/时相强行拼接，导致异质数据相互干扰</td>
+      </tr>
+      <tr>
+          <td><strong>晚期融合</strong></td>
+          <td>各模态独立编码后融合，丢失跨模态交互信息</td>
+      </tr>
+      <tr>
+          <td><strong>统一tokenizer</strong></td>
+          <td>用同一套tokenizer处理所有模态，忽略传感器特性差异</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个统一的自监督学习框架，能够高效地融合多模态、多时相、多光谱的遥感数据，同时保持计算效率？</strong></p>]]></description></item></channel></rss>

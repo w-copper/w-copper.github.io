@@ -1,6 +1,6 @@
 ---
 title: "RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像\"听懂\"自然语言描述"
-date: 2026-06-01
+date: 2026-06-01T23:55:00+08:00
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
 ---

@@ -1,6 +1,6 @@
 ---
 title: "RS-08 Text-to-Region Retrieval in Large EO Mosaics"
-date: 2026-06-07
+date: 2026-06-07T09:07:00+08:00
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感VLM", "视觉语言", "地理空间推理"]
 categories: ["遥感基础模型与多模态理解"]
