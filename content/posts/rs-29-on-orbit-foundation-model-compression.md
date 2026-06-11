@@ -3,26 +3,12 @@ title: "RS-29 On-Orbit Foundation Model Compression"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高效推理", "大幅面遥感", "星上部署"]
-source: "research/rs29_on_orbit_foundation_model_compression.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-29 On-Orbit Foundation Model Compression
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-29` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务来源：research/50threadprompts.md 中 RS29 OnOrbit Foundation Model Compression 范围：面向星上/边缘部署的光学/多光谱 GeoFM 压缩实验。默认不以 SARonly 任务为主；混合模态论文只取其中对光学/多光谱 foundation model 压缩有价值
-
-## 正文
-
-# RS-29 On-Orbit Foundation Model Compression
-
-更新时间：2026-06-07  
-任务来源：`research/50_thread_prompts.md` 中 `RS-29 On-Orbit Foundation Model Compression`  
 范围：面向星上/边缘部署的光学/多光谱 GeoFM 压缩实验。默认不以 SAR-only 任务为主；混合模态论文只取其中对光学/多光谱 foundation model 压缩有价值的部分。
 
 ## 1. 研究问题
@@ -262,10 +248,3 @@ Student:
 ## 12. 结论
 
 RS-29 最值得继续推进的不是单点压缩技巧，而是**风险感知的星上 GeoFM 任务系统**：用压缩 GeoFM 提供语义能力，用 tiny router 和 uncertainty fallback 控制漏检风险，用 energy/downlink/OOD/calibration 指标替代只看 FLOPs 的评价。这个切口足够细，也贴近 2026 已经出现的 Prithvi in Orbit 趋势，具备 TGRS、ISPRS JPRS、CVPR/ICCV workshop 或应用型顶刊的投稿潜力。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

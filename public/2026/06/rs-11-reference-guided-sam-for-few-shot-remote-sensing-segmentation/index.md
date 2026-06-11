@@ -3,19 +3,6 @@
 
 # RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-11` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务原文：比较 ViRefSAM、SEMPNet、PerSAM/VRPSAM 类方法在遥感 fewshot segmentation 中如何用 15 张参考图像生成 prompt 或 prototype。重点分析是否训练、如何选参考样本、如何和 RSCLIP/SAM 特征对齐，并给出 iSAID5i/LoveDA2i 实验方案。 
-
-## 正文
-
-# RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation
-
-更新时间：2026-06-07  
-任务原文：比较 ViRefSAM、SEMPNet、PerSAM/VRP-SAM 类方法在遥感 few-shot segmentation 中如何用 1-5 张参考图像生成 prompt 或 prototype。重点分析是否训练、如何选参考样本、如何和 RS-CLIP/SAM 特征对齐，并给出 iSAID-5i/LoveDA-2i 实验方案。
-
 ## 1. 问题由来
 
 遥感 few-shot segmentation 的难点不是单纯“样本少”，而是样本少叠加了遥感特有的数据形态：俯视视角、小目标密集、尺度变化大、同类跨区域外观差异大、背景纹理容易和目标混淆。传统 few-shot segmentation 通常用 support image/mask 学一个 prototype，再去 query image 上匹配；它能带来类别语义，但边界往往粗。SAM 则相反：边界和候选 mask 很强，但它是 category-agnostic，需要点、框、mask 等 prompt 才知道要分哪个对象。
@@ -178,11 +165,4 @@ ViRefSAM 是 RS-11 最核心的近年论文。arXiv 摘要显示它面向 remote
 6. [VLP-SAM](https://arxiv.org/abs/2502.00719) and [GitHub](https://github.com/kosukesakurai1/VLP-SAM)
 7. [ProSAM, ICCV 2025](https://openaccess.thecvf.com/content/ICCV2025/html/Wang_ProSAM_Enhancing_the_Robustness_of_SAM-based_Visual_Reference_Segmentation_with_ICCV_2025_paper.html)
 8. [Learnable Prompt for Few-Shot Semantic Segmentation in Remote Sensing Domain, CVPRW 2024](https://openaccess.thecvf.com/content/CVPR2024W/L3D-IVU/papers/Immanuel_Learnable_Prompt_for_Few-Shot_Semantic_Segmentation_in_Remote_Sensing_Domain_CVPRW_2024_paper.pdf)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

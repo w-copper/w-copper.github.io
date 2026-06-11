@@ -3,7 +3,6 @@ title: "扩散模型赋能遥感变化检测：DDPM-CD的创新之路"
 date: 2026-06-01
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # 扩散模型赋能遥感变化检测：DDPM-CD的创新之路

@@ -1,28 +1,14 @@
 ---
-title: "RS-36 Raster-Vector Joint Encoder 调研"
+title: "RS-36 Raster-Vector Joint Encoder"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
-source: "research/RS-36_raster_vector_joint_encoder.md"
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
-# RS-36 Raster-Vector Joint Encoder 调研
+# RS-36 Raster-Vector Joint Encoder
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-36` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务来源：research/50threadprompts.md 中 RS36 范围：20242026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。 1. 问题定义 细问题：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不
-
-## 正文
-
-# RS-36 Raster-Vector Joint Encoder 调研
-
-更新时间：2026-06-07  
-任务来源：`research/50_thread_prompts.md` 中 RS-36  
 范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。
 
 ## 1. 问题定义
@@ -195,10 +181,3 @@ GeoViSTA 提醒我们，很多地理空间任务不是纯“影像 + OSM geometr
 - [AETHER / Beyond AlphaEarth via POI-Guided Contrastive Learning](https://arxiv.org/abs/2510.09894)
 - [GeoSynth](https://vishu26.github.io/geosynth/index.html)
 - [MapTracker](https://map-tracker.github.io/)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

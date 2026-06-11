@@ -3,26 +3,11 @@ title: "RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["高效推理", "大幅面遥感", "星上部署"]
-source: "research/rs26_risk_aware_token_pruning_large_rs_vlms.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-26` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务范围：大幅面光学遥感 VLM/VQA/grounding 中的视觉 token pruning 与动态切片，重点研究如何避免剪掉小目标、罕见目标或答案证据区域。默认不以 SAR 为主。本文区分两类来源：遥感专用方法与可迁移的通用 VLM token reduction 方法。 1. 方向概述 大幅面遥感图像的矛盾很尖锐：一张卫
-
-## 正文
-
-# RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs
-
-更新时间：2026-06-07  
-任务范围：大幅面光学遥感 VLM/VQA/grounding 中的视觉 token pruning 与动态切片，重点研究如何避免剪掉小目标、罕见目标或答案证据区域。默认不以 SAR 为主。本文区分两类来源：遥感专用方法与可迁移的通用 VLM token reduction 方法。
 
 ## 1. 方向概述
 
@@ -207,10 +192,3 @@ Risk-Aware Token Pruning for Large Remote Sensing Vision-Language Models
 ## 11. 结论
 
 RS-26 最值得推进的不是单纯复现一个 token pruning 方法，而是把“剪枝是否漏掉遥感证据”变成可测、可优化的研究问题。通用 VLM 剪枝方法提供了工程基线，LRS-VQA/CF-TTP 提供了遥感任务入口，DynamicVis/RS-Mamba 等提供了高效视觉替代路线。一个清晰的小论文可以围绕 risk-aware pruning diagnostic + 三路风险估计 + deferred reading fallback 展开，目标是在大幅面遥感 VQA/grounding 中同时报告 accuracy、latency 和 evidence false prune rate。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

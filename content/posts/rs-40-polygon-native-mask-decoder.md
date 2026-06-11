@@ -1,28 +1,13 @@
 ---
-title: "RS-40 Polygon-Native Mask Decoder 调研"
+title: "RS-40 Polygon-Native Mask Decoder"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
-source: "research/rs-40-polygon-native-mask-decoder.md"
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
-# RS-40 Polygon-Native Mask Decoder 调研
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-40` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：研究从遥感影像直接输出 polygon/vector，而不是先输出 raster mask 再做后处理。重点比较 SAMPolyBuild、建筑轮廓提取、可微 polygon decoder、GIS 后处理，并设计建筑/道路/地块的边界质量和拓扑指标。 执行摘要 20242026 的矢量化遥感提取正在从“mask polyg
-
-## 正文
-
-# RS-40 Polygon-Native Mask Decoder 调研
-
-更新时间：2026-06-07  
-任务：研究从遥感影像直接输出 polygon/vector，而不是先输出 raster mask 再做后处理。重点比较 SAMPolyBuild、建筑轮廓提取、可微 polygon decoder、GIS 后处理，并设计建筑/道路/地块的边界质量和拓扑指标。
+# RS-40 Polygon-Native Mask Decoder
 
 ## 执行摘要
 
@@ -213,10 +198,3 @@ GeoFormer 则把多 polygon 预测做成自回归问题，更接近“一个 ima
 12. [Fields of The World](https://fieldsofthe.world/)
 13. [PRUE](https://arxiv.org/abs/2603.27101)
 14. [FTW PRUE GitHub](https://github.com/fieldsoftheworld/ftw-prue)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

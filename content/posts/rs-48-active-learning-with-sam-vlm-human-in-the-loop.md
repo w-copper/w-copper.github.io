@@ -3,26 +3,11 @@ title: "RS-48 Active Learning with SAM/VLM Human-in-the-Loop"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
-source: "research/rs48_active_learning_sam_vlm_hitl.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-48 Active Learning with SAM/VLM Human-in-the-Loop
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-48` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：设计一个低成本遥感标注闭环：主动选择样本，SAM 生成 mask，VLM 生成类别/描述，人类纠错，再更新 prompt/prototype。输出标注成本曲线、mIoU/AP 收益、停止准则和失败案例分析。 1. 问题由来 遥感标注贵，贵在三个地方：大幅面影像要切片和定位，小目标/旋转目标/密集实例边界难修，类别语义还经常依
-
-## 正文
-
-# RS-48 Active Learning with SAM/VLM Human-in-the-Loop
-
-更新时间：2026-06-07  
-任务：设计一个低成本遥感标注闭环：主动选择样本，SAM 生成 mask，VLM 生成类别/描述，人类纠错，再更新 prompt/prototype。输出标注成本曲线、mIoU/AP 收益、停止准则和失败案例分析。
 
 ## 1. 问题由来
 
@@ -208,10 +193,3 @@ draw_polygon = 8 units
 6. [OpenRSD, ICCV 2025](https://openaccess.thecvf.com/content/ICCV2025/html/Huang_OpenRSD_Towards_Open-prompts_for_Object_Detection_in_Remote_Sensing_Images_ICCV_2025_paper.html)
 7. [Grounded-SAM-2 GitHub](https://github.com/IDEA-Research/Grounded-SAM-2)
 8. [VRSBench, NeurIPS 2024 Datasets & Benchmarks](https://proceedings.neurips.cc/paper_files/paper/2024/file/05b7f821234f66b78f99e7803fffa78a-Paper-Datasets_and_Benchmarks_Track.pdf)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

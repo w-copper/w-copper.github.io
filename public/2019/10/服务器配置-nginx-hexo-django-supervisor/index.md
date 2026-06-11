@@ -1,5 +1,6 @@
 # 服务器配置-Nginx+Hexo+Django+Supervisor
 
+
 <!--more-->
 ## 前言
 
@@ -120,3 +121,4 @@ def push():
 之后配置github的webhooks：
 1. 在仓库的settings中找到Webhooks
 2. 添加webhoos，这里只监听push事件，url即https://your.web.com/githooks/push，将发送的消息类型改为JSON
+

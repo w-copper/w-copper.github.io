@@ -3,27 +3,11 @@ title: "RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感基础模型", "GeoFM", "2024-2026"]
-source: "research/rs05_alphaearth_prithvi_small_area_lora.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-05` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-原始问题：围绕“用公开 GeoFM embedding 做小区域低样本制图”深挖：AlphaEarth embeddings、PrithviEO2.0、Clay、Satlas/RS foundation features 在 wildfire、crop、urban mapping 中如何微调。设计一个 LoRA/linear probe/adapter 的公
-
-## 正文
-
-# RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA
-
-原始问题：围绕“用公开 GeoFM embedding 做小区域低样本制图”深挖：AlphaEarth embeddings、Prithvi-EO-2.0、Clay、Satlas/RS foundation features 在 wildfire、crop、urban mapping 中如何微调。设计一个 LoRA/linear probe/adapter 的公平比较实验，强调小样本和跨区泛化。
-
-更新时间：2026-06-07
 
 ## 结论摘要
 
@@ -287,10 +271,3 @@ source_repo: "codex-rs-articles"
 - [Low-Rank Adaptation of GFMs for Wildfire Mapping](https://arxiv.org/abs/2605.04989)
 - [Earth Embeddings Reveal Diverse Urban Signals from Space](https://arxiv.org/abs/2604.03456)
 - [Mapping Tomato Cropping Systems with AlphaEarth](https://arxiv.org/abs/2605.21804)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

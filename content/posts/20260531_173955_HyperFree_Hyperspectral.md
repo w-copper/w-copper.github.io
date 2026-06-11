@@ -3,7 +3,6 @@ title: "HyperFree: 通道自适应免微调高光谱遥感基础模型"
 date: 2026-05-31
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "articles"
 ---
 
 # HyperFree: 通道自适应免微调高光谱遥感基础模型

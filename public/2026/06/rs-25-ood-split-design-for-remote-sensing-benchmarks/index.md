@@ -2,19 +2,6 @@
 
 
 # RS-25 OOD Split Design for Remote Sensing Benchmarks
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-25` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：专门调研遥感 benchmark 的 OOD split 设计，比较 random split、spatial block split、leavecityout、leavecountryout、leaveseasonout、leavesensorout 各自测到什么，并输出适合论文复现实验的 split protocol。 
-
-## 正文
-
-# RS-25 OOD Split Design for Remote Sensing Benchmarks
-
-更新时间：2026-06-07  
-任务：专门调研遥感 benchmark 的 OOD split 设计，比较 random split、spatial block split、leave-city-out、leave-country-out、leave-season-out、leave-sensor-out 各自测到什么，并输出适合论文复现实验的 split protocol。  
 默认范围：光学/多光谱/高分辨率遥感为主；不把 SAR-only 作为主线。
 
 ## 摘要
@@ -219,11 +206,4 @@
 5. [Distribution Shifts at Scale / TARDIS](https://arxiv.org/abs/2412.13394) 和 [GitHub](https://github.com/microsoft/geospatial-ood-detection)
 6. [PhilEO Bench](https://phileo-bench.github.io/)
 7. [DSGR / Spatial Domain Shift across Geographic Regions](https://link.springer.com/article/10.1007/s11263-025-02518-z)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

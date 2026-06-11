@@ -3,18 +3,6 @@
 
 # RS-32 Spectral Configuration Shift
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-32` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 摘要 Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。20242026
-
-## 正文
-
-# RS-32 Spectral Configuration Shift
-
-更新时间：2026-06-07
-
 ## 摘要
 
 Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。
@@ -79,11 +67,4 @@ RGB 模型默认通道固定；遥感中 Sentinel-2、Landsat/HLS、Planet、NAI
 3. missing-band dropout 与 sensor metadata adapter 联合预训练。
 4. 将光谱指数保持约束加入自监督重建。
 5. 把 spectral shift 与 spatial/GSD shift 解耦评测。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

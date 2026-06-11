@@ -3,19 +3,6 @@
 
 # RS-17 Latent Flow/Diffusion for Change Detection
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-17` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。 结论先行 这个
-
-## 正文
-
-# RS-17 Latent Flow/Diffusion for Change Detection
-
-更新时间：2026-06-07  
-任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。
-
 ## 结论先行
 
 这个方向的核心不是“把扩散模型塞进变化检测”，而是把变化检测从逐像素二分类改写为“在潜空间中建模一个合理的变化区域/变化过程”。判别式模型通常学习 `pre/post -> changed probability`，很擅长局部边界和快速推理；生成式/潜变量方法试图学习“什么样的变化 mask 或变化图像在全局上是合理的”，因此天然适合处理区域一致性、标签歧义、不确定性和低标注数据。
@@ -219,11 +206,4 @@ ChangeFlow 是当前最直接回答 RS-17 prompt 的论文。它把 binary chang
 - LDGuid 是否会开放代码；DE 模块与 information bottleneck 的实现细节需要从论文 PDF 深读。
 - Changen2 官方模型/数据是否公开；如果没有，作为概念和 synthetic data baseline 引用，实验可先用 ChangeAnywhere/DreamCD。
 - CVPR 2025 semantic change detection 的代码和数据协议，决定是否纳入主实验还是只作为语义变化延伸。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

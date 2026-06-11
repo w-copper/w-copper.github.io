@@ -3,7 +3,6 @@ title: "UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框
 date: 2026-06-01
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架

@@ -3,26 +3,11 @@ title: "RS-43 Illegal Mining Evidence Grounding"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感应用", "农业生态灾害", "方法化"]
-source: "research/rs43_illegal_mining_evidence_grounding.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-43 Illegal Mining Evidence Grounding
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-43` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidencegrounded detec
-
-## 正文
-
-# RS-43 Illegal Mining Evidence Grounding
-
-更新时间：2026-06-07  
-任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidence-grounded detection / change caption 方案。
 
 ## 1. 方向概述
 
@@ -275,10 +260,3 @@ Stage D: Grounded explanation
 8. [HiSem arXiv](https://arxiv.org/abs/2605.15024)
 9. [GeoChat CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html)
 10. [LISAT HF paper page](https://huggingface.co/papers/2505.02829)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

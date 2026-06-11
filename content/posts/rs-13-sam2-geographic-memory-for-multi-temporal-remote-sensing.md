@@ -3,25 +3,12 @@ title: "RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["SAM", "开放词表分割", "提示式分割"]
-source: "research/rs13_sam2_geographic_memory_multitemporal_rs.md"
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-13` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。 结论摘要 SAM2 的真正新能力不是“又一个更强 SAM”，而是它把交互式分割扩展到视频：给某一帧提示后，模型可以用 streaming memory 在后续帧传播对象 ma
-
-## 正文
-
-# RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing
-
-更新时间：2026-06-07  
 细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。
 
 ## 结论摘要
@@ -274,10 +261,3 @@ Baselines：
 8. [SAMWS](https://www.sciencedirect.com/science/article/pii/S1569843224004394)
 9. [OmniCD](https://arxiv.org/abs/2605.30168)
 10. [AnyTime-CD](https://www.sciencedirect.com/science/article/pii/S003442572600009X)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

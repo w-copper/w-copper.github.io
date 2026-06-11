@@ -2,19 +2,6 @@
 
 
 # RS-39 POI-Assisted Remote Sensing VLM Reasoning
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-39` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：研究 POI、OSM 和地图文本如何辅助遥感 VLM 做场景理解，同时避免模型只靠文本猜答案。 结论先行：这个题目最值得做成一个“证据一致性 benchmark + 抗地图偏置训练/推理框架”。核心不是简单把 OSM/POI 文本塞进 prompt，而是要求模型在 imageonly、maponly、image+map 三种
-
-## 正文
-
-# RS-39 POI-Assisted Remote Sensing VLM Reasoning
-
-更新时间：2026-06-07  
-任务：研究 POI、OSM 和地图文本如何辅助遥感 VLM 做场景理解，同时避免模型只靠文本猜答案。  
 结论先行：这个题目最值得做成一个“证据一致性 benchmark + 抗地图偏置训练/推理框架”。核心不是简单把 OSM/POI 文本塞进 prompt，而是要求模型在 `image-only`、`map-only`、`image+map` 三种设置下都可诊断，并能说明答案来自影像证据、地图先验，还是二者一致。
 
 ## 1. 问题由来
@@ -282,11 +269,4 @@ Contradiction Robustness = POI 错误或错位时仍不盲信地图的比例
 - NeurIPS Datasets & Benchmarks：如果数据集规模、人工验证和三路评测足够扎实。
 - ISPRS JPRS / TGRS / Geo-spatial Information Science：如果方法与地图先验融合、遥感场景理解实验完整。
 - ACM SIGSPATIAL / CIKM：如果强调 POI/OSM 检索、geoentity 图结构和空间推理。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

@@ -3,25 +3,11 @@ title: "RS-37 Topology-Aware Road and Building Segmentation"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
-source: "research/rs37_topology_aware_road_building_segmentation.md"
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-37 Topology-Aware Road and Building Segmentation
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-37` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 摘要 道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。20242026 的相关工作包括 SAMRoad、TopoRFNet、connectivitypreserving loss、Pix2Poly、P2PFo
-
-## 正文
-
-# RS-37 Topology-Aware Road and Building Segmentation
-
-更新时间：2026-06-07
 
 ## 摘要
 
@@ -91,10 +77,3 @@ source_repo: "codex-rs-articles"
 3. 大图跨 tile road graph stitching。
 4. 建筑规则化 decoder 与灾损不规则建筑的冲突处理。
 5. 将 OSM road/building 作为弱拓扑先验并估计其噪声。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

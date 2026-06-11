@@ -1,23 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>提示式分割 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%8F%90%E7%A4%BA%E5%BC%8F%E5%88%86%E5%89%B2/</link><description>提示式分割 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%8F%90%E7%A4%BA%E5%BC%8F%E5%88%86%E5%89%B2/" rel="self" type="application/rss+xml"/><item><title>RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation" class="headerLink">
-    <a href="#rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation" class="header-mark"></a>RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-11</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务原文：比较 ViRefSAM、SEMPNet、PerSAM/VRPSAM 类方法在遥感 fewshot segmentation 中如何用 15 张参考图像生成 prompt 或 prototype。重点分析是否训练、如何选参考样本、如何和 RSCLIP/SAM 特征对齐，并给出 iSAID5i/LoveDA2i 实验方案。</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation-1" class="headerLink">
-    <a href="#rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation-1" class="header-mark"></a>RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation</h1><p>更新时间：2026-06-07<br>
-任务原文：比较 ViRefSAM、SEMPNet、PerSAM/VRP-SAM 类方法在遥感 few-shot segmentation 中如何用 1-5 张参考图像生成 prompt 或 prototype。重点分析是否训练、如何选参考样本、如何和 RS-CLIP/SAM 特征对齐，并给出 iSAID-5i/LoveDA-2i 实验方案。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感 few-shot segmentation 的难点不是单纯“样本少”，而是样本少叠加了遥感特有的数据形态：俯视视角、小目标密集、尺度变化大、同类跨区域外观差异大、背景纹理容易和目标混淆。传统 few-shot segmentation 通常用 support image/mask 学一个 prototype，再去 query image 上匹配；它能带来类别语义，但边界往往粗。SAM 则相反：边界和候选 mask 很强，但它是 category-agnostic，需要点、框、mask 等 prompt 才知道要分哪个对象。</p>]]></description></item><item><title>RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-12-training-free-open-vocabulary-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-12-training-free-open-vocabulary-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-12-training-free-open-vocabulary-remote-sensing-segmentation" class="headerLink">
-    <a href="#rs-12-training-free-open-vocabulary-remote-sensing-segmentation" class="header-mark"></a>RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-12</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务来源：research/50threadprompts.md 中 RS12 范围：光学/航空/卫星遥感为主；关注 trainingfree 或接近 trainingfree 的 openvocabulary semantic segmentation (OVSS/OVRSS/OVRSIS)，并比较 CLIP token、SAM</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-12-training-free-open-vocabulary-remote-sensing-segmentation-1" class="headerLink">
-    <a href="#rs-12-training-free-open-vocabulary-remote-sensing-segmentation-1" class="header-mark"></a>RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation</h1><p>更新时间：2026-06-07<br>
-任务来源：<code>research/50_thread_prompts.md</code> 中 RS-12<br>
-范围：光学/航空/卫星遥感为主；关注 training-free 或接近 training-free 的 open-vocabulary semantic segmentation (OVSS/OVRSS/OVRSIS)，并比较 CLIP token、SAM mask、DINO feature、上下文推理的组合方式。</p>
+    <a href="#rs-11-reference-guided-sam-for-few-shot-remote-sensing-segmentation" class="header-mark"></a>RS-11 Reference-Guided SAM for Few-Shot Remote Sensing Segmentation</h1><h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感 few-shot segmentation 的难点不是单纯“样本少”，而是样本少叠加了遥感特有的数据形态：俯视视角、小目标密集、尺度变化大、同类跨区域外观差异大、背景纹理容易和目标混淆。传统 few-shot segmentation 通常用 support image/mask 学一个 prototype，再去 query image 上匹配；它能带来类别语义，但边界往往粗。SAM 则相反：边界和候选 mask 很强，但它是 category-agnostic，需要点、框、mask 等 prompt 才知道要分哪个对象。</p>
+<p>因此 2024-2026 的一个自然小方向是：让少量参考图像自动给 SAM 生成提示，或者生成类别 prototype，再把 SAM 的边界能力和 few-shot 的语义能力合起来。RS-11 的核心问题可以表述为：</p>
+<blockquote>
+  <p>给定 1-5 张带 mask 的遥感参考图像，如何自动在目标遥感图像中找到同类地物，并生成足够稳定的 SAM prompt / prototype，使模型既不需要人工点框，又能保持遥感小目标和复杂边界质量？</p>
+</blockquote><h2 id="2-方法脉络" class="headerLink">
+    <a href="#2-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>2. 方法脉络</h2><h3 id="21-粗-prompt--prototype-驱动-sam" class="headerLink">
+    <a href="#21-%e7%b2%97-prompt--prototype-%e9%a9%b1%e5%8a%a8-sam" class="header-mark"></a>2.1 粗 prompt / prototype 驱动 SAM</h3><p>SAM-RSP 将 few-shot prototype 与 SAM 结合：用 SAM encoder 感知 query 的区域边界，再用传统 few-shot backbone 产生 rough segmentation prompt，最后用 prompt transformer decoder 融合 query embedding、prompt 和 prototype。它不是遥感专用，但思路直接可迁移：prototype 提供“是什么”，SAM 提供“边界在哪里”。论文页明确给出代码链接 <code>https://github.com/Jiaguang-NEU/SAM-RSP</code>。</p>]]></description></item><item><title>RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-12-training-free-open-vocabulary-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-12-training-free-open-vocabulary-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-12-training-free-open-vocabulary-remote-sensing-segmentation" class="headerLink">
+    <a href="#rs-12-training-free-open-vocabulary-remote-sensing-segmentation" class="header-mark"></a>RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation</h1><p>范围：光学/航空/卫星遥感为主；关注 training-free 或接近 training-free 的 open-vocabulary semantic segmentation (OVSS/OVRSS/OVRSIS)，并比较 CLIP token、SAM mask、DINO feature、上下文推理的组合方式。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感语义分割长期依赖封闭类别：训练集里有 <code>building/road/water/crop</code>，测试时也只能预测这些类。但真实地理应用经常要临时查询新类别，比如“洪水淹没道路”“停车场”“光伏板”“裸土中的采矿坑”。重新标注像素级数据成本很高，于是 open-vocabulary segmentation 变得很诱人。</p>
 <p>把自然图像 OVSS 直接搬到遥感会遇到三个硬问题：</p>
@@ -26,15 +16,98 @@
 <li>遥感影像通常是大场景，独立 tile 预测会破坏道路、水体、农田等空间连续性。</li>
 <li>类别语义层级复杂。<code>impervious surface/road/runway/building</code>、<code>field/crop/rice</code>、<code>water/river/lake/flood</code> 之间存在父子和重叠关系，简单 prompt matching 会产生类别漂移。</li>
 </ul>
-<p>因此 2024-2026 的主线不是“重新训练一个遥感分割网络”，而是把已有 foundation model 的能力组合起来：CLIP/RS-CLIP 提供文本语义，SAM 提供候选 mask 和边界，DINO/DINOv3 提供更强 patch feature，上下文推理负责跨 tile 或跨 region 一致性。</p>]]></description></item><item><title>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</title><link>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</guid><description><![CDATA[<h1 id="rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="headerLink">
-    <a href="#rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="header-mark"></a>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-13</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。 结论摘要 SAM2 的真正新能力不是“又一个更强 SAM”，而是它把交互式分割扩展到视频：给某一帧提示后，模型可以用 streaming memory 在后续帧传播对象 ma</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing-1" class="headerLink">
-    <a href="#rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing-1" class="header-mark"></a>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</h1><p>更新时间：2026-06-07<br>
-细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。</p>
+<p>因此 2024-2026 的主线不是“重新训练一个遥感分割网络”，而是把已有 foundation model 的能力组合起来：CLIP/RS-CLIP 提供文本语义，SAM 提供候选 mask 和边界，DINO/DINOv3 提供更强 patch feature，上下文推理负责跨 tile 或跨 region 一致性。</p>
+<h2 id="2-代表论文与代码" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>2. 代表论文与代码</h2><table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>训练需求</th>
+          <th>关键组件</th>
+          <th>官方链接</th>
+          <th>核心贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>OVRS / Open-Vocabulary Remote Sensing Image Semantic Segmentation</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>需要方法训练/基准构造</td>
+          <td>CLIP similarity、rotation aggregation、multi-scale refinement</td>
+          <td><a href="https://arxiv.org/abs/2409.07683" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/caoql98/OVRS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>面向遥感 OVS 的早期系统框架；提出旋转聚合相似度和尺度感知上采样，并开源 4 个遥感数据集基准。</td>
+      </tr>
+      <tr>
+          <td>SegEarth-OV</td>
+          <td style="text-align: right">2025 CVPR Oral</td>
+          <td>推理主流程 training-free；SimFeatUp 有预训练组件</td>
+          <td>CLIP patch token、CLS subtraction、SimFeatUp</td>
+          <td><a href="https://likyoo.github.io/SegEarth-OV/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVPR PDF</a>, <a href="https://github.com/likyoo/SegEarth-OV" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>观察 CLIP local patch token 受 global CLS bias 干扰，用 CLS token subtraction 缓解全局偏置，用 SimFeatUp 恢复空间细节；在 17 个遥感数据集上覆盖语义分割、建筑、道路、水体/洪水。</td>
+      </tr>
+      <tr>
+          <td>AerOSeg</td>
+          <td style="text-align: right">2025 CVPRW EarthVision</td>
+          <td>有方法组件/可能轻训练</td>
+          <td>SAM-guided OVS、旋转增强图文相关特征</td>
+          <td><a href="https://www.openaccess.thecvf.com/content/CVPR2025W/EarthVision/papers/Dutta_AerOSeg_Harnessing_SAM_for_Open-Vocabulary_Segmentation_in_Remote_Sensing_Images_CVPRW_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVPRW PDF</a></td>
+          <td>使用 SAM 边界/空间先验增强开放词表遥感分割，强调遥感旋转和空间 refinement。</td>
+      </tr>
+      <tr>
+          <td>ReSeg-CLIP</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>training-free</td>
+          <td>SAM hierarchical masks、RS-CLIP model composition</td>
+          <td><a href="https://arxiv.org/abs/2602.23869" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>用 SAM 多尺度 mask 限制 CLIP self-attention 交互，并组合多个遥感 CLIP 变体；目标是无需额外训练提升 OVSS。</td>
+      </tr>
+      <tr>
+          <td>Enabling Training-Free Text-Based Remote Sensing Segmentation</td>
+          <td style="text-align: right">2026 CVPRW EarthVision</td>
+          <td>完全 zero-shot 或轻量 LoRA</td>
+          <td>CLIP mask selector、SAM grid masks、GPT/Qwen-VL click prompts</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2026W/EarthVision/html/Sosa_Enabling_Training-Free_Text-Based_Remote_Sensing_Segmentation_CVPRW_2026_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2602.17799" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/josesosajs/trainfree-rs-segmentation" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>训练自由地把 CLIP 用作 SAM grid mask selector；同时用生成式 VLM 产生 click prompts，覆盖 OVSS、referring 和 reasoning segmentation。</td>
+      </tr>
+      <tr>
+          <td>ConInfer</td>
+          <td style="text-align: right">2026 CVPR Findings</td>
+          <td>inference-only framework</td>
+          <td>context-aware joint inference、inter-unit semantic dependencies</td>
+          <td><a href="https://arxiv.org/abs/2603.29271" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2026F/papers/Chen_ConInfer_Context-Aware_Inference_for_Training-Free_Open-Vocabulary_Remote_Sensing_Segmentation_CVPRF_2026_paper.pdf" target="_blank" rel="noopener noreferrer">CVPR PDF</a>, <a href="https://github.com/Dog-Yang/ConInfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>指出 patch 独立预测与遥感大场景空间语义相关性不匹配；通过多空间单元联合预测提升一致性和泛化。</td>
+      </tr>
+      <tr>
+          <td>Towards Realistic OVRS Segmentation / Pi-Seg</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>需要训练 baseline，但贡献在 benchmark</td>
+          <td>OVRSISBenchV2、OVRSIS95K、positive-incentive noise</td>
+          <td><a href="https://arxiv.org/abs/2604.15652" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/LiBingyu01/RSKT-Seg_and_Pi-Seg/tree/Pi-Seg" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>构建更真实的大规模 OVRSIS benchmark：约 170K images、128 categories，并加入建筑、道路、洪水等应用协议。</td>
+      </tr>
+      <tr>
+          <td>DINO Soars / CAFe-DINO</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>主干不做遥感 fine-tuning；在 RS-targeted COCO-Stuff 子集微调</td>
+          <td>DINOv3/DINO.txt、cost aggregation、feature upsampling</td>
+          <td><a href="https://arxiv.org/abs/2605.03175" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/rfaulk/DINO_Soars" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>利用 DINOv3 的 dense feature 和 DINO.txt 的开放词表能力，强调比 CLIP-style dense similarity 更适合遥感 OVSS。</td>
+      </tr>
+      <tr>
+          <td>dinov3.seg</td>
+          <td style="text-align: right">2026 arXiv, CV 通用</td>
+          <td>非遥感专用</td>
+          <td>DINOv3 local/global alignment、early/late refinement、sliding-window aggregation</td>
+          <td><a href="https://arxiv.org/abs/2603.19531" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>通用 OVSS 方向的重要可迁移方法；其 high-resolution local-global inference 对遥感大图有直接借鉴价值。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络比较" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e6%af%94%e8%be%83" class="header-mark"></a>3. 方法脉络比较</h2><h3 id="31-clip-token-路线" class="headerLink">
+    <a href="#31-clip-token-%e8%b7%af%e7%ba%bf" class="header-mark"></a>3.1 CLIP Token 路线</h3><p>代表：OVRS、SegEarth-OV、ReSeg-CLIP、CVPRW 2026 text-based segmentation。</p>]]></description></item><item><title>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</title><link>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</guid><description><![CDATA[<h1 id="rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="headerLink">
+    <a href="#rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="header-mark"></a>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</h1><p>细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。</p>
 <h2 id="结论摘要" class="headerLink">
     <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>SAM2 的真正新能力不是“又一个更强 SAM”，而是它把交互式分割扩展到视频：给某一帧提示后，模型可以用 streaming memory 在后续帧传播对象 mask。这个机制天然吸引遥感多时相任务，但不能直接把 Sentinel-2/Landsat/航空影像时间序列当作视频来跑。自然视频中的相邻帧通常是秒级连续运动；遥感多时相是天、月、季、年级间隔，存在云影、季节物候、传感器差异、配准误差、GSD 差异和真实地物变化。</p>
 <p>因此，值得研究的小问题是：把 SAM2 的“帧序 memory”改为“地理位置/对象/季节/传感器条件化 memory”。换句话说，memory 不应该只问“上一帧这个对象在哪里”，而应该问：</p>
@@ -145,27 +218,20 @@
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><h3 id="sam2-的-memory-假设" class="headerLink">
     <a href="#sam2-%e7%9a%84-memory-%e5%81%87%e8%ae%be" class="header-mark"></a>SAM2 的 memory 假设</h3><p>SAM2 将图像看成单帧视频，并为视频分割引入 streaming memory。自然视频里的 memory 主要解决对象跨帧传播：对象身份大致连续，外观变化平滑，帧间位移可由视觉相似性和短期记忆处理。</p>]]></description></item><item><title>RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS</title><link>https://spacetop.win/2026/06/rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss/</guid><description><![CDATA[<h1 id="rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss" class="headerLink">
-    <a href="#rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss" class="header-mark"></a>RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-14</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务原文：以 SegEarthOV3/SAM3 为核心，研究遥感开放词表分割中的 presence score 校准问题。关注不存在类别误检、类别同义词、landcover 与 object label 混用、尺度先验和地理先验，设计 prompt ensemble 与 calibration 实验。 1. 研究问题 细问题：SA</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss-1" class="headerLink">
-    <a href="#rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss-1" class="header-mark"></a>RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS</h1><p>更新时间：2026-06-07<br>
-任务原文：以 SegEarth-OV3/SAM3 为核心，研究遥感开放词表分割中的 presence score 校准问题。关注不存在类别误检、类别同义词、land-cover 与 object label 混用、尺度先验和地理先验，设计 prompt ensemble 与 calibration 实验。</p>
-<h2 id="1-研究问题" class="headerLink">
+    <a href="#rs-14-sam3-presence-score-calibration-for-remote-sensing-ovss" class="header-mark"></a>RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS</h1><h2 id="1-研究问题" class="headerLink">
     <a href="#1-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1. 研究问题</h2><p>细问题：SAM3 的 <code>presence score</code> 被设计成“概念是否存在”的全局判别信号。SegEarth-OV3 将它用于遥感开放词表语义分割，过滤大词表和 patch-level 推理中不存在类别造成的 false positives。RS-14 关注的不是“做一个遥感开放词表分割模型”，而是一个更窄的环节：</p>
 <blockquote>
-  <p>当遥感大图被切成多个 patch，并且输入词表包含大量同义词、层级词、对象词和土地覆盖词时，如何校准 SAM3/SegEarth-OV3 的 presence score，使它更可靠地区分“该类别真的在当前区域出现”与“语义相近、尺度不匹配或上下文诱导的误检”？</p>]]></description></item><item><title>RS-15 Taxonomy-Aware Mask Selection</title><link>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</guid><description><![CDATA[<h1 id="rs-15-taxonomy-aware-mask-selection" class="headerLink">
-    <a href="#rs-15-taxonomy-aware-mask-selection" class="header-mark"></a>RS-15 Taxonomy-Aware Mask Selection</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-15</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：研究开放词表遥感分割中层级标签冲突，例如 building / residential building / damaged building、road / highway / runway、crop / field / rice。结合 CLIP/SAM mask scoring 和层级 taxonomy，设计 taxono</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-15-taxonomy-aware-mask-selection-1" class="headerLink">
-    <a href="#rs-15-taxonomy-aware-mask-selection-1" class="header-mark"></a>RS-15 Taxonomy-Aware Mask Selection</h1><p>更新时间：2026-06-07<br>
-任务：研究开放词表遥感分割中层级标签冲突，例如 <code>building / residential building / damaged building</code>、<code>road / highway / runway</code>、<code>crop / field / rice</code>。结合 CLIP/SAM mask scoring 和层级 taxonomy，设计 taxonomy-aware mask selection 与评价指标。</p>
-<h2 id="1-问题由来" class="headerLink">
+  <p>当遥感大图被切成多个 patch，并且输入词表包含大量同义词、层级词、对象词和土地覆盖词时，如何校准 SAM3/SegEarth-OV3 的 presence score，使它更可靠地区分“该类别真的在当前区域出现”与“语义相近、尺度不匹配或上下文诱导的误检”？</p>
+</blockquote><p>这个方向适合做成一个小论文，因为它抓住了 SAM3 相比 SAM/SAM2 的新能力：SAM/SAM2 主要是 class-agnostic mask generator，SAM3 引入 promptable concept segmentation，能直接接收文本/示例图像概念，并通过 presence head 把“识别是什么”和“定位在哪里”解耦。遥感 OVSS 的痛点恰好在于：类别词表大、概念层级混乱、patch 切片破坏场景上下文、自然图像概念和遥感概念不完全对齐。</p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><h3 id="21-sam-到-sam3-的变化" class="headerLink">
+    <a href="#21-sam-%e5%88%b0-sam3-%e7%9a%84%e5%8f%98%e5%8c%96" class="header-mark"></a>2.1 SAM 到 SAM3 的变化</h3><p>SAM/SAM2 在遥感中已经被广泛用作边界生成器，但它们本质上不知道“这个 mask 是建筑还是道路”。开放词表遥感分割通常要把 CLIP/RS-CLIP/DINO/VLM 的语义分数和 SAM mask 融合：语义模型负责类别，SAM 负责边界。这会带来两个典型问题：</p>
+<ul>
+<li>语义分数高但 mask 不对：例如把停车场纹理误当作建筑。</li>
+<li>mask 边界好但类别不对：例如道路、跑道、河流、裸地这些长条或低纹理区域容易互相混。</li>
+</ul>
+<p>SAM3 的新接口是 promptable concept segmentation。Hugging Face 文档将 SAM3 描述为能基于文本或图像示例概念返回实例/语义 mask，并指出 recognition/localization 通过 presence head 解耦；Ultralytics 文档也强调了 presence head 用于全局概念存在判断。对遥感来说，这意味着我们不必只依赖 CLIP similarity 后验去猜类别，而是可以利用 SAM3 自带的 presence score 作为“类别是否存在”的门控。</p>]]></description></item><item><title>RS-15 Taxonomy-Aware Mask Selection</title><link>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</guid><description><![CDATA[<h1 id="rs-15-taxonomy-aware-mask-selection" class="headerLink">
+    <a href="#rs-15-taxonomy-aware-mask-selection" class="header-mark"></a>RS-15 Taxonomy-Aware Mask Selection</h1><h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>开放词表遥感分割通常把问题拆成两步：先用 SAM/SAM3 或分割骨干产生候选 mask，再用 CLIP/RemoteCLIP/RS-CLIP/VLM 对 mask 和类别文本打分。这个范式解决了“类别不固定”的问题，但在遥感里很快遇到层级标签冲突：</p>
 <ul>
 <li><code>building</code> 是父类，<code>residential building</code>、<code>industrial building</code>、<code>damaged building</code> 是子类或属性组合。预测父类未必是错，但用 flat mIoU 会被当成全错。</li>
@@ -173,4 +239,146 @@
 <li><code>crop</code>、<code>field</code>、<code>rice</code>、<code>farmland</code> 混合了土地覆盖、土地利用、作物类型和地块对象，跨数据集 label 定义不一致。</li>
 <li>同一个 mask 可能同时属于多个层级：一片 <code>impervious surface</code> 里面包含 road、parking lot、building roof；一个 <code>water</code> mask 可能是 river、lake、pond 或 flood water。</li>
 </ul>
-<p>因此，RS-15 的研究对象不是泛泛的“遥感语义分割”，而是一个更窄的问题：<strong>当候选 mask 和开放词表类别已经给出时，如何利用层级 taxonomy、语义相似度、地理/几何先验和父子一致性来选择最终 mask label，并用更合理的指标评价预测？</strong></p>]]></description></item></channel></rss>
+<p>因此，RS-15 的研究对象不是泛泛的“遥感语义分割”，而是一个更窄的问题：<strong>当候选 mask 和开放词表类别已经给出时，如何利用层级 taxonomy、语义相似度、地理/几何先验和父子一致性来选择最终 mask label，并用更合理的指标评价预测？</strong></p>
+<h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/项目</th>
+          <th>与 RS-15 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
+          <td style="text-align: right">2024 arXiv / 2025 CVPR</td>
+          <td><a href="https://arxiv.org/abs/2410.01768" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://earth-insights.github.io/SegEarth-OV" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>项目页称代码释放</td>
+          <td>训练自由遥感 OVSS 基线；证明 CLIP patch token 与低分辨率边界在 RS 中不稳，可作为 taxonomy-aware mask selection 的底座。</td>
+      </tr>
+      <tr>
+          <td>ReSeg-CLIP: Open-Vocabulary Semantic Segmentation in Remote Sensing via Hierarchical Attention Masking and Model Composition</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2602.23869" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未检索到稳定官方代码</td>
+          <td>用 SAM mask 做 hierarchical attention masking；“hierarchical”主要是 mask/attention 多尺度，不是语义 taxonomy，但方法结构很适合接入 taxonomy 约束。</td>
+      </tr>
+      <tr>
+          <td>ConInfer: Context-Aware Inference for Training-Free Open-Vocabulary Remote Sensing Segmentation</td>
+          <td style="text-align: right">2026 arXiv / CVPR 2026 Findings</td>
+          <td><a href="https://arxiv.org/abs/2603.29271" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2026F/papers/Chen_ConInfer_Context-Aware_Inference_for_Training-Free_Open-Vocabulary_Remote_Sensing_Segmentation_CVPRF_2026_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td><a href="https://github.com/Dog-Yang/ConInfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>从独立 patch 推理转向上下文联合推理；可扩展为“区域间 label 层级一致性/互斥性”推理。</td>
+      </tr>
+      <tr>
+          <td>HG-RSOVSSeg: Hierarchical Guidance Open-Vocabulary Semantic Segmentation Framework of High-Resolution Remote Sensing Images</td>
+          <td style="text-align: right">2026 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/18/2/213" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>文中给出 <a href="https://github.com/HuangWBill/HG-RSOVSSeg" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>直接以 hierarchical guidance 命名；重点是文本引导高分辨率 decoder，可作为层级文本特征构造参考。</td>
+      </tr>
+      <tr>
+          <td>Reducing Semantic Ambiguity in Open-Vocabulary Remote Sensing Image Segmentation via Knowledge Graph-Enhanced Class Representations</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625004666" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见稳定官方代码</td>
+          <td>最贴近 RS-15：用 knowledge graph 缓解开放词表 RS segmentation 的语义歧义。适合作为 taxonomy-aware text embedding 的直接对照。</td>
+      </tr>
+      <tr>
+          <td>DGSeg: Dual Guidance with Textual Priors and Structural Awareness for Open-Vocabulary Remote Sensing Segmentation</td>
+          <td style="text-align: right">2026 Computers &amp; Geosciences</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0098300426000798" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/Funny0101/DGSeg" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>同时处理文本语义和结构边界，适合比较“文本先验 + 几何结构”与 taxonomy-aware mask selection 的互补性。</td>
+      </tr>
+      <tr>
+          <td>Towards Open-Vocabulary Semantic Segmentation for Remote Sensing Images / ROSS</td>
+          <td style="text-align: right">2026 Pattern Recognition</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S003132032600083X" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见稳定官方代码</td>
+          <td>强调旋转、领域知识、多尺度融合，说明遥感 OVSS 的语义混淆和空间边界需要同时处理。</td>
+      </tr>
+      <tr>
+          <td>Effective SAM Combination for Open-Vocabulary Semantic Segmentation / ESC-Net</td>
+          <td style="text-align: right">2024 arXiv / 2025 CVPR</td>
+          <td><a href="https://arxiv.org/abs/2411.14723" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Lee_Effective_SAM_Combination_for_Open-Vocabulary_Semantic_Segmentation_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>未见稳定官方代码</td>
+          <td>CV 侧 SAM+CLIP 组合路线，可迁移到 RS：用图文相关生成 pseudo prompt，减少两阶段高成本。</td>
+      </tr>
+      <tr>
+          <td>Open-World Semantic Segmentation Including Class Similarity</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Sodano_Open-World_Semantic_Segmentation_Including_Class_Similarity_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td>论文页有补充材料</td>
+          <td>不是遥感，但提出“未知类与已知类相似度”思想；可转成 hierarchy-aware / semantic-distance metric。</td>
+      </tr>
+      <tr>
+          <td>Flattening the Parent Bias: Hierarchical Semantic Segmentation in the Poincare Ball</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://cvpr.thecvf.com/virtual/2024/poster/31551" target="_blank" rel="noopener noreferrer">CVPR poster</a></td>
+          <td>论文页 PDF</td>
+          <td>提醒不要迷信层级结构：如果父类 bias 处理不好，层级监督可能反而伤害跨域泛化。</td>
+      </tr>
+      <tr>
+          <td>Fusion of Hierarchical Class Graphs for Remote Sensing Semantic Segmentation</td>
+          <td style="text-align: right">2024 Information Fusion</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1566253524001878" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见稳定官方代码</td>
+          <td>遥感固定类分割里的 class hierarchy graph，可迁移为开放词表 mask selection 的 taxonomy graph。</td>
+      </tr>
+      <tr>
+          <td>SHiNe: Semantic Hierarchy Nexus for Open-Vocabulary Object Detection</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Liu_SHiNe_Semantic_Hierarchy_Nexus_for_Open-vocabulary_Object_Detection_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>需进一步查证</td>
+          <td>检测方向的层级语义建模，可借鉴文本类别图和父子节点融合方式。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法比较当前路线缺什么" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83%e5%bd%93%e5%89%8d%e8%b7%af%e7%ba%bf%e7%bc%ba%e4%bb%80%e4%b9%88" class="header-mark"></a>3. 方法比较：当前路线缺什么</h2><table>
+  <thead>
+      <tr>
+          <th>路线</th>
+          <th>典型方法</th>
+          <th>优点</th>
+          <th>对 RS-15 的缺口</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CLIP patch scoring</td>
+          <td>SegEarth-OV, DGSeg, ROSS</td>
+          <td>训练自由或少训练，开放词表灵活</td>
+          <td>类别词平面化，<code>road/highway/runway</code> 这种近义/层级冲突难解</td>
+      </tr>
+      <tr>
+          <td>SAM mask proposal + CLIP classification</td>
+          <td>ReSeg-CLIP, ESC-Net, OVSAM 类方法</td>
+          <td>mask 边界好，能避免纯 patch 噪声</td>
+          <td>一个 mask 可能对应父类和子类，缺少父子一致性约束</td>
+      </tr>
+      <tr>
+          <td>上下文联合推理</td>
+          <td>ConInfer</td>
+          <td>缓解大图 patch 独立预测导致的类别漂移</td>
+          <td>上下文通常是空间/语义相关，未显式建模 taxonomy graph</td>
+      </tr>
+      <tr>
+          <td>知识图谱/层级文本增强</td>
+          <td>KG-OVRSeg, HG-RSOVSSeg, SHiNe</td>
+          <td>能显式利用类别关系和同义词</td>
+          <td>需要解决遥感 taxonomy 不统一、图谱噪声和跨数据集 label 映射</td>
+      </tr>
+      <tr>
+          <td>层级语义分割指标</td>
+          <td>Flattening Parent Bias, Open-world class similarity</td>
+          <td>能缓解父子类误判被 flat mIoU 惩罚过重</td>
+          <td>需要为遥感 land-cover/object/use 混合标签定义语义距离</td>
+      </tr>
+  </tbody>
+</table>
+<p>关键空白：<strong>目前遥感 OVSS 多数方法把类别列表当成 flat vocabulary；即便方法名里有 hierarchical，也常指 feature/mask hierarchy，而不是语义 taxonomy。</strong> RS-15 可以把贡献落在“后处理/推理层”的 taxonomy-aware mask selection 上，避免重新训练大模型，研究成本相对可控。</p>]]></description></item></channel></rss>

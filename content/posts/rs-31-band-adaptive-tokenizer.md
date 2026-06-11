@@ -1,19 +1,14 @@
-# RS-31 Band-Adaptive Tokenizer 调研
+---
+title: "RS-31 Band-Adaptive Tokenizer"
+date: 2026-06-07
+series: ["2024-2026 遥感 AI 细分研究方向"]
+tags: ["高光谱", "多光谱", "谱段适配"]
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+---
 
+# RS-31 Band-Adaptive Tokenizer
 
-# RS-31 Band-Adaptive Tokenizer 调研
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-31` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：当输入可能来自 Sentinel2、Landsat/HLS、NAIP、Planet 或高光谱 cube 时，如何把不同 band 数量、中心波长、带宽、响应函数和空间分辨率映射到统一 token，使同一个遥感基础模型能跨传感器、缺失 band 和未见谱段泛化。 摘要 Bandadaptive tokenizer 是 202
-
-## 正文
-
-# RS-31 Band-Adaptive Tokenizer 调研
-
-更新时间：2026-06-07  
 细问题：当输入可能来自 Sentinel-2、Landsat/HLS、NAIP、Planet 或高光谱 cube 时，如何把不同 band 数量、中心波长、带宽、响应函数和空间分辨率映射到统一 token，使同一个遥感基础模型能跨传感器、缺失 band 和未见谱段泛化。
 
 ## 摘要
@@ -218,11 +213,3 @@ Band-adaptive tokenizer 是 2024-2026 遥感 foundation model 里很值得做“
 10. [SpecAware: A Spectral-Content Aware Foundation Model](https://www.sciencedirect.com/science/article/pii/S0924271626000754)
 11. [SpectralEarth-FM](https://arxiv.org/abs/2605.21075)
 12. [Any-Optical-Model](https://arxiv.org/abs/2512.17224)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
-

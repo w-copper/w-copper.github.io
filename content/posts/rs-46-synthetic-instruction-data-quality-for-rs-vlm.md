@@ -3,25 +3,12 @@ title: "RS-46 Synthetic Instruction Data Quality for RS-VLM"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
-source: "research/rs46_synthetic_instruction_data_quality_rsvlm.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-46 Synthetic Instruction Data Quality for RS-VLM
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-46` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？ 摘要 20242026 年遥感 VLM 的核心数据路线可以概括为三类：把已有 caption/VQA/检测/分割数据转成 instruction；用 GPT4V/通用 VLM/LLM 生成多轮问答、细粒度 caption 或 
-
-## 正文
-
-# RS-46 Synthetic Instruction Data Quality for RS-VLM
-
-更新时间：2026-06-07  
 细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？
 
 ## 摘要
@@ -192,10 +179,3 @@ source_repo: "codex-rs-articles"
 3. [GEOBench-VLM](https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf) 与 [OmniEarth](https://arxiv.org/abs/2603.09471)：重点看人工验证和语义一致性。
 4. [RSHBench/RADAR](https://arxiv.org/abs/2603.02754)：重点看 hallucination taxonomy。
 5. [Cambrian-1](https://papers.nips.cc/paper_files/paper/2024/hash/9ee3a664ccfeabc0da16ac6f1f1cfe59-Abstract-Conference.html) 与 [What matters when building VLMs?](https://proceedings.neurips.cc/paper_files/paper/2024/file/a03037317560b8c5f2fb4b6466d4c439-Paper-Conference.pdf)：迁移通用 MLLM 数据策展消融到遥感。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

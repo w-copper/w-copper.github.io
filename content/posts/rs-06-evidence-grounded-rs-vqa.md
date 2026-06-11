@@ -1,28 +1,13 @@
 ---
-title: "RS-06 Evidence-Grounded RS-VQA 调研"
+title: "RS-06 Evidence-Grounded RS-VQA"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感VLM", "视觉语言", "地理空间推理"]
-source: "research/rs06_evidence_grounded_rsvqa.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
-# RS-06 Evidence-Grounded RS-VQA 调研
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-06` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 对应 prompt：RS06 EvidenceGrounded RSVQA 核心问题 遥感 VQA 里最危险的失败不是“答错”，而是“答案看起来对，但证据区域错”。例如模型回答“有 3 架飞机”，但它看的 attention/box 落在建筑屋顶；或者回答“这是洪水区域”，但证据 mask 覆盖的是云影。自然图像 VQA 中这种问
-
-## 正文
-
-# RS-06 Evidence-Grounded RS-VQA 调研
-
-更新时间：2026-06-07  
-对应 prompt：`RS-06 Evidence-Grounded RS-VQA`
+# RS-06 Evidence-Grounded RS-VQA
 
 ## 核心问题
 
@@ -231,10 +216,3 @@ experiments/evirs_vqa_baseline_matrix.md
 - ScaleEarth arXiv 2026: https://arxiv.org/abs/2605.07562
 - SATGround arXiv: https://arxiv.org/abs/2512.08881
 - RSHR-Bench Hugging Face: https://huggingface.co/datasets/RL-MIND/RSHR-Bench
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

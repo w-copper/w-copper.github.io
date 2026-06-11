@@ -3,7 +3,6 @@ title: "SelectiveMAE：用高效掩码图像建模驯服海量卫星影像"
 date: 2026-05-31
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # SelectiveMAE：用高效掩码图像建模驯服海量卫星影像

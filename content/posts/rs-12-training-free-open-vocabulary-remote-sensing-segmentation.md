@@ -3,26 +3,12 @@ title: "RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["SAM", "开放词表分割", "提示式分割"]
-source: "research/rs12_training_free_open_vocabulary_rs_segmentation.md"
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-12` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务来源：research/50threadprompts.md 中 RS12 范围：光学/航空/卫星遥感为主；关注 trainingfree 或接近 trainingfree 的 openvocabulary semantic segmentation (OVSS/OVRSS/OVRSIS)，并比较 CLIP token、SAM
-
-## 正文
-
-# RS-12 Training-Free Open-Vocabulary Remote Sensing Segmentation
-
-更新时间：2026-06-07  
-任务来源：`research/50_thread_prompts.md` 中 RS-12  
 范围：光学/航空/卫星遥感为主；关注 training-free 或接近 training-free 的 open-vocabulary semantic segmentation (OVSS/OVRSS/OVRSIS)，并比较 CLIP token、SAM mask、DINO feature、上下文推理的组合方式。
 
 ## 1. 问题由来
@@ -194,10 +180,3 @@ experiments/rs12_ovrs/
 ```
 
 最小可发表假设：在不训练新 backbone 的条件下，通过“mask-level context calibration + prompt sensitivity control”，可以显著降低 training-free OVRS 的类别漂移和跨 tile 不一致，同时保持 SegEarth-OV/ReSeg-CLIP 的开放词表能力。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

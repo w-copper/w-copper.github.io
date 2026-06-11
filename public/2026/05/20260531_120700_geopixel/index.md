@@ -190,3 +190,4 @@ GeoPixel的成功表明：
 ---
 
 *本文基于ICML 2025论文"GeoPixel: Pixel Grounding Large Multimodal Model in Remote Sensing"撰写，旨在深入解读该论文的核心创新和技术细节。*
+

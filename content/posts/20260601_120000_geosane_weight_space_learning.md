@@ -3,7 +3,6 @@ title: "从模型权重中学习：GeoSANE开创遥感基础模型新范式"
 date: 2026-06-01
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "articles"
 ---
 
 # 从模型权重中学习：GeoSANE开创遥感基础模型新范式

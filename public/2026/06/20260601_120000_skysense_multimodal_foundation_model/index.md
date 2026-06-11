@@ -326,3 +326,4 @@ SkySense是遥感基础模型领域的一项里程碑式工作。它首次将多
 3. Schmitt, M., Hughes, L. H., Qiu, C., et al. SEN12MS–A curated dataset of georeferenced multi-sensor sentinel-1/2 imagery for deep learning and data fusion. ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences, 2019.
 4. Helber, P., Bischke, B., Dengel, A., et al. EuroSAT: A novel dataset and deep learning benchmark for land use and land cover classification. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2019.
 5. Xia, G. S., Hu, J., Hu, F., et al. AID: A benchmark data set for performance evaluation of aerial scene classification. IEEE Transactions on Geoscience and Remote Sensing, 2017.
+

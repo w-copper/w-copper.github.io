@@ -3,7 +3,6 @@ title: "LSKNet：遥感场景下的大型选择性核网络，动态感受野助
 date: 2026-06-01
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "articles"
 ---
 
 # LSKNet：遥感场景下的大型选择性核网络，动态感受野助力小目标检测

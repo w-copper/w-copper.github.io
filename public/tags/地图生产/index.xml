@@ -1,13 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>地图生产 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E5%9C%B0%E5%9B%BE%E7%94%9F%E4%BA%A7/</link><description>地图生产 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E5%9C%B0%E5%9B%BE%E7%94%9F%E4%BA%A7/" rel="self" type="application/rss+xml"/><item><title>RS-36 Raster-Vector Joint Encoder 调研</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder-调研" class="headerLink">
-    <a href="#rs-36-raster-vector-joint-encoder-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-36</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务来源：research/50threadprompts.md 中 RS36 范围：20242026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。 1. 问题定义 细问题：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-36-raster-vector-joint-encoder-调研-1" class="headerLink">
-    <a href="#rs-36-raster-vector-joint-encoder-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder 调研</h1><p>更新时间：2026-06-07<br>
-任务来源：<code>research/50_thread_prompts.md</code> 中 RS-36<br>
-范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>地图生产 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E5%9C%B0%E5%9B%BE%E7%94%9F%E4%BA%A7/</link><description>地图生产 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E5%9C%B0%E5%9B%BE%E7%94%9F%E4%BA%A7/" rel="self" type="application/rss+xml"/><item><title>RS-36 Raster-Vector Joint Encoder</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder" class="headerLink">
+    <a href="#rs-36-raster-vector-joint-encoder" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder</h1><p>范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
 <h2 id="1-问题定义" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89" class="header-mark"></a>1. 问题定义</h2><p><strong>细问题</strong>：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不把矢量数据粗暴栅格化的情况下，共同学习可迁移的地理空间表示？</p>
 <p>这个问题的价值在于：纯 raster foundation model 很擅长捕捉连续的光谱、纹理和空间形态，但它天然缺少显式对象、拓扑、地块边界、道路连通性、POI 功能语义和行政单元属性。矢量数据正好补这些信息，却又和影像 patch 的数据结构完全不同：点、线、面、标签表、拓扑关系、空间范围和时效性都不一致。</p>
@@ -99,15 +91,8 @@
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-旧路线矢量转栅格或转标签" class="headerLink">
     <a href="#31-%e6%97%a7%e8%b7%af%e7%ba%bf%e7%9f%a2%e9%87%8f%e8%bd%ac%e6%a0%85%e6%a0%bc%e6%88%96%e8%bd%ac%e6%a0%87%e7%ad%be" class="header-mark"></a>3.1 旧路线：矢量转栅格或转标签</h3><p>常见做法是把 OSM 道路、建筑、土地利用 polygon rasterize 成额外通道，或者直接作为弱标签训练 segmentation。优点是工程简单，能沿用 CNN/ViT；缺点是会损失拓扑关系、对象边界、标签表语义和多尺度结构。GeoLink 的论文把这类路线归纳为 data conversion / data derivation / knowledge graph 等间接融合方式，并指出它们往往任务特定、区域小、空间信息损失较大。</p>]]></description></item><item><title>RS-37 Topology-Aware Road and Building Segmentation</title><link>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</guid><description><![CDATA[<h1 id="rs-37-topology-aware-road-and-building-segmentation" class="headerLink">
-    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-37</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。20242026 的相关工作包括 SAMRoad、TopoRFNet、connectivitypreserving loss、Pix2Poly、P2PFo</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-37-topology-aware-road-and-building-segmentation-1" class="headerLink">
-    <a href="#rs-37-topology-aware-road-and-building-segmentation-1" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
+    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感基础模型擅长提供强特征或候选 mask，但 GIS 产品需要道路网络和建筑轮廓。像素级分割错误一旦进入路网或建筑 footprint，会造成导航断裂、地块统计错误和灾损估计偏差。因此拓扑指标与 vectorization 是从研究分割走向实际地图生产的关键。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -182,15 +167,8 @@
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Topology-Aware SAM Adapter for Map-Ready Road and Building Extraction</p>]]></description></item><item><title>RS-38 Parcel-Aware Crop Mapping</title><link>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</guid><description><![CDATA[<h1 id="rs-38-parcel-aware-crop-mapping" class="headerLink">
-    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-38</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。20242026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-38-parcel-aware-crop-mapping-1" class="headerLink">
-    <a href="#rs-38-parcel-aware-crop-mapping-1" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
+    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>像素级 crop classification 会在地块边界、混合像元、云影、裸土期和不同作物物候接近时出错。若将地块作为结构先验，可以把时序信号在地块内聚合，并减少椒盐噪声。但地块边界本身并不总是可用，OSM/LPIS 等矢量数据也可能过期、错位或不完整。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -265,15 +243,7 @@
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Uncertainty-Aware Parcel Aggregation for Crop Mapping</p>]]></description></item><item><title>RS-39 POI-Assisted Remote Sensing VLM Reasoning</title><link>https://spacetop.win/2026/06/rs-39-poi-assisted-remote-sensing-vlm-reasoning/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-39-poi-assisted-remote-sensing-vlm-reasoning/</guid><description><![CDATA[<h1 id="rs-39-poi-assisted-remote-sensing-vlm-reasoning" class="headerLink">
-    <a href="#rs-39-poi-assisted-remote-sensing-vlm-reasoning" class="header-mark"></a>RS-39 POI-Assisted Remote Sensing VLM Reasoning</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-39</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：研究 POI、OSM 和地图文本如何辅助遥感 VLM 做场景理解，同时避免模型只靠文本猜答案。 结论先行：这个题目最值得做成一个“证据一致性 benchmark + 抗地图偏置训练/推理框架”。核心不是简单把 OSM/POI 文本塞进 prompt，而是要求模型在 imageonly、maponly、image+map 三种</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-39-poi-assisted-remote-sensing-vlm-reasoning-1" class="headerLink">
-    <a href="#rs-39-poi-assisted-remote-sensing-vlm-reasoning-1" class="header-mark"></a>RS-39 POI-Assisted Remote Sensing VLM Reasoning</h1><p>更新时间：2026-06-07<br>
-任务：研究 POI、OSM 和地图文本如何辅助遥感 VLM 做场景理解，同时避免模型只靠文本猜答案。<br>
-结论先行：这个题目最值得做成一个“证据一致性 benchmark + 抗地图偏置训练/推理框架”。核心不是简单把 OSM/POI 文本塞进 prompt，而是要求模型在 <code>image-only</code>、<code>map-only</code>、<code>image+map</code> 三种设置下都可诊断，并能说明答案来自影像证据、地图先验，还是二者一致。</p>
+    <a href="#rs-39-poi-assisted-remote-sensing-vlm-reasoning" class="header-mark"></a>RS-39 POI-Assisted Remote Sensing VLM Reasoning</h1><p>结论先行：这个题目最值得做成一个“证据一致性 benchmark + 抗地图偏置训练/推理框架”。核心不是简单把 OSM/POI 文本塞进 prompt，而是要求模型在 <code>image-only</code>、<code>map-only</code>、<code>image+map</code> 三种设置下都可诊断，并能说明答案来自影像证据、地图先验，还是二者一致。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感 VLM 的常见失败有两类。一类是视觉证据不足：俯视视角、小目标密集、地物边界模糊，VLM 很难单靠影像判断“这是学校、医院、物流园、商业区还是普通建筑群”。另一类是语言和地理先验太强：如果给模型 POI、OSM 标签、道路名或地块用途，模型可能不看图也能猜出答案，尤其在“附近有 university/hospital/airport POI”这类问题上。</p>
 <p>POI/OSM 的价值很真实：它提供了遥感图像中不可见或弱可见的功能语义，比如建筑用途、道路等级、商铺类型、公共设施、行政地名、交通网络和土地利用标签。但它也带来四个风险：</p>
@@ -285,17 +255,225 @@
 </ol>
 <p>因此，这个方向的关键研究问题可以写得很细：</p>
 <blockquote>
-  <p>给定同一片光学遥感影像、同区域 OSM/POI 文本和可选 rasterized map，如何让遥感 VLM 使用地图先验补足功能语义，同时通过证据一致性约束防止“map-only shortcut”？</p>]]></description></item><item><title>RS-40 Polygon-Native Mask Decoder 调研</title><link>https://spacetop.win/2026/06/rs-40-polygon-native-mask-decoder-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-40-polygon-native-mask-decoder-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-40-polygon-native-mask-decoder-调研" class="headerLink">
-    <a href="#rs-40-polygon-native-mask-decoder-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-40 Polygon-Native Mask Decoder 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-40</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：研究从遥感影像直接输出 polygon/vector，而不是先输出 raster mask 再做后处理。重点比较 SAMPolyBuild、建筑轮廓提取、可微 polygon decoder、GIS 后处理，并设计建筑/道路/地块的边界质量和拓扑指标。 执行摘要 20242026 的矢量化遥感提取正在从“mask polyg</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-40-polygon-native-mask-decoder-调研-1" class="headerLink">
-    <a href="#rs-40-polygon-native-mask-decoder-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-40 Polygon-Native Mask Decoder 调研</h1><p>更新时间：2026-06-07<br>
-任务：研究从遥感影像直接输出 polygon/vector，而不是先输出 raster mask 再做后处理。重点比较 SAMPolyBuild、建筑轮廓提取、可微 polygon decoder、GIS 后处理，并设计建筑/道路/地块的边界质量和拓扑指标。</p>
-<h2 id="执行摘要" class="headerLink">
+  <p>给定同一片光学遥感影像、同区域 OSM/POI 文本和可选 rasterized map，如何让遥感 VLM 使用地图先验补足功能语义，同时通过证据一致性约束防止“map-only shortcut”？</p>
+</blockquote><h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>与 RS-39 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>RSTeller: Scaling Up Visual Language Modeling in Remote Sensing with Rich Linguistic Semantics from Openly Available Data and Large Language Models</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2408.14744" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2408.14744" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td><a href="https://github.com/SlytherinGe/RSTeller" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 OSM 数据和 LLM 生成大规模遥感 caption，是“OSM -&gt; 文本监督”的直接起点。</td>
+      </tr>
+      <tr>
+          <td>GeoPriorCLIP: a foundational remote sensing vision-language model enhanced with cascaded geographic information priors</td>
+          <td style="text-align: right">2026 Geo-spatial Information Science</td>
+          <td><a href="https://www.tandfonline.com/doi/full/10.1080/10095020.2026.2619233" target="_blank" rel="noopener noreferrer">Taylor &amp; Francis</a>, <a href="https://impact.ornl.gov/en/publications/geopriorclip-a-foundational-remote-sensing-vision-language-model-/" target="_blank" rel="noopener noreferrer">ORNL record</a></td>
+          <td>论文称代码/数据待发布</td>
+          <td>构造 GeoPrior 三模态数据：卫星影像、文本描述、rasterized maps；用 Geo-CMA 将地图先验注入 CLIP image encoder。</td>
+      </tr>
+      <tr>
+          <td>OSM-based Domain Adaptation for Remote Sensing VLMs</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.11804" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2603.11804" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>论文称 dataset/model weights 待发布</td>
+          <td>用 aerial images + rendered OSM tiles，经 OCR/图表理解自动生成 OSM-enriched caption，主打低成本 domain adaptation。</td>
+      </tr>
+      <tr>
+          <td>GEOBench-VLM: Benchmarking Vision-Language Models for Geospatial Tasks</td>
+          <td style="text-align: right">2025 ICCV</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://arxiv.org/abs/2411.19325" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>虽不专门研究 POI，但提供 geospatial VLM 的计数、定位、分类、时序等评测框架，可扩展成三路输入评测。</td>
+      </tr>
+      <tr>
+          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td><a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>grounded RS dialogue 的基线；可作为 image-only VLM baseline 和 image+map prompt baseline。</td>
+      </tr>
+      <tr>
+          <td>VRSBench: A Versatile Vision-Language Benchmark Dataset for Remote Sensing Image Understanding</td>
+          <td style="text-align: right">2024 NeurIPS Datasets &amp; Benchmarks</td>
+          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/05b7f821234f66b78f99e7803fffa78a-Paper-Datasets_and_Benchmarks_Track.pdf" target="_blank" rel="noopener noreferrer">NeurIPS PDF</a></td>
+          <td><a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提供高质量 caption/object reference/VQA，可作为无地图 VLM 能力底座。</td>
+      </tr>
+      <tr>
+          <td>GeoGround: A Unified Large Vision-Language Model for Remote Sensing Visual Grounding</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2411.11904" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2411.11904" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>HF 页面列 GitHub</td>
+          <td>grounding 输出可用于验证“答案是否有影像区域证据”。</td>
+      </tr>
+      <tr>
+          <td>GeoAlignCLIP: Enhancing Fine-Grained Vision-Language Alignment in Remote Sensing via Multi-Granular Consistency Learning</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.09566" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见稳定官方代码</td>
+          <td>构造细粒度层级数据与 hard negatives，可迁移到 POI/OSM 文本偏置抑制。</td>
+      </tr>
+      <tr>
+          <td>Towards Faithful Reasoning in Remote Sensing: A Perceptually-Grounded GeoSpatial Chain-of-Thought for VLMs</td>
+          <td style="text-align: right">2025/2026 arXiv/ICLR</td>
+          <td><a href="https://arxiv.org/abs/2509.22221" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openreview.net/pdf?id=lJ7zecny2e" target="_blank" rel="noopener noreferrer">OpenReview PDF</a></td>
+          <td>论文称发布 Geo-CoT380k/RSThinker</td>
+          <td>强调 perceptually-grounded reasoning，可作为“先看影像证据再使用地图先验”的训练范式参考。</td>
+      </tr>
+      <tr>
+          <td>GeoCoT: Towards Reliable Remote Sensing Reasoning with Manifold Perspective</td>
+          <td style="text-align: right">2026 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2026/html/Li_GeoCoT_Towards_Reliable_Remote_Sensing_Reasoning_with_Manifold_Perspective_CVPR_2026_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td>CVF 页面</td>
+          <td>遥感推理可靠性方向，可参考其 MoE/CoT 设计，但本题要额外引入 map-only shortcut 诊断。</td>
+      </tr>
+      <tr>
+          <td>GeoViS: Geospatially Rewarded Visual Search for Remote Sensing Visual Grounding</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2512.02715" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2512.02715" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td>未见稳定官方代码</td>
+          <td>将 grounding 视为逐步 search-and-reasoning，可借鉴为“先定位影像区域，再读取 nearby POI”。</td>
+      </tr>
+      <tr>
+          <td>Spatial Representation Learning Beyond Pixels</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2606.02374" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见稳定官方代码</td>
+          <td>raster + vector semantics 的 GeoFM 方向，提供从 POI/矢量语义到人本地理空间表示的更大背景。</td>
+      </tr>
+      <tr>
+          <td>NARA: Anchor-Conditioned Relation-Aware Contextualization of Heterogeneous Geoentities</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.12276" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见稳定官方代码</td>
+          <td>异构 geoentity 关系建模，可用于 POI、道路、地块、建筑之间的图结构建模。</td>
+      </tr>
+      <tr>
+          <td>CityVLM: Towards sustainable urban development via multi-view coordinated VLM</td>
+          <td style="text-align: right">2026 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625004678" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见稳定官方代码</td>
+          <td>RS + street-view + QA 的城市 VLM，说明单一俯视影像不足以回答功能/可持续发展问题。</td>
+      </tr>
+      <tr>
+          <td>OpenEarthMap / OpenMapCD</td>
+          <td style="text-align: right">2024-2026 project family</td>
+          <td><a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">Project</a></td>
+          <td>项目页列 GitHub</td>
+          <td>OpenMapCD 使用光学遥感和 OSM 做 multimodal change detection，可为 OSM/影像错位、时效差提供数据构造参考。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法谱系" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%b0%b1%e7%b3%bb" class="header-mark"></a>3. 方法谱系</h2><h3 id="31-osmpoi-生成图文监督" class="headerLink">
+    <a href="#31-osmpoi-%e7%94%9f%e6%88%90%e5%9b%be%e6%96%87%e7%9b%91%e7%9d%a3" class="header-mark"></a>3.1 OSM/POI 生成图文监督</h3><p>代表：RSTeller、OSM-based Domain Adaptation。</p>]]></description></item><item><title>RS-40 Polygon-Native Mask Decoder</title><link>https://spacetop.win/2026/06/rs-40-polygon-native-mask-decoder/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-40-polygon-native-mask-decoder/</guid><description><![CDATA[<h1 id="rs-40-polygon-native-mask-decoder" class="headerLink">
+    <a href="#rs-40-polygon-native-mask-decoder" class="header-mark"></a>RS-40 Polygon-Native Mask Decoder</h1><h2 id="执行摘要" class="headerLink">
     <a href="#%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>执行摘要</h2><p>2024-2026 的矢量化遥感提取正在从“mask -&gt; polygonize -&gt; simplify/regularize”的工程管线，转向“模型原生输出 vertex / edge / ring graph / polygon token”。这个转变的原因很直接：GIS、城市建模、道路导航、地块管理最终需要的是可编辑、拓扑有效、顶点简洁的矢量对象，而 raster mask 的高 IoU 并不保证角点直、边界稳、道路连通、地块不自交。</p>
 <p>最值得推进的小课题不是泛泛地“建筑物提取”，而是：<strong>用 SAM/GeoFM 的强视觉特征作为 encoder，同时设计 polygon-native decoder，直接输出多实例、多环、多类别的 GIS-ready 矢量对象，并用边界质量、顶点效率和拓扑有效性作为主指标。</strong></p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感分割把建筑、道路、农田边界当作像素分类问题，输出 raster mask。这个输出在 mIoU 上可能很好，但在 GIS 里常见四类问题：</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感分割把建筑、道路、农田边界当作像素分类问题，输出 raster mask。这个输出在 mIoU 上可能很好，但在 GIS 里常见四类问题：</p>
+<ol>
+<li>建筑边界呈锯齿或圆角，直角、长直边、规则边界被破坏。</li>
+<li>mask polygonize 后顶点数量过多，需要 Douglas-Peucker、正交化、拓扑修复等经验后处理。</li>
+<li>后处理不可微，训练时不能直接优化“顶点少、角点准、拓扑合法”。</li>
+<li>道路和地块更关心连通性、闭合性、相邻关系，像素级 IoU 不足以评价产品质量。</li>
+</ol>
+<p>2024-2026 的新方法大致分三条路线：</p>
+<ul>
+<li><strong>SAM/基础模型增强的间接矢量化</strong>：先借助 SAM 或强 segmentation encoder 得到 mask、vertex、boundary，再连接成 polygon，例如 SAMPolyBuild。</li>
+<li><strong>显式 polygon / graph 序列预测</strong>：把角点坐标、边连接、ring graph 当作 token 或图结构直接预测，例如 Pix2Poly、GeoFormer、P2PFormer、VectorLLM。</li>
+<li><strong>面向道路/地块的拓扑矢量输出</strong>：道路输出图或道路 outline polygon，农田输出可扩展 field boundary polygon，例如 SAM-Road、LDPoly、FTW/PRUE。</li>
+</ul>
+<h2 id="代表工作" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e5%b7%a5%e4%bd%9c" class="header-mark"></a>代表工作</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>对象</th>
+          <th>输出形式</th>
+          <th>代码/资源</th>
+          <th>关键贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SAMPolyBuild</td>
+          <td style="text-align: right">2024 ISPRS JPRS</td>
+          <td>建筑</td>
+          <td>mask + vertex/boundary/offset -&gt; polygon</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/wchh-2000/SAMPolyBuild" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>适配 SAM 做 polygonal building extraction；额外预测 Gaussian vertex、offset、boundary map，并支持自动 bbox 和交互 prompt。</td>
+      </tr>
+      <tr>
+          <td>P2PFormer</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>建筑</td>
+          <td>geometric primitives + sequence</td>
+          <td><a href="https://arxiv.org/abs/2406.02930" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>先分割 vertex/line/corner 等几何 primitive，再预测连接顺序，构造规则建筑轮廓。</td>
+      </tr>
+      <tr>
+          <td>GeoFormer</td>
+          <td style="text-align: right">2024 BMVC</td>
+          <td>多 polygon</td>
+          <td>auto-regressive multi-polygon</td>
+          <td><a href="https://arxiv.org/abs/2411.16616" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/pihalf/GeoFormer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>将自回归 transformer 用于遥感多 polygon 预测，是直接多边形生成路线的代表。</td>
+      </tr>
+      <tr>
+          <td>Pix2Poly</td>
+          <td style="text-align: right">2025 WACV</td>
+          <td>建筑，也扩展到道路</td>
+          <td>ring graph vertex tokens + matching</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2025/papers/Adimoolam_Pix2Poly_A_Sequence_Prediction_Method_for_End-to-End_Polygonal_Building_Footprint_WACV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://arxiv.org/abs/2412.07899" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/yeshwanth95/Pix2Poly" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>端到端 differentiable transformer，直接生成高质量 building footprint ring graph，用 optimal matching 学顶点连接。</td>
+      </tr>
+      <tr>
+          <td>SAM-Road</td>
+          <td style="text-align: right">2024 CVPRW</td>
+          <td>道路网络</td>
+          <td>graph vertices + edges</td>
+          <td><a href="https://arxiv.org/abs/2403.16051" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/htcr/sam_road" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>将 SAM 适配到大范围道路图提取；SAM embedding 预测道路/交叉口 mask，再用轻量 graph transformer 估计边。</td>
+      </tr>
+      <tr>
+          <td>LDPoly</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td>道路 outline</td>
+          <td>road mask + vertex heatmap -&gt; polygon</td>
+          <td><a href="https://arxiv.org/abs/2504.20645" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>面向 polygonal road outline extraction，提出 dual-latent diffusion，同时生成 road masks 和 vertex heatmaps，并设计 polygon simplicity / boundary smoothness 指标。</td>
+      </tr>
+      <tr>
+          <td>VectorLLM</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td>建筑轮廓，可泛化到其他目标</td>
+          <td>corner-by-corner regression</td>
+          <td><a href="https://arxiv.org/abs/2507.04664" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>用 MLLM 模拟人工标注员逐角点绘制建筑轮廓；报告在 WHU、WHU-Mix、CrowdAI 上超过前 SOTA，并有零样本对象潜力。</td>
+      </tr>
+      <tr>
+          <td>FTW / PRUE</td>
+          <td style="text-align: right">2025-2026 benchmark + CVPR 2026</td>
+          <td>农田地块边界</td>
+          <td>segmentation -&gt; polygons at scale</td>
+          <td><a href="https://fieldsofthe.world/" target="_blank" rel="noopener noreferrer">Fields of The World</a>, <a href="https://arxiv.org/abs/2603.27101" target="_blank" rel="noopener noreferrer">PRUE arXiv</a>, <a href="https://github.com/fieldsoftheworld/ftw-prue" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提供全球 field boundary 生态，FTW 覆盖 2024/2025 的十亿级 polygons；PRUE 强调 scalable field boundary segmentation 和可部署管线。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法谱系" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%b0%b1%e7%b3%bb" class="header-mark"></a>方法谱系</h2><h3 id="1-mask-后处理管线" class="headerLink">
+    <a href="#1-mask-%e5%90%8e%e5%a4%84%e7%90%86%e7%ae%a1%e7%ba%bf" class="header-mark"></a>1. Mask 后处理管线</h3><p>典型流程是 <code>segmentation mask -&gt; connected components -&gt; contour extraction -&gt; simplify -&gt; regularize -&gt; topology repair</code>。优点是工程成熟、容易接入 U-Net、DeepLab、SAM、GeoFM feature；缺点是不可微，后处理参数对区域、GSD 和建筑风格敏感。</p>]]></description></item></channel></rss>

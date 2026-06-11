@@ -3,7 +3,6 @@ title: "SegEarth-OV：让遥感图像拥有\"开放世界\"分割能力"
 date: 2026-05-31
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # SegEarth-OV：让遥感图像拥有"开放世界"分割能力

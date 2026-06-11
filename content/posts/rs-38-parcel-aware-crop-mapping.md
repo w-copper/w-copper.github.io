@@ -3,25 +3,11 @@ title: "RS-38 Parcel-Aware Crop Mapping"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["GIS融合", "矢量先验", "地图生产"]
-source: "research/rs38_parcel_aware_crop_mapping.md"
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-38 Parcel-Aware Crop Mapping
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-38` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 摘要 作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。20242026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything
-
-## 正文
-
-# RS-38 Parcel-Aware Crop Mapping
-
-更新时间：2026-06-07
 
 ## 摘要
 
@@ -91,10 +77,3 @@ source_repo: "codex-rs-articles"
 3. 用农业机械轨迹或 cadastral map 辅助 field delineation。
 4. 小地块区域的超分辨率与边界联合优化。
 5. parcel-level active learning，优先标注边界不确定且类别不确定的地块。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

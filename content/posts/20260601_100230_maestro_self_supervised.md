@@ -3,7 +3,6 @@ title: "MAESTRO：多模态多时相多光谱遥感自监督学习的\"指挥家
 date: 2026-06-01
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "articles"
 ---
 
 # MAESTRO：多模态多时相多光谱遥感自监督学习的"指挥家"

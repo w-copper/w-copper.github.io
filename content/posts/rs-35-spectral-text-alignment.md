@@ -1,19 +1,14 @@
-# RS-35 Spectral-Text Alignment 调研
+---
+title: "RS-35 Spectral-Text Alignment"
+date: 2026-06-07
+series: ["2024-2026 遥感 AI 细分研究方向"]
+tags: ["高光谱", "多光谱", "谱段适配"]
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+---
 
+# RS-35 Spectral-Text Alignment
 
-# RS-35 Spectral-Text Alignment 调研
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-35` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：高光谱/多光谱与文本语义如何对齐，使文本中的“健康植被、裸土、浑浊水体、屋顶材料、湿润土壤、烧毁区域”等描述能对应到可验证的谱曲线、谱段组合或光谱指数，而不是只依赖 RGB 外观和语言先验。 摘要 Spectraltext alignment 是遥感 VLM 里一个很新的小切口。传统 RSCLIP/RSVLM 多把遥感图像
-
-## 正文
-
-# RS-35 Spectral-Text Alignment 调研
-
-更新时间：2026-06-07  
 细问题：高光谱/多光谱与文本语义如何对齐，使文本中的“健康植被、裸土、浑浊水体、屋顶材料、湿润土壤、烧毁区域”等描述能对应到可验证的谱曲线、谱段组合或光谱指数，而不是只依赖 RGB 外观和语言先验。
 
 ## 摘要
@@ -216,11 +211,3 @@ Spectral-text alignment 是遥感 VLM 里一个很新的小切口。传统 RS-CL
 **一句话**：用光谱指数和谱曲线属性构造可验证文本监督，让多光谱/高光谱 VLM 不仅能把图像和类别文本对齐，还能对齐到“高 NIR、低 red、强 SWIR 吸收”等物理证据。
 
 **目标 venue**：TGRS / ISPRS JPRS / CVPR EarthVision / ICCV workshop / NeurIPS Datasets and Benchmarks track。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
-

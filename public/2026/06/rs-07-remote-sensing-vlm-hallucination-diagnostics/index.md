@@ -3,18 +3,6 @@
 
 # RS-07 Remote Sensing VLM Hallucination Diagnostics
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-07` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 委托条目：research/50threadprompts.md 中 RS07 Remote Sensing VLM Hallucination Diagnostics 研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hardnegative QA 与自动评测指标。 
-
-## 正文
-
-# RS-07 Remote Sensing VLM Hallucination Diagnostics
-
-更新时间：2026-06-07  
-委托条目：`research/50_thread_prompts.md` 中 `RS-07 Remote Sensing VLM Hallucination Diagnostics`  
 研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hard-negative QA 与自动评测指标。
 
 ## 1. 问题由来
@@ -248,11 +236,4 @@ GeoHalluBench: Evidence-Calibrated Hallucination Diagnostics for Remote Sensing 
 - GeoChat: https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html, https://github.com/mbzuai-oryx/GeoChat
 - HallusionBench: https://openaccess.thecvf.com/content/CVPR2024/papers/Guan_HallusionBench_An_Advanced_Diagnostic_Suite_for_Entangled_Language_Hallucination_and_CVPR_2024_paper.pdf, https://github.com/tianyi-lab/HallusionBench
 - M-HalDetect: https://ojs.aaai.org/index.php/AAAI/article/view/29771, https://github.com/hendryx-scale/mhal-detect
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

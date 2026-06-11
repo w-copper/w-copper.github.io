@@ -1,28 +1,7 @@
----
-title: "RS-19 Change Caption Evidence Grounding 调研"
-date: 2026-06-07
-series: ["2024-2026 遥感 AI 细分研究方向"]
-tags: ["多时相", "变化检测", "时序遥感"]
-source: "research/rs19_change_caption_evidence_grounding.md"
-categories: ["遥感基础模型与多模态理解"]
-draft: false
-source_repo: "codex-rs-articles"
----
+# RS-19 Change Caption Evidence Grounding
 
-# RS-19 Change Caption Evidence Grounding 调研
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-19` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 对应 prompt：RS19 Change Caption Evidence Grounding 核心问题 遥感 change captioning 的目标是输入同一区域的双时相或多时相影像，输出自然语言变化描述，例如“新建了几栋建筑”“农田变成裸地”“洪水淹没了道路和建筑”。这个任务比普通变化检测更接近人类解释，但也更容易出现一
-
-## 正文
-
-# RS-19 Change Caption Evidence Grounding 调研
-
-更新时间：2026-06-07  
-对应 prompt：`RS-19 Change Caption Evidence Grounding`
+# RS-19 Change Caption Evidence Grounding
 
 ## 核心问题
 
@@ -272,9 +251,3 @@ final_report = {
 9. [OmniCD](https://arxiv.org/abs/2605.30168)
 10. [VRSBench](https://arxiv.org/abs/2406.12384) 和 [GitHub](https://github.com/lx709/VRSBench)
 
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

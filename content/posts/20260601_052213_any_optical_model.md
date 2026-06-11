@@ -3,7 +3,6 @@ title: "支持任意波段、任意分辨率！AOM：通用遥感基础模型"
 date: 2026-06-01
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "articles"
 ---
 
 # 支持任意波段、任意分辨率！AOM：通用遥感基础模型

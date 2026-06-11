@@ -3,25 +3,11 @@ title: "RS-41 Phenology-Aware Crop Foundation Models"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感应用", "农业生态灾害", "方法化"]
-source: "research/rs41_phenology_aware_crop_foundation_models.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-41 Phenology-Aware Crop Foundation Models
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-41` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 摘要 作物识别的关键不是某一天的影像，而是作物在一个生长季中的物候轨迹。20242026 的作物遥感研究从传统 Sentinel2 time series 分类，走向 multisource temporal foundation model、regionadaptive phenology、WorldCereal 实际部署和 A
-
-## 正文
-
-# RS-41 Phenology-Aware Crop Foundation Models
-
-更新时间：2026-06-07
 
 ## 摘要
 
@@ -92,10 +78,3 @@ source_repo: "codex-rs-articles"
 3. 地块级 temporal aggregation 与 crop FM 结合。
 4. 早季作物识别的不确定性校准。
 5. 将气象异常作为 domain shift 输入，而不是训练噪声。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

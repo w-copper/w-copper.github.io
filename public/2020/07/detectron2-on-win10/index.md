@@ -1,9 +1,7 @@
 # Detectron2 在win10的安装经历
 
 
-
 <!--more-->
-
 
 # Detectron2 在win10的安装经历
 

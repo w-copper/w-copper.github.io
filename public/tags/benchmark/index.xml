@@ -1,14 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Benchmark - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/benchmark/</link><description>Benchmark - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/benchmark/" rel="self" type="application/rss+xml"/><item><title>RS-46 Synthetic Instruction Data Quality for RS-VLM</title><link>https://spacetop.win/2026/06/rs-46-synthetic-instruction-data-quality-for-rs-vlm/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-46-synthetic-instruction-data-quality-for-rs-vlm/</guid><description><![CDATA[<h1 id="rs-46-synthetic-instruction-data-quality-for-rs-vlm" class="headerLink">
-    <a href="#rs-46-synthetic-instruction-data-quality-for-rs-vlm" class="header-mark"></a>RS-46 Synthetic Instruction Data Quality for RS-VLM</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-46</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？ 摘要 20242026 年遥感 VLM 的核心数据路线可以概括为三类：把已有 caption/VQA/检测/分割数据转成 instruction；用 GPT4V/通用 VLM/LLM 生成多轮问答、细粒度 caption 或</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-46-synthetic-instruction-data-quality-for-rs-vlm-1" class="headerLink">
-    <a href="#rs-46-synthetic-instruction-data-quality-for-rs-vlm-1" class="header-mark"></a>RS-46 Synthetic Instruction Data Quality for RS-VLM</h1><p>更新时间：2026-06-07<br>
-细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>2024-2026 年遥感 VLM 的核心数据路线可以概括为三类：把已有 caption/VQA/检测/分割数据转成 instruction；用 GPT-4V/通用 VLM/LLM 生成多轮问答、细粒度 caption 或 scene graph；再用人工验证、负样本或 benchmark 协议约束模型幻觉。问题是，遥感图像有小目标、俯视视角、尺度/GSD、地理上下文和类别层级，通用 VLM 生成的数据很容易出现“看不见却说有”“模板句式过强”“类别先验替代图像证据”“地理常识编造”等伪细节。</p>
+    <a href="#rs-46-synthetic-instruction-data-quality-for-rs-vlm" class="header-mark"></a>RS-46 Synthetic Instruction Data Quality for RS-VLM</h1><p>细问题：遥感 VLM 的合成 instruction/caption 数据质量如何评估、过滤和人工抽检？</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>2024-2026 年遥感 VLM 的核心数据路线可以概括为三类：把已有 caption/VQA/检测/分割数据转成 instruction；用 GPT-4V/通用 VLM/LLM 生成多轮问答、细粒度 caption 或 scene graph；再用人工验证、负样本或 benchmark 协议约束模型幻觉。问题是，遥感图像有小目标、俯视视角、尺度/GSD、地理上下文和类别层级，通用 VLM 生成的数据很容易出现“看不见却说有”“模板句式过强”“类别先验替代图像证据”“地理常识编造”等伪细节。</p>
 <p>本方向最值得做的小课题不是再堆一个更大的 instruction 数据集，而是提出一个可复现的 <code>Synthetic RS-VLM Data Quality Protocol</code>：对每条 image-instruction-answer 做来源追踪、视觉证据检查、地理/尺度一致性检查、负样本压力测试、人工分层抽检和训练收益验证。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感 VLM 训练数据的难点来自两个冲突：</p>
@@ -16,27 +9,212 @@
 <li>大规模 instruction 数据必须自动化生成，否则成本不可承受。</li>
 <li>遥感场景又极其依赖证据，自动生成的一句 caption 或 QA 只要错一个小目标、方向、类别层级，就会把模型训练成“会说但不看图”。</li>
 </ul>
-<p>2024 年的 RS-LLaVA、SkyEyeGPT、GeoChat、RS-GPT4V、SkySenseGPT、VHM 都在扩充 instruction 数据；2025-2026 年的 GEOBench-VLM、OmniEarth、RSHBench/RADAR 则开始反过来诊断这些数据和模型是否真的可靠。这个演化说明：数据质量本身已经成为遥感 VLM 的研究问题。</p>]]></description></item><item><title>RS-47 Benchmark Contamination and Deduplication</title><link>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</guid><description><![CDATA[<h1 id="rs-47-benchmark-contamination-and-deduplication" class="headerLink">
-    <a href="#rs-47-benchmark-contamination-and-deduplication" class="header-mark"></a>RS-47 Benchmark Contamination and Deduplication</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-47</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、nearduplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。 范围：光学/多光谱/高分辨率遥感优先；SARonly 不作为主线。本文与 [R</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-47-benchmark-contamination-and-deduplication-1" class="headerLink">
-    <a href="#rs-47-benchmark-contamination-and-deduplication-1" class="header-mark"></a>RS-47 Benchmark Contamination and Deduplication</h1><p>更新时间：2026-06-07<br>
-细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、near-duplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。<br>
+<p>2024 年的 RS-LLaVA、SkyEyeGPT、GeoChat、RS-GPT4V、SkySenseGPT、VHM 都在扩充 instruction 数据；2025-2026 年的 GEOBench-VLM、OmniEarth、RSHBench/RADAR 则开始反过来诊断这些数据和模型是否真的可靠。这个演化说明：数据质量本身已经成为遥感 VLM 的研究问题。</p>
+<h2 id="代表论文与资源" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>数据构造方式</th>
+          <th>与数据质量相关的贡献</th>
+          <th>主要风险/可借鉴点</th>
+          <th>链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>RS-LLaVA</td>
+          <td style="text-align: right">2024 Remote Sensing</td>
+          <td>将 caption 和 VQA 数据混合成 RS-instructions</td>
+          <td>早期 LLaVA-style RS caption+VQA 指令数据</td>
+          <td>多来自既有数据集，任务覆盖窄，容易继承原数据集偏差</td>
+          <td><a href="https://www.mdpi.com/2072-4292/16/9/1477" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/BigData-KSU/RS-LLaVA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>SkyEyeGPT</td>
+          <td style="text-align: right">2024 arXiv / 2025 ISPRS JPRS</td>
+          <td>构造 SkyEye-968k，单任务和多任务 instruction</td>
+          <td>统一多种 RS vision-language 任务</td>
+          <td>模板化和任务格式转换质量需要审计</td>
+          <td><a href="https://arxiv.org/abs/2401.09712" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/ZhanYang-nwpu/SkyEyeGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>GeoChat</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td>构造 grounded RS instruction，包含 region dialogue / grounding</td>
+          <td>强调遥感 grounded conversation，开源代码、模型、数据和评测</td>
+          <td>grounding 数据能缓解纯语言幻觉，但 bbox/region 与答案一致性仍需检查</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>VHM</td>
+          <td style="text-align: right">2024 arXiv / 2025 AAAI</td>
+          <td>VersaD rich captions + HnstD honest/deceptive questions</td>
+          <td>引入详细 caption 和不存在目标的欺骗性问题，直接针对“诚实性”</td>
+          <td>很适合作为 RS-VLM 数据负样本构造模板</td>
+          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>RS-GPT4V</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>用 GPT-4V 构造统一多模态 instruction-following 数据</td>
+          <td>代表 GPT-4V 生成遥感指令数据路线</td>
+          <td>需要系统验证 GPT-4V 生成细节是否有图像证据</td>
+          <td><a href="https://arxiv.org/abs/2406.12479" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/GeoX-Lab/RS-GPT4V" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>SkySenseGPT / FIT-RS</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>FIT-RS，约 1.8M instruction，含关系推理、scene graph</td>
+          <td>关注复杂语义关系和细粒度理解</td>
+          <td>大规模合成/转换数据必须检查关系三元组是否可见</td>
+          <td><a href="https://arxiv.org/abs/2406.10100" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/Luo-Z13/SkySenseGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>VRSBench</td>
+          <td style="text-align: right">2024 NeurIPS Datasets &amp; Benchmarks</td>
+          <td>高质量 RS vision-language benchmark，caption/object reference/VQA</td>
+          <td>将 benchmark 从简单问答扩展到多任务</td>
+          <td>可作为抽检协议和人工验证标准参考</td>
+          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>RSUniVLM</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>图像级、区域级、像素级、多图输入统一</td>
+          <td>粒度 MoE 让 instruction 覆盖多粒度任务</td>
+          <td>需要检查不同粒度标签互相是否一致</td>
+          <td><a href="https://arxiv.org/abs/2412.05679" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://rsunivlm.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
+      </tr>
+      <tr>
+          <td>GeoGround</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td>用 HBB/OBB/mask 支持遥感视觉 grounding</td>
+          <td>提供更细的视觉证据约束</td>
+          <td>可用于过滤“有答案但无定位证据”的样本</td>
+          <td><a href="https://arxiv.org/abs/2411.11904" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zytx121/GeoGround" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>GEOBench-VLM</td>
+          <td style="text-align: right">2025 ICCV</td>
+          <td>多任务 geospatial VLM benchmark，包含自动与人工验证标注</td>
+          <td>用 MCQ 降低 open-ended 评估偏差，覆盖计数、定位、时序、关系等</td>
+          <td>可借鉴其任务 taxonomy 和人工核验方式</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>OmniEarth</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>44,210 manually verified instructions，含 MCQ/open-ended、bbox/mask</td>
+          <td>blind test + semantic consistency，用于检验是否依赖视觉证据</td>
+          <td>很适合作为“数据质量目标函数”的 benchmark</td>
+          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/datasets/sjeeudd/OmniEarth" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+      </tr>
+      <tr>
+          <td>RSHBench/RADAR</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td>细粒度诊断 RS-VQA 事实/逻辑幻觉</td>
+          <td>把幻觉归因到 grounding failure 和小目标误读</td>
+          <td>可直接用于合成数据负样本和失败模式分类</td>
+          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>Cambrian-1</td>
+          <td style="text-align: right">2024 NeurIPS</td>
+          <td>通用 MLLM 数据策展和分布平衡</td>
+          <td>强调高质量视觉指令数据、数据源平衡、视觉中心 benchmark</td>
+          <td>可迁移为 RS-VLM 数据混合比例和质量审计原则</td>
+          <td><a href="https://papers.nips.cc/paper_files/paper/2024/hash/9ee3a664ccfeabc0da16ac6f1f1cfe59-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">NeurIPS</a>, <a href="https://github.com/cambrian-mllm/cambrian" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+      </tr>
+      <tr>
+          <td>What matters when building VLMs?</td>
+          <td style="text-align: right">2024 NeurIPS</td>
+          <td>通用 VLM 构建消融</td>
+          <td>讨论训练混合、数据重复、合成 caption 对 VLM 的影响</td>
+          <td>可作为 RS 合成 caption 是否真正增益的消融模板</td>
+          <td><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/a03037317560b8c5f2fb4b6466d4c439-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">paper</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="数据构造路线对比" class="headerLink">
+    <a href="#%e6%95%b0%e6%8d%ae%e6%9e%84%e9%80%a0%e8%b7%af%e7%ba%bf%e5%af%b9%e6%af%94" class="header-mark"></a>数据构造路线对比</h2><table>
+  <thead>
+      <tr>
+          <th>路线</th>
+          <th>典型做法</th>
+          <th>优点</th>
+          <th>质量风险</th>
+          <th>建议检查</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>既有数据集转 instruction</td>
+          <td>将 caption/VQA/detection/segmentation 标签包装为自然语言 QA</td>
+          <td>成本低、可复现</td>
+          <td>模板化强，问题答案分布单一，继承旧数据标签噪声</td>
+          <td>模板多样性、答案分布、同图多问一致性</td>
+      </tr>
+      <tr>
+          <td>GPT-4V/通用 VLM 生成</td>
+          <td>给图像生成 caption、多轮 QA、关系描述</td>
+          <td>规模大，语言自然</td>
+          <td>小目标、尺度、类别和空间关系幻觉</td>
+          <td>视觉证据核验、负样本、人工抽检</td>
+      </tr>
+      <tr>
+          <td>LLM 基于标签生成</td>
+          <td>用已有 bbox/mask/class 让 LLM 生成问答</td>
+          <td>语义可控，便于批量生成</td>
+          <td>答案可能只来自标签而不是图像；语言先验强</td>
+          <td>bbox/mask-answer 一致性、图像可见性</td>
+      </tr>
+      <tr>
+          <td>detector/SAM/VLM 联合自动标注</td>
+          <td>GroundingDINO/SAM/CLIP/VLM 产生区域和描述</td>
+          <td>有区域证据，适合 grounding</td>
+          <td>detector 漏检、SAM 类别无关、CLIP 类别混淆</td>
+          <td>多模型一致性、mask stability、类别置信度</td>
+      </tr>
+      <tr>
+          <td>人工验证 benchmark</td>
+          <td>人工校验 instruction、答案和证据</td>
+          <td>可信度高，适合评测</td>
+          <td>成本高，覆盖有限</td>
+          <td>分层抽样、双人标注、一致性统计</td>
+      </tr>
+      <tr>
+          <td>hard negative / deceptive QA</td>
+          <td>问不存在对象、相似类别、空间关系陷阱</td>
+          <td>直接抑制幻觉</td>
+          <td>构造不自然会让模型学到模板捷径</td>
+          <td>负样本自然度、与正样本配对、难度分层</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="质量问题分类" class="headerLink">
+    <a href="#%e8%b4%a8%e9%87%8f%e9%97%ae%e9%a2%98%e5%88%86%e7%b1%bb" class="header-mark"></a>质量问题分类</h2><ol>
+<li>伪细节幻觉：caption 里出现图像中没有的飞机、船、道路、建筑损毁等。</li>
+<li>小目标误读：把 tiny vehicle、storage tank、greenhouse、ship 等当成纹理或相似类别。</li>
+<li>空间关系错误：left/right、near、inside、parallel、surrounded by 在俯视图中容易错。</li>
+<li>尺度/GSD 错误：把球场、停车场、房屋屋顶等按自然图像尺度理解。</li>
+<li>类别层级混乱：land cover 与 object label 混用，例如 impervious surface/road/runway/building。</li>
+<li>模板偏置：模型靠问题句式猜答案，而不是看图。</li>
+<li>答案分布偏置：yes/no、选项位置、常见类别过度集中。</li>
+<li>地理常识编造：根据地区名、典型场景或语言先验推断不可见信息。</li>
+<li>多粒度不一致：同一图像的 image-level caption、region QA、mask label 互相矛盾。</li>
+<li>训练-测试污染：合成数据来自公开 benchmark 或同一区域瓦片，导致评测虚高。</li>
+</ol>
+<h2 id="可执行的数据过滤协议" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%9a%84%e6%95%b0%e6%8d%ae%e8%bf%87%e6%bb%a4%e5%8d%8f%e8%ae%ae" class="header-mark"></a>可执行的数据过滤协议</h2><h3 id="stage-0-数据血缘记录" class="headerLink">
+    <a href="#stage-0-%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e8%ae%b0%e5%bd%95" class="header-mark"></a>Stage 0: 数据血缘记录</h3><p>每条样本保存：</p>]]></description></item><item><title>RS-47 Benchmark Contamination and Deduplication</title><link>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-47-benchmark-contamination-and-deduplication/</guid><description><![CDATA[<h1 id="rs-47-benchmark-contamination-and-deduplication" class="headerLink">
+    <a href="#rs-47-benchmark-contamination-and-deduplication" class="header-mark"></a>RS-47 Benchmark Contamination and Deduplication</h1><p>细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、near-duplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。<br>
 范围：光学/多光谱/高分辨率遥感优先；SAR-only 不作为主线。本文与 <a href="./RS-02_geofm_benchmark_leakage_audit.md" rel="">RS-02 GeoFM Benchmark Leakage Audit</a> 和 <a href="./rs25_ood_split_design.md" rel="">RS-25 OOD Split Design</a> 互补：RS-02 偏 GeoFM 评测泄漏审计，RS-25 偏 OOD split；本文件专门落在数据污染检测、近重复去重和可执行工具链。</p>
 <h2 id="1-结论先行" class="headerLink">
-    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>遥感 benchmark contamination 不是一个抽象风险，而是已经被实证发现的硬问题。最直接的证据是 CVPR 2026 oral 论文 <strong>Data Leakage Detection and De-duplication in Large Scale Geospatial Image Datasets</strong>：作者审计 INRIA、SpaceNet 2 和 AICrowd Mapping Challenge 等建筑 footprint 数据集，发现 AICrowd 训练集中约 25 万张、接近 90% 图像是完全或增强重复；验证集中大量样本也出现在训练集中，并给出官方代码 <a href="https://github.com/yeshwanth95/Hash_and_search" target="_blank" rel="noopener noreferrer">Hash_and_search</a>。</p>]]></description></item><item><title>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</title><link>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</guid><description><![CDATA[<h1 id="rs-48-active-learning-with-samvlm-human-in-the-loop" class="headerLink">
-    <a href="#rs-48-active-learning-with-samvlm-human-in-the-loop" class="header-mark"></a>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-48</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：设计一个低成本遥感标注闭环：主动选择样本，SAM 生成 mask，VLM 生成类别/描述，人类纠错，再更新 prompt/prototype。输出标注成本曲线、mIoU/AP 收益、停止准则和失败案例分析。 1. 问题由来 遥感标注贵，贵在三个地方：大幅面影像要切片和定位，小目标/旋转目标/密集实例边界难修，类别语义还经常依</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-48-active-learning-with-samvlm-human-in-the-loop-1" class="headerLink">
-    <a href="#rs-48-active-learning-with-samvlm-human-in-the-loop-1" class="header-mark"></a>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</h1><p>更新时间：2026-06-07<br>
-任务：设计一个低成本遥感标注闭环：主动选择样本，SAM 生成 mask，VLM 生成类别/描述，人类纠错，再更新 prompt/prototype。输出标注成本曲线、mIoU/AP 收益、停止准则和失败案例分析。</p>
-<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>遥感 benchmark contamination 不是一个抽象风险，而是已经被实证发现的硬问题。最直接的证据是 CVPR 2026 oral 论文 <strong>Data Leakage Detection and De-duplication in Large Scale Geospatial Image Datasets</strong>：作者审计 INRIA、SpaceNet 2 和 AICrowd Mapping Challenge 等建筑 footprint 数据集，发现 AICrowd 训练集中约 25 万张、接近 90% 图像是完全或增强重复；验证集中大量样本也出现在训练集中，并给出官方代码 <a href="https://github.com/yeshwanth95/Hash_and_search" target="_blank" rel="noopener noreferrer">Hash_and_search</a>。</p>
+<p>对 2024-2026 的 GeoFM/VLM 时代来说，问题更复杂：模型预训练数据往往来自全球 Sentinel-2、Landsat、NAIP、航空影像、Web caption、OSM/WorldCover/building footprint 等衍生产品；下游 benchmark 又可能使用相同区域、相同年份、相同 parent scene、相同标签产品或同源 caption/QA。只做 image-level random split 已经不够，必须做 <strong>provenance-aware dedup</strong>：同时用坐标、时间、传感器、parent scene、精确/感知哈希、embedding 近邻和标签来源审计。</p>]]></description></item><item><title>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</title><link>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</guid><description><![CDATA[<h1 id="rs-48-active-learning-with-samvlm-human-in-the-loop" class="headerLink">
+    <a href="#rs-48-active-learning-with-samvlm-human-in-the-loop" class="header-mark"></a>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</h1><h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注贵，贵在三个地方：大幅面影像要切片和定位，小目标/旋转目标/密集实例边界难修，类别语义还经常依赖地理上下文。传统主动学习只问“哪张图最不确定”，但 foundation model 时代的问题变了：SAM 能给 mask 但不懂类别，GroundingDINO/VLM 能给语义但受 prompt 和语言先验影响，人类标注者的主要成本也从“从零画 mask”变成“检查、修正、合并、改类别”。</p>
 <p>因此，这个方向的核心研究问题不是再做一个主动学习打分函数，而是：</p>
 <ul>
@@ -132,15 +310,7 @@
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-传统主动学习" class="headerLink">
     <a href="#31-%e4%bc%a0%e7%bb%9f%e4%b8%bb%e5%8a%a8%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 传统主动学习</h3><p>典型做法是用 uncertainty、entropy、margin、BALD、core-set/diversity 或 query-by-committee 选择未标注样本。遥感中它的问题是：随机切片高度冗余，空间相邻样本相关性强，模型最不确定的样本可能只是云、阴影、配准错或异常纹理，并不一定值得人类标注。</p>]]></description></item><item><title>RS-49 Weak Labels from OSM/Map Products</title><link>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</guid><description><![CDATA[<h1 id="rs-49-weak-labels-from-osmmap-products" class="headerLink">
-    <a href="#rs-49-weak-labels-from-osmmap-products" class="header-mark"></a>RS-49 Weak Labels from OSM/Map Products</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-49</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务范围：调研 20242026 年使用 OSM、建筑 footprint、道路、水体、土地覆盖产品等地图/地理产品作为弱标签训练遥感模型的研究。重点分析时效误差、空间错位、类别不一致、噪声鲁棒训练和弱标签质量估计。默认聚焦光学/多光谱遥感，不把 SAR 作为主线。 1. 问题由来 遥感标注最贵的部分通常不是图像本身，而是“地理一</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-49-weak-labels-from-osmmap-products-1" class="headerLink">
-    <a href="#rs-49-weak-labels-from-osmmap-products-1" class="header-mark"></a>RS-49 Weak Labels from OSM/Map Products</h1><p>更新时间：2026-06-07<br>
-任务范围：调研 2024-2026 年使用 OSM、建筑 footprint、道路、水体、土地覆盖产品等地图/地理产品作为弱标签训练遥感模型的研究。重点分析时效误差、空间错位、类别不一致、噪声鲁棒训练和弱标签质量估计。默认聚焦光学/多光谱遥感，不把 SAR 作为主线。</p>
-<h2 id="1-问题由来" class="headerLink">
+    <a href="#rs-49-weak-labels-from-osmmap-products" class="header-mark"></a>RS-49 Weak Labels from OSM/Map Products</h1><h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注最贵的部分通常不是图像本身，而是“地理一致、时相一致、类别一致”的像素级或对象级标签。OSM、Microsoft/Google building footprints、ESA WorldCover、Dynamic World、FROM-GLC、GlobeLand30、HydroLAKES/Global Surface Water、各国地籍和道路数据看起来像天然标签源，但它们本质上是异构、异时相、异精度的地图产品。直接把它们当 ground truth 会把地图误差转成模型偏差。</p>
 <p>这个方向在 2024-2026 变得更重要，原因有三点：</p>
 <ol>
@@ -261,15 +431,12 @@
       </tr>
   </tbody>
 </table>
-<p>说明：上述部分 arXiv 论文需要在后续深挖时继续确认官方代码是否发布；表中“code”只在已找到官方或项目方链接时列出。</p>]]></description></item><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
-    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-50</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。 结论摘要 遥感分割和检测的类别体系天然不是平面的：impervious surface / road / runway / building、crop / rice / field、wate</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing-1" class="headerLink">
-    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing-1" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><p>更新时间：2026-06-07<br>
-任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。</p>
-<h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>]]></description></item><item><title>遥感 AI 研究中最该关注的 Benchmark 和数据集</title><link>https://spacetop.win/2026/06/00-benchmark-and-datasets/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-benchmark-and-datasets/</guid><description><![CDATA[<h1 id="遥感-ai-研究中最该关注的-benchmark-和数据集" class="headerLink">
+<h2 id="3-弱标签噪声类型" class="headerLink">
+    <a href="#3-%e5%bc%b1%e6%a0%87%e7%ad%be%e5%99%aa%e5%a3%b0%e7%b1%bb%e5%9e%8b" class="header-mark"></a>3. 弱标签噪声类型</h2><h3 id="31-时效误差" class="headerLink">
+    <a href="#31-%e6%97%b6%e6%95%88%e8%af%af%e5%b7%ae" class="header-mark"></a>3.1 时效误差</h3><p>地图产品和遥感影像常不在同一天甚至同一年。建筑新增/拆除、道路施工、洪水季节性水体、农田轮作、城市扩张都会让标签与影像真实状态不一致。</p>]]></description></item><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
+    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
+<p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>遥感 AI 研究中最该关注的 Benchmark 和数据集</title><link>https://spacetop.win/2026/06/00-benchmark-and-datasets/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-benchmark-and-datasets/</guid><description><![CDATA[<h1 id="遥感-ai-研究中最该关注的-benchmark-和数据集" class="headerLink">
     <a href="#%e9%81%a5%e6%84%9f-ai-%e7%a0%94%e7%a9%b6%e4%b8%ad%e6%9c%80%e8%af%a5%e5%85%b3%e6%b3%a8%e7%9a%84-benchmark-%e5%92%8c%e6%95%b0%e6%8d%ae%e9%9b%86" class="header-mark"></a>遥感 AI 研究中最该关注的 Benchmark 和数据集</h1><p>这一批研究反复出现的基准包括 PANGAEA、EarthShift、GEOBench-VLM、OmniEarth、LRS-VQA、RS5M、VRSBench、REOBench、PhilEO Bench、Copernicus-Bench、SpectralEarth、Fields of The World、WorldCereal、LoveDA、iSAID、Vaihingen/Potsdam、SpaceNet、xBD。选择数据集时要优先检查地理划分、时间划分、传感器差异、标注成本和是否可能与预训练数据重叠。</p>]]></description></item></channel></rss>

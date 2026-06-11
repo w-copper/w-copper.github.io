@@ -4,7 +4,6 @@ date: 2026-06-07
 tags: ["阅读路线", "遥感AI"]
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # 如何阅读这 50 篇遥感 AI 研究笔记

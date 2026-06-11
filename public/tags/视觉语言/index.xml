@@ -1,13 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>视觉语言 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80/</link><description>视觉语言 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80/" rel="self" type="application/rss+xml"/><item><title>RS-06 Evidence-Grounded RS-VQA 调研</title><link>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-06-evidence-grounded-rs-vqa-调研" class="headerLink">
-    <a href="#rs-06-evidence-grounded-rs-vqa-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-06 Evidence-Grounded RS-VQA 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-06</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 对应 prompt：RS06 EvidenceGrounded RSVQA 核心问题 遥感 VQA 里最危险的失败不是“答错”，而是“答案看起来对，但证据区域错”。例如模型回答“有 3 架飞机”，但它看的 attention/box 落在建筑屋顶；或者回答“这是洪水区域”，但证据 mask 覆盖的是云影。自然图像 VQA 中这种问</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-06-evidence-grounded-rs-vqa-调研-1" class="headerLink">
-    <a href="#rs-06-evidence-grounded-rs-vqa-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-06 Evidence-Grounded RS-VQA 调研</h1><p>更新时间：2026-06-07<br>
-对应 prompt：<code>RS-06 Evidence-Grounded RS-VQA</code></p>
-<h2 id="核心问题" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>视觉语言 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80/</link><description>视觉语言 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80/" rel="self" type="application/rss+xml"/><item><title>RS-06 Evidence-Grounded RS-VQA</title><link>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-06-evidence-grounded-rs-vqa/</guid><description><![CDATA[<h1 id="rs-06-evidence-grounded-rs-vqa" class="headerLink">
+    <a href="#rs-06-evidence-grounded-rs-vqa" class="header-mark"></a>RS-06 Evidence-Grounded RS-VQA</h1><h2 id="核心问题" class="headerLink">
     <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h2><p>遥感 VQA 里最危险的失败不是“答错”，而是“答案看起来对，但证据区域错”。例如模型回答“有 3 架飞机”，但它看的 attention/box 落在建筑屋顶；或者回答“这是洪水区域”，但证据 mask 覆盖的是云影。自然图像 VQA 中这种问题已经存在，遥感里会更严重，因为遥感图像常有：</p>
 <ul>
 <li>超大图和 tile 切片，问题相关区域可能只占极少像素。</li>
@@ -16,16 +8,95 @@
 <li>语义依赖地理上下文，模型可能用“机场附近应该有飞机”这类先验猜答案。</li>
 <li>公开数据中 caption/QA/grounding 多由检测框、模板或 VLM 合成，证据链不一定被人工核验。</li>
 </ul>
-<p>因此 RS-06 的目标不是再做一个普通 RS-VQA 数据集，而是设计一个强制输出 <code>answer + bbox/mask + confidence</code> 的 evidence-grounded RS-VQA benchmark。它要能诊断三类错误：答案错、答案对但证据错、答案和证据都对但置信度不可信。</p>]]></description></item><item><title>RS-07 Remote Sensing VLM Hallucination Diagnostics</title><link>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</guid><description><![CDATA[<h1 id="rs-07-remote-sensing-vlm-hallucination-diagnostics" class="headerLink">
-    <a href="#rs-07-remote-sensing-vlm-hallucination-diagnostics" class="header-mark"></a>RS-07 Remote Sensing VLM Hallucination Diagnostics</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-07</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 委托条目：research/50threadprompts.md 中 RS07 Remote Sensing VLM Hallucination Diagnostics 研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hardnegative QA 与自动评测指标。</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-07-remote-sensing-vlm-hallucination-diagnostics-1" class="headerLink">
-    <a href="#rs-07-remote-sensing-vlm-hallucination-diagnostics-1" class="header-mark"></a>RS-07 Remote Sensing VLM Hallucination Diagnostics</h1><p>更新时间：2026-06-07<br>
-委托条目：<code>research/50_thread_prompts.md</code> 中 <code>RS-07 Remote Sensing VLM Hallucination Diagnostics</code><br>
-研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hard-negative QA 与自动评测指标。</p>
+<p>因此 RS-06 的目标不是再做一个普通 RS-VQA 数据集，而是设计一个强制输出 <code>answer + bbox/mask + confidence</code> 的 evidence-grounded RS-VQA benchmark。它要能诊断三类错误：答案错、答案对但证据错、答案和证据都对但置信度不可信。</p>
+<h2 id="代表论文与资源" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>证据/grounding 设计</th>
+          <th>对 RS-06 的启发</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
+          <td style="text-align: right">CVPR 2024</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>支持 image/region caption、VQA、grounded conversations、referring object detection；项目页说明已开源代码、模型、数据和评测脚本。</td>
+          <td>说明 RS-VLM 可以把自然语言回答和目标位置交织输出，但还需要独立评估“回答和框是否一致”。</td>
+      </tr>
+      <tr>
+          <td>VHM: Versatile and Honest VLM for Remote Sensing Image Analysis</td>
+          <td style="text-align: right">arXiv 2024 / AAAI 2025 方向</td>
+          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>强调 honest QA，用不存在目标/欺骗性问题减轻幻觉。</td>
+          <td>RS-06 可借鉴 false-premise QA，但要进一步要求证据框/mask 和拒答置信度。</td>
+      </tr>
+      <tr>
+          <td>VRSBench: A Versatile Vision-Language Benchmark Dataset for Remote Sensing Image Understanding</td>
+          <td style="text-align: right">NeurIPS 2024 Datasets &amp; Benchmarks</td>
+          <td><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/05b7f821234f66b78f99e7803fffa78a-Abstract-Datasets_and_Benchmarks_Track.html" target="_blank" rel="noopener noreferrer">NeurIPS</a>, <a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>包含 29,614 图、人工核验 caption、52,472 object references、123,221 QA，覆盖 caption、visual grounding、VQA。</td>
+          <td>可作为 answer-grounding 联合样本来源；但需要把 VQA 与 reference/object evidence 强绑定。</td>
+      </tr>
+      <tr>
+          <td>GEOBench-VLM</td>
+          <td style="text-align: right">ICCV 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>覆盖 8 大类、31 个细粒度 geospatial VLM 任务，包括计数、定位、分割、caption、event、temporal 等；采用 MCQ 以降低开放回答评测偏差。</td>
+          <td>提供任务谱系和客观评测思路，但 RS-06 应从 MCQ 扩展到开放答案 + 证据区域。</td>
+      </tr>
+      <tr>
+          <td>OmniEarth</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>28 个细粒度任务，支持 MCQ 与 open-ended VQA；开放形式含文本、bbox、mask；采用 blind test 和 quintuple semantic consistency 降低语言偏差。</td>
+          <td>最接近 RS-06 的 benchmark 形态，可直接借鉴“任务维度 + box/mask 输出 + 语义一致性”。</td>
+      </tr>
+      <tr>
+          <td>RSHBench / RADAR: Seeing Clearly without Training</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub 计划</a></td>
+          <td>RSHBench 诊断 RS-VQA 中 factual/logical hallucination；RADAR 是 training-free 推理方法，用模型内在 attention 做渐进定位和局部推理。</td>
+          <td>证明幻觉主要来自 grounding failure 和小目标误读；RS-06 应把局部化过程显式纳入指标。</td>
+      </tr>
+      <tr>
+          <td>ScaleEarth: Continuous Scale Conditioning for RS-VLMs</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2605.07562" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>把 GSD 当连续条件变量，用 CS-HLoRA 动态调制 LoRA 子空间；构造 GeoScale-VQA，问题生成与物理尺度条件绑定。</td>
+          <td>RS-06 必须记录 GSD，并将“证据区域是否足以支持答案”按尺度分层评估。</td>
+      </tr>
+      <tr>
+          <td>SATGround</td>
+          <td style="text-align: right">arXiv 2025/2026</td>
+          <td><a href="https://arxiv.org/abs/2512.08881" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>面向遥感 visual grounding 的空间感知方法，强化语言与空间定位联合推理。</td>
+          <td>可作为 evidence box 生成/校准 baseline。</td>
+      </tr>
+      <tr>
+          <td>RSHallu / RSHalluEval</td>
+          <td style="text-align: right">arXiv 2026 方向</td>
+          <td><a href="https://researchtrend.ai/papers/2602.10799" target="_blank" rel="noopener noreferrer">paper page</a></td>
+          <td>提出遥感 MLLM 幻觉 taxonomy，区分 object-centric 与 image-level inconsistencies，并做双模式检查。</td>
+          <td>可补足 RS-06 的幻觉类别定义，特别是 modality、resolution、scene-level 语义错误。</td>
+      </tr>
+      <tr>
+          <td>RSHR-Bench</td>
+          <td style="text-align: right">2025/2026 方向</td>
+          <td><a href="https://huggingface.co/datasets/RL-MIND/RSHR-Bench" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+          <td>面向超高分辨率遥感 MLLM，含 VQA/caption 等任务。</td>
+          <td>可用于大图场景的 evidence localization 和 token/tiling 失败诊断。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-从回答问题到回答并定位" class="headerLink">
+    <a href="#1-%e4%bb%8e%e5%9b%9e%e7%ad%94%e9%97%ae%e9%a2%98%e5%88%b0%e5%9b%9e%e7%ad%94%e5%b9%b6%e5%ae%9a%e4%bd%8d" class="header-mark"></a>1. 从“回答问题”到“回答并定位”</h3><p>早期 RS-VQA 主要优化 answer accuracy：分类式答案、文本匹配或 LLM judge。GeoChat 之后，模型开始可以把回答和位置一起输出，例如 grounded description、referring expression、region caption。问题是多数评测仍把 VQA、grounding、caption 分开算；模型只要答案对，就可能掩盖证据区域错误。</p>]]></description></item><item><title>RS-07 Remote Sensing VLM Hallucination Diagnostics</title><link>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-07-remote-sensing-vlm-hallucination-diagnostics/</guid><description><![CDATA[<h1 id="rs-07-remote-sensing-vlm-hallucination-diagnostics" class="headerLink">
+    <a href="#rs-07-remote-sensing-vlm-hallucination-diagnostics" class="header-mark"></a>RS-07 Remote Sensing VLM Hallucination Diagnostics</h1><p>研究问题：遥感 VLM/MLLM 为什么会在不存在目标、相似地物、尺度、空间关系和语言先验上产生幻觉；如何构造 hard-negative QA 与自动评测指标。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感 VLM 的幻觉比自然图像 VLM 更尖锐，原因不是模型“不会说话”，而是视觉证据更难被可靠读取：</p>
 <ul>
@@ -35,15 +106,90 @@
 <li>遥感问题经常要求空间关系、数量、尺度和存在性判断，例如“机场旁是否有大型停机坪”“河道北侧是否出现采矿裸地”。这些问题只答文本不够，必须有证据区域。</li>
 <li>2024 年后大量 RS-VLM 数据由 GPT-4V、模板、检测标签、caption 扩展得到；如果没有 hard negative 和事实核验，训练集会鼓励模型给出“看起来合理”的肯定回答。</li>
 </ul>
-<p>因此，本方向的核心不只是降低 hallucination rate，而是把幻觉拆成可诊断、可复现、可定位的错误类型。</p>]]></description></item><item><title>RS-08 Text-to-Region Retrieval in Large EO Mosaics</title><link>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</guid><description><![CDATA[<h1 id="rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="headerLink">
-    <a href="#rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="header-mark"></a>RS-08 Text-to-Region Retrieval in Large EO Mosaics</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-08</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 研究问题 把遥感图文检索从“给一句文本，检索一张固定裁剪图”推进到“给一句自然语言，在大范围地理空间影像镶嵌图中检索一个或多个候选区域”。例如： “找到沿河分布、旁边有密集建筑的太阳能板区域。” “找出疑似新建物流园区：大屋顶、规则停车区、靠近高速出入口。” “在这个城市范围内找可能的采石场或裸土扩张区域。” 这不是普通 RS i</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-08-text-to-region-retrieval-in-large-eo-mosaics-1" class="headerLink">
-    <a href="#rs-08-text-to-region-retrieval-in-large-eo-mosaics-1" class="header-mark"></a>RS-08 Text-to-Region Retrieval in Large EO Mosaics</h1><p>更新时间：2026-06-07</p>
-<h2 id="研究问题" class="headerLink">
+<p>因此，本方向的核心不只是降低 hallucination rate，而是把幻觉拆成可诊断、可复现、可定位的错误类型。</p>
+<h2 id="2-代表论文与资源" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>2. 代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>资源链接</th>
+          <th>与幻觉诊断的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>VHM: Versatile and Honest Vision Language Model for Remote Sensing Image Analysis</td>
+          <td style="text-align: right">2024 arXiv / 2025 AAAI</td>
+          <td><a href="https://arxiv.org/abs/2403.20213" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ojs.aaai.org/index.php/AAAI/article/download/32683/34838" target="_blank" rel="noopener noreferrer">AAAI PDF</a>, <a href="https://github.com/opendatalab/VHM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>引入 VersaD 详细 caption 和 HnstD honest instruction，包含 factual 与 deceptive questions，用“不存在目标”训练模型避免无脑肯定。</td>
+      </tr>
+      <tr>
+          <td>DDFAV / RSPOPE: Remote Sensing LVLM Dataset and Evaluation Benchmark</td>
+          <td style="text-align: right">2024 arXiv / 2025 Remote Sensing</td>
+          <td><a href="https://arxiv.org/abs/2411.02733" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://www.mdpi.com/2072-4292/17/4/719" target="_blank" rel="noopener noreferrer">MDPI</a>, <a href="https://github.com/HaodongLi2024/rspope" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/isaaccorley/DDFAV" target="_blank" rel="noopener noreferrer">HF mirror</a></td>
+          <td>面向遥感 LVLM 的 hallucination evaluation，借鉴 POPE 式二元存在性问答，适合做 object-existence hallucination 基线。</td>
+      </tr>
+      <tr>
+          <td>Seeing Clearly without Training / RSHBench / RADAR</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.02754" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/MiliLab/RADAR" target="_blank" rel="noopener noreferrer">GitHub placeholder/承诺</a></td>
+          <td>将 RS-VQA 幻觉细分为 factual 与 logical hallucinations；RADAR 用 attention 驱动 progressive localization 和 local reasoning，训练自由。需注意：截至本次检索，官方代码/数据可能仍未完整释放。</td>
+      </tr>
+      <tr>
+          <td>OmniEarth: A Benchmark for Evaluating VLMs in Geospatial Tasks</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/datasets/sjeeudd/OmniEarth" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+          <td>支持 multiple-choice 和 open-ended VQA；采用 blind test 与 semantic consistency 来降低语言偏置，适合作为综合评测框架。</td>
+      </tr>
+      <tr>
+          <td>GEOBench-VLM</td>
+          <td style="text-align: right">2025 ICCV</td>
+          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://arxiv.org/abs/2411.19325" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>覆盖计数、定位、细粒度分类、分割、时序等 geospatial tasks，可用于把“幻觉”扩展到空间定位、数量和几何错误。</td>
+      </tr>
+      <tr>
+          <td>RS-GPT4V</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.12479" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2406.12479" target="_blank" rel="noopener noreferrer">HF paper page</a>, <a href="https://github.com/GeoX-Lab/RS-GPT4V" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GPT-4V 构造多模态 instruction-following 数据，适合分析合成数据中的伪细节、语言模板和肯定偏置。</td>
+      </tr>
+      <tr>
+          <td>SkySenseGPT / FIT-RS</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.10100" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2406.10100" target="_blank" rel="noopener noreferrer">HF paper page</a>, <a href="https://github.com/Luo-Z13/SkySenseGPT" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>强调 fine-grained relation comprehension 和 scene graph，可用于空间关系幻觉诊断；也要检查复杂关系样本是否由模板和裁剪策略带来偏差。</td>
+      </tr>
+      <tr>
+          <td>GeoChat</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://mbzuai-oryx.github.io/GeoChat/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>遥感 grounded dialogue 代表；可作为 evidence-grounded answer 的模型基线。</td>
+      </tr>
+      <tr>
+          <td>HallusionBench</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Guan_HallusionBench_An_Advanced_Diagnostic_Suite_for_Entangled_Language_Hallucination_and_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://github.com/tianyi-lab/HallusionBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>通用 VLM 幻觉诊断，可迁移其“视觉错觉 + 语言幻觉纠缠”的题型设计到遥感相似地物和尺度误判。</td>
+      </tr>
+      <tr>
+          <td>M-HalDetect</td>
+          <td style="text-align: right">2024 AAAI</td>
+          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/29771" target="_blank" rel="noopener noreferrer">AAAI</a>, <a href="https://github.com/hendryx-scale/mhal-detect" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>通用 LVLM hallucination detection/prevention 数据，可借鉴 reward model 或 detector 作为自动评测器。</td>
+      </tr>
+      <tr>
+          <td>GROUNDHOG</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://groundhog-mllm.github.io/index.html" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://cvpr.thecvf.com/virtual/2024/poster/30796" target="_blank" rel="noopener noreferrer">CVPR poster</a></td>
+          <td>将 grounding 变成 segmentation entity selection；可迁移到“回答必须绑定 mask/entity”的遥感 VQA。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-从存在性二元问答开始" class="headerLink">
+    <a href="#31-%e4%bb%8e%e5%ad%98%e5%9c%a8%e6%80%a7%e4%ba%8c%e5%85%83%e9%97%ae%e7%ad%94%e5%bc%80%e5%a7%8b" class="header-mark"></a>3.1 从“存在性二元问答”开始</h3><p>VHM/HnstD 与 DDFAV/RSPOPE 都抓住了一个很小但很关键的问题：当问题问“图中是否有 X”时，如果 X 并不存在，RS-VLM 是否会因为遥感场景常识或训练集肯定偏置回答“有”。这类题容易自动评测，适合建立第一版 hallucination rate：</p>]]></description></item><item><title>RS-08 Text-to-Region Retrieval in Large EO Mosaics</title><link>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-08-text-to-region-retrieval-in-large-eo-mosaics/</guid><description><![CDATA[<h1 id="rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="headerLink">
+    <a href="#rs-08-text-to-region-retrieval-in-large-eo-mosaics" class="header-mark"></a>RS-08 Text-to-Region Retrieval in Large EO Mosaics</h1><h2 id="研究问题" class="headerLink">
     <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>把遥感图文检索从“给一句文本，检索一张固定裁剪图”推进到“给一句自然语言，在大范围地理空间影像镶嵌图中检索一个或多个候选区域”。例如：</p>
 <ul>
 <li>“找到沿河分布、旁边有密集建筑的太阳能板区域。”</li>
@@ -158,18 +304,8 @@
 <h2 id="方法脉络" class="headerLink">
     <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-text-to-chip-retrieval" class="headerLink">
     <a href="#1-text-to-chip-retrieval" class="header-mark"></a>1. Text-to-chip retrieval</h3><p>输入文本，候选库是固定大小 image chips。RemoteCLIP、GeoRSCLIP、PriorCLIP、PR-CLIP、CMPAGL 等都属于这条线。优点是易复现、指标成熟；缺点是候选 chip 的边界由数据集预先定义，不解决“在大图中找区域”的问题。</p>]]></description></item><item><title>RS-09 HBB/OBB/Mask Unified Visual Grounding</title><link>https://spacetop.win/2026/06/rs-09-hbb-obb-mask-unified-visual-grounding/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-09-hbb-obb-mask-unified-visual-grounding/</guid><description><![CDATA[<h1 id="rs-09-hbbobbmask-unified-visual-grounding" class="headerLink">
-    <a href="#rs-09-hbbobbmask-unified-visual-grounding" class="header-mark"></a>RS-09 HBB/OBB/Mask Unified Visual Grounding</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-09</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 来源范围：20242026 遥感视觉语言、visual grounding、referring segmentation、SAM/SAM2 相关论文与官方项目。默认排除 SARonly；若 benchmark 包含 SAR，仅把其 bbox/mask 评测范式作为参考。 任务 Prompt 请深挖遥感 visual groundi</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-09-hbbobbmask-unified-visual-grounding-1" class="headerLink">
-    <a href="#rs-09-hbbobbmask-unified-visual-grounding-1" class="header-mark"></a>RS-09 HBB/OBB/Mask Unified Visual Grounding</h1><p>更新时间：2026-06-07<br>
-来源范围：2024-2026 遥感视觉语言、visual grounding、referring segmentation、SAM/SAM2 相关论文与官方项目。默认排除 SAR-only；若 benchmark 包含 SAR，仅把其 bbox/mask 评测范式作为参考。</p>
-<h2 id="任务-prompt" class="headerLink">
-    <a href="#%e4%bb%bb%e5%8a%a1-prompt" class="header-mark"></a>任务 Prompt</h2><blockquote>
-  <p>请深挖遥感 visual grounding 中 HBB、OBB、mask 三种输出范式如何统一。比较 GeoChat、GeoGround、SATGround、RSUniVLM、OmniEarth、RS2-SAM2，提出一个支持旋转目标和密集小目标的 grounding-to-mask pipeline。</p>
-</blockquote><h2 id="执行摘要" class="headerLink">
+    <a href="#rs-09-hbbobbmask-unified-visual-grounding" class="header-mark"></a>RS-09 HBB/OBB/Mask Unified Visual Grounding</h1><h2 id="任务-prompt" class="headerLink">
+    <a href="#%e4%bb%bb%e5%8a%a1-prompt" class="header-mark"></a>任务 Prompt</h2><h2 id="执行摘要" class="headerLink">
     <a href="#%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>执行摘要</h2><ul>
 <li>遥感 visual grounding 的输出正在从单一 HBB 走向 HBB/OBB/mask 统一：HBB 适合粗定位，OBB 适合飞机、船、车辆、跑道等旋转目标，mask 适合建筑、道路、水体、农田等形状复杂目标。</li>
 <li>GeoChat 先把遥感 VLM 带到 grounded dialogue，但主要输出框；GeoGround 进一步把 HBB、OBB、mask 统一成同一套 RS visual grounding 框架，并用 Text-Mask 与 hybrid supervision 对齐三种几何信号。</li>
@@ -179,15 +315,7 @@
 </ul>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感图像和自然图像的 grounding 差异很硬：</p>]]></description></item><item><title>RS-10 Reference-Free Caption Evaluation for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-10-reference-free-caption-evaluation-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-10-reference-free-caption-evaluation-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-10-reference-free-caption-evaluation-for-remote-sensing" class="headerLink">
-    <a href="#rs-10-reference-free-caption-evaluation-for-remote-sensing" class="header-mark"></a>RS-10 Reference-Free Caption Evaluation for Remote Sensing</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-10</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务 prompt：研究遥感 image caption 的参考无关评测。检索 RemoteDescriber/ReconScore、GEOBenchVLM、OmniEarth、RS caption 数据集，分析 BLEU/CIDEr 为什么不足，提出一个基于可重建语义、证据区域和地物关系的 caption metric。 1.</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-10-reference-free-caption-evaluation-for-remote-sensing-1" class="headerLink">
-    <a href="#rs-10-reference-free-caption-evaluation-for-remote-sensing-1" class="header-mark"></a>RS-10 Reference-Free Caption Evaluation for Remote Sensing</h1><p>更新时间：2026-06-07<br>
-任务 prompt：研究遥感 image caption 的参考无关评测。检索 RemoteDescriber/ReconScore、GEOBench-VLM、OmniEarth、RS caption 数据集，分析 BLEU/CIDEr 为什么不足，提出一个基于可重建语义、证据区域和地物关系的 caption metric。</p>
-<h2 id="1-核心判断" class="headerLink">
+    <a href="#rs-10-reference-free-caption-evaluation-for-remote-sensing" class="header-mark"></a>RS-10 Reference-Free Caption Evaluation for Remote Sensing</h1><h2 id="1-核心判断" class="headerLink">
     <a href="#1-%e6%a0%b8%e5%bf%83%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 核心判断</h2><p>遥感 caption 评测的主要矛盾已经从“生成句子是否像参考句”转向“句子是否忠实、可定位、可复核地描述影像”。传统 BLEU、METEOR、ROUGE、CIDEr、SPICE 依赖人工参考 caption 的 n-gram 或场景图相似度，适合比较旧式 encoder-decoder caption 模型，但很难评价 2024-2026 的遥感 VLM/MLLM 生成的长描述、区域描述、变化描述和开放式解释。</p>
 <p>更具体地说，遥感 caption 的参考无关评测需要回答三个问题：</p>
 <ol>
@@ -195,4 +323,47 @@
 <li><strong>证据区域</strong>：caption 中每个对象、属性、变化或关系是否能在图像中定位到 bbox/mask/region？</li>
 <li><strong>地物关系</strong>：caption 是否正确描述道路、建筑、水体、农田、港口、机场等对象之间的空间关系，而不是只罗列类别词？</li>
 </ol>
-<p>RemoteDescriber/ReconScore 的价值在于，它把遥感 caption 评价从“参考文本匹配”推向“参考无关、可重建、可解释”的方向。通用 caption metric 如 FLEUR、InfoMetIC、Pearl、CLIPScore/RefCLIPScore 可以迁移，但需要遥感专门改造：小目标、俯视视角、尺度/GSD、密集实例、地理关系、土地覆盖层级标签和多时相变化。</p>]]></description></item></channel></rss>
+<p>RemoteDescriber/ReconScore 的价值在于，它把遥感 caption 评价从“参考文本匹配”推向“参考无关、可重建、可解释”的方向。通用 caption metric 如 FLEUR、InfoMetIC、Pearl、CLIPScore/RefCLIPScore 可以迁移，但需要遥感专门改造：小目标、俯视视角、尺度/GSD、密集实例、地理关系、土地覆盖层级标签和多时相变化。</p>
+<h2 id="2-为什么-bleucider-不足" class="headerLink">
+    <a href="#2-%e4%b8%ba%e4%bb%80%e4%b9%88-bleucider-%e4%b8%8d%e8%b6%b3" class="header-mark"></a>2. 为什么 BLEU/CIDEr 不足</h2><table>
+  <thead>
+      <tr>
+          <th>问题</th>
+          <th>在自然图像中的表现</th>
+          <th>在遥感 caption 中的放大效应</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>参考 caption 不唯一</td>
+          <td>同一图可有多种合理描述</td>
+          <td>遥感图可从 land cover、object、human activity、risk、变化等多粒度描述，单参考更不充分</td>
+      </tr>
+      <tr>
+          <td>n-gram 匹配偏向常见表达</td>
+          <td>句式相近得分高</td>
+          <td>“dense residential area” 与 “clustered buildings along roads” 语义相近但词面不同</td>
+      </tr>
+      <tr>
+          <td>不能惩罚证据错误</td>
+          <td>幻觉对象可能仍有高文本相似</td>
+          <td>模型说“airport runway”但图中是 highway/industrial roof，传统指标可能看不出</td>
+      </tr>
+      <tr>
+          <td>数量和空间关系弱</td>
+          <td>few/many/left/right 常被忽略</td>
+          <td>遥感任务常关心道路连通、建筑密度、农田边界、水体邻接等关系</td>
+      </tr>
+      <tr>
+          <td>细粒度层级混乱</td>
+          <td>dog/animal 层级尚可处理</td>
+          <td>land cover 与 object 混用严重，如 impervious surface/road/runway/building</td>
+      </tr>
+      <tr>
+          <td>长 caption 评价不稳</td>
+          <td>长描述更易包含额外信息</td>
+          <td>VLM 可能加入地理常识或业务解释，传统指标无法分辨有证据推断和无证据幻觉</td>
+      </tr>
+  </tbody>
+</table>
+<p>结论：BLEU/CIDEr 仍可作为旧数据集上的可比基线，但不适合作为遥感 caption/VLM 的主指标。更合理的是把它们降级为 “legacy text-overlap metrics”，主评测转向 image-grounded、region-grounded、relation-aware 和 reference-free。</p>]]></description></item></channel></rss>

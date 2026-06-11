@@ -4,7 +4,6 @@ date: 2026-06-07
 tags: ["论文选题", "遥感AI"]
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # 最值得优先尝试的 12 个遥感 AI 小论文题眼

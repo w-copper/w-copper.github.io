@@ -4,7 +4,6 @@ date: 2026-06-07
 tags: ["benchmark", "数据集", "遥感AI"]
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # 遥感 AI 研究中最该关注的 Benchmark 和数据集

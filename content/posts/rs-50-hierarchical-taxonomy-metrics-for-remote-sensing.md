@@ -3,26 +3,11 @@ title: "RS-50 Hierarchical Taxonomy Metrics for Remote Sensing"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["数据集", "弱监督", "benchmark"]
-source: "research/rs50_hierarchical_taxonomy_metrics.md"
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-50 Hierarchical Taxonomy Metrics for Remote Sensing
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-50` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。 结论摘要 遥感分割和检测的类别体系天然不是平面的：impervious surface / road / runway / building、crop / rice / field、wate
-
-## 正文
-
-# RS-50 Hierarchical Taxonomy Metrics for Remote Sensing
-
-更新时间：2026-06-07  
-任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。
 
 ## 结论摘要
 
@@ -273,10 +258,3 @@ experiments/
 8. [Dynamic World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)
 9. [ESA WorldCover](https://worldcover2021.esa.int/)
 10. [USGS Annual NLCD](https://www.usgs.gov/centers/eros/science/annual-nlcd-land-cover-classification)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

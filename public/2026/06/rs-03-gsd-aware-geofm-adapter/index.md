@@ -3,18 +3,6 @@
 
 # RS-03 GSD-Aware GeoFM Adapter
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-03` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 对应 prompt：research/50threadprompts.md 中 RS03 GSDAware GeoFM Adapter 目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、PrithviEO2.0、AlphaEarth、GeoFM
-
-## 正文
-
-# RS-03 GSD-Aware GeoFM Adapter
-
-更新时间：2026-06-07  
-对应 prompt：`research/50_thread_prompts.md` 中 `RS-03 GSD-Aware GeoFM Adapter`  
 目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、Prithvi-EO-2.0、AlphaEarth、GeoFM/AnySat/Clay/Galileo 中的尺度处理方式；设计一个只引入轻量 adapter/LoRA 的 GSD-aware 下游适配方法，并给出分类、分割、检测三个任务的实验矩阵。
 
 ## 1. 问题由来
@@ -206,11 +194,4 @@ s = [
 8. [Galileo repository](https://github.com/nasaharvest/galileo)
 9. [PANGAEA benchmark](https://pangaea-bench.github.io/)
 10. [EarthShift benchmark](https://earthshift.github.io/)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

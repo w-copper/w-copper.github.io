@@ -3,7 +3,6 @@ title: "SMARTIES: 面向遥感的频谱感知多传感器自编码器"
 date: 2026-05-31
 categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
-source_repo: "articles"
 ---
 
 # SMARTIES: 面向遥感的频谱感知多传感器自编码器

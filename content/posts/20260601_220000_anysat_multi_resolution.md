@@ -3,7 +3,6 @@ title: "AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数
 date: 2026-06-01
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "articles"
 ---
 
 # AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据

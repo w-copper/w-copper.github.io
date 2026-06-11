@@ -3,7 +3,6 @@ title: "M-CD：基于Mamba的孪生网络实现高效遥感变化检测"
 date: 2026-06-01
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # M-CD：基于Mamba的孪生网络实现高效遥感变化检测

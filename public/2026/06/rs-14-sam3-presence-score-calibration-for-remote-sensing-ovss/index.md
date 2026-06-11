@@ -3,19 +3,6 @@
 
 # RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-14` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务原文：以 SegEarthOV3/SAM3 为核心，研究遥感开放词表分割中的 presence score 校准问题。关注不存在类别误检、类别同义词、landcover 与 object label 混用、尺度先验和地理先验，设计 prompt ensemble 与 calibration 实验。 1. 研究问题 细问题：SA
-
-## 正文
-
-# RS-14 SAM3 Presence Score Calibration for Remote Sensing OVSS
-
-更新时间：2026-06-07  
-任务原文：以 SegEarth-OV3/SAM3 为核心，研究遥感开放词表分割中的 presence score 校准问题。关注不存在类别误检、类别同义词、land-cover 与 object label 混用、尺度先验和地理先验，设计 prompt ensemble 与 calibration 实验。
-
 ## 1. 研究问题
 
 细问题：SAM3 的 `presence score` 被设计成“概念是否存在”的全局判别信号。SegEarth-OV3 将它用于遥感开放词表语义分割，过滤大词表和 patch-level 推理中不存在类别造成的 false positives。RS-14 关注的不是“做一个遥感开放词表分割模型”，而是一个更窄的环节：
@@ -403,11 +390,4 @@ SAM3 presence score 在自然图像概念分割中能减少 hard-negative false 
 - 校准：global threshold、per-class threshold、prompt ensemble、RS-PresCal。
 - 指标：presence AUROC/AUPRC/Brier/ECE、absent FPR、mIoU、false-positive area、taxonomy consistency、scale-binned ECE。
 - 可视化：展示原始 SegEarth-OV3、统一阈值、RS-PresCal 在 absent class、sibling class、scale mismatch 三类失败上的对比。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

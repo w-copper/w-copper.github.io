@@ -3,17 +3,6 @@
 
 # RS-42 Wildfire Mapping with GeoFM LoRA
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-42` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：面向 wildfire / burn scar / burn severity mapping，如何用低样本、参数高效的 GeoFM adapter/LoRA 适配 Prithvi、TerraMind、DINOv3、AlphaEarth 等遥感基础模型，并处理 pre/postfire 光学影像、云烟干扰、不确定性和跨地区
-
-## 正文
-
-# RS-42 Wildfire Mapping with GeoFM LoRA
-
-更新时间：2026-06-07  
 细问题：面向 wildfire / burn scar / burn severity mapping，如何用低样本、参数高效的 GeoFM adapter/LoRA 适配 Prithvi、TerraMind、DINOv3、AlphaEarth 等遥感基础模型，并处理 pre/post-fire 光学影像、云烟干扰、不确定性和跨地区泛化。
 
 ## 1. 方向判断
@@ -157,11 +146,4 @@ AlphaEarth 更像“年度地球表征产品”，优点是稀疏标签下的 ma
 5. [USGS BARC Thematic Burn Severity Mosaic](https://data.usgs.gov/datacatalog/data/USGS%3A62e3e9b4d34e394b65365bef)
 6. [SAFE burned area extraction](https://www.mdpi.com/2072-4292/17/1/54)
 7. [AlphaEarth Foundations](https://arxiv.org/abs/2507.22291)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

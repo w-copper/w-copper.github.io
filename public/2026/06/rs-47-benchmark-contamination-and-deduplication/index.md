@@ -3,17 +3,6 @@
 
 # RS-47 Benchmark Contamination and Deduplication
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-47` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、nearduplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。 范围：光学/多光谱/高分辨率遥感优先；SARonly 不作为主线。本文与 [R
-
-## 正文
-
-# RS-47 Benchmark Contamination and Deduplication
-
-更新时间：2026-06-07  
 细问题：专门研究遥感 benchmark contamination：预训练图像、下游测试、同一区域瓦片、增强副本、near-duplicate 如何去重；提出基于地理坐标、时间戳、图像哈希和 embedding 相似度的 dedup pipeline。  
 范围：光学/多光谱/高分辨率遥感优先；SAR-only 不作为主线。本文与 [RS-02 GeoFM Benchmark Leakage Audit](./RS-02_geofm_benchmark_leakage_audit.md) 和 [RS-25 OOD Split Design](./rs25_ood_split_design.md) 互补：RS-02 偏 GeoFM 评测泄漏审计，RS-25 偏 OOD split；本文件专门落在数据污染检测、近重复去重和可执行工具链。
 
@@ -394,11 +383,4 @@ evaluate_models(original_split, clean_splits)
 7. [VRSBench GitHub](https://github.com/lx709/VRSBench)
 8. [Copernicus-FM GitHub](https://github.com/zhu-xlab/Copernicus-FM)
 9. [SemDeDup paper](https://arxiv.org/abs/2303.09540) and [GitHub](https://github.com/facebookresearch/SemDeDup)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

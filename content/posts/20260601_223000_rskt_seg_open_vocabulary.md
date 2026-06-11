@@ -3,7 +3,6 @@ title: "RSKT-Seg：旋转不变+领域迁移实现遥感图像开放词汇分割
 date: 2026-06-01
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # RSKT-Seg：旋转不变+领域迁移实现遥感图像开放词汇分割

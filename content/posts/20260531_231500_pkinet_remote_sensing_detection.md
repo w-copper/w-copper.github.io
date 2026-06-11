@@ -3,7 +3,6 @@ title: "多核Inception网络：遥感目标检测的尺度感知新范式"
 date: 2026-05-31
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # 多核Inception网络：遥感目标检测的尺度感知新范式

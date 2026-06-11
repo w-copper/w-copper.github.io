@@ -264,3 +264,4 @@ class DualStreamEncoder(nn.Module):
 ---
 
 *本文详细解读了AAAI 2025论文《Towards Open-Vocabulary Remote Sensing Image Semantic Segmentation》，该工作通过双流融合架构实现了遥感图像的开放词汇语义分割，为遥感AI的灵活部署提供了新思路。*
+

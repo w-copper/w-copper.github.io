@@ -1,12 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序遥感 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/</link><description>时序遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>RS-16 Semantic Change VQA 深挖</title><link>https://spacetop.win/2026/06/rs-16-semantic-change-vqa-%E6%B7%B1%E6%8C%96/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-16-semantic-change-vqa-%E6%B7%B1%E6%8C%96/</guid><description><![CDATA[<h1 id="rs-16-semantic-change-vqa-深挖" class="headerLink">
-    <a href="#rs-16-semantic-change-vqa-%e6%b7%b1%e6%8c%96" class="header-mark"></a>RS-16 Semantic Change VQA 深挖</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-16</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixedmodality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。 结论摘要 20242026 已经出现直接命中的任务定义：CDQAG、Chan</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-16-semantic-change-vqa-深挖-1" class="headerLink">
-    <a href="#rs-16-semantic-change-vqa-%e6%b7%b1%e6%8c%96-1" class="header-mark"></a>RS-16 Semantic Change VQA 深挖</h1><p>更新时间：2026-06-07<br>
-范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixed-modality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序遥感 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/</link><description>时序遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>RS-16 Semantic Change VQA</title><link>https://spacetop.win/2026/06/rs-16-semantic-change-vqa/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-16-semantic-change-vqa/</guid><description><![CDATA[<h1 id="rs-16-semantic-change-vqa" class="headerLink">
+    <a href="#rs-16-semantic-change-vqa" class="header-mark"></a>RS-16 Semantic Change VQA</h1><p>范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixed-modality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。</p>
 <h2 id="结论摘要" class="headerLink">
     <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><ul>
 <li>2024-2026 已经出现直接命中的任务定义：CDQAG、Change VQA、RSICA、interactive change understanding。它们把传统 change detection 的 mask 监督扩展为 question-answer-grounding 三元组。</li>
@@ -16,16 +9,9 @@
 <li>当前空白：很多模型会给变化描述，但证据 mask、数量、类别层级和开放式回答之间不一致；多数 benchmark 还没有把“答对但证据错”“mask 对但语义错”“变化存在但原因解释错”拆开评估。</li>
 </ul>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感变化检测主要回答“哪里变了”，输出二值变化图；语义变化检测进一步回答“从什么变成什么”，输出 changed / unchanged 或 class transition map；change captioning 用自然语言描述变化，但通常是一段单向 caption，不支持用户按类别、区域、数量或原因追问。</p>]]></description></item><item><title>RS-17 Latent Flow/Diffusion for Change Detection</title><link>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</guid><description><![CDATA[<h1 id="rs-17-latent-flowdiffusion-for-change-detection" class="headerLink">
-    <a href="#rs-17-latent-flowdiffusion-for-change-detection" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-17</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。 结论先行 这个</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-17-latent-flowdiffusion-for-change-detection-1" class="headerLink">
-    <a href="#rs-17-latent-flowdiffusion-for-change-detection-1" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><p>更新时间：2026-06-07<br>
-任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。</p>
-<h2 id="结论先行" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感变化检测主要回答“哪里变了”，输出二值变化图；语义变化检测进一步回答“从什么变成什么”，输出 changed / unchanged 或 class transition map；change captioning 用自然语言描述变化，但通常是一段单向 caption，不支持用户按类别、区域、数量或原因追问。</p>
+<p>Semantic Change VQA 的动机来自这个缺口：真实用户不会只问“是否变化”，而会问：</p>]]></description></item><item><title>RS-17 Latent Flow/Diffusion for Change Detection</title><link>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</guid><description><![CDATA[<h1 id="rs-17-latent-flowdiffusion-for-change-detection" class="headerLink">
+    <a href="#rs-17-latent-flowdiffusion-for-change-detection" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><h2 id="结论先行" class="headerLink">
     <a href="#%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>结论先行</h2><p>这个方向的核心不是“把扩散模型塞进变化检测”，而是把变化检测从逐像素二分类改写为“在潜空间中建模一个合理的变化区域/变化过程”。判别式模型通常学习 <code>pre/post -&gt; changed probability</code>，很擅长局部边界和快速推理；生成式/潜变量方法试图学习“什么样的变化 mask 或变化图像在全局上是合理的”，因此天然适合处理区域一致性、标签歧义、不确定性和低标注数据。</p>
 <p>目前可分成四条路线：</p>
 <ol>
@@ -34,27 +20,277 @@
 <li><strong>latent difference guidance</strong>：LDGuid 显式学习“任务相关的变化潜向量”，再注入 U-Net、BIT、AERNet 等判别式 CD 模型。</li>
 <li><strong>latent mask generation / rectified flow</strong>：ChangeFlow 直接在 latent space 中用 rectified flow 生成变化 mask，并用多次采样做 ensemble 和置信度估计。</li>
 </ol>
-<p>我的判断：2024-2026 最值得做的小问题是 <strong>“潜空间生成式变化先验如何在不牺牲边界精度的前提下，提升跨域鲁棒性和不确定性可信度”</strong>。这比单纯追一个 LEVIR-CD F1 更像一篇能站住的论文。</p>]]></description></item><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
-    <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-18</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。 1. 问题由来 传统二时相 change detection 通常把输入简化为 (imaget1, imaget2) change mask，但真实遥感里的“不变”并不等于像</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-18-temporal-hard-negatives-for-change-models-1" class="headerLink">
-    <a href="#rs-18-temporal-hard-negatives-for-change-models-1" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>更新时间：2026-06-07<br>
-细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
+<p>我的判断：2024-2026 最值得做的小问题是 <strong>“潜空间生成式变化先验如何在不牺牲边界精度的前提下，提升跨域鲁棒性和不确定性可信度”</strong>。这比单纯追一个 LEVIR-CD F1 更像一篇能站住的论文。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感变化检测的标注不是纯视觉差分。很多变化 mask 反映的是区域级语义约定：新建建筑算变化，阴影移动不算；作物季节纹理变化可能不算，土地利用类别变化算；配准误差导致的边缘错位通常不应算。这带来三个矛盾：</p>
+<ul>
+<li><strong>局部像素差异与语义变化不等价</strong>：亮度、阴影、云雾、季节、传感器响应、配准误差会造成明显差异，但不是目标变化。</li>
+<li><strong>变化区域具有全局结构</strong>：建筑群、道路扩张、采矿区、水体扩张往往是连通区域或对象集合，而不是独立像素。</li>
+<li><strong>变化标签存在歧义和不确定性</strong>：边界、细碎对象和半变化区域通常有多种合理标注。</li>
+</ul>
+<p>判别式模型把这些问题压成单次前向的 pixel classification；生成式 latent 方法则把变化当作一个分布、过程或潜语义差异来建模，这正是 ChangeFlow、LDGuid、Changen2 等工作的切入点。</p>
+<h2 id="代表论文与代码" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>代表论文与代码</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>方法定位</th>
+          <th>与本课题关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DDPM-CD: Denoising Diffusion Probabilistic Models as Feature Extractors for Remote Sensing Change Detection</td>
+          <td style="text-align: right">WACV 2025，arXiv 2022 起</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2025/papers/Bandara_DDPM-CD_Denoising_Diffusion_Probabilistic_Models_as_Feature_Extractors_for_Remote_WACV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2206.11892" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/wgcban/ddpm-cd" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/BiliSakura/ddpm-cd" target="_blank" rel="noopener noreferrer">HF diffusers 实现</a></td>
+          <td>扩散模型作为遥感特征提取器</td>
+          <td>早期强基线，证明扩散预训练特征对 CD 有用，但不是直接生成变化 mask</td>
+      </tr>
+      <tr>
+          <td>ChangeAnywhere: Sample Generation for Remote Sensing Change Detection via Semantic Latent Diffusion Model</td>
+          <td style="text-align: right">arXiv 2024</td>
+          <td><a href="https://arxiv.org/abs/2404.08892" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/tangkai-RS/ChangeAnywhere" target="_blank" rel="noopener noreferrer">GitHub</a>, ChangeAnywhere-100K</td>
+          <td>用 semantic latent diffusion 从单时相语义数据生成双时相变化样本</td>
+          <td>解决标注稀缺，适合研究合成变化数据对真实 CD 的迁移收益</td>
+      </tr>
+      <tr>
+          <td>Changen2: Multi-Temporal Remote Sensing Generative Change Foundation Model</td>
+          <td style="text-align: right">arXiv 2024, TPAMI 2025</td>
+          <td><a href="https://arxiv.org/abs/2406.17998" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://colab.ws/articles/10.1109%2Ftpami.2024.3475824" target="_blank" rel="noopener noreferrer">DOI/TIPAMI 信息</a></td>
+          <td>官方代码未在检索中稳定核验</td>
+          <td>GPCM + resolution-scalable diffusion transformer，生成时序图像、语义和变化标签</td>
+          <td>将“变化过程”显式建模为生成式 foundation model，是理论背景核心</td>
+      </tr>
+      <tr>
+          <td>DreamCD: A change-label-free framework for change detection via a weakly conditional semantic diffusion model in optical VHR imagery</td>
+          <td style="text-align: right">JAG 2026</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843226000415" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/tangkai-RS/DreamCD" target="_blank" rel="noopener noreferrer">GitHub</a>, LsSCD-Ex</td>
+          <td>弱语义条件扩散，合成后时相图像与语义变化数据</td>
+          <td>适合做无变化标签/弱标签场景，与 ChangeAnywhere/Changen2 对比</td>
+      </tr>
+      <tr>
+          <td>ChangeFlow: Latent Rectified Flow for Change Detection in Remote Sensing</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2605.15375" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://blaz-r.github.io/changeflow_cd/" target="_blank" rel="noopener noreferrer">Project</a></td>
+          <td>项目页标注 code coming soon</td>
+          <td>latent rectified flow 生成变化 mask；多次采样可做 ensemble/confidence</td>
+          <td>本方向最直接 anchor：把 CD 改写为 latent mask generation</td>
+      </tr>
+      <tr>
+          <td>LDGuid: A Framework for Robust Change Detection via Latent Difference Guidance</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2605.15582" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>adversarial autoencoding + information bottleneck 学习 task-relevant difference embedding，再注入 CD 模型</td>
+          <td>最适合与 ChangeFlow 对照：显式差异潜向量 vs 生成变化 mask</td>
+      </tr>
+      <tr>
+          <td>BIT: Remote Sensing Image Change Detection with Transformers</td>
+          <td style="text-align: right">TGRS 2021</td>
+          <td><a href="https://github.com/justchenhao/BIT_CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>官方 PyTorch</td>
+          <td>双时相 Transformer 变化检测经典基线</td>
+          <td>LDGuid 报告集成到 BIT；实验必须保留</td>
+      </tr>
+      <tr>
+          <td>ChangeFormer: A Transformer-Based Siamese Network for Change Detection</td>
+          <td style="text-align: right">IGARSS 2022</td>
+          <td><a href="https://arxiv.org/abs/2201.01293" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/wgcban/ChangeFormer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>Siamese Transformer + MLP decoder</td>
+          <td>判别式 Transformer 强基线，和 DDPM-CD 同作者生态衔接好</td>
+      </tr>
+      <tr>
+          <td>Open-CD</td>
+          <td style="text-align: right">ACM MM 2025 technical report/toolbox</td>
+          <td><a href="https://github.com/likyoo/open-cd" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://arxiv.org/abs/2407.15317" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>支持 LEVIR-CD、WHU-CD、S2Looking、SVCD、DSIFN、SECOND 等</td>
+          <td>OpenMMLab 风格 CD toolbox</td>
+          <td>最适合作为公平实验底座，减少实现差异</td>
+      </tr>
+      <tr>
+          <td>The Change You Want To Detect: Semantic Change Detection</td>
+          <td style="text-align: right">CVPR 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Benidir_The_Change_You_Want_To_Detect_Semantic_Change_Detection_In_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>需进一步核验代码</td>
+          <td>语义变化检测问题重定义</td>
+          <td>提供 semantic CD 对照：变化不只是 binary mask</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法比较" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83" class="header-mark"></a>方法比较</h2><h3 id="1-扩散特征提取器ddpm-cd" class="headerLink">
+    <a href="#1-%e6%89%a9%e6%95%a3%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8ddpm-cd" class="header-mark"></a>1. 扩散特征提取器：DDPM-CD</h3><p>DDPM-CD 的关键想法是：扩散模型在去噪过程中学习到遥感图像的多尺度结构，变化检测不一定要让扩散模型生成图像，可以取其 encoder/denoising 中间特征，再训练轻量变化分类头。优点是能利用未标注遥感影像预训练；缺点是变化语义并未被显式建模，仍然依赖后续分类头把双时相特征差异解释为变化。</p>]]></description></item><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
+    <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>传统二时相 change detection 通常把输入简化为 <code>(image_t1, image_t2) -&gt; change mask</code>，但真实遥感里的“不变”并不等于像素相同。很多变化检测模型在 LEVIR-CD、WHU-CD、CDD 这类标准集上分数很高，部署到跨季节、跨年份、跨传感器或轻微错位场景时会把无害差异误报成变化。</p>
-<p>2024 的 <a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">A Change Detection Reality Check</a> 和其 <a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a> 对这个问题给了很直接的提醒：社区里大量架构在标准 benchmark 上堆 SOTA，但评测设置并不总能反映真实泛化。2024 的 <a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">CSDACD</a> 明确把 cross-seasonal domain shift 作为问题，代码见 <a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">24kironhead/CSDACD</a>。2026 的 <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a> 则开始提供更接近真实城市时序变化的 Sentinel-2 语义变化 benchmark，并公开 <a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">omkarsoak/TERRA-CD</a>。</p>]]></description></item><item><title>RS-19 Change Caption Evidence Grounding 调研</title><link>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-19-change-caption-evidence-grounding-调研" class="headerLink">
-    <a href="#rs-19-change-caption-evidence-grounding-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-19 Change Caption Evidence Grounding 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-19</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 对应 prompt：RS19 Change Caption Evidence Grounding 核心问题 遥感 change captioning 的目标是输入同一区域的双时相或多时相影像，输出自然语言变化描述，例如“新建了几栋建筑”“农田变成裸地”“洪水淹没了道路和建筑”。这个任务比普通变化检测更接近人类解释，但也更容易出现一</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-19-change-caption-evidence-grounding-调研-1" class="headerLink">
-    <a href="#rs-19-change-caption-evidence-grounding-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-19 Change Caption Evidence Grounding 调研</h1><p>更新时间：2026-06-07<br>
-对应 prompt：<code>RS-19 Change Caption Evidence Grounding</code></p>
-<h2 id="核心问题" class="headerLink">
+<p>2024 的 <a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">A Change Detection Reality Check</a> 和其 <a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a> 对这个问题给了很直接的提醒：社区里大量架构在标准 benchmark 上堆 SOTA，但评测设置并不总能反映真实泛化。2024 的 <a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">CSDACD</a> 明确把 cross-seasonal domain shift 作为问题，代码见 <a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">24kironhead/CSDACD</a>。2026 的 <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a> 则开始提供更接近真实城市时序变化的 Sentinel-2 语义变化 benchmark，并公开 <a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">omkarsoak/TERRA-CD</a>。</p>
+<p>因此，RS-18 的核心不是再设计一个普通 CD backbone，而是设计一套 temporal hard negative mining 与评测协议：让“不应改变但像素变化很大”的样本成为训练和评测的一等公民。</p>
+<h2 id="2-hard-negative-类型" class="headerLink">
+    <a href="#2-hard-negative-%e7%b1%bb%e5%9e%8b" class="header-mark"></a>2. Hard Negative 类型</h2><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>看起来像变化的原因</th>
+          <th>常见误报</th>
+          <th>需要的标签/元数据</th>
+          <th>推荐构造方式</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>季节变化</td>
+          <td>植被物候、落叶/返青、积雪、干湿季</td>
+          <td>农田、林地、水体边界误报</td>
+          <td>日期、气候带、NDVI/NDWI、物候区</td>
+          <td>同一区域不同季节但同一年土地利用稳定的样本</td>
+      </tr>
+      <tr>
+          <td>光照和阴影</td>
+          <td>太阳高度角、传感器观测角、建筑/山体阴影</td>
+          <td>建筑新增、道路变化、山地变化</td>
+          <td>太阳角、DEM/坡度、阴影 mask</td>
+          <td>同一区域相近日期不同太阳角，或合成阴影增强</td>
+      </tr>
+      <tr>
+          <td>云、薄雾、云影</td>
+          <td>云层遮挡和辐射差异</td>
+          <td>大片伪变化、边缘伪变化</td>
+          <td>cloud probability、QA band、cloud/shadow mask</td>
+          <td>Sentinel-2 SCL/CloudScore 选低到中等云污染负样本</td>
+      </tr>
+      <tr>
+          <td>农田轮作/收割</td>
+          <td>作物类型和生育阶段变化</td>
+          <td>土地利用改变、裸地扩张</td>
+          <td>作物历、NDVI 时间序列、parcel</td>
+          <td>parcel 内多日期作物周期，标注为无结构性变化</td>
+      </tr>
+      <tr>
+          <td>潮汐/水位</td>
+          <td>潮位、水库调度、降雨后暂时积水</td>
+          <td>水体扩张/消退误报</td>
+          <td>潮位、水文站、NDWI、多时相水体频率</td>
+          <td>海岸/河口/湿地多潮位样本，标注 transient change</td>
+      </tr>
+      <tr>
+          <td>配准误差</td>
+          <td>t1/t2 空间错位、不同 GSD、重采样</td>
+          <td>建筑/道路边缘双线变化</td>
+          <td>GCP、registration residual、边缘图</td>
+          <td>对稳定区域施加亚像素到数像素偏移</td>
+      </tr>
+      <tr>
+          <td>成像风格差异</td>
+          <td>不同传感器、辐射定标、压缩、季节 composite</td>
+          <td>大面积纹理变化</td>
+          <td>传感器 ID、处理级别、GSD</td>
+          <td>同地同类目标跨传感器配对</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-代表论文benchmark-与代码" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87benchmark-%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>3. 代表论文、benchmark 与代码</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>与 hard negative 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>A Change Detection Reality Check</td>
+          <td style="text-align: right">2024 ICLR ML4RS / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>说明标准 CD SOTA 可能被 benchmark 设置放大，适合作为评测协议警示起点。</td>
+      </tr>
+      <tr>
+          <td>CSDACD: Domain-adaptive Change Detection Network for Cross-seasonal RS Images</td>
+          <td style="text-align: right">2024 IEEE GRSL</td>
+          <td><a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">paper/info</a></td>
+          <td><a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>直接处理季节差异导致的 domain shift，是 cross-seasonal negative 的方法基线。</td>
+      </tr>
+      <tr>
+          <td>Single-Temporal Supervised Learning for Universal RS Change Detection</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.15694" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/Z-Zheng/pytorch-change-models" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用单时相监督构造变化信号，可借鉴 unpaired negative/positive 生成。</td>
+      </tr>
+      <tr>
+          <td>ChangeMamba</td>
+          <td style="text-align: right">2024 IEEE TGRS</td>
+          <td><a href="https://github.com/ChenHongruixuan/ChangeMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/ChenHongruixuan/ChangeMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>时空 SSM backbone，可作为 hard negative 训练的强基线。</td>
+      </tr>
+      <tr>
+          <td>CD-Lamba / rschange</td>
+          <td style="text-align: right">2025 arXiv / 2026 TGRS 线索</td>
+          <td><a href="https://arxiv.org/abs/2501.15455" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/xwmaxwma/rschange" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>locally adaptive SSM，适合测试复杂负样本下的边界与局部差异建模。</td>
+      </tr>
+      <tr>
+          <td>Multi-Modal Building Change Detection for Large-Scale Small Changes</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.19077" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/AeroVILab-AHU/LSMD" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>明确指出光照、季节、材料变化干扰，适合作为 small-change hard negative 数据参考。</td>
+      </tr>
+      <tr>
+          <td>TERRA-CD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>2019/2024 Sentinel-2、232 城市、土地覆盖/植被变化/语义变化三套标签，适合跨城市和语义负样本。</td>
+      </tr>
+      <tr>
+          <td>OmniCD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.30168" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>待确认</td>
+          <td>多模态语义指导 CD，适合测试文本/语义提示是否能减少季节与风格误报。</td>
+      </tr>
+      <tr>
+          <td>ChangeFlow</td>
+          <td style="text-align: right">2026 arXiv/HF</td>
+          <td><a href="https://huggingface.co/papers/2605.15375" target="_blank" rel="noopener noreferrer">HF paper</a>, <a href="https://blaz-r.github.io/changeflow_cd" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>project page</td>
+          <td>latent rectified flow 用于变化检测，可作为生成式变化先验对照。</td>
+      </tr>
+      <tr>
+          <td>TERRA-CD / TERRA style multi-class CD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提供多类别 transition 标签，可把“vegetation state change”与 land-cover transition 分开评测。</td>
+      </tr>
+      <tr>
+          <td>STTORM-CD</td>
+          <td style="text-align: right">2026 PMC / Scientific Reports 线索</td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12873372/" target="_blank" rel="noopener noreferrer">article</a></td>
+          <td>未核验</td>
+          <td>使用 triplet loss 拉近无害季节变化、推远洪水变化，思路上非常贴近 hard negative metric learning。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-方法脉络" class="headerLink">
+    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-传统-cd-backbone" class="headerLink">
+    <a href="#41-%e4%bc%a0%e7%bb%9f-cd-backbone" class="header-mark"></a>4.1 传统 CD backbone</h3><p>代表：Siamese UNet/Transformer、BIT、ChangeFormer、STANet、ChangeMamba、CD-Lamba。<br>
+优点是可复现、适合作为 baseline；缺点是大多把 hard negative 当作普通背景像素，没有显式建模“无害但视觉差异大”的样本。</p>]]></description></item><item><title>RS-19 Change Caption Evidence Grounding</title><link>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding/</guid><description><![CDATA[<h1 id="rs-19-change-caption-evidence-grounding" class="headerLink">
+    <a href="#rs-19-change-caption-evidence-grounding" class="header-mark"></a>RS-19 Change Caption Evidence Grounding</h1><h2 id="核心问题" class="headerLink">
     <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h2><p>遥感 change captioning 的目标是输入同一区域的双时相或多时相影像，输出自然语言变化描述，例如“新建了几栋建筑”“农田变成裸地”“洪水淹没了道路和建筑”。这个任务比普通变化检测更接近人类解释，但也更容易出现一种危险失败：句子读起来合理，BLEU/CIDEr 也不低，却没有被变化区域真正支撑。</p>
 <p>RS-19 的细问题是：<strong>如何判断 change caption 中每个变化短语是否有 bbox/mask 级证据支撑</strong>。例如 caption 说“two buildings were destroyed and surrounding roads were flooded”，评估不应只看文本相似度，而要拆成：</p>
 <ul>
@@ -65,15 +301,122 @@
 <li>时间关系：pre-event 存在、post-event 消失/受损/出现。</li>
 <li>证据区域：对象变化 mask、损毁建筑 bbox、洪水区域 mask、道路变化线状 mask。</li>
 </ul>
-<p>一个好的 evidence-grounded change caption 评测，应区分四类结果：</p>]]></description></item><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
-    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-20</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 masked temporal reconstruction + downstream change/crop mapping 的小论文方案？ 1. 方向概述 光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="headerLink">
-    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>更新时间：2026-06-07<br>
-细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
+<p>一个好的 evidence-grounded change caption 评测，应区分四类结果：</p>
+<ol>
+<li>文本正确且证据正确。</li>
+<li>文本正确但证据区域错。</li>
+<li>证据区域覆盖真实变化，但文本属性/数量错。</li>
+<li>文本和证据都错，或对 no-change 图像产生幻觉变化。</li>
+</ol>
+<h2 id="代表论文与资源" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>官方代码/数据</th>
+          <th>和 evidence grounding 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>RSICCFormer / LEVIR-CC</td>
+          <td style="text-align: right">2022 TGRS</td>
+          <td><a href="https://levir.buaa.edu.cn/static/pdfs/2022_chenyang_liu_remote_dataset.pdf" target="_blank" rel="noopener noreferrer">论文 PDF</a></td>
+          <td>LEVIR-CC 数据集</td>
+          <td>早期核心基准；每对图像有多条变化描述，但主要按文本指标评估，缺少 phrase-to-region 证据。</td>
+      </tr>
+      <tr>
+          <td>PromptCC</td>
+          <td style="text-align: right">2023 TGRS</td>
+          <td><a href="https://github.com/Chen-Yang-Liu/PromptCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/Chen-Yang-Liu/PromptCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 prompt learning 和预训练语言模型做 RSICC；代码中包含 LEVIR-CC 训练、推理、指标脚本，可作为复现实验基线。</td>
+      </tr>
+      <tr>
+          <td>Chg2Cap</td>
+          <td style="text-align: right">2023/2024</td>
+          <td><a href="https://arxiv.org/abs/2304.01091" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/ShizhenChang/Chg2Cap" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 attentive decoder 定位 change-related features，再生成 caption；注意力可作为弱证据，但不是显式 bbox/mask 证据。</td>
+      </tr>
+      <tr>
+          <td>Semantic-CC</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2407.14032" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未稳定确认官方代码</td>
+          <td>用 foundation knowledge 与 change detection pixel-level semantic guidance 联合训练，直接把 CD mask/语义引入 caption，是 RS-19 最重要的 baseline 之一。</td>
+      </tr>
+      <tr>
+          <td>VRSBench</td>
+          <td style="text-align: right">2024 NeurIPS Datasets &amp; Benchmarks</td>
+          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>包含 caption、object references、QA 和 visual grounding。虽不是 change caption 专门数据，但提供 phrase/object grounding 数据构造范式。</td>
+      </tr>
+      <tr>
+          <td>SAT-Cap</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2501.08114" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>论文称代码/模型将发布</td>
+          <td>单阶段 Transformer change caption，强调低复杂度和细节提取；适合作为文本强基线，但证据约束仍弱。</td>
+      </tr>
+      <tr>
+          <td>SECOND-CC / MModalCC</td>
+          <td style="text-align: right">2025 arXiv / JSTARS 关联</td>
+          <td><a href="https://arxiv.org/abs/2501.10075" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/ChangeCapsInRS/SecondCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/ChangeCapsInRS/SecondCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提供 6,041 对高分 RGB 双时相图、语义分割图和 30,205 条句子；语义图可直接用于 phrase-to-mask evidence score。</td>
+      </tr>
+      <tr>
+          <td>DeltaVLM / ChangeChat-105k</td>
+          <td style="text-align: right">2025 arXiv/HF</td>
+          <td><a href="https://huggingface.co/papers/2507.22346" target="_blank" rel="noopener noreferrer">HF paper</a>, <a href="https://github.com/hanlinwu/DeltaVLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/hanlinwu/DeltaVLM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/hlwu/changechat-105k" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
+          <td>将 change caption、classification、quantification、localization、open QA、多轮对话统一成 interactive change analysis。localization 子任务可直接补证据监督。</td>
+      </tr>
+      <tr>
+          <td>ChangeIMTI / ChangeVG</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2509.23105" target="_blank" rel="noopener noreferrer">arXiv 摘要线索</a></td>
+          <td>论文称 GitHub 公开</td>
+          <td>构造包含 change captioning、binary classification、counting、localization 的交互式多任务数据集；和 RS-19 的“caption 句子必须对齐定位”高度相关。</td>
+      </tr>
+      <tr>
+          <td>RSCC disaster change caption dataset</td>
+          <td style="text-align: right">2025 NeurIPS D&amp;B</td>
+          <td><a href="https://papers.neurips.cc/paper_files/paper/2025/file/62867024377cac4233195949b9db0ebd-Paper-Datasets_and_Benchmarks_Track.pdf" target="_blank" rel="noopener noreferrer">NeurIPS PDF</a>, <a href="https://github.com/Bili-Sakura/RSCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/Bili-Sakura/RSCC" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>62,351 对灾前/灾后影像，使用 xBD/EBD 等灾害标签生成并人工核验 caption；建筑损毁框/等级可用作证据监督。</td>
+      </tr>
+      <tr>
+          <td>HiSem</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.15024" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>论文称代码将发布</td>
+          <td>提出层级语义解耦：先区分 changed/no-change，再对 changed 样本做 token-level MoE。问题意识很接近 RS-19，但仍主要报告 BLEU/CIDEr 等文本指标。</td>
+      </tr>
+      <tr>
+          <td>OmniCD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.30168" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>论文页线索</td>
+          <td>用 multimodal semantics 引导变化检测 foundation framework。可作为 mask/semantic evidence 生成器，给 caption 评测提供候选变化证据。</td>
+      </tr>
+      <tr>
+          <td>OmniEarth</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.09471" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>数据/评测线索</td>
+          <td>覆盖文本、bbox、mask 等输出形态，可借鉴其多输出一致性评测思想，迁移到 change caption。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><h3 id="1-传统指标只评价句子相似不评价证据" class="headerLink">
+    <a href="#1-%e4%bc%a0%e7%bb%9f%e6%8c%87%e6%a0%87%e5%8f%aa%e8%af%84%e4%bb%b7%e5%8f%a5%e5%ad%90%e7%9b%b8%e4%bc%bc%e4%b8%8d%e8%af%84%e4%bb%b7%e8%af%81%e6%8d%ae" class="header-mark"></a>1. 传统指标只评价句子相似，不评价证据</h3><p>RSICC 早期主要沿用 BLEU、METEOR、ROUGE-L、CIDEr、SPICE 等 caption 指标。这些指标适合快速比较模型，但对遥感 change caption 有三个缺陷：</p>]]></description></item><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
 <h2 id="1-方向概述" class="headerLink">
     <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云、云影、雪、薄雾、传感器缺测、不同重访周期、物候周期和真实地物变化混在一起。传统做法常用云掩膜、最佳像元合成、插值、时序平滑或单任务云去除，但 foundation model 时代的机会是：把“缺测、遮挡、季节变化”变成预训练任务本身，让模型学会在不完整、多季节、多区域、多传感器序列中形成稳定表示。</p>
 <p>本方向可被压成一个很具体的论文问题：</p>
@@ -81,4 +424,127 @@
   <p>在 Sentinel-2 / HLS 多时相序列中，用真实或模拟云缺测做 masked temporal reconstruction 预训练，是否能同时提升云遮挡条件下的 crop mapping 和真实变化检测，并减少把季节变化误判为变化的错误？</p>
 </blockquote><h2 id="2-问题由来" class="headerLink">
     <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感时序和普通视频不同。视频帧通常时间间隔密集、同一相机、视角连续；卫星时序是稀疏、不规则、多传感器、多大气条件，而且同一像元的语义可能因物候周期而显著变化。对于 crop mapping，模型必须理解不同作物的物候曲线，而不是只看单期纹理。对于 change detection，模型必须区分真实建设/灾害/砍伐变化与季节性植被变化、云影、观测角和配准误差。</p>
-<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>]]></description></item></channel></rss>
+<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>
+<h2 id="3-代表论文与项目" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/模型/数据</th>
+          <th>与本问题的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications</td>
+          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ntrs.nasa.gov/api/citations/20240015391/downloads/RSE%20Prithvi%20Global.pdf" target="_blank" rel="noopener noreferrer">NASA NTRS PDF</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF 300M</a></td>
+          <td>HLS 多时相 MAE，使用 3D spatiotemporal patch embedding、time/geolocation encoding；是本课题最直接基线。</td>
+      </tr>
+      <tr>
+          <td>SkySense: A Multi-Modal Remote Sensing Foundation Model</td>
+          <td style="text-align: right">2024 CVPR</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2312.10115" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>使用大规模时序遥感数据和 factorized spatiotemporal encoder；说明 temporal sequence 已是 RSFM 核心能力。</td>
+      </tr>
+      <tr>
+          <td>SkySense++: A semantic-enhanced multi-modal RSFM for EO</td>
+          <td style="text-align: right">2025 Nature Machine Intelligence</td>
+          <td><a href="https://www.nature.com/articles/s42256-025-01078-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
+          <td><a href="https://github.com/kang-wu/SkySensePlusPlus" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>加入语义增强多模态建模，可作为“时序表示 + 语义任务”参照。</td>
+      </tr>
+      <tr>
+          <td>Galileo: Learning Global and Local Features in Pretrained Remote Sensing Models</td>
+          <td style="text-align: right">2025 arXiv / OpenReview</td>
+          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openreview.net/pdf?id=gqZO3eSZRy" target="_blank" rel="noopener noreferrer">OpenReview PDF</a></td>
+          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>设计为灵活处理不同空间和时间形状的多模态 RS 输入；适合做可变长度/不规则时序基线。</td>
+      </tr>
+      <tr>
+          <td>TerraMind: Large-Scale Generative Multimodality for Earth Observation</td>
+          <td style="text-align: right">2025 ICCV/arXiv</td>
+          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Jakubik_TerraMind_Large-Scale_Generative_Multimodality_for_Earth_Observation_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td><a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-esa-geospatial/TerraMind-1.0-base" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>任意模态生成和 Thinking-in-Modalities 可转化为“缺测时生成辅助模态/时间片”的鲁棒方案。</td>
+      </tr>
+      <tr>
+          <td>ChronoEarth-492K</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.15666" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码/数据</td>
+          <td>长时间跨度 hyperspectral 时序 benchmark，强调 temporal calibration，可启发长期时序评测。</td>
+      </tr>
+      <tr>
+          <td>UniTS: Unified Time Series Generative Model for Remote Sensing</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2512.04461" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码</td>
+          <td>统一时序重建、云去除、语义变化检测、预测；与本课题的生成式预训练目标很接近。</td>
+      </tr>
+      <tr>
+          <td>SatSwinMAE: Efficient Autoencoding for Multiscale Time-series Satellite Imagery</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2405.02512" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待确认官方代码</td>
+          <td>3D masked autoencoder + Video Swin，直接支持多尺度时序影像自编码。</td>
+      </tr>
+      <tr>
+          <td>SatMAE</td>
+          <td style="text-align: right">2022 NeurIPS, 仍是时间/多光谱 MAE 基线</td>
+          <td><a href="https://sustainlab-group.github.io/SatMAE/" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://papers.neurips.cc/paper_files/paper/2022/file/01c561df365429f33fcd7a7faa44c985-Paper-Conference.pdf" target="_blank" rel="noopener noreferrer">PDF</a></td>
+          <td>项目页</td>
+          <td>虽早于目标窗口，但 temporal/multispectral MAE 设计仍是所有 2024-2026 方法的重要参照。</td>
+      </tr>
+      <tr>
+          <td>Reconstruction of seamless HLS time series via self-supervised learning</td>
+          <td style="text-align: right">2024 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425724002098" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>HLS 时序无缝重建与 gap filling 是 masked temporal reconstruction 的应用前身。</td>
+      </tr>
+      <tr>
+          <td>AnytimeFormer</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725005243" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>目标是任意时间 reflectance reconstruction；含 SAR-optical 融合，本文只借鉴异步时序重建思想，不把 SAR 作为主线。</td>
+      </tr>
+      <tr>
+          <td>RESTORE-DiT</td>
+          <td style="text-align: right">2025 RSE</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425725002767" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>时序重建/云去除的 diffusion transformer 代表；同样含 SAR-optical，作为生成式重建参照。</td>
+      </tr>
+      <tr>
+          <td>AgriFM: A Multi-source Temporal RSFM for Crop Mapping</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2505.21357" target="_blank" rel="noopener noreferrer">HF paper</a></td>
+          <td><a href="https://github.com/flyakon/AgriFM" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>面向 crop mapping 的多源长时序 foundation model，适合作为下游农业任务对比。</td>
+      </tr>
+      <tr>
+          <td>Spatiotemporal masked pre-training for crop mapping with limited labels</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843225000731" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>论文页</td>
+          <td>明确验证 spatiotemporal masking 对低标签 crop mapping 的价值。</td>
+      </tr>
+      <tr>
+          <td>SITS-MoCo: Self-supervised pre-training for large-scale crop mapping</td>
+          <td style="text-align: right">2024/2023 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/YXu556/SITS-MoCo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>对 temporal shift、spectral noise、irregular length 做鲁棒表示学习，是 contrastive baseline。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-方法脉络" class="headerLink">
+    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-多时相-mae-路线" class="headerLink">
+    <a href="#41-%e5%a4%9a%e6%97%b6%e7%9b%b8-mae-%e8%b7%af%e7%ba%bf" class="header-mark"></a>4.1 多时相 MAE 路线</h3><p>代表：Prithvi-EO-2.0、SatSwinMAE、SatMAE。<br>
+核心思想是 mask 掉空间、谱段或时间 patch，让模型重建缺失观测。优点是简单、可扩展，能自然模拟云遮挡和缺测。问题是像素重建质量不一定等价于下游语义鲁棒性，尤其容易学到“平滑插值”而不是物候语义。</p>]]></description></item></channel></rss>

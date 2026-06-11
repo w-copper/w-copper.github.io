@@ -3,17 +3,6 @@
 
 # RS-20 Temporal Foundation Model for Cloud/Season Robustness
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-20` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 masked temporal reconstruction + downstream change/crop mapping 的小论文方案？ 1. 方向概述 光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云
-
-## 正文
-
-# RS-20 Temporal Foundation Model for Cloud/Season Robustness
-
-更新时间：2026-06-07  
 细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 `masked temporal reconstruction + downstream change/crop mapping` 的小论文方案？
 
 ## 1. 方向概述
@@ -187,11 +176,4 @@ Cloud- and Season-Robust Temporal Foundation Models via Masked Phenological Reco
 - [AgriFM](https://arxiv.org/abs/2505.21357)
 - [SatSwinMAE](https://arxiv.org/abs/2405.02512)
 - [SITS-MoCo code](https://github.com/YXu556/SITS-MoCo)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

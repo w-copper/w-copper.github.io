@@ -3,22 +3,7 @@
 
 # RS-09 HBB/OBB/Mask Unified Visual Grounding
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-09` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 来源范围：20242026 遥感视觉语言、visual grounding、referring segmentation、SAM/SAM2 相关论文与官方项目。默认排除 SARonly；若 benchmark 包含 SAR，仅把其 bbox/mask 评测范式作为参考。 任务 Prompt 请深挖遥感 visual groundi
-
-## 正文
-
-# RS-09 HBB/OBB/Mask Unified Visual Grounding
-
-更新时间：2026-06-07  
-来源范围：2024-2026 遥感视觉语言、visual grounding、referring segmentation、SAM/SAM2 相关论文与官方项目。默认排除 SAR-only；若 benchmark 包含 SAR，仅把其 bbox/mask 评测范式作为参考。
-
 ## 任务 Prompt
-
-> 请深挖遥感 visual grounding 中 HBB、OBB、mask 三种输出范式如何统一。比较 GeoChat、GeoGround、SATGround、RSUniVLM、OmniEarth、RS2-SAM2，提出一个支持旋转目标和密集小目标的 grounding-to-mask pipeline。
 
 ## 执行摘要
 
@@ -260,11 +245,4 @@ GCS = mean(
 3. 如何在密集飞机/车辆/船只场景中评估 referring expression 是否定位到唯一实例？
 4. 如何用 RS-CLIP/VLM 对 mask crop 做 semantic re-ranking，降低相似目标错配？
 5. 如何把地理先验，如跑道方向、道路拓扑、建筑 footprint，引入 OBB/mask refinement？
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

@@ -3,7 +3,6 @@ title: "REST：全景遥感影像端到端语义分割的整体学习框架"
 date: 2026-05-31
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # REST：全景遥感影像端到端语义分割的整体学习框架

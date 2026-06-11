@@ -1,14 +1,7 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>谱段适配 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E8%B0%B1%E6%AE%B5%E9%80%82%E9%85%8D/</link><description>谱段适配 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E8%B0%B1%E6%AE%B5%E9%80%82%E9%85%8D/" rel="self" type="application/rss+xml"/><item><title>RS-31 Band-Adaptive Tokenizer 调研</title><link>https://spacetop.win/2026/06/rs-31-band-adaptive-tokenizer-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-31-band-adaptive-tokenizer-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-31-band-adaptive-tokenizer-调研" class="headerLink">
-    <a href="#rs-31-band-adaptive-tokenizer-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-31 Band-Adaptive Tokenizer 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-31</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：当输入可能来自 Sentinel2、Landsat/HLS、NAIP、Planet 或高光谱 cube 时，如何把不同 band 数量、中心波长、带宽、响应函数和空间分辨率映射到统一 token，使同一个遥感基础模型能跨传感器、缺失 band 和未见谱段泛化。 摘要 Bandadaptive tokenizer 是 202</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-31-band-adaptive-tokenizer-调研-1" class="headerLink">
-    <a href="#rs-31-band-adaptive-tokenizer-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-31 Band-Adaptive Tokenizer 调研</h1><p>更新时间：2026-06-07<br>
-细问题：当输入可能来自 Sentinel-2、Landsat/HLS、NAIP、Planet 或高光谱 cube 时，如何把不同 band 数量、中心波长、带宽、响应函数和空间分辨率映射到统一 token，使同一个遥感基础模型能跨传感器、缺失 band 和未见谱段泛化。</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>Band-adaptive tokenizer 是 2024-2026 遥感 foundation model 里很值得做“小而硬”的方向。它解决的不是“Transformer 怎么更大”，而是更底层的输入表示问题：遥感影像不是自然图像的 RGB 三通道，不同传感器的 band 数、中心波长、带宽、响应函数、GSD 和辐射处理链都不同。如果 patch embedding 固定在某个传感器上，模型在跨传感器、缺失 band、任意波段组合和高光谱输入时就会出现结构性失配。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>谱段适配 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E8%B0%B1%E6%AE%B5%E9%80%82%E9%85%8D/</link><description>谱段适配 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E8%B0%B1%E6%AE%B5%E9%80%82%E9%85%8D/" rel="self" type="application/rss+xml"/><item><title>RS-31 Band-Adaptive Tokenizer</title><link>https://spacetop.win/2026/06/rs-31-band-adaptive-tokenizer/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-31-band-adaptive-tokenizer/</guid><description><![CDATA[<h1 id="rs-31-band-adaptive-tokenizer" class="headerLink">
+    <a href="#rs-31-band-adaptive-tokenizer" class="header-mark"></a>RS-31 Band-Adaptive Tokenizer</h1><p>细问题：当输入可能来自 Sentinel-2、Landsat/HLS、NAIP、Planet 或高光谱 cube 时，如何把不同 band 数量、中心波长、带宽、响应函数和空间分辨率映射到统一 token，使同一个遥感基础模型能跨传感器、缺失 band 和未见谱段泛化。</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Band-adaptive tokenizer 是 2024-2026 遥感 foundation model 里很值得做“小而硬”的方向。它解决的不是“Transformer 怎么更大”，而是更底层的输入表示问题：遥感影像不是自然图像的 RGB 三通道，不同传感器的 band 数、中心波长、带宽、响应函数、GSD 和辐射处理链都不同。如果 patch embedding 固定在某个传感器上，模型在跨传感器、缺失 band、任意波段组合和高光谱输入时就会出现结构性失配。</p>
 <p>当前方法大致分成五类：</p>
 <ol>
 <li>固定多光谱 tokenizer：如 SatMAE++、Prithvi-EO-2.0，更适合固定 HLS/Sentinel-2/Landsat 配置。</li>
@@ -18,15 +11,8 @@
 <li>跨传感器融合 tokenizer：如 SpectralEarth-FM，把高光谱、多光谱和其他 EO 观测映射到共享层级编码器。</li>
 </ol>
 <p>我认为最有潜力的小论文切口是：<strong>SRF-aware band-adaptive tokenizer</strong>。现有多数方法只用中心波长或 band id，较少完整使用 spectral response function（SRF）。可以把每个 band 的响应曲线压缩成少量 basis coefficients，再由 hypernetwork 生成通道投影权重，使 tokenizer 同时支持 Sentinel-2/Landsat/HLS/NAIP/Planet/EnMAP，并在 missing-band、leave-sensor-out 和 cross-resolution 设置下评测。</p>]]></description></item><item><title>RS-32 Spectral Configuration Shift</title><link>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</guid><description><![CDATA[<h1 id="rs-32-spectral-configuration-shift" class="headerLink">
-    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-32</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。20242026</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-32-spectral-configuration-shift-1" class="headerLink">
-    <a href="#rs-32-spectral-configuration-shift-1" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
+    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>RGB 模型默认通道固定；遥感中 Sentinel-2、Landsat/HLS、Planet、NAIP、EnMAP、PACE、AVIRIS 等传感器的谱段配置差异很大。高光谱数据还会遇到坏 band、噪声 band、不同大气校正链和空间分辨率差异。若模型只记住通道序号，到了未见传感器或缺 band 输入时就会退化。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -120,30 +106,109 @@
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：SRF-Aware Evaluation for Spectral Configuration Shift</p>]]></description></item><item><title>RS-33 Hyperspectral Foundation Model Transfer</title><link>https://spacetop.win/2026/06/rs-33-hyperspectral-foundation-model-transfer/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-33-hyperspectral-foundation-model-transfer/</guid><description><![CDATA[<h1 id="rs-33-hyperspectral-foundation-model-transfer" class="headerLink">
-    <a href="#rs-33-hyperspectral-foundation-model-transfer" class="header-mark"></a>RS-33 Hyperspectral Foundation Model Transfer</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-33</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：研究高光谱 foundation model 的跨数据集迁移，重点关注 Indian Pines / Pavia / Houston / EnMAP / PRISMA 等小数据与大规模预训练如何衔接，并比较 linear probe、adapter、LoRA、full finetuning 的样本效率与过拟合风险。 1. 核</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-33-hyperspectral-foundation-model-transfer-1" class="headerLink">
-    <a href="#rs-33-hyperspectral-foundation-model-transfer-1" class="header-mark"></a>RS-33 Hyperspectral Foundation Model Transfer</h1><p>更新时间：2026-06-07<br>
-任务：研究高光谱 foundation model 的跨数据集迁移，重点关注 Indian Pines / Pavia / Houston / EnMAP / PRISMA 等小数据与大规模预训练如何衔接，并比较 linear probe、adapter、LoRA、full fine-tuning 的样本效率与过拟合风险。</p>
-<h2 id="1-核心判断" class="headerLink">
+    <a href="#rs-33-hyperspectral-foundation-model-transfer" class="header-mark"></a>RS-33 Hyperspectral Foundation Model Transfer</h1><h2 id="1-核心判断" class="headerLink">
     <a href="#1-%e6%a0%b8%e5%bf%83%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 核心判断</h2><p>高光谱 foundation model 的迁移问题，本质上不是“有没有预训练模型”，而是“预训练域、传感器谱段、空间分辨率、标注粒度和下游小样本协议是否一致”。2024-2026 的代表性工作已经从单数据集 HSI 分类，推进到 HyperGlobal-450K、SpectralEarth/EnMAP、HyperSeg、HyperFM250K 这类大规模预训练数据。但下游仍常落回 Indian Pines、Pavia University、Houston 2013、Salinas、WHU-Hi 等小数据集，导致两个矛盾：</p>
 <ol>
 <li>大模型有谱-空表示能力，但小数据全量微调很容易记住局部空间纹理和 train/test split。</li>
 <li>大规模卫星 HSI 与经典机载 HSI 的光谱响应、空间分辨率和地物类别差异很大，简单 fine-tune 不一定是真的 transfer。</li>
 </ol>
-<p>最值得做的小论文切口：建立一个 <strong>HSI-FM transfer protocol</strong>，用统一 split、统一预算和统一参数量比较 linear probe、adapter、LoRA、prompt/tuning-free、full fine-tuning，并增加 leave-dataset-out / leave-sensor-out / few-shot 曲线和过拟合诊断。</p>]]></description></item><item><title>RS-34 Missing-Band Reconstruction vs Robust Adaptation</title><link>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</guid><description><![CDATA[<h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation" class="headerLink">
-    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-34</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。20242026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation-1" class="headerLink">
-    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation-1" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。</p>
+<p>最值得做的小论文切口：建立一个 <strong>HSI-FM transfer protocol</strong>，用统一 split、统一预算和统一参数量比较 linear probe、adapter、LoRA、prompt/tuning-free、full fine-tuning，并增加 leave-dataset-out / leave-sensor-out / few-shot 曲线和过拟合诊断。</p>
+<h2 id="2-代表论文与资源" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>2. 代表论文与资源</h2><table>
+  <thead>
+      <tr>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>和 RS-33 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SpectralGPT: Spectral Remote Sensing Foundation Model</td>
+          <td style="text-align: right">TPAMI 2024</td>
+          <td><a href="https://github.com/danfenghong/IEEE_TPAMI_SpectralGPT" target="_blank" rel="noopener noreferrer">GitHub paper page</a></td>
+          <td><a href="https://github.com/danfenghong/IEEE_TPAMI_SpectralGPT" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://zenodo.org/doi/10.5281/zenodo.10533809" target="_blank" rel="noopener noreferrer">Zenodo</a></td>
+          <td>早期谱域 FM，使用 3D token 和多目标重建，适合做 full fine-tune 与 linear probe 基线。</td>
+      </tr>
+      <tr>
+          <td>S2MAE: A Spatial-Spectral Pretraining Foundation Model for Spectral Remote Sensing Data</td>
+          <td style="text-align: right">CVPR 2024</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Li_S2MAE_A_Spatial-Spectral_Pretraining_Foundation_Model_for_Spectral_Remote_Sensing_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
+          <td>代码状态需再核验</td>
+          <td>3D masked transformer + 高 mask ratio，适合研究少样本 HSI 分类迁移。</td>
+      </tr>
+      <tr>
+          <td>HSIMAE: A Unified Masked Autoencoder with Large-scale Pretraining for Hyperspectral Image Classification</td>
+          <td style="text-align: right">JSTARS 2024</td>
+          <td><a href="https://github.com/Ryan21wy/HSIMAE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/Ryan21wy/HSIMAE" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>官方结果覆盖 Salinas、Pavia University、Houston 2013、WHU-Hi-LongKou，并报告 5/10/15/20 samples per class。</td>
+      </tr>
+      <tr>
+          <td>HyperSIGMA: Hyperspectral Intelligence Comprehension Foundation Model</td>
+          <td style="text-align: right">TPAMI 2025</td>
+          <td><a href="https://arxiv.org/abs/2406.11519" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/WHU-Sigma/HyperSIGMA" target="_blank" rel="noopener noreferrer">GitHub</a>, HyperGlobal-450K</td>
+          <td>十亿级 HSI FM，提供 spatial/spectral MAE 权重，覆盖多任务多数据集，是主要迁移基座。</td>
+      </tr>
+      <tr>
+          <td>SpectralEarth: Training Hyperspectral Foundation Models at Scale</td>
+          <td style="text-align: right">JSTARS 2025 / arXiv 2024</td>
+          <td><a href="https://arxiv.org/abs/2408.08447" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/AABNassim/spectral_earth" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://c.geoservice.dlr.de/web/datasets/enmap_spectralearth" target="_blank" rel="noopener noreferrer">DLR dataset</a></td>
+          <td>基于 EnMAP 的全球多时相 HSI 预训练集，带 land-cover、crop-type、tree-species 下游数据，适合研究卫星 HSI 到任务数据迁移。</td>
+      </tr>
+      <tr>
+          <td>HyperFree: A Channel-adaptive and Tuning-free Foundation Model for HSI</td>
+          <td style="text-align: right">CVPR 2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td><a href="https://rsidea.whu.edu.cn/hyperfree.htm" target="_blank" rel="noopener noreferrer">Project</a>, <a href="https://huggingface.co/JingtaoLi/HyperFree" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>0.4-2.5 μm weight dictionary，强调 tuning-free 与变通道适配，是“少/免微调”强基线。</td>
+      </tr>
+      <tr>
+          <td>SpecAware: Spectral-content Aware FM for Multi-sensor HSI Mapping</td>
+          <td style="text-align: right">ISPRS JPRS 2026</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271626000754" target="_blank" rel="noopener noreferrer">ScienceDirect</a>, <a href="https://arxiv.org/abs/2510.27219" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>GitHub planned</td>
+          <td>用 sensor meta-attributes + image semantic features 做统一 embedding，直接对应 cross-sensor transfer。</td>
+      </tr>
+      <tr>
+          <td>Cross-Domain Transfer of Hyperspectral Foundation Models</td>
+          <td style="text-align: right">ICPR 2026 / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.26478" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>明确比较 in-domain training、cross-modality transfer 和 cross-domain transfer；为“遥感 HSI FM 迁移到新域”提供研究框架。</td>
+      </tr>
+      <tr>
+          <td>SpectralEarth-FM: Bringing Hyperspectral Imagery into Multimodal EO Pretraining</td>
+          <td style="text-align: right">arXiv 2026</td>
+          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待核验</td>
+          <td>将 EnMAP/EMIT/DESIS 与 Sentinel-2、Landsat 等共址，对跨模态/跨传感器迁移很关键。</td>
+      </tr>
+      <tr>
+          <td>HyperFM: Efficient HSI FM with Spectral Grouping</td>
+          <td style="text-align: right">CVPR 2026 Findings / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.21127" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待核验</td>
+          <td>面向 PACE-OCI 等长谱段 HSI，突出 spectral grouping 和高效 transfer。</td>
+      </tr>
+      <tr>
+          <td>HyperspectralMAE: Fourier-Encoded Dual-Branch MAE</td>
+          <td style="text-align: right">arXiv 2025</td>
+          <td><a href="https://arxiv.org/abs/2505.05710" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>待核验</td>
+          <td>在 Hyperion/EnMAP 预训练后迁移到 Indian Pines，适合放入“classic benchmark transfer”比较。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-问题由来" class="headerLink">
+    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>3. 问题由来</h2><h3 id="31-经典-hsi-数据集太小容易高估迁移能力" class="headerLink">
+    <a href="#31-%e7%bb%8f%e5%85%b8-hsi-%e6%95%b0%e6%8d%ae%e9%9b%86%e5%a4%aa%e5%b0%8f%e5%ae%b9%e6%98%93%e9%ab%98%e4%bc%b0%e8%bf%81%e7%a7%bb%e8%83%bd%e5%8a%9b" class="header-mark"></a>3.1 经典 HSI 数据集太小，容易高估迁移能力</h3><p>Indian Pines、Pavia University、Houston 2013、Salinas 等经典数据集常用于 HSI classification，但它们通常是单场景、单传感器、空间相邻样本强相关。随机抽样时，训练和测试像素可能来自同一地块或相邻区域，模型可以靠局部纹理和空间平滑拿高分。这会掩盖 foundation model 是否真的学到了可迁移谱-空表示。</p>]]></description></item><item><title>RS-34 Missing-Band Reconstruction vs Robust Adaptation</title><link>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</guid><description><![CDATA[<h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation" class="headerLink">
+    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>真实遥感输入经常不完整：传感器原生 band 不同、云和质量控制屏蔽部分波段、不同产品处理级别不一致、商业卫星只提供少数通道。直接补零或丢弃样本会造成信息浪费；但盲目重建 band 也可能生成光谱上好看、下游却有害的伪信号。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -210,17 +275,10 @@
 <h2 id="两条路线" class="headerLink">
     <a href="#%e4%b8%a4%e6%9d%a1%e8%b7%af%e7%ba%bf" class="header-mark"></a>两条路线</h2><h3 id="先重建再推理" class="headerLink">
     <a href="#%e5%85%88%e9%87%8d%e5%bb%ba%e5%86%8d%e6%8e%a8%e7%90%86" class="header-mark"></a>先重建再推理</h3><p>优点：输出完整光谱，适合光谱指数、物理反演、材料识别和可解释分析。<br>
-缺点：重建误差会传播到下游；生成模型可能产生看似合理但物理不真实的 band。</p>]]></description></item><item><title>RS-35 Spectral-Text Alignment 调研</title><link>https://spacetop.win/2026/06/rs-35-spectral-text-alignment-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-35-spectral-text-alignment-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-35-spectral-text-alignment-调研" class="headerLink">
-    <a href="#rs-35-spectral-text-alignment-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-35 Spectral-Text Alignment 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-35</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：高光谱/多光谱与文本语义如何对齐，使文本中的“健康植被、裸土、浑浊水体、屋顶材料、湿润土壤、烧毁区域”等描述能对应到可验证的谱曲线、谱段组合或光谱指数，而不是只依赖 RGB 外观和语言先验。 摘要 Spectraltext alignment 是遥感 VLM 里一个很新的小切口。传统 RSCLIP/RSVLM 多把遥感图像</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-35-spectral-text-alignment-调研-1" class="headerLink">
-    <a href="#rs-35-spectral-text-alignment-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-35 Spectral-Text Alignment 调研</h1><p>更新时间：2026-06-07<br>
-细问题：高光谱/多光谱与文本语义如何对齐，使文本中的“健康植被、裸土、浑浊水体、屋顶材料、湿润土壤、烧毁区域”等描述能对应到可验证的谱曲线、谱段组合或光谱指数，而不是只依赖 RGB 外观和语言先验。</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>Spectral-text alignment 是遥感 VLM 里一个很新的小切口。传统 RS-CLIP/RS-VLM 多把遥感图像当 RGB 或伪 RGB patch，与 caption/class name 做对比学习；但多光谱/高光谱真正有价值的信息在 NIR、red-edge、SWIR 和连续谱曲线里。2025-2026 已经出现三个强信号：</p>
+缺点：重建误差会传播到下游；生成模型可能产生看似合理但物理不真实的 band。</p>]]></description></item><item><title>RS-35 Spectral-Text Alignment</title><link>https://spacetop.win/2026/06/rs-35-spectral-text-alignment/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-35-spectral-text-alignment/</guid><description><![CDATA[<h1 id="rs-35-spectral-text-alignment" class="headerLink">
+    <a href="#rs-35-spectral-text-alignment" class="header-mark"></a>RS-35 Spectral-Text Alignment</h1><p>细问题：高光谱/多光谱与文本语义如何对齐，使文本中的“健康植被、裸土、浑浊水体、屋顶材料、湿润土壤、烧毁区域”等描述能对应到可验证的谱曲线、谱段组合或光谱指数，而不是只依赖 RGB 外观和语言先验。</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Spectral-text alignment 是遥感 VLM 里一个很新的小切口。传统 RS-CLIP/RS-VLM 多把遥感图像当 RGB 或伪 RGB patch，与 caption/class name 做对比学习；但多光谱/高光谱真正有价值的信息在 NIR、red-edge、SWIR 和连续谱曲线里。2025-2026 已经出现三个强信号：</p>
 <ol>
 <li><strong>多光谱 CLIP 化</strong>：Llama3-MS-CLIP 将 CLIP 输入扩展到 Sentinel-2 多光谱，并在 zero-shot classification / retrieval 中验证多光谱比 RGB-only 更强。</li>
 <li><strong>光谱先验文本化</strong>：SPEX/SPIE 将 NDVI、NDWI、NDBI 等经典光谱指数转写成 LLM 可读的地物属性，用于 instruction-driven land cover extraction。</li>

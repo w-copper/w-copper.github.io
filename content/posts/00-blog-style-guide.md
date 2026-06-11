@@ -4,7 +4,6 @@ date: 2026-06-07
 tags: ["写作模板", "博客"]
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # 遥感 AI 博客系列写作模板

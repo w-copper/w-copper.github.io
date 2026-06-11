@@ -3,18 +3,6 @@
 
 # RS-34 Missing-Band Reconstruction vs Robust Adaptation
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-34` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 摘要 遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。20242026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的
-
-## 正文
-
-# RS-34 Missing-Band Reconstruction vs Robust Adaptation
-
-更新时间：2026-06-07
-
 ## 摘要
 
 遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。
@@ -91,11 +79,4 @@
 3. reconstruction uncertainty-aware downstream adapter。
 4. 多分辨率 band repair，不先强制重采样。
 5. 针对任务选择是否重建的 routing policy。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

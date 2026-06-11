@@ -3,19 +3,6 @@
 
 # RS-33 Hyperspectral Foundation Model Transfer
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-33` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：研究高光谱 foundation model 的跨数据集迁移，重点关注 Indian Pines / Pavia / Houston / EnMAP / PRISMA 等小数据与大规模预训练如何衔接，并比较 linear probe、adapter、LoRA、full finetuning 的样本效率与过拟合风险。 1. 核
-
-## 正文
-
-# RS-33 Hyperspectral Foundation Model Transfer
-
-更新时间：2026-06-07  
-任务：研究高光谱 foundation model 的跨数据集迁移，重点关注 Indian Pines / Pavia / Houston / EnMAP / PRISMA 等小数据与大规模预训练如何衔接，并比较 linear probe、adapter、LoRA、full fine-tuning 的样本效率与过拟合风险。
-
 ## 1. 核心判断
 
 高光谱 foundation model 的迁移问题，本质上不是“有没有预训练模型”，而是“预训练域、传感器谱段、空间分辨率、标注粒度和下游小样本协议是否一致”。2024-2026 的代表性工作已经从单数据集 HSI 分类，推进到 HyperGlobal-450K、SpectralEarth/EnMAP、HyperSeg、HyperFM250K 这类大规模预训练数据。但下游仍常落回 Indian Pines、Pavia University、Houston 2013、Salinas、WHU-Hi 等小数据集，导致两个矛盾：
@@ -197,11 +184,4 @@ SpectralEarth 这类 EnMAP 全球数据能提供大规模 HSI 表示，但其 30
 ## 9. 最终建议
 
 RS-33 不建议做“我又提出一个 HSI 分类网络”。更好的论文形态是：提出一个 **迁移评测协议 + 参数高效适配方法 + 泄漏/过拟合诊断**。如果方法部分要有明确创新，可以做一个 **Wavelength-aware LoRA/Adapter**：LoRA rank 或 adapter gate 由 band metadata、sensor id 和目标域少量统计量动态调节。这样问题足够细，又能连接 HyperSIGMA/SpectralEarth/HyperFree/SpecAware 这条 2024-2026 的主线。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

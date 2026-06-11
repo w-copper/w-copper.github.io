@@ -1,23 +1,168 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
-    <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-18</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。 1. 问题由来 传统二时相 change detection 通常把输入简化为 (imaget1, imaget2) change mask，但真实遥感里的“不变”并不等于像</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-18-temporal-hard-negatives-for-change-models-1" class="headerLink">
-    <a href="#rs-18-temporal-hard-negatives-for-change-models-1" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>更新时间：2026-06-07<br>
-细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
+    <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
 <h2 id="1-问题由来" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>传统二时相 change detection 通常把输入简化为 <code>(image_t1, image_t2) -&gt; change mask</code>，但真实遥感里的“不变”并不等于像素相同。很多变化检测模型在 LEVIR-CD、WHU-CD、CDD 这类标准集上分数很高，部署到跨季节、跨年份、跨传感器或轻微错位场景时会把无害差异误报成变化。</p>
-<p>2024 的 <a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">A Change Detection Reality Check</a> 和其 <a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a> 对这个问题给了很直接的提醒：社区里大量架构在标准 benchmark 上堆 SOTA，但评测设置并不总能反映真实泛化。2024 的 <a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">CSDACD</a> 明确把 cross-seasonal domain shift 作为问题，代码见 <a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">24kironhead/CSDACD</a>。2026 的 <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a> 则开始提供更接近真实城市时序变化的 Sentinel-2 语义变化 benchmark，并公开 <a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">omkarsoak/TERRA-CD</a>。</p>]]></description></item><item><title>RS-30 Tiny Model Task Routing for EO</title><link>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</guid><description><![CDATA[<h1 id="rs-30-tiny-model-task-routing-for-eo" class="headerLink">
-    <a href="#rs-30-tiny-model-task-routing-for-eo" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-30</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。 1. 方向概述 星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-30-tiny-model-task-routing-for-eo-1" class="headerLink">
-    <a href="#rs-30-tiny-model-task-routing-for-eo-1" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><p>更新时间：2026-06-07<br>
-范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。</p>
+<p>2024 的 <a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">A Change Detection Reality Check</a> 和其 <a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a> 对这个问题给了很直接的提醒：社区里大量架构在标准 benchmark 上堆 SOTA，但评测设置并不总能反映真实泛化。2024 的 <a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">CSDACD</a> 明确把 cross-seasonal domain shift 作为问题，代码见 <a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">24kironhead/CSDACD</a>。2026 的 <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a> 则开始提供更接近真实城市时序变化的 Sentinel-2 语义变化 benchmark，并公开 <a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">omkarsoak/TERRA-CD</a>。</p>
+<p>因此，RS-18 的核心不是再设计一个普通 CD backbone，而是设计一套 temporal hard negative mining 与评测协议：让“不应改变但像素变化很大”的样本成为训练和评测的一等公民。</p>
+<h2 id="2-hard-negative-类型" class="headerLink">
+    <a href="#2-hard-negative-%e7%b1%bb%e5%9e%8b" class="header-mark"></a>2. Hard Negative 类型</h2><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>看起来像变化的原因</th>
+          <th>常见误报</th>
+          <th>需要的标签/元数据</th>
+          <th>推荐构造方式</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>季节变化</td>
+          <td>植被物候、落叶/返青、积雪、干湿季</td>
+          <td>农田、林地、水体边界误报</td>
+          <td>日期、气候带、NDVI/NDWI、物候区</td>
+          <td>同一区域不同季节但同一年土地利用稳定的样本</td>
+      </tr>
+      <tr>
+          <td>光照和阴影</td>
+          <td>太阳高度角、传感器观测角、建筑/山体阴影</td>
+          <td>建筑新增、道路变化、山地变化</td>
+          <td>太阳角、DEM/坡度、阴影 mask</td>
+          <td>同一区域相近日期不同太阳角，或合成阴影增强</td>
+      </tr>
+      <tr>
+          <td>云、薄雾、云影</td>
+          <td>云层遮挡和辐射差异</td>
+          <td>大片伪变化、边缘伪变化</td>
+          <td>cloud probability、QA band、cloud/shadow mask</td>
+          <td>Sentinel-2 SCL/CloudScore 选低到中等云污染负样本</td>
+      </tr>
+      <tr>
+          <td>农田轮作/收割</td>
+          <td>作物类型和生育阶段变化</td>
+          <td>土地利用改变、裸地扩张</td>
+          <td>作物历、NDVI 时间序列、parcel</td>
+          <td>parcel 内多日期作物周期，标注为无结构性变化</td>
+      </tr>
+      <tr>
+          <td>潮汐/水位</td>
+          <td>潮位、水库调度、降雨后暂时积水</td>
+          <td>水体扩张/消退误报</td>
+          <td>潮位、水文站、NDWI、多时相水体频率</td>
+          <td>海岸/河口/湿地多潮位样本，标注 transient change</td>
+      </tr>
+      <tr>
+          <td>配准误差</td>
+          <td>t1/t2 空间错位、不同 GSD、重采样</td>
+          <td>建筑/道路边缘双线变化</td>
+          <td>GCP、registration residual、边缘图</td>
+          <td>对稳定区域施加亚像素到数像素偏移</td>
+      </tr>
+      <tr>
+          <td>成像风格差异</td>
+          <td>不同传感器、辐射定标、压缩、季节 composite</td>
+          <td>大面积纹理变化</td>
+          <td>传感器 ID、处理级别、GSD</td>
+          <td>同地同类目标跨传感器配对</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-代表论文benchmark-与代码" class="headerLink">
+    <a href="#3-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87benchmark-%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>3. 代表论文、benchmark 与代码</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>与 hard negative 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>A Change Detection Reality Check</td>
+          <td style="text-align: right">2024 ICLR ML4RS / arXiv</td>
+          <td><a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>说明标准 CD SOTA 可能被 benchmark 设置放大，适合作为评测协议警示起点。</td>
+      </tr>
+      <tr>
+          <td>CSDACD: Domain-adaptive Change Detection Network for Cross-seasonal RS Images</td>
+          <td style="text-align: right">2024 IEEE GRSL</td>
+          <td><a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">paper/info</a></td>
+          <td><a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>直接处理季节差异导致的 domain shift，是 cross-seasonal negative 的方法基线。</td>
+      </tr>
+      <tr>
+          <td>Single-Temporal Supervised Learning for Universal RS Change Detection</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.15694" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/Z-Zheng/pytorch-change-models" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用单时相监督构造变化信号，可借鉴 unpaired negative/positive 生成。</td>
+      </tr>
+      <tr>
+          <td>ChangeMamba</td>
+          <td style="text-align: right">2024 IEEE TGRS</td>
+          <td><a href="https://github.com/ChenHongruixuan/ChangeMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td><a href="https://github.com/ChenHongruixuan/ChangeMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>时空 SSM backbone，可作为 hard negative 训练的强基线。</td>
+      </tr>
+      <tr>
+          <td>CD-Lamba / rschange</td>
+          <td style="text-align: right">2025 arXiv / 2026 TGRS 线索</td>
+          <td><a href="https://arxiv.org/abs/2501.15455" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/xwmaxwma/rschange" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>locally adaptive SSM，适合测试复杂负样本下的边界与局部差异建模。</td>
+      </tr>
+      <tr>
+          <td>Multi-Modal Building Change Detection for Large-Scale Small Changes</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2603.19077" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/AeroVILab-AHU/LSMD" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
+          <td>明确指出光照、季节、材料变化干扰，适合作为 small-change hard negative 数据参考。</td>
+      </tr>
+      <tr>
+          <td>TERRA-CD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>2019/2024 Sentinel-2、232 城市、土地覆盖/植被变化/语义变化三套标签，适合跨城市和语义负样本。</td>
+      </tr>
+      <tr>
+          <td>OmniCD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.30168" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>待确认</td>
+          <td>多模态语义指导 CD，适合测试文本/语义提示是否能减少季节与风格误报。</td>
+      </tr>
+      <tr>
+          <td>ChangeFlow</td>
+          <td style="text-align: right">2026 arXiv/HF</td>
+          <td><a href="https://huggingface.co/papers/2605.15375" target="_blank" rel="noopener noreferrer">HF paper</a>, <a href="https://blaz-r.github.io/changeflow_cd" target="_blank" rel="noopener noreferrer">project</a></td>
+          <td>project page</td>
+          <td>latent rectified flow 用于变化检测，可作为生成式变化先验对照。</td>
+      </tr>
+      <tr>
+          <td>TERRA-CD / TERRA style multi-class CD</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提供多类别 transition 标签，可把“vegetation state change”与 land-cover transition 分开评测。</td>
+      </tr>
+      <tr>
+          <td>STTORM-CD</td>
+          <td style="text-align: right">2026 PMC / Scientific Reports 线索</td>
+          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12873372/" target="_blank" rel="noopener noreferrer">article</a></td>
+          <td>未核验</td>
+          <td>使用 triplet loss 拉近无害季节变化、推远洪水变化，思路上非常贴近 hard negative metric learning。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-方法脉络" class="headerLink">
+    <a href="#4-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>4. 方法脉络</h2><h3 id="41-传统-cd-backbone" class="headerLink">
+    <a href="#41-%e4%bc%a0%e7%bb%9f-cd-backbone" class="header-mark"></a>4.1 传统 CD backbone</h3><p>代表：Siamese UNet/Transformer、BIT、ChangeFormer、STANet、ChangeMamba、CD-Lamba。<br>
+优点是可复现、适合作为 baseline；缺点是大多把 hard negative 当作普通背景像素，没有显式建模“无害但视觉差异大”的样本。</p>]]></description></item><item><title>RS-30 Tiny Model Task Routing for EO</title><link>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</guid><description><![CDATA[<h1 id="rs-30-tiny-model-task-routing-for-eo" class="headerLink">
+    <a href="#rs-30-tiny-model-task-routing-for-eo" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><p>范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。</p>
 <h2 id="1-方向概述" class="headerLink">
     <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬件”。但 2024-2026 的趋势正在变成“级联式任务路由”：轻量模型先做快速筛选，大模型或下传链路只处理高价值、高风险或不确定样本。这样的问题比单纯模型压缩更像一个决策系统：</p>
 <ul>
@@ -162,15 +307,8 @@
 <h2 id="3-问题由来" class="headerLink">
     <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>3. 问题由来</h2><h3 id="31-星上边缘不是单模型问题" class="headerLink">
     <a href="#31-%e6%98%9f%e4%b8%8a%e8%be%b9%e7%bc%98%e4%b8%8d%e6%98%af%e5%8d%95%e6%a8%a1%e5%9e%8b%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 星上/边缘不是单模型问题</h3><p>单个轻量模型可以降低延迟，但真实 EO 系统还要决定：</p>]]></description></item><item><title>RS-32 Spectral Configuration Shift</title><link>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-32-spectral-configuration-shift/</guid><description><![CDATA[<h1 id="rs-32-spectral-configuration-shift" class="headerLink">
-    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-32</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。20242026</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-32-spectral-configuration-shift-1" class="headerLink">
-    <a href="#rs-32-spectral-configuration-shift-1" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
+    <a href="#rs-32-spectral-configuration-shift" class="header-mark"></a>RS-32 Spectral Configuration Shift</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>Spectral configuration shift 指训练和测试时的谱段数量、中心波长、带宽、spectral response function、预处理级别或缺失模式不同。它是高光谱/多光谱基础模型落地的硬问题：模型不是只要“能吃很多 band”，而是要知道不同传感器的 band 不是同一个物理观测。2024-2026 的代表路线包括 SpectralGPT、S2MAE、DOFA、HyperSIGMA、HyperFree、Panopticon、SpecAware、LESSViT、Any-Optical-Model 和 SpectralEarth-FM。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>RGB 模型默认通道固定；遥感中 Sentinel-2、Landsat/HLS、Planet、NAIP、EnMAP、PACE、AVIRIS 等传感器的谱段配置差异很大。高光谱数据还会遇到坏 band、噪声 band、不同大气校正链和空间分辨率差异。若模型只记住通道序号，到了未见传感器或缺 band 输入时就会退化。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -263,16 +401,8 @@
 <li>缺少统一 leave-sensor-out protocol。</li>
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
-    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：SRF-Aware Evaluation for Spectral Configuration Shift</p>]]></description></item><item><title>RS-36 Raster-Vector Joint Encoder 调研</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder-调研" class="headerLink">
-    <a href="#rs-36-raster-vector-joint-encoder-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder 调研</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-36</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务来源：research/50threadprompts.md 中 RS36 范围：20242026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。 1. 问题定义 细问题：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-36-raster-vector-joint-encoder-调研-1" class="headerLink">
-    <a href="#rs-36-raster-vector-joint-encoder-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder 调研</h1><p>更新时间：2026-06-07<br>
-任务来源：<code>research/50_thread_prompts.md</code> 中 RS-36<br>
-范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：SRF-Aware Evaluation for Spectral Configuration Shift</p>]]></description></item><item><title>RS-36 Raster-Vector Joint Encoder</title><link>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-36-raster-vector-joint-encoder/</guid><description><![CDATA[<h1 id="rs-36-raster-vector-joint-encoder" class="headerLink">
+    <a href="#rs-36-raster-vector-joint-encoder" class="header-mark"></a>RS-36 Raster-Vector Joint Encoder</h1><p>范围：2024-2026，光学遥感/地理空间 AI 为主；不把 SAR 作为主线。</p>
 <h2 id="1-问题定义" class="headerLink">
     <a href="#1-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89" class="header-mark"></a>1. 问题定义</h2><p><strong>细问题</strong>：影像 patch、道路/建筑/地块 polygon、POI、行政区和 tabular covariates 如何进入同一个 encoder，并在不把矢量数据粗暴栅格化的情况下，共同学习可迁移的地理空间表示？</p>
 <p>这个问题的价值在于：纯 raster foundation model 很擅长捕捉连续的光谱、纹理和空间形态，但它天然缺少显式对象、拓扑、地块边界、道路连通性、POI 功能语义和行政单元属性。矢量数据正好补这些信息，却又和影像 patch 的数据结构完全不同：点、线、面、标签表、拓扑关系、空间范围和时效性都不一致。</p>
@@ -364,15 +494,8 @@
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-旧路线矢量转栅格或转标签" class="headerLink">
     <a href="#31-%e6%97%a7%e8%b7%af%e7%ba%bf%e7%9f%a2%e9%87%8f%e8%bd%ac%e6%a0%85%e6%a0%bc%e6%88%96%e8%bd%ac%e6%a0%87%e7%ad%be" class="header-mark"></a>3.1 旧路线：矢量转栅格或转标签</h3><p>常见做法是把 OSM 道路、建筑、土地利用 polygon rasterize 成额外通道，或者直接作为弱标签训练 segmentation。优点是工程简单，能沿用 CNN/ViT；缺点是会损失拓扑关系、对象边界、标签表语义和多尺度结构。GeoLink 的论文把这类路线归纳为 data conversion / data derivation / knowledge graph 等间接融合方式，并指出它们往往任务特定、区域小、空间信息损失较大。</p>]]></description></item><item><title>RS-37 Topology-Aware Road and Building Segmentation</title><link>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-37-topology-aware-road-and-building-segmentation/</guid><description><![CDATA[<h1 id="rs-37-topology-aware-road-and-building-segmentation" class="headerLink">
-    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-37</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。20242026 的相关工作包括 SAMRoad、TopoRFNet、connectivitypreserving loss、Pix2Poly、P2PFo</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-37-topology-aware-road-and-building-segmentation-1" class="headerLink">
-    <a href="#rs-37-topology-aware-road-and-building-segmentation-1" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
+    <a href="#rs-37-topology-aware-road-and-building-segmentation" class="header-mark"></a>RS-37 Topology-Aware Road and Building Segmentation</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>道路和建筑分割不能只看像素 IoU。道路需要连通，建筑需要规则边界、角点和拓扑一致，普通 mask 即使 mIoU 高也可能出现道路断裂、建筑边界锯齿、孔洞和相邻建筑粘连。2024-2026 的相关工作包括 SAM-Road、TopoRF-Net、connectivity-preserving loss、Pix2Poly、P2PFormer、SAMPolyBuild 和 polygon-native building extraction。最值得做的小课题是将 topology-aware loss、vector prior 和 SAM/polygon decoder 结合，专门评价“地图可用性”。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感基础模型擅长提供强特征或候选 mask，但 GIS 产品需要道路网络和建筑轮廓。像素级分割错误一旦进入路网或建筑 footprint，会造成导航断裂、地块统计错误和灾损估计偏差。因此拓扑指标与 vectorization 是从研究分割走向实际地图生产的关键。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -447,15 +570,8 @@
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Topology-Aware SAM Adapter for Map-Ready Road and Building Extraction</p>]]></description></item><item><title>RS-38 Parcel-Aware Crop Mapping</title><link>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-38-parcel-aware-crop-mapping/</guid><description><![CDATA[<h1 id="rs-38-parcel-aware-crop-mapping" class="headerLink">
-    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-38</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。20242026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-38-parcel-aware-crop-mapping-1" class="headerLink">
-    <a href="#rs-38-parcel-aware-crop-mapping-1" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><p>更新时间：2026-06-07</p>
-<h2 id="摘要-1" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
+    <a href="#rs-38-parcel-aware-crop-mapping" class="header-mark"></a>RS-38 Parcel-Aware Crop Mapping</h1><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>作物制图不应该只按像素分类。农业管理的基本单元是 field parcel：同一地块内部作物通常一致，边界决定时序聚合、面积估计和轮作分析。2024-2026 的趋势是将 field boundary segmentation、WorldCereal/Fields of the World、Delineate Anything、PRUE、AgriFM 和多时相 foundation model 结合，形成 parcel-aware crop mapping。最值得做的小课题是：先估计地块边界和边界不确定性，再在 parcel 内聚合多时相特征，测试跨年份和跨区域泛化。</p>
 <h2 id="问题由来" class="headerLink">
     <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>像素级 crop classification 会在地块边界、混合像元、云影、裸土期和不同作物物候接近时出错。若将地块作为结构先验，可以把时序信号在地块内聚合，并减少椒盐噪声。但地块边界本身并不总是可用，OSM/LPIS 等矢量数据也可能过期、错位或不完整。</p>
 <h2 id="代表论文与项目" class="headerLink">
@@ -530,16 +646,11 @@
 </ul>
 <h2 id="可执行研究方案" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Uncertainty-Aware Parcel Aggregation for Crop Mapping</p>]]></description></item><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
-    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><blockquote>
-  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-50</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
-</blockquote><h2 id="摘要" class="headerLink">
-    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。 结论摘要 遥感分割和检测的类别体系天然不是平面的：impervious surface / road / runway / building、crop / rice / field、wate</p>
-<h2 id="正文" class="headerLink">
-    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing-1" class="headerLink">
-    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing-1" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><p>更新时间：2026-06-07<br>
-任务范围：遥感开放词表分割、土地覆盖/土地利用分类、目标检测中的层级 taxonomy 评价。默认关注光学/多光谱遥感，不以 SAR 为主。</p>
-<h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>]]></description></item><item><title>如何阅读这 50 篇遥感 AI 研究笔记</title><link>https://spacetop.win/2026/06/00-reading-roadmap/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-reading-roadmap/</guid><description><![CDATA[<h1 id="如何阅读这-50-篇遥感-ai-研究笔记" class="headerLink">
+    <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
+<p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>如何阅读这 50 篇遥感 AI 研究笔记</title><link>https://spacetop.win/2026/06/00-reading-roadmap/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-reading-roadmap/</guid><description><![CDATA[<h1 id="如何阅读这-50-篇遥感-ai-研究笔记" class="headerLink">
     <a href="#%e5%a6%82%e4%bd%95%e9%98%85%e8%af%bb%e8%bf%99-50-%e7%af%87%e9%81%a5%e6%84%9f-ai-%e7%a0%94%e7%a9%b6%e7%ac%94%e8%ae%b0" class="header-mark"></a>如何阅读这 50 篇遥感 AI 研究笔记</h1><p>如果目标是快速找论文题目，优先读 RS-01、RS-06、RS-23、RS-26、RS-31、RS-36、RS-47。它们分别对应 promptable segmentation、证据约束 VQA、可信制图、大图剪枝、谱段适配、raster-vector 融合和 benchmark 去重。</p>
 <p>如果目标是写综述，按十个大方向分组阅读。每组 5 篇，刚好形成一个相关工作小节。</p>]]></description></item><item><title>最值得优先尝试的 12 个遥感 AI 小论文题眼</title><link>https://spacetop.win/2026/06/00-paper-idea-shortlist/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/00-paper-idea-shortlist/</guid><description><![CDATA[<h1 id="最值得优先尝试的-12-个遥感-ai-小论文题眼" class="headerLink">
     <a href="#%e6%9c%80%e5%80%bc%e5%be%97%e4%bc%98%e5%85%88%e5%b0%9d%e8%af%95%e7%9a%84-12-%e4%b8%aa%e9%81%a5%e6%84%9f-ai-%e5%b0%8f%e8%ae%ba%e6%96%87%e9%a2%98%e7%9c%bc" class="header-mark"></a>最值得优先尝试的 12 个遥感 AI 小论文题眼</h1><p>优先级最高的选题包括：box-to-point SAM prompt refinement、evidence-grounded RS-VQA、GeoFM benchmark leakage audit、risk-aware token pruning、GSD-aware adapter、SAM2 geographic memory、SRF-aware tokenizer、raster-vector joint encoder、EarthShift-style robustness、text-to-region retrieval、SAM/VLM active learning、hierarchical taxonomy metrics。</p>]]></description></item><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">

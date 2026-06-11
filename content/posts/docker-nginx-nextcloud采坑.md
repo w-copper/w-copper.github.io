@@ -4,12 +4,9 @@ draft = false
 title = 'docker+nginx+nextcloud采坑'
 +++
 
-
 <!--more-->
 
-
 其实也算不上采坑，nginx和nextcloud都是很成熟的软件。需要配置的是反向代理有关的设置。
-
 
 docker-compose.yml
 

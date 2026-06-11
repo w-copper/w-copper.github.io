@@ -203,3 +203,4 @@ AOM（Any-Optical-Model）是AAAI 2026的一篇重要论文，提出了一个能
 2. Cong, Y., et al. (2022). SatMAE: Pre-training Transformers for Temporal and Multi-Spectral Satellite Imagery. NeurIPS 2022.
 3. Hong, D., et al. (2023). SpectralGPT: Spectral Remote Sensing Foundation Model. IEEE TPAMI.
 4. Li, Z., et al. (2023). Scale-MAE: A Scale-Aware Masked Autoencoder for Multiscale Geospatial Representation Learning. ICCV 2023.
+

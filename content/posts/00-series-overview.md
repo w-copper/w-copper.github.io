@@ -5,7 +5,6 @@ series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感AI", "研究路线", "总览"]
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # 2024-2026 遥感 AI 研究系列总览

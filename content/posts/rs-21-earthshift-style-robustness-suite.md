@@ -3,25 +3,12 @@ title: "RS-21 EarthShift-Style Robustness Suite"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["泛化", "OOD", "不确定性"]
-source: "research/RS-21_earthshift_style_robustness_suite.md"
 categories: ["时序变化、跨域泛化与可信评测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-21 EarthShift-Style Robustness Suite
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-21` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。 范围：光学/多光谱遥感优先；不把 SARonly 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/
-
-## 正文
-
-# RS-21 EarthShift-Style Robustness Suite
-
-更新时间：2026-06-07  
 细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。  
 范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。
 
@@ -272,10 +259,3 @@ GeoFM 的 OOD 失败并不是单一原因导致的；如果把 shift 分解为 g
 - RWDS paper: https://arxiv.org/abs/2503.19202
 - RWDS GitHub: https://github.com/RWGAI/RWDS
 - WILDS project: https://wilds.stanford.edu/
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

@@ -3,19 +3,6 @@
 
 # RS-43 Illegal Mining Evidence Grounding
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-43` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidencegrounded detec
-
-## 正文
-
-# RS-43 Illegal Mining Evidence Grounding
-
-更新时间：2026-06-07  
-任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidence-grounded detection / change caption 方案。
-
 ## 1. 方向概述
 
 非法采矿，尤其是亚马逊和加纳等地区的 artisanal and small-scale gold mining，具有几个典型遥感难点：目标尺度小、形态变化快、常沿河流和道路扩散、裸土/采坑/尾矿池/临时道路/简易机场之间存在强上下文关系，同时又经常受云、阴影、季节水位和成像分辨率影响。传统做法多是二分类或语义分割：给出“这里是矿区”。但执法、新闻调查、生态评估和社区沟通需要的不只是一个 mask，而是可审计证据：模型为什么认为这里是非法采矿，变化发生在何处，相关证据是否来自裸土扩张、河道浑浊、植被损失、道路/机场/机械痕迹，答案有没有定位支撑。
@@ -267,11 +254,4 @@ Stage D: Grounded explanation
 8. [HiSem arXiv](https://arxiv.org/abs/2605.15024)
 9. [GeoChat CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html)
 10. [LISAT HF paper page](https://huggingface.co/papers/2505.02829)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

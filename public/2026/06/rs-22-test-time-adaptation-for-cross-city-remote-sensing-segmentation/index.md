@@ -3,19 +3,6 @@
 
 # RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation
 
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-22` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务原文：研究 testtime adaptation 在跨城市遥感语义分割中的可靠性。重点分析熵最小化、自训练、BN adaptation、prototype adaptation 在 LoveDA、DeepGlobe、Vaihingen/Potsdam 上的风险，提出带不确定性约束的 TTA 方法。 1. 结论先行 跨城市遥感
-
-## 正文
-
-# RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation
-
-更新时间：2026-06-07  
-任务原文：研究 test-time adaptation 在跨城市遥感语义分割中的可靠性。重点分析熵最小化、自训练、BN adaptation、prototype adaptation 在 LoveDA、DeepGlobe、Vaihingen/Potsdam 上的风险，提出带不确定性约束的 TTA 方法。
-
 ## 1. 结论先行
 
 跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。
@@ -336,11 +323,4 @@ L = L_reliable_entropy
 第一实验：
 
 LoveDA urban -> rural / rural -> urban，SegFormer-B2，比较 source-only、BN Adapt、TENT、SAR、自训练、UCTTA-RS。若 UCTTA-RS 的平均 mIoU 不一定最高，但 negative transfer rate、rare-class IoU 和 ECE 明显更稳，就已经有论文价值。
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
 

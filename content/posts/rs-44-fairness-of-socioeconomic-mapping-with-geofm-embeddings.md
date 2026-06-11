@@ -3,27 +3,11 @@ title: "RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["遥感应用", "农业生态灾害", "方法化"]
-source: "research/rs44_fairness_socioeconomic_mapping_geofm_embeddings.md"
 categories: ["遥感基础模型与多模态理解"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-44` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-原始问题：研究用 GeoFM embedding 做人口、财富、基础设施估计时的空间公平性。调研 AlphaEarth embeddings、population/wealth monitoring 论文，分析城市/农村、国家、收入水平的误差不均，提出 fairnessaware evaluation。 更新时间：20260607 结论摘要 这个方向的关键不
-
-## 正文
-
-# RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings
-
-原始问题：研究用 GeoFM embedding 做人口、财富、基础设施估计时的空间公平性。调研 AlphaEarth embeddings、population/wealth monitoring 论文，分析城市/农村、国家、收入水平的误差不均，提出 fairness-aware evaluation。
-
-更新时间：2026-06-07
 
 ## 结论摘要
 
@@ -373,11 +357,3 @@ GeoFM embeddings 能提升社会经济制图平均性能，但收益在空间、
 8. [AlphaEarth Foundations](https://arxiv.org/abs/2507.22291) and [Satellite Embedding V1](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL)
 9. [SustainBench](https://github.com/sustainlab-group/sustainbench)
 10. [WorldPop](https://www.worldpop.org/) and [GHSL](https://data.jrc.ec.europa.eu/collection/ghsl)
-
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

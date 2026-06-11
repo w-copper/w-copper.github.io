@@ -3,7 +3,6 @@ title: "ROS-SAM：遥感视频中运动目标的高质量交互式分割"
 date: 2026-06-01
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "articles"
 ---
 
 # ROS-SAM：遥感视频中运动目标的高质量交互式分割

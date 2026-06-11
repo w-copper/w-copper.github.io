@@ -3,26 +3,11 @@ title: "RS-15 Taxonomy-Aware Mask Selection"
 date: 2026-06-07
 series: ["2024-2026 遥感 AI 细分研究方向"]
 tags: ["SAM", "开放词表分割", "提示式分割"]
-source: "research/rs15_taxonomy_aware_mask_selection.md"
 categories: ["可提示分割、开放词表与密集预测"]
 draft: false
-source_repo: "codex-rs-articles"
 ---
 
 # RS-15 Taxonomy-Aware Mask Selection
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-15` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 任务：研究开放词表遥感分割中层级标签冲突，例如 building / residential building / damaged building、road / highway / runway、crop / field / rice。结合 CLIP/SAM mask scoring 和层级 taxonomy，设计 taxono
-
-## 正文
-
-# RS-15 Taxonomy-Aware Mask Selection
-
-更新时间：2026-06-07  
-任务：研究开放词表遥感分割中层级标签冲突，例如 `building / residential building / damaged building`、`road / highway / runway`、`crop / field / rice`。结合 CLIP/SAM mask scoring 和层级 taxonomy，设计 taxonomy-aware mask selection 与评价指标。
 
 ## 1. 问题由来
 
@@ -253,10 +238,3 @@ hIoU_c = hIntersection_c / union_c
 - [Flattening the Parent Bias, CVPR 2024 poster](https://cvpr.thecvf.com/virtual/2024/poster/31551)
 - [Fusion of Hierarchical Class Graphs for Remote Sensing Semantic Segmentation](https://www.sciencedirect.com/science/article/pii/S1566253524001878)
 - [SHiNe, CVPR 2024 PDF](https://openaccess.thecvf.com/content/CVPR2024/papers/Liu_SHiNe_Semantic_Hierarchy_Nexus_for_Open-vocabulary_Object_Detection_CVPR_2024_paper.pdf)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。

@@ -1,19 +1,14 @@
-# RS-16 Semantic Change VQA 深挖
+---
+title: "RS-16 Semantic Change VQA"
+date: 2026-06-07
+series: ["2024-2026 遥感 AI 细分研究方向"]
+tags: ["多时相", "变化检测", "时序遥感"]
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+---
 
+# RS-16 Semantic Change VQA
 
-# RS-16 Semantic Change VQA 深挖
-
-> 系列定位：这是一篇可独立发布的研究博客草稿，来自 `RS-16` 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。
-
-## 摘要
-
-更新时间：20260607 范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixedmodality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。 结论摘要 20242026 已经出现直接命中的任务定义：CDQAG、Chan
-
-## 正文
-
-# RS-16 Semantic Change VQA 深挖
-
-更新时间：2026-06-07  
 范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixed-modality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。
 
 ## 结论摘要
@@ -223,11 +218,3 @@ Evidence-Grounded Semantic Change VQA for Optical Remote Sensing
 8. [RSCC dataset](https://github.com/Bili-Sakura/RSCC)
 9. [Referring Change Detection in Remote Sensing Imagery](https://yilmazkorkmaz1.github.io/RCD/)
 10. [OmniEarth](https://huggingface.co/datasets/sjeeudd/OmniEarth)
-
-
-## 博客化改写建议
-
-- 开头可以补一个真实应用场景，让读者先看到为什么这个问题值得做。
-- 保留论文和 GitHub 链接，适合做“可复现研究路线”栏目。
-- 结尾建议固定为“最小实验”和“可能投稿点”，方便后续连续更新。
-

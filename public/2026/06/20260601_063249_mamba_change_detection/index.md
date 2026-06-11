@@ -186,3 +186,4 @@ Mamba是状态空间模型（SSM）的最新进展，具有以下优势：
 2. Gu, A., & Dao, T. (2023). Mamba: Linear-Time Sequence Modeling with Selective State Spaces. arXiv preprint arXiv:2312.00752.
 3. Chen, H., & Shi, Z. (2024). ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model. IEEE Transactions on Geoscience and Remote Sensing.
 4. Zhang, C., et al. (2022). BIT: Bi-temporal Image Transformer for Remote Sensing Image Change Detection. IEEE Transactions on Geoscience and Remote Sensing.
+
