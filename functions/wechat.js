@@ -38,7 +38,7 @@ function siteBase(env) {
 }
 
 async function verifySignature(request, env) {
-  const token = env.WECHAT_TOKEN;
+  const token = (env.WECHAT_TOKEN || "").trim();
   if (!token) {
     return false;
   }
