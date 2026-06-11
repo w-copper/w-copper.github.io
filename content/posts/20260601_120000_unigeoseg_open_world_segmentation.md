@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架'
-categories = ['遥感AI']
-tags = ["指令驱动分割", "开放世界分割", "GeoSeg-1M数据集", "统一框架", "多任务学习"]
-+++
+---
+title: "UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # UniGeoSeg：百万级数据集驱动的统一开放世界遥感分割框架
 

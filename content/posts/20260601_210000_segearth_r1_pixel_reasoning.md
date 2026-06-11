@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = '当遥感图像学会\"思考\"：SegEarth-R1用LLM实现地理空间像素推理'
-categories = ['遥感AI']
-tags = ["地理空间像素推理", "大语言模型", "遥感分割", "视觉推理", "EarthReason数据集"]
-+++
+---
+title: "当遥感图像学会\"思考\"：SegEarth-R1用LLM实现地理空间像素推理"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # 当遥感图像学会"思考"：SegEarth-R1用LLM实现地理空间像素推理
 

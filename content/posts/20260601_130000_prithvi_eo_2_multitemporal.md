@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "多时相", "MAE预训练", "时空注意力", "全球覆盖"]
-+++
+---
+title: "Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # Prithvi-EO-2.0：NASA和IBM联手打造的600M参数地球观测基础模型
 

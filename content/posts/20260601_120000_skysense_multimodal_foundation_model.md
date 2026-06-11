@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'SkySense：20亿参数多模态遥感基础模型，统一理解地球观测'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "多模态融合", "时序建模", "地球观测", "通用解译"]
-+++
+---
+title: "SkySense：20亿参数多模态遥感基础模型，统一理解地球观测"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # SkySense：20亿参数多模态遥感基础模型，统一理解地球观测
 

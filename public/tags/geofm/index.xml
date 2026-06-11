@@ -1,0 +1,134 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GeoFM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/geofm/</link><description>GeoFM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/geofm/" rel="self" type="application/rss+xml"/><item><title>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</title><link>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</guid><description><![CDATA[<h1 id="rs-01-sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
+    <a href="#rs-01-sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-01</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 研究问题 细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
+    <a href="#sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><p>更新时间：2026-06-07</p>
+<h2 id="研究问题" class="headerLink">
+    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出更稳定的边界。</p>
+<p>这个问题不等同于“遥感语义分割”或“把 SAM 用到遥感”。它只关注一个环节：给定 <code>box</code>、<code>rotated box</code>、<code>coarse mask</code> 或检测器输出，如何选择 prompt 点的位置、数量、正负标签和迭代策略。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>SAM 的交互分割在自然图像中很强，但遥感图像有几个结构性差异：</p>
+<ul>
+<li>目标小：飞机、车、船、屋顶构件在 tile 中只占少量像素，box 内背景比例很高。</li>
+<li>目标旋转：水平框会包进大量背景，尤其是飞机、船、跑道、细长建筑。</li>
+<li>目标密集：停车场车辆、建筑群、集装箱等相邻实例容易被一个正点或一个 box 合并。</li>
+<li>大幅面切片：超大影像被切成 patch 后，目标可能跨 tile，且局部上下文不足。</li>
+<li>语义与边界分离：CLIP/VLM/检测器知道类别，SAM 主要负责边界；两者之间的误差会传给 prompt。</li>
+</ul>
+<p>因此，box prompt 常能定位但边界粗，point prompt 可纠偏但点位选择困难。可投稿的小空间在于：把检测/粗分割的不确定性、边界几何和遥感先验转化成一组正负 prompt 点。</p>]]></description></item><item><title>RS-02 GeoFM Benchmark Leakage Audit</title><link>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</guid><description><![CDATA[<h1 id="rs-02-geofm-benchmark-leakage-audit" class="headerLink">
+    <a href="#rs-02-geofm-benchmark-leakage-audit" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-02</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>研究问题：geospatial foundation model 评测中的训练测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。 1. 问题由来 GeoFM 的预训练数据通常来自全球尺度 Sentinel2</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-02-geofm-benchmark-leakage-audit-1" class="headerLink">
+    <a href="#rs-02-geofm-benchmark-leakage-audit-1" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><p>研究问题：geospatial foundation model 评测中的训练-测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GeoFM 的预训练数据通常来自全球尺度 Sentinel-2、Landsat、NAIP、航空影像、气象/地理辅助数据和公开下游数据集合并。模型越大，越容易出现一个尴尬问题：下游 benchmark 的测试图像、相邻瓦片、同一 Sentinel/Landsat scene、同一年同一区域影像，可能已经在预训练中出现过。</p>
+<p>这会让 SOTA 被高估，尤其在以下场景中：</p>
+<ul>
+<li>地理区域重叠：训练或预训练见过同一城市、同一农田地块、同一灾区附近区域，测试看似独立但空间自相关很强。</li>
+<li>时间重叠：测试年份、季节或灾害前后影像被预训练覆盖，模型可能记住局部地物状态，而不是真正泛化。</li>
+<li>同源瓦片泄漏：大幅影像被切成 patch 后随机划分，训练/测试 patch 共享同一 parent scene 或 mosaic。</li>
+<li>下游数据覆盖：模型预训练直接使用了下游 benchmark 的影像、标签衍生产品、caption/QA 或同源公开数据。</li>
+</ul>
+<p>2024-2026 的趋势是：PANGAEA、PhilEO Bench、Copernicus-Bench、GEOBench-VLM 等开始统一评测；EarthShift 和 REOBench 开始强调真实分布偏移；<code>No One Knows the State of the Art in Geospatial Foundation Models</code> 则把问题进一步推到“GeoFM SOTA 是否可被清晰比较”的层面。我的判断是：未来两年，GeoFM 论文如果没有清楚的数据血缘和泄漏审计，很难让评测结论真正站稳。</p>]]></description></item><item><title>RS-03 GSD-Aware GeoFM Adapter</title><link>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-03-gsd-aware-geofm-adapter/</guid><description><![CDATA[<h1 id="rs-03-gsd-aware-geofm-adapter" class="headerLink">
+    <a href="#rs-03-gsd-aware-geofm-adapter" class="header-mark"></a>RS-03 GSD-Aware GeoFM Adapter</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-03</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 对应 prompt：research/50threadprompts.md 中 RS03 GSDAware GeoFM Adapter 目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、PrithviEO2.0、AlphaEarth、GeoFM</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-03-gsd-aware-geofm-adapter-1" class="headerLink">
+    <a href="#rs-03-gsd-aware-geofm-adapter-1" class="header-mark"></a>RS-03 GSD-Aware GeoFM Adapter</h1><p>更新时间：2026-06-07<br>
+对应 prompt：<code>research/50_thread_prompts.md</code> 中 <code>RS-03 GSD-Aware GeoFM Adapter</code><br>
+目标：研究遥感 foundation model 如何显式利用 GSD/分辨率作为连续条件；比较 ScaleEarth、SkySense、Prithvi-EO-2.0、AlphaEarth、GeoFM/AnySat/Clay/Galileo 中的尺度处理方式；设计一个只引入轻量 adapter/LoRA 的 GSD-aware 下游适配方法，并给出分类、分割、检测三个任务的实验矩阵。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GSD, ground sample distance，决定一个像素对应地面的真实长度。遥感模型如果只看 resize 后的 patch，很容易把“像素尺度”误当成“真实尺度”：同样 224 x 224 的输入，在 0.3 m 航空影像中可能覆盖一个街区，在 10 m Sentinel-2 中可能覆盖数平方公里。自然图像 VFM 常把尺度变化当成数据增强问题，但遥感中尺度本身包含任务语义：</p>
+<ul>
+<li>建筑、车辆、飞机、船舶等目标的真实尺寸范围相对稳定，GSD 决定它们在图像中的像素大小。</li>
+<li>land cover / crop / ecological mapping 中，GSD 影响 mixed pixel、边界模糊、纹理可见性和类别层级。</li>
+<li>多源训练常把 Sentinel-2、Landsat、NAIP、VHR aerial、Planet、commercial imagery 放在一起，如果模型不知道 GSD，跨传感器泛化会出现隐性偏差。</li>
+<li>下游 benchmark 常把图像统一 resize 到固定输入大小，这会抹掉真实地理尺度，导致模型在跨分辨率测试时不稳。</li>
+</ul>
+<p>因此，GSD-aware adapter 的核心不是“把分辨率写进 prompt”，而是让模型在特征变换、attention、adapter/LoRA 参数或 decoder 中连续地感知地面尺度。</p>]]></description></item><item><title>RS-04 Geo-Temporal Embedding for Foundation Models</title><link>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-04-geo-temporal-embedding-for-foundation-models/</guid><description><![CDATA[<h1 id="rs-04-geo-temporal-embedding-for-foundation-models" class="headerLink">
+    <a href="#rs-04-geo-temporal-embedding-for-foundation-models" class="header-mark"></a>RS-04 Geo-Temporal Embedding for Foundation Models</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-04</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 对应 prompt：调研 20242026 GeoFM 如何使用经纬度、时间、季节、气候带等地理时间元数据。重点分析这些元数据是作为 token、positional encoding、retrieval key 还是训练采样策略；提出一个“地理时间条件化 adapter”小课题，避免模型只记住区域偏差。 1. 执行摘要 2024</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-04-geo-temporal-embedding-for-foundation-models-1" class="headerLink">
+    <a href="#rs-04-geo-temporal-embedding-for-foundation-models-1" class="header-mark"></a>RS-04 Geo-Temporal Embedding for Foundation Models</h1><p>更新时间：2026-06-07<br>
+对应 prompt：调研 2024-2026 GeoFM 如何使用经纬度、时间、季节、气候带等地理时间元数据。重点分析这些元数据是作为 token、positional encoding、retrieval key 还是训练采样策略；提出一个“地理时间条件化 adapter”小课题，避免模型只记住区域偏差。</p>
+<h2 id="1-执行摘要" class="headerLink">
+    <a href="#1-%e6%89%a7%e8%a1%8c%e6%91%98%e8%a6%81" class="header-mark"></a>1. 执行摘要</h2><p>2024-2026 的 GeoFM 正在从“只看像素”转向“像素 + 传感器 + 时间 + 地理位置 + 生态/气候上下文”的条件化表示。这个方向的关键不只是把经纬度和日期塞给模型，而是要回答：模型是否学到了可迁移的地理时间规律，还是只是记住某个地方常见什么地物。</p>
+<p>目前可以把方法分成五类：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类别</th>
+          <th>做法</th>
+          <th>代表</th>
+          <th>优点</th>
+          <th>风险</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>显式连续元数据 embedding</td>
+          <td>对 lat/lon、week/hour、GSD、wavelength 做数值归一化后编码</td>
+          <td>Clay, Prithvi-EO-2.0</td>
+          <td>工程直接、适合下游 adapter</td>
+          <td>容易让模型记地理偏置</td>
+      </tr>
+      <tr>
+          <td>离散 token 化</td>
+          <td>将经纬度/时间/模态等转成离散 token，与图像 token 一起预训练</td>
+          <td>TerraMind</td>
+          <td>适合任意模态生成和 token-level 推理</td>
+          <td>token 粒度影响很大，坐标离散会损失连续空间关系</td>
+      </tr>
+      <tr>
+          <td>时空统一检索空间</td>
+          <td>把图像、位置、时间映射到同一 embedding space</td>
+          <td>TIGeR, GT-Loc</td>
+          <td>可做 geolocation、time prediction、geo-time retrieval</td>
+          <td>主要来自自然图像/街景，迁移到卫星需处理俯视和传感器差异</td>
+      </tr>
+      <tr>
+          <td>年度/时序 embedding field</td>
+          <td>生成每年每个像元的地表 embedding</td>
+          <td>AlphaEarth Foundations, Tessera</td>
+          <td>适合全球制图和时间序列监测</td>
+          <td>模型内部不可控，可能隐藏空间不公平性</td>
+      </tr>
+      <tr>
+          <td>采样/benchmark 层面的地理时间控制</td>
+          <td>用 spatial/temporal split、生态区覆盖、跨年评测控制偏差</td>
+          <td>EarthShift, PANGAEA, SSL4EO-S12 v1.1</td>
+          <td>可验证泛化</td>
+          <td>不是模型结构，不能单独提升能力</td>
+      </tr>
+  </tbody>
+</table>
+<p>核心研究机会：提出一个 <strong>Geo-Time Conditional Adapter (GTCA)</strong>，在冻结 GeoFM backbone 的前提下，只用轻量模块注入经纬度、年内时间、年份、气候区和 GSD，并通过反偏置训练约束避免“坐标捷径”。</p>]]></description></item><item><title>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</title><link>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-05-alphaearth-prithvi-embeddings-for-small-area-lora/</guid><description><![CDATA[<h1 id="rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="headerLink">
+    <a href="#rs-05-alphaearthprithvi-embeddings-for-small-area-lora" class="header-mark"></a>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-05</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>原始问题：围绕“用公开 GeoFM embedding 做小区域低样本制图”深挖：AlphaEarth embeddings、PrithviEO2.0、Clay、Satlas/RS foundation features 在 wildfire、crop、urban mapping 中如何微调。设计一个 LoRA/linear probe/adapter 的公</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-05-alphaearthprithvi-embeddings-for-small-area-lora-1" class="headerLink">
+    <a href="#rs-05-alphaearthprithvi-embeddings-for-small-area-lora-1" class="header-mark"></a>RS-05 AlphaEarth/Prithvi Embeddings for Small-Area LoRA</h1><p>原始问题：围绕“用公开 GeoFM embedding 做小区域低样本制图”深挖：AlphaEarth embeddings、Prithvi-EO-2.0、Clay、Satlas/RS foundation features 在 wildfire、crop、urban mapping 中如何微调。设计一个 LoRA/linear probe/adapter 的公平比较实验，强调小样本和跨区泛化。</p>
+<p>更新时间：2026-06-07</p>
+<h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向最值得做的不是“再证明 foundation model 有用”，而是做一个严格、可复现、成本可控的比较：同样的小区域标签预算下，公开 embedding、冻结编码器、轻量 adapter/LoRA、decoder-only 和 full fine-tuning 到底谁更稳，尤其在跨区域、跨年份、跨生物群区、跨城市形态时谁掉得少。</p>
+<p>关键边界：</p>
+<ul>
+<li>AlphaEarth Foundations 当前主要以 Google Satellite Embedding 数据集形式开放：10 m、年度、64 维、2017-2024 的全球 embedding layers，适合做 frozen embedding + classifier/head，不适合直接对模型本体做 LoRA。</li>
+<li>Prithvi-EO-2.0、Clay、SatlasPretrain 是更适合做参数高效微调的 open model/backbone 路线。Prithvi-EO-2.0 官方 GitHub 已提供 TerraTorch 下游任务配置，TerraTorch 也明确支持 Prithvi、TerraMind、SatMAE、Satlas、DOFA、Clay 等 backbone。</li>
+<li>小区域制图的核心问题是“局部标签少 + 空间自相关强 + 区域外泛化难”。随机划分会虚高；必须做 spatial block、leave-region、leave-year、leave-biome 或 leave-city 测试。</li>
+</ul>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感制图依赖人工特征、光谱指数、随机森林或任务专用深度网络。它们在本地标签足够、同分布测试时表现不错，但迁移到新的城市、农田制度、火烧迹地、气候带或传感器组合时往往需要重新标注。GeoFM 的承诺是：用大规模未标注 EO 数据预训练出通用表示，再用很少的本地标签快速制图。</p>]]></description></item></channel></rss>

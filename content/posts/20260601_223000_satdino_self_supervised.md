@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'SatDINO：当DINO遇上遥感——对比学习在卫星图像预训练中的深度探索'
-categories = ['遥感AI']
-tags = ["自监督学习", "DINO", "对比学习", "GSD编码", "遥感预训练"]
-+++
+---
+title: "SatDINO：当DINO遇上遥感——对比学习在卫星图像预训练中的深度探索"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # SatDINO：当DINO遇上遥感——对比学习在卫星图像预训练中的深度探索
 

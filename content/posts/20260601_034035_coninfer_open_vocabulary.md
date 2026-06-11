@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'ConInfer：无需训练，用上下文推理实现遥感开放词汇分割'
-categories = ['遥感AI']
-tags = ["开放词汇分割", "遥感图像", "免训练", "上下文推理", "CLIP"]
-+++
+---
+title: "ConInfer：无需训练，用上下文推理实现遥感开放词汇分割"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # ConInfer：无需训练，用上下文推理实现遥感开放词汇分割
 

@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'GeoGround：统一遥感视觉Grounding的大型视觉语言模型'
-categories = ['遥感AI']
-tags = ["视觉Grounding", "遥感大模型", "多任务统一", "Text-Mask技术", "像素级定位"]
-+++
+---
+title: "GeoGround：统一遥感视觉Grounding的大型视觉语言模型"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # GeoGround：统一遥感视觉Grounding的大型视觉语言模型
 

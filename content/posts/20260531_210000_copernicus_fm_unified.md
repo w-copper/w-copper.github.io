@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = '一个模型吃透所有卫星传感器：Copernicus-FM如何统一地球观测基础模型'
-categories = ['遥感AI']
-tags = ["地球观测基础模型", "多传感器统一", "动态超网络", "元数据编码", "哥白尼计划"]
-+++
+---
+title: "一个模型吃透所有卫星传感器：Copernicus-FM如何统一地球观测基础模型"
+date: 2026-05-31
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # 一个模型吃透所有卫星传感器：Copernicus-FM如何统一地球观测基础模型
 

@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "多模态统一", "Transformer", "自监督学习", "专家混合"]
-+++
+---
+title: "SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # SkySense V2：统一多模态遥感基础模型，一个Backbone搞定RGB/SAR/多光谱
 

@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'Mamba-FCS：融合空间-频率特征与变化引导注意力的遥感语义变化检测'
-categories = ['遥感AI']
-tags = ["语义变化检测", "Mamba架构", "频率域融合", "变化引导注意力", "类别不平衡"]
-+++
+---
+title: "Mamba-FCS：融合空间-频率特征与变化引导注意力的遥感语义变化检测"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # Mamba-FCS：融合空间-频率特征与变化引导注意力的遥感语义变化检测
 

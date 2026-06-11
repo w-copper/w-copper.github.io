@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = 'TerraMind: 地球观测领域的首个任意到任意生成式多模态基础模型'
-categories = ['遥感AI']
-tags = []
-+++
+---
+title: "TerraMind: 地球观测领域的首个任意到任意生成式多模态基础模型"
+date: 2026-05-31
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # TerraMind: 地球观测领域的首个任意到任意生成式多模态基础模型
 

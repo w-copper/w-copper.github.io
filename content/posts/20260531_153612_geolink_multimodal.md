@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = 'GeoLink：用OpenStreetMap数据赋能遥感基础模型'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "OpenStreetMap", "多模态融合", "图神经网络", "语义分割"]
-+++
+---
+title: "GeoLink：用OpenStreetMap数据赋能遥感基础模型"
+date: 2026-05-31
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # GeoLink：用OpenStreetMap数据赋能遥感基础模型
 

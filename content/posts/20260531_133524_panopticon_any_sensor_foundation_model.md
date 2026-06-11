@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = 'Panopticon: 任意传感器地球观测基础模型'
-categories = ['遥感AI']
-tags = ["任意传感器基础模型", "地球观测", "DINOv2", "跨注意力机制", "传感器无关"]
-+++
+---
+title: "Panopticon: 任意传感器地球观测基础模型"
+date: 2026-05-31
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # Panopticon: 任意传感器地球观测基础模型
 

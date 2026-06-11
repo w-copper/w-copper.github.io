@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "多模态", "多分辨率", "JEPA架构", "自监督学习"]
-+++
+---
+title: "AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据
 

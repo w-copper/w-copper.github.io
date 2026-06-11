@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = '扩散模型赋能遥感变化检测：DDPM-CD的创新之路'
-categories = ['遥感AI']
-tags = ["遥感变化检测", "扩散模型", "自监督预训练", "特征提取", "DDPM"]
-+++
+---
+title: "扩散模型赋能遥感变化检测：DDPM-CD的创新之路"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # 扩散模型赋能遥感变化检测：DDPM-CD的创新之路
 

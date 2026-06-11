@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'RSKT-Seg：旋转不变+领域迁移实现遥感图像开放词汇分割'
-categories = ['遥感AI']
-tags = ["开放词汇分割", "遥感图像", "旋转不变", "领域迁移", "成本图"]
-+++
+---
+title: "RSKT-Seg：旋转不变+领域迁移实现遥感图像开放词汇分割"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # RSKT-Seg：旋转不变+领域迁移实现遥感图像开放词汇分割
 

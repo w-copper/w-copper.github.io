@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = 'HyperFree: 通道自适应免微调高光谱遥感基础模型'
-categories = ['遥感AI']
-tags = ["高光谱遥感", "基础模型", "通道自适应", "免微调", "多任务处理"]
-+++
+---
+title: "HyperFree: 通道自适应免微调高光谱遥感基础模型"
+date: 2026-05-31
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # HyperFree: 通道自适应免微调高光谱遥感基础模型
 

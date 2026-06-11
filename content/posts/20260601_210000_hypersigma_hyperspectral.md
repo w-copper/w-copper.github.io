@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = '全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？'
-categories = ['遥感AI']
-tags = ["高光谱图像", "基础模型", "Vision Transformer", "稀疏采样注意力", "自监督预训练"]
-+++
+---
+title: "全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？"
+date: 2026-06-01
+categories: ["多源数据融合、效率部署与应用落地"]
+draft: false
+source_repo: "articles"
+---
 
 # 全球首个十亿级高光谱基础模型：HyperSIGMA如何统一高层与底层视觉任务？
 

@@ -1,0 +1,246 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>方法化 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%96%B9%E6%B3%95%E5%8C%96/</link><description>方法化 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%96%B9%E6%B3%95%E5%8C%96/" rel="self" type="application/rss+xml"/><item><title>RS-41 Phenology-Aware Crop Foundation Models</title><link>https://spacetop.win/2026/06/rs-41-phenology-aware-crop-foundation-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-41-phenology-aware-crop-foundation-models/</guid><description><![CDATA[<h1 id="rs-41-phenology-aware-crop-foundation-models" class="headerLink">
+    <a href="#rs-41-phenology-aware-crop-foundation-models" class="header-mark"></a>RS-41 Phenology-Aware Crop Foundation Models</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-41</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 作物识别的关键不是某一天的影像，而是作物在一个生长季中的物候轨迹。20242026 的作物遥感研究从传统 Sentinel2 time series 分类，走向 multisource temporal foundation model、regionadaptive phenology、WorldCereal 实际部署和 A</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-41-phenology-aware-crop-foundation-models-1" class="headerLink">
+    <a href="#rs-41-phenology-aware-crop-foundation-models-1" class="header-mark"></a>RS-41 Phenology-Aware Crop Foundation Models</h1><p>更新时间：2026-06-07</p>
+<h2 id="摘要-1" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>作物识别的关键不是某一天的影像，而是作物在一个生长季中的物候轨迹。2024-2026 的作物遥感研究从传统 Sentinel-2 time series 分类，走向 multi-source temporal foundation model、region-adaptive phenology、WorldCereal 实际部署和 AgriFM。最有价值的小问题是：如何让 foundation model 学到“可迁移的物候阶段”，而不是记住某地区某年的日历日期。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>同一种作物在不同纬度、海拔、管理制度和气候年份下，播种、返青、抽穗、成熟和收获时间都会偏移。模型若用固定 day-of-year 作为强特征，很容易跨年份或跨区域失效。物候感知模型需要处理不规则时间采样、云导致的缺测、多源传感器和作物生长阶段对齐。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>价值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Self-supervised pre-training for large-scale crop mapping using Sentinel-2 time series</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271623003386" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>大规模 S2 时序自监督作物制图。</td>
+      </tr>
+      <tr>
+          <td>Temporally transferable crop mapping with temporal encoding and augmentations</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843224002218" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>使用 temporal encoding 和 day shifting 提升跨年份迁移。</td>
+      </tr>
+      <tr>
+          <td>AgriFM</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2505.21357" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>多源时序 crop mapping foundation model，强调多尺度时空模式。</td>
+      </tr>
+      <tr>
+          <td>Deploying GFMs in the Real World: WorldCereal</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2508.00858" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>用 Presto 等模型讨论真实作物制图部署难点。</td>
+      </tr>
+      <tr>
+          <td>Region-Adaptive Phenology-Aware Network</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/24/4011" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>区域自适应物候网络，强调跨区域泛化。</td>
+      </tr>
+      <tr>
+          <td>Benchmarking FMs for hyperspectral crop type mapping</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2510.11576" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>将 foundation model 用于 cereal crop type mapping。</td>
+      </tr>
+      <tr>
+          <td>FLORO</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://doi.org/10.48550/arXiv.2605.28174" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>生态遥感 across sensors/scales，可迁移到农业生态任务。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="方法脉络" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><ol>
+<li>时间编码：day-of-year、month、season embedding。</li>
+<li>物候增强：random day shifting、temporal cropping、cloud gap simulation。</li>
+<li>阶段对齐：用 NDVI/EVI 曲线估计生长阶段，再让模型按阶段而非日期聚合。</li>
+<li>多源时序：Sentinel-2、Landsat/HLS、SAR 可选、气象和地块先验共同建模；本系列默认光学/多光谱优先。</li>
+<li>foundation model 适配：Presto、Prithvi、AgriFM、Galileo 等作为时序基座。</li>
+</ol>
+<h2 id="当前问题" class="headerLink">
+    <a href="#%e5%bd%93%e5%89%8d%e9%97%ae%e9%a2%98" class="header-mark"></a>当前问题</h2><ul>
+<li>日历日期和物候阶段混淆。</li>
+<li>云缺测导致关键阶段观测不足。</li>
+<li>作物标签跨区域定义不一致。</li>
+<li>多年、多地、多传感器 benchmark 不统一。</li>
+<li>foundation model 在真实部署中仍需要区域微调。</li>
+</ul>
+<h2 id="可执行研究方案" class="headerLink">
+    <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a0%94%e7%a9%b6%e6%96%b9%e6%a1%88" class="header-mark"></a>可执行研究方案</h2><p>题目：Phenology-Phase Adapter for Crop Foundation Models</p>]]></description></item><item><title>RS-42 Wildfire Mapping with GeoFM LoRA</title><link>https://spacetop.win/2026/06/rs-42-wildfire-mapping-with-geofm-lora/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-42-wildfire-mapping-with-geofm-lora/</guid><description><![CDATA[<h1 id="rs-42-wildfire-mapping-with-geofm-lora" class="headerLink">
+    <a href="#rs-42-wildfire-mapping-with-geofm-lora" class="header-mark"></a>RS-42 Wildfire Mapping with GeoFM LoRA</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-42</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：面向 wildfire / burn scar / burn severity mapping，如何用低样本、参数高效的 GeoFM adapter/LoRA 适配 Prithvi、TerraMind、DINOv3、AlphaEarth 等遥感基础模型，并处理 pre/postfire 光学影像、云烟干扰、不确定性和跨地区</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-42-wildfire-mapping-with-geofm-lora-1" class="headerLink">
+    <a href="#rs-42-wildfire-mapping-with-geofm-lora-1" class="header-mark"></a>RS-42 Wildfire Mapping with GeoFM LoRA</h1><p>更新时间：2026-06-07<br>
+细问题：面向 wildfire / burn scar / burn severity mapping，如何用低样本、参数高效的 GeoFM adapter/LoRA 适配 Prithvi、TerraMind、DINOv3、AlphaEarth 等遥感基础模型，并处理 pre/post-fire 光学影像、云烟干扰、不确定性和跨地区泛化。</p>
+<h2 id="1-方向判断" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e5%88%a4%e6%96%ad" class="header-mark"></a>1. 方向判断</h2><p>Wildfire mapping 的经典路线是 NBR/dNBR、BAIS2、阈值、随机森林、U-Net/Siamese U-Net、ChangeFormer 一类变化检测模型。2024-2026 的新变化是：基础模型开始进入真正可复现的 wildfire 任务，而不只是“拿 Prithvi 做一个示例”。其中最直接的锚点是 2026 IGARSS 论文 <a href="https://arxiv.org/abs/2605.04989" target="_blank" rel="noopener noreferrer">Low-Rank Adaptation of Geospatial Foundation Models for Wildfire Mapping Using Sentinel-2 Data</a>，其官方代码为 <a href="https://github.com/alishibli97/wildfire-lora-gfm" target="_blank" rel="noopener noreferrer">alishibli97/wildfire-lora-gfm</a>。</p>]]></description></item><item><title>RS-43 Illegal Mining Evidence Grounding</title><link>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</guid><description><![CDATA[<h1 id="rs-43-illegal-mining-evidence-grounding" class="headerLink">
+    <a href="#rs-43-illegal-mining-evidence-grounding" class="header-mark"></a>RS-43 Illegal Mining Evidence Grounding</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-43</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidencegrounded detec</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-43-illegal-mining-evidence-grounding-1" class="headerLink">
+    <a href="#rs-43-illegal-mining-evidence-grounding-1" class="header-mark"></a>RS-43 Illegal Mining Evidence Grounding</h1><p>更新时间：2026-06-07<br>
+任务：以 illegal mining / deforestation 监测为场景，研究 VLM / GeoFM 如何输出可审计证据区域；调研 ELDOR、Amazon Mining Watch、change detection / VQA / change caption 论文，提出 evidence-grounded detection / change caption 方案。</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>非法采矿，尤其是亚马逊和加纳等地区的 artisanal and small-scale gold mining，具有几个典型遥感难点：目标尺度小、形态变化快、常沿河流和道路扩散、裸土/采坑/尾矿池/临时道路/简易机场之间存在强上下文关系，同时又经常受云、阴影、季节水位和成像分辨率影响。传统做法多是二分类或语义分割：给出“这里是矿区”。但执法、新闻调查、生态评估和社区沟通需要的不只是一个 mask，而是可审计证据：模型为什么认为这里是非法采矿，变化发生在何处，相关证据是否来自裸土扩张、河道浑浊、植被损失、道路/机场/机械痕迹，答案有没有定位支撑。</p>]]></description></item><item><title>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</title><link>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</guid><description><![CDATA[<h1 id="rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="headerLink">
+    <a href="#rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="header-mark"></a>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-44</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>原始问题：研究用 GeoFM embedding 做人口、财富、基础设施估计时的空间公平性。调研 AlphaEarth embeddings、population/wealth monitoring 论文，分析城市/农村、国家、收入水平的误差不均，提出 fairnessaware evaluation。 更新时间：20260607 结论摘要 这个方向的关键不</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings-1" class="headerLink">
+    <a href="#rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings-1" class="header-mark"></a>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</h1><p>原始问题：研究用 GeoFM embedding 做人口、财富、基础设施估计时的空间公平性。调研 AlphaEarth embeddings、population/wealth monitoring 论文，分析城市/农村、国家、收入水平的误差不均，提出 fairness-aware evaluation。</p>
+<p>更新时间：2026-06-07</p>
+<h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向的关键不在于“GeoFM embedding 能不能预测财富/人口/基础设施”，而在于：这些预测误差是否会系统性落在农村、低收入、非洲/拉美、非核心城市、非正式住区、低人口密度地区，以及这些误差是否会改变政策资源排序。</p>
+<p>2024-2026 的新变化是，社会经济遥感从手工夜光/道路/建筑 covariates 和 CNN poverty mapping，进入了 embedding-as-data 阶段：AlphaEarth Foundations 提供全球年度 10 m、64 维 embedding；PDFM/Population Dynamics Foundation Model 提供面向人口动态、健康、社会经济和环境任务的地理 embedding；Tempov 把双时相 Landsat 自监督预训练用于财富监测；Prithvi、Clay 等 Earth embeddings 也被用于城市指标预测。</p>]]></description></item><item><title>RS-45 Few-Shot Disaster Building Damage Mapping</title><link>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</guid><description><![CDATA[<h1 id="rs-45-few-shot-disaster-building-damage-mapping" class="headerLink">
+    <a href="#rs-45-few-shot-disaster-building-damage-mapping" class="header-mark"></a>RS-45 Few-Shot Disaster Building Damage Mapping</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-45</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：灾后建筑损毁低样本制图；优先 VHR 光学 pre/post 遥感影像，兼顾 UAV/FloodNet 与 VLM 报告任务；SAR 或地面多视角工作只作为补充参考。 1. 问题由来 灾后建筑损毁制图的核心约束是“黄金 72 小时”：需要快速定位受损建筑、判断损毁等级，并把结果交给救援、保险和城市管理流程。但 xBD/xVi</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-45-few-shot-disaster-building-damage-mapping-1" class="headerLink">
+    <a href="#rs-45-few-shot-disaster-building-damage-mapping-1" class="header-mark"></a>RS-45 Few-Shot Disaster Building Damage Mapping</h1><p>更新时间：2026-06-07<br>
+范围：灾后建筑损毁低样本制图；优先 VHR 光学 pre/post 遥感影像，兼顾 UAV/FloodNet 与 VLM 报告任务；SAR 或地面多视角工作只作为补充参考。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>灾后建筑损毁制图的核心约束是“黄金 72 小时”：需要快速定位受损建筑、判断损毁等级，并把结果交给救援、保险和城市管理流程。但 xBD/xView2 这类主流数据虽然大，仍存在三个长期矛盾：</p>
+<ol>
+<li><strong>低样本与跨灾种泛化</strong>：新灾害发生时通常没有本地标注，模型从飓风迁移到地震、火灾、海啸时会因为建筑形态、成像角度、灾害痕迹和背景地貌变化而失效。</li>
+<li><strong>建筑实例与损毁证据错位</strong>：像素级变化不一定等于建筑损毁，阴影、季节、火烟、水体、配准误差都会产生伪变化；反过来，屋顶破损、局部坍塌又可能很细微。</li>
+<li><strong>可审计输出不足</strong>：应急场景不只要分类标签，还要建筑轮廓、pre/post 证据、损毁理由、置信度和报告文本。VLM 能生成报告，但容易脱离图像证据。</li>
+</ol>
+<p>2024-2026 的新变化是，研究开始把 vision foundation model、SAM、VLM、LoRA/adapter、in-context learning 和跨域迁移引入灾害损毁评估，而不是只训练一个 xBD 专用 Siamese CNN。</p>
+<h2 id="2-代表论文数据与代码" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%95%b0%e6%8d%ae%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>2. 代表论文、数据与代码</h2><table>
+  <thead>
+      <tr>
+          <th>方向</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/数据</th>
+          <th>关键贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>强基线与泛化诊断</td>
+          <td>A simple, strong baseline for building damage detection on the xBD dataset</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2401.17271" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/PaulBorneP/Xview2_Strong_Baseline" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>从 xView2 复杂冠军方案中剥离出简单强基线，并重新划分 unseen-location 测试，指出模型和数据分布都会导致跨地点泛化失败。</td>
+      </tr>
+      <tr>
+          <td>Foundation model 变化检测</td>
+          <td>Generalizable Disaster Damage Assessment via Change Detection with Vision Foundation Model / DAVI</td>
+          <td style="text-align: right">2024 arXiv, 2025 revision</td>
+          <td><a href="https://arxiv.org/abs/2406.08020" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>未确认官方代码</td>
+          <td>结合源域任务模型和 segmentation foundation model，在目标区域无 GT 标签时生成损毁伪标签，并做 pixel/image 两阶段 refinement。</td>
+      </tr>
+      <tr>
+          <td>SAM 视觉提示</td>
+          <td>Visual Prompt Learning of Foundation Models for Post-Disaster Damage Evaluation / ViPDE</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/10/1664" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>未见官方代码</td>
+          <td>用 SAM 嵌入知识和 pre/post 图像对做 contrastive visual prompt learning，面向建筑损毁评价。</td>
+      </tr>
+      <tr>
+          <td>VLM 灾害数据</td>
+          <td>DisasterM3: A Remote Sensing Vision-Language Dataset for Disaster Damage Assessment and Response</td>
+          <td style="text-align: right">2025 NeurIPS</td>
+          <td><a href="https://arxiv.org/abs/2505.21089" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/Junjue-Wang/DisasterM3" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>26,988 bi-temporal images、123k instruction pairs、36 个灾害事件、9 类任务；包含多传感器，SAR 内容需在光学主线中标记为 mixed-modality。</td>
+      </tr>
+      <tr>
+          <td>多模态基准</td>
+          <td>DisasterInsight: A Multimodal Benchmark for Function-Aware and Grounded Disaster Assessment</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2601.18493" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>待确认</td>
+          <td>将 xBD 重构为约 112K building-centered instances，支持功能分类、损毁等级、灾害类型、计数和结构化报告；DI-Chat 用 LoRA 做灾害指令适配。</td>
+      </tr>
+      <tr>
+          <td>智能迁移</td>
+          <td>Smart Transfer: Leveraging Vision Foundation Model for Rapid Building Damage Mapping with Post-Earthquake VHR Imagery</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.02627" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/ai4city-hkust/SmartTransfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>面向震后 VHR 单灾害快速迁移，提出 Pixel-wise Clustering 和 Distance-Penalized Triplet，做 LODO/SSDC 跨区域实验。</td>
+      </tr>
+      <tr>
+          <td>VLM 推理</td>
+          <td>Instruct-ICL: Instruction-Guided In-Context Learning for Post-Disaster Damage Assessment</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2605.11439" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td>FloodNet 依赖 <a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用一个 MLLM 生成任务指令/CoT 指导另一个 MLLM，在 FloodNet post-disaster VQA 上研究 prompt/ICL 稳定性。</td>
+      </tr>
+      <tr>
+          <td>SAM + temporal VLM</td>
+          <td>Integrating segmentation and vision-language model for automated and interpretable building damage assessment from satellite imagery / BDAChat</td>
+          <td style="text-align: right">2026 Automation in Construction</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S1474034626000121" target="_blank" rel="noopener noreferrer">paper</a></td>
+          <td><a href="https://github.com/WangYong921/BDAChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>三阶段框架：改进 SAM 分割、时空配对、BDAChat temporal VLM 做对象级损毁推理和解释。</td>
+      </tr>
+      <tr>
+          <td>工程基线</td>
+          <td>Microsoft building damage assessment toolkit</td>
+          <td style="text-align: right">持续维护</td>
+          <td><a href="https://github.com/microsoft/building-damage-assessment" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://github.com/microsoft/building-damage-assessment-cnn-siamese" target="_blank" rel="noopener noreferrer">CNN Siamese</a></td>
+          <td>GitHub</td>
+          <td>提供 xBD 类别、推理/可视化 workflow，可作为工程 baseline 与部署参考。</td>
+      </tr>
+      <tr>
+          <td>经典对象级变化</td>
+          <td>ChangeOS</td>
+          <td style="text-align: right">2021 RSE, 仍是重要基线</td>
+          <td><a href="https://github.com/Z-Zheng/ChangeOS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>深度对象级语义变化检测框架，适合作为非 foundation model 的强对照。</td>
+      </tr>
+      <tr>
+          <td>数据</td>
+          <td>xBD / xView2</td>
+          <td style="text-align: right">2019-</td>
+          <td><a href="https://arxiv.org/abs/1911.09296" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://fmi-data-index.github.io/xbd.html" target="_blank" rel="noopener noreferrer">dataset index</a>, <a href="https://www.eotdl.com/datasets/xView2" target="_blank" rel="noopener noreferrer">EOTDL</a></td>
+          <td><a href="https://github.com/diux-xview/xview2-baseline" target="_blank" rel="noopener noreferrer">baseline</a></td>
+          <td>主流建筑损毁数据，四级损毁标签：no damage、minor、major、destroyed；仍是少样本和跨灾种实验的核心数据。</td>
+      </tr>
+      <tr>
+          <td>UAV/VQA 补充</td>
+          <td>FloodNet Challenge</td>
+          <td style="text-align: right">2021-</td>
+          <td><a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>GitHub</td>
+          <td>高分辨率 UAV 洪灾图像，含分类、半监督分割和 VQA，适合验证 Instruct-ICL/VLM 的灾害问答路线。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-xbd-专用模型到跨地点强基线" class="headerLink">
+    <a href="#31-xbd-%e4%b8%93%e7%94%a8%e6%a8%a1%e5%9e%8b%e5%88%b0%e8%b7%a8%e5%9c%b0%e7%82%b9%e5%bc%ba%e5%9f%ba%e7%ba%bf" class="header-mark"></a>3.1 xBD 专用模型到跨地点强基线</h3><p>2024 的 xBD simple strong baseline 很重要，因为它不只是给一个模型，而是指出原 competition split 可能高估泛化能力。它把测试位置设置为训练未见区域后，复杂模型和简化模型都明显暴露跨地点弱点。这说明 RS-45 不能只做随机 split 上的 F1，而必须做 leave-event-out、leave-region-out、leave-disaster-type-out。</p>]]></description></item></channel></rss>

@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像\"听懂\"自然语言描述'
-categories = ['遥感AI']
-tags = ["引用式分割", "遥感图像", "CLIP", "SAM", "基础模型"]
-+++
+---
+title: "RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像\"听懂\"自然语言描述"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像"听懂"自然语言描述
 

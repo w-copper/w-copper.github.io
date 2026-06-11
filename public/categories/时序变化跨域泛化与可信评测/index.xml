@@ -1,0 +1,335 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/</link><description>时序变化、跨域泛化与可信评测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/categories/%E6%97%B6%E5%BA%8F%E5%8F%98%E5%8C%96%E8%B7%A8%E5%9F%9F%E6%B3%9B%E5%8C%96%E4%B8%8E%E5%8F%AF%E4%BF%A1%E8%AF%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-20</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 masked temporal reconstruction + downstream change/crop mapping 的小论文方案？ 1. 方向概述 光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>更新时间：2026-06-07<br>
+细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云、云影、雪、薄雾、传感器缺测、不同重访周期、物候周期和真实地物变化混在一起。传统做法常用云掩膜、最佳像元合成、插值、时序平滑或单任务云去除，但 foundation model 时代的机会是：把“缺测、遮挡、季节变化”变成预训练任务本身，让模型学会在不完整、多季节、多区域、多传感器序列中形成稳定表示。</p>
+<p>本方向可被压成一个很具体的论文问题：</p>
+<blockquote>
+  <p>在 Sentinel-2 / HLS 多时相序列中，用真实或模拟云缺测做 masked temporal reconstruction 预训练，是否能同时提升云遮挡条件下的 crop mapping 和真实变化检测，并减少把季节变化误判为变化的错误？</p>
+</blockquote><h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感时序和普通视频不同。视频帧通常时间间隔密集、同一相机、视角连续；卫星时序是稀疏、不规则、多传感器、多大气条件，而且同一像元的语义可能因物候周期而显著变化。对于 crop mapping，模型必须理解不同作物的物候曲线，而不是只看单期纹理。对于 change detection，模型必须区分真实建设/灾害/砍伐变化与季节性植被变化、云影、观测角和配准误差。</p>
+<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>]]></description></item><item><title>RS-21 EarthShift-Style Robustness Suite</title><link>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-21-earthshift-style-robustness-suite/</guid><description><![CDATA[<h1 id="rs-21-earthshift-style-robustness-suite" class="headerLink">
+    <a href="#rs-21-earthshift-style-robustness-suite" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-21</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。 范围：光学/多光谱遥感优先；不把 SARonly 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-21-earthshift-style-robustness-suite-1" class="headerLink">
+    <a href="#rs-21-earthshift-style-robustness-suite-1" class="header-mark"></a>RS-21 EarthShift-Style Robustness Suite</h1><p>更新时间：2026-06-07<br>
+细问题：以 EarthShift 为核心，设计一个遥感模型真实分布偏移评测套件，覆盖跨城市、跨国家、跨气候带、跨季节、跨 GSD、跨传感器，比较 GeoFM、传统监督模型、TTA 方法，并提出报告模板。<br>
+范围：光学/多光谱遥感优先；不把 SAR-only 设置作为主线。若某 benchmark 含 SAR 或多模态，只保留可用光学/多光谱任务或标注为 mixed-modality。</p>
+<h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>EarthShift 把 2024-2026 GeoFM 评测里最关键的问题挑明了：当前大量遥感 benchmark 主要测的是 in-distribution performance，但真实部署经常遇到新的时间窗口、地理区域、空间尺度和传感器。EarthShift 官方页说明其覆盖 5 类 shift、11 个任务和 8 个 geospatial foundation models；论文摘要报告 GFMs 在 OOD 上平均约 15-20% 性能下降，并且这种下降不因模型结构、尺寸、预训练或微调策略而自然消失。</p>
+<p>因此，一个可投稿的小方向不是“再做一个平均精度更高的 GeoFM”，而是做一个更可解释、更可诊断、更贴近部署的 robustness suite：明确每类 shift 的因果来源，区分模型能力、数据泄漏、传感器差异和标签体系变化，并把结果报告成性能、鲁棒性、校准、效率和失败类型的组合。</p>]]></description></item><item><title>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</title><link>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation/</guid><description><![CDATA[<h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="headerLink">
+    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-22</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务原文：研究 testtime adaptation 在跨城市遥感语义分割中的可靠性。重点分析熵最小化、自训练、BN adaptation、prototype adaptation 在 LoveDA、DeepGlobe、Vaihingen/Potsdam 上的风险，提出带不确定性约束的 TTA 方法。 1. 结论先行 跨城市遥感</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation-1" class="headerLink">
+    <a href="#rs-22-test-time-adaptation-for-cross-city-remote-sensing-segmentation-1" class="header-mark"></a>RS-22 Test-Time Adaptation for Cross-City Remote Sensing Segmentation</h1><p>更新时间：2026-06-07<br>
+任务原文：研究 test-time adaptation 在跨城市遥感语义分割中的可靠性。重点分析熵最小化、自训练、BN adaptation、prototype adaptation 在 LoveDA、DeepGlobe、Vaihingen/Potsdam 上的风险，提出带不确定性约束的 TTA 方法。</p>
+<h2 id="1-结论先行" class="headerLink">
+    <a href="#1-%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>1. 结论先行</h2><p>跨城市遥感语义分割的 TTA 不是“把 TENT 跑一下”这么简单。遥感目标具有强空间自相关、类别长尾、城市/农村类别先验差异、GSD 和成像条件差异；这些因素会让熵最小化、自训练和 BN adaptation 在无标签测试流上发生负迁移。当前 2024-2026 的直接 RS-TTA 工作仍少，更成熟的是两条邻近线：遥感 UDA/source-free/one-shot domain adaptation，以及通用 CV 的 continual TTA / segmentation TTA / uncertainty-aware TTA。</p>]]></description></item><item><title>RS-25 OOD Split Design for Remote Sensing Benchmarks</title><link>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-25-ood-split-design-for-remote-sensing-benchmarks/</guid><description><![CDATA[<h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks" class="headerLink">
+    <a href="#rs-25-ood-split-design-for-remote-sensing-benchmarks" class="header-mark"></a>RS-25 OOD Split Design for Remote Sensing Benchmarks</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-25</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：专门调研遥感 benchmark 的 OOD split 设计，比较 random split、spatial block split、leavecityout、leavecountryout、leaveseasonout、leavesensorout 各自测到什么，并输出适合论文复现实验的 split protocol。</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-25-ood-split-design-for-remote-sensing-benchmarks-1" class="headerLink">
+    <a href="#rs-25-ood-split-design-for-remote-sensing-benchmarks-1" class="header-mark"></a>RS-25 OOD Split Design for Remote Sensing Benchmarks</h1><p>更新时间：2026-06-07<br>
+任务：专门调研遥感 benchmark 的 OOD split 设计，比较 random split、spatial block split、leave-city-out、leave-country-out、leave-season-out、leave-sensor-out 各自测到什么，并输出适合论文复现实验的 split protocol。<br>
+默认范围：光学/多光谱/高分辨率遥感为主；不把 SAR-only 作为主线。</p>
+<h2 id="摘要-1" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>遥感 benchmark 的最大风险是“随机划分高分，真实部署掉分”。影像瓦片具有强空间自相关，同一区域相邻 patch、同一城市不同裁片、同一季节同一传感器采样出来的数据，常常让训练集和测试集在纹理、建筑形态、植被物候、成像条件上高度相似。OOD split 的研究价值在于把这种相似性有意打散，分别测试模型面对新地理区域、新时间窗口、新传感器、新空间分辨率和新数据源时是否仍可靠。</p>
+<p>2024-2026 的趋势很明确：PANGAEA 和 PhilEO Bench 试图统一 GeoFM 评测；REOBench 开始系统评估高分辨率光学任务在真实扰动下的鲁棒性；EarthShift 进一步把 OOD 从“单一 corruption”推进到 location、temporal、sensor、scale、data-source 等真实分布偏移；RWDS 专门把卫星目标检测放到真实空间域偏移下评测；Distribution Shifts at Scale/TARDIS 则关注如何在部署阶段检测 ID/OOD。</p>]]></description></item><item><title>RS-34 Missing-Band Reconstruction vs Robust Adaptation</title><link>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-34-missing-band-reconstruction-vs-robust-adaptation/</guid><description><![CDATA[<h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation" class="headerLink">
+    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-34</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 摘要 遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。20242026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-34-missing-band-reconstruction-vs-robust-adaptation-1" class="headerLink">
+    <a href="#rs-34-missing-band-reconstruction-vs-robust-adaptation-1" class="header-mark"></a>RS-34 Missing-Band Reconstruction vs Robust Adaptation</h1><p>更新时间：2026-06-07</p>
+<h2 id="摘要-1" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81-1" class="header-mark"></a>摘要</h2><p>遥感模型遇到缺失 band 有两条路线：先重建缺失 band 再做下游任务，或让模型直接对缺失 band 鲁棒。2024-2026 的光谱 foundation model、masked spectral modeling 和扩散式 band repair 让这个问题重新变得有研究价值。核心判断是：如果下游任务需要物理可解释的光谱曲线，重建路线更强；如果目标是分类/分割泛化，鲁棒适配可能更简单、更稳。</p>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>真实遥感输入经常不完整：传感器原生 band 不同、云和质量控制屏蔽部分波段、不同产品处理级别不一致、商业卫星只提供少数通道。直接补零或丢弃样本会造成信息浪费；但盲目重建 band 也可能生成光谱上好看、下游却有害的伪信号。</p>
+<h2 id="代表论文与项目" class="headerLink">
+    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>工作</th>
+          <th style="text-align: right">年份</th>
+          <th>链接</th>
+          <th>相关性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SatMAE++</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2403.05419" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/techmn/satmae_pp" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>masked pretraining 的固定/多光谱基线。</td>
+      </tr>
+      <tr>
+          <td>DOFA</td>
+          <td style="text-align: right">2024</td>
+          <td><a href="https://arxiv.org/abs/2403.15356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/DOFA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>动态适配不同观测通道。</td>
+      </tr>
+      <tr>
+          <td>SpectralEarth</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2408.08447" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/AABNassim/spectral_earth" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>大规模 EnMAP 高光谱预训练数据和基准。</td>
+      </tr>
+      <tr>
+          <td>HyperFree</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Li_HyperFree_A_Channel-adaptive_and_Tuning-free_Foundation_Model_for_Hyperspectral_Remote_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
+          <td>channel-adaptive/tuning-free，适合作为直接鲁棒适配基线。</td>
+      </tr>
+      <tr>
+          <td>Multispectral to Hyperspectral using Pretrained FM</td>
+          <td style="text-align: right">2025</td>
+          <td><a href="https://arxiv.org/abs/2502.19451" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>MSI 到 HSI 重建路线代表。</td>
+      </tr>
+      <tr>
+          <td>AnyBand-Diff</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.14341" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>spectral-prior-guided diffusion band repair。</td>
+      </tr>
+      <tr>
+          <td>Any-Optical-Model</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/download/37583/41545" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
+          <td>直接评估 missing bands、cross-sensor、cross-resolution 鲁棒性。</td>
+      </tr>
+      <tr>
+          <td>SpectralEarth-FM</td>
+          <td style="text-align: right">2026</td>
+          <td><a href="https://arxiv.org/abs/2605.21075" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>多模态 EO 预训练中接入 HSI。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="两条路线" class="headerLink">
+    <a href="#%e4%b8%a4%e6%9d%a1%e8%b7%af%e7%ba%bf" class="header-mark"></a>两条路线</h2><h3 id="先重建再推理" class="headerLink">
+    <a href="#%e5%85%88%e9%87%8d%e5%bb%ba%e5%86%8d%e6%8e%a8%e7%90%86" class="header-mark"></a>先重建再推理</h3><p>优点：输出完整光谱，适合光谱指数、物理反演、材料识别和可解释分析。<br>
+缺点：重建误差会传播到下游；生成模型可能产生看似合理但物理不真实的 band。</p>]]></description></item><item><title>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</title><link>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</link><pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_211500_rscama_change_captioning/</guid><description><![CDATA[<h1 id="rscama首次将mamba引入遥感变化描述任务实现高效时空建模" class="headerLink">
+    <a href="#rscama%e9%a6%96%e6%ac%a1%e5%b0%86mamba%e5%bc%95%e5%85%a5%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%8f%8f%e8%bf%b0%e4%bb%bb%e5%8a%a1%e5%ae%9e%e7%8e%b0%e9%ab%98%e6%95%88%e6%97%b6%e7%a9%ba%e5%bb%ba%e6%a8%a1" class="header-mark"></a>RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE GRSL 2024 | ESI高被引论文</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>RSCaMa: Remote Sensing Image Change Captioning with State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Chen-Yang Liu et al.</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Geoscience and Remote Sensing Letters (GRSL) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2405.13366" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2405.13366</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/Chen-Yang-Liu/RSCaMa" target="_blank" rel="noopener noreferrer">https://github.com/Chen-Yang-Liu/RSCaMa</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化描述、状态空间模型、Mamba、时序建模、多时相遥感</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像变化描述（Remote Sensing Image Change Captioning, RSICC）是一项新兴的多模态任务，旨在<strong>用自然语言描述多时相遥感图像之间的地表变化</strong>。与传统的二元变化检测（仅判断&quot;变/不变&quot;）不同，RSICC需要输出更丰富的语义信息：</p>
+<ul>
+<li><strong>变化对象</strong>：建筑物、道路、植被等</li>
+<li><strong>变化位置</strong>：在哪里发生了变化</li>
+<li><strong>变化动态</strong>：是新增还是消失</li>
+</ul>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li><strong>CNN-based方法</strong>：感受野有限，难以捕获长距离时空依赖关系</li>
+<li><strong>Transformer-based方法</strong>：自注意力机制的二次复杂度导致计算成本高昂，特别是在处理高分辨率遥感图像时</li>
+<li><strong>时序建模不足</strong>：现有方法多采用简单的双分支结构，缺乏对时序信息的深度交互</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何在保持线性计算复杂度的同时，实现双时相遥感图像之间的深度时空交互，从而生成更准确的变化描述？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1temporal-traversing-ssm-tt-ssm" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91temporal-traversing-ssm-tt-ssm" class="header-mark"></a>核心创新点1：Temporal-Traversing SSM (TT-SSM)</h3><p><strong>设计动机</strong>：
+Mamba架构的时间扫描特性与RSICC任务的时序需求存在天然契合。传统SSM采用单向扫描，无法充分利用双时相图像之间的交互信息。</p>
+<p><strong>具体实现</strong>：
+TT-SSM采用<strong>时间交叉扫描策略</strong>，让两个时相的特征在网络中&quot;交错前行&quot;：</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>]]></description></item><item><title>ChangeMamba：用状态空间模型革新遥感变化检测</title><link>https://spacetop.win/2026/05/20260531_215800_changemamba/</link><pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_215800_changemamba/</guid><description><![CDATA[<h1 id="changemamba用状态空间模型革新遥感变化检测" class="headerLink">
+    <a href="#changemamba%e7%94%a8%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e9%9d%a9%e6%96%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>ChangeMamba：用状态空间模型革新遥感变化检测</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Transactions on Geoscience and Remote Sensing (TGRS) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2404.03425" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、Mamba、状态空间模型、时空建模</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感影像变化检测（Change Detection, CD）是地球观测领域的核心任务之一。想象一下：当你需要快速评估台风过后的建筑损毁情况，或是监测亚马逊雨林的砍伐进度时，传统人工判读方式不仅效率低下，而且容易受主观因素影响。这正是AI模型大显身手的场景——它能自动分析不同时相的卫星或航拍影像，精准定位地表变化。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li>
+<p><strong>CNN的&quot;近视眼&quot;问题</strong>：卷积神经网络受限于有限的感受野，难以捕捉大尺寸遥感影像中的长距离依赖关系。当变化区域跨越较大范围时，CNN容易漏检。</p>
+</li>
+<li>
+<p><strong>Transformer的&quot;暴饮暴食&quot;问题</strong>：虽然Transformer能够建模全局上下文，但其自注意力机制的计算复杂度随图像尺寸呈平方级增长。处理8000×8000像素的卫星影像时，显存消耗惊人。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><blockquote>
+  <p><strong>如何设计一种既能高效处理大尺寸遥感影像，又能准确捕捉时空变化信息的网络架构？</strong></p>
+</blockquote><h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1引入mamba架构到遥感变化检测" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%bc%95%e5%85%a5mamba%e6%9e%b6%e6%9e%84%e5%88%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>核心创新点1：引入Mamba架构到遥感变化检测</h3><p><strong>设计动机</strong>：Mamba架构基于状态空间模型（State Space Model, SSM），通过选择性记忆机制，只保留关键信息，实现线性复杂度的全局感知。这就像给变化检测装上了兼具望远镜和显微镜功能的智能眼镜。</p>
+<p><strong>具体实现</strong>：</p>
+<p>ChangeMamba将Mamba架构应用于遥感变化检测，提出了三种网络框架：</p>
+<ol>
+<li><strong>MambaBCD</strong>：二元变化检测（Binary Change Detection）</li>
+<li><strong>MambaSCD</strong>：语义变化检测（Semantic Change Detection）</li>
+<li><strong>MambaBDA</strong>：建筑损坏评估（Building Damage Assessment）</li>
+</ol>
+<p><strong>关键细节</strong>：</p>]]></description></item><item><title>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</title><link>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</link><pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/05/20260531_211017_changemamba_ssm/</guid><description><![CDATA[<h1 id="changemamba首个基于状态空间模型的遥感变化检测框架" class="headerLink">
+    <a href="#changemamba%e9%a6%96%e4%b8%aa%e5%9f%ba%e4%ba%8e%e7%8a%b6%e6%80%81%e7%a9%ba%e9%97%b4%e6%a8%a1%e5%9e%8b%e7%9a%84%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e6%a1%86%e6%9e%b6" class="header-mark"></a>ChangeMamba：首个基于状态空间模型的遥感变化检测框架</h1><blockquote>
+  <p><strong>论文解读</strong> | IEEE TGRS 2024 | 2026-05-31</p>
+</blockquote><h2 id="-论文信息" class="headerLink">
+    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>标题</strong></td>
+          <td>ChangeMamba: Remote Sensing Change Detection with Spatio-Temporal State Space Model</td>
+      </tr>
+      <tr>
+          <td><strong>作者</strong></td>
+          <td>Hongruixuan Chen, Jian Song, Chengxi Han, Junshi Xia, Naoto Yokoya</td>
+      </tr>
+      <tr>
+          <td><strong>会议</strong></td>
+          <td>IEEE Transactions on Geoscience and Remote Sensing (TGRS) 2024</td>
+      </tr>
+      <tr>
+          <td><strong>arXiv</strong></td>
+          <td><a href="https://arxiv.org/abs/2404.03425v4" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2404.03425v4</a></td>
+      </tr>
+      <tr>
+          <td><strong>GitHub</strong></td>
+          <td><a href="https://github.com/ChenHongruixuan/MambaCD" target="_blank" rel="noopener noreferrer">https://github.com/ChenHongruixuan/MambaCD</a></td>
+      </tr>
+      <tr>
+          <td><strong>关键词</strong></td>
+          <td>遥感变化检测、状态空间模型、Mamba架构、时空建模、二元变化检测、语义变化检测</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-解决的核心问题" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感变化检测（Change Detection, CD）是地理信息科学的核心任务之一，旨在识别同一地理区域在不同时间段拍摄的影像之间的变化。这项技术在灾害评估、城市扩张监测、生态环境保护等领域具有重要应用价值。</p>
+<h3 id="现有方法的局限" class="headerLink">
+    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
+<li>
+<p><strong>CNN的&quot;近视眼&quot;问题</strong>：卷积神经网络受限于有限的感受野，难以捕捉大范围的空间上下文信息。在处理高分辨率遥感影像时，这一缺陷尤为明显。</p>
+</li>
+<li>
+<p><strong>Transformer的&quot;暴饮暴食&quot;问题</strong>：虽然Transformer具有全局建模能力，但其自注意力机制的计算复杂度与序列长度呈平方关系（O(L²)），在处理大尺寸遥感影像时计算成本极高。</p>
+</li>
+<li>
+<p><strong>实际应用挑战</strong>：在实际场景中，如台风灾后评估或森林砍伐监测，需要快速、准确地处理大量高分辨率影像，传统方法难以满足实时性要求。</p>
+</li>
+</ol>
+<h3 id="核心问题提炼" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p>如何设计一个既能捕捉全局空间上下文信息，又具有线性计算复杂度的遥感变化检测架构？</p>
+<h2 id="-解决方案" class="headerLink">
+    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1首次引入mamba架构到遥感变化检测" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e9%a6%96%e6%ac%a1%e5%bc%95%e5%85%a5mamba%e6%9e%b6%e6%9e%84%e5%88%b0%e9%81%a5%e6%84%9f%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b" class="header-mark"></a>核心创新点1：首次引入Mamba架构到遥感变化检测</h3><p><strong>设计动机</strong>：
+Mamba是基于状态空间模型（State Space Model, SSM）的新兴架构，在自然语言处理领域展现出卓越性能。其核心优势在于：</p>
+<ul>
+<li>线性计算复杂度（O(L)），远低于Transformer的O(L²)</li>
+<li>通过选择性记忆机制实现全局感知</li>
+<li>更适合处理长序列数据</li>
+</ul>
+<p><strong>具体实现</strong>：
+ChangeMamba采用Visual Mamba架构作为编码器，将遥感影像转换为序列数据，通过状态空间模型进行特征提取。关键设计包括：</p>]]></description></item></channel></rss>

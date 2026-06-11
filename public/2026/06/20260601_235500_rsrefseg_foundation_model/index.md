@@ -1,4 +1,4 @@
-# RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像\"听懂\"自然语言描述
+# RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像"听懂"自然语言描述
 
 
 # RSRefSeg：用CLIP+SAM双剑合璧，让遥感图像"听懂"自然语言描述

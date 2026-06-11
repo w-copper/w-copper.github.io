@@ -1,0 +1,358 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>大幅面遥感 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E5%A4%A7%E5%B9%85%E9%9D%A2%E9%81%A5%E6%84%9F/</link><description>大幅面遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E5%A4%A7%E5%B9%85%E9%9D%A2%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs</title><link>https://spacetop.win/2026/06/rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms/</guid><description><![CDATA[<h1 id="rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms" class="headerLink">
+    <a href="#rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms" class="header-mark"></a>RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-26</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务范围：大幅面光学遥感 VLM/VQA/grounding 中的视觉 token pruning 与动态切片，重点研究如何避免剪掉小目标、罕见目标或答案证据区域。默认不以 SAR 为主。本文区分两类来源：遥感专用方法与可迁移的通用 VLM token reduction 方法。 1. 方向概述 大幅面遥感图像的矛盾很尖锐：一张卫</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms-1" class="headerLink">
+    <a href="#rs-26-risk-aware-token-pruning-for-large-remote-sensing-vlms-1" class="header-mark"></a>RS-26 Risk-Aware Token Pruning for Large Remote Sensing VLMs</h1><p>更新时间：2026-06-07<br>
+任务范围：大幅面光学遥感 VLM/VQA/grounding 中的视觉 token pruning 与动态切片，重点研究如何避免剪掉小目标、罕见目标或答案证据区域。默认不以 SAR 为主。本文区分两类来源：遥感专用方法与可迁移的通用 VLM token reduction 方法。</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>大幅面遥感图像的矛盾很尖锐：一张卫星或航拍图可以达到几千到几万像素边长，但 VLM 的视觉 token budget 通常按自然图像设计。若直接缩小整图，小目标、细道路、灾损建筑、车辆、飞机等证据会消失；若全图切 tile，再把大量 tile token 送入 VLM，显存、延迟和上下文长度都会爆炸；若只按 attention 或文本相关性剪 token，又可能把真正的答案区域提前剪掉。</p>
+<p>因此 RS-26 的核心不是“怎样剪得更多”，而是“怎样知道哪些 token 不能剪”。遥感场景尤其需要风险感知：目标稀疏、长尾类别多、问题可能指向图像中很小的区域，且背景纹理和地物重复度高。一个可投稿的小问题可以定义为：</p>
+<blockquote>
+  <p>在大幅面遥感 VQA/grounding 中，token pruning 不只优化保留率和推理速度，还要显式估计被剪 token 中包含答案证据、小目标或罕见类别的风险，并在速度-精度-漏检风险之间自适应取舍。</p>]]></description></item><item><title>RS-27 DIP with GIS Priors for Tile Selection</title><link>https://spacetop.win/2026/06/rs-27-dip-with-gis-priors-for-tile-selection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-27-dip-with-gis-priors-for-tile-selection/</guid><description><![CDATA[<h1 id="rs-27-dip-with-gis-priors-for-tile-selection" class="headerLink">
+    <a href="#rs-27-dip-with-gis-priors-for-tile-selection" class="header-mark"></a>RS-27 DIP with GIS Priors for Tile Selection</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-27</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：把 dynamic image pyramid / coarsetofine tile selection 与 GIS 先验结合，让道路、水系、建筑密度、历史变化热力图、POI 等外部地理信息指导高分辨率 tile 选择，用于遥感 VQA 和 visual grounding。 结论先行 这个方向的研究空位比较清晰：ICC</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-27-dip-with-gis-priors-for-tile-selection-1" class="headerLink">
+    <a href="#rs-27-dip-with-gis-priors-for-tile-selection-1" class="header-mark"></a>RS-27 DIP with GIS Priors for Tile Selection</h1><p>更新时间：2026-06-07<br>
+细问题：把 dynamic image pyramid / coarse-to-fine tile selection 与 GIS 先验结合，让道路、水系、建筑密度、历史变化热力图、POI 等外部地理信息指导高分辨率 tile 选择，用于遥感 VQA 和 visual grounding。</p>
+<h2 id="结论先行" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>结论先行</h2><p>这个方向的研究空位比较清晰：ICCV 2025 的 LRS-VQA / Dynamic Image Pyramid 已经证明“大幅面遥感 VLM 不能直接缩放整图，需要 coarse-to-fine tile selection 和 text-guided token pruning”。但它的 selection 主要依赖图像和文本相关性；遥感任务天然有 GIS 层，例如道路、水体、建筑 footprint、POI、地块、历史变化区域。当前还缺一个系统研究：这些 GIS 先验如何进入 tile selection，什么时候帮忙，什么时候导致模型偷看地图或被过期地图误导。</p>]]></description></item><item><title>RS-28 Mamba/SSM Backbones for Dense Remote Sensing Prediction</title><link>https://spacetop.win/2026/06/rs-28-mamba-ssm-backbones-for-dense-remote-sensing-prediction/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-28-mamba-ssm-backbones-for-dense-remote-sensing-prediction/</guid><description><![CDATA[<h1 id="rs-28-mambassm-backbones-for-dense-remote-sensing-prediction" class="headerLink">
+    <a href="#rs-28-mambassm-backbones-for-dense-remote-sensing-prediction" class="header-mark"></a>RS-28 Mamba/SSM Backbones for Dense Remote Sensing Prediction</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-28</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：20242026 光学/航空/卫星遥感 dense prediction，重点是语义分割、二值/语义变化检测、大幅面高分辨率理解；不把 SARonly 作为主线。 1. 方向概述 Mamba/SSM 在遥感 dense prediction 中兴起的直接原因，是高分辨率遥感图像同时需要“全局上下文”和“可承受的长序列计算”。</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-28-mambassm-backbones-for-dense-remote-sensing-prediction-1" class="headerLink">
+    <a href="#rs-28-mambassm-backbones-for-dense-remote-sensing-prediction-1" class="header-mark"></a>RS-28 Mamba/SSM Backbones for Dense Remote Sensing Prediction</h1><p>更新时间：2026-06-07<br>
+范围：2024-2026 光学/航空/卫星遥感 dense prediction，重点是语义分割、二值/语义变化检测、大幅面高分辨率理解；不把 SAR-only 作为主线。</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>Mamba/SSM 在遥感 dense prediction 中兴起的直接原因，是高分辨率遥感图像同时需要“全局上下文”和“可承受的长序列计算”。CNN 的局部感受野不够，ViT/Transformer 的全局注意力又在万级像素或大 patch 序列上成本很高；遥感影像还存在俯视方向任意、目标尺度差异大、背景占比高、小目标稀疏等问题。2024 年 Vim 和 VMamba 把选择性状态空间模型迁移到视觉，随后 Samba、RS3Mamba、RS-Mamba、ChangeMamba 几乎在同一时间把 SSM 带进遥感分割和变化检测。</p>
+<p>这个方向的研究重点已经从“把 Mamba 换进 backbone”逐步变成三个更细的问题：</p>
+<ul>
+<li>扫描方向：遥感目标没有固定上/下/左/右语义，2D/多方向/全向扫描是否真的必要，何时比普通 bidirectional scan 更好。</li>
+<li>全局-局部平衡：Mamba 擅长长程建模，但 dense prediction 需要边界、纹理和小目标细节，很多新方法开始重新引入 CNN、多尺度金字塔、频域和局部卷积。</li>
+<li>任务结构：语义分割是单时相 dense labeling，变化检测还要建模双时相/多时相交互，不能只把两张图分别编码后相减。</li>
+</ul>
+<h2 id="2-代表论文与代码" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>2. 代表论文与代码</h2><table>
+  <thead>
+      <tr>
+          <th>方向</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">年份/来源</th>
+          <th>链接</th>
+          <th>代码/资源</th>
+          <th>核心贡献</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>通用视觉 SSM</td>
+          <td>Vision Mamba (Vim)</td>
+          <td style="text-align: right">2024 arXiv/ICML 方向</td>
+          <td><a href="https://arxiv.org/abs/2401.09417" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/hustvl/Vim" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>用 bidirectional Mamba blocks 处理图像序列，是遥感 Mamba 的重要通用基座。</td>
+      </tr>
+      <tr>
+          <td>通用视觉 SSM</td>
+          <td>VMamba: Visual State Space Model</td>
+          <td style="text-align: right">2024 NeurIPS spotlight</td>
+          <td><a href="https://arxiv.org/abs/2401.10166" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/MzeroMiko/VMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>提出 SS2D，用四条扫描路线连接 1D selective scan 与 2D 图像结构，后续 ChangeMamba/M-CD 等直接基于它。</td>
+      </tr>
+      <tr>
+          <td>RS 语义分割</td>
+          <td>Samba: Semantic Segmentation of Remotely Sensed Images with State Space Model</td>
+          <td style="text-align: right">2024 arXiv / Heliyon</td>
+          <td><a href="https://arxiv.org/abs/2404.01705" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/zhuqinfeng1999/Samba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>Encoder-decoder + Samba blocks + UperNet，在 LoveDA、Vaihingen、Potsdam 上验证 SSM 做高分遥感分割。</td>
+      </tr>
+      <tr>
+          <td>RS 语义分割</td>
+          <td>RS3Mamba</td>
+          <td style="text-align: right">2024 arXiv/GRSL</td>
+          <td><a href="https://arxiv.org/abs/2404.02457" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/sstary/SSRS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>双分支结构：CNN 主分支保局部细节，VSS 辅助分支补全局信息，CCM 融合两类特征。</td>
+      </tr>
+      <tr>
+          <td>RS dense prediction</td>
+          <td>RS-Mamba for Large Remote Sensing Image Dense Prediction</td>
+          <td style="text-align: right">2024 arXiv/TGRS</td>
+          <td><a href="https://arxiv.org/abs/2404.02668" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/NJU-LHRS/Official_Remote_Sensing_Mamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>面向大幅面 VHR 图像，提出 omnidirectional selective scan；同一框架覆盖语义分割和变化检测。</td>
+      </tr>
+      <tr>
+          <td>RS 语义分割</td>
+          <td>PyramidMamba</td>
+          <td style="text-align: right">2024 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.10828" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/WangLibo1995/GeoSeg" target="_blank" rel="noopener noreferrer">GeoSeg</a></td>
+          <td>用 selective state space model 重做金字塔特征融合，缓解多尺度特征语义冗余。</td>
+      </tr>
+      <tr>
+          <td>RS 语义分割</td>
+          <td>MF-Mamba</td>
+          <td style="text-align: right">2025 TGRS</td>
+          <td><a href="https://elib.dlr.de/215790/" target="_blank" rel="noopener noreferrer">DLR entry</a></td>
+          <td><a href="https://github.com/Mango-Mars/MF-Mamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>CNN encoder + Mamba decoder，GLSS 八方向扫描 + 多核卷积，强调 global-local 和多尺度融合。</td>
+      </tr>
+      <tr>
+          <td>RS 语义分割</td>
+          <td>UrbanSSF</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271625000176" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未核验到官方代码</td>
+          <td>FSI-Mamba 建模不同 feature state 的序列关系，面向 VHR 城市场景分割和应用落地。</td>
+      </tr>
+      <tr>
+          <td>RS foundation model</td>
+          <td>RoMA</td>
+          <td style="text-align: right">2025 NeurIPS</td>
+          <td><a href="https://arxiv.org/abs/2503.10392" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openreview.net/forum?id=QwY1vk67T3" target="_blank" rel="noopener noreferrer">OpenReview</a></td>
+          <td><a href="https://github.com/MiliLab/RoMA" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>系统验证 Mamba 在遥感预训练中的 data/parameter scaling law；覆盖分类、检测、分割。</td>
+      </tr>
+      <tr>
+          <td>RS foundation model</td>
+          <td>DynamicVis</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.16426" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/KyanChen/DynamicVis" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>selective region-aware SSM + MIL meta-embedding，面向高分大图和跨任务 foundation model。</td>
+      </tr>
+      <tr>
+          <td>变化检测</td>
+          <td>ChangeMamba</td>
+          <td style="text-align: right">2024 TGRS</td>
+          <td><a href="https://arxiv.org/abs/2404.03425" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/ChenHongruixuan/ChangeMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>基于 VMamba，分别给 BCD/SCD/BDA 设计 MambaBCD/MambaSCD/MambaBDA，重点是时空交互建模。</td>
+      </tr>
+      <tr>
+          <td>变化检测</td>
+          <td>CDMamba</td>
+          <td style="text-align: right">2024/2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2406.04207" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/zmoka-zht/CDMamba" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>指出纯扫描改造忽略局部细节，提出 Scaled Residual ConvMamba 和双时相 global-local guided fusion。</td>
+      </tr>
+      <tr>
+          <td>变化检测</td>
+          <td>A Mamba-Based Siamese Network for Remote Sensing Change Detection</td>
+          <td style="text-align: right">2025 WACV</td>
+          <td><a href="https://openaccess.thecvf.com/content/WACV2025/papers/Paranjape_A_Mamba-Based_Siamese_Network_for_Remote_Sensing_Change_Detection_WACV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://arxiv.org/abs/2407.06839" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/JayParanjape/M-CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>Siamese VMamba encoder + difference module + Mamba decoder，在 4 个变化检测数据集上验证。</td>
+      </tr>
+      <tr>
+          <td>语义变化检测</td>
+          <td>GSTM-SCD</td>
+          <td style="text-align: right">2025 ISPRS JPRS</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625003557" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td><a href="https://github.com/liuxuanguang/GSTM-SCD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>Graph-enhanced spatio-temporal Mamba，支持 bi-temporal 和 time-series SCD，并加入时序拓扑一致性。</td>
+      </tr>
+      <tr>
+          <td>语义变化检测</td>
+          <td>Mamba-FCS</td>
+          <td style="text-align: right">2025 arXiv / 2026 JSTARS 方向</td>
+          <td><a href="https://arxiv.org/abs/2508.08232" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/Buddhi19/MambaFCS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
+          <td>将频域特征、change-guided attention 和 SeK-inspired loss 融入 Mamba SCD。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-方法脉络比较" class="headerLink">
+    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e6%af%94%e8%be%83" class="header-mark"></a>3. 方法脉络比较</h2><h3 id="31-扫描策略" class="headerLink">
+    <a href="#31-%e6%89%ab%e6%8f%8f%e7%ad%96%e7%95%a5" class="header-mark"></a>3.1 扫描策略</h3><ul>
+<li>Vim：把图像 token 当序列，使用双向 Mamba；优点是简单、通用，缺点是 2D 空间结构依赖展开顺序。</li>
+<li>VMamba：SS2D 四方向扫描，是多数遥感变化检测 Mamba 的通用底座。</li>
+<li>RS-Mamba：针对遥感俯视方向任意，提出全向/多方向 selective scan，强调大幅面全局上下文。</li>
+<li>MF-Mamba：进一步使用八方向扫描，并配合多核卷积补局部纹理。</li>
+<li>GSTM-SCD：把扫描扩展到多时相语义变化，加入双向三维变化扫描和图关系。</li>
+</ul>
+<p>判断：扫描方向不是越多越好。多方向扫描提升上下文覆盖，但也带来实现复杂度、显存和重复语义。真正值得做的实验是“方向数量/方向选择是否与目标形态、场景结构、GSD 和任务类型相关”。</p>]]></description></item><item><title>RS-29 On-Orbit Foundation Model Compression</title><link>https://spacetop.win/2026/06/rs-29-on-orbit-foundation-model-compression/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-29-on-orbit-foundation-model-compression/</guid><description><![CDATA[<h1 id="rs-29-on-orbit-foundation-model-compression" class="headerLink">
+    <a href="#rs-29-on-orbit-foundation-model-compression" class="header-mark"></a>RS-29 On-Orbit Foundation Model Compression</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-29</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务来源：research/50threadprompts.md 中 RS29 OnOrbit Foundation Model Compression 范围：面向星上/边缘部署的光学/多光谱 GeoFM 压缩实验。默认不以 SARonly 任务为主；混合模态论文只取其中对光学/多光谱 foundation model 压缩有价值</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-29-on-orbit-foundation-model-compression-1" class="headerLink">
+    <a href="#rs-29-on-orbit-foundation-model-compression-1" class="header-mark"></a>RS-29 On-Orbit Foundation Model Compression</h1><p>更新时间：2026-06-07<br>
+任务来源：<code>research/50_thread_prompts.md</code> 中 <code>RS-29 On-Orbit Foundation Model Compression</code><br>
+范围：面向星上/边缘部署的光学/多光谱 GeoFM 压缩实验。默认不以 SAR-only 任务为主；混合模态论文只取其中对光学/多光谱 foundation model 压缩有价值的部分。</p>
+<h2 id="1-研究问题" class="headerLink">
+    <a href="#1-%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>1. 研究问题</h2><p>这个方向的核心问题不是“把模型做小”这么简单，而是：在星上或边缘设备的功耗、内存、延迟、抗辐照、通信和实时决策约束下，如何把 Prithvi/SkySense/Clay/多模态遥感 VLM 等大模型能力压缩成可靠可运行的任务系统。</p>
+<p>典型场景包括：</p>
+<ul>
+<li>云检测、洪水检测、火点/烧毁区、非法采矿、灾后损毁等事件触发式任务。</li>
+<li>星上预筛选：只下传有价值 tile 或事件摘要，减少带宽。</li>
+<li>边缘无人机/小卫星实时推理：低延迟、低功耗、可失败回退。</li>
+<li>小模型先路由，大模型按需调用：tiny detector/cloud mask/saliency 先判断是否值得使用 GeoFM。</li>
+</ul>
+<p>最适合作为论文切口的问题是：<strong>GeoFM 压缩后的 accuracy-latency-energy-OOD trade-off 如何被系统评估，并且能否通过 adapter、量化、剪枝、蒸馏和任务路由组合，让压缩模型在真实分布偏移下仍可靠。</strong></p>
+<h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感 foundation model 的规模在 2024-2026 快速变大：SkySense、Prithvi-EO-2.0、Clay、Galileo、TerraMind、AlphaEarth 等都在扩大数据、任务和模态覆盖。但星上部署的约束反过来很硬：</p>]]></description></item><item><title>RS-30 Tiny Model Task Routing for EO</title><link>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-30-tiny-model-task-routing-for-eo/</guid><description><![CDATA[<h1 id="rs-30-tiny-model-task-routing-for-eo" class="headerLink">
+    <a href="#rs-30-tiny-model-task-routing-for-eo" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-30</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。 1. 方向概述 星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-30-tiny-model-task-routing-for-eo-1" class="headerLink">
+    <a href="#rs-30-tiny-model-task-routing-for-eo-1" class="header-mark"></a>RS-30 Tiny Model Task Routing for EO</h1><p>更新时间：2026-06-07<br>
+范围：星上或边缘端的光学/多光谱遥感任务路由。核心问题是：先用轻量 cloud mask、saliency、tiny detector 或低分辨率模型判断是否调用大模型、是否下传图像、是否触发灾害回退机制，从而节省能耗和带宽，同时控制漏检风险。</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>星上 AI 的早期目标通常是“把一个小模型塞进 CubeSat/边缘硬件”。但 2024-2026 的趋势正在变成“级联式任务路由”：轻量模型先做快速筛选，大模型或下传链路只处理高价值、高风险或不确定样本。这样的问题比单纯模型压缩更像一个决策系统：</p>
+<ul>
+<li><strong>输入端</strong>：低分辨率 quick-look、压缩预览、云量估计、saliency map、tiny detector、元数据、任务优先级。</li>
+<li><strong>路由端</strong>：决定丢弃、压缩下传、调用中等模型、调用大模型、或触发灾害/异常回退。</li>
+<li><strong>输出端</strong>：省电、省带宽、低延迟，同时保证云、洪水、火点、船只、道路损毁等关键事件不被漏掉。</li>
+</ul>
+<p>这个方向的研究价值在于：真实星上/边缘约束不是一个静态 FLOPs 约束，而是动态的电量、热、存储、下传窗口、任务优先级和风险预算。一个可投稿的小题可以围绕“风险感知 tiny-to-large cascade for EO”展开。</p>
+<h2 id="2-代表论文与项目" class="headerLink">
+    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
+  <thead>
+      <tr>
+          <th>标题/项目</th>
+          <th style="text-align: right">年份/venue</th>
+          <th>链接</th>
+          <th>代码/模型</th>
+          <th>与 RS-30 的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NASA&rsquo;s Prithvi Becomes First AI Geospatial Foundation Model In Orbit</td>
+          <td style="text-align: right">2026 NASA</td>
+          <td><a href="https://science.nasa.gov/science-research/ai-foundation-model-in-orbit/" target="_blank" rel="noopener noreferrer">NASA Science</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">Prithvi-EO-2.0 GitHub</a></td>
+          <td>压缩版 Prithvi 已在 Kanyini 与 ISS IMAGIN-e 上测试云/洪水检测，说明“压缩 FM 上轨 + 任务触发”已进入实证阶段。</td>
+      </tr>
+      <tr>
+          <td>Prithvi-EO-2.0</td>
+          <td style="text-align: right">2024 arXiv / NASA-IBM</td>
+          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td><a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M" target="_blank" rel="noopener noreferrer">HF</a></td>
+          <td>可作为大模型分支或 teacher；300M/600M 版本适合研究压缩、LoRA、蒸馏。</td>
+      </tr>
+      <tr>
+          <td>Φsat-2</td>
+          <td style="text-align: right">2024 ESA mission</td>
+          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2" target="_blank" rel="noopener noreferrer">ESA mission</a>, <a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Introducing_Phsat-2" target="_blank" rel="noopener noreferrer">Introducing Φsat-2</a></td>
+          <td><a href="https://github.com/PhiSat-2" target="_blank" rel="noopener noreferrer">PhiSat-2 GitHub org</a></td>
+          <td>6U CubeSat，星上运行 cloud detection、vessel detection、wildfire、marine anomaly、compression 等应用，是任务路由系统的现实原型。</td>
+      </tr>
+      <tr>
+          <td>Φsat-2 gets two new AI apps</td>
+          <td style="text-align: right">2024 ESA</td>
+          <td><a href="https://www.esa.int/Applications/Observing_the_Earth/Phsat-2/Phsat-2_gets_two_new_AI_apps" target="_blank" rel="noopener noreferrer">ESA</a></td>
+          <td>mission apps</td>
+          <td>明确提出云去除、应急街图、船只检测、海洋污染、野火检测等多 app 场景，适合抽象成 onboard scheduler。</td>
+      </tr>
+      <tr>
+          <td>Optimizing Deep Learning Models for On-Orbit Deployment Through Neural Architecture Search</td>
+          <td style="text-align: right">2025 Scientific Reports</td>
+          <td><a href="https://www.nature.com/articles/s41598-025-21467-8" target="_blank" rel="noopener noreferrer">Nature</a></td>
+          <td>未见官方代码</td>
+          <td>硬件/任务约束下的 NAS，给级联系统里的 tiny/mid 模型选型提供方法基础。</td>
+      </tr>
+      <tr>
+          <td>Efficient FPGA-accelerated CNNs for Cloud Detection on CubeSats</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2504.03891" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>云检测是最自然的第一级路由器；论文报告在 Zynq UltraScale+ MPSoC 上用 FPGA/DPU 实现实时云检测。</td>
+      </tr>
+      <tr>
+          <td>TinyRS-R1: Compact Multimodal Language Model for Remote Sensing</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2505.12099" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未确认官方代码</td>
+          <td>2B 遥感多模态小模型，可作为边缘端“轻量语义解释/任务确认”分支，而不是直接调用 7B/13B VLM。</td>
+      </tr>
+      <tr>
+          <td>Lightweight Remote Sensing Scene Classification on Edge Devices via Knowledge Distillation and Early-exit</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2507.20623" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>early-exit 和蒸馏适合做“简单样本早停，困难样本路由到大模型”。</td>
+      </tr>
+      <tr>
+          <td>SatReg: Regression-based NAS for Lightweight Satellite Image Segmentation</td>
+          <td style="text-align: right">2026 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2604.10306" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>GitHub 未核验</td>
+          <td>在 Jetson Orin Nano 上拟合 mIoU、latency、power surrogate，适合作为级联系统硬件 cost model。</td>
+      </tr>
+      <tr>
+          <td>TA-YOLO</td>
+          <td style="text-align: right">2024 Complex &amp; Intelligent Systems</td>
+          <td><a href="https://link.springer.com/article/10.1007/s40747-024-01448-6" target="_blank" rel="noopener noreferrer">Springer</a></td>
+          <td>未见官方代码</td>
+          <td>轻量小目标检测，可作为第一级 tiny detector 候选。</td>
+      </tr>
+      <tr>
+          <td>LEGNet</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.14012" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未见官方代码</td>
+          <td>针对低质量遥感图像的轻量目标检测，适合评估噪声/低分辨率 quick-look 下的路由鲁棒性。</td>
+      </tr>
+      <tr>
+          <td>MEANet</td>
+          <td style="text-align: right">2024 Expert Systems with Applications</td>
+          <td><a href="https://www.sciencedirect.com/science/article/pii/S0957417423022807" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
+          <td>未见官方代码</td>
+          <td>轻量光学遥感 saliency detection，可用于“是否值得下传/是否调用大模型”的 saliency gate。</td>
+      </tr>
+      <tr>
+          <td>Lightweight Semantic- and Graph-Guided Network for ORSI-SOD</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/5/861" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>未见官方代码</td>
+          <td>低计算成本 saliency，强调边缘和语义引导，可作为异常/目标候选区域路由器。</td>
+      </tr>
+      <tr>
+          <td>IEAM for Remote Sensing Salient Object Detection</td>
+          <td style="text-align: right">2025 Remote Sensing</td>
+          <td><a href="https://www.mdpi.com/2072-4292/17/12/2053" target="_blank" rel="noopener noreferrer">MDPI</a></td>
+          <td>未见官方代码</td>
+          <td>兼顾边界、注意力和效率，适合与 tiny detector/cloud mask 组合。</td>
+      </tr>
+      <tr>
+          <td>LightEMNet</td>
+          <td style="text-align: right">2025 TGRS</td>
+          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2025.3587287" target="_blank" rel="noopener noreferrer">CoLab/IEEE record</a></td>
+          <td>未见官方代码</td>
+          <td>弱监督轻量 Mamba-fusion SOD，论文记录显示仅 4.81M 参数，适合 onboard saliency gate。</td>
+      </tr>
+      <tr>
+          <td>E4: Energy-Efficient DNN Inference via Early-Exit and DVFS</td>
+          <td style="text-align: right">2025 arXiv</td>
+          <td><a href="https://arxiv.org/abs/2503.04865" target="_blank" rel="noopener noreferrer">arXiv</a></td>
+          <td>未核验</td>
+          <td>通用边缘视频分析方法，可迁移到星上 EO：根据模型置信度和芯片频率动态控制能耗。</td>
+      </tr>
+      <tr>
+          <td>SCTNet-NAS for Cloud-Edge Collaborative Perception</td>
+          <td style="text-align: right">2025 Complex &amp; Intelligent Systems</td>
+          <td><a href="https://link.springer.com/article/10.1007/s40747-025-01996-5" target="_blank" rel="noopener noreferrer">Springer</a></td>
+          <td>未见官方代码</td>
+          <td>通用 cloud-edge 协同分割框架，可迁移为“星上初筛 + 地面/大模型精处理”。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-问题由来" class="headerLink">
+    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>3. 问题由来</h2><h3 id="31-星上边缘不是单模型问题" class="headerLink">
+    <a href="#31-%e6%98%9f%e4%b8%8a%e8%be%b9%e7%bc%98%e4%b8%8d%e6%98%af%e5%8d%95%e6%a8%a1%e5%9e%8b%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 星上/边缘不是单模型问题</h3><p>单个轻量模型可以降低延迟，但真实 EO 系统还要决定：</p>]]></description></item></channel></rss>

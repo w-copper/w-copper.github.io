@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'ROS-SAM：遥感视频中运动目标的高质量交互式分割'
-categories = ['遥感AI']
-tags = ["遥感视频分割", "交互式分割", "SAM", "LoRA微调", "运动目标"]
-+++
+---
+title: "ROS-SAM：遥感视频中运动目标的高质量交互式分割"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # ROS-SAM：遥感视频中运动目标的高质量交互式分割
 

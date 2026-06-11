@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模'
-categories = ['遥感AI']
-tags = ["遥感变化描述", "状态空间模型", "Mamba", "时序建模", "多时相遥感"]
-+++
+---
+title: "RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模"
+date: 2026-06-01
+categories: ["时序变化、跨域泛化与可信评测"]
+draft: false
+source_repo: "articles"
+---
 
 # RSCaMa：首次将Mamba引入遥感变化描述任务，实现高效时空建模
 

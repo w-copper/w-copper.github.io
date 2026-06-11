@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示'
-categories = ['遥感AI']
-tags = ["时序遥感", "自监督学习", "Barlow Twins", "基础模型", "像素级表示"]
-+++
+---
+title: "TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示
 

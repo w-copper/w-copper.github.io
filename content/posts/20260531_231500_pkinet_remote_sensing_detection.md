@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = '多核Inception网络：遥感目标检测的尺度感知新范式'
-categories = ['遥感AI']
-tags = ["遥感目标检测", "多尺度特征提取", "Inception网络", "上下文锚注意力", "无膨胀卷积"]
-+++
+---
+title: "多核Inception网络：遥感目标检测的尺度感知新范式"
+date: 2026-05-31
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # 多核Inception网络：遥感目标检测的尺度感知新范式
 

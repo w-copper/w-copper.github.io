@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = '突破方形卷积限制：自适应矩形卷积革新遥感图像融合'
-categories = ['遥感AI']
-tags = ["遥感图像融合", "Pansharpening", "自适应卷积", "即插即用模块"]
-+++
+---
+title: "突破方形卷积限制：自适应矩形卷积革新遥感图像融合"
+date: 2026-06-01
+categories: ["可提示分割、开放词表与密集预测"]
+draft: false
+source_repo: "articles"
+---
 
 # 突破方形卷积限制：自适应矩形卷积革新遥感图像融合
 

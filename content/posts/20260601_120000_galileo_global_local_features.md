@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = 'Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "多模态融合", "自监督学习", "多尺度特征", "掩码建模"]
-+++
+---
+title: "Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破"
+date: 2026-06-01
+categories: ["多源数据融合、效率部署与应用落地"]
+draft: false
+source_repo: "articles"
+---
 
 # Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破
 

@@ -1,10 +1,10 @@
-+++
-date = '2026-06-01T12:00:00+08:00'
-draft = false
-title = '支持任意波段、任意分辨率！AOM：通用遥感基础模型'
-categories = ['遥感AI']
-tags = ["遥感基础模型", "任意波段", "任意分辨率", "多尺度自适应", "通道独立tokenizer"]
-+++
+---
+title: "支持任意波段、任意分辨率！AOM：通用遥感基础模型"
+date: 2026-06-01
+categories: ["遥感基础模型与多模态理解"]
+draft: false
+source_repo: "articles"
+---
 
 # 支持任意波段、任意分辨率！AOM：通用遥感基础模型
 

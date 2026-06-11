@@ -1,53 +1,84 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序遥感 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/</link><description>时序遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示</title><link>https://spacetop.win/2026/06/20260601_120000_tessera_temporal_foundation_model/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_tessera_temporal_foundation_model/</guid><description><![CDATA[<h1 id="tessera用barlow-twins从时序卫星影像中学习全球10米分辨率表示" class="headerLink">
-    <a href="#tessera%e7%94%a8barlow-twins%e4%bb%8e%e6%97%b6%e5%ba%8f%e5%8d%ab%e6%98%9f%e5%bd%b1%e5%83%8f%e4%b8%ad%e5%ad%a6%e4%b9%a0%e5%85%a8%e7%90%8310%e7%b1%b3%e5%88%86%e8%be%a8%e7%8e%87%e8%a1%a8%e7%a4%ba" class="header-mark"></a>TESSERA：用Barlow Twins从时序卫星影像中学习全球10米分辨率表示</h1><blockquote>
-  <p><strong>论文解读</strong> | CVPR 2026 | 2026-06-01</p>
-</blockquote><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>TESSERA: Temporal Embeddings of Surface Spectra for Earth Representation and Analysis</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Z. Feng, C. Atzberger, S. Jaffer, J. Knezevic, S. Sormunen, R. Young, M.C. Lisaius, M. Immitzer, T. Jackson, J. Ball, D.A. Coomes, A. Madhavapeddy, A. Blake, S. Keshav</td>
-      </tr>
-      <tr>
-          <td><strong>会议</strong></td>
-          <td>CVPR 2026</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2506.20380" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2506.20380</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/ucam-eo/tessera" target="_blank" rel="noopener noreferrer">https://github.com/ucam-eo/tessera</a> (594 stars)</td>
-      </tr>
-      <tr>
-          <td><strong>关键词</strong></td>
-          <td>时序遥感、自监督学习、Barlow Twins、基础模型、像素级表示</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="-解决的核心问题" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>卫星遥感是监测地球表面变化的重要工具，广泛应用于栖息地制图、碳核算、农业监测等领域。然而，卫星时序数据面临两大挑战：</p>
-<ol>
-<li><strong>数据量巨大</strong>：全球范围的卫星时序数据达到PB级别，处理和存储成本极高</li>
-<li><strong>云遮挡严重</strong>：光学卫星影像经常被云层遮挡，导致时序数据不完整</li>
-</ol>
-<h3 id="现有方法的局限" class="headerLink">
-    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ul>
-<li><strong>传统方法</strong>：通常对时序数据取平均或选择无云影像，丢失了重要的时序信息</li>
-<li><strong>现有基础模型</strong>：大多基于单时相影像训练，无法捕捉时序变化模式</li>
-<li><strong>像素级方法</strong>：计算成本高，难以扩展到全球范围</li>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>时序遥感 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/</link><description>时序遥感 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://spacetop.win/tags/%E6%97%B6%E5%BA%8F%E9%81%A5%E6%84%9F/" rel="self" type="application/rss+xml"/><item><title>RS-16 Semantic Change VQA 深挖</title><link>https://spacetop.win/2026/06/rs-16-semantic-change-vqa-%E6%B7%B1%E6%8C%96/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-16-semantic-change-vqa-%E6%B7%B1%E6%8C%96/</guid><description><![CDATA[<h1 id="rs-16-semantic-change-vqa-深挖" class="headerLink">
+    <a href="#rs-16-semantic-change-vqa-%e6%b7%b1%e6%8c%96" class="header-mark"></a>RS-16 Semantic Change VQA 深挖</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-16</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixedmodality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。 结论摘要 20242026 已经出现直接命中的任务定义：CDQAG、Chan</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-16-semantic-change-vqa-深挖-1" class="headerLink">
+    <a href="#rs-16-semantic-change-vqa-%e6%b7%b1%e6%8c%96-1" class="header-mark"></a>RS-16 Semantic Change VQA 深挖</h1><p>更新时间：2026-06-07<br>
+范围：双时相/多时相光学遥感为主；灾害类工作若包含 SAR，只作为 mixed-modality 参考，不作为本方向主线。核心问题是：给定同一区域不同时相影像，模型不仅要输出变化区域，还要回答“变了什么、在哪里、多少、为什么像是这种变化、证据区域在哪里”。</p>
+<h2 id="结论摘要" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><ul>
+<li>2024-2026 已经出现直接命中的任务定义：CDQAG、Change VQA、RSICA、interactive change understanding。它们把传统 change detection 的 mask 监督扩展为 question-answer-grounding 三元组。</li>
+<li>最值得跟进的锚点是 <a href="https://github.com/like413/VisTA" target="_blank" rel="noopener noreferrer">VisTA/QAG-360K</a>：它明确提出 Change Detection Question Answering and Grounding，要求文本答案和视觉 mask 同时可解释。</li>
+<li><a href="https://github.com/hanlinwu/ChangeChat" target="_blank" rel="noopener noreferrer">ChangeChat</a> 和 <a href="https://github.com/hanlinwu/DeltaVLM" target="_blank" rel="noopener noreferrer">DeltaVLM</a> 是交互式变化分析路线：把 change captioning、分类、计数、定位、多轮问答统一成指令微调。</li>
+<li><a href="https://arxiv.org/abs/2605.30168" target="_blank" rel="noopener noreferrer">OmniCD</a>、<a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a>、<a href="https://arxiv.org/abs/2605.15024" target="_blank" rel="noopener noreferrer">HiSem</a>、<a href="https://github.com/zhuduowang/Change3D" target="_blank" rel="noopener noreferrer">Change3D</a> 分别补上 multimodal semantic guidance、多类别语义变化数据、change caption 的层级语义解耦、以及“把双时相当 tiny video”的统一变化表征。</li>
+<li>当前空白：很多模型会给变化描述，但证据 mask、数量、类别层级和开放式回答之间不一致；多数 benchmark 还没有把“答对但证据错”“mask 对但语义错”“变化存在但原因解释错”拆开评估。</li>
 </ul>
-<h3 id="核心问题提炼" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何从云遮挡严重的卫星时序数据中，高效学习保留时序物候信号的像素级表示？</strong></p>]]></description></item></channel></rss>
+<h2 id="问题由来" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感变化检测主要回答“哪里变了”，输出二值变化图；语义变化检测进一步回答“从什么变成什么”，输出 changed / unchanged 或 class transition map；change captioning 用自然语言描述变化，但通常是一段单向 caption，不支持用户按类别、区域、数量或原因追问。</p>]]></description></item><item><title>RS-17 Latent Flow/Diffusion for Change Detection</title><link>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</guid><description><![CDATA[<h1 id="rs-17-latent-flowdiffusion-for-change-detection" class="headerLink">
+    <a href="#rs-17-latent-flowdiffusion-for-change-detection" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-17</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。 结论先行 这个</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-17-latent-flowdiffusion-for-change-detection-1" class="headerLink">
+    <a href="#rs-17-latent-flowdiffusion-for-change-detection-1" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><p>更新时间：2026-06-07<br>
+任务：围绕 ChangeFlow、LDGuid、diffusion/rectified flow 在光学遥感变化检测中的作用，分析生成式 latent difference 是否能区分真实变化与成像差异，并设计与 Siamese Transformer、ChangeFormer、BIT、语义变化检测方法的公平比较。</p>
+<h2 id="结论先行" class="headerLink">
+    <a href="#%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>结论先行</h2><p>这个方向的核心不是“把扩散模型塞进变化检测”，而是把变化检测从逐像素二分类改写为“在潜空间中建模一个合理的变化区域/变化过程”。判别式模型通常学习 <code>pre/post -&gt; changed probability</code>，很擅长局部边界和快速推理；生成式/潜变量方法试图学习“什么样的变化 mask 或变化图像在全局上是合理的”，因此天然适合处理区域一致性、标签歧义、不确定性和低标注数据。</p>
+<p>目前可分成四条路线：</p>
+<ol>
+<li><strong>扩散特征提取器</strong>：DDPM-CD 先在未标注遥感图像上预训练扩散模型，再用扩散中间特征训练轻量变化头。</li>
+<li><strong>变化样本生成器</strong>：ChangeAnywhere、Changen2、DreamCD 生成双时相样本、语义变化标签或后时相图像，用来缓解变化标注昂贵的问题。</li>
+<li><strong>latent difference guidance</strong>：LDGuid 显式学习“任务相关的变化潜向量”，再注入 U-Net、BIT、AERNet 等判别式 CD 模型。</li>
+<li><strong>latent mask generation / rectified flow</strong>：ChangeFlow 直接在 latent space 中用 rectified flow 生成变化 mask，并用多次采样做 ensemble 和置信度估计。</li>
+</ol>
+<p>我的判断：2024-2026 最值得做的小问题是 <strong>“潜空间生成式变化先验如何在不牺牲边界精度的前提下，提升跨域鲁棒性和不确定性可信度”</strong>。这比单纯追一个 LEVIR-CD F1 更像一篇能站住的论文。</p>]]></description></item><item><title>RS-18 Temporal Hard Negatives for Change Models</title><link>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-18-temporal-hard-negatives-for-change-models/</guid><description><![CDATA[<h1 id="rs-18-temporal-hard-negatives-for-change-models" class="headerLink">
+    <a href="#rs-18-temporal-hard-negatives-for-change-models" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-18</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。 1. 问题由来 传统二时相 change detection 通常把输入简化为 (imaget1, imaget2) change mask，但真实遥感里的“不变”并不等于像</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-18-temporal-hard-negatives-for-change-models-1" class="headerLink">
+    <a href="#rs-18-temporal-hard-negatives-for-change-models-1" class="header-mark"></a>RS-18 Temporal Hard Negatives for Change Models</h1><p>更新时间：2026-06-07<br>
+细问题：多时相遥感变化检测中，如何系统构造 hard negatives，让模型学会区分真实变化与季节变化、光照阴影、云薄雾、农田轮作、潮汐水体和配准误差。</p>
+<h2 id="1-问题由来" class="headerLink">
+    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>传统二时相 change detection 通常把输入简化为 <code>(image_t1, image_t2) -&gt; change mask</code>，但真实遥感里的“不变”并不等于像素相同。很多变化检测模型在 LEVIR-CD、WHU-CD、CDD 这类标准集上分数很高，部署到跨季节、跨年份、跨传感器或轻微错位场景时会把无害差异误报成变化。</p>
+<p>2024 的 <a href="https://arxiv.org/abs/2402.06994" target="_blank" rel="noopener noreferrer">A Change Detection Reality Check</a> 和其 <a href="https://github.com/isaaccorley/a-change-detection-reality-check" target="_blank" rel="noopener noreferrer">GitHub</a> 对这个问题给了很直接的提醒：社区里大量架构在标准 benchmark 上堆 SOTA，但评测设置并不总能反映真实泛化。2024 的 <a href="https://colab.ws/articles/10.1109%2Flgrs.2024.3431212" target="_blank" rel="noopener noreferrer">CSDACD</a> 明确把 cross-seasonal domain shift 作为问题，代码见 <a href="https://github.com/24kironhead/CSDACD" target="_blank" rel="noopener noreferrer">24kironhead/CSDACD</a>。2026 的 <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a> 则开始提供更接近真实城市时序变化的 Sentinel-2 语义变化 benchmark，并公开 <a href="https://github.com/omkarsoak/TERRA-CD" target="_blank" rel="noopener noreferrer">omkarsoak/TERRA-CD</a>。</p>]]></description></item><item><title>RS-19 Change Caption Evidence Grounding 调研</title><link>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding-%E8%B0%83%E7%A0%94/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-19-change-caption-evidence-grounding-%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<h1 id="rs-19-change-caption-evidence-grounding-调研" class="headerLink">
+    <a href="#rs-19-change-caption-evidence-grounding-%e8%b0%83%e7%a0%94" class="header-mark"></a>RS-19 Change Caption Evidence Grounding 调研</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-19</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 对应 prompt：RS19 Change Caption Evidence Grounding 核心问题 遥感 change captioning 的目标是输入同一区域的双时相或多时相影像，输出自然语言变化描述，例如“新建了几栋建筑”“农田变成裸地”“洪水淹没了道路和建筑”。这个任务比普通变化检测更接近人类解释，但也更容易出现一</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-19-change-caption-evidence-grounding-调研-1" class="headerLink">
+    <a href="#rs-19-change-caption-evidence-grounding-%e8%b0%83%e7%a0%94-1" class="header-mark"></a>RS-19 Change Caption Evidence Grounding 调研</h1><p>更新时间：2026-06-07<br>
+对应 prompt：<code>RS-19 Change Caption Evidence Grounding</code></p>
+<h2 id="核心问题" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>核心问题</h2><p>遥感 change captioning 的目标是输入同一区域的双时相或多时相影像，输出自然语言变化描述，例如“新建了几栋建筑”“农田变成裸地”“洪水淹没了道路和建筑”。这个任务比普通变化检测更接近人类解释，但也更容易出现一种危险失败：句子读起来合理，BLEU/CIDEr 也不低，却没有被变化区域真正支撑。</p>
+<p>RS-19 的细问题是：<strong>如何判断 change caption 中每个变化短语是否有 bbox/mask 级证据支撑</strong>。例如 caption 说“two buildings were destroyed and surrounding roads were flooded”，评估不应只看文本相似度，而要拆成：</p>
+<ul>
+<li>对象：building、road、water/flood。</li>
+<li>属性：destroyed、flooded、newly built、removed、expanded。</li>
+<li>数量：two、several、large area。</li>
+<li>位置关系：surrounding、near、north of、along the road。</li>
+<li>时间关系：pre-event 存在、post-event 消失/受损/出现。</li>
+<li>证据区域：对象变化 mask、损毁建筑 bbox、洪水区域 mask、道路变化线状 mask。</li>
+</ul>
+<p>一个好的 evidence-grounded change caption 评测，应区分四类结果：</p>]]></description></item><item><title>RS-20 Temporal Foundation Model for Cloud/Season Robustness</title><link>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</link><pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-20-temporal-foundation-model-for-cloud-season-robustness/</guid><description><![CDATA[<h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><blockquote>
+  <p>系列定位：这是一篇可独立发布的研究博客草稿，来自 <code>RS-20</code> 细分方向调研。它聚焦一个小问题，而不是泛泛讨论大方向。</p>
+</blockquote><h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>更新时间：20260607 细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 masked temporal reconstruction + downstream change/crop mapping 的小论文方案？ 1. 方向概述 光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云</p>
+<h2 id="正文" class="headerLink">
+    <a href="#%e6%ad%a3%e6%96%87" class="header-mark"></a>正文</h2><h1 id="rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="headerLink">
+    <a href="#rs-20-temporal-foundation-model-for-cloudseason-robustness-1" class="header-mark"></a>RS-20 Temporal Foundation Model for Cloud/Season Robustness</h1><p>更新时间：2026-06-07<br>
+细问题：多时相 foundation model 如何对云、缺测和季节变化鲁棒？能否设计一个 <code>masked temporal reconstruction + downstream change/crop mapping</code> 的小论文方案？</p>
+<h2 id="1-方向概述" class="headerLink">
+    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>光学/多光谱遥感时序的关键困难不是“没有时间维度”，而是时间维度经常不干净：云、云影、雪、薄雾、传感器缺测、不同重访周期、物候周期和真实地物变化混在一起。传统做法常用云掩膜、最佳像元合成、插值、时序平滑或单任务云去除，但 foundation model 时代的机会是：把“缺测、遮挡、季节变化”变成预训练任务本身，让模型学会在不完整、多季节、多区域、多传感器序列中形成稳定表示。</p>
+<p>本方向可被压成一个很具体的论文问题：</p>
+<blockquote>
+  <p>在 Sentinel-2 / HLS 多时相序列中，用真实或模拟云缺测做 masked temporal reconstruction 预训练，是否能同时提升云遮挡条件下的 crop mapping 和真实变化检测，并减少把季节变化误判为变化的错误？</p>
+</blockquote><h2 id="2-问题由来" class="headerLink">
+    <a href="#2-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>2. 问题由来</h2><p>遥感时序和普通视频不同。视频帧通常时间间隔密集、同一相机、视角连续；卫星时序是稀疏、不规则、多传感器、多大气条件，而且同一像元的语义可能因物候周期而显著变化。对于 crop mapping，模型必须理解不同作物的物候曲线，而不是只看单期纹理。对于 change detection，模型必须区分真实建设/灾害/砍伐变化与季节性植被变化、云影、观测角和配准误差。</p>
+<p>因此，单期 MAE 或普通图像 encoder 不够；只做云去除也不够。更有价值的是把 temporal masking、cloud-aware reconstruction、seasonal contrastive learning 和 downstream robustness 放在同一个评测框架里。</p>]]></description></item></channel></rss>

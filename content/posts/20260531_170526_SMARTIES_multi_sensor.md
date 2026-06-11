@@ -1,10 +1,10 @@
-+++
-date = '2026-05-31T12:00:00+08:00'
-draft = false
-title = 'SMARTIES: 面向遥感的频谱感知多传感器自编码器'
-categories = ['遥感AI']
-tags = ["多传感器融合", "频谱感知空间", "跨传感器Token Mixup", "传感器无关表示", "基础模型"]
-+++
+---
+title: "SMARTIES: 面向遥感的频谱感知多传感器自编码器"
+date: 2026-05-31
+categories: ["多源数据融合、效率部署与应用落地"]
+draft: false
+source_repo: "articles"
+---
 
 # SMARTIES: 面向遥感的频谱感知多传感器自编码器
 
