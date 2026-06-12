@@ -1,4 +1,10 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 07 Jun 2026 09:49:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:49:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 10:37:41 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>VecLang：把遥感矢量地图写成可执行语言</title><link>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 10:37:41 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="veclang把遥感矢量地图写成可执行语言" class="headerLink">
+    <a href="#veclang%e6%8a%8a%e9%81%a5%e6%84%9f%e7%9f%a2%e9%87%8f%e5%9c%b0%e5%9b%be%e5%86%99%e6%88%90%e5%8f%af%e6%89%a7%e8%a1%8c%e8%af%ad%e8%a8%80" class="header-mark"></a>VecLang：把遥感矢量地图写成可执行语言</h1><p><strong>结论：今天最值得跟踪的不是又一个遥感 VLM 问答模型，而是 VecLang 这个“把地图当语言生成”的方向。</strong> 它把建筑物、水体、道路网络这类几何结构完全不同的地图要素，统一表示成一种 GeoJSON-like 的 Structured Vector Language（SVL），再让 VLM 生成可解析、可渲染、可进入 GIS 流程的矢量对象。这个题眼比“遥感大模型又提升了多少分”更小，也更像一篇可以继续做的论文：遥感 AI 的输出不只要像素准，还要能被下游地图系统执行。</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>来源事实：论文 <em>Vector Map as Language: Toward Unified Remote Sensing Vector Mapping</em> 于 2026-06-09 以 arXiv:2606.10701v1 提交。作者提出 VecLang，将 remote sensing vector mapping 重写为结构化文本生成问题；核心表示是 SVL，用统一字段描述语义、几何和拓扑。项目页已公开 README 和可视化结果，但截至我检查时，GitHub README 里的 code、weights、VecMap-Bench dataset 仍标注为待发布。</p>
+<p>研究判断：VecLang 的价值不在于“用大模型做矢量化”这个口号，而在于它把遥感制图里长期分裂的两类输出对齐了：polygon 方法适合建筑物和水体，但很难自然表达道路连接；graph 方法适合道路，却弱化了实例边界。SVL 给了一个共同接口：建筑物是 polygon + holes，水体是 polygon，路网是 multiline + junctions。这样一来，模型输出可以直接转成矢量地图，而不是先出 mask 再靠一堆后处理补拓扑。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感 AI 过去几年很擅长做 raster prediction：分类图、分割 mask、检测框、变化热力图。但真实地图生产更关心 vector product：建筑轮廓能不能闭合，水体边界是否简洁，道路中心线是否连通，交叉口能否保留，输出能不能被 GIS 软件解析。像素 IoU 很高的模型，未必能生成好用的地图要素。</p>]]></description></item><item><title>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</title><link>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:49:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-50-hierarchical-taxonomy-metrics-for-remote-sensing/</guid><description><![CDATA[<h1 id="rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="headerLink">
     <a href="#rs-50-hierarchical-taxonomy-metrics-for-remote-sensing" class="header-mark"></a>RS-50 Hierarchical Taxonomy Metrics for Remote Sensing</h1><h2 id="结论摘要" class="headerLink">
     <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
 <p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
@@ -743,79 +749,4 @@
 </table>
 <h2 id="-解决的核心问题" class="headerLink">
     <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item><item><title>MAESTRO：多模态多时相多光谱遥感自监督学习的"指挥家"</title><link>https://spacetop.win/2026/06/20260601_100230_maestro_self_supervised/</link><pubDate>Mon, 01 Jun 2026 10:02:30 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_100230_maestro_self_supervised/</guid><description><![CDATA[<h1 id="maestro多模态多时相多光谱遥感自监督学习的指挥家" class="headerLink">
-    <a href="#maestro%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e6%97%b6%e7%9b%b8%e5%a4%9a%e5%85%89%e8%b0%b1%e9%81%a5%e6%84%9f%e8%87%aa%e7%9b%91%e7%9d%a3%e5%ad%a6%e4%b9%a0%e7%9a%84%e6%8c%87%e6%8c%a5%e5%ae%b6" class="header-mark"></a>MAESTRO：多模态多时相多光谱遥感自监督学习的&quot;指挥家&quot;</h1><blockquote>
-  <p><strong>论文解读</strong> | WACV 2026 | 2026-06-01</p>
-</blockquote><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>MAESTRO: Masked AutoEncoders for Multimodal, Multitemporal, and Multispectral Earth Observation Data</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Antoine Labatie, Michael Vaccaro, Nina Lardiere, Anatol Garioud, Nicolas Gonthier</td>
-      </tr>
-      <tr>
-          <td><strong>会议</strong></td>
-          <td>WACV 2026 (IEEE/CVF Winter Conference on Applications of Computer Vision)</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2508.10894" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2508.10894</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/ignf/maestro" target="_blank" rel="noopener noreferrer">https://github.com/ignf/maestro</a></td>
-      </tr>
-      <tr>
-          <td><strong>关键词</strong></td>
-          <td>自监督学习, 掩码自编码器, 多模态融合, 多时相分析, 多光谱遥感, 地球观测</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="-解决的核心问题" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景遥感数据的三多挑战" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae%e7%9a%84%e4%b8%89%e5%a4%9a%e6%8c%91%e6%88%98" class="header-mark"></a>问题背景：遥感数据的&quot;三多&quot;挑战</h3><p>地球观测（Earth Observation, EO）数据具有独特的&quot;三多&quot;特性：</p>
-<ol>
-<li><strong>多模态</strong>：光学（Sentinel-2）、SAR（Sentinel-1）、高光谱、DEM等不同传感器</li>
-<li><strong>多时相</strong>：同一区域在不同时间点的观测，蕴含丰富的时序变化信息</li>
-<li><strong>多光谱</strong>：单个传感器就有多个光谱波段（如Sentinel-2有13个波段）</li>
-</ol>
-<p>这些特性使得直接将自然图像领域的自监督学习方法（如MAE）迁移到遥感领域存在根本性挑战。</p>
-<h3 id="现有方法的局限" class="headerLink">
-    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
-  <thead>
-      <tr>
-          <th>方法类型</th>
-          <th>局限性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>单模态MAE</strong></td>
-          <td>忽略多模态互补信息，无法充分利用SAR、DEM等数据</td>
-      </tr>
-      <tr>
-          <td><strong>简单拼接融合</strong></td>
-          <td>将所有模态/时相强行拼接，导致异质数据相互干扰</td>
-      </tr>
-      <tr>
-          <td><strong>晚期融合</strong></td>
-          <td>各模态独立编码后融合，丢失跨模态交互信息</td>
-      </tr>
-      <tr>
-          <td><strong>统一tokenizer</strong></td>
-          <td>用同一套tokenizer处理所有模态，忽略传感器特性差异</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="核心问题提炼" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何设计一个统一的自监督学习框架，能够高效地融合多模态、多时相、多光谱的遥感数据，同时保持计算效率？</strong></p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item></channel></rss>

@@ -1,0 +1,62 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>VLM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/vlm/</link><description>VLM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 10:37:41 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/vlm/" rel="self" type="application/rss+xml"/><item><title>VecLang：把遥感矢量地图写成可执行语言</title><link>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 10:37:41 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="veclang把遥感矢量地图写成可执行语言" class="headerLink">
+    <a href="#veclang%e6%8a%8a%e9%81%a5%e6%84%9f%e7%9f%a2%e9%87%8f%e5%9c%b0%e5%9b%be%e5%86%99%e6%88%90%e5%8f%af%e6%89%a7%e8%a1%8c%e8%af%ad%e8%a8%80" class="header-mark"></a>VecLang：把遥感矢量地图写成可执行语言</h1><p><strong>结论：今天最值得跟踪的不是又一个遥感 VLM 问答模型，而是 VecLang 这个“把地图当语言生成”的方向。</strong> 它把建筑物、水体、道路网络这类几何结构完全不同的地图要素，统一表示成一种 GeoJSON-like 的 Structured Vector Language（SVL），再让 VLM 生成可解析、可渲染、可进入 GIS 流程的矢量对象。这个题眼比“遥感大模型又提升了多少分”更小，也更像一篇可以继续做的论文：遥感 AI 的输出不只要像素准，还要能被下游地图系统执行。</p>
+<h2 id="摘要" class="headerLink">
+    <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>来源事实：论文 <em>Vector Map as Language: Toward Unified Remote Sensing Vector Mapping</em> 于 2026-06-09 以 arXiv:2606.10701v1 提交。作者提出 VecLang，将 remote sensing vector mapping 重写为结构化文本生成问题；核心表示是 SVL，用统一字段描述语义、几何和拓扑。项目页已公开 README 和可视化结果，但截至我检查时，GitHub README 里的 code、weights、VecMap-Bench dataset 仍标注为待发布。</p>
+<p>研究判断：VecLang 的价值不在于“用大模型做矢量化”这个口号，而在于它把遥感制图里长期分裂的两类输出对齐了：polygon 方法适合建筑物和水体，但很难自然表达道路连接；graph 方法适合道路，却弱化了实例边界。SVL 给了一个共同接口：建筑物是 polygon + holes，水体是 polygon，路网是 multiline + junctions。这样一来，模型输出可以直接转成矢量地图，而不是先出 mask 再靠一堆后处理补拓扑。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感 AI 过去几年很擅长做 raster prediction：分类图、分割 mask、检测框、变化热力图。但真实地图生产更关心 vector product：建筑轮廓能不能闭合，水体边界是否简洁，道路中心线是否连通，交叉口能否保留，输出能不能被 GIS 软件解析。像素 IoU 很高的模型，未必能生成好用的地图要素。</p>]]></description></item><item><title>过去 24 小时遥感 AI 雷达：GeoAgent 基准、空间推理接口与 Mask Prompt</title><link>https://spacetop.win/2026/06/20260612_103741_daily_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 10:37:41 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_103741_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达geoagent-基准空间推理接口与-mask-prompt" class="headerLink">
+    <a href="#%e8%bf%87%e5%8e%bb-24-%e5%b0%8f%e6%97%b6%e9%81%a5%e6%84%9f-ai-%e9%9b%b7%e8%be%begeoagent-%e5%9f%ba%e5%87%86%e7%a9%ba%e9%97%b4%e6%8e%a8%e7%90%86%e6%8e%a5%e5%8f%a3%e4%b8%8e-mask-prompt" class="header-mark"></a>过去 24 小时遥感 AI 雷达：GeoAgent 基准、空间推理接口与 Mask Prompt</h1><p><strong>结论：今天的信号不在“又一个遥感 backbone”，而在地理智能系统的评测方式。</strong> 近 24 小时内，严格非 SAR/radar-only 的遥感 AI 新文并不多；更值得跟踪的是三条相互靠近的线：Earth-system agent benchmark 开始把遥感影像、格网数据、GIS 和模拟器放进同一个可执行工作流；通用 VLM 空间推理开始转向“代码作为行动接口”；mask/box prompt 从机器人世界模型里被证明是降低语言歧义的强约束。这三条线组合起来，正好对应遥感 VLM 的一个短板：能说，但未必能把证据落到对象、区域、时间和地图操作上。</p>
+<p>我按 2026-06-12 10:37:41 +08:00 回看近 24 小时公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 项。OpenReview、CVF、IEEE/ISPRS/ACM 在这个时间窗内没有检索到比 arXiv/官方 GitHub 更直接的新主线；GitHub/Hugging Face 只作为代码或数据可复现性补证据。</p>
+<h2 id="今日-3-个重点" class="headerLink">
+    <a href="#%e4%bb%8a%e6%97%a5-3-%e4%b8%aa%e9%87%8d%e7%82%b9" class="header-mark"></a>今日 3 个重点</h2><table>
+  <thead>
+      <tr>
+          <th>排名</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">来源时间</th>
+          <th>任务</th>
+          <th>数据/模态</th>
+          <th>贡献</th>
+          <th>代码/数据</th>
+          <th style="text-align: right">分数</th>
+          <th>为什么重要</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>TerraBench: Can Agents Reason Over Heterogeneous Earth-System Data?</td>
+          <td style="text-align: right">arXiv, 2026-06-11 10:26 UTC</td>
+          <td>Earth-system agent 评测</td>
+          <td>遥感影像、格网数据、GIS、模拟器、文档证据</td>
+          <td>用 TerraAgent/ReAct 式可执行框架，把工具调用、过程指标和容差数值评分合在一起；403 个任务、24,500 个验证执行步骤</td>
+          <td>论文页已公开；代码需继续跟踪</td>
+          <td style="text-align: right">8.6</td>
+          <td>遥感 AI 评测从“单图问答/单任务分割”走向“可执行地理工作流”，适合做 GeoFM/VLM 的下一代 benchmark</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning</td>
+          <td style="text-align: right">arXiv/GitHub, 2026-06-11 17:59 UTC</td>
+          <td>VLM 空间推理</td>
+          <td>图像/视频、3D/4D 空间任务</td>
+          <td>训练自由框架，让 VLM 在持久 Python kernel 里逐步写代码，调用感知与几何工具，而不是一次性输出答案</td>
+          <td>官方 GitHub: NVlabs/SpatialClaw</td>
+          <td style="text-align: right">8.2</td>
+          <td>对遥感 VLM 很可迁移：大幅影像、矢量图层、DEM、对象 mask 都天然适合“代码单元 + 中间证据”式推理</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>MaskWAM: Unifying Mask Prompting and Prediction for World-Action Models</td>
+          <td style="text-align: right">arXiv, 2026-06-11 16:02 UTC</td>
+          <td>Mask prompt / 目标中心预测</td>
+          <td>视频、mask、动作条件</td>
+          <td>把 mask 同时作为输入提示和预测目标，用对象中心监督减弱背景噪声和语言歧义</td>
+          <td>论文页已公开；官方代码需继续跟踪</td>
+          <td style="text-align: right">7.4</td>
+          <td>虽然是机器人/世界模型论文，但它给遥感一个清晰迁移点：box/mask prompt 可以作为变化检测、开放词汇分割和人工交互标注的证据锚点</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="1-terrabench遥感-agent-评测开始像真实地理工作流" class="headerLink">
+    <a href="#1-terrabench%e9%81%a5%e6%84%9f-agent-%e8%af%84%e6%b5%8b%e5%bc%80%e5%a7%8b%e5%83%8f%e7%9c%9f%e5%ae%9e%e5%9c%b0%e7%90%86%e5%b7%a5%e4%bd%9c%e6%b5%81" class="header-mark"></a>1. TerraBench：遥感 Agent 评测开始像真实地理工作流</h2><p><strong>来源事实：</strong> TerraBench 于 2026-06-11 提交 arXiv。论文把问题定义为 grounded Earth-science reasoning，覆盖 Earth observation imagery、gridded data、GIS reasoning、simulation 和 document-grounded verification。它不是只问“图里有什么”，而是要求 agent 通过工具调用完成检索、地理处理、模拟和带证据的计算。论文报告 benchmark 包含 403 个任务、三个 track、八个应用域和 24,500 个验证执行步骤。</p>]]></description></item></channel></rss>
