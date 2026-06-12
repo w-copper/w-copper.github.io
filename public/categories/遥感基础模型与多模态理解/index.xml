@@ -1,4 +1,10 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 19:00:03 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>Earth-Agent：把遥感 VLM 从看图问答推进到可验证的工具推理</title><link>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 19:00:03 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="earth-agent把遥感-vlm-从看图问答推进到可验证的工具推理" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 21:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>Flexible GeoFM：缺 band 鲁棒性可能比单榜最高分更重要</title><link>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 21:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="flexible-geofm缺-band-鲁棒性可能比单榜最高分更重要" class="headerLink">
+    <a href="#flexible-geofm%e7%bc%ba-band-%e9%b2%81%e6%a3%92%e6%80%a7%e5%8f%af%e8%83%bd%e6%af%94%e5%8d%95%e6%a6%9c%e6%9c%80%e9%ab%98%e5%88%86%e6%9b%b4%e9%87%8d%e8%a6%81" class="header-mark"></a>Flexible GeoFM：缺 band 鲁棒性可能比单榜最高分更重要</h1><p><strong>结论：这一轮最值得单独跟踪的不是一个新遥感 VLM，而是一篇把 geospatial foundation model 架构放到同一预训练、同一 GeoBench 协议下比较的工作；它提醒我们，真正可落地的遥感基础模型必须能在 band 缺失、传感器切换和任务谱段偏好变化时“优雅退化”。</strong></p>
+<p>我按 2026-06-12 21:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 2026-06-10 提交的 <em>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</em>。论文中包含一个 Sentinel-1/Sentinel-2 扩展实验，但本文只讨论其 Sentinel-2 光学多光谱主实验和缺 band 结论，不把 SAR-only 结果作为推荐重点。</p>
+<p>这篇的价值在于它不再只问“哪个 GeoFM 在某个下游任务上最高”，而是问一个更工程也更科学的问题：当下游数据只有 RGB+NIR，或者缺少 Red Edge / SWIR，或者从 Sentinel-2 迁移到商业四波段影像时，模型性能如何下降。这个问题直接关系到遥感基础模型能不能从论文 benchmark 进入真实生产管线。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>过去两年遥感基础模型的竞争很容易被三个指标带偏：模型参数量、预训练数据规模、单个 benchmark 的平均分。问题是，遥感应用的输入从来不稳定。不同卫星的光谱配置不同，同一地区可能因为云、传感器噪声、产品级别或采购成本导致某些 band 不可用；农业、城市、生态和灾害任务对谱段的依赖也不同。一个模型在完整 Sentinel-2 十波段上表现强，并不代表它在 RGB+NIR 或缺 SWIR 的场景里可靠。</p>
+<p>这篇论文把 SatMAE、DOFA 和一个 ClimaX/Flex 风格架构放到同一实验条件下比较。作者统一了预训练目标、预训练数据、模型规模和 GeoBench 下游协议，尽量减少“每篇论文各自调参、各自选数据”的不可比问题。这个设定对后续做 GeoFM 很重要，因为很多所谓 SOTA 其实混杂了架构、数据、训练轮数、下游 head 和评测 split 的差异。</p>]]></description></item><item><title>Earth-Agent：把遥感 VLM 从看图问答推进到可验证的工具推理</title><link>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 19:00:03 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="earth-agent把遥感-vlm-从看图问答推进到可验证的工具推理" class="headerLink">
     <a href="#earth-agent%e6%8a%8a%e9%81%a5%e6%84%9f-vlm-%e4%bb%8e%e7%9c%8b%e5%9b%be%e9%97%ae%e7%ad%94%e6%8e%a8%e8%bf%9b%e5%88%b0%e5%8f%af%e9%aa%8c%e8%af%81%e7%9a%84%e5%b7%a5%e5%85%b7%e6%8e%a8%e7%90%86" class="header-mark"></a>Earth-Agent：把遥感 VLM 从看图问答推进到可验证的工具推理</h1><p><strong>结论：这一轮最值得单独跟踪的是 Earth-Agent / Earth-Bench。它的价值不在于又训练了一个更会描述遥感图像的 VLM，而在于把遥感智能体的评测对象从“回答一句话”推进到“能否选择工具、传递参数、执行多步定量分析，并让推理轨迹可检查”。</strong></p>
 <p>我按 2026-06-12 19:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 项。本篇选择 ICLR 2026 Poster <em>Earth-Agent: Unlocking the Full Landscape of Earth Observation with Agents</em>。它覆盖 RGB、光谱数据和加工后的 Earth products，但核心不是雷达或 SAR；公开材料也没有把 SAR 作为主贡献。因此它符合本轮“非 SAR、优先 VLM/可落地 benchmark”的筛选条件。</p>
 <p>这篇和已有 GeoChat、VHM、SegEarth-OV、RS-VLM benchmark 的区别很明显：它不再把遥感 VLM 主要定义为图像描述、分类、VQA 或 grounding，而是把 LLM 作为 policy，让它在 Earth observation 工具系统里做多步规划、工具调用、记忆更新和结果判断。对遥感 AI 来说，这个方向比单纯写 prompt 更值得跟踪，因为真正的 EO 任务往往需要传感器选择、时间窗口、指数计算、区域统计、模型推理和误差检查，而不是只看一张 RGB 图回答“这里有什么”。</p>
@@ -746,143 +752,4 @@
 </table>
 <h2 id="方法脉络" class="headerLink">
     <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-传统-covariates--survey-labels" class="headerLink">
-    <a href="#1-%e4%bc%a0%e7%bb%9f-covariates--survey-labels" class="header-mark"></a>1. 传统 covariates + survey labels</h3><p>输入包括 night lights、built-up、roads、land cover、elevation、climate、population products、POI 和 admin features；标签来自 DHS/LSMS/census/ACS 等。模型通常是 RF、GBDT、Bayesian small-area estimation、CNN 或 CNN feature + regression。</p>]]></description></item><item><title>RS-43 Illegal Mining Evidence Grounding</title><link>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</link><pubDate>Sun, 07 Jun 2026 09:42:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-43-illegal-mining-evidence-grounding/</guid><description><![CDATA[<h1 id="rs-43-illegal-mining-evidence-grounding" class="headerLink">
-    <a href="#rs-43-illegal-mining-evidence-grounding" class="header-mark"></a>RS-43 Illegal Mining Evidence Grounding</h1><h2 id="1-方向概述" class="headerLink">
-    <a href="#1-%e6%96%b9%e5%90%91%e6%a6%82%e8%bf%b0" class="header-mark"></a>1. 方向概述</h2><p>非法采矿，尤其是亚马逊和加纳等地区的 artisanal and small-scale gold mining，具有几个典型遥感难点：目标尺度小、形态变化快、常沿河流和道路扩散、裸土/采坑/尾矿池/临时道路/简易机场之间存在强上下文关系，同时又经常受云、阴影、季节水位和成像分辨率影响。传统做法多是二分类或语义分割：给出“这里是矿区”。但执法、新闻调查、生态评估和社区沟通需要的不只是一个 mask，而是可审计证据：模型为什么认为这里是非法采矿，变化发生在何处，相关证据是否来自裸土扩张、河道浑浊、植被损失、道路/机场/机械痕迹，答案有没有定位支撑。</p>
-<p>因此这个细方向可以定义为：面向非法采矿/森林破坏的 evidence-grounded remote sensing interpretation。输出不只是 detection / segmentation / change mask，还包括：</p>
-<ul>
-<li>证据区域：bbox、mask、polygon 或 georeferenced tile。</li>
-<li>证据类型：裸土采坑、尾矿池、浑浊水体、临时道路、营地、机场、森林清除边界等。</li>
-<li>时间证据：pre/post 或多时相变化描述。</li>
-<li>置信度与不确定性：是否可能是合法矿区、自然裸地、农业开垦、河道季节变化。</li>
-<li>可复核产物：地图图层、caption、QA、变化报告和失败案例。</li>
-</ul>
-<h2 id="2-代表论文数据与项目" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%95%b0%e6%8d%ae%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文、数据与项目</h2><table>
-  <thead>
-      <tr>
-          <th>名称</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>对 RS-43 的价值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ELDOR: A Dataset and Benchmark for Illegal Gold Mining in the Amazon Rainforest</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.15397" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>论文提到 interactive explorer，官方代码需继续跟踪</td>
-          <td>目前最贴近本题的 benchmark：UAV orthomosaic、像素级 mining/ecological labels、语义分割、recognition、VLM class-presence 任务。</td>
-      </tr>
-      <tr>
-          <td>Amazon Mining Watch</td>
-          <td style="text-align: right">2026 数据平台/产品</td>
-          <td><a href="https://amazonminingwatch.org/es" target="_blank" rel="noopener noreferrer">platform</a>, <a href="https://source.coop/earthgenome/amazon-mining-watch" target="_blank" rel="noopener noreferrer">Source Cooperative data</a></td>
-          <td><a href="https://github.com/earthrise-media/mining-detector" target="_blank" rel="noopener noreferrer">GitHub: mining-detector</a></td>
-          <td>Sentinel-2 泛亚马逊矿区检测产品；GitHub 说明使用 SSL4EO DINO ViT 特征 + 小型 ensemble classifier；适合做真实部署基线和地理范围评测。</td>
-      </tr>
-      <tr>
-          <td>SmallMinesDS: A Multimodal Dataset for Mapping Artisanal and Small-Scale Gold Mines</td>
-          <td style="text-align: right">2025 IEEE GRSL</td>
-          <td><a href="https://portal.fis.tum.de/en/publications/smallminesds-a-multimodal-dataset-for-mapping-artisanal-and-small/" target="_blank" rel="noopener noreferrer">TUM page</a></td>
-          <td><a href="https://huggingface.co/datasets/ellaampy/SmallMinesDS" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
-          <td>Ghana 小规模金矿，多时相/多传感器；适合测试跨区域、跨传感器和小目标矿区分割。</td>
-      </tr>
-      <tr>
-          <td>EuroMineNet: A Multitemporal Sentinel-2 Benchmark for Spatiotemporal Mining Footprint Analysis</td>
-          <td style="text-align: right">2026 ISPRS JPRS / 2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2510.14661" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://www.sciencedirect.com/science/article/pii/S092427162600225X" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td><a href="https://github.com/EricYu97/EuroMineNet" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>虽非“非法”主线，但提供 2015-2024 年度 mining footprint，多时相变化和 footprint tracking protocol 可迁移。</td>
-      </tr>
-      <tr>
-          <td>Remote Sensing Capabilities of Detecting Spatio-Temporal Dynamics in Unregulated Gold Mining Hotspots in Ecuador</td>
-          <td style="text-align: right">2026 EGUsphere preprint</td>
-          <td><a href="https://egusphere.copernicus.org/preprints/2026/egusphere-2026-1854/" target="_blank" rel="noopener noreferrer">EGUsphere</a></td>
-          <td>使用公开数据，含 Amazon Mining Watch 引用</td>
-          <td>对“unregulated mining”真实场景评估 Sentinel / Planet / embedding 数据能力，适合做案例与验证区域。</td>
-      </tr>
-      <tr>
-          <td>MineCam: Segmentation and Change Detection of Mining Areas</td>
-          <td style="text-align: right">2024 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/16/6/955" target="_blank" rel="noopener noreferrer">MDPI</a></td>
-          <td>未见官方代码</td>
-          <td>传统 segmentation + change detection baseline，可作为 VLM 证据化方案的对照。</td>
-      </tr>
-      <tr>
-          <td>Global High-Resolution Mining Footprints</td>
-          <td style="text-align: right">数据产品</td>
-          <td><a href="https://gee-community-catalog.org/projects/global-mining/" target="_blank" rel="noopener noreferrer">GEE Community Catalog</a></td>
-          <td>GEE 数据</td>
-          <td>全球矿区 footprint 先验，可作为弱标签、负样本过滤或合法/历史矿区背景层。</td>
-      </tr>
-      <tr>
-          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Kuckreja_GeoChat_Grounded_Large_Vision-Language_Model_for_Remote_Sensing_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
-          <td><a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>遥感 grounded dialogue 基线，可迁移到“指出证据区域并解释为什么像矿区”。</td>
-      </tr>
-      <tr>
-          <td>LHRS-Bot</td>
-          <td style="text-align: right">2024 ECCV</td>
-          <td><a href="https://pumpkin-co.github.io/publication/2024-01" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>项目页含 GitHub</td>
-          <td>VGI-enhanced 遥感 MLLM，适合探索 OSM/POI/地名/道路先验辅助但需防止文本幻觉。</td>
-      </tr>
-      <tr>
-          <td>Change-Agent</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2403.19646" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td><a href="https://github.com/Chen-Yang-Liu/Change-Agent" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>交互式变化解释：change detection、caption、counting、cause analysis；适合迁移到矿区扩张解释。</td>
-      </tr>
-      <tr>
-          <td>CDChat</td>
-          <td style="text-align: right">2024/2025 IGARSS</td>
-          <td><a href="https://github.com/techmn/cdchat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GitHub</td>
-          <td>遥感变化描述 MLLM；可作为 change caption baseline。</td>
-      </tr>
-      <tr>
-          <td>SECOND-CC / MModalCC</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2501.10075" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td><a href="https://github.com/ChangeCapsInRS/SecondCC" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
-          <td>change captioning 数据与模型，适合借鉴多模态 change caption 数据构造。</td>
-      </tr>
-      <tr>
-          <td>DeltaVLM</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2507.22346" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td>需继续核验</td>
-          <td>instruction-guided difference perception，把双时相变化分析做成可交互 VLM。</td>
-      </tr>
-      <tr>
-          <td>HiSem</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.15024" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/Man-Wang-star/HiSem" target="_blank" rel="noopener noreferrer">GitHub planned</a></td>
-          <td>层级语义解耦 change caption，可迁移到“森林损失 -&gt; 采坑/道路/水体污染”等分层描述。</td>
-      </tr>
-      <tr>
-          <td>Vision-Language Agents for Interactive Forest Change Analysis</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2601.04497" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td>需继续核验</td>
-          <td>直接面向 forest change 的交互式 VLM agent；适合迁移到 deforestation + mining 证据问答。</td>
-      </tr>
-      <tr>
-          <td>LISAT: Language-Instructed Segmentation Assistant for Satellite Imagery</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://huggingface.co/papers/2505.02829" target="_blank" rel="noopener noreferrer">HF paper</a></td>
-          <td>HF page links project/GitHub</td>
-          <td>reasoning segmentation 能力可迁移到“segment mining scars / tailing ponds / disturbed riverbank”。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-问题由来为什么需要-evidence-grounding" class="headerLink">
-    <a href="#3-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81-evidence-grounding" class="header-mark"></a>3. 问题由来：为什么需要 evidence grounding</h2><h3 id="31-从检测矿区到证明矿区" class="headerLink">
-    <a href="#31-%e4%bb%8e%e6%a3%80%e6%b5%8b%e7%9f%bf%e5%8c%ba%e5%88%b0%e8%af%81%e6%98%8e%e7%9f%bf%e5%8c%ba" class="header-mark"></a>3.1 从“检测矿区”到“证明矿区”</h3><p>Amazon Mining Watch 这类系统已经能做大范围筛查，但现实使用者往往需要回答更细的问题：</p>]]></description></item></channel></rss>
+    <a href="#1-%e4%bc%a0%e7%bb%9f-covariates--survey-labels" class="header-mark"></a>1. 传统 covariates + survey labels</h3><p>输入包括 night lights、built-up、roads、land cover、elevation、climate、population products、POI 和 admin features；标签来自 DHS/LSMS/census/ACS 等。模型通常是 RF、GBDT、Bayesian small-area estimation、CNN 或 CNN feature + regression。</p>]]></description></item></channel></rss>
