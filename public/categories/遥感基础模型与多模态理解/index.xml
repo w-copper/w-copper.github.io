@@ -1,4 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 23:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>iSAGE：把遥感分割标注从画 mask 改成点错点</title><link>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 23:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="isage把遥感分割标注从画-mask-改成点错点" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 13 Jun 2026 01:00:05 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>SpatialSky-Bench：把遥感 VLM 评测从看图问答推到空间导航</title><link>https://spacetop.win/2026/06/20260613_010005_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 01:00:05 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_010005_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="spatialsky-bench把遥感-vlm-评测从看图问答推到空间导航" class="headerLink">
+    <a href="#spatialsky-bench%e6%8a%8a%e9%81%a5%e6%84%9f-vlm-%e8%af%84%e6%b5%8b%e4%bb%8e%e7%9c%8b%e5%9b%be%e9%97%ae%e7%ad%94%e6%8e%a8%e5%88%b0%e7%a9%ba%e9%97%b4%e5%af%bc%e8%88%aa" class="header-mark"></a>SpatialSky-Bench：把遥感 VLM 评测从看图问答推到空间导航</h1><p><strong>结论：这一轮最值得单独跟踪的是 SpatialSky-Bench / Sky-VLM。它的价值不在于又做了一个遥感问答榜，而是把 VLM 的问题从“能不能看懂一张遥感图”推进到“能不能在无人机视角里理解方向、距离、高度、障碍物和降落安全”。这对遥感 VLM 很关键，因为很多真实任务不是静态 caption 或分类，而是带空间约束、风险判断和行动后果的动态决策。</strong></p>
+<p>我按 2026-06-13 01:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 CVPR 2026 论文 <em>Is your VLM Sky-Ready? A Comprehensive Spatial Intelligence Benchmark for UAV Navigation</em>。论文有 arXiv、CVF Open Access 页面和官方 GitHub；其场景基于无人机视觉导航，不走雷达主线。需要注意的是，关联 UAVScenes 数据集包含相机与 LiDAR 标注，本文只把它作为 UAV 场景几何与视觉 benchmark 背景，不把 LiDAR 或三维重建作为主推荐方向。</p>
+<p>这篇适合放进“遥感基础模型与多模态理解”类目。它提醒我们：遥感 VLM 的下一步不应只追求更会描述图像，而要能处理空间关系、尺度、可通行性、目标相对位置和安全决策。对城市应急、低空巡检、灾害侦察、无人机测绘和地面-空中协同，这比普通 VQA 更接近应用需求。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>过去两年遥感 VLM 的评测大多围绕 caption、VQA、grounding、目标识别、场景分类和开放词表理解展开。这些任务很有必要，但它们通常仍是离线、静态、单图判断：模型看一张图，回答里面有什么、某个目标在哪里、图像属于什么类别。问题是，无人机和低空遥感场景里的“理解”往往不是静态语义，而是空间行动能力。</p>
+<p>例如，一个巡检无人机需要判断前方是否可安全穿越，当前视角下目标在左前方还是右后方，障碍物高度是否构成风险，候选降落区域是否平整开阔，建筑、道路、树木和车辆之间的相对距离是否支持下一步动作。这类问题很难用普通图像描述衡量。一个 VLM 可以把图说得很流畅，却仍然无法稳定判断方向、距离和安全边界。</p>
+<p>SpatialSky-Bench 把这个缺口显式化。它关注的是 UAV navigation 中的 spatial intelligence，也就是让模型在空中视角里完成环境感知和场景理解。CV-to-RS 的迁移路径很清楚：通用 VLM 里已有的视觉问答、空间推理和多模态指令能力，需要适配遥感/UAV 视角的尺度变化、俯视几何、遮挡、航迹连续性、地物类别和安全约束。</p>]]></description></item><item><title>iSAGE：把遥感分割标注从画 mask 改成点错点</title><link>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 23:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="isage把遥感分割标注从画-mask-改成点错点" class="headerLink">
     <a href="#isage%e6%8a%8a%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e6%a0%87%e6%b3%a8%e4%bb%8e%e7%94%bb-mask-%e6%94%b9%e6%88%90%e7%82%b9%e9%94%99%e7%82%b9" class="header-mark"></a>iSAGE：把遥感分割标注从画 mask 改成点错点</h1><p><strong>结论：这一轮最值得单独跟踪的是 iSAGE。它的价值不是提出一个更大的遥感 backbone，而是把高分辨率遥感语义分割里最贵的环节，也就是像素级标注，重新定义为“专家只点击模型已经自信但明显错的像素”。这比又堆一个 SAM/VLM 自动伪标注管线更值得看，因为它直接挑战了当前弱监督、主动学习和 foundation-model 标注管线里一个被忽略的问题：模型自己的置信度分布并不能告诉你哪些高置信预测其实是错的。</strong></p>
 <p>我按 2026-06-12 23:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 2026-06-08 提交的 <em>iSAGE: A Human-in-the-Loop Framework for Remote Sensing Semantic Segmentation via Sparse Point Supervision</em>。论文提供 arXiv、HTML 版本、GitHub 代码和 Zenodo 归档；实验用 RGB/IRRG 航空影像，不涉及雷达主线。</p>
 <p>这篇适合放进“遥感解译与目标检测”类目，但它真正的研究信号更偏数据中心 AI：遥感模型的瓶颈不只是模型结构，而是新区域、新传感器、新类别上线时，如何持续维护一个可修正、可审计、可增量扩展的监督信号。</p>
@@ -513,127 +520,4 @@
 </ol>
 <h2 id="可执行的数据过滤协议" class="headerLink">
     <a href="#%e5%8f%af%e6%89%a7%e8%a1%8c%e7%9a%84%e6%95%b0%e6%8d%ae%e8%bf%87%e6%bb%a4%e5%8d%8f%e8%ae%ae" class="header-mark"></a>可执行的数据过滤协议</h2><h3 id="stage-0-数据血缘记录" class="headerLink">
-    <a href="#stage-0-%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e8%ae%b0%e5%bd%95" class="header-mark"></a>Stage 0: 数据血缘记录</h3><p>每条样本保存：</p>]]></description></item><item><title>RS-45 Few-Shot Disaster Building Damage Mapping</title><link>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</link><pubDate>Sun, 07 Jun 2026 09:44:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-45-few-shot-disaster-building-damage-mapping/</guid><description><![CDATA[<h1 id="rs-45-few-shot-disaster-building-damage-mapping" class="headerLink">
-    <a href="#rs-45-few-shot-disaster-building-damage-mapping" class="header-mark"></a>RS-45 Few-Shot Disaster Building Damage Mapping</h1><p>范围：灾后建筑损毁低样本制图；优先 VHR 光学 pre/post 遥感影像，兼顾 UAV/FloodNet 与 VLM 报告任务；SAR 或地面多视角工作只作为补充参考。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>灾后建筑损毁制图的核心约束是“黄金 72 小时”：需要快速定位受损建筑、判断损毁等级，并把结果交给救援、保险和城市管理流程。但 xBD/xView2 这类主流数据虽然大，仍存在三个长期矛盾：</p>
-<ol>
-<li><strong>低样本与跨灾种泛化</strong>：新灾害发生时通常没有本地标注，模型从飓风迁移到地震、火灾、海啸时会因为建筑形态、成像角度、灾害痕迹和背景地貌变化而失效。</li>
-<li><strong>建筑实例与损毁证据错位</strong>：像素级变化不一定等于建筑损毁，阴影、季节、火烟、水体、配准误差都会产生伪变化；反过来，屋顶破损、局部坍塌又可能很细微。</li>
-<li><strong>可审计输出不足</strong>：应急场景不只要分类标签，还要建筑轮廓、pre/post 证据、损毁理由、置信度和报告文本。VLM 能生成报告，但容易脱离图像证据。</li>
-</ol>
-<p>2024-2026 的新变化是，研究开始把 vision foundation model、SAM、VLM、LoRA/adapter、in-context learning 和跨域迁移引入灾害损毁评估，而不是只训练一个 xBD 专用 Siamese CNN。</p>
-<h2 id="2-代表论文数据与代码" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e6%95%b0%e6%8d%ae%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>2. 代表论文、数据与代码</h2><table>
-  <thead>
-      <tr>
-          <th>方向</th>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>关键贡献</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>强基线与泛化诊断</td>
-          <td>A simple, strong baseline for building damage detection on the xBD dataset</td>
-          <td style="text-align: right">2024 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2401.17271" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td><a href="https://github.com/PaulBorneP/Xview2_Strong_Baseline" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>从 xView2 复杂冠军方案中剥离出简单强基线，并重新划分 unseen-location 测试，指出模型和数据分布都会导致跨地点泛化失败。</td>
-      </tr>
-      <tr>
-          <td>Foundation model 变化检测</td>
-          <td>Generalizable Disaster Damage Assessment via Change Detection with Vision Foundation Model / DAVI</td>
-          <td style="text-align: right">2024 arXiv, 2025 revision</td>
-          <td><a href="https://arxiv.org/abs/2406.08020" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td>未确认官方代码</td>
-          <td>结合源域任务模型和 segmentation foundation model，在目标区域无 GT 标签时生成损毁伪标签，并做 pixel/image 两阶段 refinement。</td>
-      </tr>
-      <tr>
-          <td>SAM 视觉提示</td>
-          <td>Visual Prompt Learning of Foundation Models for Post-Disaster Damage Evaluation / ViPDE</td>
-          <td style="text-align: right">2025 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/17/10/1664" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td>未见官方代码</td>
-          <td>用 SAM 嵌入知识和 pre/post 图像对做 contrastive visual prompt learning，面向建筑损毁评价。</td>
-      </tr>
-      <tr>
-          <td>VLM 灾害数据</td>
-          <td>DisasterM3: A Remote Sensing Vision-Language Dataset for Disaster Damage Assessment and Response</td>
-          <td style="text-align: right">2025 NeurIPS</td>
-          <td><a href="https://arxiv.org/abs/2505.21089" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td><a href="https://github.com/Junjue-Wang/DisasterM3" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>26,988 bi-temporal images、123k instruction pairs、36 个灾害事件、9 类任务；包含多传感器，SAR 内容需在光学主线中标记为 mixed-modality。</td>
-      </tr>
-      <tr>
-          <td>多模态基准</td>
-          <td>DisasterInsight: A Multimodal Benchmark for Function-Aware and Grounded Disaster Assessment</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2601.18493" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td>待确认</td>
-          <td>将 xBD 重构为约 112K building-centered instances，支持功能分类、损毁等级、灾害类型、计数和结构化报告；DI-Chat 用 LoRA 做灾害指令适配。</td>
-      </tr>
-      <tr>
-          <td>智能迁移</td>
-          <td>Smart Transfer: Leveraging Vision Foundation Model for Rapid Building Damage Mapping with Post-Earthquake VHR Imagery</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2604.02627" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td><a href="https://github.com/ai4city-hkust/SmartTransfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>面向震后 VHR 单灾害快速迁移，提出 Pixel-wise Clustering 和 Distance-Penalized Triplet，做 LODO/SSDC 跨区域实验。</td>
-      </tr>
-      <tr>
-          <td>VLM 推理</td>
-          <td>Instruct-ICL: Instruction-Guided In-Context Learning for Post-Disaster Damage Assessment</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.11439" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td>FloodNet 依赖 <a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>用一个 MLLM 生成任务指令/CoT 指导另一个 MLLM，在 FloodNet post-disaster VQA 上研究 prompt/ICL 稳定性。</td>
-      </tr>
-      <tr>
-          <td>SAM + temporal VLM</td>
-          <td>Integrating segmentation and vision-language model for automated and interpretable building damage assessment from satellite imagery / BDAChat</td>
-          <td style="text-align: right">2026 Automation in Construction</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1474034626000121" target="_blank" rel="noopener noreferrer">paper</a></td>
-          <td><a href="https://github.com/WangYong921/BDAChat" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>三阶段框架：改进 SAM 分割、时空配对、BDAChat temporal VLM 做对象级损毁推理和解释。</td>
-      </tr>
-      <tr>
-          <td>工程基线</td>
-          <td>Microsoft building damage assessment toolkit</td>
-          <td style="text-align: right">持续维护</td>
-          <td><a href="https://github.com/microsoft/building-damage-assessment" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://github.com/microsoft/building-damage-assessment-cnn-siamese" target="_blank" rel="noopener noreferrer">CNN Siamese</a></td>
-          <td>GitHub</td>
-          <td>提供 xBD 类别、推理/可视化 workflow，可作为工程 baseline 与部署参考。</td>
-      </tr>
-      <tr>
-          <td>经典对象级变化</td>
-          <td>ChangeOS</td>
-          <td style="text-align: right">2021 RSE, 仍是重要基线</td>
-          <td><a href="https://github.com/Z-Zheng/ChangeOS" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GitHub</td>
-          <td>深度对象级语义变化检测框架，适合作为非 foundation model 的强对照。</td>
-      </tr>
-      <tr>
-          <td>数据</td>
-          <td>xBD / xView2</td>
-          <td style="text-align: right">2019-</td>
-          <td><a href="https://arxiv.org/abs/1911.09296" target="_blank" rel="noopener noreferrer">paper</a>, <a href="https://fmi-data-index.github.io/xbd.html" target="_blank" rel="noopener noreferrer">dataset index</a>, <a href="https://www.eotdl.com/datasets/xView2" target="_blank" rel="noopener noreferrer">EOTDL</a></td>
-          <td><a href="https://github.com/diux-xview/xview2-baseline" target="_blank" rel="noopener noreferrer">baseline</a></td>
-          <td>主流建筑损毁数据，四级损毁标签：no damage、minor、major、destroyed；仍是少样本和跨灾种实验的核心数据。</td>
-      </tr>
-      <tr>
-          <td>UAV/VQA 补充</td>
-          <td>FloodNet Challenge</td>
-          <td style="text-align: right">2021-</td>
-          <td><a href="https://github.com/BinaLab/FloodNet-Challenge-EARTHVISION2021" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GitHub</td>
-          <td>高分辨率 UAV 洪灾图像，含分类、半监督分割和 VQA，适合验证 Instruct-ICL/VLM 的灾害问答路线。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法脉络" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-xbd-专用模型到跨地点强基线" class="headerLink">
-    <a href="#31-xbd-%e4%b8%93%e7%94%a8%e6%a8%a1%e5%9e%8b%e5%88%b0%e8%b7%a8%e5%9c%b0%e7%82%b9%e5%bc%ba%e5%9f%ba%e7%ba%bf" class="header-mark"></a>3.1 xBD 专用模型到跨地点强基线</h3><p>2024 的 xBD simple strong baseline 很重要，因为它不只是给一个模型，而是指出原 competition split 可能高估泛化能力。它把测试位置设置为训练未见区域后，复杂模型和简化模型都明显暴露跨地点弱点。这说明 RS-45 不能只做随机 split 上的 F1，而必须做 leave-event-out、leave-region-out、leave-disaster-type-out。</p>]]></description></item></channel></rss>
+    <a href="#stage-0-%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e8%ae%b0%e5%bd%95" class="header-mark"></a>Stage 0: 数据血缘记录</h3><p>每条样本保存：</p>]]></description></item></channel></rss>

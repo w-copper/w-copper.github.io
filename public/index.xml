@@ -1,4 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>堂堂一跑堂</title><link>https://spacetop.win/</link><description>珍惜眼前始为真</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 23:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/index.xml" rel="self" type="application/rss+xml"/><item><title>iSAGE：把遥感分割标注从画 mask 改成点错点</title><link>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 23:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="isage把遥感分割标注从画-mask-改成点错点" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>堂堂一跑堂</title><link>https://spacetop.win/</link><description>珍惜眼前始为真</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 13 Jun 2026 01:00:05 +0800</lastBuildDate><atom:link href="https://spacetop.win/index.xml" rel="self" type="application/rss+xml"/><item><title>SpatialSky-Bench：把遥感 VLM 评测从看图问答推到空间导航</title><link>https://spacetop.win/2026/06/20260613_010005_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 01:00:05 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_010005_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="spatialsky-bench把遥感-vlm-评测从看图问答推到空间导航" class="headerLink">
+    <a href="#spatialsky-bench%e6%8a%8a%e9%81%a5%e6%84%9f-vlm-%e8%af%84%e6%b5%8b%e4%bb%8e%e7%9c%8b%e5%9b%be%e9%97%ae%e7%ad%94%e6%8e%a8%e5%88%b0%e7%a9%ba%e9%97%b4%e5%af%bc%e8%88%aa" class="header-mark"></a>SpatialSky-Bench：把遥感 VLM 评测从看图问答推到空间导航</h1><p><strong>结论：这一轮最值得单独跟踪的是 SpatialSky-Bench / Sky-VLM。它的价值不在于又做了一个遥感问答榜，而是把 VLM 的问题从“能不能看懂一张遥感图”推进到“能不能在无人机视角里理解方向、距离、高度、障碍物和降落安全”。这对遥感 VLM 很关键，因为很多真实任务不是静态 caption 或分类，而是带空间约束、风险判断和行动后果的动态决策。</strong></p>
+<p>我按 2026-06-13 01:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 CVPR 2026 论文 <em>Is your VLM Sky-Ready? A Comprehensive Spatial Intelligence Benchmark for UAV Navigation</em>。论文有 arXiv、CVF Open Access 页面和官方 GitHub；其场景基于无人机视觉导航，不走雷达主线。需要注意的是，关联 UAVScenes 数据集包含相机与 LiDAR 标注，本文只把它作为 UAV 场景几何与视觉 benchmark 背景，不把 LiDAR 或三维重建作为主推荐方向。</p>
+<p>这篇适合放进“遥感基础模型与多模态理解”类目。它提醒我们：遥感 VLM 的下一步不应只追求更会描述图像，而要能处理空间关系、尺度、可通行性、目标相对位置和安全决策。对城市应急、低空巡检、灾害侦察、无人机测绘和地面-空中协同，这比普通 VQA 更接近应用需求。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>过去两年遥感 VLM 的评测大多围绕 caption、VQA、grounding、目标识别、场景分类和开放词表理解展开。这些任务很有必要，但它们通常仍是离线、静态、单图判断：模型看一张图，回答里面有什么、某个目标在哪里、图像属于什么类别。问题是，无人机和低空遥感场景里的“理解”往往不是静态语义，而是空间行动能力。</p>
+<p>例如，一个巡检无人机需要判断前方是否可安全穿越，当前视角下目标在左前方还是右后方，障碍物高度是否构成风险，候选降落区域是否平整开阔，建筑、道路、树木和车辆之间的相对距离是否支持下一步动作。这类问题很难用普通图像描述衡量。一个 VLM 可以把图说得很流畅，却仍然无法稳定判断方向、距离和安全边界。</p>
+<p>SpatialSky-Bench 把这个缺口显式化。它关注的是 UAV navigation 中的 spatial intelligence，也就是让模型在空中视角里完成环境感知和场景理解。CV-to-RS 的迁移路径很清楚：通用 VLM 里已有的视觉问答、空间推理和多模态指令能力，需要适配遥感/UAV 视角的尺度变化、俯视几何、遮挡、航迹连续性、地物类别和安全约束。</p>]]></description></item><item><title>iSAGE：把遥感分割标注从画 mask 改成点错点</title><link>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 23:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="isage把遥感分割标注从画-mask-改成点错点" class="headerLink">
     <a href="#isage%e6%8a%8a%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e6%a0%87%e6%b3%a8%e4%bb%8e%e7%94%bb-mask-%e6%94%b9%e6%88%90%e7%82%b9%e9%94%99%e7%82%b9" class="header-mark"></a>iSAGE：把遥感分割标注从画 mask 改成点错点</h1><p><strong>结论：这一轮最值得单独跟踪的是 iSAGE。它的价值不是提出一个更大的遥感 backbone，而是把高分辨率遥感语义分割里最贵的环节，也就是像素级标注，重新定义为“专家只点击模型已经自信但明显错的像素”。这比又堆一个 SAM/VLM 自动伪标注管线更值得看，因为它直接挑战了当前弱监督、主动学习和 foundation-model 标注管线里一个被忽略的问题：模型自己的置信度分布并不能告诉你哪些高置信预测其实是错的。</strong></p>
 <p>我按 2026-06-12 23:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 2026-06-08 提交的 <em>iSAGE: A Human-in-the-Loop Framework for Remote Sensing Semantic Segmentation via Sparse Point Supervision</em>。论文提供 arXiv、HTML 版本、GitHub 代码和 Zenodo 归档；实验用 RGB/IRRG 航空影像，不涉及雷达主线。</p>
 <p>这篇适合放进“遥感解译与目标检测”类目，但它真正的研究信号更偏数据中心 AI：遥感模型的瓶颈不只是模型结构，而是新区域、新传感器、新类别上线时，如何持续维护一个可修正、可审计、可增量扩展的监督信号。</p>
@@ -99,128 +106,4 @@
     <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>遥感分割和检测的类别体系天然不是平面的：<code>impervious surface / road / runway / building</code>、<code>crop / rice / field</code>、<code>water / river / lake / flood water</code>、<code>tree / forest / shrubland</code> 常常同时包含 land-cover、land-use、object、material、function 和 fine-grained species。标准 <code>mIoU</code>、<code>h-mIoU</code>、<code>mAP</code> 会把“预测到同一父类但粒度不对”和“完全不相关类别”同等惩罚；开放词表模型又会因为同义词、上下位词、地区命名差异产生额外歧义。</p>
 <p>最有潜力的小课题不是再提出一个 OVSS 模型，而是提出一个 <strong>taxonomy-aware evaluation protocol</strong>：同时报告叶子类别精度、父类一致性、语义距离、层级混淆矩阵和开放词表别名鲁棒性。这个指标体系可以服务于 SegEarth-OV / RSKT-Seg / Pi-Seg / AerOSeg / HieraRS / GeoFM-VLM 等模型，也能用于审计 OpenEarthMap、Dynamic World、ESA WorldCover、NLCD、CORINE 等不同类别体系之间的映射误差。</p>
 <h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item><item><title>RS-49 Weak Labels from OSM/Map Products</title><link>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</link><pubDate>Sun, 07 Jun 2026 09:48:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-49-weak-labels-from-osm-map-products/</guid><description><![CDATA[<h1 id="rs-49-weak-labels-from-osmmap-products" class="headerLink">
-    <a href="#rs-49-weak-labels-from-osmmap-products" class="header-mark"></a>RS-49 Weak Labels from OSM/Map Products</h1><h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注最贵的部分通常不是图像本身，而是“地理一致、时相一致、类别一致”的像素级或对象级标签。OSM、Microsoft/Google building footprints、ESA WorldCover、Dynamic World、FROM-GLC、GlobeLand30、HydroLAKES/Global Surface Water、各国地籍和道路数据看起来像天然标签源，但它们本质上是异构、异时相、异精度的地图产品。直接把它们当 ground truth 会把地图误差转成模型偏差。</p>
-<p>这个方向在 2024-2026 变得更重要，原因有三点：</p>
-<ol>
-<li>Foundation model 需要海量弱监督。OSM tag、道路/建筑矢量和土地覆盖产品可以提供全球尺度的预训练或伪标签信号。</li>
-<li>SAM、GroundingDINO、VLM 可以半自动生成 mask/box/caption，但它们仍需要地图产品做类别约束、空间先验或质量校验。</li>
-<li>真实部署更看重跨地区泛化。OSM 在欧美城市覆盖好，在农村、发展中地区、灾后区域常缺失或滞后；这会直接造成空间公平性问题。</li>
-</ol>
-<p>核心研究问题不是“能不能用 OSM 做弱标签”，而是：如何估计每个弱标签的可靠性、如何处理时相和空间错位、如何在训练时避免模型学习地图产品的系统性偏差。</p>
-<h2 id="2-代表论文与项目" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>与弱标签的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>OSM 自监督</td>
-          <td>Rose: Register Assisted General Time Series Embedding for Multimodal and Sensor Agnostic Satellite Data</td>
-          <td style="text-align: right">2024, Remote Sensing of Environment</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0034425724005996" target="_blank" rel="noopener noreferrer">ScienceDirect</a>, <a href="https://github.com/antofuller/rose" target="_blank" rel="noopener noreferrer">code</a></td>
-          <td>使用 OSM register / 地图语义辅助多模态、多传感器时序表示学习，是“地图作为预训练信号”的代表。</td>
-      </tr>
-      <tr>
-          <td>地图弱标签分割</td>
-          <td>SAModified: A Foundation Model for Image Segmentation of Remote Sensing Data</td>
-          <td style="text-align: right">2025, arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.08101" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>明确从已有地图产品/基础地理数据构造 prompt 和伪标签，用 SAM 系列能力做遥感分割。</td>
-      </tr>
-      <tr>
-          <td>地图产品纠偏</td>
-          <td>MapSR: Mapping with Super-Resolution</td>
-          <td style="text-align: right">2024, arXiv</td>
-          <td><a href="https://arxiv.org/abs/2406.00891" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>研究用低分辨率/粗糙地图产品作为 supervision，恢复更高分辨率的空间边界，是“地图产品到高分制图”的典型问题。</td>
-      </tr>
-      <tr>
-          <td>大规模土地覆盖</td>
-          <td>LandSegmenter: Large-scale land cover mapping by segmentation models</td>
-          <td style="text-align: right">2025, arXiv</td>
-          <td><a href="https://arxiv.org/abs/2504.03451" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>使用全球土地覆盖产品和大规模影像训练分割模型，体现 map product label noise 与类别体系问题。</td>
-      </tr>
-      <tr>
-          <td>OSM + RS 表示</td>
-          <td>Spatial Representation Learning Beyond Pixels</td>
-          <td style="text-align: right">2026, arXiv</td>
-          <td><a href="https://arxiv.org/abs/2606.02374" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>将 raster data 与 vector semantics 统一，说明 OSM/矢量语义正从下游弱标签变成 foundation model 表示的一部分。</td>
-      </tr>
-      <tr>
-          <td>benchmark / 数据质量</td>
-          <td>PANGAEA benchmark</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>虽不是专门弱标签论文，但其跨任务/跨区域协议可作为地图弱标签方法的泛化评测框架。</td>
-      </tr>
-      <tr>
-          <td>真实偏移评测</td>
-          <td>EarthShift</td>
-          <td style="text-align: right">2026, arXiv</td>
-          <td><a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>提供真实世界分布偏移评测思路，可检测地图弱标签模型是否只适配局部数据质量。</td>
-      </tr>
-      <tr>
-          <td>鲁棒性评测</td>
-          <td>REOBench</td>
-          <td style="text-align: right">2025, arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>可用于评估弱标签训练模型在扰动、退化和 OOD 下的可靠性。</td>
-      </tr>
-      <tr>
-          <td>弱标签来源</td>
-          <td>Microsoft Global ML Building Footprints</td>
-          <td style="text-align: right">持续更新</td>
-          <td><a href="https://github.com/microsoft/GlobalMLBuildingFootprints" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>全球建筑 footprint，可作为建筑分割/检测弱标签；存在地区覆盖、时间戳和几何误差问题。</td>
-      </tr>
-      <tr>
-          <td>弱标签来源</td>
-          <td>Google Open Buildings</td>
-          <td style="text-align: right">持续更新</td>
-          <td><a href="https://sites.research.google/open-buildings/" target="_blank" rel="noopener noreferrer">dataset</a></td>
-          <td>非洲、南亚、东南亚等区域建筑 footprint，适合研究区域覆盖差异和弱标签置信度。</td>
-      </tr>
-      <tr>
-          <td>弱标签来源</td>
-          <td>Dynamic World</td>
-          <td style="text-align: right">持续更新</td>
-          <td><a href="https://dynamicworld.app/" target="_blank" rel="noopener noreferrer">Google</a>, <a href="https://www.nature.com/articles/s41597-022-01307-4" target="_blank" rel="noopener noreferrer">Nature paper</a></td>
-          <td>10m near-real-time land cover 概率产品，适合做时序弱标签和置信度加权。</td>
-      </tr>
-      <tr>
-          <td>弱标签来源</td>
-          <td>ESA WorldCover</td>
-          <td style="text-align: right">2020/2021 product, 仍常用</td>
-          <td><a href="https://esa-worldcover.org/" target="_blank" rel="noopener noreferrer">ESA</a></td>
-          <td>10m 全球土地覆盖标签源，适合弱监督 land-cover pretraining，但类别粗、时相固定。</td>
-      </tr>
-      <tr>
-          <td>弱标签来源</td>
-          <td>Field boundaries / FTW</td>
-          <td style="text-align: right">2025 左右活跃</td>
-          <td><a href="https://github.com/fieldsoftheworld/ftw-baselines" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://fieldsoftheworld.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>地块边界弱标签和农业制图常用资源，可研究 parcel/field boundary 与作物标签错位。</td>
-      </tr>
-      <tr>
-          <td>质量规范</td>
-          <td>OpenStreetMap Import Guidelines</td>
-          <td style="text-align: right">官方文档</td>
-          <td><a href="https://wiki.openstreetmap.org/wiki/Import/Guidelines" target="_blank" rel="noopener noreferrer">OSM Wiki</a></td>
-          <td>不是论文，但说明 OSM 数据导入、许可证、质量审查和社区验证流程，是使用 OSM 标签时必须考虑的约束。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-弱标签噪声类型" class="headerLink">
-    <a href="#3-%e5%bc%b1%e6%a0%87%e7%ad%be%e5%99%aa%e5%a3%b0%e7%b1%bb%e5%9e%8b" class="header-mark"></a>3. 弱标签噪声类型</h2><h3 id="31-时效误差" class="headerLink">
-    <a href="#31-%e6%97%b6%e6%95%88%e8%af%af%e5%b7%ae" class="header-mark"></a>3.1 时效误差</h3><p>地图产品和遥感影像常不在同一天甚至同一年。建筑新增/拆除、道路施工、洪水季节性水体、农田轮作、城市扩张都会让标签与影像真实状态不一致。</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统遥感数据集通常固定一个闭集标签表。OpenEarthMap 用 8 类高分辨率 land-cover 标签覆盖 44 个国家和 97 个区域，适合全球高分辨率制图，但类别较粗。<a href="https://open-earth-map.org/overview.html" target="_blank" rel="noopener noreferrer">OpenEarthMap project</a></p>]]></description></item></channel></rss>
