@@ -1,66 +1,7 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多模态 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/</link><description>多模态 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" rel="self" type="application/rss+xml"/><item><title>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</title><link>https://spacetop.win/2026/06/20260601_220000_anysat_multi_resolution/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_220000_anysat_multi_resolution/</guid><description><![CDATA[<h1 id="anysat一个模型搞定所有分辨率尺度和模态的遥感数据" class="headerLink">
-    <a href="#anysat%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e6%89%80%e6%9c%89%e5%88%86%e8%be%a8%e7%8e%87%e5%b0%ba%e5%ba%a6%e5%92%8c%e6%a8%a1%e6%80%81%e7%9a%84%e9%81%a5%e6%84%9f%e6%95%b0%e6%8d%ae" class="header-mark"></a>AnySat：一个模型搞定所有分辨率、尺度和模态的遥感数据</h1><blockquote>
-  <p><strong>论文解读</strong> | CVPR 2025 Highlight | 2026-06-01</p>
-</blockquote><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>AnySat: One Earth Observation Model for Many Resolutions, Scales, and Modalities</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Guillaume Astruc, Nicolas Gonthier, Clement Mallet, Loic Landrieu</td>
-      </tr>
-      <tr>
-          <td><strong>会议</strong></td>
-          <td>CVPR 2025 (Highlight)</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2412.14123" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2412.14123</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/gastruc/AnySat" target="_blank" rel="noopener noreferrer">https://github.com/gastruc/AnySat</a> (190 stars)</td>
-      </tr>
-      <tr>
-          <td><strong>关键词</strong></td>
-          <td>遥感基础模型、多模态、多分辨率、JEPA架构、自监督学习</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="-解决的核心问题" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据天然具有<strong>多源异构</strong>的特点：</p>
-<ul>
-<li><strong>分辨率差异</strong>：从0.3米的无人机影像到30米的Sentinel-2，跨越100倍</li>
-<li><strong>通道数量不同</strong>：RGB（3通道）、多光谱（4-13通道）、SAR（2通道）</li>
-<li><strong>覆盖范围多样</strong>：小区域精细观测 vs 大范围宏观监测</li>
-<li><strong>传感器类型繁多</strong>：光学、SAR、高光谱等11种以上传感器</li>
-</ul>
-<h3 id="现有方法的局限" class="headerLink">
-    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><ol>
-<li><strong>单模型单数据</strong>：每个数据集需要单独训练模型，无法共享知识</li>
-<li><strong>分辨率不兼容</strong>：不同分辨率的数据需要不同的网络架构</li>
-<li><strong>模态隔离</strong>：光学和SAR数据通常分开处理</li>
-<li><strong>扩展性差</strong>：新增传感器需要重新设计模型</li>
-</ol>
-<h3 id="核心问题提炼" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何用一个统一的模型处理任意分辨率、任意尺度、任意模态组合的遥感数据？</strong></p>
-<h2 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1scale-adaptive-jepa架构" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91scale-adaptive-jepa%e6%9e%b6%e6%9e%84" class="header-mark"></a>核心创新点1：Scale-Adaptive JEPA架构</h3><p><strong>设计动机</strong>：传统MAE需要固定输入尺寸，无法处理不同分辨率的图像。</p>
-<p><strong>具体实现</strong>：</p>
-<ul>
-<li>采用<strong>Joint Embedding Predictive Architecture (JEPA)</strong>，不依赖像素级重建</li>
-<li>引入<strong>尺度自适应</strong>机制，根据输入数据的GSD自动调整</li>
-<li>使用<strong>分块嵌入</strong>策略，将不同分辨率的图像映射到统一的特征空间</li>
-</ul>
-<p><strong>关键细节</strong>：</p>]]></description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多模态 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/</link><description>多模态 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 19:00:03 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" rel="self" type="application/rss+xml"/><item><title>Earth-Agent：把遥感 VLM 从看图问答推进到可验证的工具推理</title><link>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 19:00:03 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_190002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="earth-agent把遥感-vlm-从看图问答推进到可验证的工具推理" class="headerLink">
+    <a href="#earth-agent%e6%8a%8a%e9%81%a5%e6%84%9f-vlm-%e4%bb%8e%e7%9c%8b%e5%9b%be%e9%97%ae%e7%ad%94%e6%8e%a8%e8%bf%9b%e5%88%b0%e5%8f%af%e9%aa%8c%e8%af%81%e7%9a%84%e5%b7%a5%e5%85%b7%e6%8e%a8%e7%90%86" class="header-mark"></a>Earth-Agent：把遥感 VLM 从看图问答推进到可验证的工具推理</h1><p><strong>结论：这一轮最值得单独跟踪的是 Earth-Agent / Earth-Bench。它的价值不在于又训练了一个更会描述遥感图像的 VLM，而在于把遥感智能体的评测对象从“回答一句话”推进到“能否选择工具、传递参数、执行多步定量分析，并让推理轨迹可检查”。</strong></p>
+<p>我按 2026-06-12 19:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 项。本篇选择 ICLR 2026 Poster <em>Earth-Agent: Unlocking the Full Landscape of Earth Observation with Agents</em>。它覆盖 RGB、光谱数据和加工后的 Earth products，但核心不是雷达或 SAR；公开材料也没有把 SAR 作为主贡献。因此它符合本轮“非 SAR、优先 VLM/可落地 benchmark”的筛选条件。</p>
+<p>这篇和已有 GeoChat、VHM、SegEarth-OV、RS-VLM benchmark 的区别很明显：它不再把遥感 VLM 主要定义为图像描述、分类、VQA 或 grounding，而是把 LLM 作为 policy，让它在 Earth observation 工具系统里做多步规划、工具调用、记忆更新和结果判断。对遥感 AI 来说，这个方向比单纯写 prompt 更值得跟踪，因为真正的 EO 任务往往需要传感器选择、时间窗口、指数计算、区域统计、模型推理和误差检查，而不是只看一张 RGB 图回答“这里有什么”。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感 VLM 这两年发展很快，但主流评测仍偏向单步感知：给一张遥感图像，让模型分类、生成 caption、回答 VQA、定位目标或做开放词表分割。这类任务当然重要，但离真实 Earth observation 工作流还有距离。一个研究人员或业务人员真正要问的问题常常是：某个地区过去三个月植被是否异常下降，某次灾害前后建筑损毁是否集中在河道附近，城市热岛是否和不透水面扩张有关，或者某个产品的空间统计能否支持一个科学判断。</p>
+<p>这些问题的难点不只是视觉识别。模型需要知道该用哪个数据源、哪个时间段、哪个空间范围、哪个指数或产品；还要能调用外部工具，处理多张影像或栅格产品，最后给出定量结果。单纯的 MLLM 即使能描述图像，也容易在这类任务上产生三类问题：凭视觉印象下结论、编造不可执行的分析步骤、无法复现中间证据。</p>]]></description></item></channel></rss>
