@@ -1,4 +1,15 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 21:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>Flexible GeoFM：缺 band 鲁棒性可能比单榜最高分更重要</title><link>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 21:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="flexible-geofm缺-band-鲁棒性可能比单榜最高分更重要" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 23:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>iSAGE：把遥感分割标注从画 mask 改成点错点</title><link>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 23:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_230002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="isage把遥感分割标注从画-mask-改成点错点" class="headerLink">
+    <a href="#isage%e6%8a%8a%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e6%a0%87%e6%b3%a8%e4%bb%8e%e7%94%bb-mask-%e6%94%b9%e6%88%90%e7%82%b9%e9%94%99%e7%82%b9" class="header-mark"></a>iSAGE：把遥感分割标注从画 mask 改成点错点</h1><p><strong>结论：这一轮最值得单独跟踪的是 iSAGE。它的价值不是提出一个更大的遥感 backbone，而是把高分辨率遥感语义分割里最贵的环节，也就是像素级标注，重新定义为“专家只点击模型已经自信但明显错的像素”。这比又堆一个 SAM/VLM 自动伪标注管线更值得看，因为它直接挑战了当前弱监督、主动学习和 foundation-model 标注管线里一个被忽略的问题：模型自己的置信度分布并不能告诉你哪些高置信预测其实是错的。</strong></p>
+<p>我按 2026-06-12 23:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 2026-06-08 提交的 <em>iSAGE: A Human-in-the-Loop Framework for Remote Sensing Semantic Segmentation via Sparse Point Supervision</em>。论文提供 arXiv、HTML 版本、GitHub 代码和 Zenodo 归档；实验用 RGB/IRRG 航空影像，不涉及雷达主线。</p>
+<p>这篇适合放进“遥感解译与目标检测”类目，但它真正的研究信号更偏数据中心 AI：遥感模型的瓶颈不只是模型结构，而是新区域、新传感器、新类别上线时，如何持续维护一个可修正、可审计、可增量扩展的监督信号。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>高分辨率遥感语义分割的常规流程很重：先画 dense mask，再训练模型，再在新城市、新季节、新分辨率或新类别上重复标注。问题是遥感类别边界常常并不干净。建筑阴影、道路边缘、树冠遮挡、停车车辆、透水地表和低矮植被之间的边界，很多时候连专家也只能按项目约定做决定。把这些边界全部画成密集像素标签，既贵，也会把边界噪声硬编码进训练集。</p>
+<p>过去的省标注路线主要有几类：稀疏点、scribble、弱标签、主动学习、伪标签、自训练、CRF 传播、SAM/基础模型辅助标注。它们看上去都在减少人工，但很多方法有一个共同假设：可以从模型输出的置信度、熵、伪标签或传播结果里找到下一步监督。iSAGE 反过来说，这个假设本身有信息论缺口。一个像素如果被模型高置信度预测成“道路”，它既可能真是道路，也可能是模型自信地把屋顶错当道路；单看这个预测分布，两者是不可区分的。区分信号来自模型外部，也就是专家视觉判断。</p>
+<p>因此 iSAGE 的核心不是“让人多标一点”，而是让人只标一种最有价值的点：模型当前自信但错误的点。每一次点击都是一个 <code>(图像, 坐标, 类别)</code> 记录，不扩张成区域，不生成伪 mask，不走 superpixel，也不交给 CRF 平滑。这个极简设定把人工信号、训练梯度和数据审计绑定在一起。</p>
+<h2 id="方法模型" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95%e6%a8%a1%e5%9e%8b" class="header-mark"></a>方法/模型</h2><p>iSAGE 的循环很直接。第一步用少量稀疏点训练一个初始分割模型；第二步把模型预测叠加到原图上，让专家只点击可见错误区域中类别明确的像素；第三步把新增点击追加到 JSON 标注记录；第四步把这些点转换成训练 mask，其中未标注像素全部作为 ignore；第五步用新的稀疏监督重新训练模型。这个过程循环到收益变小为止。</p>
+<p>论文最重要的设计选择是拒绝“点到区域”的自动扩张。每个点就是一个独立监督决策。这样做牺牲了看上去更密集的伪标签，但换来了三个属性：第一，单点可审计，错了可以删掉一条 JSON 记录；第二，类均衡更自然，每个点击贡献相同，不被大面积类别支配；第三，训练信号只来自专家确认过的像素，不把模型自己的错误再灌回训练集。</p>
+<p>损失函数使用 Error-Weighted Dice Loss。普通 Dice 或交叉熵对所有已标注点近似等权，而 iSAGE 的标注点本来就是冲着错误去的，所以 EWDL 会对当前预测错误的已标注像素加大权重。论文也很克制：EWDL 不是凭绝对数值碾压所有 loss，而是和框架逻辑一致，因为“专家点击错误点”和“loss 放大错误点”指向同一个可追溯的 JSON 决策。</p>]]></description></item><item><title>Flexible GeoFM：缺 band 鲁棒性可能比单榜最高分更重要</title><link>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 21:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_210002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="flexible-geofm缺-band-鲁棒性可能比单榜最高分更重要" class="headerLink">
     <a href="#flexible-geofm%e7%bc%ba-band-%e9%b2%81%e6%a3%92%e6%80%a7%e5%8f%af%e8%83%bd%e6%af%94%e5%8d%95%e6%a6%9c%e6%9c%80%e9%ab%98%e5%88%86%e6%9b%b4%e9%87%8d%e8%a6%81" class="header-mark"></a>Flexible GeoFM：缺 band 鲁棒性可能比单榜最高分更重要</h1><p><strong>结论：这一轮最值得单独跟踪的不是一个新遥感 VLM，而是一篇把 geospatial foundation model 架构放到同一预训练、同一 GeoBench 协议下比较的工作；它提醒我们，真正可落地的遥感基础模型必须能在 band 缺失、传感器切换和任务谱段偏好变化时“优雅退化”。</strong></p>
 <p>我按 2026-06-12 21:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 2026-06-10 提交的 <em>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</em>。论文中包含一个 Sentinel-1/Sentinel-2 扩展实验，但本文只讨论其 Sentinel-2 光学多光谱主实验和缺 band 结论，不把 SAR-only 结果作为推荐重点。</p>
 <p>这篇的价值在于它不再只问“哪个 GeoFM 在某个下游任务上最高”，而是问一个更工程也更科学的问题：当下游数据只有 RGB+NIR，或者缺少 Red Edge / SWIR，或者从 Sentinel-2 迁移到商业四波段影像时，模型性能如何下降。这个问题直接关系到遥感基础模型能不能从论文 benchmark 进入真实生产管线。</p>
@@ -625,131 +636,4 @@
 </table>
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-xbd-专用模型到跨地点强基线" class="headerLink">
-    <a href="#31-xbd-%e4%b8%93%e7%94%a8%e6%a8%a1%e5%9e%8b%e5%88%b0%e8%b7%a8%e5%9c%b0%e7%82%b9%e5%bc%ba%e5%9f%ba%e7%ba%bf" class="header-mark"></a>3.1 xBD 专用模型到跨地点强基线</h3><p>2024 的 xBD simple strong baseline 很重要，因为它不只是给一个模型，而是指出原 competition split 可能高估泛化能力。它把测试位置设置为训练未见区域后，复杂模型和简化模型都明显暴露跨地点弱点。这说明 RS-45 不能只做随机 split 上的 F1，而必须做 leave-event-out、leave-region-out、leave-disaster-type-out。</p>]]></description></item><item><title>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</title><link>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</link><pubDate>Sun, 07 Jun 2026 09:43:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings/</guid><description><![CDATA[<h1 id="rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="headerLink">
-    <a href="#rs-44-fairness-of-socioeconomic-mapping-with-geofm-embeddings" class="header-mark"></a>RS-44 Fairness of Socioeconomic Mapping with GeoFM Embeddings</h1><h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>这个方向的关键不在于“GeoFM embedding 能不能预测财富/人口/基础设施”，而在于：这些预测误差是否会系统性落在农村、低收入、非洲/拉美、非核心城市、非正式住区、低人口密度地区，以及这些误差是否会改变政策资源排序。</p>
-<p>2024-2026 的新变化是，社会经济遥感从手工夜光/道路/建筑 covariates 和 CNN poverty mapping，进入了 embedding-as-data 阶段：AlphaEarth Foundations 提供全球年度 10 m、64 维 embedding；PDFM/Population Dynamics Foundation Model 提供面向人口动态、健康、社会经济和环境任务的地理 embedding；Tempov 把双时相 Landsat 自监督预训练用于财富监测；Prithvi、Clay 等 Earth embeddings 也被用于城市指标预测。</p>
-<p>但公平性风险没有自动消失。已有 poverty-map 公平性研究已经证明，卫星贫困图存在城市/农村代表性差异、系统性误差和下游资源分配影响。新一代 GeoFM embedding 反而让风险更值得研究：同一个 embedding 会被复用于很多下游任务，一旦它对某类地区编码不足，误差会被复制到人口、财富、健康、基础设施等多条政策链路。</p>
-<p>最值得做的小课题：<strong>GeoFM 社会经济制图的 fairness-aware evaluation benchmark</strong>。它不训练一个更大模型，而是在 AlphaEarth/PDFM/Tempov/Prithvi/Clay/传统 geospatial covariates 上统一报告平均精度、分组误差、最差组误差、空间尺度错配、排序公平性和政策敏感性。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>传统 poverty/population mapping 使用 DHS/LSMS/census 等少量地面标签，结合夜间灯光、道路、建筑、土地覆盖、地形、POI、气候或移动网络数据，把区域财富、人口或基础设施指标推断到未调查区域。这个路线有三个老问题：</p>
-<ul>
-<li>标签分布不均：调查点常按人口和行政区抽样，低密度农村、非正式住区、边境地区、小岛、冲突地区更少。</li>
-<li>图像-社会经济关系非平稳：同样的屋顶、道路、农田或夜光，在不同国家/城乡/气候带代表的财富含义不同。</li>
-<li>平均指标掩盖政策风险：一个模型整体 R² 高，但如果系统性低估农村贫困或非正式住区人口，就会影响资源分配。</li>
-</ul>
-<p>GeoFM embedding 带来了更强的表征，但也引入新问题：</p>
-<ul>
-<li>embedding 可能更像“建成环境相似度”，对收入、政策、社会网络、非正式经济等不可见因素弱。</li>
-<li>预计算 embedding 有固定空间尺度，人口/财富标签常是 cluster、admin、grid、parcel、neighborhood 等多尺度混合。</li>
-<li>多源 foundation model 可能包含搜索、移动、地图、POI 等数字行为数据，这些数据本身代表性不均。</li>
-<li>downstream 用户容易直接训练 shallow model 并发布地图，却没有检查城市/农村、国家、收入组和空间尺度上的误差差异。</li>
-</ul>
-<h2 id="代表论文与资源" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e8%b5%84%e6%ba%90" class="header-mark"></a>代表论文与资源</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>和公平性问题的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>AlphaEarth Foundations: An embedding field model for accurate and efficient global mapping from sparse label data</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2507.22291" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/" target="_blank" rel="noopener noreferrer">Google DeepMind blog</a></td>
-          <td><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL" target="_blank" rel="noopener noreferrer">Earth Engine Satellite Embedding V1</a></td>
-          <td>全球年度 10 m、64 维 embedding，适合 sparse-label mapping；公平性要检查不同地区和社会经济组的 embedding utility。</td>
-      </tr>
-      <tr>
-          <td>General Geospatial Inference with a Population Dynamics Foundation Model</td>
-          <td style="text-align: right">2024/2026 revision</td>
-          <td><a href="https://arxiv.org/abs/2411.07207" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/google-research/population-dynamics" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>PDFM 用 maps、busyness、search trends、weather、air quality 等构建地理 embedding，预测健康、社会经济和环境任务；需要检查数字行为数据代表性偏差。</td>
-      </tr>
-      <tr>
-          <td>Geospatial foundation-model embeddings improve population estimation unevenly across space and scale</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.01650" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见独立代码</td>
-          <td>直接指出 PDFM embedding 对 Brazil/Nigeria/US 人口估计的收益在空间和尺度上不均，GeoFM 不能简单替代传统 covariates。</td>
-      </tr>
-      <tr>
-          <td>A satellite foundation model for improved wealth monitoring</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2604.23166" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>arXiv 页称 open-source approach；当前需进一步核验官方 repo</td>
-          <td>Tempov 用 300 万双时相 Landsat 对自监督预训练，并用参数高效微调做财富监测；应检查 nowcast/hindcast 在国家、城乡和收入组上的误差。</td>
-      </tr>
-      <tr>
-          <td>Earth Embeddings Reveal Diverse Urban Signals from Space</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2604.03456" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/papers/2604.03456" target="_blank" rel="noopener noreferrer">HF paper page</a></td>
-          <td>未见官方代码</td>
-          <td>比较 AlphaEarth、Prithvi、Clay 预测 6 个美国都市区的 14 个 neighborhood indicators；发现跨城市表现差异明显，适合作为城市内部公平性评估参考。</td>
-      </tr>
-      <tr>
-          <td>Slum Detection and Density Mapping with AlphaEarth Foundations</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.10029" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见官方代码</td>
-          <td>用 AlphaEarth 做 12 城市 slum classification/density；发现跨城转移和密度梯度建模仍难，说明非正式住区是公平性压力测试场景。</td>
-      </tr>
-      <tr>
-          <td>Fairness and representation in satellite-based poverty maps</td>
-          <td style="text-align: right">2023</td>
-          <td><a href="https://arxiv.org/abs/2305.01783" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>需进一步核验</td>
-          <td>虽早于 2024，但它定义了本方向的核心问题：城市/农村代表性、系统性误差和下游政策排序影响。</td>
-      </tr>
-      <tr>
-          <td>Mitigating Urban-Rural Disparities in Contrastive Representation Learning with Satellite Imagery / FairDCL</td>
-          <td style="text-align: right">2024 AIES</td>
-          <td><a href="https://par.nsf.gov/biblio/10592949-mitigating-urban-rural-disparities-contrastive-representation-learning-satellite-imagery" target="_blank" rel="noopener noreferrer">NSF record</a>, <a href="https://arxiv.org/abs/2211.08672" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见主 repo</td>
-          <td>用 fair dense contrastive learning 减少城市/农村表示差异；可迁移到 GeoFM embedding 的公平预训练或后处理。</td>
-      </tr>
-      <tr>
-          <td>SustainBench / Poverty prediction over space and time</td>
-          <td style="text-align: right">2021 benchmark, still active</td>
-          <td><a href="https://github.com/sustainlab-group/sustainbench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://sustainlab-group.github.io/sustainbench/leaderboard/" target="_blank" rel="noopener noreferrer">Leaderboard</a>, <a href="https://arxiv.org/abs/2111.04724" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>公开 benchmark/code</td>
-          <td>不是 2024 新论文，但仍是 poverty mapping 和 SDG 任务的核心复现实验框架。</td>
-      </tr>
-      <tr>
-          <td>PovertyMap-WILDS</td>
-          <td style="text-align: right">2021 benchmark, still useful</td>
-          <td><a href="https://wilds.stanford.edu/" target="_blank" rel="noopener noreferrer">WILDS paper/data context</a></td>
-          <td>WILDS package</td>
-          <td>按国家和 urban/rural 定义 domain；适合最差组性能和跨国泛化评估。</td>
-      </tr>
-      <tr>
-          <td>WorldPop</td>
-          <td style="text-align: right">持续更新</td>
-          <td><a href="https://www.worldpop.org/" target="_blank" rel="noopener noreferrer">official</a></td>
-          <td>开放人口数据</td>
-          <td>传统 population mapping 强基线和辅助标签来源；其 constrained/unconstrained 选择本身影响公平性。</td>
-      </tr>
-      <tr>
-          <td>Global Human Settlement Layer / GHS-POP</td>
-          <td style="text-align: right">2023/2024 atlas and updates</td>
-          <td><a href="https://data.jrc.ec.europa.eu/collection/ghsl" target="_blank" rel="noopener noreferrer">JRC GHSL</a>, <a href="https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php" target="_blank" rel="noopener noreferrer">GHS-POP R2023A</a></td>
-          <td>官方数据</td>
-          <td>人口和 built-up baseline；城市/农村定义、built-up mask 和 coarse grid 会影响下游公平性。</td>
-      </tr>
-      <tr>
-          <td>High-resolution urban and rural settlement map of Africa</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://www.nature.com/articles/s41598-025-34295-7" target="_blank" rel="noopener noreferrer">Scientific Reports</a></td>
-          <td>论文数据需核验</td>
-          <td>10 m urban/rural settlement map，可作为非洲城乡分组和 settlement-type fairness label。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法脉络" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>方法脉络</h2><h3 id="1-传统-covariates--survey-labels" class="headerLink">
-    <a href="#1-%e4%bc%a0%e7%bb%9f-covariates--survey-labels" class="header-mark"></a>1. 传统 covariates + survey labels</h3><p>输入包括 night lights、built-up、roads、land cover、elevation、climate、population products、POI 和 admin features；标签来自 DHS/LSMS/census/ACS 等。模型通常是 RF、GBDT、Bayesian small-area estimation、CNN 或 CNN feature + regression。</p>]]></description></item></channel></rss>
+    <a href="#31-xbd-%e4%b8%93%e7%94%a8%e6%a8%a1%e5%9e%8b%e5%88%b0%e8%b7%a8%e5%9c%b0%e7%82%b9%e5%bc%ba%e5%9f%ba%e7%ba%bf" class="header-mark"></a>3.1 xBD 专用模型到跨地点强基线</h3><p>2024 的 xBD simple strong baseline 很重要，因为它不只是给一个模型，而是指出原 competition split 可能高估泛化能力。它把测试位置设置为训练未见区域后，复杂模型和简化模型都明显暴露跨地点弱点。这说明 RS-45 不能只做随机 split 上的 F1，而必须做 leave-event-out、leave-region-out、leave-disaster-type-out。</p>]]></description></item></channel></rss>
