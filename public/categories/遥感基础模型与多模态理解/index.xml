@@ -1,4 +1,7 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 13 Jun 2026 07:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>VLRS-Bench：遥感 VLM 不能只会认物体，还要会推理</title><link>https://spacetop.win/2026/06/20260613_070002_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 07:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_070002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="vlrs-bench遥感-vlm-不能只会认物体还要会推理" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/</link><description>遥感基础模型与多模态理解 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 13 Jun 2026 23:00:05 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E9%81%A5%E6%84%9F%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%A4%9A%E6%A8%A1%E6%80%81%E7%90%86%E8%A7%A3/" rel="self" type="application/rss+xml"/><item><title>SpatialClaw：把遥感 VLM 的空间推理改成可执行代码</title><link>https://spacetop.win/2026/06/20260613_230004_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 23:00:05 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_230004_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="spatialclaw把遥感-vlm-的空间推理改成可执行代码" class="headerLink">
+    <a href="#spatialclaw%e6%8a%8a%e9%81%a5%e6%84%9f-vlm-%e7%9a%84%e7%a9%ba%e9%97%b4%e6%8e%a8%e7%90%86%e6%94%b9%e6%88%90%e5%8f%af%e6%89%a7%e8%a1%8c%e4%bb%a3%e7%a0%81" class="header-mark"></a>SpatialClaw：把遥感 VLM 的空间推理改成可执行代码</h1><p><strong>结论：这一轮最值得单独深挖的是 <em>SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning</em>。它不是遥感原生论文，也没有在卫星影像 benchmark 上报告结果；但它给遥感 VLM 一个很直接的启发：空间推理不应只靠一次性文本回答，也不应只靠固定 schema 的工具调用，而应该让模型在一个有状态 Python kernel 里逐步写代码、调用感知工具、查看中间证据、修改分析路径，最后再提交答案。对大幅遥感影像、矢量图层、DEM、时间序列和 GIS 证据链来说，这个“代码即动作接口”的设定比普通 VQA prompt 更接近真实工作流。</strong></p>
+<p>我按 2026-06-13 23:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。本篇选择 2026-06-11 提交 arXiv 的 SpatialClaw。论文和官方 GitHub 均已公开，仓库说明包含 agent runtime、LangGraph workflow、persistent Jupyter kernel、AST safety check、planning/reflection loop、20 个 benchmark loader、perception tool wrappers、FastAPI GPU tool server、vLLM 发现与负载均衡、SLURM 复现实验管理。本文把它作为 CV-to-RS 迁移方向，而不是当作已有遥感 SOTA 结果引用。</p>
+<p>这篇适合放进“遥感基础模型与多模态理解”。原因是它研究的是 VLM agent 的空间推理接口，而遥感 VLM 的很多关键失败都来自空间接口不足：模型看不清局部证据、不会把 tile 和全图坐标对齐、不会把 mask/box/polygon/DEM 统一计算、不会记录跨步骤证据，也不会把中间计算交给可验证工具。SpatialClaw 不直接解决遥感问题，但它给了一个可复用的系统骨架。</p>]]></description></item><item><title>VLRS-Bench：遥感 VLM 不能只会认物体，还要会推理</title><link>https://spacetop.win/2026/06/20260613_070002_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 07:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_070002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="vlrs-bench遥感-vlm-不能只会认物体还要会推理" class="headerLink">
     <a href="#vlrs-bench%e9%81%a5%e6%84%9f-vlm-%e4%b8%8d%e8%83%bd%e5%8f%aa%e4%bc%9a%e8%ae%a4%e7%89%a9%e4%bd%93%e8%bf%98%e8%a6%81%e4%bc%9a%e6%8e%a8%e7%90%86" class="header-mark"></a>VLRS-Bench：遥感 VLM 不能只会认物体，还要会推理</h1><p><strong>结论：这一轮最值得单独跟踪的是 VLRS-Bench。它的价值不在于又给遥感 VLM 增加一个问答分数，而是把评测问题从“图里有什么”推进到“为什么会这样、应该怎么做、接下来会发生什么”。这对遥感多模态模型很关键：真实地理任务通常不是识别一栋建筑或一片农田，而是要求模型结合空间结构、时间变化、DSM/NIR 等遥感先验和专家 mask，做出有约束的因果、决策和预测推理。</strong></p>
 <p>我按 2026-06-13 07:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。本篇选择 <em>VLRS-Bench: A Vision-Language Reasoning Benchmark for Remote Sensing</em>。论文有 arXiv、官方 GitHub 和 Hugging Face 数据集；数据来源以公开光学/航空/多时相遥感数据、DSM、NIR 和专家标注为主，不走雷达主线。</p>
 <p>这篇适合放进“遥感基础模型与多模态理解”。原因是它直接挑战当前遥感 VLM 的核心短板：很多模型已经会做 scene classification、caption、object counting、visual grounding，但在地理因果、规划决策和未来状态预测上仍然不稳。对后续做遥感 VLM、GeoAgent、变化理解、灾害评估和城市规划推理的人来说，VLRS-Bench 更像一个能力诊断器，而不是普通排行榜。</p>
@@ -227,100 +230,4 @@
 </table>
 <h2 id="3-弱标签噪声类型" class="headerLink">
     <a href="#3-%e5%bc%b1%e6%a0%87%e7%ad%be%e5%99%aa%e5%a3%b0%e7%b1%bb%e5%9e%8b" class="header-mark"></a>3. 弱标签噪声类型</h2><h3 id="31-时效误差" class="headerLink">
-    <a href="#31-%e6%97%b6%e6%95%88%e8%af%af%e5%b7%ae" class="header-mark"></a>3.1 时效误差</h3><p>地图产品和遥感影像常不在同一天甚至同一年。建筑新增/拆除、道路施工、洪水季节性水体、农田轮作、城市扩张都会让标签与影像真实状态不一致。</p>]]></description></item><item><title>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</title><link>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</link><pubDate>Sun, 07 Jun 2026 09:47:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-48-active-learning-with-sam-vlm-human-in-the-loop/</guid><description><![CDATA[<h1 id="rs-48-active-learning-with-samvlm-human-in-the-loop" class="headerLink">
-    <a href="#rs-48-active-learning-with-samvlm-human-in-the-loop" class="header-mark"></a>RS-48 Active Learning with SAM/VLM Human-in-the-Loop</h1><h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>遥感标注贵，贵在三个地方：大幅面影像要切片和定位，小目标/旋转目标/密集实例边界难修，类别语义还经常依赖地理上下文。传统主动学习只问“哪张图最不确定”，但 foundation model 时代的问题变了：SAM 能给 mask 但不懂类别，GroundingDINO/VLM 能给语义但受 prompt 和语言先验影响，人类标注者的主要成本也从“从零画 mask”变成“检查、修正、合并、改类别”。</p>
-<p>因此，这个方向的核心研究问题不是再做一个主动学习打分函数，而是：</p>
-<ul>
-<li>如何估计一张候选图像的“自动标注可修正性”：SAM/VLM 生成的伪标签是否值得交给人类改？</li>
-<li>如何把选样目标从 uncertainty 扩展到地理覆盖、季节覆盖、长尾类别、小目标覆盖和纠错成本？</li>
-<li>如何让人类纠错反过来更新 prompt、prototype、类别词表或轻量 adapter，而不是只把修正标签放进训练集？</li>
-<li>如何用“单位人工分钟带来的 mIoU/AP 提升”评估方法，而不是只比较标注比例？</li>
-</ul>
-<h2 id="2-2024-2026-代表论文项目" class="headerLink">
-    <a href="#2-2024-2026-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 2024-2026 代表论文/项目</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>官方代码/数据</th>
-          <th>与本方向的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Active Learning Meets Foundation Models: Fast Remote Sensing Data Annotation</td>
-          <td style="text-align: right">ICCV 2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Burges_Active_Learning_Meets_Foundation_Models_Fast_Remote_Sensing_Data_Annotation_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td><a href="https://github.com/mburges-cvl/ICCV_AL4FM" target="_blank" rel="noopener noreferrer">GitHub: ICCV_AL4FM</a></td>
-          <td>最直接锚点：把主动学习和 SAM 半自动遥感目标检测标注结合，强调标注时间和冷启动。</td>
-      </tr>
-      <tr>
-          <td>FMARS: Annotating Remote Sensing Images for Disaster Monitoring with Foundation Models</td>
-          <td style="text-align: right">2024 IGARSS / arXiv</td>
-          <td><a href="https://arxiv.org/abs/2405.20109" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://huggingface.co/datasets/links-ads/fmars-dataset" target="_blank" rel="noopener noreferrer">HF dataset</a>, <a href="https://paperswithcode.com/paper/fmars-annotating-remote-sensing-images-for" target="_blank" rel="noopener noreferrer">Papers with Code</a></td>
-          <td>使用 GroundingDINO + SAM 自动标注灾害相关 VHR 遥感图像，适合作为自动伪标签管线基线。</td>
-      </tr>
-      <tr>
-          <td>RemoteSAM / RemoteSAM-270K</td>
-          <td style="text-align: right">2025 ACM MM oral / arXiv</td>
-          <td><a href="https://arxiv.org/abs/2505.18022" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/1e12Leon/RemoteSAM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/1e12Leon/RemoteSAM270k" target="_blank" rel="noopener noreferrer">HF dataset</a></td>
-          <td>构建 image-text-mask 三元组数据引擎，可作为 SAM/VLM 自动标注和 referring segmentation 基座。</td>
-      </tr>
-      <tr>
-          <td>Segment Anything, From Space?</td>
-          <td style="text-align: right">WACV 2024</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2024/papers/Ren_Segment_Anything_From_Space_WACV_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>论文评测多遥感数据</td>
-          <td>系统暴露 SAM 在 overhead imagery 上的失败模式，是设计人类纠错和 prompt refinement 的依据。</td>
-      </tr>
-      <tr>
-          <td>PointSAM</td>
-          <td style="text-align: right">2024/2025 arXiv / TGRS 方向</td>
-          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>点监督、负提示校准、伪标签自训练；可用于“少量点击 -&gt; 更好 mask”的 HITL 单元。</td>
-      </tr>
-      <tr>
-          <td>OpenRSD: Towards Open-prompts for Object Detection in Remote Sensing Images</td>
-          <td style="text-align: right">ICCV 2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Huang_OpenRSD_Towards_Open-prompts_for_Object_Detection_in_Remote_Sensing_Images_ICCV_2025_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2503.06146" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>论文页为主</td>
-          <td>开放提示遥感检测，适合作为 VLM/文本 prompt 生成候选框的比较对象。</td>
-      </tr>
-      <tr>
-          <td>VRSBench</td>
-          <td style="text-align: right">NeurIPS 2024 Datasets &amp; Benchmarks</td>
-          <td><a href="https://arxiv.org/abs/2406.12384" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/05b7f821234f66b78f99e7803fffa78a-Paper-Datasets_and_Benchmarks_Track.pdf" target="_blank" rel="noopener noreferrer">NeurIPS PDF</a></td>
-          <td><a href="https://github.com/lx709/VRSBench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>高质量遥感视觉语言 benchmark，可借鉴人工验证、object reference 和 VQA 标注质量控制。</td>
-      </tr>
-      <tr>
-          <td>Grounded-SAM-2</td>
-          <td style="text-align: right">2024-2025 official-style project</td>
-          <td><a href="https://github.com/IDEA-Research/Grounded-SAM-2" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GitHub</td>
-          <td>通用 GroundingDINO/SAM2 管线，可迁移为“文本/框 -&gt; mask -&gt; 人类修正”的工程基线。</td>
-      </tr>
-      <tr>
-          <td>SAM 2</td>
-          <td style="text-align: right">2024 Meta</td>
-          <td><a href="https://ai.meta.com/sam2/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>GitHub/model weights</td>
-          <td>对多帧 memory 和交互式修正友好，可用于多时相遥感标注闭环。</td>
-      </tr>
-      <tr>
-          <td>GEOBench-VLM</td>
-          <td style="text-align: right">ICCV 2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/ICCV2025/papers/Danish_GEOBench-VLM_Benchmarking_Vision-Language_Models_for_Geospatial_Tasks_ICCV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td><a href="https://github.com/The-AI-Alliance/GEO-Bench-VLM" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>可作为 VLM 语义质量和定位能力评估参考，避免把语言答案当作可靠标签。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法脉络" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-传统主动学习" class="headerLink">
-    <a href="#31-%e4%bc%a0%e7%bb%9f%e4%b8%bb%e5%8a%a8%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 传统主动学习</h3><p>典型做法是用 uncertainty、entropy、margin、BALD、core-set/diversity 或 query-by-committee 选择未标注样本。遥感中它的问题是：随机切片高度冗余，空间相邻样本相关性强，模型最不确定的样本可能只是云、阴影、配准错或异常纹理，并不一定值得人类标注。</p>]]></description></item></channel></rss>
+    <a href="#31-%e6%97%b6%e6%95%88%e8%af%af%e5%b7%ae" class="header-mark"></a>3.1 时效误差</h3><p>地图产品和遥感影像常不在同一天甚至同一年。建筑新增/拆除、道路施工、洪水季节性水体、农田轮作、城市扩张都会让标签与影像真实状态不一致。</p>]]></description></item></channel></rss>
