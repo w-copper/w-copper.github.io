@@ -1,4 +1,10 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Fri, 12 Jun 2026 10:37:41 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>VecLang：把遥感矢量地图写成可执行语言</title><link>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 10:37:41 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="veclang把遥感矢量地图写成可执行语言" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/</link><description>多源数据融合、效率部署与应用落地 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 14 Jun 2026 19:00:14 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%A4%9A%E6%BA%90%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%95%88%E7%8E%87%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%BA%94%E7%94%A8%E8%90%BD%E5%9C%B0/" rel="self" type="application/rss+xml"/><item><title>Fusing Satellite Imagery and Planimetric Maps for Cross-View Localization：卫星影像和 OSM 不能只选一个</title><link>https://spacetop.win/2026/06/20260614_190014_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 19:00:14 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_190014_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="fusing-satellite-imagery-and-planimetric-maps-for-cross-view-localization卫星影像和-osm-不能只选一个" class="headerLink">
+    <a href="#fusing-satellite-imagery-and-planimetric-maps-for-cross-view-localization%e5%8d%ab%e6%98%9f%e5%bd%b1%e5%83%8f%e5%92%8c-osm-%e4%b8%8d%e8%83%bd%e5%8f%aa%e9%80%89%e4%b8%80%e4%b8%aa" class="header-mark"></a>Fusing Satellite Imagery and Planimetric Maps for Cross-View Localization：卫星影像和 OSM 不能只选一个</h1><p><strong>结论：这一轮最值得单独跟踪的是 <em>Fusing Satellite Imagery and Planimetric Maps for Cross-View Localization</em>。它做的不是再造一个更大的 backbone，而是把一个很现实的问题摆到台面上：跨视角定位里，为什么总是默认只用卫星影像，明明平面地图和卫星图各有长处。论文给出一个很轻的融合模块，用 cross-modal conditioning 加 patch-level fusion，把 OpenStreetMap 这类平面地图和卫星影像一起喂给现成编码器，结果在 VIGOR 和 KITTI 上都比单模态更稳，KITTI 的 mean localization error 最好降到 3.85 m，较此前单模态最优方法低 30.13%。</strong></p>
+<p>我按 2026-06-14 19:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线工作。这里选的是 2026-06-08 提交 arXiv 的 CV 论文，但它和遥感的关系很直接：输入一端是卫星影像，另一端是 OSM 平面地图，目标是地理定位。这类方法对遥感系统的价值，不在于它本身是“遥感专用网络”，而在于它给出了一个可迁移的多源融合模板。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>跨视角定位一直有个老问题：地面视角和俯视视角差异太大。单靠卫星图，模型能看到建筑轮廓、道路纹理和街区形状，但在树冠遮挡、细粒度街景结构不清、或者局部语义歧义时，信息会不够。平面地图相反，它不一定像影像那样“真实”，但它有明确的对象标注，尤其在道路、街灯、建筑和路网结构上很强，遮挡区域也更稳。</p>
+<p>之前很多工作默认“卫星图够用了”，或者把 OSM 当成辅助分支粗暴拼接。问题是，这样做常常只能看到形式上的融合，没有真正把两种模态的互补性吃进去。更糟的是，卫星图和地图在不同区域的可用性并不一样：有些地方 OSM 覆盖好，路网和 POI 丰富；有些地方地图稀疏，卫星图反而更可靠。于是，真正有价值的不是再加一条分支，而是让模型学会按区域、按 patch 动态决定该信谁。</p>
+<p>这篇文章的定位很清楚：它要解决的不是遥感分类，而是“地理定位里的模态选择问题”。这对遥感侧的启发是直接的。很多 RS 系统也在走同样的路：卫星影像、栅格地图、矢量图、POI、建筑轮廓、道路拓扑，最后都要汇到一个定位或检索模型里。问题从来不是有没有数据，而是这些数据怎么协同。</p>]]></description></item><item><title>VecLang：把遥感矢量地图写成可执行语言</title><link>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</link><pubDate>Fri, 12 Jun 2026 10:37:41 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260612_103741_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="veclang把遥感矢量地图写成可执行语言" class="headerLink">
     <a href="#veclang%e6%8a%8a%e9%81%a5%e6%84%9f%e7%9f%a2%e9%87%8f%e5%9c%b0%e5%9b%be%e5%86%99%e6%88%90%e5%8f%af%e6%89%a7%e8%a1%8c%e8%af%ad%e8%a8%80" class="header-mark"></a>VecLang：把遥感矢量地图写成可执行语言</h1><p><strong>结论：今天最值得跟踪的不是又一个遥感 VLM 问答模型，而是 VecLang 这个“把地图当语言生成”的方向。</strong> 它把建筑物、水体、道路网络这类几何结构完全不同的地图要素，统一表示成一种 GeoJSON-like 的 Structured Vector Language（SVL），再让 VLM 生成可解析、可渲染、可进入 GIS 流程的矢量对象。这个题眼比“遥感大模型又提升了多少分”更小，也更像一篇可以继续做的论文：遥感 AI 的输出不只要像素准，还要能被下游地图系统执行。</p>
 <h2 id="摘要" class="headerLink">
     <a href="#%e6%91%98%e8%a6%81" class="header-mark"></a>摘要</h2><p>来源事实：论文 <em>Vector Map as Language: Toward Unified Remote Sensing Vector Mapping</em> 于 2026-06-09 以 arXiv:2606.10701v1 提交。作者提出 VecLang，将 remote sensing vector mapping 重写为结构化文本生成问题；核心表示是 SVL，用统一字段描述语义、几何和拓扑。项目页已公开 README 和可视化结果，但截至我检查时，GitHub README 里的 code、weights、VecMap-Bench dataset 仍标注为待发布。</p>
@@ -709,44 +715,4 @@
 </ul>
 <h2 id="-解决的核心问题第一层表象层" class="headerLink">
     <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e7%ac%ac%e4%b8%80%e5%b1%82%e8%a1%a8%e8%b1%a1%e5%b1%82" class="header-mark"></a>🎯 解决的核心问题（第一层：表象层）</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>高光谱图像（Hyperspectral Image, HSI）是遥感领域的重要数据类型，能够捕获数百个连续光谱波段的信息，在矿物勘探、农业监测、环境评估等领域有广泛应用。然而，与普通RGB图像相比，高光谱图像面临独特的挑战：</p>]]></description></item><item><title>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</title><link>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_galileo_global_local_features/</guid><description><![CDATA[<h1 id="galileo一个模型搞定遥感多模态多尺度icml-2025-通用基础模型新突破" class="headerLink">
-    <a href="#galileo%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b%e6%90%9e%e5%ae%9a%e9%81%a5%e6%84%9f%e5%a4%9a%e6%a8%a1%e6%80%81%e5%a4%9a%e5%b0%ba%e5%ba%a6icml-2025-%e9%80%9a%e7%94%a8%e5%9f%ba%e7%a1%80%e6%a8%a1%e5%9e%8b%e6%96%b0%e7%aa%81%e7%a0%b4" class="header-mark"></a>Galileo：一个模型搞定遥感多模态多尺度，ICML 2025 通用基础模型新突破</h1><blockquote>
-  <p><strong>论文解读</strong> | ICML 2025 | 2026-06-01</p>
-</blockquote><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>Galileo: Learning Global &amp; Local Features of Many Remote Sensing Modalities</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Gabriel Tseng, Anthony Fuller, Marlena Reil, Henry Herzog, Patrick Beukema, Favyen Bastani, James R. Green, Evan Shelhamer, Hannah Kerner, David Rolnick</td>
-      </tr>
-      <tr>
-          <td><strong>会议</strong></td>
-          <td>ICML 2025 (Proceedings of the 42nd International Conference on Machine Learning)</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2502.09356</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">https://github.com/nasaharvest/galileo</a> (⭐ 177)</td>
-      </tr>
-      <tr>
-          <td><strong>关键词</strong></td>
-          <td>遥感基础模型, 多模态融合, 自监督学习, 多尺度特征, 掩码建模, 通用模型</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="-解决的核心问题" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感数据具有两大独特挑战，使得直接套用计算机视觉方法变得困难：</p>]]></description></item></channel></rss>
+    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>高光谱图像（Hyperspectral Image, HSI）是遥感领域的重要数据类型，能够捕获数百个连续光谱波段的信息，在矿物勘探、农业监测、环境评估等领域有广泛应用。然而，与普通RGB图像相比，高光谱图像面临独特的挑战：</p>]]></description></item></channel></rss>
