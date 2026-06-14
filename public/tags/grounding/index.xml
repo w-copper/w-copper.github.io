@@ -1,82 +1,10 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Grounding - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/grounding/</link><description>Grounding - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 01 Jun 2026 12:00:00 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/grounding/" rel="self" type="application/rss+xml"/><item><title>GeoChat：首个遥感领域Grounded视觉语言大模型，让卫星图像对话更智能</title><link>https://spacetop.win/2026/06/20260601_120000_geochat_vlm/</link><pubDate>Mon, 01 Jun 2026 12:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260601_120000_geochat_vlm/</guid><description><![CDATA[<h1 id="geochat首个遥感领域grounded视觉语言大模型让卫星图像对话更智能" class="headerLink">
-    <a href="#geochat%e9%a6%96%e4%b8%aa%e9%81%a5%e6%84%9f%e9%a2%86%e5%9f%9fgrounded%e8%a7%86%e8%a7%89%e8%af%ad%e8%a8%80%e5%a4%a7%e6%a8%a1%e5%9e%8b%e8%ae%a9%e5%8d%ab%e6%98%9f%e5%9b%be%e5%83%8f%e5%af%b9%e8%af%9d%e6%9b%b4%e6%99%ba%e8%83%bd" class="header-mark"></a>GeoChat：首个遥感领域Grounded视觉语言大模型，让卫星图像对话更智能</h1><blockquote>
-  <p><strong>论文解读</strong> | CVPR 2024 | 2026-06-01</p>
-</blockquote><h2 id="-论文信息" class="headerLink">
-    <a href="#-%e8%ae%ba%e6%96%87%e4%bf%a1%e6%81%af" class="header-mark"></a>📄 论文信息</h2><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>标题</strong></td>
-          <td>GeoChat: Grounded Large Vision-Language Model for Remote Sensing</td>
-      </tr>
-      <tr>
-          <td><strong>作者</strong></td>
-          <td>Kartik Kuckreja, Muhammad Sohail Danish, Muzammal Naseer, Abduljabbar Al-Khateri, Shoaib Jameel, Lars Petersson, Salman Khan, Fahad Shahbaz Khan</td>
-      </tr>
-      <tr>
-          <td><strong>会议</strong></td>
-          <td>CVPR 2024</td>
-      </tr>
-      <tr>
-          <td><strong>arXiv</strong></td>
-          <td><a href="https://arxiv.org/abs/2311.15826" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2311.15826</a></td>
-      </tr>
-      <tr>
-          <td><strong>GitHub</strong></td>
-          <td><a href="https://github.com/mbzuai-oryx/GeoChat" target="_blank" rel="noopener noreferrer">https://github.com/mbzuai-oryx/GeoChat</a></td>
-      </tr>
-      <tr>
-          <td><strong>关键词</strong></td>
-          <td>遥感、视觉语言模型、Grounding、多任务学习、区域级推理</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="-解决的核心问题" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="header-mark"></a>🎯 解决的核心问题</h2><h3 id="问题背景" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af" class="header-mark"></a>问题背景</h3><p>遥感图像分析是地球观测的核心任务，传统方法通常针对单一任务（如分类、检测、分割）设计专用模型。随着大型视觉语言模型（VLM）在通用领域的成功，研究者开始探索将其应用于遥感领域。</p>
-<p>然而，现有方法面临三个关键挑战：</p>
-<ol>
-<li><strong>领域适配问题</strong>：通用VLM（如GPT-4V）在遥感场景下表现不佳，容易产生不准确或虚构的信息</li>
-<li><strong>缺乏区域级推理</strong>：现有遥感VLM主要支持图像级任务，无法对特定区域进行细粒度分析</li>
-<li><strong>多任务统一困难</strong>：不同遥感任务（分类、检测、描述等）通常需要独立模型，缺乏统一框架</li>
-</ol>
-<h3 id="现有方法的局限" class="headerLink">
-    <a href="#%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e7%9a%84%e5%b1%80%e9%99%90" class="header-mark"></a>现有方法的局限</h3><table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>局限性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>通用VLM（GPT-4V等）</td>
-          <td>缺乏遥感领域知识，对卫星图像理解能力有限</td>
-      </tr>
-      <tr>
-          <td>遥感专用模型</td>
-          <td>仅支持单一任务，无法进行多轮对话</td>
-      </tr>
-      <tr>
-          <td>现有遥感VLM</td>
-          <td>仅支持图像级推理，缺乏区域级grounding能力</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="核心问题提炼" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%8f%90%e7%82%bc" class="header-mark"></a>核心问题提炼</h3><p><strong>如何构建一个既能理解遥感图像全局语义，又能对特定区域进行细粒度推理的统一视觉语言模型？</strong></p>
-<h2 id="-解决方案" class="headerLink">
-    <a href="#-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" class="header-mark"></a>💡 解决方案</h2><h3 id="核心创新点1多模态遥感指令数据集构建" class="headerLink">
-    <a href="#%e6%a0%b8%e5%bf%83%e5%88%9b%e6%96%b0%e7%82%b91%e5%a4%9a%e6%a8%a1%e6%80%81%e9%81%a5%e6%84%9f%e6%8c%87%e4%bb%a4%e6%95%b0%e6%8d%ae%e9%9b%86%e6%9e%84%e5%bb%ba" class="header-mark"></a>核心创新点1：多模态遥感指令数据集构建</h3><p><strong>设计动机</strong>：遥感领域缺乏大规模多模态指令调优数据集，直接使用通用数据集会导致领域偏移。</p>
-<p><strong>具体实现</strong>：</p>
-<ul>
-<li>整合多个现有遥感数据集（LRBEN、NWPU-RESISC-45、SAMRS等）</li>
-<li>利用Vicuna-v1.5和自动化管道生成318k指令数据</li>
-<li>设计统一的图像-文本对格式，支持多种任务类型</li>
-</ul>
-<p><strong>关键细节</strong>：</p>]]></description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Grounding - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/grounding/</link><description>Grounding - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 07:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/grounding/" rel="self" type="application/rss+xml"/><item><title>LG-SAM：遥感视觉 grounding 不该只押一个模型</title><link>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 07:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="lg-sam遥感视觉-grounding-不该只押一个模型" class="headerLink">
+    <a href="#lg-sam%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89-grounding-%e4%b8%8d%e8%af%a5%e5%8f%aa%e6%8a%bc%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b" class="header-mark"></a>LG-SAM：遥感视觉 grounding 不该只押一个模型</h1><p><strong>结论：这一轮最值得单独跟踪的是 2026-05-30 提交到 arXiv 的 <em>Improving Visual Grounding in Remote Sensing via Cluster-Guided Refinement and Model Ensemble Voting</em>。它不是再造一个遥感 VLM，而是把 RemoteSAM 的遥感定位能力、SAM3 的通用分割能力、EarthMind / Falcon 这类遥感多模态模型的互补性放进同一个 grounding 框架里。对遥感 AI 来说，这篇工作的价值在于提醒我们：开放词汇定位和语言驱动分割在复杂遥感场景中很难靠单模型稳定解决，模型间的一致性本身可以成为一种可用的置信度信号。</strong></p>
+<p>我按 2026-06-15 07:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是光学遥感图像上的语言引导定位与分割，不以雷达数据为输入。它也不在前几轮已跟踪的 CoastlineVLM、Stateful Visual Encoder、BCP、UltraVR、SpatialClaw 等条目中，适合作为本轮单篇深挖。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感 VLM 的一个真实瓶颈是 grounding。问答和 caption 可以看起来很流畅，但一旦要求模型把“机场跑道”“港口码头”“密集居民区中的操场”精确落到图像区域上，错误会立刻暴露出来。遥感影像里对象尺度跨度很大，背景高度重复，同一张图里可能有多个相似目标，普通自然图像模型常常能分割出漂亮 mask，却不一定找对对象。</p>
+<p>这篇论文的问题定义很直接：视觉 grounding 要把自然语言描述对应到图像区域。作者认为，单一模型很难同时处理遥感里的定位、分割、尺度变化和复杂背景。RemoteSAM 更懂遥感，但输出可能粗糙、碎片化；SAM3 的 mask 质量强，但在大幅遥感图像中容易先找错位置；EarthMind 和 Falcon 这类遥感 VLM 在部分场景有效，但跨类别稳定性还不够。</p>
+<p>所以它的主张不是“换一个更大的模型”，而是把多个模型的长处拆开使用：先用更懂遥感的模型给候选位置，再用更强的分割模型细化边界，最后用多模型投票抵消单模型失误。</p>
+<h2 id="方法" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95" class="header-mark"></a>方法</h2><p>论文提出两条主要 pipeline。</p>
+<p>第一条是 <strong>Sequential Grounding Refinement (SGR)</strong>。流程是先让 RemoteSAM 根据文本 prompt 产生初始位置，再把这些候选框交给 SAM3 生成更细的 segmentation mask。这个思路很自然，但论文实验发现，直接串联并不稳。RemoteSAM 的候选框如果碎片化、重叠或包含多余目标，SAM3 会被迫逐框处理，结果可能出现重复 mask 或错误分割。</p>]]></description></item></channel></rss>
