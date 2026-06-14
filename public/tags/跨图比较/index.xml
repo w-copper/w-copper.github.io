@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>跨图比较 - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/%E8%B7%A8%E5%9B%BE%E6%AF%94%E8%BE%83/</link><description>跨图比较 - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 05:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/%E8%B7%A8%E5%9B%BE%E6%AF%94%E8%BE%83/" rel="self" type="application/rss+xml"/><item><title>Stateful Visual Encoders：把跨图比较前移到视觉端，遥感 VLM 才能记住变化</title><link>https://spacetop.win/2026/06/20260615_050002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 05:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_050002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="stateful-visual-encoders把跨图比较前移到视觉端遥感-vlm-才能记住变化" class="headerLink">
+    <a href="#stateful-visual-encoders%e6%8a%8a%e8%b7%a8%e5%9b%be%e6%af%94%e8%be%83%e5%89%8d%e7%a7%bb%e5%88%b0%e8%a7%86%e8%a7%89%e7%ab%af%e9%81%a5%e6%84%9f-vlm-%e6%89%8d%e8%83%bd%e8%ae%b0%e4%bd%8f%e5%8f%98%e5%8c%96" class="header-mark"></a>Stateful Visual Encoders：把跨图比较前移到视觉端，遥感 VLM 才能记住变化</h1><p><strong>结论：这一轮最值得单独跟踪的是 2026-06-03 的 <em>Stateful Visual Encoders for Vision-Language Models</em>。它不是遥感专用论文，但它把“多图比较”从语言侧前移到视觉编码器侧，正好击中遥感里最常见的痛点：双时相变化往往很小，语义又很接近，如果视觉表征先被独立编码，真正关键的差异会在进语言模型之前就被稀释掉。更重要的是，这篇工作在遥感上不是只做概念推断，而是直接在 LEVIR-CC 上验证了收益。</strong></p>
+<p>我按 2026-06-15 05:00 +08 检索公开来源，并优先保留有代码/项目页、且能明确转移到遥感任务的 CV 工作。这个条目比纯遥感专用论文更像“可迁移方法”：它不依赖 SAR、PolSAR 或 InSAR，主线是 open-weight VLM 的跨图比较能力，适合迁移到遥感变化描述、时序问答、细粒度差分审计和人工复核队列。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感里的很多任务，本质都不是单图识别，而是“比较”。变化描述要回答哪里变了、变成什么；时序问答要判断两期影像里的差异是否成立；人工审核要区分真实变化、阴影、配准误差和纹理扰动。问题在于，现有很多 VLM 的比较方式发生在语言模型里，而视觉编码器仍然是逐张独立处理图像。</p>
+<p>这对遥感很不友好。双时相影像里，真实变化常常只占很小一部分像素，建筑新增、道路延伸、农田轮作、灾后破坏都可能被大背景淹没。如果没有跨图上下文，视觉侧更容易把“小变化”当成噪声。等信息到语言模型时，能剩下的证据已经不够稳定。</p>
+<p>所以这篇工作的核心不是“再做一个更大的 VLM”，而是把状态直接塞进视觉编码器，让当前图像的表示能看到前一张图像的特征。这和遥感变化检测、变化 captioning、以及多时相 VLM 的需求是对齐的。</p>
+<h2 id="方法" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95" class="header-mark"></a>方法</h2><p>作者提出 Stateful Visual Encoder (SVE)，把视觉编码器从 stateless 变成 stateful。简单说，编码第 <code>t</code> 张图时，不再只看本图，而是同时参考前一张图的视觉特征。</p>
+<p>论文比较了四种设计：Self-Ext、AdaLN-Zero、Cross 和 Cross+FFN。结果最稳的是 Cross+FFN，也就是当前图像 token 通过 cross-attention 去读取前一时相的视觉上下文，再接一个 FFN 做重整。</p>
+<p>这套设计里有几个细节很关键：</p>
+<ol>
+<li><code>weight cloning</code>，把预训练块里的 Q/K/V 和部分 FFN 权重复制过来，减少训练初期的不稳定。</li>
+<li><code>zero-init outputs</code>，让新增分支一开始不会破坏原有特征分布。</li>
+<li><code>stop-gradient</code> 处理前一图像分支，把它当成稳定上下文，而不是一起乱漂。</li>
+<li>给 cross-attention 加 positional information，并提供 first-image 的 fallback，保证多图输入时行为一致。</li>
+</ol>
+<p>这套 recipe 的意义在于：它不是靠堆参数“硬记住变化”，而是把变化比较这件事变成视觉表征的一部分。对遥感来说，这比只在 prompt 里要求模型“比较两张图”更接近实际需求。</p>]]></description></item></channel></rss>
