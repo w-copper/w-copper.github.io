@@ -1,4 +1,9 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sat, 13 Jun 2026 05:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>CAFOSat：农业设施 benchmark 暴露遥感 VLM 的落地短板</title><link>https://spacetop.win/2026/06/20260613_050002_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 05:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_050002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="cafosat农业设施-benchmark-暴露遥感-vlm-的落地短板" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 14 Jun 2026 09:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>Training-Free Text-Based RS Segmentation：让 VLM 只负责选 mask 和点 SAM</title><link>https://spacetop.win/2026/06/20260614_090001_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_090001_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="training-free-text-based-rs-segmentation让-vlm-只负责选-mask-和点-sam" class="headerLink">
+    <a href="#training-free-text-based-rs-segmentation%e8%ae%a9-vlm-%e5%8f%aa%e8%b4%9f%e8%b4%a3%e9%80%89-mask-%e5%92%8c%e7%82%b9-sam" class="header-mark"></a>Training-Free Text-Based RS Segmentation：让 VLM 只负责选 mask 和点 SAM</h1><p><strong>结论：这一轮最值得单独跟踪的是 CVPR 2026 EarthVision 论文 <em>Enabling Training-Free Text-Based Remote Sensing Segmentation</em>。它没有再给遥感 VLM 接一个新的 mask decoder，也没有把重点放在更复杂的专用适配器上，而是把问题拆成两条很朴素的路线：短类别词用 CLIP 给 SAM 的候选 mask 做语义选择；长句、指代表达和推理问题则让生成式 VLM 输出点击点，再交给 SAM 出 mask。它的意义不只是“又一个开放词表分割方法”，而是把遥感文本分割重新拉回一个可复用的工程问题：VLM 不必直接生成像素，先学会给通用分割器提供可靠的空间提示。</strong></p>
+<p>我按 2026-06-14 09:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线工作。本篇选择 Jose Sosa 等人在 CVPR 2026 EarthVision Workshop 的遥感文本分割论文。arXiv、CVF 页面和官方 GitHub 仓库均已公开；不过仓库目前只有 README 和 teaser，代码部分仍标注为 coming soon，因此本文把它视为“论文公开、代码仓库已建、可运行代码未确认”的条目。</p>
+<p>这篇适合放进“可提示分割、开放词表与密集预测”。它正好连接了三条线：开放词表语义分割、SAM 可提示分割、遥感 VLM 推理分割。对后续做遥感 VLM 的人来说，最值得借鉴的不是某个模型名，而是它把“语言理解”和“mask 生成”解耦以后，很多训练负担可以被转成提示生成、mask 选择和评测协议设计。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感文本分割的目标是：给一张遥感影像和一段文本，让模型输出对应区域的 mask。文本可以很短，例如 <code>building</code>、<code>road</code>、<code>water</code>；也可以是指代表达，例如“右上角那辆车”；还可以是推理问题，例如“如果要改善网球发球并参加双打，应选择体育综合体中的哪个位置”。这三种任务表面上都是分割，但它们对模型的要求完全不同。</p>]]></description></item><item><title>CAFOSat：农业设施 benchmark 暴露遥感 VLM 的落地短板</title><link>https://spacetop.win/2026/06/20260613_050002_twohour_remote_sensing_radar/</link><pubDate>Sat, 13 Jun 2026 05:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260613_050002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="cafosat农业设施-benchmark-暴露遥感-vlm-的落地短板" class="headerLink">
     <a href="#cafosat%e5%86%9c%e4%b8%9a%e8%ae%be%e6%96%bd-benchmark-%e6%9a%b4%e9%9c%b2%e9%81%a5%e6%84%9f-vlm-%e7%9a%84%e8%90%bd%e5%9c%b0%e7%9f%ad%e6%9d%bf" class="header-mark"></a>CAFOSat：农业设施 benchmark 暴露遥感 VLM 的落地短板</h1><p><strong>结论：这一轮最值得单独跟踪的是 CAFOSat。它不是又一个泛泛的遥感分类数据集，而是把一个真实应用里最难的几件事放到同一个 benchmark 中：公开清单里的点位不准、农业设施形态差异大、负样本很像正样本、跨州泛化困难、还要解释模型到底看到了 barn、manure pond 还是 grazing area。对遥感 AI 来说，这比单纯刷分类精度更有价值，因为它直接暴露了 VLM 和通用视觉基础模型进入高分辨率地理应用时的短板。</strong></p>
 <p>我按 2026-06-13 05:00 +08 检索公开来源，过滤了 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 方向。本篇选择 CVPR 2026 EarthVision Workshop 论文 <em>CAFOSat: A Strongly Annotated Dataset for Infrastructure-Aware CAFO Mapping Using High-Resolution Imagery</em>。论文有 arXiv、CVF Open Access 页面、GitHub 仓库和 Hugging Face 数据集；数据基于 NAIP 高分辨率航空影像，不是雷达方向。</p>
 <p>这篇适合放进“多源数据融合、效率部署与应用落地”。原因是它关心的不是单张遥感图像语义理解，而是把多州 CAFO 公开记录、NAIP 影像、土地覆盖约束、人工核验、弱监督定位、基础设施标注、合成增强和可复现实验拆分整合成一个可用 benchmark。它提醒我们：遥感大模型真正落地时，数据质量、空间对齐和 hard negative 往往比换一个更大的 backbone 更关键。</p>
@@ -647,115 +652,4 @@
 <li>语义分数高但 mask 不对：例如把停车场纹理误当作建筑。</li>
 <li>mask 边界好但类别不对：例如道路、跑道、河流、裸地这些长条或低纹理区域容易互相混。</li>
 </ul>
-<p>SAM3 的新接口是 promptable concept segmentation。Hugging Face 文档将 SAM3 描述为能基于文本或图像示例概念返回实例/语义 mask，并指出 recognition/localization 通过 presence head 解耦；Ultralytics 文档也强调了 presence head 用于全局概念存在判断。对遥感来说，这意味着我们不必只依赖 CLIP similarity 后验去猜类别，而是可以利用 SAM3 自带的 presence score 作为“类别是否存在”的门控。</p>]]></description></item><item><title>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</title><link>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:12:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing/</guid><description><![CDATA[<h1 id="rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="headerLink">
-    <a href="#rs-13-sam2-geographic-memory-for-multi-temporal-remote-sensing" class="header-mark"></a>RS-13 SAM2 Geographic Memory for Multi-Temporal Remote Sensing</h1><p>细问题：如何把 SAM2 的 video streaming memory 改造成遥感多时相 memory，用于农田边界、灾害水体或施工变化等光学遥感任务。</p>
-<h2 id="结论摘要" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e6%91%98%e8%a6%81" class="header-mark"></a>结论摘要</h2><p>SAM2 的真正新能力不是“又一个更强 SAM”，而是它把交互式分割扩展到视频：给某一帧提示后，模型可以用 streaming memory 在后续帧传播对象 mask。这个机制天然吸引遥感多时相任务，但不能直接把 Sentinel-2/Landsat/航空影像时间序列当作视频来跑。自然视频中的相邻帧通常是秒级连续运动；遥感多时相是天、月、季、年级间隔，存在云影、季节物候、传感器差异、配准误差、GSD 差异和真实地物变化。</p>
-<p>因此，值得研究的小问题是：把 SAM2 的“帧序 memory”改为“地理位置/对象/季节/传感器条件化 memory”。换句话说，memory 不应该只问“上一帧这个对象在哪里”，而应该问：</p>
-<ul>
-<li>这个对象或地块在同一地理坐标下是否应该保持身份？</li>
-<li>当前影像是否因云、阴影、季节、传感器或配准误差而不适合更新 memory？</li>
-<li>mask 变化是真变化，还是视觉外观变化？</li>
-<li>对农田边界、水体、建筑施工这三类不同变化速度的对象，memory 更新策略是否应该不同？</li>
-</ul>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/来源</th>
-          <th>链接</th>
-          <th>代码/资源</th>
-          <th>与本细问题的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SAM 2: Segment Anything in Images and Videos</td>
-          <td style="text-align: right">2024 arXiv / ICLR 2025</td>
-          <td><a href="https://arxiv.org/abs/2408.00714" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ai.meta.com/research/sam2/" target="_blank" rel="noopener noreferrer">Meta page</a></td>
-          <td><a href="https://github.com/facebookresearch/segment-anything-2" target="_blank" rel="noopener noreferrer">facebookresearch/sam2</a></td>
-          <td>提供 streaming memory、promptable video segmentation 和 image/video unified architecture，是“多时相 memory”灵感来源。</td>
-      </tr>
-      <tr>
-          <td>Grounded SAM 2</td>
-          <td style="text-align: right">2024 GitHub project</td>
-          <td><a href="https://github.com/IDEA-Research/Grounded-SAM-2" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>同链接</td>
-          <td>将 Grounding DINO/Florence-2/DINO-X 与 SAM2 结合，实现 text grounding + video tracking；可迁移为遥感“文本提示 + 时序 mask 传播”基线。</td>
-      </tr>
-      <tr>
-          <td>RS2-SAM2: Customized SAM2 for Referring Remote Sensing Image Segmentation</td>
-          <td style="text-align: right">2025 arXiv / AAAI 2026</td>
-          <td><a href="https://arxiv.org/abs/2503.07266" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://ojs.aaai.org/index.php/AAAI/article/download/37828/41790" target="_blank" rel="noopener noreferrer">AAAI PDF</a></td>
-          <td>未核验到稳定官方 GitHub</td>
-          <td>面向遥感 referring segmentation，提出 union encoder、层级融合、pseudo-mask dense prompt、text-guided boundary loss；可作为“语义提示生成器”接入多时相 SAM2。</td>
-      </tr>
-      <tr>
-          <td>RSRefSeg 2</td>
-          <td style="text-align: right">2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2507.06231" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/KyanChen/RSRefSeg2" target="_blank" rel="noopener noreferrer">KyanChen/RSRefSeg2</a></td>
-          <td>用 CLIP 做粗定位、SAM 做精分割，说明遥感文本/区域提示与 SAM 协作是可行路线。</td>
-      </tr>
-      <tr>
-          <td>SAM2-CD: Remote Sensing Image Change Detection with SAM2</td>
-          <td style="text-align: right">2025 IEEE JSTARS</td>
-          <td><a href="https://colab.ws/articles/10.1109%2Fjstars.2025.3610156" target="_blank" rel="noopener noreferrer">DOI summary</a></td>
-          <td>未核验到官方 GitHub</td>
-          <td>直接把 SAM2 适配到变化检测，指出 vanilla SAM2 在 RS-CD 中受 single-image bias 和 contextual granularity mismatch 限制。</td>
-      </tr>
-      <tr>
-          <td>Remote SAMsing</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.00256" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>论文称 open-source pipeline，需进一步核验仓库</td>
-          <td>关注 SAM2 在大幅面遥感中的 coverage-quality trade-off 与 tile fragmentation；对多时相大图 memory 的 tile 合并很关键。</td>
-      </tr>
-      <tr>
-          <td>SAM2-ARAFNet</td>
-          <td style="text-align: right">2026 Scientific Reports</td>
-          <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13031478/" target="_blank" rel="noopener noreferrer">PMC</a></td>
-          <td>未核验到官方代码</td>
-          <td>将 SAM2-Hiera 与 adapter/ASPP/蒸馏结合做高分遥感语义分割；说明 SAM2 encoder 可作为遥感密集预测基座。</td>
-      </tr>
-      <tr>
-          <td>Adaptive SAM2 for Planted Field Segmentation</td>
-          <td style="text-align: right">2026 IJDE</td>
-          <td><a href="https://www.tandfonline.com/doi/full/10.1080/17538947.2026.2645885" target="_blank" rel="noopener noreferrer">Taylor &amp; Francis</a></td>
-          <td>未核验到官方代码</td>
-          <td>使用 SAM2 prompt 做种植地块分割，明确提到生长季多时相影像有助于区分作物纹理/光谱差异。</td>
-      </tr>
-      <tr>
-          <td>SegTS: Subseries-driven Temporo-Spatial Learning with SAM</td>
-          <td style="text-align: right">2026 Computers and Electronics in Agriculture</td>
-          <td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0168169926002218" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>未核验到官方代码</td>
-          <td>不是 SAM2，但它把 SAM-derived temporo-spatial knowledge 用于 SITS crop segmentation，并处理云过滤和子序列建模，是“遥感时间不是自然视频”的重要参照。</td>
-      </tr>
-      <tr>
-          <td>SAMWS: SAM-based Weakly Supervised Crop Mapping using Sentinel-2 Time Series</td>
-          <td style="text-align: right">2024 IJAEOG</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843224004394" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td><a href="https://github.com/Nick0317Sun/SAMWS" target="_blank" rel="noopener noreferrer">Nick0317Sun/SAMWS</a></td>
-          <td>用 SAM 与弱监督构造 Sentinel-2 time series crop mapping 管线，适合作为低标注农业实验基线。</td>
-      </tr>
-      <tr>
-          <td>fabSAM / FieldSeg / Field Boundary SAM 系列</td>
-          <td style="text-align: right">2025-2026 arXiv/ScienceDirect</td>
-          <td><a href="https://arxiv.org/abs/2501.12487" target="_blank" rel="noopener noreferrer">fabSAM arXiv</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0168169925001929" target="_blank" rel="noopener noreferrer">FieldSeg</a></td>
-          <td>需逐篇核验</td>
-          <td>农田边界是最适合“地理记忆”的对象：边界较稳定，但内部作物纹理随季节变化。</td>
-      </tr>
-      <tr>
-          <td>OmniCD / TERRA-CD / Changen2 / AnyTime-CD</td>
-          <td style="text-align: right">2024-2026 arXiv/RSE</td>
-          <td><a href="https://arxiv.org/abs/2605.30168" target="_blank" rel="noopener noreferrer">OmniCD</a>, <a href="https://arxiv.org/abs/2605.14651" target="_blank" rel="noopener noreferrer">TERRA-CD</a>, <a href="https://arxiv.org/abs/2406.17998" target="_blank" rel="noopener noreferrer">Changen2</a>, <a href="https://www.sciencedirect.com/science/article/pii/S003442572600009X" target="_blank" rel="noopener noreferrer">AnyTime-CD</a></td>
-          <td>部分代码待核验</td>
-          <td>这些是传统或新型多时相/变化检测强基线，必须和 SAM2 memory 路线公平比较。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><h3 id="sam2-的-memory-假设" class="headerLink">
-    <a href="#sam2-%e7%9a%84-memory-%e5%81%87%e8%ae%be" class="header-mark"></a>SAM2 的 memory 假设</h3><p>SAM2 将图像看成单帧视频，并为视频分割引入 streaming memory。自然视频里的 memory 主要解决对象跨帧传播：对象身份大致连续，外观变化平滑，帧间位移可由视觉相似性和短期记忆处理。</p>]]></description></item></channel></rss>
+<p>SAM3 的新接口是 promptable concept segmentation。Hugging Face 文档将 SAM3 描述为能基于文本或图像示例概念返回实例/语义 mask，并指出 recognition/localization 通过 presence head 解耦；Ultralytics 文档也强调了 presence head 用于全局概念存在判断。对遥感来说，这意味着我们不必只依赖 CLIP similarity 后验去猜类别，而是可以利用 SAM3 自带的 presence score 作为“类别是否存在”的门控。</p>]]></description></item></channel></rss>
