@@ -1,4 +1,14 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Sun, 14 Jun 2026 13:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>RSKT-Seg：开放词表遥感分割需要自己的 benchmark</title><link>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 13:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="rskt-seg开放词表遥感分割需要自己的-benchmark" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 01:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>CSI-Net：变化检测里真正难的是压住伪变化</title><link>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 01:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="csi-net变化检测里真正难的是压住伪变化" class="headerLink">
+    <a href="#csi-net%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e9%87%8c%e7%9c%9f%e6%ad%a3%e9%9a%be%e7%9a%84%e6%98%af%e5%8e%8b%e4%bd%8f%e4%bc%aa%e5%8f%98%e5%8c%96" class="header-mark"></a>CSI-Net：变化检测里真正难的是压住伪变化</h1><p><strong>结论：这一轮最值得单独跟踪的是 2026-06-09 提交到 arXiv 的 <em>Content-Induced Spatial-Spectral Aggregation Network for Change Detection in Remote Sensing Images</em>。它的题眼不是“又一个双时相网络”，而是把变化检测里最常见的失败源说得比较准确：很多高分辨率光学影像里的强差异并不是目标变化，而是成像角度、阴影、光照、季节、背景纹理或局部配准带来的伪变化。CSI-Net 用空间推理、谱/通道差异统计和高层内容引导融合三件事，试图让模型在保留真实变化的同时压低未变化区域里的空间-光谱差异。</strong></p>
+<p>我按 2026-06-15 01:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是高分辨率光学双时相变化检测，实验数据包括 LEVIR-CD、WHU-CD、CLCD 和 Sensetime change detection 数据，论文正文没有把 SAR 作为输入模态或实验对象。同期候选里，Earth-OneVision 明确统一了 optical、SAR、infrared、multispectral、temporal、video 等模态，按本轮规则不作为主项；NGram-MoSE 虽然有趣，但下游 Landslide4Sense benchmark 涉及 PALSAR 派生层，且主线是超分辨率；PolyBuild 与最近已经写过的 VecLang、LPM、polygon-native mask decoder 重合较大。因此本轮保留 CSI-Net 这个更聚焦“光学变化伪差异抑制”的方向。</p>
+<p>这篇文章的现实意义在于：遥感变化检测并不缺模型结构，缺的是更可靠地区分“真实变化”和“看起来变了”。建筑新增、农田转用、湖泊边界变化、灾后损毁等任务都要求模型对双时相差异敏感；但如果模型只追逐像素差异，就会把阴影位移、楼体侧视角、树冠季节变化、道路纹理和传感器色彩差异当成变化。CSI-Net 不是一个基础模型论文，但它提醒我们，变化检测的关键瓶颈仍然是证据筛选和伪变化抑制。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>双时相变化检测的经典输入是同一区域两个时间点的遥感影像，输出变化 mask。看起来这是一个二分类分割问题，但实际比普通语义分割更难：模型不仅要理解每个时相里的对象，还要判断对象是否在两个时相之间发生了目标定义下的变化。</p>
+<p>传统 CNN 方法擅长局部纹理和边界，但感受野有限，容易在密集建筑、大片农田或复杂背景里漏掉上下文。Transformer、non-local 和图卷积方法被引入后，全球关系建模有所加强，但又容易把所有强相关差异都放大。空间关系有用，谱/通道差异也有用，问题是二者不能简单相加。</p>
+<p>论文指出的核心问题是：空间差异和谱差异既能帮助发现变化，也会在未变化区域制造噪声。比如两期影像里建筑没有变，但因为拍摄倾角不同，屋顶和侧墙位置发生偏移；或者农田没有发生土地利用变化，但季节和湿度造成 RGB 分布改变。这些差异如果没有被抑制，就会成为 false positive。</p>
+<p>因此，CSI-Net 的目标不是单纯增强差异，而是做一种内容引导的空间-光谱融合：用空间模块捕获全局关系，用谱差异模块提取双时相特征统计，再用高层语义内容决定二者如何交互。这个思路比“把两个时相特征 concat 后交给 decoder”更接近真实变化检测的难点。</p>
+<h2 id="方法" class="headerLink">
+    <a href="#%e6%96%b9%e6%b3%95" class="header-mark"></a>方法</h2><p>CSI-Net 的主体是 Siamese encoder-decoder 框架，backbone 使用 ResNet-18。双时相影像分别经过共享编码器提取多层特征，再由三个关键模块处理差异信息：Spatial Reasoning、Spectral Difference 和 Content-Guided Integration。</p>]]></description></item><item><title>RSKT-Seg：开放词表遥感分割需要自己的 benchmark</title><link>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 13:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="rskt-seg开放词表遥感分割需要自己的-benchmark" class="headerLink">
     <a href="#rskt-seg%e5%bc%80%e6%94%be%e8%af%8d%e8%a1%a8%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e9%9c%80%e8%a6%81%e8%87%aa%e5%b7%b1%e7%9a%84-benchmark" class="header-mark"></a>RSKT-Seg：开放词表遥感分割需要自己的 benchmark</h1><p><strong>结论：这一轮最值得单独跟踪的是 <em>RSKT-Seg: Remote Sensing Knowledge Transfer for Open-Vocabulary Semantic Segmentation</em>。它的价值不只是提出一个开放词表遥感语义分割模型，而是把问题拆成了三件更基础的事：遥感类别名称太粗，通用视觉语言模型容易被自然图像语义带偏；遥感图像中的尺度、纹理和俯视视角会削弱 CLIP 类文本对齐；现有遥感分割数据集本来就不是为“见过类/未见类”泛化评测设计的。因此 RSKT-Seg 同时给出知识迁移方法和 OVRSISBench，把开放词表遥感分割从 demo 推向可比较 benchmark。</strong></p>
 <p>我按 2026-06-14 13:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。本篇选择 2025-09-16 提交 arXiv、2026-06-10 更新 v2 的 RSKT-Seg。论文和 arXiv HTML 已公开；官方 GitHub 仓库标注为 AAAI 2026 Oral，并提供代码、预训练权重、OVRSISBench 数据集说明和训练/评测配置。该工作面向光学遥感语义分割和开放词表迁移，不属于雷达方向。</p>
 <p>这篇适合放进“可提示分割、开放词表与密集预测”。原因是它不满足于让 SAM 或 CLIP 在遥感图上跑一个零样本例子，而是直面开放词表语义分割的评测协议：哪些类别是 base，哪些类别是 novel，文本类别名如何构造，遥感知识如何注入，最后如何在多个公开数据集上比较未见类 mIoU。</p>
@@ -494,155 +504,4 @@
 </table>
 <h2 id="方法比较" class="headerLink">
     <a href="#%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83" class="header-mark"></a>方法比较</h2><h3 id="1-扩散特征提取器ddpm-cd" class="headerLink">
-    <a href="#1-%e6%89%a9%e6%95%a3%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8ddpm-cd" class="header-mark"></a>1. 扩散特征提取器：DDPM-CD</h3><p>DDPM-CD 的关键想法是：扩散模型在去噪过程中学习到遥感图像的多尺度结构，变化检测不一定要让扩散模型生成图像，可以取其 encoder/denoising 中间特征，再训练轻量变化分类头。优点是能利用未标注遥感影像预训练；缺点是变化语义并未被显式建模，仍然依赖后续分类头把双时相特征差异解释为变化。</p>]]></description></item><item><title>RS-15 Taxonomy-Aware Mask Selection</title><link>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</link><pubDate>Sun, 07 Jun 2026 09:14:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-15-taxonomy-aware-mask-selection/</guid><description><![CDATA[<h1 id="rs-15-taxonomy-aware-mask-selection" class="headerLink">
-    <a href="#rs-15-taxonomy-aware-mask-selection" class="header-mark"></a>RS-15 Taxonomy-Aware Mask Selection</h1><h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>开放词表遥感分割通常把问题拆成两步：先用 SAM/SAM3 或分割骨干产生候选 mask，再用 CLIP/RemoteCLIP/RS-CLIP/VLM 对 mask 和类别文本打分。这个范式解决了“类别不固定”的问题，但在遥感里很快遇到层级标签冲突：</p>
-<ul>
-<li><code>building</code> 是父类，<code>residential building</code>、<code>industrial building</code>、<code>damaged building</code> 是子类或属性组合。预测父类未必是错，但用 flat mIoU 会被当成全错。</li>
-<li><code>road</code>、<code>highway</code>、<code>runway</code> 在俯视图中都可能是细长硬质铺装面；CLIP 文本 embedding 很容易被纹理和形状牵着走。</li>
-<li><code>crop</code>、<code>field</code>、<code>rice</code>、<code>farmland</code> 混合了土地覆盖、土地利用、作物类型和地块对象，跨数据集 label 定义不一致。</li>
-<li>同一个 mask 可能同时属于多个层级：一片 <code>impervious surface</code> 里面包含 road、parking lot、building roof；一个 <code>water</code> mask 可能是 river、lake、pond 或 flood water。</li>
-</ul>
-<p>因此，RS-15 的研究对象不是泛泛的“遥感语义分割”，而是一个更窄的问题：<strong>当候选 mask 和开放词表类别已经给出时，如何利用层级 taxonomy、语义相似度、地理/几何先验和父子一致性来选择最终 mask label，并用更合理的指标评价预测？</strong></p>
-<h2 id="2-代表论文与项目" class="headerLink">
-    <a href="#2-%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>2. 代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/项目</th>
-          <th>与 RS-15 的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images</td>
-          <td style="text-align: right">2024 arXiv / 2025 CVPR</td>
-          <td><a href="https://arxiv.org/abs/2410.01768" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a>, <a href="https://earth-insights.github.io/SegEarth-OV" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>项目页称代码释放</td>
-          <td>训练自由遥感 OVSS 基线；证明 CLIP patch token 与低分辨率边界在 RS 中不稳，可作为 taxonomy-aware mask selection 的底座。</td>
-      </tr>
-      <tr>
-          <td>ReSeg-CLIP: Open-Vocabulary Semantic Segmentation in Remote Sensing via Hierarchical Attention Masking and Model Composition</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2602.23869" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未检索到稳定官方代码</td>
-          <td>用 SAM mask 做 hierarchical attention masking；“hierarchical”主要是 mask/attention 多尺度，不是语义 taxonomy，但方法结构很适合接入 taxonomy 约束。</td>
-      </tr>
-      <tr>
-          <td>ConInfer: Context-Aware Inference for Training-Free Open-Vocabulary Remote Sensing Segmentation</td>
-          <td style="text-align: right">2026 arXiv / CVPR 2026 Findings</td>
-          <td><a href="https://arxiv.org/abs/2603.29271" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2026F/papers/Chen_ConInfer_Context-Aware_Inference_for_Training-Free_Open-Vocabulary_Remote_Sensing_Segmentation_CVPRF_2026_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td><a href="https://github.com/Dog-Yang/ConInfer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>从独立 patch 推理转向上下文联合推理；可扩展为“区域间 label 层级一致性/互斥性”推理。</td>
-      </tr>
-      <tr>
-          <td>HG-RSOVSSeg: Hierarchical Guidance Open-Vocabulary Semantic Segmentation Framework of High-Resolution Remote Sensing Images</td>
-          <td style="text-align: right">2026 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/18/2/213" target="_blank" rel="noopener noreferrer">MDPI</a></td>
-          <td>文中给出 <a href="https://github.com/HuangWBill/HG-RSOVSSeg" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>直接以 hierarchical guidance 命名；重点是文本引导高分辨率 decoder，可作为层级文本特征构造参考。</td>
-      </tr>
-      <tr>
-          <td>Reducing Semantic Ambiguity in Open-Vocabulary Remote Sensing Image Segmentation via Knowledge Graph-Enhanced Class Representations</td>
-          <td style="text-align: right">2025 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271625004666" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>未见稳定官方代码</td>
-          <td>最贴近 RS-15：用 knowledge graph 缓解开放词表 RS segmentation 的语义歧义。适合作为 taxonomy-aware text embedding 的直接对照。</td>
-      </tr>
-      <tr>
-          <td>DGSeg: Dual Guidance with Textual Priors and Structural Awareness for Open-Vocabulary Remote Sensing Segmentation</td>
-          <td style="text-align: right">2026 Computers &amp; Geosciences</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0098300426000798" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td><a href="https://github.com/Funny0101/DGSeg" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>同时处理文本语义和结构边界，适合比较“文本先验 + 几何结构”与 taxonomy-aware mask selection 的互补性。</td>
-      </tr>
-      <tr>
-          <td>Towards Open-Vocabulary Semantic Segmentation for Remote Sensing Images / ROSS</td>
-          <td style="text-align: right">2026 Pattern Recognition</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S003132032600083X" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>未见稳定官方代码</td>
-          <td>强调旋转、领域知识、多尺度融合，说明遥感 OVSS 的语义混淆和空间边界需要同时处理。</td>
-      </tr>
-      <tr>
-          <td>Effective SAM Combination for Open-Vocabulary Semantic Segmentation / ESC-Net</td>
-          <td style="text-align: right">2024 arXiv / 2025 CVPR</td>
-          <td><a href="https://arxiv.org/abs/2411.14723" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Lee_Effective_SAM_Combination_for_Open-Vocabulary_Semantic_Segmentation_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>未见稳定官方代码</td>
-          <td>CV 侧 SAM+CLIP 组合路线，可迁移到 RS：用图文相关生成 pseudo prompt，减少两阶段高成本。</td>
-      </tr>
-      <tr>
-          <td>Open-World Semantic Segmentation Including Class Similarity</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Sodano_Open-World_Semantic_Segmentation_Including_Class_Similarity_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a></td>
-          <td>论文页有补充材料</td>
-          <td>不是遥感，但提出“未知类与已知类相似度”思想；可转成 hierarchy-aware / semantic-distance metric。</td>
-      </tr>
-      <tr>
-          <td>Flattening the Parent Bias: Hierarchical Semantic Segmentation in the Poincare Ball</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://cvpr.thecvf.com/virtual/2024/poster/31551" target="_blank" rel="noopener noreferrer">CVPR poster</a></td>
-          <td>论文页 PDF</td>
-          <td>提醒不要迷信层级结构：如果父类 bias 处理不好，层级监督可能反而伤害跨域泛化。</td>
-      </tr>
-      <tr>
-          <td>Fusion of Hierarchical Class Graphs for Remote Sensing Semantic Segmentation</td>
-          <td style="text-align: right">2024 Information Fusion</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1566253524001878" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td>未见稳定官方代码</td>
-          <td>遥感固定类分割里的 class hierarchy graph，可迁移为开放词表 mask selection 的 taxonomy graph。</td>
-      </tr>
-      <tr>
-          <td>SHiNe: Semantic Hierarchy Nexus for Open-Vocabulary Object Detection</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Liu_SHiNe_Semantic_Hierarchy_Nexus_for_Open-vocabulary_Object_Detection_CVPR_2024_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>需进一步查证</td>
-          <td>检测方向的层级语义建模，可借鉴文本类别图和父子节点融合方式。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法比较当前路线缺什么" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83%e5%bd%93%e5%89%8d%e8%b7%af%e7%ba%bf%e7%bc%ba%e4%bb%80%e4%b9%88" class="header-mark"></a>3. 方法比较：当前路线缺什么</h2><table>
-  <thead>
-      <tr>
-          <th>路线</th>
-          <th>典型方法</th>
-          <th>优点</th>
-          <th>对 RS-15 的缺口</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>CLIP patch scoring</td>
-          <td>SegEarth-OV, DGSeg, ROSS</td>
-          <td>训练自由或少训练，开放词表灵活</td>
-          <td>类别词平面化，<code>road/highway/runway</code> 这种近义/层级冲突难解</td>
-      </tr>
-      <tr>
-          <td>SAM mask proposal + CLIP classification</td>
-          <td>ReSeg-CLIP, ESC-Net, OVSAM 类方法</td>
-          <td>mask 边界好，能避免纯 patch 噪声</td>
-          <td>一个 mask 可能对应父类和子类，缺少父子一致性约束</td>
-      </tr>
-      <tr>
-          <td>上下文联合推理</td>
-          <td>ConInfer</td>
-          <td>缓解大图 patch 独立预测导致的类别漂移</td>
-          <td>上下文通常是空间/语义相关，未显式建模 taxonomy graph</td>
-      </tr>
-      <tr>
-          <td>知识图谱/层级文本增强</td>
-          <td>KG-OVRSeg, HG-RSOVSSeg, SHiNe</td>
-          <td>能显式利用类别关系和同义词</td>
-          <td>需要解决遥感 taxonomy 不统一、图谱噪声和跨数据集 label 映射</td>
-      </tr>
-      <tr>
-          <td>层级语义分割指标</td>
-          <td>Flattening Parent Bias, Open-world class similarity</td>
-          <td>能缓解父子类误判被 flat mIoU 惩罚过重</td>
-          <td>需要为遥感 land-cover/object/use 混合标签定义语义距离</td>
-      </tr>
-  </tbody>
-</table>
-<p>关键空白：<strong>目前遥感 OVSS 多数方法把类别列表当成 flat vocabulary；即便方法名里有 hierarchical，也常指 feature/mask hierarchy，而不是语义 taxonomy。</strong> RS-15 可以把贡献落在“后处理/推理层”的 taxonomy-aware mask selection 上，避免重新训练大模型，研究成本相对可控。</p>]]></description></item></channel></rss>
+    <a href="#1-%e6%89%a9%e6%95%a3%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8ddpm-cd" class="header-mark"></a>1. 扩散特征提取器：DDPM-CD</h3><p>DDPM-CD 的关键想法是：扩散模型在去噪过程中学习到遥感图像的多尺度结构，变化检测不一定要让扩散模型生成图像，可以取其 encoder/denoising 中间特征，再训练轻量变化分类头。优点是能利用未标注遥感影像预训练；缺点是变化语义并未被显式建模，仍然依赖后续分类头把双时相特征差异解释为变化。</p>]]></description></item></channel></rss>
