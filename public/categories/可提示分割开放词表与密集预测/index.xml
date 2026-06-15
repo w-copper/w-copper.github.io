@@ -1,4 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 01:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>CSI-Net：变化检测里真正难的是压住伪变化</title><link>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 01:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="csi-net变化检测里真正难的是压住伪变化" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</title><link>https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/</link><description>可提示分割、开放词表与密集预测 - Category - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 15:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/categories/%E5%8F%AF%E6%8F%90%E7%A4%BA%E5%88%86%E5%89%B2%E5%BC%80%E6%94%BE%E8%AF%8D%E8%A1%A8%E4%B8%8E%E5%AF%86%E9%9B%86%E9%A2%84%E6%B5%8B/" rel="self" type="application/rss+xml"/><item><title>ShearFuse-UNet：火势蔓延预测不一定要更大模型，方向边界更重要</title><link>https://spacetop.win/2026/06/20260615_150002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 15:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_150002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="shearfuse-unet火势蔓延预测不一定要更大模型方向边界更重要" class="headerLink">
+    <a href="#shearfuse-unet%e7%81%ab%e5%8a%bf%e8%94%93%e5%bb%b6%e9%a2%84%e6%b5%8b%e4%b8%8d%e4%b8%80%e5%ae%9a%e8%a6%81%e6%9b%b4%e5%a4%a7%e6%a8%a1%e5%9e%8b%e6%96%b9%e5%90%91%e8%be%b9%e7%95%8c%e6%9b%b4%e9%87%8d%e8%a6%81" class="header-mark"></a>ShearFuse-UNet：火势蔓延预测不一定要更大模型，方向边界更重要</h1><p><strong>结论：这一轮最值得补进雷达的是 2026-06-12 提交到 arXiv 的 <em>ShearFuse-UNet: Hadamard, DCT, and Shearlet Transform Fusion for Next-Day Wildfire Spread Prediction</em>。它不是遥感 VLM，也不是新的 GeoFM，而是把次日野火蔓延预测里一个很具体的结构先验说清楚了：火线不是普通纹理，而是受风、地形、植被和既有燃烧边界共同约束的方向性边界。ShearFuse-UNet 用 WHT、DCT 和 Shearlet 三类固定变换替代一部分 learned attention，在 267k 参数下达到 WildfireSpreadTS 上 F1 0.596，比 14M 参数 ResNet18 U-Net baseline 的 0.589 略高，重点价值在“轻量、可部署、面向边界几何”。</strong></p>
+<p>我按 2026-06-15 15:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇使用的是多模态卫星、气象、地形和火点时序数据，不以雷达或微波成像为核心输入。它和历史里的 wildfire GeoFM LoRA 方向不同：那条线更偏火烧迹地/灾后制图和基础模型微调，本篇聚焦 <strong>次日火势蔓延预测</strong>，也就是应急响应里更关心的“明天哪里可能烧到”。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感灾害 AI 很容易被两个方向吸走注意力。</p>
+<p>一个方向是大模型化。我们会自然想到用 GeoFM、VLM、SAM 或多模态 Agent 来做灾害识别、火烧迹地制图、风险问答和报告生成。这条线重要，但它并不直接解决应急预测里的延迟和资源约束。</p>
+<p>另一个方向是物理模拟。火势蔓延受燃料、湿度、风速、坡度、地表覆盖、历史火点和人工干预影响，传统模型通常需要大量参数、专家校准和高质量输入。它可解释，但在真实应急环境中，快速更新、缺失数据和区域泛化都很难。</p>
+<p>ShearFuse-UNet 切在两者之间：保留 U-Net 这种轻量 dense prediction 框架，但把火线几何放进网络结构里。它不追求用 Transformer 学出一切，而是问一个更工程的问题：如果火势边界天然有方向性，能不能用固定的频域和方向变换，把这种先验便宜地注入模型？</p>]]></description></item><item><title>CSI-Net：变化检测里真正难的是压住伪变化</title><link>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 01:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_010002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="csi-net变化检测里真正难的是压住伪变化" class="headerLink">
     <a href="#csi-net%e5%8f%98%e5%8c%96%e6%a3%80%e6%b5%8b%e9%87%8c%e7%9c%9f%e6%ad%a3%e9%9a%be%e7%9a%84%e6%98%af%e5%8e%8b%e4%bd%8f%e4%bc%aa%e5%8f%98%e5%8c%96" class="header-mark"></a>CSI-Net：变化检测里真正难的是压住伪变化</h1><p><strong>结论：这一轮最值得单独跟踪的是 2026-06-09 提交到 arXiv 的 <em>Content-Induced Spatial-Spectral Aggregation Network for Change Detection in Remote Sensing Images</em>。它的题眼不是“又一个双时相网络”，而是把变化检测里最常见的失败源说得比较准确：很多高分辨率光学影像里的强差异并不是目标变化，而是成像角度、阴影、光照、季节、背景纹理或局部配准带来的伪变化。CSI-Net 用空间推理、谱/通道差异统计和高层内容引导融合三件事，试图让模型在保留真实变化的同时压低未变化区域里的空间-光谱差异。</strong></p>
 <p>我按 2026-06-15 01:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是高分辨率光学双时相变化检测，实验数据包括 LEVIR-CD、WHU-CD、CLCD 和 Sensetime change detection 数据，论文正文没有把 SAR 作为输入模态或实验对象。同期候选里，Earth-OneVision 明确统一了 optical、SAR、infrared、multispectral、temporal、video 等模态，按本轮规则不作为主项；NGram-MoSE 虽然有趣，但下游 Landslide4Sense benchmark 涉及 PALSAR 派生层，且主线是超分辨率；PolyBuild 与最近已经写过的 VecLang、LPM、polygon-native mask decoder 重合较大。因此本轮保留 CSI-Net 这个更聚焦“光学变化伪差异抑制”的方向。</p>
 <p>这篇文章的现实意义在于：遥感变化检测并不缺模型结构，缺的是更可靠地区分“真实变化”和“看起来变了”。建筑新增、农田转用、湖泊边界变化、灾后损毁等任务都要求模型对双时相差异敏感；但如果模型只追逐像素差异，就会把阴影位移、楼体侧视角、树冠季节变化、道路纹理和传感器色彩差异当成变化。CSI-Net 不是一个基础模型论文，但它提醒我们，变化检测的关键瓶颈仍然是证据筛选和伪变化抑制。</p>
@@ -388,120 +395,4 @@
 <li>MF-Mamba：进一步使用八方向扫描，并配合多核卷积补局部纹理。</li>
 <li>GSTM-SCD：把扫描扩展到多时相语义变化，加入双向三维变化扫描和图关系。</li>
 </ul>
-<p>判断：扫描方向不是越多越好。多方向扫描提升上下文覆盖，但也带来实现复杂度、显存和重复语义。真正值得做的实验是“方向数量/方向选择是否与目标形态、场景结构、GSD 和任务类型相关”。</p>]]></description></item><item><title>RS-17 Latent Flow/Diffusion for Change Detection</title><link>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</link><pubDate>Sun, 07 Jun 2026 09:16:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-17-latent-flow-diffusion-for-change-detection/</guid><description><![CDATA[<h1 id="rs-17-latent-flowdiffusion-for-change-detection" class="headerLink">
-    <a href="#rs-17-latent-flowdiffusion-for-change-detection" class="header-mark"></a>RS-17 Latent Flow/Diffusion for Change Detection</h1><h2 id="结论先行" class="headerLink">
-    <a href="#%e7%bb%93%e8%ae%ba%e5%85%88%e8%a1%8c" class="header-mark"></a>结论先行</h2><p>这个方向的核心不是“把扩散模型塞进变化检测”，而是把变化检测从逐像素二分类改写为“在潜空间中建模一个合理的变化区域/变化过程”。判别式模型通常学习 <code>pre/post -&gt; changed probability</code>，很擅长局部边界和快速推理；生成式/潜变量方法试图学习“什么样的变化 mask 或变化图像在全局上是合理的”，因此天然适合处理区域一致性、标签歧义、不确定性和低标注数据。</p>
-<p>目前可分成四条路线：</p>
-<ol>
-<li><strong>扩散特征提取器</strong>：DDPM-CD 先在未标注遥感图像上预训练扩散模型，再用扩散中间特征训练轻量变化头。</li>
-<li><strong>变化样本生成器</strong>：ChangeAnywhere、Changen2、DreamCD 生成双时相样本、语义变化标签或后时相图像，用来缓解变化标注昂贵的问题。</li>
-<li><strong>latent difference guidance</strong>：LDGuid 显式学习“任务相关的变化潜向量”，再注入 U-Net、BIT、AERNet 等判别式 CD 模型。</li>
-<li><strong>latent mask generation / rectified flow</strong>：ChangeFlow 直接在 latent space 中用 rectified flow 生成变化 mask，并用多次采样做 ensemble 和置信度估计。</li>
-</ol>
-<p>我的判断：2024-2026 最值得做的小问题是 <strong>“潜空间生成式变化先验如何在不牺牲边界精度的前提下，提升跨域鲁棒性和不确定性可信度”</strong>。这比单纯追一个 LEVIR-CD F1 更像一篇能站住的论文。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>遥感变化检测的标注不是纯视觉差分。很多变化 mask 反映的是区域级语义约定：新建建筑算变化，阴影移动不算；作物季节纹理变化可能不算，土地利用类别变化算；配准误差导致的边缘错位通常不应算。这带来三个矛盾：</p>
-<ul>
-<li><strong>局部像素差异与语义变化不等价</strong>：亮度、阴影、云雾、季节、传感器响应、配准误差会造成明显差异，但不是目标变化。</li>
-<li><strong>变化区域具有全局结构</strong>：建筑群、道路扩张、采矿区、水体扩张往往是连通区域或对象集合，而不是独立像素。</li>
-<li><strong>变化标签存在歧义和不确定性</strong>：边界、细碎对象和半变化区域通常有多种合理标注。</li>
-</ul>
-<p>判别式模型把这些问题压成单次前向的 pixel classification；生成式 latent 方法则把变化当作一个分布、过程或潜语义差异来建模，这正是 ChangeFlow、LDGuid、Changen2 等工作的切入点。</p>
-<h2 id="代表论文与代码" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e4%bb%a3%e7%a0%81" class="header-mark"></a>代表论文与代码</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>代码/数据</th>
-          <th>方法定位</th>
-          <th>与本课题关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>DDPM-CD: Denoising Diffusion Probabilistic Models as Feature Extractors for Remote Sensing Change Detection</td>
-          <td style="text-align: right">WACV 2025，arXiv 2022 起</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2025/papers/Bandara_DDPM-CD_Denoising_Diffusion_Probabilistic_Models_as_Feature_Extractors_for_Remote_WACV_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://arxiv.org/abs/2206.11892" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/wgcban/ddpm-cd" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/BiliSakura/ddpm-cd" target="_blank" rel="noopener noreferrer">HF diffusers 实现</a></td>
-          <td>扩散模型作为遥感特征提取器</td>
-          <td>早期强基线，证明扩散预训练特征对 CD 有用，但不是直接生成变化 mask</td>
-      </tr>
-      <tr>
-          <td>ChangeAnywhere: Sample Generation for Remote Sensing Change Detection via Semantic Latent Diffusion Model</td>
-          <td style="text-align: right">arXiv 2024</td>
-          <td><a href="https://arxiv.org/abs/2404.08892" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/tangkai-RS/ChangeAnywhere" target="_blank" rel="noopener noreferrer">GitHub</a>, ChangeAnywhere-100K</td>
-          <td>用 semantic latent diffusion 从单时相语义数据生成双时相变化样本</td>
-          <td>解决标注稀缺，适合研究合成变化数据对真实 CD 的迁移收益</td>
-      </tr>
-      <tr>
-          <td>Changen2: Multi-Temporal Remote Sensing Generative Change Foundation Model</td>
-          <td style="text-align: right">arXiv 2024, TPAMI 2025</td>
-          <td><a href="https://arxiv.org/abs/2406.17998" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://colab.ws/articles/10.1109%2Ftpami.2024.3475824" target="_blank" rel="noopener noreferrer">DOI/TIPAMI 信息</a></td>
-          <td>官方代码未在检索中稳定核验</td>
-          <td>GPCM + resolution-scalable diffusion transformer，生成时序图像、语义和变化标签</td>
-          <td>将“变化过程”显式建模为生成式 foundation model，是理论背景核心</td>
-      </tr>
-      <tr>
-          <td>DreamCD: A change-label-free framework for change detection via a weakly conditional semantic diffusion model in optical VHR imagery</td>
-          <td style="text-align: right">JAG 2026</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S1569843226000415" target="_blank" rel="noopener noreferrer">ScienceDirect</a></td>
-          <td><a href="https://github.com/tangkai-RS/DreamCD" target="_blank" rel="noopener noreferrer">GitHub</a>, LsSCD-Ex</td>
-          <td>弱语义条件扩散，合成后时相图像与语义变化数据</td>
-          <td>适合做无变化标签/弱标签场景，与 ChangeAnywhere/Changen2 对比</td>
-      </tr>
-      <tr>
-          <td>ChangeFlow: Latent Rectified Flow for Change Detection in Remote Sensing</td>
-          <td style="text-align: right">arXiv 2026</td>
-          <td><a href="https://arxiv.org/abs/2605.15375" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://blaz-r.github.io/changeflow_cd/" target="_blank" rel="noopener noreferrer">Project</a></td>
-          <td>项目页标注 code coming soon</td>
-          <td>latent rectified flow 生成变化 mask；多次采样可做 ensemble/confidence</td>
-          <td>本方向最直接 anchor：把 CD 改写为 latent mask generation</td>
-      </tr>
-      <tr>
-          <td>LDGuid: A Framework for Robust Change Detection via Latent Difference Guidance</td>
-          <td style="text-align: right">arXiv 2026</td>
-          <td><a href="https://arxiv.org/abs/2605.15582" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>未见官方代码</td>
-          <td>adversarial autoencoding + information bottleneck 学习 task-relevant difference embedding，再注入 CD 模型</td>
-          <td>最适合与 ChangeFlow 对照：显式差异潜向量 vs 生成变化 mask</td>
-      </tr>
-      <tr>
-          <td>BIT: Remote Sensing Image Change Detection with Transformers</td>
-          <td style="text-align: right">TGRS 2021</td>
-          <td><a href="https://github.com/justchenhao/BIT_CD" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>官方 PyTorch</td>
-          <td>双时相 Transformer 变化检测经典基线</td>
-          <td>LDGuid 报告集成到 BIT；实验必须保留</td>
-      </tr>
-      <tr>
-          <td>ChangeFormer: A Transformer-Based Siamese Network for Change Detection</td>
-          <td style="text-align: right">IGARSS 2022</td>
-          <td><a href="https://arxiv.org/abs/2201.01293" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td><a href="https://github.com/wgcban/ChangeFormer" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>Siamese Transformer + MLP decoder</td>
-          <td>判别式 Transformer 强基线，和 DDPM-CD 同作者生态衔接好</td>
-      </tr>
-      <tr>
-          <td>Open-CD</td>
-          <td style="text-align: right">ACM MM 2025 technical report/toolbox</td>
-          <td><a href="https://github.com/likyoo/open-cd" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://arxiv.org/abs/2407.15317" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>支持 LEVIR-CD、WHU-CD、S2Looking、SVCD、DSIFN、SECOND 等</td>
-          <td>OpenMMLab 风格 CD toolbox</td>
-          <td>最适合作为公平实验底座，减少实现差异</td>
-      </tr>
-      <tr>
-          <td>The Change You Want To Detect: Semantic Change Detection</td>
-          <td style="text-align: right">CVPR 2025</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Benidir_The_Change_You_Want_To_Detect_Semantic_Change_Detection_In_CVPR_2025_paper.pdf" target="_blank" rel="noopener noreferrer">CVF PDF</a></td>
-          <td>需进一步核验代码</td>
-          <td>语义变化检测问题重定义</td>
-          <td>提供 semantic CD 对照：变化不只是 binary mask</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="方法比较" class="headerLink">
-    <a href="#%e6%96%b9%e6%b3%95%e6%af%94%e8%be%83" class="header-mark"></a>方法比较</h2><h3 id="1-扩散特征提取器ddpm-cd" class="headerLink">
-    <a href="#1-%e6%89%a9%e6%95%a3%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96%e5%99%a8ddpm-cd" class="header-mark"></a>1. 扩散特征提取器：DDPM-CD</h3><p>DDPM-CD 的关键想法是：扩散模型在去噪过程中学习到遥感图像的多尺度结构，变化检测不一定要让扩散模型生成图像，可以取其 encoder/denoising 中间特征，再训练轻量变化分类头。优点是能利用未标注遥感影像预训练；缺点是变化语义并未被显式建模，仍然依赖后续分类头把双时相特征差异解释为变化。</p>]]></description></item></channel></rss>
+<p>判断：扫描方向不是越多越好。多方向扫描提升上下文覆盖，但也带来实现复杂度、显存和重复语义。真正值得做的实验是“方向数量/方向选择是否与目标形态、场景结构、GSD 和任务类型相关”。</p>]]></description></item></channel></rss>
