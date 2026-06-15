@@ -3,7 +3,7 @@ title: "OSMGraphCLIP：位置表征不一定要从卫星像素开始"
 date: "2026-06-15T21:00:02+08:00"
 tags: ["OSM", "图表示", "位置编码", "GeoFM", "SatCLIP", "GIS先验"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

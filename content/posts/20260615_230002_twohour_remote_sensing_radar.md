@@ -3,7 +3,7 @@ title: "TTABC：遥感 VLM 的测试时自适应，先别急着调参"
 date: "2026-06-15T23:00:02+08:00"
 tags: ["VLM", "TTA", "CLIP", "OOD评测", "EuroSAT", "CV-to-RS"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["时序变化、跨域泛化与可信评测"]
 draft: false
 ---
 

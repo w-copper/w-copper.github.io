@@ -3,7 +3,7 @@ title: "RPC-GS：卫星 3DGS 别再把 RPC 当针孔相机凑合"
 date: "2026-06-16T01:00:02+08:00"
 tags: ["3DGS", "RPC", "卫星影像", "多视角重建", "DSM", "DFC2019"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

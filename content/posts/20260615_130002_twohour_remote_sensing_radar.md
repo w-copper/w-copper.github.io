@@ -3,7 +3,7 @@ title: "MaskWAM：遥感时序模型也该预测 mask，而不只是预测影像
 date: "2026-06-15T13:00:03+08:00"
 tags: ["MaskWAM", "World Model", "Mask Prompt", "时序预测", "VLM", "CV-to-RS"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["时序变化、跨域泛化与可信评测"]
 draft: false
 ---
 

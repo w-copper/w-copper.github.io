@@ -3,7 +3,7 @@ title: "CAFOSat：农业设施 benchmark 暴露遥感 VLM 的落地短板"
 date: "2026-06-13T05:00:02+08:00"
 tags: ["CAFO", "NAIP", "农业设施", "弱监督", "VLM", "benchmark"]
 mode: "twohour"
-categories: ["可提示分割、开放词表与密集预测"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

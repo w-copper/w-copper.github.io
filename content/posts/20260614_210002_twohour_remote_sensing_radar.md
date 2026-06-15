@@ -3,7 +3,7 @@ title: "Mag1c-SAS + LinkNet：星上甲烷检测先别急着上大模型"
 date: "2026-06-14T21:00:02+08:00"
 tags: ["甲烷检测", "高光谱", "星上部署", "Mag1c-SAS", "LinkNet", "EMIT"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

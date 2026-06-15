@@ -3,7 +3,7 @@ title: "LALE：遥感分割别只追大模型，也要追每瓦精度"
 date: "2026-06-15T11:00:02+08:00"
 tags: ["轻量分割", "ARAS400k", "合成数据", "VLM", "语义分割", "部署效率"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

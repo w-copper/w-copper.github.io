@@ -3,7 +3,7 @@ title: "Prithvi-EO-2.0 用轻量 ViT-Adapter 做 HLS 休耕地检测"
 date: "2026-06-11T21:43:26+08:00"
 tags: ["Prithvi-EO", "休耕地检测", "HLS", "CDL", "PEFT", "农业遥感"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

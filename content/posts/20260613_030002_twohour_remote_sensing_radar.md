@@ -3,7 +3,7 @@ title: "TerraBench：地球科学智能体不能只会调工具"
 date: "2026-06-13T03:00:02+08:00"
 tags: ["Earth-system Agent", "工具调用", "GIS", "benchmark", "数值推理", "证据链"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net"
 date: "2026-06-16T03:00:02+08:00"
 tags: ["GeoFM", "Clay", "Landslide4Sense", "LoRA", "Sentinel-2", "灾害制图"]
 mode: "twohour"
-categories: ["遥感基础模型与多模态理解"]
+categories: ["多源数据融合、效率部署与应用落地"]
 draft: false
 ---
 
