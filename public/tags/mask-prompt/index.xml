@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mask Prompt - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/mask-prompt/</link><description>Mask Prompt - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 09:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/mask-prompt/" rel="self" type="application/rss+xml"/><item><title>过去 24 小时遥感 AI 雷达：GeoFM 比架构，VLM 比证据，Agent 比执行</title><link>https://spacetop.win/2026/06/20260615_090002_daily_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_090002_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达geofm-比架构vlm-比证据agent-比执行" class="headerLink">
+    <a href="#%e8%bf%87%e5%8e%bb-24-%e5%b0%8f%e6%97%b6%e9%81%a5%e6%84%9f-ai-%e9%9b%b7%e8%be%begeofm-%e6%af%94%e6%9e%b6%e6%9e%84vlm-%e6%af%94%e8%af%81%e6%8d%aeagent-%e6%af%94%e6%89%a7%e8%a1%8c" class="header-mark"></a>过去 24 小时遥感 AI 雷达：GeoFM 比架构，VLM 比证据，Agent 比执行</h1><p><strong>结论：今天最值得看的不是单点 SOTA，而是遥感 AI 的评价对象正在变化。</strong> GeoFM 方向开始从“谁的预训练更大”转向“同一协议下，架构如何处理缺 band、多光谱和下游任务”；GeoAI Agent 方向开始从“能不能调用工具”转向“能不能把遥感影像、格网数据、GIS、模拟器和文档证据串成可执行过程”；CV-to-RS 方向给出一个强信号：box/mask prompt 与 test-time adaptation 很适合做遥感开放词汇分割和变化检测的证据校准。</p>
+<p>我按 2026-06-15 09:00:02 +08:00 回看公开来源。由于 arXiv 周末没有正常新一轮发布，严格 24 小时内没有比前几轮更强的新遥感主线；本篇保留最近一个可核验 release 窗口里仍值得进入日报的 5 个条目，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。个别论文含 S1/S2 混合实验时，本文只讨论其 Sentinel-2、多光谱、缺 band 和架构泛化部分，不把 SAR 结果作为推荐依据。</p>
+<h2 id="今日-5-个重点" class="headerLink">
+    <a href="#%e4%bb%8a%e6%97%a5-5-%e4%b8%aa%e9%87%8d%e7%82%b9" class="header-mark"></a>今日 5 个重点</h2><table>
+  <thead>
+      <tr>
+          <th>排名</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">来源时间</th>
+          <th>任务</th>
+          <th>数据/模态</th>
+          <th>贡献</th>
+          <th>代码/数据</th>
+          <th style="text-align: right">分数</th>
+          <th>为什么重要</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</td>
+          <td style="text-align: right">arXiv, 2026-06-10</td>
+          <td>GeoFM 架构比较</td>
+          <td>Sentinel-2、多光谱、GEOBench</td>
+          <td>在同一预训练目标、数据和下游协议下比较 SatMAE、DOFA、Flex，重点看 band 灵活性和 dense prediction</td>
+          <td>论文公开；复现实验框架指向 Terratorch iterate</td>
+          <td style="text-align: right">8.5</td>
+          <td>它把 GeoFM 讨论从“模型名对模型名”拉回到 tokenization、fusion、missing-band 这些可实验变量</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>TerraBench: Can Agents Reason Over Heterogeneous Earth-System Data?</td>
+          <td style="text-align: right">arXiv, 2026-06-11</td>
+          <td>Earth-system agent benchmark</td>
+          <td>EO imagery、gridded data、GIS、simulation、documents</td>
+          <td>403 个 agentic tasks、3 个 track、8 个应用域、24,500 个 verified execution steps</td>
+          <td>论文公开；代码/benchmark 需继续跟踪入口</td>
+          <td style="text-align: right">8.4</td>
+          <td>遥感 AI 评测开始要求过程证据、工具参数和 artifact provenance，而不是只看最终文字</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>GeoNatureAgent Benchmark</td>
+          <td style="text-align: right">arXiv, 2026-06-11</td>
+          <td>环境地理分析 agent</td>
+          <td>GIS API、环境指标、BigEarthNet V2 扩展</td>
+          <td>93 个任务、18 类能力、16 个工具接口，评测真实 API 上的结构化 tool calling</td>
+          <td>论文称 benchmark、harness、自托管 API 公开</td>
+          <td style="text-align: right">8.0</td>
+          <td>对生态、城市、农业场景很实用：检验 agent 是否真的会做地理分析，而不是会写漂亮解释</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning</td>
+          <td style="text-align: right">arXiv / project, 2026-06-11</td>
+          <td>VLM 空间推理接口</td>
+          <td>图像/视频、3D/4D 空间任务</td>
+          <td>训练自由框架，让 VLM 在 stateful Python kernel 中逐步写代码、观察结果、再推理</td>
+          <td>项目页公开；GitHub 需跟踪</td>
+          <td style="text-align: right">7.8</td>
+          <td>这条 CV 线可迁移到遥感：大幅 tile、mask、polygon、DEM、GIS layer 都适合可执行代码轨迹</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>MaskWAM: Unifying Mask Prompting and Prediction for World-Action Models</td>
+          <td style="text-align: right">arXiv / GitHub, 2026-06-11</td>
+          <td>Mask prompt / object-centric prediction</td>
+          <td>视频、mask、动作条件</td>
+          <td>把 mask 同时作为输入 prompt 和预测目标，降低语言指代歧义并抑制背景噪声</td>
+          <td>arXiv 与 GitHub README 可访问</td>
+          <td style="text-align: right">7.5</td>
+          <td>虽然是机器人论文，但对遥感 VLM/SAM 很有迁移价值：box/mask prompt 可以成为跨域 TTA 的空间锚点</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="1-flexible-geofm第一篇最值得精读" class="headerLink">
+    <a href="#1-flexible-geofm%e7%ac%ac%e4%b8%80%e7%af%87%e6%9c%80%e5%80%bc%e5%be%97%e7%b2%be%e8%af%bb" class="header-mark"></a>1. Flexible GeoFM：第一篇最值得精读</h2><p><strong>这篇的价值在于把 GeoFM 的争论变成可控实验。</strong> 过去很多遥感 foundation model 论文同时换了数据、任务、训练轮数、mask 策略、输入 band 和 decoder，很难判断到底是架构有效，还是训练 recipe 更强。<code>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</code> 把 SatMAE、DOFA 和一个 ClimaX-inspired Flex 放进同一套自监督预训练和 GEOBench 下游协议里比较，重点问两个问题：多光谱 band 应该怎么 tokenization，跨 band / modality 的 fusion 应该放在什么位置。</p>]]></description></item></channel></rss>

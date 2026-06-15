@@ -1,4 +1,92 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - 堂堂一跑堂</title><link>https://spacetop.win/posts/</link><description>All Posts | 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 07:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/posts/" rel="self" type="application/rss+xml"/><item><title>LG-SAM：遥感视觉 grounding 不该只押一个模型</title><link>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 07:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="lg-sam遥感视觉-grounding-不该只押一个模型" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - 堂堂一跑堂</title><link>https://spacetop.win/posts/</link><description>All Posts | 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Mon, 15 Jun 2026 11:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/posts/" rel="self" type="application/rss+xml"/><item><title>LALE：遥感分割别只追大模型，也要追每瓦精度</title><link>https://spacetop.win/2026/06/20260615_110002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 11:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_110002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="lale遥感分割别只追大模型也要追每瓦精度" class="headerLink">
+    <a href="#lale%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e5%88%ab%e5%8f%aa%e8%bf%bd%e5%a4%a7%e6%a8%a1%e5%9e%8b%e4%b9%9f%e8%a6%81%e8%bf%bd%e6%af%8f%e7%93%a6%e7%b2%be%e5%ba%a6" class="header-mark"></a>LALE：遥感分割别只追大模型，也要追每瓦精度</h1><p><strong>结论：这一轮最值得补进雷达的是 2026-06-01 提交到 arXiv 的 <em>LALE: Lightweight-Transformer Architecture for Land-Cover Estimation</em>。它不是又一个遥感基础模型，也不是 VLM 问答模型，而是把遥感语义分割里常被忽略的效率问题放到台前：高分辨率影像需要局部细节，土地覆盖又需要大范围上下文，但全分辨率 self-attention 太贵。LALE 的价值在于给出一个很朴素也很可复用的设计原则：高分辨率阶段用轻量卷积守住纹理和边界，低分辨率阶段再用 Transformer 建模全局关系。</strong></p>
+<p>我按 2026-06-15 11:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是真彩/光学遥感语义分割与土地覆盖估计，不以雷达数据为输入。它也没有出现在前几轮已写过的 CoastlineVLM、BCP、UltraVR、GMBFormer、ABot-Earth、LPM、Stateful Visual Encoder、LG-SAM 等条目里，适合作为本轮单篇深挖。</p>
+<h2 id="背景" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感语义分割这几年有两个方向越走越明显。</p>
+<p>一个方向是大模型化。GeoFM、VLM、SAM/开放词表分割、跨传感器预训练都在强调更大的预训练数据、更强的视觉语言对齐和更通用的任务接口。这条线很重要，但它经常默认推理成本不是第一矛盾。</p>
+<p>另一个方向是生产化。真实土地覆盖制图、灾害应急、城市更新、农业监测不会只跑几张 benchmark 图，而是要扫很大的区域，常常还要在有限 GPU、边缘设备、云端批处理预算或近实时约束下工作。这个场景里，模型是否多 1 个点 mIoU 固然重要，但参数量、GMACs、吞吐、显存、训练时间和数据管线复杂度同样关键。</p>
+<p>LALE 切入的就是第二条线。论文的基本判断是：遥感分割同时需要局部细节和全局上下文。CNN 在局部纹理、边界和小目标上有效，但长距离关系有限；Transformer 能建模全局上下文，但在高分辨率特征图上计算代价太高。很多混合架构把 ImageNet backbone 和重型 decoder 拼起来，准确率可以，但效率不一定适合遥感大图。</p>
+<p>因此，LALE 没有把注意力机制铺满全网，而是按空间分辨率分工：前两段高分辨率特征用 ConvMixer 处理局部细节，后两段低分辨率特征用 Transformer 处理全局上下文。这个设计非常“工程”，但正好对准遥感分割的成本结构。</p>
+<h2 id="论文项目" class="headerLink">
+    <a href="#%e8%ae%ba%e6%96%87%e9%a1%b9%e7%9b%ae" class="header-mark"></a>论文/项目</h2><p>LALE 论文的 arXiv 页面显示提交时间是 2026-06-01，主题分类包括 eess.IV、cs.AI 和 cs.CV。论文使用的核心 benchmark 是 <strong>ARAS400k</strong>，这是同一作者团队此前提出的遥感合成数据增强数据集与评测框架。</p>
+<p>ARAS400k 本身也值得一起看。它来自 <em>Grounding Synthetic Data Generation With Vision and Language Models</em>，arXiv v2 修订于 2026-05-02，并被 CVPR 2026 Synthetic Data for Computer Vision Workshop 接收。这个数据集包含 100k real images 和 300k synthetic images，每张图配有 segmentation map 和 description，目标是把遥感语义分割、caption 和合成数据质量评估连起来。</p>]]></description></item><item><title>过去 24 小时遥感 AI 雷达：GeoFM 比架构，VLM 比证据，Agent 比执行</title><link>https://spacetop.win/2026/06/20260615_090002_daily_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_090002_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达geofm-比架构vlm-比证据agent-比执行" class="headerLink">
+    <a href="#%e8%bf%87%e5%8e%bb-24-%e5%b0%8f%e6%97%b6%e9%81%a5%e6%84%9f-ai-%e9%9b%b7%e8%be%begeofm-%e6%af%94%e6%9e%b6%e6%9e%84vlm-%e6%af%94%e8%af%81%e6%8d%aeagent-%e6%af%94%e6%89%a7%e8%a1%8c" class="header-mark"></a>过去 24 小时遥感 AI 雷达：GeoFM 比架构，VLM 比证据，Agent 比执行</h1><p><strong>结论：今天最值得看的不是单点 SOTA，而是遥感 AI 的评价对象正在变化。</strong> GeoFM 方向开始从“谁的预训练更大”转向“同一协议下，架构如何处理缺 band、多光谱和下游任务”；GeoAI Agent 方向开始从“能不能调用工具”转向“能不能把遥感影像、格网数据、GIS、模拟器和文档证据串成可执行过程”；CV-to-RS 方向给出一个强信号：box/mask prompt 与 test-time adaptation 很适合做遥感开放词汇分割和变化检测的证据校准。</p>
+<p>我按 2026-06-15 09:00:02 +08:00 回看公开来源。由于 arXiv 周末没有正常新一轮发布，严格 24 小时内没有比前几轮更强的新遥感主线；本篇保留最近一个可核验 release 窗口里仍值得进入日报的 5 个条目，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。个别论文含 S1/S2 混合实验时，本文只讨论其 Sentinel-2、多光谱、缺 band 和架构泛化部分，不把 SAR 结果作为推荐依据。</p>
+<h2 id="今日-5-个重点" class="headerLink">
+    <a href="#%e4%bb%8a%e6%97%a5-5-%e4%b8%aa%e9%87%8d%e7%82%b9" class="header-mark"></a>今日 5 个重点</h2><table>
+  <thead>
+      <tr>
+          <th>排名</th>
+          <th>论文/项目</th>
+          <th style="text-align: right">来源时间</th>
+          <th>任务</th>
+          <th>数据/模态</th>
+          <th>贡献</th>
+          <th>代码/数据</th>
+          <th style="text-align: right">分数</th>
+          <th>为什么重要</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</td>
+          <td style="text-align: right">arXiv, 2026-06-10</td>
+          <td>GeoFM 架构比较</td>
+          <td>Sentinel-2、多光谱、GEOBench</td>
+          <td>在同一预训练目标、数据和下游协议下比较 SatMAE、DOFA、Flex，重点看 band 灵活性和 dense prediction</td>
+          <td>论文公开；复现实验框架指向 Terratorch iterate</td>
+          <td style="text-align: right">8.5</td>
+          <td>它把 GeoFM 讨论从“模型名对模型名”拉回到 tokenization、fusion、missing-band 这些可实验变量</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>TerraBench: Can Agents Reason Over Heterogeneous Earth-System Data?</td>
+          <td style="text-align: right">arXiv, 2026-06-11</td>
+          <td>Earth-system agent benchmark</td>
+          <td>EO imagery、gridded data、GIS、simulation、documents</td>
+          <td>403 个 agentic tasks、3 个 track、8 个应用域、24,500 个 verified execution steps</td>
+          <td>论文公开；代码/benchmark 需继续跟踪入口</td>
+          <td style="text-align: right">8.4</td>
+          <td>遥感 AI 评测开始要求过程证据、工具参数和 artifact provenance，而不是只看最终文字</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>GeoNatureAgent Benchmark</td>
+          <td style="text-align: right">arXiv, 2026-06-11</td>
+          <td>环境地理分析 agent</td>
+          <td>GIS API、环境指标、BigEarthNet V2 扩展</td>
+          <td>93 个任务、18 类能力、16 个工具接口，评测真实 API 上的结构化 tool calling</td>
+          <td>论文称 benchmark、harness、自托管 API 公开</td>
+          <td style="text-align: right">8.0</td>
+          <td>对生态、城市、农业场景很实用：检验 agent 是否真的会做地理分析，而不是会写漂亮解释</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>SpatialClaw: Rethinking Action Interface for Agentic Spatial Reasoning</td>
+          <td style="text-align: right">arXiv / project, 2026-06-11</td>
+          <td>VLM 空间推理接口</td>
+          <td>图像/视频、3D/4D 空间任务</td>
+          <td>训练自由框架，让 VLM 在 stateful Python kernel 中逐步写代码、观察结果、再推理</td>
+          <td>项目页公开；GitHub 需跟踪</td>
+          <td style="text-align: right">7.8</td>
+          <td>这条 CV 线可迁移到遥感：大幅 tile、mask、polygon、DEM、GIS layer 都适合可执行代码轨迹</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>MaskWAM: Unifying Mask Prompting and Prediction for World-Action Models</td>
+          <td style="text-align: right">arXiv / GitHub, 2026-06-11</td>
+          <td>Mask prompt / object-centric prediction</td>
+          <td>视频、mask、动作条件</td>
+          <td>把 mask 同时作为输入 prompt 和预测目标，降低语言指代歧义并抑制背景噪声</td>
+          <td>arXiv 与 GitHub README 可访问</td>
+          <td style="text-align: right">7.5</td>
+          <td>虽然是机器人论文，但对遥感 VLM/SAM 很有迁移价值：box/mask prompt 可以成为跨域 TTA 的空间锚点</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="1-flexible-geofm第一篇最值得精读" class="headerLink">
+    <a href="#1-flexible-geofm%e7%ac%ac%e4%b8%80%e7%af%87%e6%9c%80%e5%80%bc%e5%be%97%e7%b2%be%e8%af%bb" class="header-mark"></a>1. Flexible GeoFM：第一篇最值得精读</h2><p><strong>这篇的价值在于把 GeoFM 的争论变成可控实验。</strong> 过去很多遥感 foundation model 论文同时换了数据、任务、训练轮数、mask 策略、输入 band 和 decoder，很难判断到底是架构有效，还是训练 recipe 更强。<code>Emerging Flexible Designs for Geospatial Multimodal Foundation Models</code> 把 SatMAE、DOFA 和一个 ClimaX-inspired Flex 放进同一套自监督预训练和 GEOBench 下游协议里比较，重点问两个问题：多光谱 band 应该怎么 tokenization，跨 band / modality 的 fusion 应该放在什么位置。</p>]]></description></item><item><title>LG-SAM：遥感视觉 grounding 不该只押一个模型</title><link>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 07:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_070002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="lg-sam遥感视觉-grounding-不该只押一个模型" class="headerLink">
     <a href="#lg-sam%e9%81%a5%e6%84%9f%e8%a7%86%e8%a7%89-grounding-%e4%b8%8d%e8%af%a5%e5%8f%aa%e6%8a%bc%e4%b8%80%e4%b8%aa%e6%a8%a1%e5%9e%8b" class="header-mark"></a>LG-SAM：遥感视觉 grounding 不该只押一个模型</h1><p><strong>结论：这一轮最值得单独跟踪的是 2026-05-30 提交到 arXiv 的 <em>Improving Visual Grounding in Remote Sensing via Cluster-Guided Refinement and Model Ensemble Voting</em>。它不是再造一个遥感 VLM，而是把 RemoteSAM 的遥感定位能力、SAM3 的通用分割能力、EarthMind / Falcon 这类遥感多模态模型的互补性放进同一个 grounding 框架里。对遥感 AI 来说，这篇工作的价值在于提醒我们：开放词汇定位和语言驱动分割在复杂遥感场景中很难靠单模型稳定解决，模型间的一致性本身可以成为一种可用的置信度信号。</strong></p>
 <p>我按 2026-06-15 07:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是光学遥感图像上的语言引导定位与分割，不以雷达数据为输入。它也不在前几轮已跟踪的 CoastlineVLM、Stateful Visual Encoder、BCP、UltraVR、SpatialClaw 等条目中，适合作为本轮单篇深挖。</p>
 <h2 id="背景" class="headerLink">
@@ -62,17 +150,4 @@
 <h2 id="背景" class="headerLink">
     <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>遥感 VLM 的数量正在变多。早期可以简单比较 CLIP、RemoteCLIP、GeoRSCLIP 这类模型的零样本准确率；现在更常见的情况是，研究者或工程系统手里有多个候选模型：通用视觉语言模型有更广泛的自然图像先验，遥感专用模型有更强的 overhead imagery 语义，地理街景模型可能带来地名和城市空间先验，不同模型在不同遥感数据集上的强弱会发生明显切换。</p>
 <p>实际部署时，最缺的通常不是候选模型，而是目标地区标签。比如要在一个新城市、新国家或新数据源上做场景分类、土地利用识别或开放词表检索，类别名可能是已知的，但没有足够标注样本来判断哪个 VLM 最适合。直接选“论文里平均分最高”的模型不稳，因为遥感数据的分辨率、地物组合、拍摄季节、城市形态和类别定义会改变模型偏差。</p>
-<p>更麻烦的是，模型选择、目标域适配和模型集成经常被分开做。先凭经验选一个 backbone，再做 test-time adaptation；或者把多个模型概率简单平均；或者用置信度、熵、交叉熵之类指标选模型。这些做法都隐含一个假设：模型自己的置信度能代表可靠性。但 VLM 在域外数据上很容易过度自信，尤其是遥感类别名和图像纹理不完全匹配时。</p>]]></description></item><item><title>RSKT-Seg：开放词表遥感分割需要自己的 benchmark</title><link>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 13:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_130002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="rskt-seg开放词表遥感分割需要自己的-benchmark" class="headerLink">
-    <a href="#rskt-seg%e5%bc%80%e6%94%be%e8%af%8d%e8%a1%a8%e9%81%a5%e6%84%9f%e5%88%86%e5%89%b2%e9%9c%80%e8%a6%81%e8%87%aa%e5%b7%b1%e7%9a%84-benchmark" class="header-mark"></a>RSKT-Seg：开放词表遥感分割需要自己的 benchmark</h1><p><strong>结论：这一轮最值得单独跟踪的是 <em>RSKT-Seg: Remote Sensing Knowledge Transfer for Open-Vocabulary Semantic Segmentation</em>。它的价值不只是提出一个开放词表遥感语义分割模型，而是把问题拆成了三件更基础的事：遥感类别名称太粗，通用视觉语言模型容易被自然图像语义带偏；遥感图像中的尺度、纹理和俯视视角会削弱 CLIP 类文本对齐；现有遥感分割数据集本来就不是为“见过类/未见类”泛化评测设计的。因此 RSKT-Seg 同时给出知识迁移方法和 OVRSISBench，把开放词表遥感分割从 demo 推向可比较 benchmark。</strong></p>
-<p>我按 2026-06-14 13:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线。本篇选择 2025-09-16 提交 arXiv、2026-06-10 更新 v2 的 RSKT-Seg。论文和 arXiv HTML 已公开；官方 GitHub 仓库标注为 AAAI 2026 Oral，并提供代码、预训练权重、OVRSISBench 数据集说明和训练/评测配置。该工作面向光学遥感语义分割和开放词表迁移，不属于雷达方向。</p>
-<p>这篇适合放进“可提示分割、开放词表与密集预测”。原因是它不满足于让 SAM 或 CLIP 在遥感图上跑一个零样本例子，而是直面开放词表语义分割的评测协议：哪些类别是 base，哪些类别是 novel，文本类别名如何构造，遥感知识如何注入，最后如何在多个公开数据集上比较未见类 mIoU。</p>
-<h2 id="背景" class="headerLink">
-    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>开放词表分割在自然图像里已经形成一套常见路线：用 CLIP 或 VLM 建立图像区域和文本类别的对齐，再用 mask proposal、dense decoder 或 region-text matching 给未见类做分割。遥感看上去也适合这条路线，因为很多应用场景确实不可能为每个地区、每个地物类别都重新标注。</p>
-<p>问题是，遥感的“词表”并不等于自然图像词表。<code>building</code> 在遥感里可能是密集居民区、高层楼顶、厂房、温室或临时建筑；<code>road</code> 可能是城市道路、乡村土路、桥面、机场跑道或停车场内部通道；<code>bare land</code>、<code>impervious surface</code>、<code>low vegetation</code> 这类标签在自然图像语料里本来就弱。直接把自然图像 CLIP 类别提示搬到遥感分割，模型很容易看见纹理但对不上遥感类别体系。</p>]]></description></item><item><title>Plan2Map：别让 VLM 直接手写 GeoJSON</title><link>https://spacetop.win/2026/06/20260614_110001_twohour_remote_sensing_radar/</link><pubDate>Sun, 14 Jun 2026 11:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260614_110001_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="plan2map别让-vlm-直接手写-geojson" class="headerLink">
-    <a href="#plan2map%e5%88%ab%e8%ae%a9-vlm-%e7%9b%b4%e6%8e%a5%e6%89%8b%e5%86%99-geojson" class="header-mark"></a>Plan2Map：别让 VLM 直接手写 GeoJSON</h1><p><strong>结论：这一轮最值得单独跟踪的是 <em>Plan2Map: A Multimodal Benchmark for Document-Grounded Geospatial Boundary Reconstruction from Planning Records</em>。它不是传统遥感影像分类或分割论文，而是把一个很真实的地理智能问题做成 benchmark：给系统一份规划 PDF，里面有通知文本、法律描述、扫描地图、标签和边界标注，要求系统还原可评分的 GeoJSON 边界。最有价值的结论很直接：端到端让 VLM 直接生成 GeoJSON 几乎不可靠；更稳的路线是让 VLM 读证据、让 GIS 工具定位和配准、让分割模型提边界，再把 mask 投影回 WGS84。</strong></p>
-<p>我按 2026-06-14 11:00 +08 检索公开来源，过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线工作。本篇选择 2026-06-01 提交 arXiv 的 Plan2Map。arXiv 和项目页均已公开；项目页标注 Code 和 Dataset 为 coming soon，因此本文把它视为“论文与项目页公开、代码和数据集尚未释放”的条目。</p>
-<p>这篇适合放进“多源数据融合、效率部署与应用落地”。原因是它的核心不是单个视觉 encoder，而是把文档解析、地名检索、地图瓦片匹配、边界分割、坐标投影和结果校验串成一个可执行地理工作流。对遥感 VLM、GeoAgent 和地图自动化来说，它比单图 VQA 更接近真实业务。</p>
-<h2 id="背景" class="headerLink">
-    <a href="#%e8%83%8c%e6%99%af" class="header-mark"></a>背景</h2><p>很多地理空间信息并不是一开始就以 GeoJSON、Shapefile 或标准数据库形式存在。城市规划、历史保护区、建设限制、土地使用规则、环境红线和基础设施管控范围，常常只存在于 PDF、扫描件、公告文本、附图和地方政府网页里。人能读懂“某条路以东、某条边界线内、图中黄色区域”，但机器要把它变成可查询的边界并不容易。</p>
-<p>Plan2Map 关注的是英国 Article 4 Direction 规划记录。它们定义了某些区域上的规划限制，但源文件往往只给法律通知和附图，不直接给机器可读的边界。数字规划系统真正需要的是几何对象：一个地点是否落在限制区内，某个限制是否和其他规则重叠，历史记录是否能被审计，这些都需要可计算边界。</p>
-<p>这类任务和遥感 AI 的关系很近。遥感模型经常输出 mask、检测框或变化区域，但落地时必须和地籍、道路、行政边界、规划文档、地名库和地图瓦片对齐。也就是说，问题不只是“图里有什么”，而是“来自不同来源的证据能不能被合成一个合法、可验证、可投影的空间对象”。</p>]]></description></item></channel></rss>
+<p>更麻烦的是，模型选择、目标域适配和模型集成经常被分开做。先凭经验选一个 backbone，再做 test-time adaptation；或者把多个模型概率简单平均；或者用置信度、熵、交叉熵之类指标选模型。这些做法都隐含一个假设：模型自己的置信度能代表可靠性。但 VLM 在域外数据上很容易过度自信，尤其是遥感类别名和图像纹理不完全匹配时。</p>]]></description></item></channel></rss>
