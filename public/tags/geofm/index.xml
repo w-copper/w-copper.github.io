@@ -1,4 +1,6 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GeoFM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/geofm/</link><description>GeoFM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Tue, 16 Jun 2026 09:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/geofm/" rel="self" type="application/rss+xml"/><item><title>过去 24 小时遥感 AI 雷达：VLM 要看对区域，GeoFM 要接对任务，TTA 要有证据</title><link>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达vlm-要看对区域geofm-要接对任务tta-要有证据" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GeoFM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/geofm/</link><description>GeoFM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Tue, 16 Jun 2026 15:00:04 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/geofm/" rel="self" type="application/rss+xml"/><item><title>DEO：用双教师蒸馏把 DINOv3 的 RGB 语义注入多光谱 GeoFM</title><link>https://spacetop.win/2026/06/20260616_150004_twohour_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 15:00:04 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_150004_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="deo用双教师蒸馏把-dinov3-的-rgb-语义注入多光谱-geofm" class="headerLink">
+    <a href="#deo%e7%94%a8%e5%8f%8c%e6%95%99%e5%b8%88%e8%92%b8%e9%a6%8f%e6%8a%8a-dinov3-%e7%9a%84-rgb-%e8%af%ad%e4%b9%89%e6%b3%a8%e5%85%a5%e5%a4%9a%e5%85%89%e8%b0%b1-geofm" class="header-mark"></a>DEO：用双教师蒸馏把 DINOv3 的 RGB 语义注入多光谱 GeoFM</h1><p><strong>结论：这一轮最值得补进雷达的是 CVPR 2026 Highlight 论文 <em>Brewing Stronger Features: Dual-Teacher Distillation for Multispectral Earth Observation</em>。它提出 DEO，用一个多光谱 EMA teacher 学 Sentinel-2 10 通道表示，再用冻结的光学 VFM teacher（默认 DINOv3）把 RGB 语义和 patch-level 结构蒸馏到同一个学生模型里。论文的关键信号不是“再训练一个遥感 backbone”，而是把通用视觉基础模型和多光谱 EO 基础模型之间的接口说清楚：如果目标是让 RGB 光学语义迁移到多光谱，预训练目标最好和 DINO/DINOv3 这类 contrastive self-distillation 范式对齐，而不是只靠 masked image modeling 做局部重建。</strong></p>
+<p>我按 2026-06-16 15:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。DEO 的训练主线是 fMoW-Sentinel / fMoW-RGB 的光学与 Sentinel-2 多光谱数据；论文确实在相关工作和对比方法中提到含雷达路线，但本篇只讨论它对非 SAR 光学/多光谱 GeoFM 的价值。同期本地文章已经覆盖 FusionRS、RATS、Gaze Heads、TTABC、Clay-CNN Hybrids、AI4Land、MaskWAM、GeoFM layer probing、CoastlineVLM、Stateful Visual Encoders、LG-SAM、VecLang、TerraBench、OSTB 等方向，因此这里不重复已有条目。</p>]]></description></item><item><title>过去 24 小时遥感 AI 雷达：VLM 要看对区域，GeoFM 要接对任务，TTA 要有证据</title><link>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达vlm-要看对区域geofm-要接对任务tta-要有证据" class="headerLink">
     <a href="#%e8%bf%87%e5%8e%bb-24-%e5%b0%8f%e6%97%b6%e9%81%a5%e6%84%9f-ai-%e9%9b%b7%e8%be%bevlm-%e8%a6%81%e7%9c%8b%e5%af%b9%e5%8c%ba%e5%9f%9fgeofm-%e8%a6%81%e6%8e%a5%e5%af%b9%e4%bb%bb%e5%8a%a1tta-%e8%a6%81%e6%9c%89%e8%af%81%e6%8d%ae" class="header-mark"></a>过去 24 小时遥感 AI 雷达：VLM 要看对区域，GeoFM 要接对任务，TTA 要有证据</h1><p><strong>结论：过去 24 小时最强信号不是单个遥感 SOTA，而是几条方法线正在合到一起。</strong> 第一，Gaze Heads 说明 VLM 的区域描述可以被少数 attention heads 追踪和干预，这给遥感 VQA、开放词汇分割和变化解释提供了“看没看对区域”的可审计机制。第二，TTABC 把 CLIP/VLM 的 test-time adaptation 从刷榜拉回到证据、代理目标和 shift 类型的受控比较，对跨城市、跨季节、跨 GSD 遥感部署很关键。第三，Clay-CNN Hybrids 和 AI4Land 提醒我们，GeoFM 不一定要替代 U-Net 或业务管线，很多时候更适合作为上下文、先验和全球尺度生产系统的一部分。第四，RATS、Adaptive Visual Token Selection 和 OmniVideo-100K 这类 CV/ML 新工作分别给出 part-level token、层级 token 选择、结构化 evidence chain 的迁移路径。今天最值得做的研究方向是：<strong>把 box/mask prompt 作为空间锚点，用 gaze/head steering 约束 VLM 看哪里，再用 CLIP/GeoFM 的轻量 TTA 校准目标域类别、边界和置信度，最终输出 mask/polygon、证据区域、置信度和人工复核优先级。</strong></p>
 <p>我按 2026-06-16 09:00:02 +08:00 回看公开来源，重点检查 arXiv cs.CV 2026-06-15 recent 批次和近 3 个月内仍在形成趋势的 GeoFM/VLM/TTA 工作。本篇过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线；若论文来自通用 CV/ML，我只保留能明确迁移到光学、多光谱、VHR、UAV 或地理大数据任务的部分。</p>]]></description></item><item><title>Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net</title><link>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 03:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="clay-cnn-hybridsgeofm-做滑坡制图别急着替换-u-net" class="headerLink">
     <a href="#clay-cnn-hybridsgeofm-%e5%81%9a%e6%bb%91%e5%9d%a1%e5%88%b6%e5%9b%be%e5%88%ab%e6%80%a5%e7%9d%80%e6%9b%bf%e6%8d%a2-u-net" class="header-mark"></a>Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net</h1><p><strong>结论：这一轮最值得补进雷达的是 2026-06-12 提交到 arXiv 的 <em>Clay-CNN Hybrids: Leveraging Geo-Foundational Models as Auxiliary Context for Landslide Detection</em>。它的结论很克制，但很有用：在 Landslide4Sense 滑坡像素级分割上，Clay v1.5 直接当主干并不比 U-Net 强；真正有效的是把 Clay 的预训练表征作为 U-Net bottleneck 的辅助上下文，再用两阶段 LoRA 微调。最佳 Hybrid U-Net + Clay 在三种随机种子下得到 64.5±1.8% F1，高于 U-Net baseline 的 59.9%，也高于论文引用的 Prithvi-EO-2.0 在同一 benchmark 上的 60.7%。这篇文章提醒遥感基础模型研究：GeoFM 的价值不一定是取代所有任务网络，而是给强空间归纳偏置的模型补上更好的光谱和地理语义先验。</strong></p>
@@ -272,97 +274,4 @@
 </table>
 <h2 id="3-方法脉络" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c" class="header-mark"></a>3. 方法脉络</h2><h3 id="31-隐式尺度学习" class="headerLink">
-    <a href="#31-%e9%9a%90%e5%bc%8f%e5%b0%ba%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 隐式尺度学习</h3><p>SkySense、Prithvi、Clay、Galileo 等主要依赖大规模多源预训练，让模型从数据中隐式吸收尺度差异。这类方法优点是简单，缺点是模型可能把传感器、地域、类别和 GSD 纠缠起来。例如 10 m Sentinel-2 中“城市纹理”与 0.3 m NAIP 中“建筑轮廓”不是同一层级语义，统一 resize 后模型容易学到 dataset shortcut。</p>]]></description></item><item><title>RS-02 GeoFM Benchmark Leakage Audit</title><link>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</link><pubDate>Sun, 07 Jun 2026 09:01:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-02-geofm-benchmark-leakage-audit/</guid><description><![CDATA[<h1 id="rs-02-geofm-benchmark-leakage-audit" class="headerLink">
-    <a href="#rs-02-geofm-benchmark-leakage-audit" class="header-mark"></a>RS-02 GeoFM Benchmark Leakage Audit</h1><p>研究问题：geospatial foundation model 评测中的训练-测试泄漏如何影响 SOTA，尤其是地理区域重叠、时间重叠、同源瓦片、下游数据被预训练数据覆盖四类问题。本文面向光学/多光谱遥感优先，方法也可用于多模态 GeoFM；涉及 SAR 的模型只作为评测设置参考。</p>
-<h2 id="1-问题由来" class="headerLink">
-    <a href="#1-%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>1. 问题由来</h2><p>GeoFM 的预训练数据通常来自全球尺度 Sentinel-2、Landsat、NAIP、航空影像、气象/地理辅助数据和公开下游数据集合并。模型越大，越容易出现一个尴尬问题：下游 benchmark 的测试图像、相邻瓦片、同一 Sentinel/Landsat scene、同一年同一区域影像，可能已经在预训练中出现过。</p>
-<p>这会让 SOTA 被高估，尤其在以下场景中：</p>
-<ul>
-<li>地理区域重叠：训练或预训练见过同一城市、同一农田地块、同一灾区附近区域，测试看似独立但空间自相关很强。</li>
-<li>时间重叠：测试年份、季节或灾害前后影像被预训练覆盖，模型可能记住局部地物状态，而不是真正泛化。</li>
-<li>同源瓦片泄漏：大幅影像被切成 patch 后随机划分，训练/测试 patch 共享同一 parent scene 或 mosaic。</li>
-<li>下游数据覆盖：模型预训练直接使用了下游 benchmark 的影像、标签衍生产品、caption/QA 或同源公开数据。</li>
-</ul>
-<p>2024-2026 的趋势是：PANGAEA、PhilEO Bench、Copernicus-Bench、GEOBench-VLM 等开始统一评测；EarthShift 和 REOBench 开始强调真实分布偏移；<code>No One Knows the State of the Art in Geospatial Foundation Models</code> 则把问题进一步推到“GeoFM SOTA 是否可被清晰比较”的层面。我的判断是：未来两年，GeoFM 论文如果没有清楚的数据血缘和泄漏审计，很难让评测结论真正站稳。</p>
-<h2 id="2-重点来源" class="headerLink">
-    <a href="#2-%e9%87%8d%e7%82%b9%e6%9d%a5%e6%ba%90" class="header-mark"></a>2. 重点来源</h2><table>
-  <thead>
-      <tr>
-          <th>来源</th>
-          <th style="text-align: right">年份</th>
-          <th>链接</th>
-          <th>与泄漏审计的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>PANGAEA: A Global and Inclusive Benchmark for Geospatial Foundation Models</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://arxiv.org/abs/2412.04204" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://pangaea-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://github.com/yurujaja/pangaea-bench" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>跨任务、跨区域、跨模态统一评测，是审计协议的主目标之一。</td>
-      </tr>
-      <tr>
-          <td>EarthShift: a benchmark for measuring robustness to real-world distribution shifts in Earth observation</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.29330" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://earthshift.github.io/" target="_blank" rel="noopener noreferrer">project</a></td>
-          <td>明确把真实世界 shift 放进 benchmark，可用于“去泄漏后性能下降”对照。</td>
-      </tr>
-      <tr>
-          <td>No One Knows the State of the Art in Geospatial Foundation Models</td>
-          <td style="text-align: right">2026</td>
-          <td><a href="https://arxiv.org/abs/2605.12678" target="_blank" rel="noopener noreferrer">arXiv</a></td>
-          <td>直接指出 GeoFM SOTA 比较不稳定、评测协议和透明度不足。</td>
-      </tr>
-      <tr>
-          <td>Prithvi-EO-2.0</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://arxiv.org/abs/2412.02732" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/NASA-IMPACT/Prithvi-EO-2.0" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/ibm-nasa-geospatial" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>HLS 多时相预训练，适合审计同 MGRS tile、同日期、同区域覆盖。</td>
-      </tr>
-      <tr>
-          <td>Clay Foundation Model</td>
-          <td style="text-align: right">2024/2025</td>
-          <td><a href="https://clay-foundation.github.io/model/" target="_blank" rel="noopener noreferrer">docs</a>, <a href="https://github.com/Clay-foundation/model" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/made-with-clay" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>多传感器、多时相工程化开源模型，模型卡/数据卡透明度适合做 audit case。</td>
-      </tr>
-      <tr>
-          <td>SkySense</td>
-          <td style="text-align: right">2024 CVPR</td>
-          <td><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">CVF</a>, <a href="https://github.com/Jack-bo1220/SkySense" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>大规模多模态遥感 FM，代表高性能但数据源复杂的评测场景。</td>
-      </tr>
-      <tr>
-          <td>Galileo</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2502.09356" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/nasaharvest/galileo" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>全球/局部多模态 EO 表征，适合审计跨区域与下游任务覆盖。</td>
-      </tr>
-      <tr>
-          <td>TerraMind</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2504.11171" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/IBM/terramind" target="_blank" rel="noopener noreferrer">GitHub</a></td>
-          <td>任意模态到任意模态 EO 生成/表征，适合审计“预训练是否见过下游目标模态或标签产品”。</td>
-      </tr>
-      <tr>
-          <td>PhilEO Bench</td>
-          <td style="text-align: right">2024</td>
-          <td><a href="https://phileo-bench.github.io/" target="_blank" rel="noopener noreferrer">project</a>, <a href="https://arxiv.org/abs/2401.04464" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://huggingface.co/PhilEO-community/PhilEO-Bench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>few-shot/n-shot GeoFM benchmark，可用来验证去泄漏 split 后的样本效率变化。</td>
-      </tr>
-      <tr>
-          <td>Copernicus-FM / Copernicus-Bench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2503.11849" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/zhu-xlab/Copernicus-FM" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/wangyi111/Copernicus-FM" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>Copernicus 数据预训练和层级任务评测，适合做同源 Copernicus 数据覆盖审计。</td>
-      </tr>
-      <tr>
-          <td>REOBench</td>
-          <td style="text-align: right">2025</td>
-          <td><a href="https://arxiv.org/abs/2505.16793" target="_blank" rel="noopener noreferrer">arXiv</a>, <a href="https://github.com/lx709/reobench" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://huggingface.co/datasets/xiang709/REOBench" target="_blank" rel="noopener noreferrer">HF</a></td>
-          <td>光学遥感扰动鲁棒性 benchmark，可作为泄漏之外的 robustness 对照。</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="3-方法脉络从随机划分到数据血缘审计" class="headerLink">
-    <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e5%88%b0%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e5%ae%a1%e8%ae%a1" class="header-mark"></a>3. 方法脉络：从随机划分到数据血缘审计</h2><h3 id="31-传统随机划分的问题" class="headerLink">
-    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item></channel></rss>
+    <a href="#31-%e9%9a%90%e5%bc%8f%e5%b0%ba%e5%ba%a6%e5%ad%a6%e4%b9%a0" class="header-mark"></a>3.1 隐式尺度学习</h3><p>SkySense、Prithvi、Clay、Galileo 等主要依赖大规模多源预训练，让模型从数据中隐式吸收尺度差异。这类方法优点是简单，缺点是模型可能把传感器、地域、类别和 GSD 纠缠起来。例如 10 m Sentinel-2 中“城市纹理”与 0.3 m NAIP 中“建筑轮廓”不是同一层级语义，统一 resize 后模型容易学到 dataset shortcut。</p>]]></description></item></channel></rss>
