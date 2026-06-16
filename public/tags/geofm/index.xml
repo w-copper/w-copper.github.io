@@ -1,4 +1,6 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GeoFM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/geofm/</link><description>GeoFM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Tue, 16 Jun 2026 03:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/geofm/" rel="self" type="application/rss+xml"/><item><title>Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net</title><link>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 03:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="clay-cnn-hybridsgeofm-做滑坡制图别急着替换-u-net" class="headerLink">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>GeoFM - Tag - 堂堂一跑堂</title><link>https://spacetop.win/tags/geofm/</link><description>GeoFM - Tag - 堂堂一跑堂</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>kingcopper@whu.edu.cn (WangTong)</managingEditor><webMaster>kingcopper@whu.edu.cn (WangTong)</webMaster><lastBuildDate>Tue, 16 Jun 2026 09:00:02 +0800</lastBuildDate><atom:link href="https://spacetop.win/tags/geofm/" rel="self" type="application/rss+xml"/><item><title>过去 24 小时遥感 AI 雷达：VLM 要看对区域，GeoFM 要接对任务，TTA 要有证据</title><link>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 09:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_090002_daily_remote_sensing_radar/</guid><description><![CDATA[<h1 id="过去-24-小时遥感-ai-雷达vlm-要看对区域geofm-要接对任务tta-要有证据" class="headerLink">
+    <a href="#%e8%bf%87%e5%8e%bb-24-%e5%b0%8f%e6%97%b6%e9%81%a5%e6%84%9f-ai-%e9%9b%b7%e8%be%bevlm-%e8%a6%81%e7%9c%8b%e5%af%b9%e5%8c%ba%e5%9f%9fgeofm-%e8%a6%81%e6%8e%a5%e5%af%b9%e4%bb%bb%e5%8a%a1tta-%e8%a6%81%e6%9c%89%e8%af%81%e6%8d%ae" class="header-mark"></a>过去 24 小时遥感 AI 雷达：VLM 要看对区域，GeoFM 要接对任务，TTA 要有证据</h1><p><strong>结论：过去 24 小时最强信号不是单个遥感 SOTA，而是几条方法线正在合到一起。</strong> 第一，Gaze Heads 说明 VLM 的区域描述可以被少数 attention heads 追踪和干预，这给遥感 VQA、开放词汇分割和变化解释提供了“看没看对区域”的可审计机制。第二，TTABC 把 CLIP/VLM 的 test-time adaptation 从刷榜拉回到证据、代理目标和 shift 类型的受控比较，对跨城市、跨季节、跨 GSD 遥感部署很关键。第三，Clay-CNN Hybrids 和 AI4Land 提醒我们，GeoFM 不一定要替代 U-Net 或业务管线，很多时候更适合作为上下文、先验和全球尺度生产系统的一部分。第四，RATS、Adaptive Visual Token Selection 和 OmniVideo-100K 这类 CV/ML 新工作分别给出 part-level token、层级 token 选择、结构化 evidence chain 的迁移路径。今天最值得做的研究方向是：<strong>把 box/mask prompt 作为空间锚点，用 gaze/head steering 约束 VLM 看哪里，再用 CLIP/GeoFM 的轻量 TTA 校准目标域类别、边界和置信度，最终输出 mask/polygon、证据区域、置信度和人工复核优先级。</strong></p>
+<p>我按 2026-06-16 09:00:02 +08:00 回看公开来源，重点检查 arXiv cs.CV 2026-06-15 recent 批次和近 3 个月内仍在形成趋势的 GeoFM/VLM/TTA 工作。本篇过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 和 SAR-optical fusion 主线；若论文来自通用 CV/ML，我只保留能明确迁移到光学、多光谱、VHR、UAV 或地理大数据任务的部分。</p>]]></description></item><item><title>Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net</title><link>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</link><pubDate>Tue, 16 Jun 2026 03:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260616_030002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="clay-cnn-hybridsgeofm-做滑坡制图别急着替换-u-net" class="headerLink">
     <a href="#clay-cnn-hybridsgeofm-%e5%81%9a%e6%bb%91%e5%9d%a1%e5%88%b6%e5%9b%be%e5%88%ab%e6%80%a5%e7%9d%80%e6%9b%bf%e6%8d%a2-u-net" class="header-mark"></a>Clay-CNN Hybrids：GeoFM 做滑坡制图，别急着替换 U-Net</h1><p><strong>结论：这一轮最值得补进雷达的是 2026-06-12 提交到 arXiv 的 <em>Clay-CNN Hybrids: Leveraging Geo-Foundational Models as Auxiliary Context for Landslide Detection</em>。它的结论很克制，但很有用：在 Landslide4Sense 滑坡像素级分割上，Clay v1.5 直接当主干并不比 U-Net 强；真正有效的是把 Clay 的预训练表征作为 U-Net bottleneck 的辅助上下文，再用两阶段 LoRA 微调。最佳 Hybrid U-Net + Clay 在三种随机种子下得到 64.5±1.8% F1，高于 U-Net baseline 的 59.9%，也高于论文引用的 Prithvi-EO-2.0 在同一 benchmark 上的 60.7%。这篇文章提醒遥感基础模型研究：GeoFM 的价值不一定是取代所有任务网络，而是给强空间归纳偏置的模型补上更好的光谱和地理语义先验。</strong></p>
 <p>我按 2026-06-16 03:00 +08 检索公开来源，并过滤 SAR、PolSAR、InSAR、radar-only、microwave-only 与 SAR-optical fusion 主线工作。本篇选择的是 Sentinel-2 多光谱滑坡制图。Landslide4Sense 的输入里包含 DEM 和 slope，其中 DEM/slope 来源与 ALOS PALSAR 产品有关，但论文任务不是 SAR 影像识别，也没有使用 SAR backscatter、coherence、interferometry 或 SAR-optical fusion 作为主线。这里把它视为光学多光谱 + 地形先验的灾害制图工作。</p>]]></description></item><item><title>OSMGraphCLIP：位置表征不一定要从卫星像素开始</title><link>https://spacetop.win/2026/06/20260615_210002_twohour_remote_sensing_radar/</link><pubDate>Mon, 15 Jun 2026 21:00:02 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/20260615_210002_twohour_remote_sensing_radar/</guid><description><![CDATA[<h1 id="osmgraphclip位置表征不一定要从卫星像素开始" class="headerLink">
     <a href="#osmgraphclip%e4%bd%8d%e7%bd%ae%e8%a1%a8%e5%be%81%e4%b8%8d%e4%b8%80%e5%ae%9a%e8%a6%81%e4%bb%8e%e5%8d%ab%e6%98%9f%e5%83%8f%e7%b4%a0%e5%bc%80%e5%a7%8b" class="header-mark"></a>OSMGraphCLIP：位置表征不一定要从卫星像素开始</h1><p><strong>结论：这一轮最值得补进雷达的是 2026-06-06 提交到 arXiv 的 <em>OSMGraphCLIP: Learning Global Location Representations from OpenStreetMap Graphs</em>。它不是一个新的遥感影像 backbone，也不是 VLM 看图问答，而是把 OpenStreetMap 里的道路、建筑、土地利用、POI 等对象组织成异构图，再用 CLIP 式对比学习训练全球 location encoder。最值得关注的地方是：它在 24 个下游地理预测任务上和 GeoCLIP、SatCLIP、AlphaEarth、Copernicus-FM 等基线比较，证明“结构化地图拓扑”本身可以成为地理基础模型的监督模态，尤其适合社会经济、公共健康、城市功能这类卫星像素只能间接表达的任务。</strong></p>
@@ -363,109 +365,4 @@
 </table>
 <h2 id="3-方法脉络从随机划分到数据血缘审计" class="headerLink">
     <a href="#3-%e6%96%b9%e6%b3%95%e8%84%89%e7%bb%9c%e4%bb%8e%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e5%88%b0%e6%95%b0%e6%8d%ae%e8%a1%80%e7%bc%98%e5%ae%a1%e8%ae%a1" class="header-mark"></a>3. 方法脉络：从随机划分到数据血缘审计</h2><h3 id="31-传统随机划分的问题" class="headerLink">
-    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item><item><title>RS-01 SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</title><link>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</link><pubDate>Sun, 07 Jun 2026 09:00:00 +0800</pubDate><author><name>WangTong</name></author><guid>https://spacetop.win/2026/06/rs-01-sam-box-coarse-mask-to-point-prompt-refinement-for-optical-remote-sensing/</guid><description><![CDATA[<h1 id="sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="headerLink">
-    <a href="#sam-boxcoarse-mask-to-point-prompt-refinement-for-optical-remote-sensing" class="header-mark"></a>SAM Box/Coarse-Mask to Point Prompt Refinement for Optical Remote Sensing</h1><h2 id="研究问题" class="headerLink">
-    <a href="#%e7%a0%94%e7%a9%b6%e9%97%ae%e9%a2%98" class="header-mark"></a>研究问题</h2><p>细问题：在光学遥感实例/语义分割中，检测框或粗 mask 已经能给出目标的大致位置，但 SAM/SAM2 对小目标、旋转目标、密集相邻目标和低对比边界仍容易生成粘连、漏分、边界外扩或背景误包含的 mask。这个方向研究如何把 box 或粗 mask 自动转化为更细致的正/负 prompt 点，并用少量迭代让 SAM 输出更稳定的边界。</p>
-<p>这个问题不等同于“遥感语义分割”或“把 SAM 用到遥感”。它只关注一个环节：给定 <code>box</code>、<code>rotated box</code>、<code>coarse mask</code> 或检测器输出，如何选择 prompt 点的位置、数量、正负标签和迭代策略。</p>
-<h2 id="问题由来" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e7%94%b1%e6%9d%a5" class="header-mark"></a>问题由来</h2><p>SAM 的交互分割在自然图像中很强，但遥感图像有几个结构性差异：</p>
-<ul>
-<li>目标小：飞机、车、船、屋顶构件在 tile 中只占少量像素，box 内背景比例很高。</li>
-<li>目标旋转：水平框会包进大量背景，尤其是飞机、船、跑道、细长建筑。</li>
-<li>目标密集：停车场车辆、建筑群、集装箱等相邻实例容易被一个正点或一个 box 合并。</li>
-<li>大幅面切片：超大影像被切成 patch 后，目标可能跨 tile，且局部上下文不足。</li>
-<li>语义与边界分离：CLIP/VLM/检测器知道类别，SAM 主要负责边界；两者之间的误差会传给 prompt。</li>
-</ul>
-<p>因此，box prompt 常能定位但边界粗，point prompt 可纠偏但点位选择困难。可投稿的小空间在于：把检测/粗分割的不确定性、边界几何和遥感先验转化成一组正负 prompt 点。</p>
-<h2 id="代表论文与项目" class="headerLink">
-    <a href="#%e4%bb%a3%e8%a1%a8%e8%ae%ba%e6%96%87%e4%b8%8e%e9%a1%b9%e7%9b%ae" class="header-mark"></a>代表论文与项目</h2><table>
-  <thead>
-      <tr>
-          <th>论文/项目</th>
-          <th style="text-align: right">年份/venue</th>
-          <th>链接</th>
-          <th>官方代码/项目</th>
-          <th>与本问题的关系</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Segment Anything, From Space?</td>
-          <td style="text-align: right">2024 WACV</td>
-          <td><a href="https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html" target="_blank" rel="noopener noreferrer">https://openaccess.thecvf.com/content/WACV2024/html/Ren_Segment_Anything_From_Space_WACV_2024_paper.html</a></td>
-          <td>未见官方 GitHub</td>
-          <td>系统评估 SAM 在 overhead imagery 的失败模式，是遥感 prompt 设计的起点。</td>
-      </tr>
-      <tr>
-          <td>SAM-Assisted Remote Sensing Imagery Semantic Segmentation With Object and Boundary Constraints</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://arxiv.org/abs/2312.02464" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2312.02464</a></td>
-          <td>未见官方 GitHub</td>
-          <td>用 SAM object/boundary 约束改善遥感语义分割，提示边界约束可与点 prompt 联合。</td>
-      </tr>
-      <tr>
-          <td>DiffuPrompter</td>
-          <td style="text-align: right">2024 Remote Sensing</td>
-          <td><a href="https://www.mdpi.com/2072-4292/16/11/2004" target="_blank" rel="noopener noreferrer">https://www.mdpi.com/2072-4292/16/11/2004</a></td>
-          <td>未确认官方代码</td>
-          <td>训练自由地利用 diffusion attention 产生 box/point prompt，可作为自动 prompt 生成基线。</td>
-      </tr>
-      <tr>
-          <td>SAM-RSIS</td>
-          <td style="text-align: right">2024 IEEE TGRS</td>
-          <td><a href="https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085" target="_blank" rel="noopener noreferrer">https://colab.ws/articles/10.1109%2Ftgrs.2024.3460085</a></td>
-          <td>未见官方 GitHub</td>
-          <td>渐进式 box prompting 与 SAM 微调，适合比较“只有 box”和“box+点 refinement”。</td>
-      </tr>
-      <tr>
-          <td>SAMPolyBuild</td>
-          <td style="text-align: right">2024 ISPRS JPRS</td>
-          <td><a href="https://www.sciencedirect.com/science/article/pii/S0924271624003563" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/pii/S0924271624003563</a></td>
-          <td><a href="https://github.com/wchh-2000/SAMPolyBuild" target="_blank" rel="noopener noreferrer">https://github.com/wchh-2000/SAMPolyBuild</a></td>
-          <td>建筑多边形提取；支持 bbox 与 prompt points，说明点 prompt 可服务于规则边界/多边形化。</td>
-      </tr>
-      <tr>
-          <td>PointSAM</td>
-          <td style="text-align: right">2024 arXiv / 2025 TGRS方向</td>
-          <td><a href="https://arxiv.org/abs/2409.13401" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2409.13401</a></td>
-          <td><a href="https://github.com/Lans1ng/PointSAM" target="_blank" rel="noopener noreferrer">https://github.com/Lans1ng/PointSAM</a></td>
-          <td>点监督 SAM，提出负提示校准、伪标签自训练和 point-to-box converter，是最相关方法。</td>
-      </tr>
-      <tr>
-          <td>CrossCut</td>
-          <td style="text-align: right">2026 AAAI</td>
-          <td><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37637" target="_blank" rel="noopener noreferrer">https://ojs.aaai.org/index.php/AAAI/article/view/37637</a></td>
-          <td><a href="https://github.com/nanzhou02/CrossCut" target="_blank" rel="noopener noreferrer">https://github.com/nanzhou02/CrossCut</a></td>
-          <td>交互式正/负点击跨 patch 传播，解决大图 patch 信息隔离。</td>
-      </tr>
-      <tr>
-          <td>RS2-SAM2</td>
-          <td style="text-align: right">2026 AAAI / 2025 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2503.07266" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2503.07266</a></td>
-          <td>未确认官方 GitHub</td>
-          <td>用 pseudo-mask dense prompt 适配 SAM2 到遥感 referring segmentation，说明粗 mask prompt 是强信号。</td>
-      </tr>
-      <tr>
-          <td>Remote SAMsing</td>
-          <td style="text-align: right">2026 arXiv</td>
-          <td><a href="https://arxiv.org/abs/2605.00256" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2605.00256</a></td>
-          <td>未确认官方代码</td>
-          <td>分析 SAM2 遥感大图 mask quality/coverage trade-off 与 tiling 问题，可作为后续评测参考。</td>
-      </tr>
-      <tr>
-          <td>SAM2 official</td>
-          <td style="text-align: right">2024 Meta</td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noopener noreferrer">https://github.com/facebookresearch/sam2</a></td>
-          <td>基础模型与 image/video prompt API；可用于实现 box+points+mask 输入组合。</td>
-      </tr>
-      <tr>
-          <td>segment-geospatial / SamGeo</td>
-          <td style="text-align: right">持续维护</td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td><a href="https://github.com/opengeos/segment-geospatial" target="_blank" rel="noopener noreferrer">https://github.com/opengeos/segment-geospatial</a></td>
-          <td>工具型基线，方便在真实 GeoTIFF/QGIS 工作流中验证自动 prompt。</td>
-      </tr>
-  </tbody>
-</table>
-<p>说明：上表中的“未确认官方 GitHub”表示截至本次检索没有找到清晰的作者官方代码仓库；可用论文实现或第三方复现替代，但复现实验中应标注。</p>]]></description></item></channel></rss>
+    <a href="#31-%e4%bc%a0%e7%bb%9f%e9%9a%8f%e6%9c%ba%e5%88%92%e5%88%86%e7%9a%84%e9%97%ae%e9%a2%98" class="header-mark"></a>3.1 传统随机划分的问题</h3><p>很多遥感数据集来自若干城市或少量大幅影像。随机切 patch 会让训练和测试共享同一城市纹理、同一传感器条件、同一季节，甚至同一 parent image。对于建筑、道路、作物和土地覆盖任务，这种空间自相关足以显著抬高测试分数。</p>]]></description></item></channel></rss>
